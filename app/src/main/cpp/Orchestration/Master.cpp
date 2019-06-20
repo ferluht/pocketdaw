@@ -86,4 +86,15 @@ void Master::setSampleRate(int samplerate)
     sample_rate = samplerate;
 }
 
-//void Master::
+void Master::receiveMIDI(MidiData md)
+{
+    ableton::Link::SessionState state = link.captureAppSessionState();
+    bpm = state.tempo();
+    std::chrono::microseconds time = link.clock().micros();
+    phase = state.phaseAtTime(time, size_denominator);
+    beat = state.beatAtTime(time, size_denominator);
+
+    md.beat = beat;
+    channel = md.status & 0x03 - 1;
+    Tracks[channel]->MidiQueue.push(md);
+}

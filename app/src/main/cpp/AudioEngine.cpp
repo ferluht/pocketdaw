@@ -7,6 +7,12 @@
 #include <thread>
 #include <mutex>
 
+
+AudioEngine::AudioEngine(Master * master)
+{
+    master_ = master;
+}
+
 // Double-buffering offers a good tradeoff between latency and protection against glitches.
 constexpr int32_t kBufferSizeInBursts = 2;
 
@@ -36,7 +42,7 @@ bool AudioEngine::start() {
     AAudioStreamBuilder_setFormat(streamBuilder, AAUDIO_FORMAT_PCM_FLOAT);
     AAudioStreamBuilder_setChannelCount(streamBuilder, 1);
     AAudioStreamBuilder_setPerformanceMode(streamBuilder, AAUDIO_PERFORMANCE_MODE_LOW_LATENCY);
-    AAudioStreamBuilder_setDataCallback(streamBuilder, ::dataCallback, &master_);
+    AAudioStreamBuilder_setDataCallback(streamBuilder, ::dataCallback, master_);
     AAudioStreamBuilder_setErrorCallback(streamBuilder, ::errorCallback, this);
 
     // Opens the stream.
@@ -49,7 +55,7 @@ bool AudioEngine::start() {
 
 //    // Retrieves the sample rate of the stream for our oscillator.
     int32_t sampleRate = AAudioStream_getSampleRate(stream_);
-    master_.setSampleRate(sampleRate);
+    master_->setSampleRate(sampleRate);
 
     // Sets the buffer size.
     AAudioStream_setBufferSizeInFrames(
@@ -82,22 +88,4 @@ void AudioEngine::stop() {
         AAudioStream_requestStop(stream_);
         AAudioStream_close(stream_);
     }
-}
-
-void AudioEngine::connectLink()
-{
-    master_.link.enable(true);
-}
-
-void AudioEngine::receiveNote(unsigned char note, unsigned char velocity)
-{
-    MidiData md;
-    md.note = note;
-    md.vel = velocity;
-    master_.Tracks[0]->MidiQueue.push(md);
-}
-
-void AudioEngine::receiveCC(unsigned char param, unsigned char value)
-{
-
 }

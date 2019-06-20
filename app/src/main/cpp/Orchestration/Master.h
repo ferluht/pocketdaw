@@ -10,6 +10,7 @@
 #include "Track.h"
 #include "../AudioEffects/AudioEffect.h"
 #include <ableton/Link.hpp>
+#include "Midi.h"
 
 
 #define DEFAULT_BPM 120.
@@ -32,10 +33,13 @@ public:
     void setSampleRate(int samplerate);
     void start();
     void stop();
-    void receiveMIDI();
+
+    // MIDI methods
+    void receiveMIDI(MidiData md);
 
 
     ableton::Link link;
+    bool rec;
     double sample_rate;
     double bpm, beat, phase;
     unsigned char size_numerator, size_denominator;

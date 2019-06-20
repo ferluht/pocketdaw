@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
 
     private native void touchEvent(int action, float x, float y);
 
-    private native void midiReceived(byte cmd, byte val1, byte val2);
+    private native void midiEvent(byte cmd, byte val1, byte val2);
 
     private native void startEngine();
 
@@ -36,8 +36,7 @@ public class MainActivity extends Activity {
     class MyReceiver extends MidiReceiver {
         public void onSend(byte[] data, int offset,
                            int count, long timestamp) throws IOException {
-            Log.e("", "could not open device " + data);
-            midiReceived(data[1], data[2], data[3]);
+            midiEvent(data[offset], data[offset + 1], data[offset + 2]);
             // parse MIDI or whatever
             //Toast.makeText(getApplicationContext(), "received midi", Toast.LENGTH_SHORT).show();
         }

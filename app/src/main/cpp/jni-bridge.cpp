@@ -1,8 +1,11 @@
 #include <jni.h>
 #include <android/input.h>
+#include "Orchestration/Master.h"
+#include "Orchestration/Midi.h"
 #include "AudioEngine.h"
 
-static AudioEngine *audioEngine = new AudioEngine();
+static Master *master = new Master();
+static AudioEngine *audioEngine = new AudioEngine(master);
 
 extern "C" {
 
@@ -16,7 +19,7 @@ Java_com_pdaw_pd_MainActivity_touchEvent(JNIEnv *env, jobject obj, jint action, 
     switch (action) {
         case AMOTION_EVENT_ACTION_MOVE:
         case AMOTION_EVENT_ACTION_DOWN:
-            audioEngine->connectLink();
+            master_->link.enable(true);
             break;
         default:
             break;
@@ -34,17 +37,9 @@ Java_com_pdaw_pd_MainActivity_stopEngine(JNIEnv *env, jobject /* this */) {
 }
 
 JNIEXPORT void JNICALL
-Java_com_pdaw_pd_MainActivity_midiReceived(JNIEnv *env, jobject obj, jbyte cmd, jbyte val1, jbyte val2) {
-    switch ((unsigned char) cmd) {
-        case 0x90:
-            audioEngine->receiveNote(val1, val2);
-            break;
-        case 0xB0:
-            audioEngine->receiveCC(val1, val2);
-            break;
-        default:
-            break;
-    }
+Java_com_pdaw_pd_MainActivity_midiEvent(JNIEnv *env, jobject obj, jbyte status_byte, jbyte data_byte_1, jbyte data_byte_2) {
+    MidiData md(status_byte, data_byte_1, data_byte_2);
+    master->receiveMIDI(md);
 }
 
 }

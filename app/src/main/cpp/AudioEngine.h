@@ -11,15 +11,15 @@
 
 class AudioEngine {
 public:
+
+	AudioEngine(Master master);
+
     bool start();
     void stop();
     void restart();
-    void connectLink();
-    void receiveNote(unsigned char note, unsigned char velocity);
-    void receiveCC(unsigned char param, unsigned char value);
-
+    
 private:
-    Master master_;
+    Master * master_;
     AAudioStream *stream_;
 };
 

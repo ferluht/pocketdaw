@@ -10,6 +10,17 @@ bool operator<(const MidiData &lhs, const MidiData &rhs) {
 }
 
 
+MidiData::MidiData(unsigned char status_, unsigned char data1_, unsigned char data2_) : MidiData(-1, status_, data1_, data2_) {}
+    
+MidiData::MidiData(double beat_, unsigned char status_, unsigned char data1_, unsigned char data2_)
+{
+    beat = beat_;
+    status = status_;
+    data1 = data1_;
+    data2 = data2_;
+}
+
+
 MidiClip::MidiClip() : MidiClip(0) {}
 
 MidiClip::MidiClip(double beat_begin) : MidiClip(beat_begin, 4) {}
