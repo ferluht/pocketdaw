@@ -8,19 +8,22 @@
 #include "Instrument.h"
 #include "ADSR.h"
 
-class Metronome : public Instrument{
-
+class MetronomeState : public InstrumentState{
 public:
 
     int duration;
-
-    float phase = 0, phase_inc = 0.02, vol;
-
+    float vol;
     ADSR ad;
 
-    Metronome();
-    void midiCommand(MidiData md);
-    float render();
+    MetronomeState(unsigned char note, unsigned char velocity);
+};
+
+class Metronome : public Instrument<MetronomeState>{
+
+public:
+
+//    Metronome();
+    float render(MetronomeState * state) override ;
 };
 
 

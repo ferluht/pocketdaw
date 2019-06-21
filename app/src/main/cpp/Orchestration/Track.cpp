@@ -20,8 +20,8 @@ float Track::render(double beat, double phase, double increment)
 //    current_clip = nullptr;
 //    auto closest_clip = MidiClips.lower_bound(beat);
 //    if (closest_clip->second->end > beat) current_clip = closest_clip->second;
-    current_clip = MidiClips[0];
-    if (current_clip) current_clip->play(&MidiQueue, beat);
+//    current_clip = MidiClips[0];
+//    if (current_clip) current_clip->play(&MidiQueue, beat);
 
     while (!MidiQueue.empty()){
         MidiData command = MidiQueue.top();

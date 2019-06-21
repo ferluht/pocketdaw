@@ -5,27 +5,21 @@
 #include "Metronome.h"
 #include <cmath>
 
-Metronome::Metronome() : Instrument()
-{
-    duration = 0;
-}
-
-void Metronome::midiCommand(MidiData md)
-{
-    if (md.vel) {
+MetronomeState::MetronomeState(unsigned char note, unsigned char velocity){
+    if (velocity) {
         phase = 0;
-        phase_inc = M_PI / 48000.0 * getFrequency(440.0, md.note);
-        vol = md.vel / 127.0;
+        phase_increment = M_PI / 48000.0 * getFrequency(440.0, note);
+        vol = velocity / 127.0;
         ad.attack();
     } else {
         ad.release();
     }
 }
 
-float Metronome::render()
+float Metronome::render(MetronomeState * state)
 {
-    float sample = sin(phase);
-    sample = ad.apply(sample) * vol;
-    phase += phase_inc;
+    float sample = sin(state->phase);
+    sample = state->ad.apply(sample) * state->vol;
+    state->phase += state->phase_increment;
     return sample;
 }

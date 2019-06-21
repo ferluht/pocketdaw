@@ -4,8 +4,8 @@
 #include "Orchestration/Midi.h"
 #include "AudioEngine.h"
 
-static Master *master = new Master();
-static AudioEngine *audioEngine = new AudioEngine(master);
+static Master master;
+static AudioEngine *audioEngine = new AudioEngine(&master);
 
 extern "C" {
 
@@ -19,7 +19,7 @@ Java_com_pdaw_pd_MainActivity_touchEvent(JNIEnv *env, jobject obj, jint action, 
     switch (action) {
         case AMOTION_EVENT_ACTION_MOVE:
         case AMOTION_EVENT_ACTION_DOWN:
-            master_->link.enable(true);
+            master.link.enable(true);
             break;
         default:
             break;
@@ -39,7 +39,7 @@ Java_com_pdaw_pd_MainActivity_stopEngine(JNIEnv *env, jobject /* this */) {
 JNIEXPORT void JNICALL
 Java_com_pdaw_pd_MainActivity_midiEvent(JNIEnv *env, jobject obj, jbyte status_byte, jbyte data_byte_1, jbyte data_byte_2) {
     MidiData md(status_byte, data_byte_1, data_byte_2);
-    master->receiveMIDI(md);
+    master.receiveMIDI(md);
 }
 
 }

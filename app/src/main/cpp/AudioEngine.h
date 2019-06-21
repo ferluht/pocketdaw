@@ -12,7 +12,7 @@
 class AudioEngine {
 public:
 
-	AudioEngine(Master master);
+	AudioEngine(Master * master);
 
     bool start();
     void stop();

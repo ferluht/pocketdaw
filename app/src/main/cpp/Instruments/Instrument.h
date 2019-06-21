@@ -7,18 +7,33 @@
 
 #include "../Orchestration/Midi.h"
 #include <cmath>
+#include <list>
 
-struct InstrumentState {
+class InstrumentState {
+public:
+    unsigned char note;
+    unsigned char velocity;
+
 	double phase;
 	double frequency;
 	double phase_increment;
-	
+	double time_from_trigger;
 };
 
-class Instrument{
+class InstrumentBase {
+public:
+    InstrumentBase() = default;
+
+    virtual void midiCommand(MidiData md) = 0;
+    virtual float render() = 0;
+};
+
+template <class State>
+class Instrument : public InstrumentBase{
 public:
 
-	std::vector<InstrumentState> Voices;
+    unsigned int num_voices = 8;
+	std::list<State *> States;
 
 	double base_frequency;
 	double sample_rate;
@@ -35,15 +50,56 @@ public:
 	bool celeste;
 	bool phaser;
 
-	unsigned int num_voices;
+//    Instrument();
 
-    Instrument();
+    void midiCommand(MidiData md) override {
+        switch (md.status & 0xF0){
+            case NOTEON_HEADER:
+//                noteOn(md.data1, md.data2);
+                for (auto const& state : States) {
+                    if (state->note == md.data1) {
+                        delete state;
+                        States.remove(state);
+                    }
+                }
+                States.push_front(new State(md.data1, md.data2));
+                if (States.size() > num_voices) States.pop_back();
+                break;
+            case NOTEOFF_HEADER:
+//                noteOff(md.data1);
+                for (auto const& state : States) {
+                    if (state->note == md.data1) {
+                        delete state;
+                        States.remove(state);
+                    }
+                }
+                break;
+            case CC_HEADER:
+                switch (md.data1){
+                    case CC_MODWHEEL:
+                        modwheel = md.data2;
+                        break;
+                    case CC_SOSTENUTO:
+                        sostenuto = false;
+                        if (md.data2 != 0xFF) sostenuto = true;
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
+    };
 
-    void midiCommand(MidiData md);
-    float render();
+    float render() override {
+        float sample = 0;
+        for (auto const& state : States) sample += 1.0/(float)States.size() * render(state);
+        return sample;
+    };
 
-    void noteOn(unsigned char note, unsigned char velocity);
-    void noteOff(unsigned char note);
+//    void noteOn(unsigned char note, unsigned char velocity);
+//    void noteOff(unsigned char note);
 
     inline double getFrequency(unsigned char note)
     {
@@ -70,12 +126,7 @@ public:
     	return getPhaseIncrement(getFrequency(note, cents));
 	}
 
-    virtual float render(InstrumentState state);
-
-
-private:
-
-	unsigned char modwheel, 
+    virtual float render(State * state) {return 0;}
 };
 
 

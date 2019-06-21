@@ -12,7 +12,7 @@ Master::Master() : link(DEFAULT_BPM)
     auto * cue = new Track;
     cue->TrackInstrument = new Metronome;
     auto * delay = new Delay(2000, 0.3);
-    cue->addAudioEffect(delay);
+//    cue->addAudioEffect(delay);
     addTrack(cue);
 
 //    addAudioEffect(new Delay(3300, 0.2));
@@ -24,6 +24,8 @@ Master::Master() : link(DEFAULT_BPM)
     size_denominator = 4;
     stopPressed_ = 0;
     isPlaying = false;
+    beat = -1;
+    phase = -1;
 }
 
 void Master::render(float *audioData, int32_t numFrames) {
@@ -51,14 +53,16 @@ void Master::render(float *audioData, int32_t numFrames) {
 
 void Master::start()
 {
-    isPlaying = true;
+    isPlaying = false;
     stopPressed_ = 0;
+    beat = -1;
+    phase = -1;
 }
 
 void Master::stop()
 {
     isPlaying = false;
-    if(stopPressed_ ++ > 1) beat = 0, phase = 0;
+    if(stopPressed_ ++ > 1) beat = -1, phase = -1;
 }
 
 void Master::addTrack(Track *track)
@@ -95,6 +99,5 @@ void Master::receiveMIDI(MidiData md)
     beat = state.beatAtTime(time, size_denominator);
 
     md.beat = beat;
-    channel = md.status & 0x03 - 1;
-    Tracks[channel]->MidiQueue.push(md);
+    Tracks[md.status & 0x03 - 1]->MidiQueue.push(md);
 }

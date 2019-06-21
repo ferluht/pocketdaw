@@ -30,7 +30,7 @@ public:
     std::vector<MidiClip*> MidiClips;
 
     std::vector<MidiEffect*> MidiEffects;
-    Instrument* TrackInstrument;
+    InstrumentBase* TrackInstrument;
     std::vector<AudioEffect*> AudioEffects;
 
     Track();
