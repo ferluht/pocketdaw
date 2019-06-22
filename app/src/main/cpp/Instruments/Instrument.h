@@ -7,29 +7,36 @@
 
 #include "../Orchestration/Midi.h"
 #include <cmath>
-#include <map>
+#include <set>
 
 #define MAX_VOICES 8
 
 class InstrumentState {
 public:
+    double beat;
     unsigned char note;
     unsigned char velocity;
 
+    float volume;
 	double phase;
 	double frequency;
 	double phase_increment;
-	double time_from_trigger;
 
+	bool active;
+
+	InstrumentState();
 	virtual void update(MidiData md) {};
+	void setActive(bool isactive);
 };
+
+bool operator<(const InstrumentState &lhs, const InstrumentState &rhs);
 
 class InstrumentBase {
 public:
     InstrumentBase() = default;
 
     virtual void midiCommand(MidiData md) = 0;
-    virtual float render() = 0;
+    virtual float render(double beat) = 0;
 };
 
 template <class State>
@@ -37,7 +44,7 @@ class Instrument : public InstrumentBase{
 public:
 
     unsigned int num_voices = 8;
-	std::multimap<double, State *> States;
+	std::multiset<State *> States;
 
 	double base_frequency = 440.0;
 	double sample_rate = 48000.0;
@@ -57,12 +64,12 @@ public:
 	unsigned char active_states;
 
     Instrument(){
-        for (int i = 0; i < MAX_VOICES; i++) States.insert({0, new State()});
+        for (int i = 0; i < MAX_VOICES; i++) States.insert(new State());
     }
 
     void midiCommand(MidiData md) override;
 
-    float render() override;
+    float render(double beat) override;
 
     void keyPressed(MidiData md);
 
@@ -91,7 +98,7 @@ public:
     	return getPhaseIncrement(getFrequency(note, cents));
 	}
 
-    virtual float render(State * state) {return 0;}
+    virtual float render(State * state, double beat) {return 0;}
 };
 
 template <class State>
@@ -125,11 +132,11 @@ void Instrument<State>::keyPressed(MidiData md)
 {
     for (auto it = States.begin(); it != States.end(); it++ )
     {
-        if ((*it).second->note == md.data1){
-            State * state = (*it).second;
+        if ((*it)->note == md.data1){
+            State * state = (*it);
             States.erase(it);
             state->update(md);
-            States.insert({md.beat, state});
+            States.insert(state);
             return;
         }
     }
@@ -137,29 +144,29 @@ void Instrument<State>::keyPressed(MidiData md)
 
     for (auto it = States.begin(); it != States.end(); it++ )
     {
-        if ((*it).second->note == 0){
-            State * state = (*it).second;
+        if (!(*it)->active){
+            State * state = (*it);
             States.erase(it);
             state->update(md);
-            States.insert({md.beat, state});
+            States.insert(state);
             return;
         }
     }
 
-    State * state = (*States.begin()).second;
+    State * state = *States.begin();
     States.erase(States.begin());
     state->update(md);
-    States.insert({md.beat, state});
+    States.insert(state);
 }
 
 
 template <class State>
-float Instrument<State>::render()
+float Instrument<State>::render(double beat)
 {
     float sample = 0;
     for (auto it = States.begin(); it != States.end(); it++ ){
-        if ((*it).second->note != 0){
-            sample += 1.0/(float)num_voices * render((*it).second);
+        if ((*it)->active){
+            sample += 1.0/(float)num_voices * render(*it, beat);
         }
     }
     return sample;

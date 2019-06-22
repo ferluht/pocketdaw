@@ -11,11 +11,8 @@
 class MetronomeState : public InstrumentState{
 public:
 
-    int duration;
-    float vol;
     ADSR ad;
 
-    MetronomeState();
     void update(MidiData md) override;
 };
 
@@ -23,8 +20,7 @@ class Metronome : public Instrument<MetronomeState>{
 
 public:
 
-//    Metronome();
-    float render(MetronomeState * state) override ;
+    float render(MetronomeState * state, double beat) override ;
 };
 
 

@@ -4,15 +4,17 @@
 
 #include "Instrument.h"
 
-//template <class State>
-//Instrument<State>::Instrument()
-//{
-//    num_voices = 8;
-//}
+InstrumentState::InstrumentState()
+{
+    note = 0;
+    phase = 0;
+    active = false;
+}
 
+void InstrumentState::setActive(bool isactive){
+    active = isactive;
+}
 
-//template <class State>
-//float Instrument<State>::render(State * state)
-//{
-//    return 0;
-//}
+bool operator<(const InstrumentState &lhs, const InstrumentState &rhs) {
+    return lhs.beat > rhs.beat;
+}

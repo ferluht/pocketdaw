@@ -35,7 +35,7 @@ public:
 
     Track();
 
-    float render(double beat, double phase, double increment);
+    float render(double beat);
     inline bool onbeat(double beat, double midi_beat);
 
     void toggleRec();

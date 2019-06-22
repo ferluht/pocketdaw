@@ -7,11 +7,11 @@
 Track::Track()
 {
     last_beat = 0;
-    MidiClip * mdc = createMetronomeMidi();
-    MidiClips.insert(MidiClips.begin(), mdc);
+//    MidiClip * mdc = createMetronomeMidi();
+//    MidiClips.insert(MidiClips.begin(), mdc);
 }
 
-float Track::render(double beat, double phase, double increment)
+float Track::render(double beat)
 {
     float sample = 0;
 
@@ -38,11 +38,11 @@ float Track::render(double beat, double phase, double increment)
         MidiQueue.pop();
     }
 
-    sample = TrackInstrument->render();
+    sample = TrackInstrument->render(beat);
 
     for (auto const& audioEffect : AudioEffects) sample = audioEffect->apply(sample);
 
-    last_beat += increment;
+    last_beat += beat;
     return sample;
 }
 

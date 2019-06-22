@@ -43,7 +43,8 @@ void Master::render(float *audioData, int32_t numFrames) {
     for (int i = 0; i < numFrames; i++) {
         audioData[i] = 0;
         for (auto const& track : Tracks) {
-            audioData[i] += track->render(beat, phase, increment);
+            audioData[i] += track->render(beat);
+            beat += increment;
         }
         for (auto const& effect : AudioEffects) {
             audioData[i] = effect->apply(audioData[i]);
@@ -53,7 +54,7 @@ void Master::render(float *audioData, int32_t numFrames) {
 
 void Master::start()
 {
-    isPlaying = false;
+    isPlaying = true;
     stopPressed_ = 0;
     beat = -1;
     phase = -1;
