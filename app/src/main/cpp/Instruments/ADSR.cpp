@@ -9,13 +9,15 @@ ADSR::ADSR()
     A = 200;
     D = 1000;
     S = 0.7;
-    R = 1000;
+    R = 2000;
+    amp = 0.0001;
 }
 
 void ADSR::attack()
 {
-    position = 0;
-    amp = 0.01;
+    active = true;
+    if (amp < 0) amp = 0.00001;
+    position = (int)(amp/A);
     amp_inc = 1.0F/(float)A;
 }
 
@@ -32,6 +34,8 @@ float ADSR::apply(float sample)
     if(amp > 0){
         amp += amp_inc;
         position ++;
+    } else {
+        active = false;
     }
     return sample*amp;
 }

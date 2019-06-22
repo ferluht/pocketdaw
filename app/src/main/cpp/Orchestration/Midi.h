@@ -73,8 +73,4 @@ public:
 
 MidiClip * createMetronomeMidi();
 
-inline double getFrequency(double base_frequency, unsigned char note){
-    return base_frequency*(pow(POWER_BASE, (note - BASE_NOTE)/SEMITONES));
-}
-
 #endif //PD_MIDI_H

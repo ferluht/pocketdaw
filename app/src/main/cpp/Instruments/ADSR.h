@@ -9,6 +9,8 @@
 class ADSR {
 
 public:
+    bool active;
+
     int A, D, R;
     float S;
     int position;

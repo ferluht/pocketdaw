@@ -7,7 +7,9 @@
 
 #include "../Orchestration/Midi.h"
 #include <cmath>
-#include <list>
+#include <map>
+
+#define MAX_VOICES 8
 
 class InstrumentState {
 public:
@@ -18,6 +20,8 @@ public:
 	double frequency;
 	double phase_increment;
 	double time_from_trigger;
+
+	virtual void update(MidiData md) {};
 };
 
 class InstrumentBase {
@@ -33,10 +37,10 @@ class Instrument : public InstrumentBase{
 public:
 
     unsigned int num_voices = 8;
-	std::list<State *> States;
+	std::multimap<double, State *> States;
 
-	double base_frequency;
-	double sample_rate;
+	double base_frequency = 440.0;
+	double sample_rate = 48000.0;
 
 	unsigned char modwheel;
 	unsigned char pitchwheel;
@@ -50,56 +54,17 @@ public:
 	bool celeste;
 	bool phaser;
 
-//    Instrument();
+	unsigned char active_states;
 
-    void midiCommand(MidiData md) override {
-        switch (md.status & 0xF0){
-            case NOTEON_HEADER:
-//                noteOn(md.data1, md.data2);
-                for (auto const& state : States) {
-                    if (state->note == md.data1) {
-                        delete state;
-                        States.remove(state);
-                    }
-                }
-                States.push_front(new State(md.data1, md.data2));
-                if (States.size() > num_voices) States.pop_back();
-                break;
-            case NOTEOFF_HEADER:
-//                noteOff(md.data1);
-                for (auto const& state : States) {
-                    if (state->note == md.data1) {
-                        delete state;
-                        States.remove(state);
-                    }
-                }
-                break;
-            case CC_HEADER:
-                switch (md.data1){
-                    case CC_MODWHEEL:
-                        modwheel = md.data2;
-                        break;
-                    case CC_SOSTENUTO:
-                        sostenuto = false;
-                        if (md.data2 != 0xFF) sostenuto = true;
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            default:
-                break;
-        }
-    };
+    Instrument(){
+        for (int i = 0; i < MAX_VOICES; i++) States.insert({0, new State()});
+    }
 
-    float render() override {
-        float sample = 0;
-        for (auto const& state : States) sample += 1.0/(float)States.size() * render(state);
-        return sample;
-    };
+    void midiCommand(MidiData md) override;
 
-//    void noteOn(unsigned char note, unsigned char velocity);
-//    void noteOff(unsigned char note);
+    float render() override;
+
+    void keyPressed(MidiData md);
 
     inline double getFrequency(unsigned char note)
     {
@@ -128,6 +93,77 @@ public:
 
     virtual float render(State * state) {return 0;}
 };
+
+template <class State>
+void Instrument<State>::midiCommand(MidiData md)
+{
+    switch (md.status & 0xF0){
+        case NOTEON_HEADER:
+        case NOTEOFF_HEADER:
+            keyPressed(md);
+            break;
+        case CC_HEADER:
+            switch (md.data1){
+                case CC_MODWHEEL:
+                    modwheel = md.data2;
+                    break;
+                case CC_SOSTENUTO:
+                    sostenuto = false;
+                    if (md.data2 != 0xFF) sostenuto = true;
+                    break;
+                default:
+                    break;
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+template <class State>
+void Instrument<State>::keyPressed(MidiData md)
+{
+    for (auto it = States.begin(); it != States.end(); it++ )
+    {
+        if ((*it).second->note == md.data1){
+            State * state = (*it).second;
+            States.erase(it);
+            state->update(md);
+            States.insert({md.beat, state});
+            return;
+        }
+    }
+
+
+    for (auto it = States.begin(); it != States.end(); it++ )
+    {
+        if ((*it).second->note == 0){
+            State * state = (*it).second;
+            States.erase(it);
+            state->update(md);
+            States.insert({md.beat, state});
+            return;
+        }
+    }
+
+    State * state = (*States.begin()).second;
+    States.erase(States.begin());
+    state->update(md);
+    States.insert({md.beat, state});
+}
+
+
+template <class State>
+float Instrument<State>::render()
+{
+    float sample = 0;
+    for (auto it = States.begin(); it != States.end(); it++ ){
+        if ((*it).second->note != 0){
+            sample += 1.0/(float)num_voices * render((*it).second);
+        }
+    }
+    return sample;
+}
 
 
 #endif //PD_INSTRUMENT_H

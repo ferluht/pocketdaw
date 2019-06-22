@@ -15,7 +15,8 @@ public:
     float vol;
     ADSR ad;
 
-    MetronomeState(unsigned char note, unsigned char velocity);
+    MetronomeState();
+    void update(MidiData md) override;
 };
 
 class Metronome : public Instrument<MetronomeState>{
