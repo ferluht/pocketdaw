@@ -14,6 +14,11 @@ include_directories(src/main/cpp/Link/android-ifaddrs)
 include_directories(${LINK_DIR}/include)
 include_directories(${LINK_DIR}/modules/asio-standalone/asio/include)
 
+add_library(native_app_glue STATIC
+        ${ANDROID_NDK}/sources/android/native_app_glue/android_native_app_glue.c)
+target_include_directories(native_app_glue PUBLIC
+        ${ANDROID_NDK}/sources/android/native_app_glue)
+
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
@@ -43,6 +48,7 @@ add_library( # Sets the name of the library.
         AudioEffects/AudioEffect.cpp
         AudioEffects/Delay.cpp
         Instruments/ADSR.cpp
+        MidiEffects/Arpeggiator.cpp
         AudioEngine.cpp)
 
 target_compile_definitions(native-lib PRIVATE
@@ -71,4 +77,5 @@ target_link_libraries( # Specifies the target library.
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib}
+        native_app_glue
         Ableton::Link)

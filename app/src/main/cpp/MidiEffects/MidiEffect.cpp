@@ -3,8 +3,3 @@
 //
 
 #include "MidiEffect.h"
-
-void MidiEffect::apply(std::priority_queue<MidiData> * midiQueue)
-{
-
-}

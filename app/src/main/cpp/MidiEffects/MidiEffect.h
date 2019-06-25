@@ -15,7 +15,7 @@ public:
 
     MidiEffect() = default;
 
-    void apply(std::priority_queue<MidiData> * midiQueue);
+    virtual void apply(std::priority_queue<MidiData> * midiQueue, double beat) {};
 };
 
 

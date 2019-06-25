@@ -23,7 +23,7 @@ Master::Master() : link(DEFAULT_BPM)
 
     size_denominator = 4;
     stopPressed_ = 0;
-    isPlaying = false;
+    isPlaying = true;
     beat = -1;
     phase = -1;
 }

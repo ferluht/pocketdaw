@@ -24,7 +24,7 @@ float Metronome::render(MetronomeState * state, double beat)
     if (state->phase_increment < 0){
         state->phase_increment = getPhaseIncrement(state->note);
     }
-    float sample = sin(state->phase) * (0.5 + 0.5*sin((beat - state->beat)/64*M_PI));
+    float sample = sin(state->phase);// * (0.5 + 0.5*sin((beat - state->beat)/64*M_PI));
 //    float sample = sin((beat - state->beat)*256*M_PI);
     sample = state->ad.apply(sample) * state->volume;
     if (!state->ad.active) {

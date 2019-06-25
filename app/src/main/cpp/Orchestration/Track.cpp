@@ -3,25 +3,31 @@
 //
 
 #include "Track.h"
+#include "../MidiEffects/Arpeggiator.h"
 
 Track::Track()
 {
     last_beat = 0;
-//    MidiClip * mdc = createMetronomeMidi();
-//    MidiClips.insert(MidiClips.begin(), mdc);
+    MidiClip * mdc = createMetronomeMidi();
+    MidiClips.insert(MidiClips.begin(), mdc);
+
+    Arpeggiator * arp = new Arpeggiator();
+    MidiEffects.push_back(arp);
 }
 
 float Track::render(double beat)
 {
     float sample = 0;
 
-    for (auto const& midiEffect : MidiEffects) midiEffect->apply(&MidiQueue);
+    for (auto const& midiEffect : MidiEffects) midiEffect->apply(&MidiQueue, beat);
 
 //    current_clip = nullptr;
 //    auto closest_clip = MidiClips.lower_bound(beat);
 //    if (closest_clip->second->end > beat) current_clip = closest_clip->second;
 //    current_clip = MidiClips[0];
 //    if (current_clip) current_clip->play(&MidiQueue, beat);
+
+//    for (auto const& midiEffect : MidiEffects) midiEffect->apply(&MidiQueue, beat);
 
     while (!MidiQueue.empty()){
         MidiData command = MidiQueue.top();

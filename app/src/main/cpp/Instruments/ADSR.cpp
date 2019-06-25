@@ -7,9 +7,9 @@
 ADSR::ADSR()
 {
     A = 200;
-    D = 2000;
+    D = 5000;
     S = 0.7;
-    R = 10000;
+    R = 1000;
     amp = 0.0001;
 }
 
@@ -28,8 +28,11 @@ void ADSR::release()
 
 float ADSR::apply(float sample)
 {
-    if (position == D){
+    if (position == A){
         amp_inc = (S - 1.0F)/(float)(D-A);
+    }
+    if (position == D){
+        release();
     }
     if(amp > 0){
         amp += amp_inc;
