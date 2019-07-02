@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">pd</string>
     <string name="tap_anywhere">Tap anywhere</string>
+    <string name="fps">0.0 FPS</string>
 </resources>

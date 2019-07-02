@@ -8,6 +8,8 @@
 #include "MidiEffect.h"
 #include <map>
 
+#include <random>
+
 class Arpeggiator : public MidiEffect{
 
 public:
@@ -15,6 +17,8 @@ public:
     double scale;
 
     int cycles;
+
+    std::default_random_engine generator;
 
     std::map<unsigned char, MidiData> notes;
     unsigned char last_played_note;

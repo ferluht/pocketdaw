@@ -13,6 +13,8 @@ public:
 
     ADSR ad;
 
+    double phase2;
+
     void update(MidiData md) override;
 };
 

@@ -69,16 +69,16 @@ void MidiClip::reset()
 
 MidiClip * createMetronomeMidi(){
     MidiClip * mc = new MidiClip;
-    MidiData on(0x91, 40, 100);
-    MidiData off(0x91, 40, 0);
+    MidiData on(0x91, 50, 100);
+    MidiData off(0x91, 50, 0);
     mc->insert(on, 0);
 //    mc->insert(off, 3);
 
-    on.data1 = 42;
+    on.data1 = 52;
     mc->insert(on, 0);
 //    mc->insert(off, 3);
 
-    on.data1 = 45;
+    on.data1 = 55;
     mc->insert(on, 0);
 //    mc->insert(off, 3);
 

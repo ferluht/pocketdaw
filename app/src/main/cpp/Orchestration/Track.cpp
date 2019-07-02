@@ -19,15 +19,15 @@ float Track::render(double beat)
 {
     float sample = 0;
 
-    for (auto const& midiEffect : MidiEffects) midiEffect->apply(&MidiQueue, beat);
+//    for (auto const& midiEffect : MidiEffects) midiEffect->apply(&MidiQueue, beat);
 
 //    current_clip = nullptr;
 //    auto closest_clip = MidiClips.lower_bound(beat);
 //    if (closest_clip->second->end > beat) current_clip = closest_clip->second;
-//    current_clip = MidiClips[0];
-//    if (current_clip) current_clip->play(&MidiQueue, beat);
+    current_clip = MidiClips[0];
+    if (current_clip) current_clip->play(&MidiQueue, beat);
 
-//    for (auto const& midiEffect : MidiEffects) midiEffect->apply(&MidiQueue, beat);
+    for (auto const& midiEffect : MidiEffects) midiEffect->apply(&MidiQueue, beat);
 
     while (!MidiQueue.empty()){
         MidiData command = MidiQueue.top();

@@ -11,7 +11,7 @@ Master::Master() : link(DEFAULT_BPM)
     link.enable(true);
     auto * cue = new Track;
     cue->TrackInstrument = new Metronome;
-    auto * delay = new Delay(2000, 0.3);
+//    auto * delay = new Delay(2000, 0.3);
 //    cue->addAudioEffect(delay);
     addTrack(cue);
 
@@ -26,6 +26,8 @@ Master::Master() : link(DEFAULT_BPM)
     isPlaying = true;
     beat = -1;
     phase = -1;
+
+    for (int i = 0; i < 2000; i ++) wave[i] = 0;
 }
 
 void Master::render(float *audioData, int32_t numFrames) {
@@ -48,6 +50,21 @@ void Master::render(float *audioData, int32_t numFrames) {
         }
         for (auto const& effect : AudioEffects) {
             audioData[i] = effect->apply(audioData[i]);
+        }
+
+//        audioData[i] = (audioData[i] + prev_sample)/2;
+//        prev_sample = audioData[i];
+
+        if (ai < window){
+            accumulator += audioData[i];
+            ai ++;
+        } else {
+            ai = 0;
+            wave[r] = (accumulator + prev_acc)/2 / window;
+            prev_acc = accumulator;
+            accumulator = 0;
+            r++;
+            if(r >= 2000) r = 0;
         }
     }
 }

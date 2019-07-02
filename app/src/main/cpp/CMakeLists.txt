@@ -5,19 +5,31 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
+project(native-lib LANGUAGES C CXX)
 
 set (LINK_DIR D:/link)
 
 include(${LINK_DIR}/AbletonLinkConfig.cmake)
 
+# set up common compile options
+set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -fno-exceptions -fno-rtti")
+
+# build the ndk-helper library
+get_filename_component(commonDir ${CMAKE_CURRENT_SOURCE_DIR}/../../../../common ABSOLUTE)
+get_filename_component(ndkHelperSrc ${commonDir}/ndk_helper ABSOLUTE)
+add_subdirectory(${ndkHelperSrc}
+        ${commonDir}/ndkHelperBin/${CMAKE_BUILD_TYPE}/${ANDROID_ABI})
+
 include_directories(src/main/cpp/Link/android-ifaddrs)
 include_directories(${LINK_DIR}/include)
 include_directories(${LINK_DIR}/modules/asio-standalone/asio/include)
 
-add_library(native_app_glue STATIC
-        ${ANDROID_NDK}/sources/android/native_app_glue/android_native_app_glue.c)
-target_include_directories(native_app_glue PUBLIC
-        ${ANDROID_NDK}/sources/android/native_app_glue)
+#add_library(native_app_glue STATIC
+#        ${ANDROID_NDK}/sources/android/native_app_glue/android_native_app_glue.c)
+#target_include_directories(native_app_glue PUBLIC
+#        ${ANDROID_NDK}/sources/android/native_app_glue)
+
+
 
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
@@ -29,6 +41,9 @@ add_library( # Sets the name of the library.
 
         # Sets the library as a shared library.
         SHARED
+
+        TeapotNativeActivity.cpp
+        TeapotRenderer.cpp
 
         # Provides a relative path to your source file(s).
         jni-bridge.cpp
@@ -71,6 +86,11 @@ find_library( # Sets the name of the path variable.
 # can link multiple libraries, such as libraries you define in this
 # build script, prebuilt third-party libraries, or system libraries.
 
+# Export ANativeActivity_onCreate(),
+# Refer to: https://github.com/android-ndk/ndk/issues/381.
+set_target_properties(${PROJECT_NAME}
+        PROPERTIES  LINK_FLAGS "-u ANativeActivity_onCreate")
+
 target_link_libraries( # Specifies the target library.
         native-lib
         aaudio
@@ -78,4 +98,6 @@ target_link_libraries( # Specifies the target library.
         # included in the NDK.
         ${log-lib}
         native_app_glue
-        Ableton::Link)
+        Ableton::Link
+
+        NdkHelper)

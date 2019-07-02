@@ -30,8 +30,8 @@ public:
 
 private:
     std::atomic<bool> isWaveOn_{false};
-    double phase_ = 0.0;
-    double phaseIncrement_ = 0.01;
+//    double phase_ = 0.0;
+//    double phaseIncrement_ = 0.01;
 };
 
 

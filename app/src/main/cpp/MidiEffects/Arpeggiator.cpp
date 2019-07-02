@@ -24,12 +24,22 @@ void Arpeggiator::apply(std::priority_queue<MidiData> *midiQueue, double beat)
         midiQueue->pop();
     }
 
+    std::uniform_int_distribution<int> distribution(1, 4);
+    int dice_roll = distribution(generator);  // generates number in the range 1..6
     if (!notes.empty() && (int)(beat / scale) > cycles){
         auto i = notes.upper_bound(last_played_note);
         if (i == notes.end()) i = notes.begin();
         MidiData md = i->second;
         md.beat = beat;
-        midiQueue->push(md);
+        if (dice_roll <= 2) {
+            midiQueue->push(md);
+        }
+        if (dice_roll == 3){
+            std::uniform_int_distribution<int> distribution(30, 70);
+            int dice_roll = distribution(generator);  // generates number in the range 1..6
+            md.data1 = dice_roll;
+            midiQueue->push(md);
+        }
         last_played_note = md.data1;
         cycles = (int)(beat / scale);
     }

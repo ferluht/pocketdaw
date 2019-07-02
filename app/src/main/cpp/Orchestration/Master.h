@@ -13,11 +13,20 @@
 #include "Midi.h"
 
 
-#define DEFAULT_BPM 120.
+#define DEFAULT_BPM 60.
 
 class Master {
 
 public:
+
+    std::atomic<float> wave[2000];
+    int r = 1;
+
+    float accumulator = 0, prev_acc = 0;
+    int ai = 0, aj = 0;
+    float window = 3;
+
+    float prev_sample = 0;
 
     std::vector<Track*> Tracks;
     std::vector<AudioEffect*> AudioEffects;
@@ -45,6 +54,7 @@ public:
     unsigned char size_numerator, size_denominator;
     bool isPlaying;
     unsigned char stopPressed_;
+
 };
 
 
