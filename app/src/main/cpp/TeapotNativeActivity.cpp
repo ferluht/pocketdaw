@@ -124,7 +124,6 @@ Engine::~Engine() {}
  * Load resources
  */
 void Engine::LoadResources() {
-  renderer_.Init();
   renderer_.Bind(&tap_camera_);
 }
 
@@ -166,6 +165,9 @@ int Engine::InitDisplay(android_app* app) {
     }
   }
 
+  renderer_.app = app_;
+  renderer_.Init();
+
   ShowUI();
 
   // Initialize GL state.
@@ -177,7 +179,6 @@ int Engine::InitDisplay(android_app* app) {
   glViewport(0, 0, gl_context_->GetScreenWidth(),
              gl_context_->GetScreenHeight());
   renderer_.UpdateViewport();
-
   tap_camera_.SetFlip(1.f, -1.f, -1.f);
   tap_camera_.SetPinchTransformFactor(2.f, 2.f, 8.f);
 

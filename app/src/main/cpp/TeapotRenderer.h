@@ -36,6 +36,7 @@
 #include <android/log.h>
 #include <android_native_app_glue.h>
 #include <android/native_window_jni.h>
+#include <android/asset_manager.h>
 
 #define CLASS_NAME "android/app/NativeActivity"
 #define APPLICATION_CLASS_NAME "com/sample/teapot/TeapotApplication"
@@ -72,11 +73,14 @@ struct TEAPOT_MATERIALS {
   float ambient_color[3];
 };
 
+struct android_app;
 class TeapotRenderer {
   int32_t num_indices_;
   int32_t num_vertices_;
   GLuint ibo_;
   GLuint vbo_;
+  GLuint vao_square_;
+  GLuint texture;
 
   // This will identify our vertex buffer
   GLuint vertexbuffer;
@@ -92,6 +96,8 @@ class TeapotRenderer {
   ndk_helper::TapCamera* camera_;
 
  public:
+    android_app* app;
+
   TeapotRenderer();
   virtual ~TeapotRenderer();
   void Init();
@@ -100,6 +106,7 @@ class TeapotRenderer {
   bool Bind(ndk_helper::TapCamera* camera);
   void Unload();
   void UpdateViewport();
+  GLuint loadBMP_custom(const char * imagepath);
 };
 
 #endif

@@ -1,3 +1,17 @@
+#version 320 es
+
+in mediump vec3 ourColor;
+in mediump vec2 TexCoord;
+
+out mediump vec4 color;
+
+uniform sampler2D ourTexture;
+
+void main()
+{
+    color = texture(ourTexture, TexCoord);
+}
+
 //
 // Copyright (C) 2015 The Android Open Source Project
 //
@@ -16,7 +30,7 @@
 //  ShaderPlain.fsh
 //
 
-void main()
-{
-    gl_FragColor = vec4( 1, 0, 0, 1 );
-}
+//void main()
+//{
+//    gl_FragColor = vec4( 0, 0, 0, 1 );
+//}

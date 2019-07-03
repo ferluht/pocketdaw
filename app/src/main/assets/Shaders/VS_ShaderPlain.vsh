@@ -1,3 +1,22 @@
+#version 320 es
+
+layout (location = 0) in vec3 position;
+layout (location = 1) in vec3 color;
+layout (location = 2) in vec2 texCoord;
+
+out vec3 ourColor;
+out vec2 TexCoord;
+
+uniform mat4 uPMatrix;
+
+void main()
+{
+    gl_Position = uPMatrix * vec4(position, 1.0f);
+    ourColor = color;
+    TexCoord = texCoord;
+}
+
+
 //
 // Copyright (C) 2015 The Android Open Source Project
 //
@@ -15,18 +34,17 @@
 //
 //  ShaderPlain.vsh
 //
-
-attribute highp vec3    myVertex;
-varying lowp    vec4    colorDiffuse;
-
-uniform highp mat4      uPMatrix;
-
-uniform lowp vec3       vMaterialAmbient;
-
-void main(void)
-{
-    highp vec4 p = vec4(myVertex,1);
-    gl_Position = uPMatrix * p;
-
-    colorDiffuse = vec4( vMaterialAmbient, 1 );
-}
+//attribute highp vec3    myVertex;
+//varying lowp    vec4    colorDiffuse;
+//
+//uniform highp mat4      uPMatrix;
+//
+//uniform lowp vec3       vMaterialAmbient;
+//
+//void main(void)
+//{
+//    highp vec4 p = vec4(myVertex,1);
+//    gl_Position = uPMatrix * p;
+//
+//    colorDiffuse = vec4( vMaterialAmbient, 1 );
+//}

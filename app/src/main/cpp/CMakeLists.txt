@@ -17,12 +17,12 @@ set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -fno-exceptions -fno-rtti")
 # build the ndk-helper library
 get_filename_component(commonDir ${CMAKE_CURRENT_SOURCE_DIR}/../../../../common ABSOLUTE)
 get_filename_component(ndkHelperSrc ${commonDir}/ndk_helper ABSOLUTE)
-add_subdirectory(${ndkHelperSrc}
-        ${commonDir}/ndkHelperBin/${CMAKE_BUILD_TYPE}/${ANDROID_ABI})
+add_subdirectory(${ndkHelperSrc} ${commonDir}/ndkHelperBin/${CMAKE_BUILD_TYPE}/${ANDROID_ABI})
 
 include_directories(src/main/cpp/Link/android-ifaddrs)
 include_directories(${LINK_DIR}/include)
 include_directories(${LINK_DIR}/modules/asio-standalone/asio/include)
+
 
 #add_library(native_app_glue STATIC
 #        ${ANDROID_NDK}/sources/android/native_app_glue/android_native_app_glue.c)

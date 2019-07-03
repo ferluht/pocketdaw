@@ -28,6 +28,8 @@
 //--------------------------------------------------------------------------------
 #include "teapot.inl"
 
+//#include <SOIL.h>
+
 //--------------------------------------------------------------------------------
 // Ctor
 //--------------------------------------------------------------------------------
@@ -39,49 +41,133 @@ TeapotRenderer::TeapotRenderer() {}
 TeapotRenderer::~TeapotRenderer() { Unload(); }
 
 void TeapotRenderer::Init() {
-      // Settings
-      glFrontFace(GL_CCW);
+    // Settings
+    glFrontFace(GL_CCW);
 
-      // Load shader
-      LoadShaders(&shader_param_, "Shaders/VS_ShaderPlain.vsh",
-                  "Shaders/ShaderPlain.fsh");
+    // Load shader
+    LoadShaders(&shader_param_, "Shaders/VS_ShaderPlain.vsh",
+              "Shaders/ShaderPlain.fsh");
 
-//      // Create Index buffer
-//      num_indices_ = sizeof(teapotIndices) / sizeof(teapotIndices[0]);
-//      glGenBuffers(1, &ibo_);
-//      glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo_);
-//      glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(teapotIndices), teapotIndices,
-//                   GL_STATIC_DRAW);
-//      glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-//
-//      // Create VBO
-//      num_vertices_ = sizeof(teapotPositions) / sizeof(teapotPositions[0]) / 3;
-//      int32_t stride = sizeof(TEAPOT_VERTEX);
-//      int32_t index = 0;
-//      TEAPOT_VERTEX* p = new TEAPOT_VERTEX[num_vertices_];
-//      for (int32_t i = 0; i < num_vertices_; ++i) {
-//            p[i].pos[0] = teapotPositions[index]/100;
-//            p[i].pos[1] = teapotPositions[index + 1]/100;
-//            p[i].pos[2] = teapotPositions[index + 2]/100;
-//
-//            p[i].normal[0] = teapotNormals[index];
-//            p[i].normal[1] = teapotNormals[index + 1];
-//            p[i].normal[2] = teapotNormals[index + 2];
-//            index += 3;
-//      }
-//      glGenBuffers(1, &vbo_);
-//      glBindBuffer(GL_ARRAY_BUFFER, vbo_);
-//      glBufferData(GL_ARRAY_BUFFER, stride * num_vertices_, p, GL_STATIC_DRAW);
-//      glBindBuffer(GL_ARRAY_BUFFER, 0);
-//
-//      delete[] p;
 
-      UpdateViewport();
-      mat_model_ = ndk_helper::Mat4::Translation(0, 0, 0);
+    // Массив 3 векторов, которые являются вершинами треугольника
+    GLfloat g_vertex_buffer_data[] = {
+            // Позиции          // Цвета             // Текстурные координаты
+            1.5f,  1.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // Верхний правый
+            1.5f, -1.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // Нижний правый
+            -1.5f, -1.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // Нижний левый
+            -1.5f,  1.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // Верхний левый
+    };
 
-//      ndk_helper::Mat4 mat = ndk_helper::Mat4::RotationX(M_PI / 3);
-//      mat_model_ = mat * mat_model_;
+    GLuint indices[] = {  // Помните, что мы начинаем с 0!
+            0, 1, 2,   // Первый треугольник
+            3, 2, 3    // Второй треугольник
+    };
 
+    glGenBuffers(1, &vbo_);
+    glGenVertexArrays(1, &vao_square_);
+    glGenBuffers(1, &ibo_);
+
+
+
+    glBindVertexArray(vao_square_);
+
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo_);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(2, 2, GL_FLOAT,GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
+    glEnableVertexAttribArray(2);
+
+    glBindVertexArray(0);
+
+
+    texture = loadBMP_custom("Textures/container.bmp");
+
+
+    UpdateViewport();
+    mat_model_ = ndk_helper::Mat4::Translation(0, 0, 0);
+}
+
+GLuint TeapotRenderer::loadBMP_custom(const char *imagepath)
+{
+
+    // Open your file
+    AAsset* file = AAssetManager_open(app->activity->assetManager, imagepath, AASSET_MODE_BUFFER);
+// Get the file length
+
+// Do whatever you want with the content of the file
+
+// Free the memoery you allocated earlie
+
+    // Данные, прочитанные из заголовка BMP-файла
+    unsigned char header[54]; // Каждый BMP-файл начинается с заголовка, длиной в 54 байта
+    unsigned int dataPos;     // Смещение данных в файле (позиция данных)
+    unsigned int width, height;
+    unsigned int imageSize;   // Размер изображения = Ширина * Высота * 3
+// RGB-данные, полученные из файла
+
+    if (!file) {
+        printf("Изображение не может быть открытоn");
+        return 0;
+    }
+
+    size_t fileLength = AAsset_getLength(file);
+
+    if (  AAsset_read(file, header, 54) != 54 ) { // Если мы прочитали меньше 54 байт, значит возникла проблема
+        printf("Некорректный BMP-файлn");
+        return 0;
+    }
+
+    if ( header[0]!='B' || header[1]!='M' ){
+        printf("Некорректный BMP-файлn");
+        return 0;
+    }
+
+    // Читаем необходимые данные
+    dataPos    = *(int*)&(header[0x0A]); // Смещение данных изображения в файле
+    imageSize  = *(int*)&(header[0x22]); // Размер изображения в байтах
+    width      = *(int*)&(header[0x12]); // Ширина
+    height     = *(int*)&(header[0x16]); // Высота
+
+    // Некоторые BMP-файлы имеют нулевые поля imageSize и dataPos, поэтому исправим их
+    if (imageSize==0)    imageSize=width*height*3; // Ширину * Высоту * 3, где 3 - 3 компоненты цвета (RGB)
+    if (dataPos==0)      dataPos=54; // В таком случае, данные будут следовать сразу за заголовком
+
+    // Создаем буфер
+    unsigned char * data = new unsigned char [imageSize];
+
+// Считываем данные из файла в буфер
+    AAsset_read(file, data, fileLength);
+
+// Закрываем файл, так как больше он нам не нужен
+    AAsset_close(file);
+
+    // Создадим одну текстуру OpenGL
+    GLuint textureID;
+    glGenTextures(1, &textureID);
+
+// Сделаем созданную текстуру текущий, таким образом все следующие функции будут работать именно с этой текстурой
+    glBindTexture(GL_TEXTURE_2D, textureID);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+// Передадим изображение OpenGL
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+
+    glGenerateMipmap(GL_TEXTURE_2D);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    delete [] data;
+
+    return textureID;
 }
 
 void TeapotRenderer::UpdateViewport() {
@@ -146,45 +232,29 @@ void TeapotRenderer::Render(std::atomic<float> * wave, int r) {
       // Feed Projection and Model View matrices to the shaders
       ndk_helper::Mat4 mat_vp = mat_projection_ * mat_view_;
 
-//      // Bind the VBO
-//      glBindBuffer(GL_ARRAY_BUFFER, vbo_);
-//
-//      int32_t iStride = sizeof(TEAPOT_VERTEX);
-//      // Pass the vertex data
-//      glVertexAttribPointer(ATTRIB_VERTEX, 3, GL_FLOAT, GL_FALSE, iStride,
-//                            BUFFER_OFFSET(0));
-//      glEnableVertexAttribArray(ATTRIB_VERTEX);
-//
-//      glVertexAttribPointer(ATTRIB_NORMAL, 3, GL_FLOAT, GL_FALSE, iStride,
-//                            BUFFER_OFFSET(3 * sizeof(GLfloat)));
-//      glEnableVertexAttribArray(ATTRIB_NORMAL);
-//
-//      // Bind the IB
-//      glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo_);
-//
-//
+
     glUseProgram(shader_param_.program_);
 
-      TEAPOT_MATERIALS material = {
-          {1.0f, 0.5f, 0.5f}, {1.0f, 1.0f, 1.0f, 10.f}, {0.1f, 0.1f, 0.1f}, };
-
-      // Update uniforms
-      glUniform4f(shader_param_.material_diffuse_, material.diffuse_color[0],
-                  material.diffuse_color[1], material.diffuse_color[2], 1.f);
-
-      glUniform4f(shader_param_.material_specular_, material.specular_color[0],
-                  material.specular_color[1], material.specular_color[2],
-                  material.specular_color[3]);
+//      TEAPOT_MATERIALS material = {
+//          {1.0f, 0.5f, 0.5f}, {1.0f, 1.0f, 1.0f, 10.f}, {0.1f, 0.1f, 0.1f}, };
+//
+//      // Update uniforms
+//      glUniform4f(shader_param_.material_diffuse_, material.diffuse_color[0],
+//                  material.diffuse_color[1], material.diffuse_color[2], 1.f);
+//
+//      glUniform4f(shader_param_.material_specular_, material.specular_color[0],
+//                  material.specular_color[1], material.specular_color[2],
+//                  material.specular_color[3]);
       //
       // using glUniform3fv here was troublesome
       //
-      glUniform3f(shader_param_.material_ambient_, material.ambient_color[0],
-                  material.ambient_color[1], material.ambient_color[2]);
+//      glUniform3f(shader_param_.material_ambient_, material.ambient_color[0],
+//                  material.ambient_color[1], material.ambient_color[2]);
 
       glUniformMatrix4fv(shader_param_.matrix_projection_, 1, GL_FALSE,
                          mat_vp.Ptr());
-      glUniformMatrix4fv(shader_param_.matrix_view_, 1, GL_FALSE, mat_view_.Ptr());
-      glUniform3f(shader_param_.light0_, 0.f, 0.f, -600.f);
+//      glUniformMatrix4fv(shader_param_.matrix_view_, 1, GL_FALSE, mat_view_.Ptr());
+//      glUniform3f(shader_param_.light0_, 0.f, 0.f, -600.f);
 //
 //      glDrawElements(GL_TRIANGLES, num_indices_, GL_UNSIGNED_SHORT,
 //                     BUFFER_OFFSET(0));
@@ -192,75 +262,51 @@ void TeapotRenderer::Render(std::atomic<float> * wave, int r) {
 //      glBindBuffer(GL_ARRAY_BUFFER, 0);
 //      glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
+//
+//      static GLfloat g_vertex_buffer_data[6000];
+//
+//      for (int i = 0; i < 2000 - 1; i++) {
+//            g_vertex_buffer_data[r*3] = wave[r]*15;
+//            g_vertex_buffer_data[r*3+1] = (float)i/100.f - 10;
+//            g_vertex_buffer_data[r*3+2] = 0;
+//            r++;
+//            if(r>=2000) r = 0;
+//      };
+//
+//      // Generate 1 buffer, put the resulting identifier in vertexbuffer
+//      glGenBuffers(1, &vertexbuffer);
+//      // The following commands will talk about our 'vertexbuffer' buffer
+//      glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+//      // Give our vertices to OpenGL.
+//      glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_DYNAMIC_DRAW);
+//
+//
+//      // 1st attribute buffer : vertices
+//      glEnableVertexAttribArray(0);
+//      glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+//      glVertexAttribPointer(
+//            0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+//            3,                  // size
+//            GL_FLOAT,           // type
+//            GL_FALSE,           // normalized?
+//            0,                  // stride
+//            (void*)0            // array buffer offset
+//      );
+//      // Draw the triangle !
+//      //glDrawArrays(GL_TRIANGLES, 0, 3); // Starting from vertex 0; 3 vertices total -> 1 triangle
+////      for(int i = 0; i < 2000 - 1; i++) {
+//          glDrawArrays(GL_LINE_STRIP, 100, 1900);
+////      }
 
-      static GLfloat g_vertex_buffer_data[6000];
-
-
-      for (int i = 0; i < 2000 - 1; i++) {
-            g_vertex_buffer_data[r*3] = wave[r]*15;
-            g_vertex_buffer_data[r*3+1] = (float)i/100.f - 10;
-            g_vertex_buffer_data[r*3+2] = 0;
-            r++;
-            if(r>=2000) r = 0;
-      };
-
-      // Generate 1 buffer, put the resulting identifier in vertexbuffer
-      glGenBuffers(1, &vertexbuffer);
-      // The following commands will talk about our 'vertexbuffer' buffer
-      glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-      // Give our vertices to OpenGL.
-      glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_DYNAMIC_DRAW);
-
-
-      // 1st attribute buffer : vertices
-      glEnableVertexAttribArray(0);
-      glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-      glVertexAttribPointer(
-            0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-            3,                  // size
-            GL_FLOAT,           // type
-            GL_FALSE,           // normalized?
-            0,                  // stride
-            (void*)0            // array buffer offset
-      );
-      // Draw the triangle !
-      //glDrawArrays(GL_TRIANGLES, 0, 3); // Starting from vertex 0; 3 vertices total -> 1 triangle
-      for(int i = 0; i < 2000 - 1; i++) {
-          glDrawArrays(GL_LINES, i, 2);
-      }
-
-    glDisableVertexAttribArray(0);
-
-
-    // Массив 3 векторов, которые являются вершинами треугольника
-    static const GLfloat g_vertex_buffer_data1[] = {
-            -1.0f, -1.0f, 0.0f,
-            1.0f, -1.0f, 0.0f,
-            -1.0f,  1.0f, 0.0f,
-            1.0f,  1.0f, 0.0f,
-    };
-
-    // Generate 1 buffer, put the resulting identifier in vertexbuffer
-    glGenBuffers(1, &vertexbuffer);
-    // The following commands will talk about our 'vertexbuffer' buffer
-    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-    // Give our vertices to OpenGL.
-    glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data1), g_vertex_buffer_data1, GL_STATIC_DRAW);
-
-    // 1st attribute buffer : vertices
-    glEnableVertexAttribArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-    glVertexAttribPointer(
-            0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-            3,                  // size
-            GL_FLOAT,           // type
-            GL_FALSE,           // normalized?
-            0,                  // stride
-            (void*)0            // array buffer offset
-    );
+//    glDisableVertexAttribArray(0);
 
 
-      glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+    glBindTexture(GL_TEXTURE_2D, texture);
+
+    glBindVertexArray(vao_square_);
+
+
+    glDrawElements(GL_TRIANGLE_FAN, 6, GL_UNSIGNED_INT, 0);
 
       //glDrawArrays(GL_LINES, 0, 6000 - 3);
 
@@ -269,8 +315,7 @@ void TeapotRenderer::Render(std::atomic<float> * wave, int r) {
 //      for(int i = 0; i < 3; i++) {
 //          glDrawArrays(GL_LINES, i, 2);
 //      }
-
-      glDisableVertexAttribArray(0);
+    glBindVertexArray(0);
 }
 
 bool TeapotRenderer::LoadShaders(SHADER_PARAMS* params, const char* strVsh,
@@ -307,7 +352,7 @@ bool TeapotRenderer::LoadShaders(SHADER_PARAMS* params, const char* strVsh,
 
       // Bind attribute locations
       // this needs to be done prior to linking
-//      glBindAttribLocation(program, ATTRIB_VERTEX, "myVertex");
+//      glBindAttribLocation(program, ATTRIB_VERTEX, "position");
 //      glBindAttribLocation(program, ATTRIB_NORMAL, "myNormal");
 //      glBindAttribLocation(program, ATTRIB_UV, "myUV");
 
@@ -332,7 +377,7 @@ bool TeapotRenderer::LoadShaders(SHADER_PARAMS* params, const char* strVsh,
 
       // Get uniform locations
       params->matrix_projection_ = glGetUniformLocation(program, "uPMatrix");
-      params->matrix_view_ = glGetUniformLocation(program, "uMVMatrix");
+//      params->matrix_view_ = glGetUniformLocation(program, "uMVMatrix");
 
 //      params->light0_ = glGetUniformLocation(program, "vLight0");
 //      params->material_diffuse_ = glGetUniformLocation(program, "vMaterialDiffuse");
