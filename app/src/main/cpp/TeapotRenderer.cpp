@@ -49,19 +49,19 @@ void TeapotRenderer::Init() {
               "Shaders/ShaderPlain.fsh");
 
 
-    // Массив 3 векторов, которые являются вершинами треугольника
     GLfloat g_vertex_buffer_data[] = {
             // Позиции          // Цвета             // Текстурные координаты
-            1.5f,  1.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // Верхний правый
-            1.5f, -1.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // Нижний правый
-            -1.5f, -1.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // Нижний левый
-            -1.5f,  1.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // Верхний левый
+            10.5f,  10.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // Верхний правый
+            10.5f, -10.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // Нижний правый
+            -10.5f, -10.5f, 0.0f,   1.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // Нижний левый
+            -10.5f,  10.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f,    // Верхний левый
     };
 
     GLuint indices[] = {  // Помните, что мы начинаем с 0!
-            0, 1, 2,   // Первый треугольник
-            3, 2, 3    // Второй треугольник
+            3, 2, 1,   // Первый треугольник
+            1, 0, 3    // Второй треугольник
     };
+
 
     glGenBuffers(1, &vbo_);
     glGenVertexArrays(1, &vao_square_);
@@ -81,7 +81,7 @@ void TeapotRenderer::Init() {
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(2, 2, GL_FLOAT,GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
     glEnableVertexAttribArray(2);
 
     glBindVertexArray(0);
@@ -147,6 +147,12 @@ GLuint TeapotRenderer::loadBMP_custom(const char *imagepath)
 
 // Закрываем файл, так как больше он нам не нужен
     AAsset_close(file);
+
+    for (int i = 0; i < fileLength/3; i ++){
+        unsigned char t = data[i*3];
+        data[i*3] = data[i*3 + 2];
+        data[i*3 + 2] = t;
+    }
 
     // Создадим одну текстуру OpenGL
     GLuint textureID;
@@ -305,8 +311,8 @@ void TeapotRenderer::Render(std::atomic<float> * wave, int r) {
 
     glBindVertexArray(vao_square_);
 
-
-    glDrawElements(GL_TRIANGLE_FAN, 6, GL_UNSIGNED_INT, 0);
+//    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
       //glDrawArrays(GL_LINES, 0, 6000 - 3);
 

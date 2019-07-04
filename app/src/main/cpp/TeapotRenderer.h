@@ -82,6 +82,7 @@ class TeapotRenderer {
   GLuint vao_square_;
   GLuint texture;
 
+
   // This will identify our vertex buffer
   GLuint vertexbuffer;
 
