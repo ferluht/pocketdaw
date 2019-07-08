@@ -38,9 +38,9 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
-public class TeapotNativeActivity extends NativeActivity {
+public class MainActivity extends NativeActivity {
 
-    //private native void midiEvent(byte cmd, byte val1, byte val2);
+    private native void midiEvent(byte cmd, byte val1, byte val2);
 
 //    private native void startEngine();
 
@@ -85,7 +85,7 @@ public class TeapotNativeActivity extends NativeActivity {
                         } else {
                             //Toast.makeText(getApplicationContext(), "opened", Toast.LENGTH_SHORT).show();
                             MidiOutputPort outputPort = device.openOutputPort(0);
-                            outputPort.connect(new TeapotNativeActivity.MyReceiver());
+                            outputPort.connect(new MainActivity.MyReceiver());
                         }
                     }}, null);
             }
@@ -142,7 +142,7 @@ public class TeapotNativeActivity extends NativeActivity {
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
     }
 
-    TeapotNativeActivity _activity;
+    MainActivity _activity;
     PopupWindow _popupWindow;
     TextView _label;
 

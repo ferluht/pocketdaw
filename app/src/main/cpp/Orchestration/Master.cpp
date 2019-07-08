@@ -5,15 +5,23 @@
 #include "Master.h"
 #include "../Instruments/Metronome.h"
 #include "../AudioEffects/Delay.h"
+#include "../GUI/Button.h"
 
-Master::Master() : link(DEFAULT_BPM)
+Master::Master() :
+GraphicObject("Textures/container.bmp", "Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlain.fsh"),
+link(DEFAULT_BPM)
 {
     link.enable(true);
     auto * cue = new Track;
     cue->TrackInstrument = new Metronome;
-//    auto * delay = new Delay(2000, 0.3);
-//    cue->addAudioEffect(delay);
+    auto * delay = new Delay(8000, 0.3);
+    cue->addAudioEffect(delay);
     addTrack(cue);
+
+    addChildObject(new Button("Textures/container.bmp", 0.f, 0.f, &delay->feedback));
+//    addChildObject(new Button("Textures/container.bmp", 0.4, 0.3));
+//    addChildObject(new Button("Textures/container.bmp", 0.7, 0.5));
+//    addChildObject(new Button("Textures/container.bmp", 0.9, 0.7));
 
 //    addAudioEffect(new Delay(3300, 0.2));
 //    addAudioEffect(new Delay(900, 0.4));
@@ -83,6 +91,16 @@ void Master::stop()
     if(stopPressed_ ++ > 1) beat = -1, phase = -1;
 }
 
+//void Master::addGraphic(GraphicObject *gr)
+//{
+//    Graphics.push_back(gr);
+//}
+//
+//void Master::delGraphic(int pos)
+//{
+//    Graphics.erase(Graphics.begin() + pos);
+//}
+//
 void Master::addTrack(Track *track)
 {
     Tracks.push_back(track);

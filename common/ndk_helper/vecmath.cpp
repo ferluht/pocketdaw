@@ -339,7 +339,7 @@ Mat4 Mat4::Perspective(float width, float height, float nearPlane,
 }
 
 Mat4 Mat4::Ortho2D(float left, float top, float right, float bottom) {
-  const float zNear = -1.0f;
+  const float zNear = 1.0f;
   const float zFar = 10000.0f;
   const float inv_z = 1.0f / (zFar - zNear);
   const float inv_y = 1.0f / (-top + bottom);

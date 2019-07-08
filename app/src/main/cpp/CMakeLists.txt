@@ -22,7 +22,7 @@ add_subdirectory(${ndkHelperSrc} ${commonDir}/ndkHelperBin/${CMAKE_BUILD_TYPE}/$
 include_directories(src/main/cpp/Link/android-ifaddrs)
 include_directories(${LINK_DIR}/include)
 include_directories(${LINK_DIR}/modules/asio-standalone/asio/include)
-
+include_directories(src/main/cpp)
 
 #add_library(native_app_glue STATIC
 #        ${ANDROID_NDK}/sources/android/native_app_glue/android_native_app_glue.c)
@@ -42,11 +42,11 @@ add_library( # Sets the name of the library.
         # Sets the library as a shared library.
         SHARED
 
-        TeapotNativeActivity.cpp
-        TeapotRenderer.cpp
-
+        MainActivity.cpp
+        GUI/GraphicObject.cpp
+        GUI/GraphicEngine.cpp
+        GUI/Button.cpp
         # Provides a relative path to your source file(s).
-        jni-bridge.cpp
 
         Link/LinkManager.cpp
         Link/android-ifaddrs/ifaddrs.cpp
@@ -64,7 +64,7 @@ add_library( # Sets the name of the library.
         AudioEffects/Delay.cpp
         Instruments/ADSR.cpp
         MidiEffects/Arpeggiator.cpp
-        AudioEngine.cpp)
+        AudioEngine/AudioEngine.cpp)
 
 target_compile_definitions(native-lib PRIVATE
         ANDROID=1 LINK_PLATFORM_LINUX=1 PD=1 ABL_LINK_OFFSET_MS=23)

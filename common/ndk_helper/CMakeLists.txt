@@ -15,6 +15,7 @@ add_library(NdkHelper
     sensorManager.cpp
     shader.cpp
     tapCamera.cpp
+    texture.cpp
     vecmath.cpp
 )
 set_target_properties(NdkHelper

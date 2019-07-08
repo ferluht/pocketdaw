@@ -23,7 +23,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.Log;
 import android.widget.Toast;
 
-public class TeapotApplication extends Application {
+public class PDApplication extends Application {
     public void onCreate(){
         super.onCreate();	
         Log.w("native-activity", "onCreate");

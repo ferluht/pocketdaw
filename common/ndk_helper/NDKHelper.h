@@ -40,4 +40,5 @@
 #include "perfMonitor.h"      // FPS counter
 #include "sensorManager.h"    // SensorManager
 #include "interpolator.h"     // Interpolator
+#include "texture.h"
 #endif
