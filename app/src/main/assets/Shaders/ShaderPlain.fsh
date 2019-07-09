@@ -5,11 +5,14 @@ in mediump vec2 TexCoord;
 
 out mediump vec4 color;
 
+uniform mediump mat2 rot;
 uniform sampler2D ourTexture;
 
 void main()
 {
-    color = texture(ourTexture, TexCoord);
+    mediump vec2 new_coord = rot*(TexCoord - vec2(0.5, 0.5));
+    color = texture(ourTexture, new_coord + vec2(0.5, 0.5));
+    if ((new_coord[0]*new_coord[0] + new_coord[1]*new_coord[1]) > 0.25) color.a = 0.0;
 }
 
 //

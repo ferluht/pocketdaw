@@ -2,9 +2,9 @@
 // Created by Admin on 06.07.2019.
 //
 
-#include "Button.h"
+#include "Encoder.h"
 
-Button::Button(const char * texture, float x, float y, float * parameter)
+Encoder::Encoder(const char * texture, float x, float y, float * parameter)
 : GraphicObject(texture, "Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlain.fsh"){
 
     parameter_ = parameter;
@@ -13,25 +13,20 @@ Button::Button(const char * texture, float x, float y, float * parameter)
     relativePosition.y = y;
     relativePosition.z = 0.1;
     relativePosition.height = 0.1;
-    relativePosition.width = 0.2;
+    relativePosition.width = 0.1;
+    angle = 0;
 }
 
-void Button::grender(float dTime) {
+void Encoder::grender(float dTime) {
     //
     // Feed Projection and Model View matrices to the shaders
-
     GLfloat g_vertex_buffer_data[] = {
             // Позиции          // Цвета             // Текстурные координаты
-            absolutePosition.x + absolutePosition.width, absolutePosition.y + absolutePosition.height, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,   // Верхний правый
+            absolutePosition.x + absolutePosition.width, absolutePosition.y + absolutePosition.width, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,   // Верхний правый
             absolutePosition.x + absolutePosition.width, absolutePosition.y, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,   // Нижний правый
             absolutePosition.x, absolutePosition.y, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f,   // Нижний левый
-            absolutePosition.x, absolutePosition.y + absolutePosition.height, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f,    // Верхний левый
+            absolutePosition.x, absolutePosition.y + absolutePosition.width, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f,    // Верхний левый
     };
-
-//    GLuint indices[] = {  // Помните, что мы начинаем с 0!
-//            0, 3, 1,   // Первый треугольник
-//            3, 2, 1    // Второй треугольник
-//    };
 
     GLuint indices[] = {  // Помните, что мы начинаем с 0!
             1, 3, 0,   // Первый треугольник
@@ -78,9 +73,11 @@ void Button::grender(float dTime) {
     glUniformMatrix4fv(shader_param_.matrix_projection_, 1, GL_FALSE,
                        mat_vp.Ptr());
 
+
     GLint MatrixID = glGetUniformLocation(shader_param_.program_, "rot");
 
-    GLfloat rot[] = {(float)cos(0.1), -(float)sin(0.1), (float)sin(0.1), (float)cos(0.1)};
+//    GLfloat rot_PI[] = {cos(-(float)M_PI_2), -sin(-(float)M_PI_2), sin(-(float)M_PI_2), cos(-(float)M_PI_2)};
+    GLfloat rot[] = {cos(angle), -sin(angle), sin(angle), cos(angle)};
 
     glUniformMatrix2fv(MatrixID, 1, GL_FALSE, rot);
 
@@ -94,18 +91,30 @@ void Button::grender(float dTime) {
 }
 
 
-void Button::dragHandler(ndk_helper::Vec2 v) {
-    relativePosition.x = (v.x_ - drag_from.x_)*drag_xscale + relative_position_backup.x;
-    relativePosition.y = (v.y_ - drag_from.y_)*drag_yscale + relative_position_backup.y;
+void Encoder::dragHandler(ndk_helper::Vec2 v) {
+//    relativePosition.x = (v.x_ - drag_from.x_)*drag_xscale + relative_position_backup.x;
+//    relativePosition.y = (v.y_ - drag_from.y_)*drag_yscale + relative_position_backup.y;
 
-    *parameter_ = relativePosition.y;
+    angle = old_angle + (drag_from.y_ - v.y_)/100;
+
+    if (angle < -0.75f*(float)M_PI) {
+        angle = -0.75f*(float)M_PI;
+    }
+
+    if (angle > 0.75f*(float)M_PI) {
+        angle = 0.75f*(float)M_PI;
+    }
+
+    float param = (angle/0.75f/(float)M_PI + 1.f) / 2.f;
+    if (param < 0.1) param = 0.1;
+    if (param > 0.9) param = 0.9;
+
+    *parameter_ = param;
 
     Update();
 }
 
-void Button::dragBegin(ndk_helper::Vec2 v, float xscale, float yscale) {
+void Encoder::dragBegin(ndk_helper::Vec2 v, float xscale, float yscale) {
     drag_from = v;
-    relative_position_backup = relativePosition;
-    drag_xscale = xscale;
-    drag_yscale = yscale;
+    old_angle = angle;
 }

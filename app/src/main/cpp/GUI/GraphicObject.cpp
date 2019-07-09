@@ -151,13 +151,6 @@ bool GraphicObject::LoadShaders(SHADER_PARAMS *params, const char *strVsh,
     return true;
 }
 
-//void * GraphicObject::beginEvent(float x, float y) {
-//    void * handler = handler;
-//    for (auto const &gr : Graphics) {
-//        gr->grender_(dTime);
-//    }
-//    return handler;
-//}
 
 GraphicObject * GraphicObject::findDragHandler(ndk_helper::Vec2 v, float xscale, float yscale){
     for (auto const &gr : Graphics) {
@@ -168,9 +161,7 @@ GraphicObject * GraphicObject::findDragHandler(ndk_helper::Vec2 v, float xscale,
             return gr->findDragHandler(v, xscale/absolutePosition.width, yscale/absolutePosition.height);
         }
     }
-    drag_from = v;
-    relative_position_backup = relativePosition;
-    drag_xscale = xscale;
-    drag_yscale = yscale;
+
+    dragBegin(v, xscale, yscale);
     return this;
 }

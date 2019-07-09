@@ -2,16 +2,21 @@
 // Created by Admin on 06.07.2019.
 //
 
-#ifndef PD_BUTTON_H
-#define PD_BUTTON_H
+#ifndef PD_ENCODER_H
+#define PD_ENCODER_H
 
 #include "GraphicObject.h"
 
-class Button : public GraphicObject{
+#define SEGMENTS 30
+
+class Encoder : public GraphicObject{
 public:
     float * parameter_;
 
-    Button(const char * texture, float x, float y, float * parameter);
+    float angle = 0;
+    float old_angle;
+
+    Encoder(const char * texture, float x, float y, float * parameter);
 
     void SetPosition(float x, float y);
     void SetSize(float x, float y);
@@ -21,4 +26,4 @@ public:
 };
 
 
-#endif //PD_BUTTON_H
+#endif //PD_ENCODER_H

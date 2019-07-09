@@ -5,18 +5,18 @@
 #include "Metronome.h"
 #include <cmath>
 
-void MetronomeState::update(MidiData md)
-{
+void Metronome::updateState(MetronomeState *state, MidiData md){
     if (md.data2 != 0) {
-        phase2 = 0;
-        beat = md.beat;
-        this->note = md.data1;
-        volume = md.data2 / 127.0;
-        phase_increment = -1;
-        ad.attack();
-        setActive(true);
+        state->ad.A = (int)(A*5000);
+        state->phase2 = 0;
+        state->beat = md.beat;
+        state->note = md.data1;
+        state->volume = md.data2 / 127.0;
+        state->phase_increment = -1;
+        state->ad.attack();
+        state->setActive(true);
     }else{
-        ad.release();
+        state->ad.release();
     }
 }
 

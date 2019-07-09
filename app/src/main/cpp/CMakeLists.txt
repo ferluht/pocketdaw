@@ -46,6 +46,7 @@ add_library( # Sets the name of the library.
         GUI/GraphicObject.cpp
         GUI/GraphicEngine.cpp
         GUI/Button.cpp
+        GUI/Encoder.cpp
         # Provides a relative path to your source file(s).
 
         Link/LinkManager.cpp

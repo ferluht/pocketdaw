@@ -6,6 +6,7 @@
 #include "../Instruments/Metronome.h"
 #include "../AudioEffects/Delay.h"
 #include "../GUI/Button.h"
+#include "../GUI/Encoder.h"
 
 Master::Master() :
 GraphicObject("Textures/container.bmp", "Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlain.fsh"),
@@ -13,12 +14,15 @@ link(DEFAULT_BPM)
 {
     link.enable(true);
     auto * cue = new Track;
-    cue->TrackInstrument = new Metronome;
+    auto metr = new Metronome;
+    cue->TrackInstrument = metr;
     auto * delay = new Delay(8000, 0.3);
     cue->addAudioEffect(delay);
     addTrack(cue);
 
-    addChildObject(new Button("Textures/container.bmp", 0.f, 0.f, &delay->feedback));
+    addChildObject(new Encoder("Textures/encoder.bmp", 0.3f, 0.5f, &delay->feedback));
+    addChildObject(new Encoder("Textures/encoder.bmp", 0.7f, 0.5f, &delay->delayTime));
+    addChildObject(new Encoder("Textures/encoder.bmp", 0.5f, 0.5f, &metr->A));
 //    addChildObject(new Button("Textures/container.bmp", 0.4, 0.3));
 //    addChildObject(new Button("Textures/container.bmp", 0.7, 0.5));
 //    addChildObject(new Button("Textures/container.bmp", 0.9, 0.7));

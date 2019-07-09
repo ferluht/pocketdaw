@@ -25,7 +25,6 @@ public:
 	bool active;
 
 	InstrumentState();
-	virtual void update(MidiData md) {};
 	void setActive(bool isactive);
 };
 
@@ -98,6 +97,8 @@ public:
     	return getPhaseIncrement(getFrequency(note, cents));
 	}
 
+    virtual void updateState(State * state, MidiData cmd) {};
+
     virtual float render(State * state, double beat) {return 0;}
 };
 
@@ -135,7 +136,7 @@ void Instrument<State>::keyPressed(MidiData md)
         if ((*it)->note == md.data1){
             State * state = (*it);
             States.erase(it);
-            state->update(md);
+            updateState(state, md);
             States.insert(state);
             return;
         }
@@ -147,7 +148,7 @@ void Instrument<State>::keyPressed(MidiData md)
         if (!(*it)->active){
             State * state = (*it);
             States.erase(it);
-            state->update(md);
+            updateState(state, md);
             States.insert(state);
             return;
         }
@@ -155,7 +156,7 @@ void Instrument<State>::keyPressed(MidiData md)
 
     State * state = *States.begin();
     States.erase(States.begin());
-    state->update(md);
+    updateState(state, md);
     States.insert(state);
 }
 

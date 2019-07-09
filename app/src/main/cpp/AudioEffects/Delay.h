@@ -9,11 +9,11 @@
 
 class Delay : public AudioEffect{
 public:
-    int delayTime = 1000;
+    float delayTime = 0;
     int position = 0;
     float feedback = 0.4;
 
-    Delay(int delayTime_, float feedback_);
+    Delay(float delayTime_, float feedback_);
     float apply(float sample);
 
 private:

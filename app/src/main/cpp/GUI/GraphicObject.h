@@ -108,6 +108,7 @@ public:
     virtual void doubleTapHandler(ndk_helper::Vec2 v) {};
 
     GraphicObject * findDragHandler(ndk_helper::Vec2 v, float xscale, float yscale);
+    virtual void dragBegin(ndk_helper::Vec2 v, float xscale, float yscale) {};
     virtual void dragHandler(ndk_helper::Vec2 v) {};
     virtual void dragEnd() {};
 
