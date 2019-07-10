@@ -4,10 +4,10 @@
 
 #include "Button.h"
 
-Button::Button(const char * texture, float x, float y, float * parameter)
+Button::Button(const char * texture, float x, float y, std::function<void(void)> callback)
 : GraphicObject(texture, "Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlain.fsh"){
 
-    parameter_ = parameter;
+    callback_ = callback;
 
     relativePosition.x = x;
     relativePosition.y = y;
@@ -108,4 +108,8 @@ void Button::dragBegin(ndk_helper::Vec2 v, float xscale, float yscale) {
     relative_position_backup = relativePosition;
     drag_xscale = xscale;
     drag_yscale = yscale;
+}
+
+void Button::dragEnd() {
+    callback_();
 }

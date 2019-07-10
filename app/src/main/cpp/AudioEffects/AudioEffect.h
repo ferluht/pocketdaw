@@ -5,13 +5,16 @@
 #ifndef PD_AUDIOEFFECT_H
 #define PD_AUDIOEFFECT_H
 
+#include "../GUI/GraphicObject.h"
 
-class AudioEffect {
+class AudioEffect : public GraphicObject{
 
 public:
 
     bool isOn;
-    AudioEffect() = default;
+    AudioEffect();
+
+    void grender(float dTime) override ;
 
     virtual float apply(float sample);
 };

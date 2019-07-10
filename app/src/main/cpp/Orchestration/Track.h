@@ -13,8 +13,9 @@
 #include "../AudioEffects/AudioEffect.h"
 #include "../MidiEffects/MidiEffect.h"
 #include "Midi.h"
+#include "../GUI/GraphicObject.h"
 
-class Track {
+class Track : public GraphicObject{
 
 public:
 

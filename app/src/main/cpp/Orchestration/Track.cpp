@@ -4,8 +4,10 @@
 
 #include "Track.h"
 #include "../MidiEffects/Arpeggiator.h"
+#include "../AudioEffects/Delay.h"
 
-Track::Track()
+Track::Track():
+GraphicObject("Textures/container.bmp", "Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlain.fsh")
 {
     last_beat = 0;
     MidiClip * mdc = createMetronomeMidi();
@@ -59,7 +61,16 @@ void Track::toggleRec()
 
 void Track::addAudioEffect(AudioEffect *effect)
 {
+    effect->relativePosition.x = 0;
+    effect->relativePosition.y = 0.2;
+    if (!AudioEffects.empty()) {
+        effect->relativePosition.x = AudioEffects.back()->relativePosition.x;
+        effect->relativePosition.y = AudioEffects.back()->relativePosition.y + AudioEffects.back()->relativePosition.height + 0.02;
+    }
+    effect->relativePosition.height = 0.1;
+    effect->relativePosition.width = 1;
     AudioEffects.push_back(effect);
+    addChildObject(effect);
 }
 
 inline bool Track::onbeat(double beat, double midi_beat)

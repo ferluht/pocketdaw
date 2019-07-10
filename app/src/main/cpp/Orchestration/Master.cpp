@@ -16,15 +16,9 @@ link(DEFAULT_BPM)
     auto * cue = new Track;
     auto metr = new Metronome;
     cue->TrackInstrument = metr;
-    auto * delay = new Delay(8000, 0.3);
-    cue->addAudioEffect(delay);
+    cue->addAudioEffect(new Delay(8000, 0.3));
     addTrack(cue);
-
-    addChildObject(new Encoder("Textures/encoder.bmp", 0.3f, 0.5f, &delay->feedback));
-    addChildObject(new Encoder("Textures/encoder.bmp", 0.7f, 0.5f, &delay->delayTime));
-    addChildObject(new Encoder("Textures/encoder.bmp", 0.5f, 0.5f, &metr->A));
-//    addChildObject(new Button("Textures/container.bmp", 0.4, 0.3));
-//    addChildObject(new Button("Textures/container.bmp", 0.7, 0.5));
+    addChildObject(new Button("Textures/container.bmp", 0.7, 0.5, [cue](){Master::addEffect(0, new Delay(8000, 0.3));}));
 //    addChildObject(new Button("Textures/container.bmp", 0.9, 0.7));
 
 //    addAudioEffect(new Delay(3300, 0.2));
@@ -107,7 +101,17 @@ void Master::stop()
 //
 void Master::addTrack(Track *track)
 {
+    track->relativePosition.x = 0;
+    track->relativePosition.y = 0;
+    if (!Tracks.empty()) {
+        track->relativePosition.x =
+                Tracks.back()->relativePosition.x + Tracks.back()->relativePosition.width;
+        track->relativePosition.y = Tracks.back()->relativePosition.y;
+    }
+    track->relativePosition.width = 0.3;
+    track->relativePosition.height = 1;
     Tracks.push_back(track);
+    addChildObject(track);
 }
 
 void Master::delTrack(int pos)
