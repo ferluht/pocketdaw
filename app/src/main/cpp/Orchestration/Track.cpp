@@ -77,3 +77,16 @@ inline bool Track::onbeat(double beat, double midi_beat)
 {
     return ((beat >= midi_beat) && (last_beat < beat));
 }
+
+void Track::dragHandler(ndk_helper::Vec2 v) {
+    relativePosition.y = (v.y_ - drag_from.y_)*drag_yscale + relative_position_backup.y;
+    if (relativePosition.y > 0) relativePosition.y = 0;
+    Update();
+}
+
+void Track::dragBegin(ndk_helper::Vec2 v, float xscale, float yscale) {
+    drag_from = v;
+    relative_position_backup = relativePosition;
+    drag_xscale = xscale;
+    drag_yscale = yscale;
+}

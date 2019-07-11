@@ -41,6 +41,9 @@ public:
 
     void toggleRec();
     void addAudioEffect(AudioEffect* effect);
+
+    void dragHandler(ndk_helper::Vec2 v) override ;
+    void dragBegin(ndk_helper::Vec2 v, float xscale, float yscale) override ;
 //    void addAudioEffect(AudioEffect* effect);
 };
 

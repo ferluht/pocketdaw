@@ -23,6 +23,8 @@ public:
     std::atomic<float> wave[2000];
     int r = 1;
 
+    int k = 0;
+
     float accumulator = 0, prev_acc = 0;
     int ai = 0, aj = 0;
     float window = 3;

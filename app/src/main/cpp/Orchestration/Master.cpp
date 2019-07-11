@@ -17,8 +17,9 @@ link(DEFAULT_BPM)
     auto metr = new Metronome;
     cue->TrackInstrument = metr;
     cue->addAudioEffect(new Delay(8000, 0.3));
+    cue->addAudioEffect(new Delay(8000, 0.3));
     addTrack(cue);
-    addChildObject(new Button("Textures/container.bmp", 0.7, 0.5, [cue](){Master::addEffect(0, new Delay(8000, 0.3));}));
+    addChildObject(new Button("Textures/container.bmp", 0.7, 0.5, this));
 //    addChildObject(new Button("Textures/container.bmp", 0.9, 0.7));
 
 //    addAudioEffect(new Delay(3300, 0.2));
@@ -35,6 +36,7 @@ link(DEFAULT_BPM)
 
     for (int i = 0; i < 2000; i ++) wave[i] = 0;
 }
+
 
 void Master::render(float *audioData, int32_t numFrames) {
 

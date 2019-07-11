@@ -36,6 +36,7 @@ void GraphicObject::Init() {
 void GraphicObject::addChildObject(GraphicObject *go) {
     go->parent = this;
     Graphics.push_back(go);
+    Update();
 }
 
 void GraphicObject::Update() {
@@ -62,6 +63,10 @@ void GraphicObject::Update() {
         absolutePosition.z = parent->absolutePosition.z + relativePosition.z;
         absolutePosition.height = relativePosition.height * parent->absolutePosition.height;
         absolutePosition.width = relativePosition.width * parent->absolutePosition.width;
+    }
+
+    for (auto const &gr : Graphics) {
+        gr->Update();
     }
 }
 

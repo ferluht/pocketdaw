@@ -3,11 +3,14 @@
 //
 
 #include "Button.h"
+#include "../AudioEffects/Delay.h"
 
-Button::Button(const char * texture, float x, float y, std::function<void(void)> callback)
+Button::Button(const char * texture, float x, float y, Master * m_)
 : GraphicObject(texture, "Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlain.fsh"){
 
-    callback_ = callback;
+    m = m_;
+
+    m->Tracks[0]->addAudioEffect(new Delay(8000, 0.3));
 
     relativePosition.x = x;
     relativePosition.y = y;
@@ -98,8 +101,6 @@ void Button::dragHandler(ndk_helper::Vec2 v) {
     relativePosition.x = (v.x_ - drag_from.x_)*drag_xscale + relative_position_backup.x;
     relativePosition.y = (v.y_ - drag_from.y_)*drag_yscale + relative_position_backup.y;
 
-    *parameter_ = relativePosition.y;
-
     Update();
 }
 
@@ -111,5 +112,5 @@ void Button::dragBegin(ndk_helper::Vec2 v, float xscale, float yscale) {
 }
 
 void Button::dragEnd() {
-    callback_();
+    m->Tracks[0]->addAudioEffect(new Delay(8000, 0.3));
 }

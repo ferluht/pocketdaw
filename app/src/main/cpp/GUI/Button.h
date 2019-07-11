@@ -6,13 +6,15 @@
 #define PD_BUTTON_H
 
 #include "GraphicObject.h"
+#include "../Orchestration/Master.h"
 
 class Button : public GraphicObject{
 public:
     float * parameter_;
     std::function<void(void)> callback_;
 
-    Button(const char * texture, float x, float y, std::function<void(void)> callback);
+    Button(const char * texture, float x, float y, Master * m_);
+    Master * m;
 
     void SetPosition(float x, float y);
     void SetSize(float x, float y);
