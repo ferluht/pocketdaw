@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.4.1)
 
 project(native-lib LANGUAGES C CXX)
 
-set (LINK_DIR D:/link)
+set (LINK_DIR /home/ibelikov/link)
 
 include(${LINK_DIR}/AbletonLinkConfig.cmake)
 
@@ -19,15 +19,19 @@ get_filename_component(commonDir ${CMAKE_CURRENT_SOURCE_DIR}/../../../../common 
 get_filename_component(ndkHelperSrc ${commonDir}/ndk_helper ABSOLUTE)
 add_subdirectory(${ndkHelperSrc} ${commonDir}/ndkHelperBin/${CMAKE_BUILD_TYPE}/${ANDROID_ABI})
 
+get_filename_component(freetypeSrc ${commonDir}/freetype-2.10.0 ABSOLUTE)
+add_subdirectory(${freetypeSrc} ${commonDir}/freetypeBin/${CMAKE_BUILD_TYPE}/${ANDROID_ABI})
+
 include_directories(src/main/cpp/Link/android-ifaddrs)
 include_directories(${LINK_DIR}/include)
 include_directories(${LINK_DIR}/modules/asio-standalone/asio/include)
 include_directories(src/main/cpp)
+include_directories(${freetypeSrc}/include)
 
-#add_library(native_app_glue STATIC
-#        ${ANDROID_NDK}/sources/android/native_app_glue/android_native_app_glue.c)
-#target_include_directories(native_app_glue PUBLIC
-#        ${ANDROID_NDK}/sources/android/native_app_glue)
+add_library(native_app_glue STATIC
+        ${ANDROID_NDK}/sources/android/native_app_glue/android_native_app_glue.c)
+target_include_directories(native_app_glue PUBLIC
+        ${ANDROID_NDK}/sources/android/native_app_glue)
 
 
 
@@ -47,6 +51,8 @@ add_library( # Sets the name of the library.
         GUI/GraphicEngine.cpp
         GUI/Button.cpp
         GUI/Encoder.cpp
+        GUI/Font.cpp
+        GUI/Text.cpp
         # Provides a relative path to your source file(s).
 
         Link/LinkManager.cpp
@@ -100,5 +106,5 @@ target_link_libraries( # Specifies the target library.
         ${log-lib}
         native_app_glue
         Ableton::Link
-
+        freetype
         NdkHelper)

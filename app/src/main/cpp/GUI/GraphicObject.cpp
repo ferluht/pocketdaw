@@ -25,6 +25,7 @@ void GraphicObject::Init() {
     glFrontFace(GL_CCW);
     LoadShaders(&shader_param_, vshader, fshader);
     texture = ndk_helper::texture::loadBMP(texture_name);
+    Init_();
     Update();
 
     for (auto const &gr : Graphics) {

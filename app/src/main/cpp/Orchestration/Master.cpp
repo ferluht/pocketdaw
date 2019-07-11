@@ -7,6 +7,7 @@
 #include "../AudioEffects/Delay.h"
 #include "../GUI/Button.h"
 #include "../GUI/Encoder.h"
+#include "../GUI/Text.h"
 
 Master::Master() :
 GraphicObject("Textures/container.bmp", "Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlain.fsh"),
@@ -19,6 +20,9 @@ link(DEFAULT_BPM)
     cue->addAudioEffect(new Delay(8000, 0.3));
     cue->addAudioEffect(new Delay(8000, 0.3));
     addTrack(cue);
+
+    addChildObject(new Text("Fonts/Roboto-Regular.ttf", L"ahtshhrt\n", 0.3, 0.5));
+
     addChildObject(new Button("Textures/container.bmp", 0.7, 0.5, this));
 //    addChildObject(new Button("Textures/container.bmp", 0.9, 0.7));
 

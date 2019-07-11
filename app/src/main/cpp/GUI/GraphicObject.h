@@ -90,6 +90,7 @@ public:
     GraphicObject(const char * texture, const char * vshader, const char * fshader, GraphicObject * parent);
     virtual ~GraphicObject();
     void Init();
+    virtual void Init_() {};
 
     void SetPosition(float x, float y);
     void SetSize(float x, float y);

@@ -112,5 +112,7 @@ void Button::dragBegin(ndk_helper::Vec2 v, float xscale, float yscale) {
 }
 
 void Button::dragEnd() {
-    m->Tracks[0]->addAudioEffect(new Delay(8000, 0.3));
+    auto d = new Delay(8000, 0.3);
+    d->Init();
+    m->Tracks[0]->addAudioEffect(d);
 }

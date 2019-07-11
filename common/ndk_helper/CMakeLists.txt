@@ -1,8 +1,13 @@
 # build native_app_glue as a static lib
 cmake_minimum_required(VERSION 3.4.1)
 
-include(AndroidNdkModules)
-android_ndk_import_module_native_app_glue()
+#include(AndroidNdkModules)
+#android_ndk_import_module_native_app_glue()
+
+add_library(native_app_glue_ STATIC
+        ${ANDROID_NDK}/sources/android/native_app_glue/android_native_app_glue.c)
+target_include_directories(native_app_glue_ PUBLIC
+        ${ANDROID_NDK}/sources/android/native_app_glue)
 
 add_library(NdkHelper
   STATIC
@@ -32,7 +37,7 @@ target_include_directories(NdkHelper
 
 target_link_libraries(NdkHelper
   PUBLIC
-    native_app_glue
+    native_app_glue_
     GLESv2
     EGL
     log
