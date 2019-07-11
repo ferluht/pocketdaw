@@ -4,6 +4,7 @@
 
 #include "Delay.h"
 #include "../GUI/Encoder.h"
+#include "../GUI/Text.h"
 
 Delay::Delay(float delayTime_, float feedback_) : AudioEffect()
 {
@@ -12,7 +13,9 @@ Delay::Delay(float delayTime_, float feedback_) : AudioEffect()
     relativePosition.y = 0.3;
     relativePosition.width = 0.4;
     relativePosition.height = 0.2;
+    addChildObject(new Text("Fonts/Roboto-Regular.ttf", L"feedback\n", 0.3, 0.1));
     addChildObject(new Encoder("Textures/encoder.bmp", 0.6f, 0.2f, &feedback));
+    addChildObject(new Text("Fonts/Roboto-Regular.ttf", L"delay time\n", -0.2, 0.1));
     addChildObject(new Encoder("Textures/encoder.bmp", 0.1f, 0.2f, &delayTime));
 
     for (int i = 0; i < 50000; i ++){

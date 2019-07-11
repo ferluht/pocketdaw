@@ -69,6 +69,8 @@ add_library( # Sets the name of the library.
         MidiEffects/MidiEffect.cpp
         AudioEffects/AudioEffect.cpp
         AudioEffects/Delay.cpp
+        AudioEffects/Waveform.cpp
+        AudioEffects/Spectrum.cpp
         Instruments/ADSR.cpp
         MidiEffects/Arpeggiator.cpp
         AudioEngine/AudioEngine.cpp)

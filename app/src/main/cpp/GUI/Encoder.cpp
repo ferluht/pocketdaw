@@ -12,8 +12,8 @@ Encoder::Encoder(const char * texture, float x, float y, float * parameter)
     relativePosition.x = x;
     relativePosition.y = y;
     relativePosition.z = 0.1;
-    relativePosition.height = 0.4;
-    relativePosition.width = 0.4;
+    relativePosition.height = 0.3;
+    relativePosition.width = 0.3;
     angle = 0;
 }
 
@@ -106,8 +106,8 @@ void Encoder::dragHandler(ndk_helper::Vec2 v) {
     }
 
     float param = (angle/0.75f/(float)M_PI + 1.f) / 2.f;
-    if (param < 0.1) param = 0.1;
-    if (param > 0.9) param = 0.9;
+    if (param < 0.01) param = 0.01;
+    if (param > 0.99) param = 0.99;
 
     *parameter_ = param;
 

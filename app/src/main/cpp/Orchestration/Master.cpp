@@ -8,6 +8,7 @@
 #include "../GUI/Button.h"
 #include "../GUI/Encoder.h"
 #include "../GUI/Text.h"
+#include "../AudioEffects/Waveform.h"
 
 Master::Master() :
 GraphicObject("Textures/container.bmp", "Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlain.fsh"),
@@ -19,9 +20,8 @@ link(DEFAULT_BPM)
     cue->TrackInstrument = metr;
     cue->addAudioEffect(new Delay(8000, 0.3));
     cue->addAudioEffect(new Delay(8000, 0.3));
+    cue->addAudioEffect(new Waveform(0.01, 0.5, 0.5));
     addTrack(cue);
-
-    addChildObject(new Text("Fonts/Roboto-Regular.ttf", L"ahtshhrt\n", 0.3, 0.5));
 
     addChildObject(new Button("Textures/container.bmp", 0.7, 0.5, this));
 //    addChildObject(new Button("Textures/container.bmp", 0.9, 0.7));
@@ -37,8 +37,6 @@ link(DEFAULT_BPM)
     isPlaying = true;
     beat = -1;
     phase = -1;
-
-    for (int i = 0; i < 2000; i ++) wave[i] = 0;
 }
 
 
@@ -66,18 +64,6 @@ void Master::render(float *audioData, int32_t numFrames) {
 
 //        audioData[i] = (audioData[i] + prev_sample)/2;
 //        prev_sample = audioData[i];
-
-        if (ai < window){
-            accumulator += audioData[i];
-            ai ++;
-        } else {
-            ai = 0;
-            wave[r] = (accumulator + prev_acc)/2 / window;
-            prev_acc = accumulator;
-            accumulator = 0;
-            r++;
-            if(r >= 2000) r = 0;
-        }
     }
 }
 

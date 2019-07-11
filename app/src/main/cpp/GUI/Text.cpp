@@ -13,8 +13,8 @@ Text::Text(const char * font, wchar_t * text, float x, float y)
     relativePosition.x = x;
     relativePosition.y = y;
     relativePosition.z = 0.1;
-    relativePosition.height = 0.1;
-    relativePosition.width = 0.1;
+    relativePosition.height = 0.9;
+    relativePosition.width = 0.3;
 }
 
 void Text::Init_() {

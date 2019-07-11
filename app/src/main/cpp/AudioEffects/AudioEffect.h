@@ -13,6 +13,7 @@ public:
 
     bool isOn;
     AudioEffect();
+    AudioEffect(const char * tex, const char * vsh, const char * fsh);
 
     void grender(float dTime) override ;
 

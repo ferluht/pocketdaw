@@ -10,6 +10,12 @@ GraphicObject("Textures/effect_canvas.bmp", "Shaders/VS_ShaderPlain.vsh", "Shade
 
 }
 
+AudioEffect::AudioEffect(const char * tex, const char * vsh, const char * fsh) :
+GraphicObject(tex, vsh, fsh)
+{
+
+}
+
 void AudioEffect::grender(float dTime) {
     //
     // Feed Projection and Model View matrices to the shaders
