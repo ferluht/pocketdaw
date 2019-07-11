@@ -13,6 +13,7 @@ class Text : public GraphicObject{
 public:
 
     Font * f;
+    float ratio;
     const char * font_file;
     wchar_t * text_;
 

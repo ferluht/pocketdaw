@@ -13,13 +13,13 @@ Text::Text(const char * font, wchar_t * text, float x, float y)
     relativePosition.x = x;
     relativePosition.y = y;
     relativePosition.z = 0.1;
-    relativePosition.height = 0.8;
-    relativePosition.width = 0.8;
+    relativePosition.height = 0.1;
+    relativePosition.width = 0.1;
 }
 
 void Text::Init_() {
     f = new Font(font_file);
-    f->init ( text_, 200, 1, 4, 4, 0, 0, 0 );
+    ratio = f->init ( text_, 200, 1, 4, 4, 0, 0, 0 );
     texture = f->textureid;
 }
 
@@ -29,10 +29,10 @@ void Text::grender(float dTime) {
 
     GLfloat g_vertex_buffer_data[] = {
             // Позиции          // Цвета             // Текстурные координаты
-            absolutePosition.x + absolutePosition.width, absolutePosition.y + absolutePosition.height, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,   // Верхний правый
+            absolutePosition.x + absolutePosition.width, absolutePosition.y + absolutePosition.width/ratio, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,   // Верхний правый
             absolutePosition.x + absolutePosition.width, absolutePosition.y, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,   // Нижний правый
             absolutePosition.x, absolutePosition.y, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f,   // Нижний левый
-            absolutePosition.x, absolutePosition.y + absolutePosition.height, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f,    // Верхний левый
+            absolutePosition.x, absolutePosition.y + absolutePosition.width/ratio, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f,    // Верхний левый
     };
 
 //    GLuint indices[] = {  // Помните, что мы начинаем с 0!
@@ -87,7 +87,7 @@ void Text::grender(float dTime) {
 
     GLint MatrixID = glGetUniformLocation(shader_param_.program_, "rot");
 
-    GLfloat rot[] = {1, 0, 0, 1};
+    GLfloat rot[] = {0, -1, 1, 0};
 
     glUniformMatrix2fv(MatrixID, 1, GL_FALSE, rot);
 

@@ -6,24 +6,6 @@
 
 Font::Font ( const char *ttf_file )
 {
-    /* Начнем с создании объекта и подготовки данных
-     * так как я делаю игру для android, я не использую cpp библиотеку glm.
-     * Я создал альтернативу, сишную библиотеку и пока там только три или четыре функции
-     * ну здесь идет очистка массивов в ноль */
-//    glm::clearMatrix4x4 ( &ortho[0] );
-//    glm::clearMatrix4x4 ( &translate[0] );
-//    glm::clearMatrix4x4 ( &result[0] );
-
-    /* получаю из глобальной структуры шейдерную программу */
-//    program = global.programs["sprite"];
-    /* также в глобальной структуре хранятся размеры экрана, их я тоже использую */
-//    int width = global.width;
-//    int height = global.height;
-    /* вот и пригодились размеры экрана, здесь я заполняю матрицу правильными значениями
-     * для 2d рисунков */
-//    glm::ortho ( &ortho[0], 0.0f, width, 0.0f, height, 0.0f, 1.0f );
-    /* устанавливаю позицию в ноль */
-
     /* инициализация библиотеки freetype2. */
     FT_Init_FreeType( &ft_library );
 
@@ -53,7 +35,7 @@ Font::Font ( const char *ttf_file )
 }
 
 /* а вот здесь самое интересное */
-void Font::init ( wchar_t *es, int fontSize, int align, int vert, int space, uint8_t r, uint8_t g, uint8_t b )
+float Font::init ( wchar_t *es, int fontSize, int align, int vert, int space, uint8_t r, uint8_t g, uint8_t b )
 {
     /* задать размер пикселя в высоту */
     FT_Set_Pixel_Sizes ( face, 0, fontSize );
@@ -210,81 +192,6 @@ void Font::init ( wchar_t *es, int fontSize, int align, int vert, int space, uin
 
     /* и удалить текстуру, она уже загружена в буфер и image_data больше не требуется. */
     delete[] image_data;
+
+    return (float)height/(float)width;
 }
-
-
-//void Font::setSize ( int w, int h )
-//{
-//    /* это я высчитал, где должны быть размеры ширины и высоты, чтобы отобразить треугольники правильно */
-//    if ( vertices ) delete[] vertices;
-//    if ( texture ) delete[] texture;
-//    vertices = new float [ 12 ];
-//    vertices[0] = 0;
-//    vertices[1] = 0;
-//    vertices[2] = 0;
-//    vertices[3] = h;
-//    vertices[4] = w;
-//    vertices[5] = 0;
-//
-//    vertices[6] = w;
-//    vertices[7] = 0;
-//    vertices[8] = w;
-//    vertices[9] = h;
-//    vertices[10] = 0;
-//    vertices[11] = h;
-//
-//    /* для текстуры надо задавать полный размер в единицу, так она будет полностью наложена на
-//     * треугольники */
-//    texture = new float [ 12 ];
-//    texture[0] = 0;
-//    texture[1] = 1;
-//    texture[2] = 0;
-//    texture[3] = 0;
-//    texture[4] = 1;
-//    texture[5] = 1;
-//
-//    texture[6] = 1;
-//    texture[7] = 1;
-//    texture[8] = 1;
-//    texture[9] = 0;
-//    texture[10] = 0;
-//    texture[11] = 0;
-//}
-
-//void Font::setPos ( int x, int y )
-//{
-//    /* ну здесь задается позиция, где отобразить текст */
-//    this->x = x;
-//    this->y = y;
-//    glm::translate ( &translate[0], x, y, 0 );
-//    glm::sumMatrix ( &result[0], &translate[0], &ortho[0] );
-//}
-//
-//void Font::draw ( )
-//{
-//    /* стандартные действия для использования шейдера */
-//    glUseProgram ( program );
-//
-//    sampler = glGetUniformLocation ( program, "s_texture" );
-//
-//    glActiveTexture ( GL_TEXTURE0 );
-//    glBindTexture ( GL_TEXTURE_2D, textureid );
-//    glUniform1i ( sampler, 0 );
-//
-//    GLint projection_location = glGetUniformLocation ( program, "transform" );
-//    glUniformMatrix4fv ( projection_location, 1, GL_FALSE, &result[0][0] );
-//
-//    glEnableVertexAttribArray ( 0 );
-//    glEnableVertexAttribArray ( 1 );
-//
-//    /* сюда заноситься координаты вершин */
-//    glVertexAttribPointer ( 0, 2, GL_FLOAT, GL_FALSE, 0, vertices );
-//    /* сюда заноситься координаты текстуры */
-//    glVertexAttribPointer ( 1, 2, GL_FLOAT, GL_FALSE, 0, texture );
-//
-//    /* и рисуем текстуру */
-//    glDrawArrays ( GL_TRIANGLES, 0, 12 );
-//
-//    glDisableVertexAttribArray ( 0 );
-//    glDisableVertexAttribArray ( 1 );
-//}

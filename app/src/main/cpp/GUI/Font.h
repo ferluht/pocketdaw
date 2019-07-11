@@ -30,7 +30,7 @@ public:
      *\7 компонент цвет зеленый.
      *\8 компонент цвет синий.
      * ну это значит что можно задать любой цвет тексту */
-    void init ( wchar_t *text, int fontSize, int align, int valign, int space, uint8_t r, uint8_t g, uint8_t b );
+    float init ( wchar_t *text, int fontSize, int align, int valign, int space, uint8_t r, uint8_t g, uint8_t b );
     /* задать размер текстуры */
     /* рисовать текстуру */
 
