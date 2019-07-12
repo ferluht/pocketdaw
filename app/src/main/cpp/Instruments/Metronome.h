@@ -22,6 +22,8 @@ public:
 
     float A = 0.1, D = 0.5, S = 0.5, R = 0.3;
 
+    Metronome();
+
     void updateState(MetronomeState * state, MidiData md) override;
     float render(MetronomeState * state, double beat) override ;
 };

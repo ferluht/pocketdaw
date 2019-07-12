@@ -8,7 +8,7 @@
 #include "../GUI/GraphicObject.h"
 #include "AudioEffect.h"
 
-#define BUFFER_SIZE 2000
+#define BUFFER_SIZE 200
 
 class Waveform : public AudioEffect{
 public:

@@ -6,6 +6,7 @@
 #define PD_INSTRUMENT_H
 
 #include "../Orchestration/Midi.h"
+#include "../GUI/GraphicObject.h"
 #include <cmath>
 #include <set>
 
@@ -30,9 +31,11 @@ public:
 
 bool operator<(const InstrumentState &lhs, const InstrumentState &rhs);
 
-class InstrumentBase {
+class InstrumentBase : public GraphicObject {
 public:
-    InstrumentBase() = default;
+    InstrumentBase() : GraphicObject("Textures/effect_canvas.bmp", "Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlainRect.fsh") {};
+
+    void grender(float dTime) override ;
 
     virtual void midiCommand(MidiData md) = 0;
     virtual float render(double beat) = 0;

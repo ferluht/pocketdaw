@@ -59,13 +59,23 @@ void Track::toggleRec()
     rec = !rec;
 }
 
+void Track::initInstrument(InstrumentBase *instr)
+{
+    TrackInstrument = instr;
+    instr->relativePosition.x = 0;
+    instr->relativePosition.y = 0;
+    instr->relativePosition.height = 0.2;
+    instr->relativePosition.width = 1;
+    addChildObject(instr);
+}
+
 void Track::addAudioEffect(AudioEffect *effect)
 {
     effect->relativePosition.x = 0;
-    effect->relativePosition.y = 0.2;
+    effect->relativePosition.y = TrackInstrument->relativePosition.y + TrackInstrument->relativePosition.height + 0.01;
     if (!AudioEffects.empty()) {
         effect->relativePosition.x = AudioEffects.back()->relativePosition.x;
-        effect->relativePosition.y = AudioEffects.back()->relativePosition.y + AudioEffects.back()->relativePosition.height + 0.02;
+        effect->relativePosition.y = AudioEffects.back()->relativePosition.y + AudioEffects.back()->relativePosition.height + 0.01;
     }
     effect->relativePosition.height = 0.1;
     effect->relativePosition.width = 1;

@@ -3,11 +3,21 @@
 //
 
 #include "Metronome.h"
+#include "../GUI/Encoder.h"
+#include "../GUI/Text.h"
 #include <cmath>
+
+Metronome::Metronome(){
+    addChildObject(new Text("Fonts/Roboto-Regular.ttf", L"attack\n", 0.3, 0.4));
+    addChildObject(new Encoder("Textures/encoder.bmp", 0.6f, 0.5f, &A));
+    addChildObject(new Text("Fonts/Roboto-Regular.ttf", L"decay\n", -0.2, 0.4));
+    addChildObject(new Encoder("Textures/encoder.bmp", 0.1f, 0.5f, &D));
+}
 
 void Metronome::updateState(MetronomeState *state, MidiData md){
     if (md.data2 != 0) {
-        state->ad.A = (int)(A*5000);
+        state->ad.A = (int)(A*2000);
+        state->ad.D = (int)(D*2000);
         state->phase2 = 0;
         state->beat = md.beat;
         state->note = md.data1;

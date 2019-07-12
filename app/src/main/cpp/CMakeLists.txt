@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.4.1)
 
 project(native-lib LANGUAGES C CXX)
 
-set (LINK_DIR /home/ibelikov/link)
+set (LINK_DIR D:/link)
 
 include(${LINK_DIR}/AbletonLinkConfig.cmake)
 

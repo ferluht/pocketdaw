@@ -10,8 +10,6 @@ Button::Button(const char * texture, float x, float y, Master * m_)
 
     m = m_;
 
-    m->Tracks[0]->addAudioEffect(new Delay(8000, 0.3));
-
     relativePosition.x = x;
     relativePosition.y = y;
     relativePosition.z = 0.1;

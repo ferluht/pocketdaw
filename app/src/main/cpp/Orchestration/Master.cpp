@@ -17,7 +17,7 @@ link(DEFAULT_BPM)
     link.enable(true);
     auto * cue = new Track;
     auto metr = new Metronome;
-    cue->TrackInstrument = metr;
+    cue->initInstrument(metr);
     cue->addAudioEffect(new Delay(8000, 0.3));
     cue->addAudioEffect(new Delay(8000, 0.3));
     cue->addAudioEffect(new Waveform(0.01, 0.5, 0.5));
