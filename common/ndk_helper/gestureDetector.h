@@ -45,7 +45,7 @@ enum {
   GESTURE_STATE_END = 4,
   GESTURE_STATE_ACTION = (GESTURE_STATE_START | GESTURE_STATE_END),
 };
-typedef int32_t GESTURE_STATE;
+typedef uint32_t GESTURE_STATE;
 
 /******************************************************************
  * Base class of Gesture Detectors

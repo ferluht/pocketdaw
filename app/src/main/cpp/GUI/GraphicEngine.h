@@ -6,22 +6,6 @@
 #define PD_GraphicEngine_H
 
 
-/*
- * Copyright 2013 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 //--------------------------------------------------------------------------------
 // Include files
 //--------------------------------------------------------------------------------
@@ -41,11 +25,6 @@
 #include "NDKHelper.h"
 
 //-------------------------------------------------------------------------
-// Preprocessor
-//-------------------------------------------------------------------------
-#define HELPER_CLASS_NAME \
-  "com/pdaw/pd/helper/NDKHelper"  // Class name of helper function
-//-------------------------------------------------------------------------
 // Shared state for our app.
 //-------------------------------------------------------------------------
 struct android_app;
@@ -55,8 +34,6 @@ class GraphicEngine {
 public:
 
     Master * master;
-
-    AudioEngine *audioEngine;
 
     ndk_helper::GLContext *gl_context_;
 
@@ -69,30 +46,19 @@ public:
     ndk_helper::TapDetector tap_detector_;
     ndk_helper::PerfMonitor monitor_;
 
-    ndk_helper::TapCamera tap_camera_;
-
     android_app *app_;
 
     GraphicObject * focus_object;
-
-    bool render = true;
-    float pinchv;
-
-    ASensorManager *sensor_manager_;
-    const ASensor *accelerometer_sensor_;
-    ASensorEventQueue *sensor_event_queue_;
 
     void UpdateFPS(float fFPS);
 
     void ShowUI();
 
-    void TransformPosition(ndk_helper::Vec2 &vec);
-
 public:
 
     GraphicEngine(Master * master);
 
-    ~GraphicEngine();
+    ~GraphicEngine() = default;
 
     void SetState(android_app *app);
 
@@ -107,16 +73,6 @@ public:
     void TrimMemory();
 
     bool IsReady();
-
-    void InitSensors();
-
-    void ProcessSensors(int32_t id);
-
-    void SuspendSensors();
-
-    void ResumeSensors();
-
-    void EnableRender(bool enr);
 };
 
 

@@ -51,16 +51,11 @@ if(_IMPORT_PREFIX STREQUAL "/")
 endif()
 
 # Create imported target freetype
-add_library(freetype STATIC IMPORTED)
+add_library(freetype SHARED IMPORTED)
 
 set_target_properties(freetype PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include/freetype2"
-  INTERFACE_LINK_LIBRARIES "D:/Android/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/i686-linux-android/libz.a"
 )
-
-if(CMAKE_VERSION VERSION_LESS 2.8.12)
-  message(FATAL_ERROR "This file relies on consumers using CMake 2.8.12 or greater.")
-endif()
 
 # Load information for each installed configuration.
 get_filename_component(_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)

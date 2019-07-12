@@ -11,7 +11,6 @@ class AudioEffect : public GraphicObject{
 
 public:
 
-    bool isOn;
     AudioEffect();
     AudioEffect(const char * tex, const char * vsh, const char * fsh);
 
