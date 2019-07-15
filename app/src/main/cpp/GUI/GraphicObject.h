@@ -39,30 +39,58 @@
 #include <android/asset_manager.h>
 
 #include "NDKHelper.h"
+#include "GraphicEngine.h"
 
 struct SHADER_PARAMS {
   GLuint program_;
   GLuint matrix_projection_;
 };
 
-struct Position2D {
+class Position2D {
+public:
     float x;
     float y;
     float z;
     float height;
     float width;
+    float rotation;
+
+    Position2D() : x(0), y(0), z(0), height(0), width(0), rotation(0) {}
+
+    Position2D(float x_, float y_, float height_, float width_)
+            : x(x_), y(y_), z(0), height(height_), width(width_), rotation(0) {}
+
+    inline void move(ndk_helper::Vec2 v)
+    {
+        x = x + v.x_, y = y + v.y_;
+    }
+
+    inline void rotate(float angle)
+    {
+        rotation += angle;
+    }
+
+    inline bool contains(const ndk_helper::Vec2& v)
+    {
+        return ((x - width/2 < v.x_) && (x + width/2 > v.x_)
+            && (y - height/2 < v.y_) && (y + height/2 > v.y_));
+    }
 };
 
-//bool operator<(const Position2D &lhs, const Position2D &rhs) {
-//    if (lhs.x != rhs.x) return lhs.x > rhs.x;
-//    return lhs.y > rhs.y;
+//bool operator =(const Position2D& a, const Position2D& b) {
+//    return ((a.x == b.x) && (a.y == b.y) && (a.z == b.z) &&
+//            (a.height == b.height) && (a.width == b.width) &&
+//            (a.rotation == b.rotation));
 //}
 
 class GraphicObject {
 public:
+
+    GraphicEngine * eng;
+
     GLuint ibo_;
     GLuint vbo_;
-    GLuint vao_square_;
+    GLuint vao_;
     GLuint texture;
 
     const char * texture_name;
@@ -71,50 +99,54 @@ public:
 
     ndk_helper::Vec2 drag_from;
     Position2D relative_position_backup;
-    float drag_xscale, drag_yscale;
 
     GraphicObject * parent;
 
     std::list<GraphicObject*> Graphics;
-    Position2D relativePosition;
-    Position2D absolutePosition;
+    Position2D position;
+    Position2D new_position;
 
     SHADER_PARAMS shader_param_;
     bool LoadShaders(SHADER_PARAMS* params, const char* strVsh,
                    const char* strFsh);
 
-    ndk_helper::Mat4 mat_projection_;
-    ndk_helper::Mat4 mat_view_;
-
+    GraphicObject();
+    GraphicObject(const char * vshader, const char * fshader);
     GraphicObject(const char * texture, const char * vshader, const char * fshader);
     GraphicObject(const char * texture, const char * vshader, const char * fshader, GraphicObject * parent);
     virtual ~GraphicObject();
-    void Init();
-    virtual void Init_() {};
+    void Init_();
+    virtual void Init() {};
 
-    void SetPosition(float x, float y);
-    void SetSize(float x, float y);
-
+    virtual void draw() {};
     void grender_(float dTime);
     virtual void grender(float dTime) {};
 
     void Unload();
-    void Update();
+
+    void update();
+
     void addChildObject(GraphicObject * go);
+    void delChildObject(GraphicObject * go);
 
-    GraphicObject * findTapHandler(ndk_helper::Vec2 v);
-    virtual void tapHandler(ndk_helper::Vec2 v) {};
+    GraphicObject * findFocusObject(const ndk_helper::Vec2& v);
 
-    GraphicObject * findDoubleTapHandler(ndk_helper::Vec2 v);
-    virtual void doubleTapHandler(ndk_helper::Vec2 v) {};
+    virtual void tapBegin(const ndk_helper::Vec2& v) {};
+    virtual void tapHandler(const ndk_helper::Vec2& v) {};
+    virtual void tapEnd() {};
 
-    GraphicObject * findDragHandler(ndk_helper::Vec2 v, float xscale, float yscale);
-    virtual void dragBegin(ndk_helper::Vec2 v, float xscale, float yscale) {};
-    virtual void dragHandler(ndk_helper::Vec2 v) {};
+    virtual void doubleTapBegin(const ndk_helper::Vec2& v) {};
+    virtual void doubleTapHandler(const ndk_helper::Vec2& v) {};
+    virtual void doubleTapEnd() {};
+
+    virtual void dragBegin(const ndk_helper::Vec2& v) {};
+    virtual void dragHandler(const ndk_helper::Vec2& v) {};
     virtual void dragEnd() {};
 
-    GraphicObject * findPinchHandler(ndk_helper::Vec2 v);
-    virtual void pinchHandler(ndk_helper::Vec2 v) {};
+    virtual void pinchBegin(const ndk_helper::Vec2& v) {};
+    virtual void pinchHandler(const ndk_helper::Vec2& v) {};
+    virtual void pinchEnd() {};
+
 };
 
 #endif

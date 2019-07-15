@@ -40,6 +40,9 @@ public:
     bool initialized_resources_;
     bool has_focus_;
 
+    ndk_helper::Mat4 mat_projection_;
+    ndk_helper::Mat4 mat_view_;
+
     ndk_helper::DoubletapDetector doubletap_detector_;
     ndk_helper::PinchDetector pinch_detector_;
     ndk_helper::DragDetector drag_detector_;
@@ -50,15 +53,17 @@ public:
 
     GraphicObject * focus_object;
 
+    static GraphicEngine& getEngine()
+    {
+        static GraphicEngine engine;
+        return engine;
+    }
+
     void UpdateFPS(float fFPS);
 
     void ShowUI();
 
-public:
-
     GraphicEngine(Master * master);
-
-    ~GraphicEngine() = default;
 
     void SetState(android_app *app);
 
@@ -73,6 +78,13 @@ public:
     void TrimMemory();
 
     bool IsReady();
+
+
+private:
+    GraphicEngine() {}                                  // Private constructor
+    ~GraphicEngine() {}
+    GraphicEngine(const GraphicEngine&);                 // Prevent copy-construction
+    GraphicEngine& operator=(const GraphicEngine&);      // Prevent assignment
 };
 
 

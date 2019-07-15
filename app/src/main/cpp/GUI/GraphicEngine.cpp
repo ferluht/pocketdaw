@@ -46,11 +46,24 @@ int GraphicEngine::InitDisplay(android_app *app) {
         }
     }
 
-    master->Init();
+    master->Init_();
+
+    int32_t viewport[4];
+    glGetIntegerv(GL_VIEWPORT, viewport);
+    mat_projection_ = ndk_helper::Mat4::Ortho2D(0, 0, viewport[2], -viewport[3]);
+
+    const float CAM_X = 0.f;
+    const float CAM_Y = 0.f;
+    const float CAM_Z = 700.f;
+
+    mat_view_ = ndk_helper::Mat4::LookAt(ndk_helper::Vec3(CAM_X, CAM_Y, CAM_Z),
+                                         ndk_helper::Vec3(0.f, 0.f, 0.f),
+                                         ndk_helper::Vec3(0.f, 1.f, 0.f));
 
     ShowUI();
 
     // Initialize GL state.
+    glFrontFace(GL_CCW);
     glEnable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
@@ -58,9 +71,8 @@ int GraphicEngine::InitDisplay(android_app *app) {
     glDepthFunc(GL_LEQUAL);
 
     // Note that screen size might have been changed
-    glViewport(0, 0, gl_context_->GetScreenWidth(),
-               gl_context_->GetScreenHeight());
-    master->Update();
+    glViewport(0, 0, gl_context_->GetScreenWidth(), gl_context_->GetScreenHeight());
+    master->update();
 
     return 0;
 }

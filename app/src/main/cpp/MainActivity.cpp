@@ -29,7 +29,8 @@ int32_t HandleInput(android_app *app, AInputEvent *event) {
             // Otherwise, start dragging
             ndk_helper::Vec2 v;
             eng->drag_detector_.GetPointer(v);
-            eng->focus_object = eng->master->findDragHandler(v, 1.0f, 1.0f);
+            eng->focus_object = eng->master->findFocusObject(v);
+            eng->focus_object->dragBegin(v);
         } else if (dragState & ndk_helper::GESTURE_STATE_MOVE) {
             ndk_helper::Vec2 v;
             eng->drag_detector_.GetPointer(v);

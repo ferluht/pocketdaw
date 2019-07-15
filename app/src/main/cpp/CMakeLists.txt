@@ -59,6 +59,7 @@ add_library(
         GUI/Encoder.cpp
         GUI/Font.cpp
         GUI/Text.cpp
+        GUI/Canvas.cpp
 
         Instruments/ModularSynth/VCO.cpp
         Instruments/ModularSynth/Module.cpp

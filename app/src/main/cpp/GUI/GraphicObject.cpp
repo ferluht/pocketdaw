@@ -1,5 +1,13 @@
 #include "GraphicObject.h"
 
+GraphicObject::GraphicObject() :
+GraphicObject("default.vsh", "default.fsh") {}
+
+GraphicObject::GraphicObject(
+        const char *vshader,
+        const char *fshader) :
+        GraphicObject(nullptr, vshader, fshader, nullptr) {}
+
 GraphicObject::GraphicObject(
         const char *texture,
         const char *vshader,
@@ -12,7 +20,6 @@ GraphicObject::GraphicObject(
         const char *fshader,
         GraphicObject *parent) {
     this->parent = parent;
-    // Load shader
     this->vshader = vshader;
     this->fshader = fshader;
     this->texture_name = texture;
@@ -20,54 +27,37 @@ GraphicObject::GraphicObject(
 
 GraphicObject::~GraphicObject() { Unload(); }
 
-void GraphicObject::Init() {
-    // Settings
-    glFrontFace(GL_CCW);
+void GraphicObject::Init_() {
     LoadShaders(&shader_param_, vshader, fshader);
     texture = ndk_helper::texture::loadBMP(texture_name);
-    Init_();
-    Update();
+    Init();
+    update();
 
     for (auto const &gr : Graphics) {
-        gr->Init();
+        gr->Init_();
     }
-
 }
 
 void GraphicObject::addChildObject(GraphicObject *go) {
     go->parent = this;
     Graphics.push_back(go);
-    Update();
+    update();
 }
 
-void GraphicObject::Update() {
-    // Init Projection matrices
-    int32_t viewport[4];
-    glGetIntegerv(GL_VIEWPORT, viewport);
+void GraphicObject::delChildObject(GraphicObject *go) {
+    Graphics.remove(go);
+    go->Unload();
+    update();
+}
 
-    mat_projection_ = ndk_helper::Mat4::Ortho2D(0, 0, viewport[2], -viewport[3]);
+void GraphicObject::update(){
 
-    if (parent == nullptr) {
-        relativePosition.x = 0;//-viewport[2] / 100.f;
-        relativePosition.y = 0;//-viewport[3] / 100.f;
-        relativePosition.z = 0;
-        relativePosition.width = viewport[2];// 2 * viewport[2] / 100.f;
-        relativePosition.height = viewport[3];// 2 * viewport[3] / 100.f;
-    }
+    position = new_position;
 
-    absolutePosition = relativePosition;
-    if (parent) {
-        absolutePosition.x =
-                parent->absolutePosition.x + parent->absolutePosition.width * relativePosition.x;
-        absolutePosition.y =
-                parent->absolutePosition.y + parent->absolutePosition.height * relativePosition.y;
-        absolutePosition.z = parent->absolutePosition.z + relativePosition.z;
-        absolutePosition.height = relativePosition.height * parent->absolutePosition.height;
-        absolutePosition.width = relativePosition.width * parent->absolutePosition.width;
-    }
+    draw();
 
     for (auto const &gr : Graphics) {
-        gr->Update();
+        gr->update();
     }
 }
 
@@ -98,7 +88,8 @@ void GraphicObject::grender_(float dTime) {
 bool GraphicObject::LoadShaders(SHADER_PARAMS *params, const char *strVsh,
                                 const char *strFsh) {
     GLuint program;
-    GLuint vert_shader, frag_shader;
+    GLuint vert_shader;
+    GLuint frag_shader;
 
     // Create shader program
     program = glCreateProgram();
@@ -146,9 +137,6 @@ bool GraphicObject::LoadShaders(SHADER_PARAMS *params, const char *strVsh,
         return false;
     }
 
-    // Get uniform locations
-    params->matrix_projection_ = glGetUniformLocation(program, "uPMatrix");
-
     // Release vertex and fragment shaders
     if (vert_shader) glDeleteShader(vert_shader);
     if (frag_shader) glDeleteShader(frag_shader);
@@ -157,17 +145,7 @@ bool GraphicObject::LoadShaders(SHADER_PARAMS *params, const char *strVsh,
     return true;
 }
 
-
-GraphicObject * GraphicObject::findDragHandler(ndk_helper::Vec2 v, float xscale, float yscale){
-    for (auto const &gr : Graphics) {
-        if ((gr->absolutePosition.x < v.x_)
-        && (gr->absolutePosition.x + gr->absolutePosition.width > v.x_)
-        && (gr->absolutePosition.y < v.y_)
-        && (gr->absolutePosition.y + gr->absolutePosition.height > v.y_)){
-            return gr->findDragHandler(v, xscale/absolutePosition.width, yscale/absolutePosition.height);
-        }
-    }
-
-    dragBegin(v, xscale, yscale);
+GraphicObject * GraphicObject::findFocusObject(const ndk_helper::Vec2& v){
+    for (auto const &gr : Graphics) if (gr->position.contains(v)) return gr->findFocusObject(v);
     return this;
 }
