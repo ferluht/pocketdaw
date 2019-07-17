@@ -41,10 +41,6 @@
 #include "NDKHelper.h"
 #include "GraphicEngine.h"
 
-struct SHADER_PARAMS {
-  GLuint program_;
-  GLuint matrix_projection_;
-};
 
 class Position2D {
 public:
@@ -53,27 +49,59 @@ public:
     float z;
     float height;
     float width;
-    float rotation;
+    float angle;
 
-    Position2D() : x(0), y(0), z(0), height(0), width(0), rotation(0) {}
+    Position2D() : x(0), y(0), z(0), height(0), width(0), angle(0) {}
 
     Position2D(float x_, float y_, float height_, float width_)
-            : x(x_), y(y_), z(0), height(height_), width(width_), rotation(0) {}
+            : x(x_), y(y_), z(0), height(height_), width(width_), angle(0) {}
 
-    inline void move(ndk_helper::Vec2 v)
-    {
+    inline void place(float x_, float y_, float height_, float width_) {
+        place(x_, y_, height_, width_, 0);
+    }
+
+    inline void place(float x_, float y_, float height_, float width_, float rotation_) {
+        x = x_, y = y_, height = height_, width = width_, angle = rotation_;
+    }
+
+    inline void move(ndk_helper::Vec2 v) {
         x = x + v.x_, y = y + v.y_;
     }
 
-    inline void rotate(float angle)
-    {
-        rotation += angle;
+    inline void rotate(float angle) {
+        this->angle += angle;
     }
 
-    inline bool contains(const ndk_helper::Vec2& v)
+    inline void set_angle(float angle) {
+        this->angle = angle;
+    }
+
+    inline bool contains(const ndk_helper::Vec2 &v) {
+        return ((x - width / 2 < v.x_) && (x + width / 2 > v.x_)
+                && (y - height / 2 < v.y_) && (y + height / 2 > v.y_));
+    }
+
+    inline Position2D toRelative(Position2D ref) {
+        Position2D rel;
+        rel.x = (x - ref.x) / ref.width;
+        rel.y = (y - ref.y) / ref.height;
+        rel.z = 0;
+        rel.height = height / ref.height;
+        rel.width = width / ref.width;
+        rel.angle = -ref.angle;
+        return rel;
+    }
+
+    inline Position2D fromRelative(Position2D rel)
     {
-        return ((x - width/2 < v.x_) && (x + width/2 > v.x_)
-            && (y - height/2 < v.y_) && (y + height/2 > v.y_));
+        Position2D ref;
+        ref.x = x + rel.x * width;
+        ref.y = y + rel.y * height;
+        ref.z = 0;
+        ref.height = height / rel.height;
+        ref.width = width / rel.width;
+        ref.angle = angle + rel.angle;
+        return rel;
     }
 };
 
@@ -83,15 +111,14 @@ public:
 //            (a.rotation == b.rotation));
 //}
 
-class GraphicObject {
+class GraphicObject : public Position2D {
 public:
-
-    GraphicEngine * eng;
 
     GLuint ibo_;
     GLuint vbo_;
     GLuint vao_;
     GLuint texture;
+    SHADER shader;
 
     const char * texture_name;
     const char * vshader;
@@ -103,33 +130,40 @@ public:
     GraphicObject * parent;
 
     std::list<GraphicObject*> Graphics;
-    Position2D position;
     Position2D new_position;
 
-    SHADER_PARAMS shader_param_;
-    bool LoadShaders(SHADER_PARAMS* params, const char* strVsh,
-                   const char* strFsh);
-
     GraphicObject();
+    GraphicObject(const char * texture);
     GraphicObject(const char * vshader, const char * fshader);
     GraphicObject(const char * texture, const char * vshader, const char * fshader);
-    GraphicObject(const char * texture, const char * vshader, const char * fshader, GraphicObject * parent);
     virtual ~GraphicObject();
-    void Init_();
-    virtual void Init() {};
 
+
+    void init_();
+    virtual void init() {};
+
+    void draw_();
     virtual void draw() {};
+
     void grender_(float dTime);
     virtual void grender(float dTime) {};
 
-    void Unload();
+    void unload();
 
-    void update();
+    // Hierarchy
 
-    void addChildObject(GraphicObject * go);
-    void delChildObject(GraphicObject * go);
+    void attach(GraphicObject * go);
+    void detach(GraphicObject * go);
 
-    GraphicObject * findFocusObject(const ndk_helper::Vec2& v);
+    inline void attachTo(GraphicObject * go) { parent = go; }
+
+    // Event handlers
+
+    virtual GraphicObject * findFocusObject(const ndk_helper::Vec2& point)
+    {
+        for (auto const &gr : Graphics) if (gr->contains(point)) return gr->findFocusObject(point);
+        return this;
+    }
 
     virtual void tapBegin(const ndk_helper::Vec2& v) {};
     virtual void tapHandler(const ndk_helper::Vec2& v) {};

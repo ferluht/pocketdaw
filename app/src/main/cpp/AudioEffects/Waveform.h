@@ -26,8 +26,6 @@ public:
 
     float apply(float sample) override ;
 
-    void SetPosition(float x, float y);
-    void SetSize(float x, float y);
     void grender(float dTime) override ;
     void dragHandler(ndk_helper::Vec2 v) override ;
     void dragBegin(ndk_helper::Vec2 v, float xscale, float yscale) override ;

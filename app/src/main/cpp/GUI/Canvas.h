@@ -11,12 +11,14 @@
 class Canvas : public GraphicObject{
 public:
 
-    Canvas(float x, float y, float h, float w) : GraphicObject()
+    Canvas(float x, float y, float h, float w, const char * texture_)
+    : GraphicObject(texture_, "Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlainRect.fsh")
     {
-        position.x = x;
-        position.y = y;
-        position.height = h;
-        position.width = w;
+        this->x = x;
+        this->y = y;
+        this->height = h;
+        this->width = w;
+        this->angle = 0;
     }
 
     void draw() override ;

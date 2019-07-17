@@ -5,11 +5,9 @@
 #ifndef PD_ENCODER_H
 #define PD_ENCODER_H
 
-#include "GraphicObject.h"
+#include "Canvas.h"
 
-#define SEGMENTS 30
-
-class Encoder : public GraphicObject{
+class Encoder : public Canvas{
 public:
     float * parameter_;
 

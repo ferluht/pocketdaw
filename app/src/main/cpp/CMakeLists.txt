@@ -46,7 +46,6 @@ add_library(
 
         MainActivity.cpp
 
-        AudioEffects/AudioEffect.cpp
         AudioEffects/Delay.cpp
         AudioEffects/Waveform.cpp
         AudioEffects/Spectrum.cpp
@@ -71,7 +70,6 @@ add_library(
         Link/LinkManager.cpp
         Link/android-ifaddrs/ifaddrs.cpp
 
-        MidiEffects/MidiEffect.cpp
         MidiEffects/Arpeggiator.cpp
 
         Orchestration/Master.cpp

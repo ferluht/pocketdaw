@@ -23,7 +23,7 @@ link(DEFAULT_BPM)
     cue->addAudioEffect(new Waveform(0.01, 0.5, 0.5));
     addTrack(cue);
 
-    addChildObject(new Button("Textures/container.bmp", 0.7, 0.5, this));
+    attach(new Button(0,0,0,0, "Textures/container.bmp", []{}));
 //    addChildObject(new Button("Textures/container.bmp", 0.9, 0.7));
 
 //    addAudioEffect(new Delay(3300, 0.2));

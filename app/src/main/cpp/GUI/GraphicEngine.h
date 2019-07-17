@@ -24,6 +24,17 @@
 #include "GraphicObject.h"
 #include "NDKHelper.h"
 
+struct SHADER {
+    GLuint program_;
+    GLint param_view_;
+    GLint param_texture_angle_;
+};
+
+enum SHADERS{
+    SHADER_BASIC,
+    SHADER_ALPHA
+};
+
 //-------------------------------------------------------------------------
 // Shared state for our app.
 //-------------------------------------------------------------------------
@@ -36,6 +47,8 @@ public:
     Master * master;
 
     ndk_helper::GLContext *gl_context_;
+
+    SHADER shaders[3];
 
     bool initialized_resources_;
     bool has_focus_;
@@ -53,7 +66,7 @@ public:
 
     GraphicObject * focus_object;
 
-    static GraphicEngine& getEngine()
+    static GraphicEngine& GetGraphicEngine()
     {
         static GraphicEngine engine;
         return engine;
@@ -63,7 +76,7 @@ public:
 
     void ShowUI();
 
-    GraphicEngine(Master * master);
+//    GraphicEngine(Master * master);
 
     void SetState(android_app *app);
 
@@ -79,9 +92,16 @@ public:
 
     bool IsReady();
 
+    static SHADER CreateShaderProgram(const char *vsh, const char *fsh);
+
+    void SetupView();
+
 
 private:
-    GraphicEngine() {}                                  // Private constructor
+    // Private constructor
+    GraphicEngine() {
+        gl_context_ = ndk_helper::GLContext::GetInstance();
+    }
     ~GraphicEngine() {}
     GraphicEngine(const GraphicEngine&);                 // Prevent copy-construction
     GraphicEngine& operator=(const GraphicEngine&);      // Prevent assignment
