@@ -5,8 +5,8 @@
 #ifndef PD_INSTRUMENT_H
 #define PD_INSTRUMENT_H
 
-#include "../Orchestration/Midi.h"
-#include "../GUI/GraphicObject.h"
+#include "Orchestration/Midi.h"
+#include "GUI/Canvas.h"
 #include <cmath>
 #include <set>
 
@@ -31,9 +31,9 @@ public:
 
 bool operator<(const InstrumentState &lhs, const InstrumentState &rhs);
 
-class InstrumentBase : public GraphicObject {
+class InstrumentBase : public Canvas {
 public:
-    InstrumentBase() : GraphicObject("Textures/effect_canvas.bmp", "Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlainRect.fsh") {};
+    InstrumentBase() : Canvas(0, 0, 0, 0) {};
 
     void grender(float dTime) override ;
 

@@ -9,11 +9,13 @@
 #include <map>
 #include <vector>
 #include <queue>
-#include "../Instruments/Instrument.h"
-#include "../AudioEffects/AudioEffect.h"
-#include "../MidiEffects/MidiEffect.h"
+#include "Instruments/Instrument.h"
+#include "AudioEffects/AudioEffect.h"
+#include "MidiEffects/MidiEffect.h"
 #include "Midi.h"
-#include "../GUI/GraphicObject.h"
+#include "GUI/GraphicObject.h"
+#include "MidiEffects/Arpeggiator.h"
+#include "AudioEffects/Delay.h"
 
 class Track : public GraphicObject{
 

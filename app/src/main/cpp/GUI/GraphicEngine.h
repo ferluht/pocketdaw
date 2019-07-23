@@ -17,9 +17,9 @@
 #include <android_native_app_glue.h>
 #include <android/native_window_jni.h>
 
-#include "../Orchestration/Master.h"
-#include "../Orchestration/Midi.h"
-#include "../AudioEngine/AudioEngine.h"
+#include "Orchestration/Master.h"
+#include "Orchestration/Midi.h"
+#include "AudioEngine/AudioEngine.h"
 
 #include "GraphicObject.h"
 #include "NDKHelper.h"

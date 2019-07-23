@@ -6,10 +6,14 @@
 #define PD_CANVAS_H
 
 
-#include "GraphicObject.h"
+#include "GUI/GraphicObject.h"
 
-class Canvas : public GraphicObject{
+class Canvas { //: public GraphicObject{
 public:
+
+    Canvas() : Canvas(0, 0, -1, -1) {}
+
+    Canvas(float x, float y, float h, float w) : Canvas(x, y, h, w, nullptr) {}
 
     Canvas(float x, float y, float h, float w, const char * texture_)
     : GraphicObject(texture_, "Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlainRect.fsh")
@@ -21,9 +25,11 @@ public:
         this->angle = 0;
     }
 
+    void init() override ;
     void draw() override ;
     void grender(float dTime) override ;
 };
 
 
 #endif //PD_CANVAS_H
+ 

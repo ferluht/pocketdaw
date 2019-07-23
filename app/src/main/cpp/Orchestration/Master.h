@@ -8,15 +8,17 @@
 #include <stdlib.h>
 #include <vector>
 #include "Track.h"
-#include "../AudioEffects/AudioEffect.h"
+#include "AudioEffects/AudioEffect.h"
 #include <ableton/Link.hpp>
 #include "Midi.h"
-#include "../GUI/GraphicObject.h"
+#include "GUI/GUI.h"
+#include "Instruments/Metronome.h"
+#include "AudioEffects/Delay.h"
 
 
 #define DEFAULT_BPM 60.
 
-class Master : public GraphicObject{
+class Master : public Canvas{
 
 public:
 
@@ -32,13 +34,10 @@ public:
     Master();
 
     void render(float *audioData, int32_t numFrames);
-//    void grender(float dTime) override ;
     void addTrack(Track* track);
     void delTrack(int pos);
     void addAudioEffect(AudioEffect* effect);
     void delAudioEffect(int pos);
-    void addGraphic(GraphicObject *gr);
-    void delGraphic(int pos);
 
     void setSampleRate(int samplerate);
     void start();
@@ -46,7 +45,6 @@ public:
 
     // MIDI methods
     void receiveMIDI(MidiData md);
-
 
     ableton::Link link;
     bool rec;

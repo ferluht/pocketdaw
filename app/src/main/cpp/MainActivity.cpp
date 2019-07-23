@@ -1,15 +1,8 @@
 //--------------------------------------------------------------------------------
 // Include files
 //--------------------------------------------------------------------------------
-#include <jni.h>
-#include <cerrno>
 
-#include "Orchestration/Master.h"
-#include "Orchestration/Midi.h"
-#include "AudioEngine/AudioEngine.h"
-#include "GUI/GraphicEngine.h"
-
-#include <NDKHelper.h>
+#include "MainActivity.h"
 
 constexpr auto HELPER_CLASS_NAME="com/pdaw/pd/helper/NDKHelper";  // Class name of helper function
 

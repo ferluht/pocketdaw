@@ -1,25 +1,5 @@
-/*
- * Copyright 2013 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-//--------------------------------------------------------------------------------
-// Teapot Renderer.h
-// Renderer for teapots
-//--------------------------------------------------------------------------------
-#ifndef _TEAPOTRENDERER_H
-#define _TEAPOTRENDERER_H
+#ifndef PD_GRAPHIC_OBJECT_H
+#define PD_GRAPHIC_OBJECT_H
 
 //--------------------------------------------------------------------------------
 // Include files
@@ -38,9 +18,8 @@
 #include <android/native_window_jni.h>
 #include <android/asset_manager.h>
 
-#include "NDKHelper.h"
 #include "GraphicEngine.h"
-
+#include "NDKHelper.h"
 
 class Position2D {
 public:
@@ -56,32 +35,32 @@ public:
     Position2D(float x_, float y_, float height_, float width_)
             : x(x_), y(y_), z(0), height(height_), width(width_), angle(0) {}
 
-    inline void place(float x_, float y_, float height_, float width_) {
+    inline virtual void place(float x_, float y_, float height_, float width_) {
         place(x_, y_, height_, width_, 0);
     }
 
-    inline void place(float x_, float y_, float height_, float width_, float rotation_) {
+    inline virtual void place(float x_, float y_, float height_, float width_, float rotation_) {
         x = x_, y = y_, height = height_, width = width_, angle = rotation_;
     }
 
-    inline void move(ndk_helper::Vec2 v) {
+    inline virtual void move(ndk_helper::Vec2 v) {
         x = x + v.x_, y = y + v.y_;
     }
 
-    inline void rotate(float angle) {
+    inline virtual void rotate(float angle) {
         this->angle += angle;
     }
 
-    inline void set_angle(float angle) {
+    inline virtual void set_angle(float angle) {
         this->angle = angle;
     }
 
-    inline bool contains(const ndk_helper::Vec2 &v) {
+    inline virtual bool contains(const ndk_helper::Vec2 &v) {
         return ((x - width / 2 < v.x_) && (x + width / 2 > v.x_)
                 && (y - height / 2 < v.y_) && (y + height / 2 > v.y_));
     }
 
-    inline Position2D toRelative(Position2D ref) {
+    inline virtual Position2D toRelative(Position2D ref) {
         Position2D rel;
         rel.x = (x - ref.x) / ref.width;
         rel.y = (y - ref.y) / ref.height;
@@ -92,7 +71,7 @@ public:
         return rel;
     }
 
-    inline Position2D fromRelative(Position2D rel)
+    inline virtual Position2D fromRelative(Position2D rel)
     {
         Position2D ref;
         ref.x = x + rel.x * width;

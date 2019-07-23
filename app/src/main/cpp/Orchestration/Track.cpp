@@ -3,8 +3,6 @@
 //
 
 #include "Track.h"
-#include "../MidiEffects/Arpeggiator.h"
-#include "../AudioEffects/Delay.h"
 
 Track::Track():
 GraphicObject("Textures/container.bmp", "Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlain.fsh")

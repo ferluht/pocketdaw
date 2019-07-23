@@ -5,6 +5,7 @@
 #ifndef PD_PLOT_H
 #define PD_PLOT_H
 
+#include "Graph.h"
 
 class Plot {
 

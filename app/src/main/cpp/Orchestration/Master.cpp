@@ -3,12 +3,6 @@
 //
 
 #include "Master.h"
-#include "../Instruments/Metronome.h"
-#include "../AudioEffects/Delay.h"
-#include "../GUI/Button.h"
-#include "../GUI/Encoder.h"
-#include "../GUI/Text.h"
-#include "../AudioEffects/Waveform.h"
 
 Master::Master() :
 GraphicObject("Textures/container.bmp", "Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlain.fsh"),

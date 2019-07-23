@@ -26,13 +26,13 @@ add_subdirectory(${commonDir}/freetype-2.10.0 ${commonDir}/freetypeBin/${CMAKE_B
 
 include_directories(
         ${CMAKE_CURRENT_SOURCE_DIR}
-        ${CMAKE_CURRENT_SOURCE_DIR}/AudioEffects
-        ${CMAKE_CURRENT_SOURCE_DIR}/AudioEngine
-        ${CMAKE_CURRENT_SOURCE_DIR}/GUI
-        ${CMAKE_CURRENT_SOURCE_DIR}/Instruments
-        ${CMAKE_CURRENT_SOURCE_DIR}/Link
-        ${CMAKE_CURRENT_SOURCE_DIR}/MidiEffects
-        ${CMAKE_CURRENT_SOURCE_DIR}/Orchestration
+#        ${CMAKE_CURRENT_SOURCE_DIR}/AudioEffects
+#        ${CMAKE_CURRENT_SOURCE_DIR}/AudioEngine
+#        ${CMAKE_CURRENT_SOURCE_DIR}/GUI
+#        ${CMAKE_CURRENT_SOURCE_DIR}/Instruments
+#        ${CMAKE_CURRENT_SOURCE_DIR}/Link
+#        ${CMAKE_CURRENT_SOURCE_DIR}/MidiEffects
+#        ${CMAKE_CURRENT_SOURCE_DIR}/Orchestration
         )
 
 add_library(native_app_glue STATIC ${ANDROID_NDK}/sources/android/native_app_glue/android_native_app_glue.c)
@@ -46,23 +46,25 @@ add_library(
 
         MainActivity.cpp
 
+        AudioEffects/AudioEffect.cpp
         AudioEffects/Delay.cpp
-        AudioEffects/Waveform.cpp
-        AudioEffects/Spectrum.cpp
+#        AudioEffects/Waveform.cpp
+#        AudioEffects/Spectrum.cpp
 
         AudioEngine/AudioEngine.cpp
 
         GUI/GraphicObject.cpp
         GUI/GraphicEngine.cpp
-        GUI/Button.cpp
-        GUI/Encoder.cpp
-        GUI/Font.cpp
-        GUI/Text.cpp
+#        GUI/Button.cpp
+#        GUI/Encoder.cpp
+#        GUI/Font.cpp
+#        GUI/Text.cpp
         GUI/Canvas.cpp
+#        GUI/Graph.cpp
 
-        Instruments/ModularSynth/VCO.cpp
-        Instruments/ModularSynth/Module.cpp
-        Instruments/ModularSynth/Modular.cpp
+#        Instruments/ModularSynth/VCO.cpp
+#        Instruments/ModularSynth/Module.cpp
+#        Instruments/ModularSynth/Modular.cpp
         Instruments/Instrument.cpp
         Instruments/Metronome.cpp
         Instruments/ADSR.cpp

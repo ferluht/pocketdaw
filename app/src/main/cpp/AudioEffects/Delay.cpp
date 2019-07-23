@@ -3,8 +3,6 @@
 //
 
 #include "Delay.h"
-#include "../GUI/Encoder.h"
-#include "../GUI/Text.h"
 
 Delay::Delay(float delayTime_, float feedback_) : AudioEffect(0,0,0,0)
 {

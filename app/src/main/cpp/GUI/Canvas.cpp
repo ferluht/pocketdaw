@@ -4,6 +4,16 @@
 
 #include "Canvas.h"
 
+void Canvas::init()
+{
+    if ((width == -1) || (height == -1)) {
+        int32_t viewport[4];
+        glGetIntegerv(GL_VIEWPORT, viewport);
+        height = viewport[2];
+        width = viewport[3];
+    }
+}
+
 void Canvas::draw()
 {
     GLfloat g_vertex_buffer_data[] = {

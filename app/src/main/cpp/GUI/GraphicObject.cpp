@@ -55,7 +55,7 @@ void GraphicObject::grender_(float dTime) {
 
     glUniformMatrix2fv(shader.param_texture_angle_, 1, GL_FALSE, rot);
 
-    glBindTexture(GL_TEXTURE_2D, texture);
+    if (texture) glBindTexture(GL_TEXTURE_2D, texture);
 
     glBindVertexArray(vao_);
 

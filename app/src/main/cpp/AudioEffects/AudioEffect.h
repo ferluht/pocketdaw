@@ -5,7 +5,7 @@
 #ifndef PD_AUDIOEFFECT_H
 #define PD_AUDIOEFFECT_H
 
-#include "../GUI/Canvas.h"
+#include "GUI/GUI.h"
 
 class AudioEffect : public Canvas{
 
