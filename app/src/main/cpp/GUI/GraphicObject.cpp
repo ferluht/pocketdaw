@@ -72,13 +72,13 @@ void GraphicObject::grender_(float dTime) {
 void GraphicObject::attach(GraphicObject *go) {
     go->attachTo(this);
     Graphics.push_back(go);
-    draw_();
+    //draw_();
 }
 
 void GraphicObject::detach(GraphicObject *go) {
     Graphics.remove(go);
     go->unload();
-    draw_();
+    //draw_();
 }
 
 void GraphicObject::unload() {

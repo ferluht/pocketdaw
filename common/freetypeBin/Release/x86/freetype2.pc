@@ -1,4 +1,4 @@
-prefix=C:/Program Files (x86)/Project
+prefix=/usr/local
 exec_prefix=${prefix}
 libdir=${prefix}/lib
 includedir=${prefix}/include

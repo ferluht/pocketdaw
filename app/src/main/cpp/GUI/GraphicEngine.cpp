@@ -46,7 +46,7 @@ int GraphicEngine::InitDisplay(android_app *app) {
         }
     }
 
-    master->init();
+    master->init_();
 
     SetupView();
 

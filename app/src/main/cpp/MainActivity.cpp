@@ -90,6 +90,7 @@ auto audioEngine = new AudioEngine(master);
 void android_main(android_app *state) {
 
     graphicEngine.SetState(state);
+    graphicEngine.master = master;
 
     // Init helper functions
     ndk_helper::JNIHelper::Init(state->activity, HELPER_CLASS_NAME);

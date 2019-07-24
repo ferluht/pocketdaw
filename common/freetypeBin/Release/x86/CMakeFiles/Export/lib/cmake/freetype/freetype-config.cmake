@@ -55,7 +55,7 @@ add_library(freetype STATIC IMPORTED)
 
 set_target_properties(freetype PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include/freetype2"
-  INTERFACE_LINK_LIBRARIES "D:/Android/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/i686-linux-android/libz.a"
+  INTERFACE_LINK_LIBRARIES "/home/ibelikov/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/i686-linux-android/libz.a"
 )
 
 if(CMAKE_VERSION VERSION_LESS 2.8.12)
