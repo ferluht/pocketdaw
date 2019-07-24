@@ -56,8 +56,8 @@ public:
     }
 
     inline virtual bool contains(const ndk_helper::Vec2 &v) {
-        return ((x - width / 2 < v.x_) && (x + width / 2 > v.x_)
-                && (y - height / 2 < v.y_) && (y + height / 2 > v.y_));
+        return ((x < v.x_) && (x + height > v.x_)
+                && (y < v.y_) && (y + width > v.y_));
     }
 
     inline virtual BBox toRelative(BBox ref) {

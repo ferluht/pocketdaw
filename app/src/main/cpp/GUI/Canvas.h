@@ -16,7 +16,10 @@ public:
     Canvas(float x, float y, float h, float w) : Canvas(x, y, h, w, nullptr) {}
 
     Canvas(float x, float y, float h, float w, const char * texture_)
-    : GraphicObject(texture_, "Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlainRect.fsh")
+    : Canvas(x, y, h, w, texture_, "Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlainRect.fsh") {}
+
+    Canvas(float x, float y, float h, float w, const char * texture_, const char * vsh, const char * fsh)
+    : GraphicObject(texture_, vsh, fsh)
     {
         this->x = x;
         this->y = y;

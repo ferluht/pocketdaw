@@ -11,8 +11,10 @@ class AudioEffect : public Canvas{
 
 public:
 
+    bool isOn;
+
     AudioEffect(float x, float y, float h, float w)
-    : Canvas(x, y, h, w, "Textures/effect_canvas.bmp") {};
+    : Canvas(x, y, h, w, "Textures/effect_canvas.bmp") {isOn = true;};
 
     virtual float apply(float sample)
     {

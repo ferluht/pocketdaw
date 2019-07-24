@@ -17,10 +17,10 @@ void Canvas::init()
 void Canvas::draw()
 {
     GLfloat g_vertex_buffer_data[] = {
-            x + width/2, y + height/2, 1.0f, 1.0f,
-            x + width/2, y, 1.0f, 0.0f,
-            x, y, 0.0f, 0.0f,
-            x, y + height/2, 0.0f, 1.0f,
+            x + height, y + width, 0.0f, 1.0f, 1.0f,
+            x + height, y, 0.0f, 1.0f, 0.0f,
+            x, y, 0.0f, 0.0f, 0.0f,
+            x, y + width, 0.0f, 0.0f, 1.0f,
     };
 
     GLuint indices[] = {
@@ -53,9 +53,6 @@ void Canvas::draw()
 
 void Canvas::grender(float dTime) {
 
-    glBindVertexArray(vao_);
-
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
-    glBindVertexArray(0);
 }

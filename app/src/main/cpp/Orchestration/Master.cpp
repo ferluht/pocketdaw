@@ -13,8 +13,16 @@ link(DEFAULT_BPM)
     auto * cue = new Track;
     auto metr = new Metronome;
     cue->initInstrument(metr);
-    cue->addAudioEffect(new Delay(8000, 0.3));
-    cue->addAudioEffect(new Delay(8000, 0.3));
+    cue->addAudioEffect(new Delay(0.2, 0.99));
+    cue->addAudioEffect(new Delay(0.2, 0.09));
+    cue->addAudioEffect(new Delay(0.2, 0.09));
+    cue->addAudioEffect(new Delay(0.2, 0.09));
+    cue->addAudioEffect(new Delay(0.2, 0.09));
+    cue->addAudioEffect(new Delay(0.2, 0.09));
+    cue->addAudioEffect(new Delay(0.2, 0.09));
+    cue->addAudioEffect(new Delay(0.2, 0.09));
+    cue->addAudioEffect(new Delay(0.2, 0.09));
+//    cue->addAudioEffect(new Delay(8000, 0.3));
 //    cue->addAudioEffect(new Waveform(0.01, 0.5, 0.5));
     addTrack(cue);
 

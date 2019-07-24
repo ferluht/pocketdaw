@@ -5,7 +5,7 @@
 #include "Track.h"
 
 Track::Track():
-Canvas(0, 0, -1, -1, "Textures/container.bmp")
+Canvas(0, 0, 500, 700, "Textures/effect_canvas.bmp")
 {
     last_beat = 0;
     MidiClip * mdc = createMetronomeMidi();

@@ -72,6 +72,12 @@ GESTURE_STATE TapDetector::Detect(const AInputEvent* motion_event) {
   return GESTURE_STATE_NONE;
 }
 
+bool TapDetector::GetPointer(ndk_helper::Vec2 &v) {
+  v.x_ = down_x_;
+  v.y_ = down_y_;
+  return true;
+}
+
 //--------------------------------------------------------------------------------
 // DoubletapDetector
 //--------------------------------------------------------------------------------

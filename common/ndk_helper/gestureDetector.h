@@ -81,6 +81,7 @@ class TapDetector : public GestureDetector {
   TapDetector();
   virtual ~TapDetector() {}
   virtual GESTURE_STATE Detect(const AInputEvent* motion_event);
+  bool GetPointer(Vec2& v);
 };
 
 /******************************************************************

@@ -7,7 +7,7 @@
 
 #include "Canvas.h"
 
-class Encoder : public GraphicObject{
+class Encoder : public Canvas{
 public:
     float * parameter_;
 
@@ -16,7 +16,6 @@ public:
 
     Encoder(const char * texture, float x, float y, float * parameter);
 
-    void grender(float dTime) override ;
     void dragHandler(ndk_helper::Vec2 v) override ;
     void dragBegin(ndk_helper::Vec2 v, float xscale, float yscale) override ;
 };

@@ -32,6 +32,17 @@ int32_t HandleInput(android_app *app, AInputEvent *event) {
             eng->focus_object->dragEnd();
             eng->focus_object = nullptr;
         }
+
+        // Handle drag state
+        if (tapState & ndk_helper::GESTURE_STATE_ACTION) {
+            // Otherwise, start dragging
+            ndk_helper::Vec2 v;
+            eng->tap_detector_.GetPointer(v);
+            eng->focus_object = eng->master->findFocusObject(v);
+            eng->focus_object->tapEnd();
+            eng->focus_object = nullptr;
+        }
+
         return 1;
     }
     return 0;

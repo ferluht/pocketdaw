@@ -8,7 +8,7 @@ cmake_minimum_required(VERSION 3.4.1)
 project(native-lib LANGUAGES C CXX)
 
 # Ableton Link
-set (LINK_DIR /home/ibelikov/link)
+set (LINK_DIR D:/link)
 include(${LINK_DIR}/AbletonLinkConfig.cmake)
 include_directories(${LINK_DIR}/include)
 include_directories(${LINK_DIR}/modules/asio-standalone/asio/include)
@@ -56,7 +56,7 @@ add_library(
         GUI/Shader.cpp
         GUI/GraphicObject.cpp
         GUI/GraphicEngine.cpp
-#        GUI/Button.cpp
+        GUI/Button.cpp
 #        GUI/Encoder.cpp
 #        GUI/Font.cpp
 #        GUI/Text.cpp
