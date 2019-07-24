@@ -35,8 +35,6 @@ class InstrumentBase : public Canvas {
 public:
     InstrumentBase() : Canvas(0, 0, 0, 0) {};
 
-    void grender(float dTime) override ;
-
     virtual void midiCommand(MidiData md) = 0;
     virtual float render(double beat) = 0;
 };

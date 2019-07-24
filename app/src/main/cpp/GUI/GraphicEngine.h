@@ -24,21 +24,11 @@
 #include "GraphicObject.h"
 #include "NDKHelper.h"
 
-struct SHADER {
-    GLuint program_;
-    GLint param_view_;
-    GLint param_texture_angle_;
-};
-
-enum SHADERS{
-    SHADER_BASIC,
-    SHADER_ALPHA
-};
-
 //-------------------------------------------------------------------------
 // Shared state for our app.
 //-------------------------------------------------------------------------
 struct android_app;
+
 
 class GraphicEngine {
 
@@ -47,8 +37,6 @@ public:
     Master * master;
 
     ndk_helper::GLContext *gl_context_;
-
-    SHADER shaders[3];
 
     bool initialized_resources_;
     bool has_focus_;
@@ -91,8 +79,6 @@ public:
     void TrimMemory();
 
     bool IsReady();
-
-    static SHADER CreateShaderProgram(const char *vsh, const char *fsh);
 
     void SetupView();
 

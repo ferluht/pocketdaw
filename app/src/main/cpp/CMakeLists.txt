@@ -53,6 +53,7 @@ add_library(
 
         AudioEngine/AudioEngine.cpp
 
+        GUI/Shader.cpp
         GUI/GraphicObject.cpp
         GUI/GraphicEngine.cpp
 #        GUI/Button.cpp

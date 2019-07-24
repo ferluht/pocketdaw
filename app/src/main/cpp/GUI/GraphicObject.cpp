@@ -1,4 +1,5 @@
 #include "GraphicObject.h"
+#include "GraphicEngine.h"
 
 GraphicObject::GraphicObject() :
 GraphicObject("default.vsh", "default.fsh") {}
@@ -14,7 +15,7 @@ GraphicObject::GraphicObject(
 GraphicObject::GraphicObject(const char *texture, const char *vshader, const char *fshader)
 {
     this->parent = nullptr;
-    this->texture = nullptr;
+    this->texture = 0;
     this->vshader = vshader;
     this->fshader = fshader;
     this->texture_name = texture;
@@ -22,7 +23,7 @@ GraphicObject::GraphicObject(const char *texture, const char *vshader, const cha
 GraphicObject::~GraphicObject() { unload(); }
 
 void GraphicObject::init_() {
-    shader = GraphicEngine::CreateShaderProgram(vshader, fshader);
+    shader = Shader::CreateShaderProgram(vshader, fshader);
     if (texture_name != nullptr) texture = ndk_helper::texture::loadBMP(texture_name);
     init();
     draw();

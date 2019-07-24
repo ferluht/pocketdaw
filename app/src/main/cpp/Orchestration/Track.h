@@ -17,7 +17,7 @@
 #include "MidiEffects/Arpeggiator.h"
 #include "AudioEffects/Delay.h"
 
-class Track : public GraphicObject{
+class Track : public Canvas{
 
 public:
 
@@ -46,8 +46,8 @@ public:
 
     void initInstrument(InstrumentBase* instr);
 
-    void dragHandler(ndk_helper::Vec2 v) override ;
-    void dragBegin(ndk_helper::Vec2 v) override ;
+    void dragHandler(const ndk_helper::Vec2& v) override ;
+    void dragBegin(const ndk_helper::Vec2& v) override ;
 //    void addAudioEffect(AudioEffect* effect);
 };
 

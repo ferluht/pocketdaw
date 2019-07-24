@@ -79,7 +79,7 @@ void HandleCmd(struct android_app *app, int32_t cmd) {
 }
 
 auto master = new Master();
-auto graphicEngine = new GraphicEngine(master);
+GraphicEngine& graphicEngine = GraphicEngine::GetGraphicEngine();
 auto audioEngine = new AudioEngine(master);
 
 /**
@@ -89,12 +89,12 @@ auto audioEngine = new AudioEngine(master);
  */
 void android_main(android_app *state) {
 
-    graphicEngine->SetState(state);
+    graphicEngine.SetState(state);
 
     // Init helper functions
     ndk_helper::JNIHelper::Init(state->activity, HELPER_CLASS_NAME);
 
-    state->userData = graphicEngine;
+    state->userData = &graphicEngine;
     state->onAppCmd = HandleCmd;
     state->onInputEvent = HandleInput;
 
@@ -115,22 +115,22 @@ void android_main(android_app *state) {
         // If not animating, we will block forever waiting for events.
         // If animating, we loop until all events are read, then continue
         // to draw the next frame of animation.
-        while ((id = ALooper_pollAll(graphicEngine->IsReady() ? 0 : -1, nullptr, &events,
+        while ((id = ALooper_pollAll(graphicEngine.IsReady() ? 0 : -1, nullptr, &events,
                                      (void **) &source)) >= 0) {
             // Process this event.
             if (source != nullptr) source->process(state, source);
 
             // Check if we are exiting.
             if (state->destroyRequested != 0) {
-                graphicEngine->TermDisplay();
+                graphicEngine.TermDisplay();
                 return;
             }
         }
 
-        if (graphicEngine->IsReady()) {
+        if (graphicEngine.IsReady()) {
             // Drawing is throttled to the screen update rate, so there
             // is no need to do timing here.
-            graphicEngine->DrawFrame();
+            graphicEngine.DrawFrame();
         }
     }
 }
@@ -147,7 +147,7 @@ JNIEXPORT void JNICALL
 Java_com_pdaw_pd_MainActivity_midiEvent(JNIEnv *env, jobject obj, jbyte status_byte,
                                         jbyte data_byte_1, jbyte data_byte_2) {
     MidiData md((unsigned char)status_byte, (unsigned char)data_byte_1, (unsigned char)data_byte_2);
-    graphicEngine->master->receiveMIDI(md);
+    master->receiveMIDI(md);
 }
 
 }

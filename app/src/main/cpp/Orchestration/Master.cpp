@@ -3,9 +3,10 @@
 //
 
 #include "Master.h"
+#include <Instruments/Metronome.h>
 
 Master::Master() :
-GraphicObject("Textures/container.bmp", "Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlain.fsh"),
+Canvas(0, 0, -1, -1, "Textures/container.bmp"),
 link(DEFAULT_BPM)
 {
     link.enable(true);
@@ -14,10 +15,10 @@ link(DEFAULT_BPM)
     cue->initInstrument(metr);
     cue->addAudioEffect(new Delay(8000, 0.3));
     cue->addAudioEffect(new Delay(8000, 0.3));
-    cue->addAudioEffect(new Waveform(0.01, 0.5, 0.5));
+//    cue->addAudioEffect(new Waveform(0.01, 0.5, 0.5));
     addTrack(cue);
 
-    attach(new Button(0,0,0,0, "Textures/container.bmp", []{}));
+//    attach(new Button(0,0,0,0, "Textures/container.bmp", []{}));
 //    addChildObject(new Button("Textures/container.bmp", 0.9, 0.7));
 
 //    addAudioEffect(new Delay(3300, 0.2));
@@ -87,17 +88,17 @@ void Master::stop()
 //
 void Master::addTrack(Track *track)
 {
-    track->relativePosition.x = 0;
-    track->relativePosition.y = 0;
-    if (!Tracks.empty()) {
-        track->relativePosition.x =
-                Tracks.back()->relativePosition.x + Tracks.back()->relativePosition.width;
-        track->relativePosition.y = Tracks.back()->relativePosition.y;
-    }
-    track->relativePosition.width = 0.3;
-    track->relativePosition.height = 1;
+//    track->relativePosition.x = 0;
+//    track->relativePosition.y = 0;
+//    if (!Tracks.empty()) {
+//        track->relativePosition.x =
+//                Tracks.back()->relativePosition.x + Tracks.back()->relativePosition.width;
+//        track->relativePosition.y = Tracks.back()->relativePosition.y;
+//    }
+//    track->relativePosition.width = 0.3;
+//    track->relativePosition.height = 1;
     Tracks.push_back(track);
-    addChildObject(track);
+    attach(track);
 }
 
 void Master::delTrack(int pos)

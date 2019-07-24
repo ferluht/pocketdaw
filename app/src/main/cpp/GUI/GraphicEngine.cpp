@@ -46,7 +46,7 @@ int GraphicEngine::InitDisplay(android_app *app) {
         }
     }
 
-    master->Init_();
+    master->init();
 
     SetupView();
 
@@ -61,10 +61,7 @@ int GraphicEngine::InitDisplay(android_app *app) {
     glDepthFunc(GL_LEQUAL);
     glHint(GL_SAMPLES, 4);
     glEnable(GL_MULTISAMPLE);
-
-    // Note that screen size might have been changed
     glViewport(0, 0, gl_context_->GetScreenWidth(), gl_context_->GetScreenHeight());
-    master->update();
 
     return 0;
 }
@@ -152,68 +149,4 @@ void GraphicEngine::UpdateFPS(float fFPS) {
     jni->CallVoidMethod(app_->activity->clazz, methodID, fFPS);
 
     app_->activity->vm->DetachCurrentThread();
-}
-
-static SHADER GraphicEngine::CreateShaderProgram(const char *vsh, const char *fsh) {
-    GLuint program;
-    GLuint vert_shader;
-    GLuint frag_shader;
-
-    SHADER sh = {0, 0, 0};
-
-    // Create shader program
-    program = glCreateProgram();
-    LOGI("Created Shader %d", program);
-
-    // Create and compile vertex shader
-    if (!ndk_helper::shader::CompileShader(&vert_shader, GL_VERTEX_SHADER,
-                                           vsh)) {
-        LOGI("Failed to compile vertex shader");
-        glDeleteProgram(program);
-        return sh;
-    }
-
-    // Create and compile fragment shader
-    if (!ndk_helper::shader::CompileShader(&frag_shader, GL_FRAGMENT_SHADER,
-                                           fsh)) {
-        LOGI("Failed to compile fragment shader");
-        glDeleteProgram(program);
-        return sh;
-    }
-
-    // Attach vertex shader to program
-    glAttachShader(program, vert_shader);
-
-    // Attach fragment shader to program
-    glAttachShader(program, frag_shader);
-
-
-    // Link program
-    if (!ndk_helper::shader::LinkProgram(program)) {
-        LOGI("Failed to link program: %d", program);
-
-        if (vert_shader) {
-            glDeleteShader(vert_shader);
-            vert_shader = 0;
-        }
-        if (frag_shader) {
-            glDeleteShader(frag_shader);
-            frag_shader = 0;
-        }
-        if (program) {
-            glDeleteProgram(program);
-        }
-
-        return sh;
-    }
-
-    sh.program_ = program;
-    sh.param_view_ = glGetUniformLocation(program, "uPMatrix");
-    sh.param_texture_angle_ = glGetUniformLocation(program, "angle");
-
-    // Release vertex and fragment shaders
-    if (vert_shader) glDeleteShader(vert_shader);
-    if (frag_shader) glDeleteShader(frag_shader);
-
-    return sh;
 }

@@ -5,10 +5,10 @@
 #include "Metronome.h"
 
 Metronome::Metronome(){
-    attach(new Text("Fonts/Roboto-Regular.ttf", L"attack\n", 0.3, 0.4));
-    attach(new Encoder("Textures/encoder.bmp", 0.6f, 0.5f, &A));
-    attach(new Text("Fonts/Roboto-Regular.ttf", L"decay\n", -0.2, 0.4));
-    attach(new Encoder("Textures/encoder.bmp", 0.1f, 0.5f, &D));
+//    attach(new Text("Fonts/Roboto-Regular.ttf", L"attack\n", 0.3, 0.4));
+//    attach(new Encoder("Textures/encoder.bmp", 0.6f, 0.5f, &A));
+//    attach(new Text("Fonts/Roboto-Regular.ttf", L"decay\n", -0.2, 0.4));
+//    attach(new Encoder("Textures/encoder.bmp", 0.1f, 0.5f, &D));
 }
 
 void Metronome::updateState(MetronomeState *state, MidiData md){

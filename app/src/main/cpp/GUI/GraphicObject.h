@@ -18,10 +18,10 @@
 #include <android/native_window_jni.h>
 #include <android/asset_manager.h>
 
-#include "GraphicEngine.h"
+#include "GUI/Shader.h"
 #include "NDKHelper.h"
 
-class Position2D {
+class BBox {
 public:
     float x;
     float y;
@@ -30,9 +30,9 @@ public:
     float width;
     float angle;
 
-    Position2D() : x(0), y(0), z(0), height(0), width(0), angle(0) {}
+    BBox() : x(0), y(0), z(0), height(0), width(0), angle(0) {}
 
-    Position2D(float x_, float y_, float height_, float width_)
+    BBox(float x_, float y_, float height_, float width_)
             : x(x_), y(y_), z(0), height(height_), width(width_), angle(0) {}
 
     inline virtual void place(float x_, float y_, float height_, float width_) {
@@ -60,8 +60,8 @@ public:
                 && (y - height / 2 < v.y_) && (y + height / 2 > v.y_));
     }
 
-    inline virtual Position2D toRelative(Position2D ref) {
-        Position2D rel;
+    inline virtual BBox toRelative(BBox ref) {
+        BBox rel;
         rel.x = (x - ref.x) / ref.width;
         rel.y = (y - ref.y) / ref.height;
         rel.z = 0;
@@ -71,9 +71,9 @@ public:
         return rel;
     }
 
-    inline virtual Position2D fromRelative(Position2D rel)
+    inline virtual BBox fromRelative(BBox rel)
     {
-        Position2D ref;
+        BBox ref;
         ref.x = x + rel.x * width;
         ref.y = y + rel.y * height;
         ref.z = 0;
@@ -84,32 +84,27 @@ public:
     }
 };
 
-//bool operator =(const Position2D& a, const Position2D& b) {
-//    return ((a.x == b.x) && (a.y == b.y) && (a.z == b.z) &&
-//            (a.height == b.height) && (a.width == b.width) &&
-//            (a.rotation == b.rotation));
-//}
 
-class GraphicObject : public Position2D {
+class GraphicObject : public BBox {
 public:
 
     GLuint ibo_;
     GLuint vbo_;
     GLuint vao_;
     GLuint texture;
-    SHADER shader;
+    Shader shader;
 
     const char * texture_name;
     const char * vshader;
     const char * fshader;
 
     ndk_helper::Vec2 drag_from;
-    Position2D relative_position_backup;
+    BBox relative_position_backup;
 
     GraphicObject * parent;
 
     std::list<GraphicObject*> Graphics;
-    Position2D new_position;
+    BBox new_position;
 
     GraphicObject();
     GraphicObject(const char * texture);

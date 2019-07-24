@@ -7,14 +7,12 @@
 
 #include <stdlib.h>
 #include <vector>
-#include "Track.h"
-#include "AudioEffects/AudioEffect.h"
 #include <ableton/Link.hpp>
-#include "Midi.h"
-#include "GUI/GUI.h"
-#include "Instruments/Metronome.h"
-#include "AudioEffects/Delay.h"
 
+#include "Orchestration/Track.h"
+#include "Orchestration/Midi.h"
+#include "AudioEffects/AudioEffect.h"
+#include "GUI/Canvas.h"
 
 #define DEFAULT_BPM 60.
 

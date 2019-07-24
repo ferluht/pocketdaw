@@ -8,7 +8,7 @@
 
 #include "GUI/GraphicObject.h"
 
-class Canvas { //: public GraphicObject{
+class Canvas : public GraphicObject{
 public:
 
     Canvas() : Canvas(0, 0, -1, -1) {}
