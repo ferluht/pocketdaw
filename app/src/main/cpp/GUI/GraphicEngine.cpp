@@ -4,20 +4,20 @@
 
 #include "GraphicEngine.h"
 
-//-------------------------------------------------------------------------
-// Ctor
-//-------------------------------------------------------------------------
-GraphicEngine::GraphicEngine(Master * master_)
-        : initialized_resources_(false),
-          has_focus_(false),
-          app_(nullptr) {
-    gl_context_ = ndk_helper::GLContext::GetInstance();
-    this->master = master_;
-}
-
-/**
- * Unload resources
- */
+////-------------------------------------------------------------------------
+//// Ctor
+////-------------------------------------------------------------------------
+//GraphicEngine::GraphicEngine(Master * master_)
+//        : initialized_resources_(false),
+//          has_focus_(false),
+//          app_(nullptr) {
+//    gl_context_ = ndk_helper::GLContext::GetInstance();
+//    this->master = master_;
+//}
+//
+///**
+// * Unload resources
+// */
 void GraphicEngine::UnloadResources() { }
 
 
@@ -46,25 +46,40 @@ int GraphicEngine::InitDisplay(android_app *app) {
         }
     }
 
-    master->Init();
+    master->init_();
+
+    SetupView();
 
     ShowUI();
 
     // Initialize GL state.
+    glFrontFace(GL_CCW);
     glEnable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glDepthFunc(GL_LEQUAL);
-
-    // Note that screen size might have been changed
-    glViewport(0, 0, gl_context_->GetScreenWidth(),
-               gl_context_->GetScreenHeight());
-    master->Update();
+    glHint(GL_SAMPLES, 4);
+    glEnable(GL_MULTISAMPLE);
+    glViewport(0, 0, gl_context_->GetScreenWidth(), gl_context_->GetScreenHeight());
 
     return 0;
 }
 
+void GraphicEngine::SetupView()
+{
+    int32_t viewport[4];
+    glGetIntegerv(GL_VIEWPORT, viewport);
+    mat_projection_ = ndk_helper::Mat4::Ortho2D(0, 0, viewport[2], -viewport[3]);
+
+    const float CAM_X = 0.f;
+    const float CAM_Y = 0.f;
+    const float CAM_Z = 700.f;
+
+    mat_view_ = ndk_helper::Mat4::LookAt(ndk_helper::Vec3(CAM_X, CAM_Y, CAM_Z),
+                                         ndk_helper::Vec3(0.f, 0.f, 0.f),
+                                         ndk_helper::Vec3(0.f, 1.f, 0.f));
+}
 
 /**
  * Just the current frame in the display.

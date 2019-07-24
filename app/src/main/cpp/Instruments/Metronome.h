@@ -7,6 +7,7 @@
 
 #include "Instrument.h"
 #include "ADSR.h"
+#include <cmath>
 
 class MetronomeState : public InstrumentState{
 public:

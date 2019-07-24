@@ -9,13 +9,15 @@
 #include <map>
 #include <vector>
 #include <queue>
-#include "../Instruments/Instrument.h"
-#include "../AudioEffects/AudioEffect.h"
-#include "../MidiEffects/MidiEffect.h"
+#include "Instruments/Instrument.h"
+#include "AudioEffects/AudioEffect.h"
+#include "MidiEffects/MidiEffect.h"
 #include "Midi.h"
-#include "../GUI/GraphicObject.h"
+#include "GUI/GraphicObject.h"
+#include "MidiEffects/Arpeggiator.h"
+#include "AudioEffects/Delay.h"
 
-class Track : public GraphicObject{
+class Track : public Canvas{
 
 public:
 
@@ -44,8 +46,8 @@ public:
 
     void initInstrument(InstrumentBase* instr);
 
-    void dragHandler(ndk_helper::Vec2 v) override ;
-    void dragBegin(ndk_helper::Vec2 v, float xscale, float yscale) override ;
+    void dragHandler(const ndk_helper::Vec2& v) override ;
+    void dragBegin(const ndk_helper::Vec2& v) override ;
 //    void addAudioEffect(AudioEffect* effect);
 };
 

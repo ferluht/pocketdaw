@@ -8,7 +8,7 @@ cmake_minimum_required(VERSION 3.4.1)
 project(native-lib LANGUAGES C CXX)
 
 # Ableton Link
-set (LINK_DIR /home/ibelikov/link)
+set (LINK_DIR D:/link)
 include(${LINK_DIR}/AbletonLinkConfig.cmake)
 include_directories(${LINK_DIR}/include)
 include_directories(${LINK_DIR}/modules/asio-standalone/asio/include)
@@ -26,13 +26,13 @@ add_subdirectory(${commonDir}/freetype-2.10.0 ${commonDir}/freetypeBin/${CMAKE_B
 
 include_directories(
         ${CMAKE_CURRENT_SOURCE_DIR}
-        ${CMAKE_CURRENT_SOURCE_DIR}/AudioEffects
-        ${CMAKE_CURRENT_SOURCE_DIR}/AudioEngine
-        ${CMAKE_CURRENT_SOURCE_DIR}/GUI
-        ${CMAKE_CURRENT_SOURCE_DIR}/Instruments
-        ${CMAKE_CURRENT_SOURCE_DIR}/Link
-        ${CMAKE_CURRENT_SOURCE_DIR}/MidiEffects
-        ${CMAKE_CURRENT_SOURCE_DIR}/Orchestration
+#        ${CMAKE_CURRENT_SOURCE_DIR}/AudioEffects
+#        ${CMAKE_CURRENT_SOURCE_DIR}/AudioEngine
+#        ${CMAKE_CURRENT_SOURCE_DIR}/GUI
+#        ${CMAKE_CURRENT_SOURCE_DIR}/Instruments
+#        ${CMAKE_CURRENT_SOURCE_DIR}/Link
+#        ${CMAKE_CURRENT_SOURCE_DIR}/MidiEffects
+#        ${CMAKE_CURRENT_SOURCE_DIR}/Orchestration
         )
 
 add_library(native_app_glue STATIC ${ANDROID_NDK}/sources/android/native_app_glue/android_native_app_glue.c)
@@ -48,21 +48,24 @@ add_library(
 
         AudioEffects/AudioEffect.cpp
         AudioEffects/Delay.cpp
-        AudioEffects/Waveform.cpp
-        AudioEffects/Spectrum.cpp
+#        AudioEffects/Waveform.cpp
+#        AudioEffects/Spectrum.cpp
 
         AudioEngine/AudioEngine.cpp
 
+        GUI/Shader.cpp
         GUI/GraphicObject.cpp
         GUI/GraphicEngine.cpp
         GUI/Button.cpp
-        GUI/Encoder.cpp
-        GUI/Font.cpp
-        GUI/Text.cpp
+#        GUI/Encoder.cpp
+#        GUI/Font.cpp
+#        GUI/Text.cpp
+        GUI/Canvas.cpp
+#        GUI/Graph.cpp
 
-        Instruments/ModularSynth/VCO.cpp
-        Instruments/ModularSynth/Module.cpp
-        Instruments/ModularSynth/Modular.cpp
+#        Instruments/ModularSynth/VCO.cpp
+#        Instruments/ModularSynth/Module.cpp
+#        Instruments/ModularSynth/Modular.cpp
         Instruments/Instrument.cpp
         Instruments/Metronome.cpp
         Instruments/ADSR.cpp
@@ -70,7 +73,6 @@ add_library(
         Link/LinkManager.cpp
         Link/android-ifaddrs/ifaddrs.cpp
 
-        MidiEffects/MidiEffect.cpp
         MidiEffects/Arpeggiator.cpp
 
         Orchestration/Master.cpp

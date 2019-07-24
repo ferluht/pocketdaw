@@ -1,25 +1,5 @@
-/*
- * Copyright 2013 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-//--------------------------------------------------------------------------------
-// Teapot Renderer.h
-// Renderer for teapots
-//--------------------------------------------------------------------------------
-#ifndef _TEAPOTRENDERER_H
-#define _TEAPOTRENDERER_H
+#ifndef PD_GRAPHIC_OBJECT_H
+#define PD_GRAPHIC_OBJECT_H
 
 //--------------------------------------------------------------------------------
 // Include files
@@ -38,83 +18,143 @@
 #include <android/native_window_jni.h>
 #include <android/asset_manager.h>
 
+#include "GUI/Shader.h"
 #include "NDKHelper.h"
 
-struct SHADER_PARAMS {
-  GLuint program_;
-  GLuint matrix_projection_;
-};
-
-struct Position2D {
+class BBox {
+public:
     float x;
     float y;
     float z;
     float height;
     float width;
+    float angle;
+
+    BBox() : x(0), y(0), z(0), height(0), width(0), angle(0) {}
+
+    BBox(float x_, float y_, float height_, float width_)
+            : x(x_), y(y_), z(0), height(height_), width(width_), angle(0) {}
+
+    inline virtual void place(float x_, float y_, float height_, float width_) {
+        place(x_, y_, height_, width_, 0);
+    }
+
+    inline virtual void place(float x_, float y_, float height_, float width_, float rotation_) {
+        x = x_, y = y_, height = height_, width = width_, angle = rotation_;
+    }
+
+    inline virtual void move(ndk_helper::Vec2 v) {
+        x = x + v.x_, y = y + v.y_;
+    }
+
+    inline virtual void rotate(float angle) {
+        this->angle += angle;
+    }
+
+    inline virtual void set_angle(float angle) {
+        this->angle = angle;
+    }
+
+    inline virtual bool contains(const ndk_helper::Vec2 &v) {
+        return ((x < v.x_) && (x + height > v.x_)
+                && (y < v.y_) && (y + width > v.y_));
+    }
+
+    inline virtual BBox toRelative(BBox ref) {
+        BBox rel;
+        rel.x = (x - ref.x) / ref.width;
+        rel.y = (y - ref.y) / ref.height;
+        rel.z = 0;
+        rel.height = height / ref.height;
+        rel.width = width / ref.width;
+        rel.angle = -ref.angle;
+        return rel;
+    }
+
+    inline virtual BBox fromRelative(BBox rel)
+    {
+        BBox ref;
+        ref.x = x + rel.x * width;
+        ref.y = y + rel.y * height;
+        ref.z = 0;
+        ref.height = height / rel.height;
+        ref.width = width / rel.width;
+        ref.angle = angle + rel.angle;
+        return rel;
+    }
 };
 
-//bool operator<(const Position2D &lhs, const Position2D &rhs) {
-//    if (lhs.x != rhs.x) return lhs.x > rhs.x;
-//    return lhs.y > rhs.y;
-//}
 
-class GraphicObject {
+class GraphicObject : public BBox {
 public:
+
     GLuint ibo_;
     GLuint vbo_;
-    GLuint vao_square_;
+    GLuint vao_;
     GLuint texture;
+    Shader shader;
 
     const char * texture_name;
     const char * vshader;
     const char * fshader;
 
     ndk_helper::Vec2 drag_from;
-    Position2D relative_position_backup;
-    float drag_xscale, drag_yscale;
+    BBox relative_position_backup;
 
     GraphicObject * parent;
 
     std::list<GraphicObject*> Graphics;
-    Position2D relativePosition;
-    Position2D absolutePosition;
+    BBox new_position;
 
-    SHADER_PARAMS shader_param_;
-    bool LoadShaders(SHADER_PARAMS* params, const char* strVsh,
-                   const char* strFsh);
-
-    ndk_helper::Mat4 mat_projection_;
-    ndk_helper::Mat4 mat_view_;
-
+    GraphicObject();
+    GraphicObject(const char * texture);
+    GraphicObject(const char * vshader, const char * fshader);
     GraphicObject(const char * texture, const char * vshader, const char * fshader);
-    GraphicObject(const char * texture, const char * vshader, const char * fshader, GraphicObject * parent);
     virtual ~GraphicObject();
-    void Init();
-    virtual void Init_() {};
 
-    void SetPosition(float x, float y);
-    void SetSize(float x, float y);
+
+    void init_();
+    virtual void init() {};
+
+    void draw_();
+    virtual void draw() {};
 
     void grender_(float dTime);
     virtual void grender(float dTime) {};
 
-    void Unload();
-    void Update();
-    void addChildObject(GraphicObject * go);
+    void unload();
 
-    GraphicObject * findTapHandler(ndk_helper::Vec2 v);
-    virtual void tapHandler(ndk_helper::Vec2 v) {};
+    // Hierarchy
 
-    GraphicObject * findDoubleTapHandler(ndk_helper::Vec2 v);
-    virtual void doubleTapHandler(ndk_helper::Vec2 v) {};
+    void attach(GraphicObject * go);
+    void detach(GraphicObject * go);
 
-    GraphicObject * findDragHandler(ndk_helper::Vec2 v, float xscale, float yscale);
-    virtual void dragBegin(ndk_helper::Vec2 v, float xscale, float yscale) {};
-    virtual void dragHandler(ndk_helper::Vec2 v) {};
+    inline void attachTo(GraphicObject * go) { parent = go; }
+
+    // Event handlers
+
+    virtual GraphicObject * findFocusObject(const ndk_helper::Vec2& point)
+    {
+        for (auto const &gr : Graphics) if (gr->contains(point)) return gr->findFocusObject(point);
+        return this;
+    }
+
+    virtual void tapBegin(const ndk_helper::Vec2& v) {};
+    virtual void tapHandler(const ndk_helper::Vec2& v) {};
+    virtual void tapEnd() {};
+
+    virtual void doubleTapBegin(const ndk_helper::Vec2& v) {};
+    virtual void doubleTapHandler(const ndk_helper::Vec2& v) {};
+    virtual void doubleTapEnd() {};
+
+    virtual void dragBegin(const ndk_helper::Vec2& v) {};
+    virtual void dragHandler(const ndk_helper::Vec2& v) {};
     virtual void dragEnd() {};
 
-    GraphicObject * findPinchHandler(ndk_helper::Vec2 v);
-    virtual void pinchHandler(ndk_helper::Vec2 v) {};
+    virtual void pinchBegin(const ndk_helper::Vec2& v) {};
+    virtual void pinchHandler(const ndk_helper::Vec2& v) {};
+    virtual void pinchEnd() {};
+
 };
 
 #endif

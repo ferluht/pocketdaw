@@ -19,10 +19,7 @@ public:
 
     Text(const char * font, wchar_t * text, float x, float y);
 
-    void SetPosition(float x, float y);
-    void SetSize(float x, float y);
-
-    void Init_() override;
+    void init_() override;
     void grender(float dTime) override ;
     void dragHandler(ndk_helper::Vec2 v) override ;
     void dragBegin(ndk_helper::Vec2 v, float xscale, float yscale) override ;

@@ -5,23 +5,17 @@
 #ifndef PD_BUTTON_H
 #define PD_BUTTON_H
 
-#include "GraphicObject.h"
-#include "../Orchestration/Master.h"
+#include "Canvas.h"
 
-class Button : public GraphicObject{
+class Button : public Canvas{
 public:
-    float * parameter_;
-    std::function<void(void)> callback_;
 
-    Button(const char * texture, float x, float y, Master * m_);
-    Master * m;
+    bool state;
+    std::function<void(bool)> callback;
 
-    void SetPosition(float x, float y);
-    void SetSize(float x, float y);
-    void grender(float dTime) override ;
-    void dragHandler(ndk_helper::Vec2 v) override ;
-    void dragBegin(ndk_helper::Vec2 v, float xscale, float yscale) override ;
-    void dragEnd() override ;
+    Button(float x, float y, float h, float w, const char * texture, std::function<void(bool)> callback_);
+
+    void tapEnd() override ;
 };
 
 
