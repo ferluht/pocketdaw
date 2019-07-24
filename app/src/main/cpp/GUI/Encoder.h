@@ -5,11 +5,9 @@
 #ifndef PD_ENCODER_H
 #define PD_ENCODER_H
 
-#include "GraphicObject.h"
+#include "Canvas.h"
 
-#define SEGMENTS 30
-
-class Encoder : public GraphicObject{
+class Encoder : public Canvas{
 public:
     float * parameter_;
 
@@ -18,9 +16,6 @@ public:
 
     Encoder(const char * texture, float x, float y, float * parameter);
 
-    void SetPosition(float x, float y);
-    void SetSize(float x, float y);
-    void grender(float dTime) override ;
     void dragHandler(ndk_helper::Vec2 v) override ;
     void dragBegin(ndk_helper::Vec2 v, float xscale, float yscale) override ;
 };

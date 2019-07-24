@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 #include <queue>
-#include "../Orchestration/Midi.h"
+#include "Orchestration/Midi.h"
 
 class MidiEffect {
 

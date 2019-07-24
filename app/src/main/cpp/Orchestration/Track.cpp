@@ -3,11 +3,9 @@
 //
 
 #include "Track.h"
-#include "../MidiEffects/Arpeggiator.h"
-#include "../AudioEffects/Delay.h"
 
 Track::Track():
-GraphicObject("Textures/container.bmp", "Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlain.fsh")
+Canvas(0, 0, 500, 700, "Textures/effect_canvas.bmp")
 {
     last_beat = 0;
     MidiClip * mdc = createMetronomeMidi();
@@ -62,25 +60,25 @@ void Track::toggleRec()
 void Track::initInstrument(InstrumentBase *instr)
 {
     TrackInstrument = instr;
-    instr->relativePosition.x = 0;
-    instr->relativePosition.y = 0;
-    instr->relativePosition.height = 0.2;
-    instr->relativePosition.width = 1;
-    addChildObject(instr);
+//    instr->position.x = position.x;
+//    instr->position.y = position.y;
+//    instr->position.height = position.height * 0.2f;
+//    instr->position.width = position.width;
+    attach(instr);
 }
 
 void Track::addAudioEffect(AudioEffect *effect)
 {
-    effect->relativePosition.x = 0;
-    effect->relativePosition.y = TrackInstrument->relativePosition.y + TrackInstrument->relativePosition.height + 0.01;
-    if (!AudioEffects.empty()) {
-        effect->relativePosition.x = AudioEffects.back()->relativePosition.x;
-        effect->relativePosition.y = AudioEffects.back()->relativePosition.y + AudioEffects.back()->relativePosition.height + 0.01;
-    }
-    effect->relativePosition.height = 0.1;
-    effect->relativePosition.width = 1;
+//    effect->position.x = position.x;
+//    effect->position.y = TrackInstrument->position.y + TrackInstrument->position.height + 0.01f;
+//    if (!AudioEffects.empty()) {
+//        effect->position.x = AudioEffects.back()->position.x;
+//        effect->position.y = AudioEffects.back()->position.y + AudioEffects.back()->position.height + 0.01f;
+//    }
+//    effect->position.height = position.height * 0.1f;
+//    effect->position.width = position.width;
     AudioEffects.push_back(effect);
-    addChildObject(effect);
+    attach(effect);
 }
 
 inline bool Track::onbeat(double beat, double midi_beat)
@@ -88,15 +86,13 @@ inline bool Track::onbeat(double beat, double midi_beat)
     return ((beat >= midi_beat) && (last_beat < beat));
 }
 
-void Track::dragHandler(ndk_helper::Vec2 v) {
-    relativePosition.y = (v.y_ - drag_from.y_)*drag_yscale + relative_position_backup.y;
-    if (relativePosition.y > 0) relativePosition.y = 0;
-    Update();
+void Track::dragHandler(const ndk_helper::Vec2& v) {
+//    new_position.y = v.y_;
+//    if (new_position.y > 0) position.y = 0;
+//    update();
 }
 
-void Track::dragBegin(ndk_helper::Vec2 v, float xscale, float yscale) {
-    drag_from = v;
-    relative_position_backup = relativePosition;
-    drag_xscale = xscale;
-    drag_yscale = yscale;
+void Track::dragBegin(const ndk_helper::Vec2& v) {
+//    drag_from = v;
+//    new_position = position;
 }

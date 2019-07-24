@@ -5,7 +5,6 @@
 #ifndef PD_WAVEFORM_H
 #define PD_WAVEFORM_H
 
-#include "../GUI/GraphicObject.h"
 #include "AudioEffect.h"
 
 #define BUFFER_SIZE 200
@@ -26,11 +25,9 @@ public:
 
     float apply(float sample) override ;
 
-    void SetPosition(float x, float y);
-    void SetSize(float x, float y);
     void grender(float dTime) override ;
-    void dragHandler(ndk_helper::Vec2 v) override ;
-    void dragBegin(ndk_helper::Vec2 v, float xscale, float yscale) override ;
+    void dragBegin(const ndk_helper::Vec2& v) override ;
+    void dragHandler(const ndk_helper::Vec2& v) override ;
     void dragEnd() override ;
 };
 

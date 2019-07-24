@@ -7,7 +7,7 @@
 
 
 #include <aaudio/AAudio.h>
-#include "../Orchestration/Master.h"
+#include "Orchestration/Master.h"
 
 class AudioEngine {
 public:
