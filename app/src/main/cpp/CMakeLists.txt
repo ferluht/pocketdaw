@@ -59,8 +59,8 @@ add_library(
         GUI/GraphicEngine.cpp
         GUI/Button.cpp
 #        GUI/Encoder.cpp
-#        GUI/Font.cpp
-#        GUI/Text.cpp
+        GUI/Font.cpp
+        GUI/Text.cpp
         GUI/Canvas.cpp
 #        GUI/Graph.cpp
 
