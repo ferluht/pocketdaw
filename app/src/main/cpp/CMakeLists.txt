@@ -48,6 +48,7 @@ add_library(
 
         AudioEffects/AudioEffect.cpp
         AudioEffects/Delay.cpp
+        AudioEffects/StereoDelay.cpp
 #        AudioEffects/Waveform.cpp
 #        AudioEffects/Spectrum.cpp
 

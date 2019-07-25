@@ -40,7 +40,7 @@ bool AudioEngine::start() {
     AAudioStreamBuilder *streamBuilder;
     AAudio_createStreamBuilder(&streamBuilder);
     AAudioStreamBuilder_setFormat(streamBuilder, AAUDIO_FORMAT_PCM_FLOAT);
-    AAudioStreamBuilder_setChannelCount(streamBuilder, 1);
+    AAudioStreamBuilder_setChannelCount(streamBuilder, 2);
     AAudioStreamBuilder_setPerformanceMode(streamBuilder, AAUDIO_PERFORMANCE_MODE_LOW_LATENCY);
     AAudioStreamBuilder_setDataCallback(streamBuilder, ::dataCallback, master_);
     AAudioStreamBuilder_setErrorCallback(streamBuilder, ::errorCallback, this);

@@ -16,10 +16,7 @@ public:
     AudioEffect(float x, float y, float h, float w)
     : Canvas(x, y, h, w, "Textures/effect_canvas.bmp") {isOn = true;};
 
-    virtual float apply(float sample)
-    {
-        return sample;
-    }
+    virtual void apply(float * lsample, float * rsample){ }
 };
 
 

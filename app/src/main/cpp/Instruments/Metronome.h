@@ -26,7 +26,8 @@ public:
     Metronome();
 
     void updateState(MetronomeState * state, MidiData md) override;
-    float render(MetronomeState * state, double beat) override ;
+
+    void render(MetronomeState * state, double beat, float * lsample, float * rsample) override ;
 };
 
 

@@ -4,6 +4,7 @@
 
 #include "Master.h"
 #include <Instruments/Metronome.h>
+#include "AudioEffects/StereoDelay.h"
 
 Master::Master() :
 Canvas(0, 0, -1, -1, "Textures/container.bmp"),
@@ -13,15 +14,16 @@ link(DEFAULT_BPM)
     auto * cue = new Track;
     auto metr = new Metronome;
     cue->initInstrument(metr);
-    cue->addAudioEffect(new Delay(0.2, 0.99));
-    cue->addAudioEffect(new Delay(0.2, 0.09));
-    cue->addAudioEffect(new Delay(0.2, 0.09));
-    cue->addAudioEffect(new Delay(0.2, 0.09));
-    cue->addAudioEffect(new Delay(0.2, 0.09));
-    cue->addAudioEffect(new Delay(0.2, 0.09));
-    cue->addAudioEffect(new Delay(0.2, 0.09));
-    cue->addAudioEffect(new Delay(0.2, 0.09));
-    cue->addAudioEffect(new Delay(0.2, 0.09));
+
+    cue->addAudioEffect(new StereoDelay(0.2));
+//    cue->addAudioEffect(new Delay(0.2, 0.09));
+//    cue->addAudioEffect(new Delay(0.2, 0.09));
+//    cue->addAudioEffect(new Delay(0.2, 0.09));
+//    cue->addAudioEffect(new Delay(0.2, 0.09));
+//    cue->addAudioEffect(new Delay(0.2, 0.09));
+//    cue->addAudioEffect(new Delay(0.2, 0.09));
+//    cue->addAudioEffect(new Delay(0.2, 0.09));
+//    cue->addAudioEffect(new Delay(0.2, 0.09));
 //    cue->addAudioEffect(new Delay(8000, 0.3));
 //    cue->addAudioEffect(new Waveform(0.01, 0.5, 0.5));
     addTrack(cue);
@@ -56,13 +58,17 @@ void Master::render(float *audioData, int32_t numFrames) {
     double increment = bpm / 60.0 / sample_rate * numFrames;
 
     for (int i = 0; i < numFrames; i++) {
-        audioData[i] = 0;
+        audioData[2*i] = 0;
+        audioData[2*i+1] = 0;
         for (auto const& track : Tracks) {
-            audioData[i] += track->render(beat);
+            float l = 0, r = 0;
+            track->render(beat, &l, &r);
+            audioData[2*i] += l;
+            audioData[2*i + 1] = r;
             beat += increment;
         }
         for (auto const& effect : AudioEffects) {
-            audioData[i] = effect->apply(audioData[i]);
+            effect->apply(&audioData[2*i], &audioData[2*i + 1]);
         }
 
 //        audioData[i] = (audioData[i] + prev_sample)/2;
