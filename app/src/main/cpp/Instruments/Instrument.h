@@ -36,7 +36,7 @@ public:
     InstrumentBase() : Canvas(0, 0, 0, 0) {};
 
     virtual void midiCommand(MidiData md) = 0;
-    virtual float render(double beat) = 0;
+    virtual void render(double beat, float * lsample, float * rsample) = 0;
 };
 
 template <class State>
@@ -69,7 +69,7 @@ public:
 
     void midiCommand(MidiData md) override;
 
-    float render(double beat) override;
+    void render(double beat, float * lsample, float * rsample) override;
 
     void keyPressed(MidiData md);
 
@@ -100,7 +100,7 @@ public:
 
     virtual void updateState(State * state, MidiData cmd) {};
 
-    virtual float render(State * state, double beat) {return 0;}
+    virtual void render(State * state, double beat, float * lsample, float * rsample) {}
 };
 
 template <class State>
@@ -163,15 +163,15 @@ void Instrument<State>::keyPressed(MidiData md)
 
 
 template <class State>
-float Instrument<State>::render(double beat)
+void Instrument<State>::render(double beat, float * lsample, float * rsample)
 {
-    float sample = 0;
     for (auto it = States.begin(); it != States.end(); it++ ){
         if ((*it)->active){
-            sample += 1.0/(float)num_voices * render(*it, beat);
+            render(*it, beat, lsample, rsample);
         }
     }
-    return sample;
+    *lsample /= (float)num_voices;
+    *rsample /= (float)num_voices;
 }
 
 

@@ -14,7 +14,8 @@ public:
     float feedback = 0.4;
 
     Delay(float delayTime_, float feedback_);
-    float apply(float sample);
+
+    void apply(float * lsample, float * rsample);
 
 private:
     float buffer[50000];

@@ -15,7 +15,7 @@ Canvas(0, 0, 500, 700, "Textures/effect_canvas.bmp")
     MidiEffects.push_back(arp);
 }
 
-float Track::render(double beat)
+void Track::render(double beat, float * lsample, float * rsample)
 {
     float sample = 0;
 
@@ -44,12 +44,11 @@ float Track::render(double beat)
         MidiQueue.pop();
     }
 
-    sample = TrackInstrument->render(beat);
+    TrackInstrument->render(beat, lsample, rsample);
 
-    for (auto const& audioEffect : AudioEffects) sample = audioEffect->apply(sample);
+    for (auto const& audioEffect : AudioEffects) audioEffect->apply(lsample, rsample);
 
     last_beat += beat;
-    return sample;
 }
 
 void Track::toggleRec()

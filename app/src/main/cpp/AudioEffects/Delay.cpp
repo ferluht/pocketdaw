@@ -23,13 +23,15 @@ Delay::Delay(float delayTime_, float feedback_) : AudioEffect(300,500,200,200)
     position = 0;
 }
 
-float Delay::apply(float sample)
+void Delay::apply(float * lsample, float * rsample)
 {
+    float sample = (*lsample + *rsample)/2;
     if (isOn) {
         int index = (int) (delayTime * 50000) - position;
         sample += buffer[index];
         buffer[index] = sample * feedback;
         position = (position + 1) % ((int) (delayTime * 50000));
     }
-    return sample;
+    *lsample = sample;
+    *rsample = sample;
 }
