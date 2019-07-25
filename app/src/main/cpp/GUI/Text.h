@@ -6,10 +6,11 @@
 #define PD_TEXT_H
 
 
-#include "GraphicObject.h"
+#include "Canvas.h"
 #include "Font.h"
+#include "NDKHelper.h"
 
-class Text : public GraphicObject{
+class Text : public Canvas{
 public:
 
     Font * f;
@@ -19,11 +20,7 @@ public:
 
     Text(const char * font, wchar_t * text, float x, float y);
 
-    void init_() override;
-    void grender(float dTime) override ;
-    void dragHandler(ndk_helper::Vec2 v) override ;
-    void dragBegin(ndk_helper::Vec2 v, float xscale, float yscale) override ;
-    void dragEnd() override ;
+    void init() override;
 };
 
 

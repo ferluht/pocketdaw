@@ -4,6 +4,7 @@
 
 #include "Master.h"
 #include <Instruments/Metronome.h>
+#include <GUI/Button.h>
 #include "AudioEffects/StereoDelay.h"
 
 Master::Master() :
@@ -15,7 +16,8 @@ link(DEFAULT_BPM)
     auto metr = new Metronome;
     cue->initInstrument(metr);
 
-    cue->addAudioEffect(new StereoDelay(0.2));
+    cue->addAudioEffect(new StereoDelay(0.7));
+    attach(new Button(600, 700, 100, 100, "Textures/encoder.bmp", [cue](bool state){cue->addAudioEffect(new Delay(0.2, 0.09));}));
 //    cue->addAudioEffect(new Delay(0.2, 0.09));
 //    cue->addAudioEffect(new Delay(0.2, 0.09));
 //    cue->addAudioEffect(new Delay(0.2, 0.09));
