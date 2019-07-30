@@ -6,6 +6,7 @@
 #include <Instruments/Metronome.h>
 #include <GUI/Button.h>
 #include <AudioEffects/Waveform.h>
+#include <AudioEffects/Lissajous.h>
 #include "AudioEffects/StereoDelay.h"
 
 Master::Master() :
@@ -58,6 +59,7 @@ link(DEFAULT_BPM)
 //    addAudioEffect(new Delay(8000, 0.6));
 
     addAudioEffect(new Waveform(200, 0, 0));
+    addAudioEffect(new Lissajous(200, 0, 0));
 
     size_denominator = 4;
     stopPressed_ = 0;
@@ -136,7 +138,12 @@ void Master::delTrack(int pos)
 
 void Master::addAudioEffect(AudioEffect *effect)
 {
-    effect->place(0,0,0.5,1);
+    if (AudioEffects.empty()) {
+        effect->place(0.01f, 0.01f, 0.48, 0.3);
+    } else {
+        effect->place(AudioEffects.back()->x + AudioEffects.back()->width + 0.01f, AudioEffects.back()->y, 0.48, 0.3);
+    }
+
     AudioEffects.push_back(effect);
     attach(effect);
 }

@@ -13,10 +13,8 @@ public:
 
     int r = 1;
     float window = 3;
-    float accumulator = 0, prev_acc = 0;
+    float accumulator = 0;
     int ai = 0;
-
-    GLuint vertexbuffer;
 
     SimpleGraph * graph;
 
