@@ -50,6 +50,7 @@ add_library(
         AudioEffects/Delay.cpp
         AudioEffects/StereoDelay.cpp
         AudioEffects/Waveform.cpp
+        AudioEffects/Lissajous.cpp
 #        AudioEffects/Spectrum.cpp
 
         AudioEngine/AudioEngine.cpp

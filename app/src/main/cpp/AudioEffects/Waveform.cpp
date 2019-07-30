@@ -9,13 +9,16 @@
 Waveform::Waveform(float n, float x_, float y_) : AudioEffect(x_,y_,0,0){
 
     window = n;
-    graph = new SimpleGraph(300, 0.05, 0.5, 3, 0.9, 0.9);
-    attach(graph);
 
-    attach(new Encoder(0, 0.02, 0.8, 2, 0.15, "Textures/encoder.bmp",
+    attach(new Text("Fonts/Roboto-Regular.ttf", L"waveform", 0.05, 0.05, 2, 0.07));
+
+    attach(new Encoder(0, 0.05, 0.7, 2, 0.25, "Textures/encoder.bmp",
                        [this](float state){
                            this->window = (state/2 + 0.5f) * 200 + 1;
                        }));
+
+    graph = new SimpleGraph(300, 0.05, 0.5, 3, 0.9, 0.9);
+    attach(graph);
 }
 
 void Waveform::apply(float *lsample, float *rsample) {
@@ -25,7 +28,6 @@ void Waveform::apply(float *lsample, float *rsample) {
     } else {
         ai = 0;
         graph->update(accumulator / sqrt(window) / 2);
-        prev_acc = accumulator;
         accumulator = 0;
     }
 }
