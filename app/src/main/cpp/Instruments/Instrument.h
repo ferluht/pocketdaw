@@ -33,7 +33,7 @@ bool operator<(const InstrumentState &lhs, const InstrumentState &rhs);
 
 class InstrumentBase : public Canvas {
 public:
-    InstrumentBase() : Canvas(0, 0, 0, 0) {};
+    InstrumentBase() : Canvas(0, 0, 0, 0, "Textures/effect_canvas.bmp", false) {};
 
     virtual void midiCommand(MidiData md) = 0;
     virtual void render(double beat, float * lsample, float * rsample) = 0;

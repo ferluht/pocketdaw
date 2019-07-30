@@ -29,35 +29,47 @@ public:
     float height;
     float width;
     float angle;
+    float ratio;
 
-    BBox() : x(0), y(0), z(0), height(0), width(0), angle(0) {}
+    bool changed;
 
-    BBox(float x_, float y_, float height_, float width_)
-            : x(x_), y(y_), z(0), height(height_), width(width_), angle(0) {}
+    BBox() : BBox (0, 0, 0, 0) {}
+
+    BBox(float x_, float y_, float height_, float width_) : BBox(x_, y_, 0, height_, width_, 0) {}
+
+    BBox(float x_, float y_, float z_, float height_, float width_, float angle_)
+            : x(x_), y(y_), z(z_), height(height_), width(width_), angle(angle_) {
+        ratio = width / height;
+        changed = true;
+    }
 
     inline virtual void place(float x_, float y_, float height_, float width_) {
         place(x_, y_, height_, width_, 0);
     }
 
     inline virtual void place(float x_, float y_, float height_, float width_, float rotation_) {
-        x = x_, y = y_, height = height_, width = width_, angle = rotation_;
+        x = x_, y = y_, height = height_, width = width_, angle = rotation_, ratio = width_/height_;
+        changed = true;
     }
 
     inline virtual void move(ndk_helper::Vec2 v) {
         x = x + v.x_, y = y + v.y_;
+        changed = true;
     }
 
     inline virtual void rotate(float angle) {
         this->angle += angle;
+        changed = true;
     }
 
     inline virtual void set_angle(float angle) {
         this->angle = angle;
+        changed = true;
     }
 
     inline virtual bool contains(const ndk_helper::Vec2 &v) {
-        return ((x < v.x_) && (x + height > v.x_)
-                && (y < v.y_) && (y + width > v.y_));
+        return ((x < v.x_) && (x + width > v.x_)
+                && (y < v.y_) && (y + height > v.y_));
     }
 
     inline virtual BBox toRelative(BBox ref) {
@@ -99,19 +111,19 @@ public:
     const char * fshader;
 
     ndk_helper::Vec2 drag_from;
-    BBox relative_position_backup;
+    BBox globalPosition;
 
     GraphicObject * parent;
 
     std::list<GraphicObject*> Graphics;
     BBox new_position;
 
-    GraphicObject();
-    GraphicObject(const char * texture);
-    GraphicObject(const char * vshader, const char * fshader);
-    GraphicObject(const char * texture, const char * vshader, const char * fshader);
-    virtual ~GraphicObject();
+    bool visible;
+    bool saveRatio;
 
+    GraphicObject(float x_, float y_, float z_, float height_, float width_, float angle_,
+                  const char * texture, const char * vshader, const char * fshader, bool saveRatio_);
+    virtual ~GraphicObject();
 
     void init_();
     virtual void init() {};
@@ -121,6 +133,8 @@ public:
 
     void grender_(float dTime);
     virtual void grender(float dTime) {};
+
+    void setVisible(bool visible_);
 
     void unload();
 
@@ -135,7 +149,9 @@ public:
 
     virtual GraphicObject * findFocusObject(const ndk_helper::Vec2& point)
     {
-        for (auto const &gr : Graphics) if (gr->contains(point)) return gr->findFocusObject(point);
+        for (auto const &gr : Graphics)
+            if (gr->visible && gr->globalPosition.contains(point))
+                return gr->findFocusObject(point);
         return this;
     }
 

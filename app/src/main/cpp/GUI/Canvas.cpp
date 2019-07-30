@@ -4,23 +4,13 @@
 
 #include "Canvas.h"
 
-void Canvas::init()
-{
-    if ((width == -1) || (height == -1)) {
-        int32_t viewport[4];
-        glGetIntegerv(GL_VIEWPORT, viewport);
-        height = viewport[2];
-        width = viewport[3];
-    }
-}
-
 void Canvas::draw()
 {
     GLfloat g_vertex_buffer_data[] = {
-            x + height, y + width, 0.0f, 1.0f, 1.0f,
-            x + height, y, 0.0f, 1.0f, 0.0f,
-            x, y, 0.0f, 0.0f, 0.0f,
-            x, y + width, 0.0f, 0.0f, 1.0f,
+            globalPosition.x + globalPosition.height*globalPosition.ratio, globalPosition.y + globalPosition.height, globalPosition.z, 1.0f, 1.0f,
+            globalPosition.x + globalPosition.height*globalPosition.ratio, globalPosition.y, globalPosition.z, 1.0f, 0.0f,
+            globalPosition.x, globalPosition.y, globalPosition.z, 0.0f, 0.0f,
+            globalPosition.x, globalPosition.y + globalPosition.height, globalPosition.z, 0.0f, 1.0f,
     };
 
     GLuint indices[] = {

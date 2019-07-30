@@ -49,7 +49,7 @@ add_library(
         AudioEffects/AudioEffect.cpp
         AudioEffects/Delay.cpp
         AudioEffects/StereoDelay.cpp
-#        AudioEffects/Waveform.cpp
+        AudioEffects/Waveform.cpp
 #        AudioEffects/Spectrum.cpp
 
         AudioEngine/AudioEngine.cpp
@@ -58,11 +58,11 @@ add_library(
         GUI/GraphicObject.cpp
         GUI/GraphicEngine.cpp
         GUI/Button.cpp
-#        GUI/Encoder.cpp
+        GUI/Encoder.cpp
         GUI/Font.cpp
         GUI/Text.cpp
         GUI/Canvas.cpp
-#        GUI/Graph.cpp
+        GUI/Graph.cpp
 
 #        Instruments/ModularSynth/VCO.cpp
 #        Instruments/ModularSynth/Module.cpp

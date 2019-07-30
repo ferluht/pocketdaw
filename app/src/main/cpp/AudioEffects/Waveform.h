@@ -6,13 +6,10 @@
 #define PD_WAVEFORM_H
 
 #include "AudioEffect.h"
-
-#define BUFFER_SIZE 200
+#include <GUI/Graph.h>
 
 class Waveform : public AudioEffect{
 public:
-
-    float buffer[BUFFER_SIZE];
 
     int r = 1;
     float window = 3;
@@ -21,14 +18,20 @@ public:
 
     GLuint vertexbuffer;
 
-    Waveform(float n, float x, float y);
+    SimpleGraph * graph;
 
-    float apply(float sample) override ;
+    Waveform(float n, float x_, float y_);
 
-    void grender(float dTime) override ;
-    void dragBegin(const ndk_helper::Vec2& v) override ;
-    void dragHandler(const ndk_helper::Vec2& v) override ;
-    void dragEnd() override ;
+    void apply(float * lsample, float * rsample) override ;
+
+//    void pinchBegin(const ndk_helper::Vec2& v) override ;
+//    void pinchHandler(const ndk_helper::Vec2& v) override ;
+//    virtual void pinchEnd() {};
+
+//    void grender(float dTime) override ;
+//    void dragBegin(const ndk_helper::Vec2& v) override ;
+//    void dragHandler(const ndk_helper::Vec2& v) override ;
+//    void dragEnd() override ;
 };
 
 

@@ -9,15 +9,15 @@
 
 class Encoder : public Canvas{
 public:
-    float * parameter_;
 
-    float angle = 0;
+    std::function<void(float)> callback;
+
     float old_angle;
 
-    Encoder(const char * texture, float x, float y, float * parameter);
+    Encoder(float default_value_, float x_, float y_, float z_, float h_, const char * texture_, std::function<void(float)> callback_);
 
-    void dragHandler(ndk_helper::Vec2 v) override ;
-    void dragBegin(ndk_helper::Vec2 v, float xscale, float yscale) override ;
+    void dragHandler(const ndk_helper::Vec2& v) override ;
+    void dragBegin(const ndk_helper::Vec2& v) override ;
 };
 
 

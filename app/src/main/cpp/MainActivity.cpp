@@ -54,6 +54,9 @@ int32_t HandleInput(android_app *app, AInputEvent *event) {
 void HandleCmd(struct android_app *app, int32_t cmd) {
     auto eng = (GraphicEngine *) app->userData;
     switch (cmd) {
+//        case APP_CMD_CONFIG_CHANGED:
+//            eng->InitDisplay(app);
+//            break;
         case APP_CMD_SAVE_STATE:
             break;
         case APP_CMD_INIT_WINDOW:

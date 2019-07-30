@@ -5,14 +5,14 @@
 #include "Track.h"
 
 Track::Track():
-Canvas(0, 0, 500, 700, "Textures/effect_canvas.bmp")
+Canvas(0.1, 0.1, 0.7, 0.7, "Textures/track_canvas.bmp", false)
 {
     last_beat = 0;
-    MidiClip * mdc = createMetronomeMidi();
-    MidiClips.insert(MidiClips.begin(), mdc);
+//    MidiClip * mdc = createMetronomeMidi();
+//    MidiClips.insert(MidiClips.begin(), mdc);
 
-    Arpeggiator * arp = new Arpeggiator();
-    MidiEffects.push_back(arp);
+//    Arpeggiator * arp = new Arpeggiator();
+//    MidiEffects.push_back(arp);
 }
 
 void Track::render(double beat, float * lsample, float * rsample)
@@ -24,8 +24,8 @@ void Track::render(double beat, float * lsample, float * rsample)
 //    current_clip = nullptr;
 //    auto closest_clip = MidiClips.lower_bound(beat);
 //    if (closest_clip->second->end > beat) current_clip = closest_clip->second;
-    current_clip = MidiClips[0];
-    if (current_clip) current_clip->play(&MidiQueue, beat);
+//    current_clip = MidiClips[0];
+//    if (current_clip) current_clip->play(&MidiQueue, beat);
 
     for (auto const& midiEffect : MidiEffects) midiEffect->apply(&MidiQueue, beat);
 
@@ -59,23 +59,17 @@ void Track::toggleRec()
 void Track::initInstrument(InstrumentBase *instr)
 {
     TrackInstrument = instr;
-//    instr->position.x = position.x;
-//    instr->position.y = position.y;
-//    instr->position.height = position.height * 0.2f;
-//    instr->position.width = position.width;
+    instr->place(0.01, 0.05, 0.9, 0.3);
     attach(instr);
 }
 
 void Track::addAudioEffect(AudioEffect *effect)
 {
-//    effect->position.x = position.x;
-//    effect->position.y = TrackInstrument->position.y + TrackInstrument->position.height + 0.01f;
-//    if (!AudioEffects.empty()) {
-//        effect->position.x = AudioEffects.back()->position.x;
-//        effect->position.y = AudioEffects.back()->position.y + AudioEffects.back()->position.height + 0.01f;
-//    }
-//    effect->position.height = position.height * 0.1f;
-//    effect->position.width = position.width;
+    if (!AudioEffects.empty()) {
+        effect->place(AudioEffects.back()->x + AudioEffects.back()->width + 0.01f, AudioEffects.back()->y, 0.9, 0.2);
+    } else {
+        effect->place(TrackInstrument->x + TrackInstrument->width + 0.01f, TrackInstrument->y, 0.9, 0.2);
+    }
     AudioEffects.push_back(effect);
     attach(effect);
 }

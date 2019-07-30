@@ -29,6 +29,8 @@ public:
     std::vector<Track*> Tracks;
     std::vector<AudioEffect*> AudioEffects;
 
+    unsigned int focusTrack;
+
     Master();
 
     void render(float *audioData, int32_t numFrames);
