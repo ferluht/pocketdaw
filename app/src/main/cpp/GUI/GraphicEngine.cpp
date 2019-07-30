@@ -4,6 +4,10 @@
 
 #include "GraphicEngine.h"
 
+float GraphicEngine::screen_width;
+float GraphicEngine::screen_height;
+float GraphicEngine::screen_ratio;
+
 ////-------------------------------------------------------------------------
 //// Ctor
 ////-------------------------------------------------------------------------
@@ -25,6 +29,7 @@ void GraphicEngine::UnloadResources() { }
  * Initialize an EGL context for the current display.
  */
 int GraphicEngine::InitDisplay(android_app *app) {
+    gl_context_ = ndk_helper::GLContext::GetInstance();
     if (!initialized_resources_) {
         gl_context_->Init(app_->window);
         initialized_resources_ = true;
@@ -46,9 +51,9 @@ int GraphicEngine::InitDisplay(android_app *app) {
         }
     }
 
-    master->init_();
-
     SetupView();
+
+    master->init_();
 
     ShowUI();
 
@@ -71,6 +76,10 @@ void GraphicEngine::SetupView()
     int32_t viewport[4];
     glGetIntegerv(GL_VIEWPORT, viewport);
     mat_projection_ = ndk_helper::Mat4::Ortho2D(0, 0, viewport[2], -viewport[3]);
+
+    screen_width = viewport[2];
+    screen_height = viewport[3];
+    screen_ratio = screen_width/screen_height;
 
     const float CAM_X = 0.f;
     const float CAM_Y = 0.f;

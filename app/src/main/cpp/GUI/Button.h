@@ -13,9 +13,11 @@ public:
     bool state;
     std::function<void(bool)> callback;
 
-    Button(float x, float y, float h, float w, const char * texture, std::function<void(bool)> callback_);
+    Button(wchar_t * label, float x, float y, float h, float w, const char * texture, std::function<void(bool)> callback_);
 
     void tapEnd() override ;
+
+    GraphicObject * findFocusObject(const ndk_helper::Vec2& point) override {return this;}
 };
 
 

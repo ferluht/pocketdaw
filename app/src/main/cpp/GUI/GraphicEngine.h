@@ -41,6 +41,10 @@ public:
     bool initialized_resources_;
     bool has_focus_;
 
+    static float screen_width;
+    static float screen_height;
+    static float screen_ratio;
+
     ndk_helper::Mat4 mat_projection_;
     ndk_helper::Mat4 mat_view_;
 

@@ -1,10 +1,10 @@
-attribute highp vec3    myVertex;
+#version 320 es
 
-uniform highp mat4      uPMatrix;
+layout (location = 0) in vec3 position;
 
+uniform mat4 uPMatrix;
 
-void main(void)
+void main()
 {
-    highp vec4 p = vec4(myVertex,1);
-    gl_Position = uPMatrix * p;
+    gl_Position = uPMatrix * vec4(position, 1.0f);
 }

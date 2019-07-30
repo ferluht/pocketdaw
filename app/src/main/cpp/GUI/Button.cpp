@@ -5,11 +5,11 @@
 #include "Button.h"
 #include "Text.h"
 
-Button::Button(float x, float y, float h, float w, const char * texture, std::function<void(bool)> callback_)
-: Canvas(x, y, h, w, texture){
+Button::Button(wchar_t * label, float x, float y, float h, float w, const char * texture, std::function<void(bool)> callback_)
+: Canvas(x, y, h, w, texture, true){
     callback = callback_;
     state = false;
-    attach(new Text("Fonts/Roboto-Regular.ttf", L"button", 200, 200));
+    attach(new Text("Fonts/Roboto-Regular.ttf", label, 0.05, 0.05, 1, 0.9));
 }
 
 void Button::tapEnd()

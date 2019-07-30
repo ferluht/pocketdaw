@@ -14,11 +14,10 @@ class Text : public Canvas{
 public:
 
     Font * f;
-    float ratio;
     const char * font_file;
     wchar_t * text_;
 
-    Text(const char * font, wchar_t * text, float x, float y);
+    Text(const char * font, wchar_t * text, float x_, float y_, float z_, float h_);
 
     void init() override;
 };

@@ -193,5 +193,5 @@ float Font::init ( wchar_t *es, int fontSize, int align, int vert, int space, ui
     /* и удалить текстуру, она уже загружена в буфер и image_data больше не требуется. */
     delete[] image_data;
 
-    return (float)height/(float)width;
+    return (float)width/(float)height;
 }

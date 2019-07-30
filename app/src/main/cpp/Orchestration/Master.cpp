@@ -5,19 +5,37 @@
 #include "Master.h"
 #include <Instruments/Metronome.h>
 #include <GUI/Button.h>
+#include <AudioEffects/Waveform.h>
 #include "AudioEffects/StereoDelay.h"
 
 Master::Master() :
-Canvas(0, 0, -1, -1, "Textures/container.bmp"),
+Canvas(0, 0, 1, 1, "Textures/background.bmp", false),
 link(DEFAULT_BPM)
 {
     link.enable(true);
+
+    focusTrack = 0;
+
     auto * cue = new Track;
     auto metr = new Metronome;
     cue->initInstrument(metr);
+    cue->setVisible(true);
+
+    auto * cue2 = new Track;
+    auto metr2 = new Metronome;
+    cue2->initInstrument(metr2);
+    cue2->setVisible(false);
 
     cue->addAudioEffect(new StereoDelay(0.7));
-    attach(new Button(600, 700, 100, 100, "Textures/encoder.bmp", [cue](bool state){cue->addAudioEffect(new Delay(0.2, 0.09));}));
+
+
+    addTrack(cue);
+    addTrack(cue2);
+
+//    auto graph = new SimpleGraph(100, 0.05, 0.05, 3, 0.9, 0.9);
+//    attach(graph);
+
+    //    attach(new Button(0.5, 0.5, 0.1, 0.1, "Textures/encoder.bmp", [cue](bool state){cue->addAudioEffect(new Delay(0.2, 0.09));}));
 //    cue->addAudioEffect(new Delay(0.2, 0.09));
 //    cue->addAudioEffect(new Delay(0.2, 0.09));
 //    cue->addAudioEffect(new Delay(0.2, 0.09));
@@ -28,7 +46,7 @@ link(DEFAULT_BPM)
 //    cue->addAudioEffect(new Delay(0.2, 0.09));
 //    cue->addAudioEffect(new Delay(8000, 0.3));
 //    cue->addAudioEffect(new Waveform(0.01, 0.5, 0.5));
-    addTrack(cue);
+
 
 //    attach(new Button(0,0,0,0, "Textures/container.bmp", []{}));
 //    addChildObject(new Button("Textures/container.bmp", 0.9, 0.7));
@@ -38,6 +56,8 @@ link(DEFAULT_BPM)
 //    addAudioEffect(new Delay(17000, 0.2));
 //    addAudioEffect(new Delay(10000, 0.3));
 //    addAudioEffect(new Delay(8000, 0.6));
+
+    addAudioEffect(new Waveform(200, 0, 0));
 
     size_denominator = 4;
     stopPressed_ = 0;
@@ -66,7 +86,7 @@ void Master::render(float *audioData, int32_t numFrames) {
             float l = 0, r = 0;
             track->render(beat, &l, &r);
             audioData[2*i] += l;
-            audioData[2*i + 1] = r;
+            audioData[2*i + 1] += r;
             beat += increment;
         }
         for (auto const& effect : AudioEffects) {
@@ -104,15 +124,7 @@ void Master::stop()
 //
 void Master::addTrack(Track *track)
 {
-//    track->relativePosition.x = 0;
-//    track->relativePosition.y = 0;
-//    if (!Tracks.empty()) {
-//        track->relativePosition.x =
-//                Tracks.back()->relativePosition.x + Tracks.back()->relativePosition.width;
-//        track->relativePosition.y = Tracks.back()->relativePosition.y;
-//    }
-//    track->relativePosition.width = 0.3;
-//    track->relativePosition.height = 1;
+    track->place(0,0.5,0.5,1);
     Tracks.push_back(track);
     attach(track);
 }
@@ -124,7 +136,9 @@ void Master::delTrack(int pos)
 
 void Master::addAudioEffect(AudioEffect *effect)
 {
+    effect->place(0,0,0.5,1);
     AudioEffects.push_back(effect);
+    attach(effect);
 }
 
 void Master::delAudioEffect(int pos)
@@ -145,6 +159,23 @@ void Master::receiveMIDI(MidiData md)
     phase = state.phaseAtTime(time, size_denominator);
     beat = state.beatAtTime(time, size_denominator);
 
+    if (md.status == 0xb0){
+        switch (md.data1){
+            case 0x15:
+                Tracks[focusTrack]->setVisible(false);
+                if (focusTrack < Tracks.size() - 1) focusTrack ++;
+                Tracks[focusTrack]->setVisible(true);
+                break;
+            case 0x16:
+                Tracks[focusTrack]->setVisible(false);
+                if (focusTrack > 0) focusTrack --;
+                Tracks[focusTrack]->setVisible(true);
+                break;
+            default:
+                break;
+        }
+    }
+
     md.beat = beat;
-    Tracks[md.status & 0x03 - 1]->MidiQueue.push(md);
+    Tracks[focusTrack]->MidiQueue.push(md);
 }

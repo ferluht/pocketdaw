@@ -13,7 +13,7 @@ Delay::Delay(float delayTime_, float feedback_) : AudioEffect(300,500,200,200)
 //    attach(new Text("Fonts/Roboto-Regular.ttf", L"delay time\n", -0.2, 0.1));
 //    attach(new Encoder("Textures/encoder.bmp", 0.1f, 0.2f, &delayTime));
 
-    attach(new Button(400, 600, 100, 100, "Textures/encoder.bmp", [this](bool state){this->isOn = state;}));
+    attach(new Button(L"ON/OFF", 400, 600, 100, 100, "Textures/button.bmp", [this](bool state){this->isOn = state;}));
 
     for (int i = 0; i < 50000; i ++){
         buffer[i] = 0;

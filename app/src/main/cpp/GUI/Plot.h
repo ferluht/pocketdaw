@@ -6,8 +6,9 @@
 #define PD_PLOT_H
 
 #include "Graph.h"
+#include "Canvas.h"
 
-class Plot {
+class Plot : public Canvas{
 
 };
 

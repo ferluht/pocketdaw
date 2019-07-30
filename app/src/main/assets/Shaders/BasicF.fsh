@@ -1,4 +1,10 @@
+#version 320 es
+
+out mediump vec4 color;
+
+uniform mediump mat2 angle;
+
 void main()
 {
-    gl_FragColor = vec4( 0.6, 0, 0, 1 );
+    color = vec4(1, 0, 0, 1);
 }

@@ -19,17 +19,12 @@ private:
 
 public:
 
-    SimpleGraph(unsigned int points, float x, float y, float h, float w)
-        : GraphicObject("BasicV.vsh", "BasicF.fsh")
+    SimpleGraph(unsigned int points, float x_, float y_, float z_, float h_, float w_)
+        : GraphicObject(x_, y_, z_, h_, w_, 0, nullptr, "Shaders/BasicV.vsh", "Shaders/BasicF.fsh", false)
     {
         this->buffer = new float[points];
-        this->g_vertex_buffer_data = new GLfloat[points];
+        this->g_vertex_buffer_data = new GLfloat[points*3];
         this->buffer_size = points;
-        this->x = x;
-        this->y = y;
-        this->height = h;
-        this->width = w;
-        this->angle = 0;
         this->r = 0;
     }
 
@@ -38,6 +33,7 @@ public:
         delete g_vertex_buffer_data;
     }
 
+    void update(float sample);
     void draw() override ;
     void grender(float dTime) override ;
 };

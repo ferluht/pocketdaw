@@ -40,6 +40,10 @@ import java.io.IOException;
 
 public class MainActivity extends NativeActivity {
 
+    static {
+        System.loadLibrary("native-lib");
+    }
+
     private native void midiEvent(byte cmd, byte val1, byte val2);
 
 //    private native void startEngine();
@@ -103,7 +107,7 @@ public class MainActivity extends NativeActivity {
     class MyReceiver extends MidiReceiver {
         public void onSend(byte[] data, int offset,
                            int count, long timestamp) throws IOException {
-            //midiEvent(data[offset], data[offset + 1], data[offset + 2]);
+            midiEvent(data[offset], data[offset + 1], data[offset + 2]);
             // parse MIDI or whatever
             //Toast.makeText(getApplicationContext(), "received midi", Toast.LENGTH_SHORT).show();
         }

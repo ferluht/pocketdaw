@@ -21,7 +21,8 @@ class Metronome : public Instrument<MetronomeState>{
 
 public:
 
-    float A = 0.1, D = 0.5, S = 0.5, R = 0.3;
+    float A = 0.1, D = 0.2, S = 0.7, R = 0.1;
+    float cnt = 0.001;
 
     Metronome();
 
