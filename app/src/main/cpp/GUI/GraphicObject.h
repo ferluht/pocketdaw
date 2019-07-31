@@ -17,6 +17,7 @@
 #include <android_native_app_glue.h>
 #include <android/native_window_jni.h>
 #include <android/asset_manager.h>
+#include <Orchestration/Midi.h>
 
 #include "GUI/Shader.h"
 #include "NDKHelper.h"
@@ -115,11 +116,15 @@ public:
 
     GraphicObject * parent;
 
+    GraphicObject * focusObject;
+
     std::list<GraphicObject*> Graphics;
     BBox new_position;
 
     bool visible;
     bool saveRatio;
+
+    bool initialized;
 
     GraphicObject(float x_, float y_, float z_, float height_, float width_, float angle_,
                   const char * texture, const char * vshader, const char * fshader, bool saveRatio_);
@@ -137,6 +142,8 @@ public:
     void setVisible(bool visible_);
 
     void unload();
+
+    virtual void receiveMIDI(MidiData md) {};
 
     // Hierarchy
 

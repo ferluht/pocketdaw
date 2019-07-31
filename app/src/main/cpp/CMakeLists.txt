@@ -64,6 +64,7 @@ add_library(
         GUI/Text.cpp
         GUI/Canvas.cpp
         GUI/Graph.cpp
+        GUI/Menu.cpp
 
 #        Instruments/ModularSynth/VCO.cpp
 #        Instruments/ModularSynth/Module.cpp

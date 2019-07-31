@@ -12,6 +12,8 @@ GraphicObject::GraphicObject(float x_, float y_, float z_, float height_, float 
     this->texture_name = texture;
     this->visible = true;
     this->saveRatio = saveRatio_;
+    this->focusObject = nullptr;
+    this->initialized = false;
 }
 
 GraphicObject::~GraphicObject() { unload(); }
@@ -22,9 +24,15 @@ void GraphicObject::init_() {
 
     init();
 
+    glGenBuffers(1, &vbo_);
+    glGenVertexArrays(1, &vao_);
+    glGenBuffers(1, &ibo_);
+
     for (auto const &gr : Graphics) {
         gr->init_();
     }
+
+    initialized = true;
 }
 
 void GraphicObject::draw_(){
@@ -60,6 +68,9 @@ void GraphicObject::draw_(){
 
 void GraphicObject::grender_(float dTime) {
 
+    if (!initialized) init_();
+    if (focusObject && !focusObject->initialized) focusObject->init_();
+
     if (visible) {
 
         if (changed) {
@@ -78,23 +89,25 @@ void GraphicObject::grender_(float dTime) {
 
         glUniformMatrix2fv(shader.param_texture_angle_, 1, GL_FALSE, rot);
 
-        if (texture) glBindTexture(GL_TEXTURE_2D, texture);
+        glUniform1f(shader.param_z_, globalPosition.z);
 
-        glBindVertexArray(vao_);
+        if (texture) glBindTexture(GL_TEXTURE_2D, texture);
 
         grender(dTime);
 
-        glBindVertexArray(0);
+        for (auto const &gr : Graphics) {
+            gr->grender_(dTime);
+        }
     }
 
-    for (auto const &gr : Graphics) {
-        gr->grender_(dTime);
+    if (focusObject) {
+        focusObject->grender_(dTime);
     }
 }
 
 void GraphicObject::setVisible(bool visible_) {
     visible = visible_;
-
+    changed = true;
     for (auto const &gr : Graphics) {
         gr->setVisible(visible_);
     }

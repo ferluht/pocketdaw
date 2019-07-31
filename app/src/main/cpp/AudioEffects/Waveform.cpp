@@ -17,7 +17,7 @@ Waveform::Waveform(float n, float x_, float y_) : AudioEffect(x_,y_,0,0){
                            this->window = (state/2 + 0.5f) * 200 + 1;
                        }));
 
-    graph = new SimpleGraph(300, 0.05, 0.5, 3, 0.9, 0.9);
+    graph = new TimeGraph(300, 0.05, 0.5, 3, 0.9, 0.9);
     attach(graph);
 }
 

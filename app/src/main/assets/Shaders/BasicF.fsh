@@ -1,10 +1,11 @@
 #version 320 es
 
-out mediump vec4 color;
+out mediump vec4 outcolor;
 
 uniform mediump mat2 angle;
+uniform mediump vec4 color;
 
 void main()
 {
-    color = vec4(1, 0, 0, 1);
+    outcolor = color;
 }
