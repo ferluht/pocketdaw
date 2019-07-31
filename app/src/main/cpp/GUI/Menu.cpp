@@ -25,7 +25,7 @@ void Menu::receiveMIDI(MidiData md)
     if (md.status == 0xb0){
         switch (md.data1){
             case 0x01:
-                focus = md.data2/10;
+                focus = (float)md.data2/127.f*((float)items.size()-1);
                 cursor->place(0.05, 0.05 + focus * 0.08, 0.07, 0.9);
                 break;
             case 0x017:

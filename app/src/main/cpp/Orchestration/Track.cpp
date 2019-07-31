@@ -4,6 +4,8 @@
 
 #include <AudioEffects/Waveform.h>
 #include <GUI/Menu.h>
+#include <AudioEffects/StereoDelay.h>
+#include <AudioEffects/Lissajous.h>
 #include "Track.h"
 
 Track::Track():
@@ -13,10 +15,10 @@ Canvas(0.1, 0.1, 0.7, 0.7, "Textures/track_canvas.bmp", false)
 
 
     std::vector<std::pair<wchar_t *, std::function<void(void)>>> items;
-    items.push_back({L"add delay", [this](){addAudioEffect(new Waveform(200, 0, 0));}});
-    items.push_back({L"add stereo delay", [this](){addAudioEffect(new Waveform(200, 0, 0));}});
+    items.push_back({L"add delay", [this](){addAudioEffect(new Delay(0.2, 0.09));}});
+    items.push_back({L"add stereo delay", [this](){addAudioEffect(new StereoDelay(0.7));}});
     items.push_back({L"add waveform", [this](){addAudioEffect(new Waveform(200, 0, 0));}});
-    items.push_back({L"add lissajous", [this](){addAudioEffect(new Waveform(200, 0, 0));}});
+    items.push_back({L"add lissajous", [this](){addAudioEffect(new Lissajous(200, 0, 0));}});
     trackMenu = new Menu(items);
     trackMenu->place(0.05, 0.05, 0.9, 0.9);
     trackMenu->setVisible(false);
