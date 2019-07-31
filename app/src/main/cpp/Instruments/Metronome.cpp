@@ -55,7 +55,7 @@ void Metronome::render(MetronomeState * state, double beat, float * lsample, flo
     }
     state->phase += state->phase_increment;
     state->phase2 += state->phase_increment*0.4;
-    //state->phase_increment += sin(state->phase) * 0.001 + sin(state->phase2) * 0.0005;
+    state->phase_increment += sin(state->phase) * 0.001 + sin(state->phase2) * 0.0005;
 
     *lsample = sample;
     *rsample = sample;

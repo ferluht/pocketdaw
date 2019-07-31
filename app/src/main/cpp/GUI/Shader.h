@@ -20,6 +20,8 @@ public:
     GLuint program_;
     GLint param_view_;
     GLint param_texture_angle_;
+    GLint param_z_;
+    GLint param_color_;
 
     Shader();
 

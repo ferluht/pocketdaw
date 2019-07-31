@@ -4,80 +4,54 @@
 
 #include "Graph.h"
 
-void SimpleGraph::draw() {
+void BaseGraph::draw() {
 
-    for (int i = 0; i < buffer_size; i++) {
-        g_vertex_buffer_data[i*3] = globalPosition.x + globalPosition.width/(float)buffer_size*i;
-        g_vertex_buffer_data[i*3+1] = globalPosition.y + buffer[r]*globalPosition.height;
-        g_vertex_buffer_data[i*3+2] = globalPosition.z;
-        r++;
-        if(r>=buffer_size) r = 0;
-    };
-
-    glGenBuffers(1, &vbo_);
-    glGenVertexArrays(1, &vao_);
+    fillGLBuffer();
 
     glBindVertexArray(vao_);
 
     // The following commands will talk about our 'vertexbuffer' buffer
     glBindBuffer(GL_ARRAY_BUFFER, vbo_);
     // Give our vertices to OpenGL.
-    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 3 * buffer_size, g_vertex_buffer_data, GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 2 * buffer_size, g_vertex_buffer_data, GL_DYNAMIC_DRAW);
 
     // 1st attribute buffer : vertices
     glBindBuffer(GL_ARRAY_BUFFER, vbo_);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*) nullptr);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (void*) nullptr);
     glEnableVertexAttribArray(0);
 
     glBindVertexArray(0);
 }
 
-void SimpleGraph::grender(float dTime) {
+void BaseGraph::grender(float dTime) {
+    glUniform4fv(shader.param_color_, 1, color);
+    glBindVertexArray(vao_);
     glDrawArrays(GL_LINE_STRIP, 0, buffer_size);
+    glBindVertexArray(0);
 }
 
-void SimpleGraph::update(float sample) {
+void TimeGraph::fillGLBuffer() {
+    for (int i = 0; i < buffer_size; i++) {
+        g_vertex_buffer_data[i*2] = globalPosition.x + i*globalPosition.width/(float)buffer_size;
+        g_vertex_buffer_data[i*2+1] = globalPosition.y + buffer[r]*globalPosition.height;
+        r++;
+        if(r>=buffer_size) r = 0;
+    };
+}
+
+void TimeGraph::update(float sample) {
     changed = true;
     buffer[r] = sample;
     r = (r + 1)%buffer_size;
 }
 
-void XYGraph::draw() {
-
+void XYGraph::fillGLBuffer() {
     for (int i = 0; i < buffer_size; i++) {
-        g_vertex_buffer_data[i*4] = globalPosition.x + buffer[2*r + 1]*globalPosition.width;
-        g_vertex_buffer_data[i*4+1] = globalPosition.y + buffer[2*r]*globalPosition.height;
-        g_vertex_buffer_data[i*4+2] = globalPosition.z;
-        g_vertex_buffer_data[i*4+3] = (float)pow(1.f - (float)i / (float)buffer_size, 2);
+        g_vertex_buffer_data[i*2] = globalPosition.x + buffer[2*r + 1]*globalPosition.width;
+        g_vertex_buffer_data[i*2+1] = globalPosition.y + buffer[2*r]*globalPosition.height;
         r++;
         if(r>=buffer_size) r = 0;
     };
-
-    glGenBuffers(1, &vbo_);
-    glGenVertexArrays(1, &vao_);
-
-    glBindVertexArray(vao_);
-
-    // The following commands will talk about our 'vertexbuffer' buffer
-    glBindBuffer(GL_ARRAY_BUFFER, vbo_);
-    // Give our vertices to OpenGL.
-    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 4 * buffer_size, g_vertex_buffer_data, GL_DYNAMIC_DRAW);
-
-    // 1st attribute buffer : vertices
-    glBindBuffer(GL_ARRAY_BUFFER, vbo_);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (void*) nullptr);
-    glEnableVertexAttribArray(0);
-
-    // 2nd attribute buffer : brightness
-    glBindBuffer(GL_ARRAY_BUFFER, vbo_);
-    glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid *) (3 * sizeof(GLfloat)));
-    glEnableVertexAttribArray(1);
-
-    glBindVertexArray(0);
-}
-
-void XYGraph::grender(float dTime) {
-    glDrawArrays(GL_LINE_STRIP, 0, buffer_size);
 }
 
 void XYGraph::update(float x, float y) {

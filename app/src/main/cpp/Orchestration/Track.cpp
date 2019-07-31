@@ -2,12 +2,26 @@
 // Created by Admin on 12.06.2019.
 //
 
+#include <AudioEffects/Waveform.h>
+#include <GUI/Menu.h>
 #include "Track.h"
 
 Track::Track():
 Canvas(0.1, 0.1, 0.7, 0.7, "Textures/track_canvas.bmp", false)
 {
     last_beat = 0;
+
+
+    std::vector<std::pair<wchar_t *, std::function<void(void)>>> items;
+    items.push_back({L"add delay", [this](){addAudioEffect(new Waveform(200, 0, 0));}});
+    items.push_back({L"add stereo delay", [this](){addAudioEffect(new Waveform(200, 0, 0));}});
+    items.push_back({L"add waveform", [this](){addAudioEffect(new Waveform(200, 0, 0));}});
+    items.push_back({L"add lissajous", [this](){addAudioEffect(new Waveform(200, 0, 0));}});
+    trackMenu = new Menu(items);
+    trackMenu->place(0.05, 0.05, 0.9, 0.9);
+    trackMenu->setVisible(false);
+    trackMenu->attachTo(this);
+
 //    MidiClip * mdc = createMetronomeMidi();
 //    MidiClips.insert(MidiClips.begin(), mdc);
 
@@ -77,6 +91,32 @@ void Track::addAudioEffect(AudioEffect *effect)
 inline bool Track::onbeat(double beat, double midi_beat)
 {
     return ((beat >= midi_beat) && (last_beat < beat));
+}
+
+void Track::receiveMIDI(MidiData md)
+{
+    if (focusObject) {
+        focusObject->receiveMIDI(md);
+    }
+
+    if (md.status == 0xb0){
+        switch (md.data1){
+            case 0x13:
+                for (auto const& gr : Graphics) gr->setVisible(false);
+                focusObject = trackMenu;
+                trackMenu->setVisible(true);
+                break;
+            case 0x14:
+                for (auto const& gr : Graphics) gr->setVisible(true);
+                focusObject = nullptr;
+                trackMenu->setVisible(false);
+                break;
+            default:
+                break;
+        }
+    }
+
+    MidiQueue.push(md);
 }
 
 void Track::dragHandler(const ndk_helper::Vec2& v) {

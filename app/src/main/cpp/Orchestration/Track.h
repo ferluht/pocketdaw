@@ -36,6 +36,8 @@ public:
     InstrumentBase* TrackInstrument;
     std::vector<AudioEffect*> AudioEffects;
 
+    GraphicObject * trackMenu;
+
     Track();
 
     void render(double beat, float * lsample, float * rsample);
@@ -45,6 +47,8 @@ public:
     void addAudioEffect(AudioEffect* effect);
 
     void initInstrument(InstrumentBase* instr);
+
+    void receiveMIDI(MidiData md);
 
     void dragHandler(const ndk_helper::Vec2& v) override ;
     void dragBegin(const ndk_helper::Vec2& v) override ;

@@ -7,6 +7,7 @@
 #include <GUI/Button.h>
 #include <AudioEffects/Waveform.h>
 #include <AudioEffects/Lissajous.h>
+#include <GUI/Menu.h>
 #include "AudioEffects/StereoDelay.h"
 
 Master::Master() :
@@ -28,7 +29,6 @@ link(DEFAULT_BPM)
     cue2->setVisible(false);
 
     cue->addAudioEffect(new StereoDelay(0.7));
-
 
     addTrack(cue);
     addTrack(cue2);
@@ -172,17 +172,17 @@ void Master::receiveMIDI(MidiData md)
                 Tracks[focusTrack]->setVisible(false);
                 if (focusTrack < Tracks.size() - 1) focusTrack ++;
                 Tracks[focusTrack]->setVisible(true);
-                break;
+                return;
             case 0x16:
                 Tracks[focusTrack]->setVisible(false);
                 if (focusTrack > 0) focusTrack --;
                 Tracks[focusTrack]->setVisible(true);
-                break;
+                return;
             default:
                 break;
         }
     }
 
     md.beat = beat;
-    Tracks[focusTrack]->MidiQueue.push(md);
+    Tracks[focusTrack]->receiveMIDI(md);
 }

@@ -16,7 +16,7 @@ public:
     float accumulator = 0;
     int ai = 0;
 
-    SimpleGraph * graph;
+    TimeGraph * graph;
 
     Waveform(float n, float x_, float y_);
 

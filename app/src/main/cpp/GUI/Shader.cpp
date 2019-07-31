@@ -67,6 +67,8 @@ Shader Shader::CreateShaderProgram(const char *vsh, const char *fsh) {
     sh.program_ = program;
     sh.param_view_ = glGetUniformLocation(program, "uPMatrix");
     sh.param_texture_angle_ = glGetUniformLocation(program, "angle");
+    sh.param_z_ = glGetUniformLocation(program, "z");
+    sh.param_color_ = glGetUniformLocation(program, "color");
 
     // Release vertex and fragment shaders
     if (vert_shader) glDeleteShader(vert_shader);

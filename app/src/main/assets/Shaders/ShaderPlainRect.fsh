@@ -2,15 +2,16 @@
 
 in mediump vec2 TexCoord;
 
-out mediump vec4 color;
+out mediump vec4 outcolor;
 
+uniform mediump vec4 color;
 uniform mediump mat2 angle;
 uniform sampler2D ourTexture;
 
 void main()
 {
     mediump vec2 new_coord = angle*(TexCoord - vec2(0.5, 0.5));
-    color = texture(ourTexture, new_coord + vec2(0.5, 0.5));
+    outcolor = texture(ourTexture, new_coord + vec2(0.5, 0.5));
 }
 
 //
