@@ -4,7 +4,7 @@
 
 #include "Canvas.h"
 
-void Canvas::draw()
+void GCanvas::GDraw()
 {
     GLfloat g_vertex_buffer_data[] = {
             globalPosition.x + globalPosition.height*globalPosition.ratio, globalPosition.y + globalPosition.height, 1.0f, 1.0f,
@@ -36,7 +36,7 @@ void Canvas::draw()
     glBindVertexArray(0);
 }
 
-void Canvas::grender(float dTime) {
+void GCanvas::GRender(float dTime) {
     glBindVertexArray(vao_);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);

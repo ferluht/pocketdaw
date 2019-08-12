@@ -20,13 +20,13 @@ public:
 
     std::default_random_engine generator;
 
-    std::map<unsigned char, MidiData> notes;
+    std::map<unsigned char, MData> notes;
     unsigned char last_played_note;
 
     Arpeggiator();
     Arpeggiator(double scale_);
 
-    void apply(std::priority_queue<MidiData> * midiQueue, double beat) override ;
+    void apply(std::priority_queue<MData> * midiQueue, double beat) override ;
 };
 
 

@@ -46,41 +46,43 @@ add_library(
 
         MainActivity.cpp
 
-        AudioEffects/AudioEffect.cpp
-        AudioEffects/Delay.cpp
-        AudioEffects/StereoDelay.cpp
-        AudioEffects/Waveform.cpp
-        AudioEffects/Lissajous.cpp
+#        AudioEffects/AudioEffect.cpp
+#        AudioEffects/Delay.cpp
+#        AudioEffects/StereoDelay.cpp
+#        AudioEffects/Waveform.cpp
+#        AudioEffects/Lissajous.cpp
 #        AudioEffects/Spectrum.cpp
 
-        AudioEngine/AudioEngine.cpp
+        Engine/A.cpp
+        Engine/G.cpp
+        Engine/M.cpp
 
-        GUI/Shader.cpp
-        GUI/GraphicObject.cpp
-        GUI/GraphicEngine.cpp
-        GUI/Button.cpp
+#        GUI/Button.cpp
         GUI/Encoder.cpp
-        GUI/Font.cpp
-        GUI/Text.cpp
+#        GUI/Font.cpp
+#        GUI/Text.cpp
         GUI/Canvas.cpp
-        GUI/Graph.cpp
-        GUI/Menu.cpp
+#        GUI/Graph.cpp
+#        GUI/Menu.cpp
 
 #        Instruments/ModularSynth/VCO.cpp
 #        Instruments/ModularSynth/Module.cpp
 #        Instruments/ModularSynth/Modular.cpp
         Instruments/Instrument.cpp
-        Instruments/Metronome.cpp
-        Instruments/ADSR.cpp
+#        Instruments/Metronome.cpp
+#        Instruments/ADSR.cpp
+        Instruments/Sine.cpp
 
-        Link/LinkManager.cpp
-        Link/android-ifaddrs/ifaddrs.cpp
+#        Link/LinkManager.cpp
+#        Link/android-ifaddrs/ifaddrs.cpp
 
-        MidiEffects/Arpeggiator.cpp
+        Synth.cpp
 
-        Orchestration/Master.cpp
+#        MidiEffects/Arpeggiator.cpp
+
+#        Orchestration/Master.cpp
         Orchestration/Track.cpp
-        Orchestration/Midi.cpp
+#        Orchestration/Midi.cpp
         )
 
 target_compile_definitions(native-lib PRIVATE ANDROID=1 LINK_PLATFORM_LINUX=1 PD=1 ABL_LINK_OFFSET_MS=23)

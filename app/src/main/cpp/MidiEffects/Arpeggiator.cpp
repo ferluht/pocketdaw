@@ -13,10 +13,10 @@ Arpeggiator::Arpeggiator(double scale_)
     cycles = 0;
 }
 
-void Arpeggiator::apply(std::priority_queue<MidiData> *midiQueue, double beat)
+void Arpeggiator::apply(std::priority_queue<MData> *midiQueue, double beat)
 {
     while (!midiQueue->empty()){
-        MidiData md = midiQueue->top();
+        MData md = midiQueue->top();
         if ((md.status & 0xF0) == NOTEON_HEADER) {
             if (md.data2) notes.insert({md.data1, md});
             else notes.erase(md.data1);
@@ -29,7 +29,7 @@ void Arpeggiator::apply(std::priority_queue<MidiData> *midiQueue, double beat)
     if (!notes.empty() && (int)(beat / scale) > cycles){
         auto i = notes.upper_bound(last_played_note);
         if (i == notes.end()) i = notes.begin();
-        MidiData md = i->second;
+        MData md = i->second;
         md.beat = beat;
         if (dice_roll <= 2) {
             midiQueue->push(md);
