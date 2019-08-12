@@ -1,8 +1,8 @@
-//--------------------------------------------------------------------------------
-// Include files
-//--------------------------------------------------------------------------------
+#include <jni.h>
+#include <cerrno>
 
-#include "MainActivity.h"
+#include "Engine/Engine.h"
+#include "Synth.h"
 
 constexpr auto HELPER_CLASS_NAME="com/pdaw/pd/helper/NDKHelper";  // Class name of helper function
 
@@ -10,7 +10,7 @@ constexpr auto HELPER_CLASS_NAME="com/pdaw/pd/helper/NDKHelper";  // Class name 
  * Process the next input event.
  */
 int32_t HandleInput(android_app *app, AInputEvent *event) {
-    auto eng = (GraphicEngine *) app->userData;
+    auto eng = (GEngine *) app->userData;
     if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION) {
         ndk_helper::GESTURE_STATE tapState = eng->tap_detector_.Detect(event);
         ndk_helper::GESTURE_STATE doubleTapState = eng->doubletap_detector_.Detect(event);
@@ -22,14 +22,14 @@ int32_t HandleInput(android_app *app, AInputEvent *event) {
             // Otherwise, start dragging
             ndk_helper::Vec2 v;
             eng->drag_detector_.GetPointer(v);
-            eng->focus_object = eng->master->findFocusObject(v);
-            eng->focus_object->dragBegin(v);
+            eng->focus_object = eng->root->GFindFocusObject(v);
+            eng->focus_object->GDragBegin(v);
         } else if (dragState & ndk_helper::GESTURE_STATE_MOVE) {
             ndk_helper::Vec2 v;
             eng->drag_detector_.GetPointer(v);
-            eng->focus_object->dragHandler(v);
+            eng->focus_object->GDragHandler(v);
         } else if (dragState & ndk_helper::GESTURE_STATE_END) {
-            eng->focus_object->dragEnd();
+            eng->focus_object->GDragEnd();
             eng->focus_object = nullptr;
         }
 
@@ -38,8 +38,8 @@ int32_t HandleInput(android_app *app, AInputEvent *event) {
             // Otherwise, start dragging
             ndk_helper::Vec2 v;
             eng->tap_detector_.GetPointer(v);
-            eng->focus_object = eng->master->findFocusObject(v);
-            eng->focus_object->tapEnd();
+            eng->focus_object = eng->root->GFindFocusObject(v);
+            eng->focus_object->GTapEnd();
             eng->focus_object = nullptr;
         }
 
@@ -52,7 +52,7 @@ int32_t HandleInput(android_app *app, AInputEvent *event) {
  * Process the next main command.
  */
 void HandleCmd(struct android_app *app, int32_t cmd) {
-    auto eng = (GraphicEngine *) app->userData;
+    auto eng = (GEngine *) app->userData;
     switch (cmd) {
 //        case APP_CMD_CONFIG_CHANGED:
 //            eng->InitDisplay(app);
@@ -92,9 +92,8 @@ void HandleCmd(struct android_app *app, int32_t cmd) {
     }
 }
 
-auto master = new Master();
-GraphicEngine& graphicEngine = GraphicEngine::GetGraphicEngine();
-auto audioEngine = new AudioEngine(master);
+auto master = new Synth();
+auto engine = new Engine(master);
 
 /**
  * This is the main entry point of a native application that is using
@@ -103,13 +102,12 @@ auto audioEngine = new AudioEngine(master);
  */
 void android_main(android_app *state) {
 
-    graphicEngine.SetState(state);
-    graphicEngine.master = master;
+    engine->graphic->SetState(state);
 
     // Init helper functions
     ndk_helper::JNIHelper::Init(state->activity, HELPER_CLASS_NAME);
 
-    state->userData = &graphicEngine;
+    state->userData = engine->graphic;
     state->onAppCmd = HandleCmd;
     state->onInputEvent = HandleInput;
 
@@ -118,7 +116,9 @@ void android_main(android_app *state) {
 #endif
 
     // Prepare to monitor accelerometer
-    audioEngine->start();
+    engine->audio->start();
+
+    int count = 0;
 
     // loop waiting for stuff to do.
     while (true) {
@@ -130,40 +130,42 @@ void android_main(android_app *state) {
         // If not animating, we will block forever waiting for events.
         // If animating, we loop until all events are read, then continue
         // to draw the next frame of animation.
-        while ((id = ALooper_pollAll(graphicEngine.IsReady() ? 0 : -1, nullptr, &events,
+        while ((id = ALooper_pollAll(engine->graphic->IsReady() ? 0 : -1, nullptr, &events,
                                      (void **) &source)) >= 0) {
             // Process this event.
             if (source != nullptr) source->process(state, source);
 
             // Check if we are exiting.
             if (state->destroyRequested != 0) {
-                graphicEngine.TermDisplay();
+                engine->graphic->TermDisplay();
                 return;
             }
         }
 
-        if (graphicEngine.IsReady()) {
+        if (engine->graphic->IsReady()) {
             // Drawing is throttled to the screen update rate, so there
             // is no need to do timing here.
-            graphicEngine.DrawFrame();
+            engine->graphic->DrawFrame();
+//            if(count == 0) {
+//                MData md{
+//                        (double) 0,
+//                        (unsigned char) 0x80,
+//                        (unsigned char) 50,
+//                        (unsigned char) 127
+//                };
+//                engine->midi->MOut(md);
+//            }
+//            if (count == 60) {
+//                MData md{
+//                        (double) 0,
+//                        (unsigned char) 0x80,
+//                        (unsigned char) 50,
+//                        (unsigned char) 0
+//                };
+//                engine->midi->MOut(md);
+//            }
+//            count = (count + 1)%120;
         }
     }
-}
-
-
-extern "C" {
-
-// Data callback stuff
-JavaVM *theJvm;
-jobject dataCallbackObj;
-jmethodID midDataCallback;
-
-JNIEXPORT void JNICALL
-Java_com_pdaw_pd_MainActivity_midiEvent(JNIEnv *env, jobject obj, jbyte status_byte,
-                                        jbyte data_byte_1, jbyte data_byte_2) {
-    MidiData md((unsigned char)status_byte, (unsigned char)data_byte_1, (unsigned char)data_byte_2);
-    master->receiveMIDI(md);
-}
-
 }
 

@@ -23,12 +23,12 @@ Metronome::Metronome(){
 //    attach(new Encoder("Textures/encoder.bmp", 0.1f, 0.5f, &D));
 }
 
-void Metronome::updateState(MetronomeState *state, MidiData md){
+void Metronome::updateState(MetronomeState *state, MData md){
     if (md.data2 != 0) {
         state->ad.A = (int)(A*2000);
         state->ad.D = (int)(D*20000);
         state->phase2 = 0;
-        state->beat = md.beat;
+//        state->beat = md.beat;
         state->note = md.data1;
         state->volume = md.data2 / 127.0;
         state->phase_increment = -1;

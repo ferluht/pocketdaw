@@ -13,10 +13,11 @@
 #include "Orchestration/Midi.h"
 #include "AudioEffects/AudioEffect.h"
 #include "GUI/Canvas.h"
+#include "Engine/Engine.h"
 
 #define DEFAULT_BPM 60.
 
-class Master : public Canvas{
+class Master : public AMGObject, public Canvas{
 
 public:
 

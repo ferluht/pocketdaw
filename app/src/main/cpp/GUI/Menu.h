@@ -6,19 +6,21 @@
 #define PD_MENU_H
 
 #include "Canvas.h"
-#include <Orchestration/Midi.h>
+//#include <Orchestration/Midi.h>
+//#include "Basic/Basic.h"
 
-class Menu : public Canvas {
+class Menu : public Canvas, MObject {
 
 public:
 
+//    MGObject * focusObject;
     unsigned int focus;
     Canvas * cursor;
     std::vector<std::pair<wchar_t *, std::function<void(void)>>> items;
 
     Menu(std::vector<std::pair<wchar_t *, std::function<void(void)>>> items_);
 
-    void receiveMIDI(MidiData md) override ;
+    void MIn(MData cmd) override ;
 
 };
 

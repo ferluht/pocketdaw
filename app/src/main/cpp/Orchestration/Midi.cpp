@@ -5,21 +5,9 @@
 #include <cmath>
 #include "Midi.h"
 
-bool operator<(const MidiData &lhs, const MidiData &rhs) {
+bool operator<(const MData &lhs, const MData &rhs) {
     return lhs.beat > rhs.beat;
 }
-
-
-MidiData::MidiData(unsigned char status_, unsigned char data1_, unsigned char data2_) : MidiData(-1, status_, data1_, data2_) {}
-    
-MidiData::MidiData(double beat_, unsigned char status_, unsigned char data1_, unsigned char data2_)
-{
-    beat = beat_;
-    status = status_;
-    data1 = data1_;
-    data2 = data2_;
-}
-
 
 MidiClip::MidiClip() : MidiClip(0) {}
 
@@ -34,7 +22,7 @@ MidiClip::MidiClip(double beat_begin, double pattern_length_)
 }
 
 
-void MidiClip::play(std::priority_queue<MidiData> *q, double beat)
+void MidiClip::play(std::priority_queue<MData> *q, double beat)
 {
     if (beat < end || end == 0){
         while(!Arrangement.empty() && (Arrangement[position].beat + loops*pattern_length < beat - begin)){
@@ -48,14 +36,14 @@ void MidiClip::play(std::priority_queue<MidiData> *q, double beat)
     }
 }
 
-void MidiClip::insertNow(MidiData md)
+void MidiClip::insertNow(MData md)
 {
     Arrangement.insert(Arrangement.begin() + position, md);
 }
 
-void MidiClip::insert(MidiData md, double beat)
+void MidiClip::insert(MData md, double beat)
 {
-    std::vector<MidiData>::iterator pos = Arrangement.begin();
+    std::vector<MData>::iterator pos = Arrangement.begin();
     beat = fmod(beat - begin, pattern_length);
     md.beat = beat;
     while (Arrangement.size() && pos != Arrangement.end() && pos->beat < beat) pos ++;
@@ -69,8 +57,8 @@ void MidiClip::reset()
 
 MidiClip * createMetronomeMidi(){
     MidiClip * mc = new MidiClip;
-    MidiData on(0x91, 50, 100);
-    MidiData off(0x91, 50, 0);
+    MData on(0x91, 50, 100);
+    MData off(0x91, 50, 0);
     mc->insert(on, 0);
 //    mc->insert(off, 3);
 

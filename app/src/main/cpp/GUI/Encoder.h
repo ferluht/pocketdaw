@@ -7,17 +7,17 @@
 
 #include "Canvas.h"
 
-class Encoder : public Canvas{
+class Encoder : public AMGCanvas{
 public:
 
     std::function<void(float)> callback;
 
     float old_angle;
 
-    Encoder(float default_value_, float x_, float y_, float z_, float h_, const char * texture_, std::function<void(float)> callback_);
+    Encoder(float default_value_, std::function<void(float)> callback_);
 
-    void dragHandler(const ndk_helper::Vec2& v) override ;
-    void dragBegin(const ndk_helper::Vec2& v) override ;
+    void GDragHandler(const ndk_helper::Vec2& v) override ;
+    void GDragBegin(const ndk_helper::Vec2& v) override ;
 };
 
 

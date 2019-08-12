@@ -20,12 +20,12 @@ Menu::Menu(std::vector<std::pair<wchar_t *, std::function<void(void)>>> items_)
     focus = 0;
 }
 
-void Menu::receiveMIDI(MidiData md)
+void Menu::MIn(MData cmd)
 {
-    if (md.status == 0xb0){
-        switch (md.data1){
+    if (cmd.status == 0xb0){
+        switch (cmd.data1){
             case 0x01:
-                focus = (float)md.data2/127.f*((float)items.size()-1);
+                focus = (float)cmd.data2/127.f*((float)items.size()-1);
                 cursor->place(0.05, 0.05 + focus * 0.08, 0.07, 0.9);
                 break;
             case 0x017:

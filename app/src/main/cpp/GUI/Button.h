@@ -17,7 +17,7 @@ public:
 
     void tapEnd() override ;
 
-    GraphicObject * findFocusObject(const ndk_helper::Vec2& point) override {return this;}
+    GObject * findFocusObject(const ndk_helper::Vec2& point) override {return this;}
 };
 
 

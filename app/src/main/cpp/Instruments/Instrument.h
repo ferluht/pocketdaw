@@ -5,7 +5,7 @@
 #ifndef PD_INSTRUMENT_H
 #define PD_INSTRUMENT_H
 
-#include "Orchestration/Midi.h"
+#include "Engine/Engine.h"
 #include "GUI/Canvas.h"
 #include <cmath>
 #include <set>
@@ -31,16 +31,8 @@ public:
 
 bool operator<(const InstrumentState &lhs, const InstrumentState &rhs);
 
-class InstrumentBase : public Canvas {
-public:
-    InstrumentBase() : Canvas(0, 0, 0, 0, "Textures/effect_canvas.bmp", false) {};
-
-    virtual void midiCommand(MidiData md) = 0;
-    virtual void render(double beat, float * lsample, float * rsample) = 0;
-};
-
 template <class State>
-class Instrument : public InstrumentBase{
+class Instrument : public AMGCanvas{
 public:
 
     unsigned int num_voices = 8;
@@ -67,11 +59,11 @@ public:
         for (int i = 0; i < MAX_VOICES; i++) States.insert(new State());
     }
 
-    void midiCommand(MidiData md) override;
+    void MIn(MData md) override;
 
-    void render(double beat, float * lsample, float * rsample) override;
+    void ARender(double beat, float * lsample, float * rsample) override;
 
-    void keyPressed(MidiData md);
+    void keyPressed(MData md);
 
     inline double getFrequency(unsigned char note)
     {
@@ -98,27 +90,27 @@ public:
     	return getPhaseIncrement(getFrequency(note, cents));
 	}
 
-    virtual void updateState(State * state, MidiData cmd) {};
+    virtual void updateState(State * state, MData cmd) {};
 
     virtual void render(State * state, double beat, float * lsample, float * rsample) {}
 };
 
 template <class State>
-void Instrument<State>::midiCommand(MidiData md)
+void Instrument<State>::MIn(MData cmd)
 {
-    switch (md.status & 0xF0){
+    switch (cmd.status & 0xF0){
         case NOTEON_HEADER:
         case NOTEOFF_HEADER:
-            keyPressed(md);
+            keyPressed(cmd);
             break;
         case CC_HEADER:
-            switch (md.data1){
+            switch (cmd.data1){
                 case CC_MODWHEEL:
-                    modwheel = md.data2;
+                    modwheel = cmd.data2;
                     break;
                 case CC_SOSTENUTO:
                     sostenuto = false;
-                    if (md.data2 != 0xFF) sostenuto = true;
+                    if (cmd.data2 != 0xFF) sostenuto = true;
                     break;
                 default:
                     break;
@@ -130,7 +122,7 @@ void Instrument<State>::midiCommand(MidiData md)
 }
 
 template <class State>
-void Instrument<State>::keyPressed(MidiData md)
+void Instrument<State>::keyPressed(MData md)
 {
     for (auto it = States.begin(); it != States.end(); it++ )
     {
@@ -163,7 +155,7 @@ void Instrument<State>::keyPressed(MidiData md)
 
 
 template <class State>
-void Instrument<State>::render(double beat, float * lsample, float * rsample)
+void Instrument<State>::ARender(double beat, float * lsample, float * rsample)
 {
     for (auto it = States.begin(); it != States.end(); it++ ){
         if ((*it)->active){

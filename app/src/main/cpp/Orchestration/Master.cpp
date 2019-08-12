@@ -158,7 +158,7 @@ void Master::setSampleRate(int samplerate)
     sample_rate = samplerate;
 }
 
-void Master::receiveMIDI(MidiData md)
+void Master::MIn(MData cmd)
 {
     ableton::Link::SessionState state = link.captureAppSessionState();
     bpm = state.tempo();
@@ -166,8 +166,8 @@ void Master::receiveMIDI(MidiData md)
     phase = state.phaseAtTime(time, size_denominator);
     beat = state.beatAtTime(time, size_denominator);
 
-    if (md.status == 0xb0){
-        switch (md.data1){
+    if (cmd.status == 0xb0){
+        switch (cmd.data1){
             case 0x15:
                 Tracks[focusTrack]->setVisible(false);
                 if (focusTrack < Tracks.size() - 1) focusTrack ++;
@@ -183,6 +183,5 @@ void Master::receiveMIDI(MidiData md)
         }
     }
 
-    md.beat = beat;
-    Tracks[focusTrack]->receiveMIDI(md);
+    Tracks[focusTrack]->MIn(cmd);
 }

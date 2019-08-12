@@ -6,9 +6,9 @@
 #define PD_GRAPH_H
 
 
-#include "GraphicObject.h"
+#include "Engine/Engine.h"
 
-class BaseGraph : public GraphicObject{
+class BaseGraph : public GObject{
 
 public:
 
@@ -19,7 +19,7 @@ public:
     GLfloat * g_vertex_buffer_data;
 
     BaseGraph(float x_, float y_, float z_, float h_, float w_)
-        : GraphicObject(x_, y_, z_, h_, w_, 0, nullptr, "Shaders/BasicV.vsh", "Shaders/BasicF.fsh", false) {}
+        : GObject(x_, y_, z_, h_, w_, 0, nullptr, "Shaders/BasicV.vsh", "Shaders/BasicF.fsh", false) {}
 
     ~BaseGraph() {
         delete buffer;
