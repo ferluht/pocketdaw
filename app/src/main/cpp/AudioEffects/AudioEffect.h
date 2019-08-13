@@ -7,14 +7,16 @@
 
 #include "GUI/Canvas.h"
 
-class AudioEffect : public Canvas{
+class AudioEffect : public AMGCanvas{
 
 public:
 
     bool isOn;
 
-    AudioEffect(float x, float y, float h, float w)
-    : Canvas(x, y, h, w, "Textures/effect_canvas.bmp", false) {isOn = true;};
+    AudioEffect(){
+        GAttachTexture("Textures/effect_canvas.bmp");
+        isOn = true;
+    }
 
     virtual void apply(float * lsample, float * rsample){ }
 };

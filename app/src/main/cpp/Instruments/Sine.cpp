@@ -7,10 +7,10 @@
 Sine::Sine(){
     GAttachTexture("Textures/effect_canvas.bmp");
 
-    k = 300;
-    enc = new Encoder(0, [](float a){});
+    enc = new Encoder(L"aaa", 0, [this](float value){k = (value + 1)*5 + 2;});
     enc->place(0.2, 0.2, 0.4, 0.4);
     GAttach(enc);
+    MConnect(enc);
 }
 
 void Sine::updateState(SineState *state, MData md){
@@ -27,18 +27,10 @@ void Sine::updateState(SineState *state, MData md){
 
 void Sine::render(SineState * state, double beat, float * lsample, float * rsample)
 {
-    float sample = sin(state->phase) * sin(state->phase2); //(sin(fmod(beat, M_PI)) + 1)/4;// * sin(state->phase2) + cnt;
+    float sample = sin(state->phase) * sin(state->phase2); //(sin(fmod(beat, M_PI)) + 1)/4; //* sin(state->phase2); //(sin(fmod(beat, M_PI)) + 1)/4;// * sin(state->phase2) + cnt;
     state->phase += state->phase_increment;
     state->phase2 += state->phase_increment / k;
 
     *lsample = sample;
     *rsample = sample;
-}
-
-void Sine::MIn(MData cmd) {
-    Instrument::MIn(cmd);
-    if (cmd.status == 0xB0) {
-        enc->angle = cmd.data2 / 127.f - 0.5f;
-        k =  cmd.data2 * 5 + 1;
-    }
 }

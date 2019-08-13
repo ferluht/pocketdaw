@@ -10,16 +10,16 @@
 #include "Font.h"
 #include "NDKHelper.h"
 
-class Text : public Canvas{
+class Text : public GCanvas{
 public:
 
     Font * f;
     const char * font_file;
     wchar_t * text_;
 
-    Text(const char * font, wchar_t * text, float x_, float y_, float z_, float h_);
+    Text(const char * font, wchar_t * text);
 
-    void init() override;
+    void GInit() override;
 };
 
 

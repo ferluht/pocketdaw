@@ -4,7 +4,7 @@
 
 #include "Graph.h"
 
-void BaseGraph::draw() {
+void BaseGraph::GDraw() {
 
     fillGLBuffer();
 
@@ -23,8 +23,7 @@ void BaseGraph::draw() {
     glBindVertexArray(0);
 }
 
-void BaseGraph::grender(float dTime) {
-    glUniform4fv(shader.param_color_, 1, color);
+void BaseGraph::GRender(float dTime) {
     glBindVertexArray(vao_);
     glDrawArrays(GL_LINE_STRIP, 0, buffer_size);
     glBindVertexArray(0);

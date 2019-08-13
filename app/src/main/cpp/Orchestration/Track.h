@@ -13,6 +13,8 @@
 #include "GUI/Canvas.h"
 #include <ableton/Link.hpp>
 #include <Instruments/Sine.h>
+#include <Instruments/Operator.h>
+#include <AudioEffects/Waveform.h>
 
 class AMGChain : public AMGObject {
 
@@ -53,7 +55,8 @@ public:
         }
         mo->MConnect(AMGObjects.back());
         AMGObjects.insert(AMGObjects.end() - 1, mo);
-        mo->place(AMGObjects[size - 2]->x + 0.01, 0, 1.0, 0.2);
+        mo->place(0.2, 0, 1, 0.2);
+//        mo->place(AMGObjects[size - 2]->x + 0.01, 0, 1.0, 0.2);
         GAttach(mo);
     }
 
@@ -124,6 +127,12 @@ public:
         MEffects.MIn(cmd);
     }
 
+    inline void MEnableMapping(bool state) override {
+        MEffects.MEnableMapping(state);
+        Instr->MEnableMapping(state);
+        AEffects.MEnableMapping(state);
+    }
+
 //    void MConnect(MObject * mo) override ;
 //    void MDisconnect(MObject * mo) override ;
 
@@ -140,11 +149,13 @@ public:
     AMGRack Rack;
 
     AMGTrack(){
-        Rack.RAttachInsrument(new Sine());
+        Rack.RAttachInsrument(new Operator());
         GAttach(&Rack);
         GAttachTexture("Textures/track_canvas.bmp");
         Rack.place(0.02, 0.01, 0.98, 0.98);
         MConnect(&Rack);
+
+        Rack.AEffects.AMGChainPushBack(new Waveform(200));
     }
     ~AMGTrack(){}
 
@@ -178,7 +189,7 @@ public:
 
     void AddTrack(AMGTrack * track) {
         Tracks.push_back(track);
-        track->place(0, 0.6, 0.4, 1);
+        track->place(0, 0.5, 0.5, 1);
         GAttach(track);
         MConnect(track);
     }

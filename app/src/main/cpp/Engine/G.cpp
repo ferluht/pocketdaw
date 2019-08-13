@@ -88,6 +88,8 @@ void GObject::GRender_(float dTime) {
 
         glUniform1f(shader.param_z_, globalPosition.z);
 
+        glUniform4fv(shader.param_color_, 1, color);
+
         if (texture) glBindTexture(GL_TEXTURE_2D, texture);
 
         GRender(dTime);

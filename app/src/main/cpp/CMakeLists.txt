@@ -15,7 +15,7 @@ include_directories(${LINK_DIR}/modules/asio-standalone/asio/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Link/android-ifaddrs)
 
 # set up common compile options
-set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -fno-exceptions -fno-rtti")
+set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -fno-exceptions")
 
 # 3rd party library dir
 get_filename_component(commonDir ${CMAKE_CURRENT_SOURCE_DIR}/../../../../common ABSOLUTE)
@@ -46,10 +46,10 @@ add_library(
 
         MainActivity.cpp
 
-#        AudioEffects/AudioEffect.cpp
+        AudioEffects/AudioEffect.cpp
 #        AudioEffects/Delay.cpp
 #        AudioEffects/StereoDelay.cpp
-#        AudioEffects/Waveform.cpp
+        AudioEffects/Waveform.cpp
 #        AudioEffects/Lissajous.cpp
 #        AudioEffects/Spectrum.cpp
 
@@ -57,12 +57,13 @@ add_library(
         Engine/G.cpp
         Engine/M.cpp
 
-#        GUI/Button.cpp
+        GUI/Button.cpp
         GUI/Encoder.cpp
-#        GUI/Font.cpp
-#        GUI/Text.cpp
+        GUI/Font.cpp
+        GUI/Text.cpp
         GUI/Canvas.cpp
-#        GUI/Graph.cpp
+        GUI/Knob.cpp
+        GUI/Graph.cpp
 #        GUI/Menu.cpp
 
 #        Instruments/ModularSynth/VCO.cpp
@@ -72,9 +73,10 @@ add_library(
 #        Instruments/Metronome.cpp
 #        Instruments/ADSR.cpp
         Instruments/Sine.cpp
+        Instruments/Operator.cpp
 
-#        Link/LinkManager.cpp
-#        Link/android-ifaddrs/ifaddrs.cpp
+        Link/LinkManager.cpp
+        Link/android-ifaddrs/ifaddrs.cpp
 
         Synth.cpp
 

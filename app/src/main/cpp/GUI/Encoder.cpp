@@ -3,31 +3,40 @@
 //
 
 #include "Encoder.h"
+#include "Text.h"
 
-Encoder::Encoder(float default_value_, std::function<void(float)> callback_){
+Encoder::Encoder(wchar_t * label, float default_value_, std::function<void(float)> callback_){
     callback = callback_;
-    GAttachShaders("Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlain.fsh");
-    GAttachTexture("Textures/encoder.bmp");
+
+    GAttachTexture("Textures/effect_canvas.bmp");
     GSaveRatio(true);
+
+    wheel = new GCanvas();
+    wheel->GAttachShaders("Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlain.fsh");
+    wheel->GAttachTexture("Textures/encoder.bmp");
+    wheel->GSaveRatio(true);
+    wheel->place(0.2, 0.05, 0.7, 0.7);
+    GAttach(wheel);
+    keymap = 0;
+    setvalue(default_value_);
+
+    auto txt = new Text("Fonts/Roboto-Regular.ttf", label);
+    txt->place(0.07, 0.77, 0.2, 0.9);
+    GAttach(txt);
+
+    info_overlay.GAttachShaders("Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlainColor.fsh");
+    info_overlay.GSetColor(0, 0, 1, 0.2);
+    info_overlay.place(0, 0, 1, 1);
+    info_overlay.GSaveRatio(true);
+    GAttach(&info_overlay);
 }
 
 void Encoder::GDragHandler(const ndk_helper::Vec2 &v) {
-    angle = old_angle + (v.x_ - drag_from.x_)/100;
-
-    if (angle < -1.25f*(float)M_PI) {
-        angle = -1.25f*(float)M_PI;
-    }
-
-    if (angle > 0.25f*(float)M_PI) {
-        angle = 0.25f*(float)M_PI;
-    }
-
-    float param = (angle/(float)M_PI+0.5f)/0.75f;
-
-    callback(param);
+    wheel->angle = old_angle + (v.x_ - drag_from.x_)/100;
+    setangle(wheel->angle);
 }
 
 void Encoder::GDragBegin(const ndk_helper::Vec2 &v) {
     drag_from = v;
-    old_angle = angle;
+    old_angle = wheel->angle;
 }

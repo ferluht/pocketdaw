@@ -12,14 +12,15 @@ class BaseGraph : public GObject{
 
 public:
 
-    float color[4] = {1, 0, 0, 1};
     unsigned int r;
     unsigned int buffer_size;
     float * buffer;
     GLfloat * g_vertex_buffer_data;
 
-    BaseGraph(float x_, float y_, float z_, float h_, float w_)
-        : GObject(x_, y_, z_, h_, w_, 0, nullptr, "Shaders/BasicV.vsh", "Shaders/BasicF.fsh", false) {}
+    BaseGraph() {
+        GAttachShaders("Shaders/BasicV.vsh", "Shaders/BasicF.fsh");
+        GSetColor(0, 1, 0, 1);
+    }
 
     ~BaseGraph() {
         delete buffer;
@@ -27,8 +28,8 @@ public:
     }
 
     virtual void fillGLBuffer() {};
-    void draw() override ;
-    void grender(float dTime) override ;
+    void GDraw() override ;
+    void GRender(float dTime) override ;
 };
 
 
@@ -36,8 +37,7 @@ class TimeGraph : public BaseGraph{
 
 public:
 
-    TimeGraph(unsigned int points, float x_, float y_, float z_, float h_, float w_)
-            : BaseGraph(x_, y_, z_, h_, w_)
+    TimeGraph(unsigned int points)
     {
         this->buffer = new float[points];
         this->g_vertex_buffer_data = new GLfloat[points*2];
@@ -53,8 +53,7 @@ class XYGraph : public BaseGraph{
 
 public:
 
-    XYGraph(unsigned int points, float x_, float y_, float z_, float h_, float w_)
-            : BaseGraph(x_, y_, z_, h_, w_)
+    XYGraph(unsigned int points)
     {
         this->buffer = new float[points*2];
         this->g_vertex_buffer_data = new GLfloat[points*2];

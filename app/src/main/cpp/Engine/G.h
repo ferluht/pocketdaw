@@ -64,7 +64,7 @@ public:
     }
 
     inline virtual void place(float x_, float y_, float height_, float width_) {
-        place(x_, y_, 0, height_, width_, 0);
+        place(x_, y_, z, height_, width_, angle);
     }
 
     inline virtual void place(float x_, float y_, float z_, float height_, float width_, float rotation_) {
@@ -144,6 +144,8 @@ public:
     bool saveRatio;
     bool initialized;
 
+    GLfloat color[4] = {1, 1, 1, 0};
+
     GObject();
     virtual ~GObject();
 
@@ -175,6 +177,10 @@ public:
     void GSetVisible(bool visible_);
 
     void GUnload();
+
+    inline void GSetColor(float r, float g, float b, float a){
+        color[0] = r, color[1] = g, color[2] = b, color[3] = a;
+    }
 
     // Hierarchy
 
