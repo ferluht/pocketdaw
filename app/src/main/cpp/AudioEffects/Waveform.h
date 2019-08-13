@@ -18,7 +18,7 @@ public:
 
     TimeGraph * graph;
 
-    Waveform(float n, float x_, float y_);
+    Waveform(float n);
 
     void apply(float * lsample, float * rsample) override ;
 

@@ -6,19 +6,21 @@
 #include "Waveform.h"
 #include "../GUI/Text.h"
 
-Waveform::Waveform(float n, float x_, float y_) : AudioEffect(x_,y_,0,0){
+Waveform::Waveform(float n) {
 
     window = n;
 
-    attach(new Text("Fonts/Roboto-Regular.ttf", L"waveform", 0.05, 0.05, 2, 0.07));
+//    GAttach(new Text("Fonts/Roboto-Regular.ttf", L"waveform", 0.05, 0.05, 2, 0.07));
 
-    attach(new Encoder(0, 0.05, 0.7, 2, 0.25, "Textures/encoder.bmp",
-                       [this](float state){
-                           this->window = (state/2 + 0.5f) * 200 + 1;
-                       }));
+    graph = new TimeGraph(300);
+    graph->place(0.05, 0.5, 0.9, 0.9);
+    GAttach(graph);
 
-    graph = new TimeGraph(300, 0.05, 0.5, 3, 0.9, 0.9);
-    attach(graph);
+    auto enc = new Encoder(L"scale", 0, [this](float value){
+        this->window = (value/2 + 0.5f) * 200 + 1;
+    });
+    enc->place(0, 0.05, 0.7, 0.25);
+    GAttach(enc);
 }
 
 void Waveform::apply(float *lsample, float *rsample) {

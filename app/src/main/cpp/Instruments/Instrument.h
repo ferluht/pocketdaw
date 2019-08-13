@@ -14,16 +14,7 @@
 
 class InstrumentState {
 public:
-    double beat;
-    unsigned char note;
-    unsigned char velocity;
-
-    float volume;
-	double phase;
-	double frequency;
-	double phase_increment;
-
-	bool active;
+    bool active;
 
 	InstrumentState();
 	void setActive(bool isactive);
@@ -119,6 +110,7 @@ void Instrument<State>::MIn(MData cmd)
         default:
             break;
     }
+    MOut(cmd);
 }
 
 template <class State>

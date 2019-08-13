@@ -5,16 +5,25 @@
 #include "Button.h"
 #include "Text.h"
 
-Button::Button(wchar_t * label, float x, float y, float h, float w, const char * texture, std::function<void(bool)> callback_)
-: Canvas(x, y, h, w, texture, true){
+Button::Button(wchar_t * label, std::function<void(bool)> callback_){
     callback = callback_;
     state = false;
-    attach(new Text("Fonts/Roboto-Regular.ttf", label, 0.05, 0.05, 1, 0.9));
+    GAttachShaders("Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlainRect.fsh");
+    GAttachTexture("Textures/button.bmp");
+
+    auto txt = new Text("Fonts/Roboto-Regular.ttf", label);
+    txt->place(0.07, 0.1, 0.7, 0.9);
+    GAttach(txt);
+
+    info_overlay.GAttachShaders("Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlainColor.fsh");
+    info_overlay.GSetColor(1, 0, 0, 0.2);
+    info_overlay.place(0, 0, 1, 1);
+    GAttach(&info_overlay);
 }
 
-void Button::tapEnd()
+void Button::GTapEnd()
 {
-    draw();
     state = !state;
+    info_overlay.GSetVisible(state);
     callback(state);
 }

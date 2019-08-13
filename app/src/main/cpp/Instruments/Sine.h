@@ -10,6 +10,15 @@
 
 class SineState : public InstrumentState{
 public:
+    double beat;
+    unsigned char note;
+    unsigned char velocity;
+
+    float volume;
+    double phase;
+    double frequency;
+    double phase_increment;
+
     float phase2;
 };
 
@@ -26,8 +35,6 @@ public:
     void updateState(SineState * state, MData md) override;
 
     void render(SineState * state, double beat, float * lsample, float * rsample) override ;
-
-    void MIn(MData cmd) override ;
 };
 
 
