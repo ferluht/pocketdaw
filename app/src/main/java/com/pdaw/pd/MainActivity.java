@@ -16,29 +16,56 @@
 
 package com.pdaw.pd;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.NativeActivity;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.midi.MidiDevice;
 import android.media.midi.MidiDeviceInfo;
 import android.media.midi.MidiManager;
 import android.media.midi.MidiOutputPort;
 import android.media.midi.MidiReceiver;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.view.WindowManager.LayoutParams;
+import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.UUID;
 
 public class MainActivity extends NativeActivity {
+
+    private LeDeviceListAdapter mLeDeviceListAdapter;
+    private BluetoothAdapter mBluetoothAdapter;
+    private boolean mScanning;
+    private Handler mHandler;
+
+    private static final UUID[] MIDI_UUIDS = new UUID[] {
+            UUID.fromString("03B80E5A-EDE8-4B33-A751-6CE34EC4C700")
+    };
+
+    private static final int REQUEST_ENABLE_BT = 1;
+    // Stops scanning after 10 seconds.
+    private static final long SCAN_PERIOD = 10000;
+
+    private static final int PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 9500; // arbitrary
 
     static {
         System.loadLibrary("native-lib");
@@ -67,10 +94,38 @@ public class MainActivity extends NativeActivity {
             });
         }
 
+
+        mHandler = new Handler();
+
+        // Use this check to determine whether BLE is supported on the device.  Then you can
+        // selectively disable BLE-related features.
+        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
+            Toast.makeText(this, "ble_not_supported", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
+        // Initializes a Bluetooth adapter.  For API level 18 and above, get a reference to
+        // BluetoothAdapter through BluetoothManager.
+        final BluetoothManager bluetoothManager =
+                (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+        mBluetoothAdapter = bluetoothManager.getAdapter();
+
+        // Checks if Bluetooth is supported on the device.
+        if (mBluetoothAdapter == null) {
+            Toast.makeText(this, "error_bluetooth_not_supported", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        mLeDeviceListAdapter = new LeDeviceListAdapter();
+        mLeDeviceListAdapter.clear();
+        scanLeDevice(true);
+
+
 //        startEngine();
 
         final MidiManager m = (MidiManager)this.getSystemService(Context.MIDI_SERVICE);
-        MidiDeviceInfo[] infos = m.getDevices();
+//        MidiDeviceInfo[] infos = m.getDevices();
 
         //Toast.makeText(MainActivity.this, "on create", Toast.LENGTH_SHORT).show();
 
@@ -132,6 +187,16 @@ public class MainActivity extends NativeActivity {
             setImmersiveSticky();
         }
 
+        if (!mBluetoothAdapter.isEnabled()) {
+            if (!mBluetoothAdapter.isEnabled()) {
+                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+            }
+        }
+
+        // Initializes list view adapter.
+        mLeDeviceListAdapter = new LeDeviceListAdapter();
+        scanLeDevice(true);
     }
     // Our popup window, you will call it from your C/C++ code later
 
@@ -187,6 +252,8 @@ public class MainActivity extends NativeActivity {
     protected void onPause()
     {
         super.onPause();
+        scanLeDevice(false);
+        mLeDeviceListAdapter.clear();
     }
 
     public void updateFPS(final float fFPS)
@@ -202,6 +269,141 @@ public class MainActivity extends NativeActivity {
 
             }});
     }
+
+
+
+    private void scanLeDevice(final boolean enable) {
+        if (enable) {
+            startScanningIfPermitted();
+        } else {
+            mScanning = false;
+            mBluetoothAdapter.stopLeScan(mLeScanCallback);
+        }
+        invalidateOptionsMenu();
+    }
+
+    private void startScanningIfPermitted() {
+        if (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                Toast.makeText(this, "why_btle_location", Toast.LENGTH_LONG).show();
+            }
+            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                    PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION);
+        } else {
+            startScanningLeDevices();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
+        if (requestCode == PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            startScanningLeDevices();
+        } else {
+            setResult(RESULT_CANCELED);
+            finish();
+        }
+    }
+
+    private void startScanningLeDevices() {
+        // Stops scanning after a pre-defined scan period.
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mScanning = false;
+                mBluetoothAdapter.stopLeScan(mLeScanCallback);
+                invalidateOptionsMenu();
+            }
+        }, SCAN_PERIOD);
+
+        mScanning = true;
+        mBluetoothAdapter.startLeScan(MIDI_UUIDS, mLeScanCallback);
+    }
+
+    // Adapter for holding devices found through scanning.
+    private class LeDeviceListAdapter extends BaseAdapter {
+        private ArrayList<BluetoothDevice> mLeDevices;
+
+        public LeDeviceListAdapter() {
+            super();
+            mLeDevices = new ArrayList<BluetoothDevice>();
+        }
+
+        public void addDevice(BluetoothDevice device) {
+            if(!mLeDevices.contains(device)) {
+                mLeDevices.add(device);
+            }
+        }
+
+        public BluetoothDevice getDevice(int position) {
+            return mLeDevices.get(position);
+        }
+
+        public void clear() {
+            mLeDevices.clear();
+        }
+
+        @Override
+        public int getCount() {
+            return mLeDevices.size();
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return mLeDevices.get(i);
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return i;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            ViewHolder viewHolder;
+            // General ListView optimization code.
+            if (view == null) {
+                viewHolder = new ViewHolder();
+                view.setTag(viewHolder);
+            } else {
+                viewHolder = (ViewHolder) view.getTag();
+            }
+
+            BluetoothDevice device = mLeDevices.get(i);
+            final String deviceName = device.getName();
+            if (deviceName != null && deviceName.length() > 0)
+                viewHolder.deviceName.setText(deviceName);
+            else
+                viewHolder.deviceName.setText("unknown device");
+            viewHolder.deviceAddress.setText(device.getAddress());
+
+            return view;
+        }
+    }
+
+    // Device scan callback.
+    private BluetoothAdapter.LeScanCallback mLeScanCallback =
+            new BluetoothAdapter.LeScanCallback() {
+
+                @Override
+                public void onLeScan(final BluetoothDevice device, int rssi, byte[] scanRecord) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mLeDeviceListAdapter.addDevice(device);
+                            mLeDeviceListAdapter.notifyDataSetChanged();
+                        }
+                    });
+                }
+            };
+
+    static class ViewHolder {
+        TextView deviceName;
+        TextView deviceAddress;
+    }
+
 }
 
 

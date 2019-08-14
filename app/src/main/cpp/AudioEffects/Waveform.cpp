@@ -12,18 +12,19 @@ Waveform::Waveform(float n) {
 
 //    GAttach(new Text("Fonts/Roboto-Regular.ttf", L"waveform", 0.05, 0.05, 2, 0.07));
 
-    graph = new TimeGraph(300);
-    graph->place(0.05, 0.5, 0.9, 0.9);
-    GAttach(graph);
-
-    auto enc = new Encoder(L"scale", 0, [this](float value){
-        this->window = (value/2 + 0.5f) * 200 + 1;
+    auto enc = new Encoder(L"scale", 0, [this, n](float value){
+        this->window = (value/2 + 0.5f) * n + 1;
     });
-    enc->place(0, 0.05, 0.7, 0.25);
+    enc->place(0.02, 0.65, 0.25, 0.25);
     GAttach(enc);
+    MConnect(enc);
+
+    graph = new TimeGraph(n);
+    graph->place(0.05, 0.05, 0.9, 0.9);
+    GAttach(graph);
 }
 
-void Waveform::apply(float *lsample, float *rsample) {
+void Waveform::ARender(double beat, float *lsample, float *rsample) {
     if (ai < window){
         accumulator += *rsample;
         ai ++;

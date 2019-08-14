@@ -40,7 +40,7 @@ void TimeGraph::fillGLBuffer() {
 
 void TimeGraph::update(float sample) {
     changed = true;
-    buffer[r] = sample;
+    buffer[r] = sample + 0.5;
     r = (r + 1)%buffer_size;
 }
 

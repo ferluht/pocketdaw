@@ -5,7 +5,11 @@
 #include "Encoder.h"
 #include "Text.h"
 
-Encoder::Encoder(wchar_t * label, float default_value_, std::function<void(float)> callback_){
+Encoder::Encoder(wchar_t *label, float default_value_, std::function<void(float)> callback_) :
+Encoder(label, default_value_, callback_, 0) {}
+
+Encoder::Encoder(wchar_t * label, float default_value_, std::function<void(float)> callback_,
+                 unsigned int default_map_){
     callback = callback_;
 
     GAttachTexture("Textures/effect_canvas.bmp");
@@ -17,7 +21,7 @@ Encoder::Encoder(wchar_t * label, float default_value_, std::function<void(float
     wheel->GSaveRatio(true);
     wheel->place(0.2, 0.05, 0.7, 0.7);
     GAttach(wheel);
-    keymap = 0;
+    keymap = default_map_;
     setvalue(default_value_);
 
     auto txt = new Text("Fonts/Roboto-Regular.ttf", label);

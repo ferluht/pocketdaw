@@ -45,6 +45,7 @@ public:
     GCanvas * wheel;
 
     Encoder(wchar_t * label, float default_value_, std::function<void(float)> callback_);
+    Encoder(wchar_t * label, float default_value_, std::function<void(float)> callback_, unsigned int default_map_);
 
     inline void MIn(MData cmd) override {
         if (cmd.status == 0xB0 && keymap && cmd.data1 == keymap){
