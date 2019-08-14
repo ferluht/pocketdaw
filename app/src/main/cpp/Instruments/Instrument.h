@@ -16,6 +16,8 @@ class InstrumentState {
 public:
     bool active;
 
+    unsigned char note;
+
 	InstrumentState();
 	void setActive(bool isactive);
 };
@@ -126,7 +128,6 @@ void Instrument<State>::keyPressed(MData md)
             return;
         }
     }
-
 
     for (auto it = States.begin(); it != States.end(); it++ )
     {

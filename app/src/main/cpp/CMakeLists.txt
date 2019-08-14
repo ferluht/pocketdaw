@@ -80,7 +80,7 @@ add_library(
 
         Synth.cpp
 
-#        MidiEffects/Arpeggiator.cpp
+        MidiEffects/Arpeggiator.cpp
 
 #        Orchestration/Master.cpp
         Orchestration/Track.cpp

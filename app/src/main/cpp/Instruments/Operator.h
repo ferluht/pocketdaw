@@ -11,7 +11,6 @@
 class OperatorState : public InstrumentState{
 public:
     double beat;
-    unsigned char note;
     unsigned char velocity;
 
     float volume;
@@ -23,6 +22,7 @@ public:
 class Operator : public Instrument<OperatorState>{
 
     Encoder * enc_ratios[4];
+    Encoder * enc_levels[4];
 
     float k;
 

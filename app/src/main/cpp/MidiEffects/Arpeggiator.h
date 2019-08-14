@@ -5,12 +5,11 @@
 #ifndef PD_ARPEGGIATOR_H
 #define PD_ARPEGGIATOR_H
 
-#include "MidiEffect.h"
 #include <map>
-
 #include <random>
+#include <GUI/Canvas.h>
 
-class Arpeggiator : public MidiEffect{
+class Arpeggiator : public AMGCanvas{
 
 public:
 
@@ -18,15 +17,14 @@ public:
 
     int cycles;
 
-    std::default_random_engine generator;
-
     std::map<unsigned char, MData> notes;
     unsigned char last_played_note;
 
     Arpeggiator();
     Arpeggiator(double scale_);
 
-    void apply(std::priority_queue<MData> * midiQueue, double beat) override ;
+    void MIn(MData cmd) override ;
+    void MRender(double beat) override ;
 };
 
 

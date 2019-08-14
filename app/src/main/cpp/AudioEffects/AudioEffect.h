@@ -18,7 +18,7 @@ public:
         isOn = true;
     }
 
-    virtual void apply(float * lsample, float * rsample){ }
+    virtual void ARender(double beat, float * lsample, float * rsample){ }
 };
 
 

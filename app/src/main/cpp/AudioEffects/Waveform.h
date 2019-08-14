@@ -20,7 +20,7 @@ public:
 
     Waveform(float n);
 
-    void apply(float * lsample, float * rsample) override ;
+    void ARender(double beat, float * lsample, float * rsample) override ;
 
 //    void pinchBegin(const ndk_helper::Vec2& v) override ;
 //    void pinchHandler(const ndk_helper::Vec2& v) override ;

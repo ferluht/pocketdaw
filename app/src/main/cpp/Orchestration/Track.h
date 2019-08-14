@@ -15,6 +15,7 @@
 #include <Instruments/Sine.h>
 #include <Instruments/Operator.h>
 #include <AudioEffects/Waveform.h>
+#include <MidiEffects/Arpeggiator.h>
 
 class AMGChain : public AMGObject {
 
@@ -54,9 +55,12 @@ public:
             AMGObjects[size - 2]->MConnect(mo);
         }
         mo->MConnect(AMGObjects.back());
+        if (size == 1) {
+            mo->place(0, 0, 1, 0.4);
+        } else {
+            mo->place(AMGObjects[size - 2]->x + 0.02, 0, 1, 0.4);
+        }
         AMGObjects.insert(AMGObjects.end() - 1, mo);
-        mo->place(0.2, 0, 1, 0.2);
-//        mo->place(AMGObjects[size - 2]->x + 0.01, 0, 1.0, 0.2);
         GAttach(mo);
     }
 
@@ -77,6 +81,10 @@ public:
 
     inline void MRender(double beat) override {
         for (auto const& mo : AMGObjects) mo->MRender(beat);
+    }
+
+    inline void MEnableMapping(bool state) override {
+        for (auto const& mo : AMGObjects) mo->MEnableMapping(state);
     }
 
 };
@@ -107,7 +115,15 @@ public:
     inline void RAttachInsrument(AMGObject * instr_) {
         Instr = instr_;
         GAttach(Instr);
+
         Instr->place(0.2, 0, 1, 0.2);
+
+        AEffects.place(0.4, 0, 1, 0.6);
+        MEffects.place(0, 0, 1, 0.2);
+
+        GAttach(&MEffects);
+        GAttach(&AEffects);
+
         MEffects.MDisconnect(&dummy_instr);
         dummy_instr.MDisconnect(&AEffects);
         MEffects.MConnect(Instr);
@@ -156,6 +172,8 @@ public:
         MConnect(&Rack);
 
         Rack.AEffects.AMGChainPushBack(new Waveform(200));
+
+//        Rack.MEffects.AMGChainPushBack(new Arpeggiator());
     }
     ~AMGTrack(){}
 
