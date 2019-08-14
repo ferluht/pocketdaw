@@ -22,8 +22,6 @@ public:
 	void setActive(bool isactive);
 };
 
-bool operator<(const InstrumentState &lhs, const InstrumentState &rhs);
-
 template <class State>
 class Instrument : public AMGCanvas{
 public:

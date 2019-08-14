@@ -303,6 +303,7 @@ Shader::Shader() {
     param_texture_angle_ = 0;
 }
 
+std::map<std::string, Shader> Shader::shaders;
 
 Shader Shader::CreateShaderProgram(const char *vsh, const char *fsh) {
     GLuint program;
@@ -310,6 +311,15 @@ Shader Shader::CreateShaderProgram(const char *vsh, const char *fsh) {
     GLuint frag_shader;
 
     Shader sh;
+
+    std::string svsh = vsh;
+    std::string sfsh = fsh;
+
+    auto program_name = svsh + sfsh;
+
+    auto loaded = shaders.find(program_name);
+    if (loaded != shaders.end())
+        return loaded->second;
 
     // Create shader program
     program = glCreateProgram();
@@ -366,6 +376,8 @@ Shader Shader::CreateShaderProgram(const char *vsh, const char *fsh) {
     // Release vertex and fragment shaders
     if (vert_shader) glDeleteShader(vert_shader);
     if (frag_shader) glDeleteShader(frag_shader);
+
+    shaders.insert({program_name, sh});
 
     return sh;
 }
