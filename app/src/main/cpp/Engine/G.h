@@ -19,6 +19,8 @@
 #include <android/asset_manager.h>
 
 #include <cerrno>
+#include <set>
+#include <string>
 
 #include "NDKHelper.h"
 
@@ -28,6 +30,8 @@ enum SHADERS{
 };
 
 class Shader {
+
+    static std::map<std::string, Shader> shaders;
 
 public:
     GLuint program_;
