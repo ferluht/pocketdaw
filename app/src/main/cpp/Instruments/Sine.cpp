@@ -7,52 +7,61 @@
 Sine::Sine(unsigned int num_voices) : Instrument<SineState>(num_voices){
     GAttachTexture("Textures/effect_canvas.bmp");
 
+    setRatio(2);
+
     enc_coarse = new Encoder(L"course", -1, [this](float value) {
         ratio = (int) (10 * (value + 1)) - 1;
     }, 1);
-    enc_coarse->place(0.0, 0.1, 0.3, 0.3);
+    enc_coarse->place(0.025, 0.05);
+    enc_coarse->setHeight(0.4);
     GAttach(enc_coarse);
     MConnect(enc_coarse);
 
     enc_fine = new Encoder(L"fine", -1, [this](float value) {
         fine = (value + 1)/2;
     }, 2);
-    enc_fine->place(0.25, 0.1, 0.3, 0.3);
+    enc_fine->place(0.225, 0.05);
+    enc_fine->setHeight(0.4);
     GAttach(enc_fine);
     MConnect(enc_fine);
 
     enc_level = new Encoder(L"level", -1, [this](float value) {
         level = (value + 1)/2;
     }, 3);
-    enc_level->place(0.50, 0.1, 0.3, 0.3);
+    enc_level->place(0.425, 0.05);
+    enc_level->setHeight(0.4);
     GAttach(enc_level);
     MConnect(enc_level);
 
     enc_attack = new Encoder(L"attack", 0, [this](float value) {
         A = (value + 1)/10;
     }, 5);
-    enc_attack->place(0.75, 0.1, 0.3, 0.3);
+    enc_attack->place(0.625, 0.05);
+    enc_attack->setHeight(0.4);
     GAttach(enc_attack);
     MConnect(enc_attack);
 
     enc_decay = new Encoder(L"decay", 0, [this](float value) {
         D = (value + 1)*2;
     }, 6);
-    enc_decay->place(0.0, 0.6, 0.3, 0.3);
+    enc_decay->place(0.025, 0.5);
+    enc_decay->setHeight(0.4);
     GAttach(enc_decay);
     MConnect(enc_decay);
 
     enc_sustain = new Encoder(L"sustain", 0, [this](float value) {
         S = (value + 1)/2;
     }, 7);
-    enc_sustain->place(0.25, 0.6, 0.3, 0.3);
+    enc_sustain->place(0.225, 0.5);
+    enc_sustain->setHeight(0.4);
     GAttach(enc_sustain);
     MConnect(enc_sustain);
 
     enc_release = new Encoder(L"release", 0, [this](float value) {
         R = (value + 1)*5;
     }, 8);
-    enc_release->place(0.50, 0.6, 0.3, 0.3);
+    enc_release->place(0.425, 0.5);
+    enc_release->setHeight(0.4);
     GAttach(enc_release);
     MConnect(enc_release);
 

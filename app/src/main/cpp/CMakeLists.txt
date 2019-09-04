@@ -66,6 +66,7 @@ add_library(
         GUI/Knob.cpp
         GUI/Graph.cpp
         GUI/Menu.cpp
+        GUI/Led.cpp
 
 #        Instruments/ModularSynth/VCO.cpp
 #        Instruments/ModularSynth/Module.cpp

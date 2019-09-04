@@ -13,24 +13,29 @@ Encoder::Encoder(wchar_t * label, float default_value_, std::function<void(float
     callback = callback_;
 
     GAttachTexture("Textures/effect_canvas.bmp");
-    GSaveRatio(true);
+    setRatio(0.8);
 
     wheel = new GCanvas();
     wheel->GAttachShaders("Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlain.fsh");
     wheel->GAttachTexture("Textures/encoder.bmp");
     wheel->GSaveRatio(true);
-    wheel->place(0.15, 0.05, 0.6, 0.6);
+    wheel->place(0.05, 0.05);
+    wheel->setWidth(0.9);
+    wheel->setRatio(1);
     GAttach(wheel);
     keymap = default_map_;
     setvalue(default_value_);
 
     auto txt = new Text("Fonts/Roboto-Regular.ttf", label);
-    txt->place(0.07, 0.77, 0.18, 0.9);
+    txt->place(0.07, 0.77);
+    txt->setHeight(0.18);
     GAttach(txt);
 
     info_overlay.GAttachShaders("Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlainColor.fsh");
     info_overlay.GSetColor(0, 0, 1, 0.2);
-    info_overlay.place(0, 0, 1, 1);
+    info_overlay.place(0, 0);
+    info_overlay.setHeight(1);
+    info_overlay.setWidth(1);
     info_overlay.GSaveRatio(true);
     GAttach(&info_overlay);
 }
