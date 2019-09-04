@@ -46,8 +46,8 @@ void TimeGraph::update(float sample) {
 
 void XYGraph::fillGLBuffer() {
     for (int i = 0; i < buffer_size; i++) {
-        g_vertex_buffer_data[i*2] = globalPosition.x + buffer[2*r + 1]*globalPosition.width;
-        g_vertex_buffer_data[i*2+1] = globalPosition.y + buffer[2*r]*globalPosition.height;
+        g_vertex_buffer_data[i*2] = globalPosition.x + buffer[2*r]*globalPosition.width;
+        g_vertex_buffer_data[i*2+1] = globalPosition.y + buffer[2*r + 1]*globalPosition.height;
         r++;
         if(r>=buffer_size) r = 0;
     };

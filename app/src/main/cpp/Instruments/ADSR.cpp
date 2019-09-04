@@ -5,40 +5,43 @@
 #include "ADSR.h"
 
 ADSR::ADSR()
+{}
+
+void ADSR::Attack(float A_, float D_, float S_, float R_)
 {
-    A = 5000;
-    D = 5000;
-    S = 0.7;
-    R = 10000;
-    amp = 0.0001;
+    released = false;
+    A = sample_rate*A_;
+    D = sample_rate*D_;
+    R = sample_rate*R_;
+    S = S_;
+    if (amp < 0) amp = 0;
+    position = (int)(amp*A);
+    ad = 1.0f/A;
+    ds = (S - 1.0F)/D;
+    sr = -S/R;
 }
 
-void ADSR::attack()
+void ADSR::Release(std::function<void(bool)> callback_)
 {
-    active = true;
-    if (amp < 0) amp = 0.00001;
-    position = (int)(amp/A);
-    amp_inc = 1.0F/(float)A;
+    callback = callback_;
+    released = true;
 }
 
-void ADSR::release()
-{
-    amp_inc = -S/(float)R;
-}
+void ADSR::ARender(double beat, float *lsample, float *rsample) {
+    if (released){
+        if (amp > 0) {
+            amp += sr;
+        } else {
+            amp = 0;
+            released = false;
+            callback(false);
+        }
+    } else if (position < A){
+        amp += ad;
+    } else if (position < A + D){
+        amp += ds;
+    }
 
-float ADSR::apply(float sample)
-{
-    if (position == A){
-        amp_inc = (S - 1.0F)/(float)(D);
-    }
-    if (position == A + D){
-        release();
-    }
-    if(amp > 0){
-        amp += amp_inc;
-        position ++;
-    } else {
-        active = false;
-    }
-    return sample*amp;
+    position ++;
+    if (amp > 1) amp = 1;
 }

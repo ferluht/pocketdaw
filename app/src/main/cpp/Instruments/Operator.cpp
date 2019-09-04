@@ -4,47 +4,113 @@
 
 #include "Operator.h"
 
-Operator::Operator(){
+Operator::Operator(unsigned int num_voices) : Instrument<OperatorState>(num_voices){
     GAttachTexture("Textures/effect_canvas.bmp");
 
     for (int i = 0; i < 4; i++) {
-        enc_ratios[i] = new Encoder(L"course 1", 0, [this, i](float value) {
-            ratios[i] = (int) (10 * (value + 1));
-            if (ratios[i] == 0) ratios[i] = 0.5;
-        }, i + 1);
-        enc_ratios[i]->place(0.03, 0.03+0.22*i, 0.2, 0.2);
-        GAttach(enc_ratios[i]);
-        MConnect(enc_ratios[i]);
+        sines[i] = new Sine(1);
+        sines[i]->place(0.03, 0.03, 0.4, 0.9);
+        GAttach(sines[i]);
+        sines[i]->GSetVisible(false);
     }
 
-    for (int i = 0; i < 4; i++) {
-        enc_levels[i] = new Encoder(L"level 1", -1, [this, i](float value) {
-            levels[i] = (value + 1)/2;
-        }, i + 5);
-        enc_levels[i]->place(0.33, 0.03+0.22*i, 0.2, 0.2);
-        GAttach(enc_levels[i]);
-        MConnect(enc_levels[i]);
+    op_focus = 0;
+    sines[op_focus]->GSetVisible(true);
+    MConnect(sines[op_focus]);
+
+
+    graph = new TimeGraph(200);
+    graph->place(0.03, 0.5, 0.5, 0.9);
+    GAttach(graph);
+    graph_phase = 0;
+
+
+    enc_mode = new Encoder(L"mode", -1, [this](float value) {
+        mode = (int) (2.2 * (value + 1));
+    }, 4);
+    enc_mode->place(0.0, 0.7, 0.3, 0.3);
+    GAttach(enc_mode);
+    MConnect(enc_mode);
+
+
+    mode = 0;
+
+    level = 1;
+}
+
+void Operator::IUpdateState(OperatorState *state, MData md){
+    if (md.data2 != 0) state->setActive(true);
+    state->note = md.data1;
+    for (int i = 0; i < 4; i++){
+        sines[i]->IUpdateState(&state->sinestates[i], md);
     }
 }
 
-void Operator::updateState(OperatorState *state, MData md){
-    if (md.data2 != 0) {
-        state->note = md.data1;
-        state->phase_increment = getPhaseIncrement(state->note);
-        for (int i = 0; i < 4; i ++) state->phases[i] = 0;
-        state->setActive(true);
-    }else{
-        state->setActive(false);
+void Operator::MIn(MData cmd) {
+    Instrument<OperatorState>::MIn(cmd);
+    if (cmd.status == 0xb0 && cmd.data2 == 0){
+        switch (cmd.data1){
+            case 0x15:
+                MDisconnect(sines[op_focus]);
+                sines[op_focus]->GSetVisible(false);
+                op_focus ++;
+                if (op_focus > 3) op_focus = 3;
+                MConnect(sines[op_focus]);
+                sines[op_focus]->GSetVisible(true);
+                break;
+            case 0x16:
+                MDisconnect(sines[op_focus]);
+                sines[op_focus]->GSetVisible(false);
+                op_focus --;
+                if (op_focus < 0) op_focus = 0;
+                MConnect(sines[op_focus]);
+                sines[op_focus]->GSetVisible(true);
+                return;
+            default:
+                break;
+        }
+    }
+    if ((cmd.status != NOTEON_HEADER) || cmd.data2 != 0) graph_phase = 0;
+}
+
+void Operator::ARender(double beat, float *lsample, float *rsample) {
+    Instrument<OperatorState>::ARender(beat, lsample, rsample);
+    if (graph_phase < 200) {
+        graph->update(*lsample);
+        graph_phase ++;
     }
 }
 
-void Operator::render(OperatorState * state, double beat, float * lsample, float * rsample)
+void Operator::IARender(OperatorState * state, double beat, float * lsample, float * rsample)
 {
-    float sample = sin(state->phases[0]) * levels[0] + \
-                   sin(state->phases[1]) * levels[1] + \
-                   sin(state->phases[2]) * levels[2] * sin(state->phases[3]) * levels[3];
-    sample /= 3;
-    for (int i = 0; i < 4; i ++) state->phases[i] += state->phase_increment * ratios[i];
+    float sample = 0;
+    float a = 0, b = 0, c = 0, d = 0;
+
+    sines[0]->IARender(&state->sinestates[0], beat, &a, &a);
+    sines[1]->IARender(&state->sinestates[1], beat, &b, &b);
+    sines[2]->IARender(&state->sinestates[2], beat, &c, &c);
+    sines[3]->IARender(&state->sinestates[3], beat, &d, &d);
+
+    switch (mode){
+        case 0:
+            sample = (a + b + c + d) / (sines[0]->level + sines[1]->level + sines[2]->level + sines[3]->level);
+            break;
+        case 1:
+            sample = (a + b + c * d) / (sines[0]->level + sines[1]->level + sines[2]->level * sines[3]->level);
+            break;
+        case 2:
+            sample = (a + b * c * d) / (sines[0]->level + sines[1]->level * sines[2]->level * sines[3]->level);
+            break;
+        case 3:
+            sample = (a * b * c * d) / (sines[0]->level * sines[1]->level * sines[2]->level * sines[3]->level);
+            break;
+        default:
+            break;
+    }
+
+    sample *= level;
+
+    state->setActive(state->sinestates[0].active || state->sinestates[1].active || state->sinestates[2].active || state->sinestates[3].active);
 
     *lsample += sample;
     *rsample += sample;

@@ -178,7 +178,13 @@ public:
     void GRender_(float dTime);
     virtual void GRender(float dTime) {};
 
-    void GSetVisible(bool visible_);
+    virtual void GSetVisible(bool visible_) {
+        visible = visible_;
+        changed = true;
+        for (auto const &gr : Graphics) {
+            gr->GSetVisible(visible_);
+        }
+    }
 
     void GUnload();
 

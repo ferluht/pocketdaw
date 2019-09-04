@@ -103,6 +103,7 @@ auto engine = new Engine(master);
 void android_main(android_app *state) {
 
     engine->graphic->SetState(state);
+    engine->midi->attachApp(state);
 
     // Init helper functions
     ndk_helper::JNIHelper::Init(state->activity, HELPER_CLASS_NAME);

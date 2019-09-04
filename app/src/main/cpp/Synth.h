@@ -6,6 +6,7 @@
 #define PD_SYNTH_H
 
 #include <GUI/Button.h>
+#include <GUI/Menu.h>
 #include "GUI/Canvas.h"
 #include "Orchestration/Track.h"
 
@@ -17,10 +18,18 @@ private:
     AMGMasterTrack * Master;
     Button * mapping_mode;
     MGObject * mapping_object;
+    Menu * midiDeviceMenu;
 
 public:
 
     Synth(){
+
+        mapping_mode = new Button(L"MIDI MAP", [this](bool state){
+            MEnableMapping(state);
+        });
+        mapping_mode->place(0.89, 0, 0.05, 0.11);
+        GAttach(mapping_mode);
+
         Master = new AMGMasterTrack();
         GAttachTexture("Textures/background.bmp");
         place(0, 0, 1, 1);
@@ -29,11 +38,13 @@ public:
         GAttach(Master);
         MConnect(Master);
 
-        mapping_mode = new Button(L"MIDI MAP", [this](bool state){
-            MEnableMapping(state);
-        });
-        mapping_mode->place(0.89, 0, 0.05, 0.11);
-        GAttach(mapping_mode);
+        std::vector<std::pair<wchar_t *, std::function<void(void)>>> midiDevices;
+
+        midiDeviceMenu = new Menu(midiDevices);
+        midiDeviceMenu->place(0.1, 0.1, 0.1, 0.3);
+        midiDeviceMenu->GSetVisible(true);
+        GAttach(midiDeviceMenu);
+        MConnect(midiDeviceMenu);
     }
 
     inline void ARender(float * audioData, int numFrames) override {

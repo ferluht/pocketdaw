@@ -30,7 +30,7 @@ void Waveform::ARender(double beat, float *lsample, float *rsample) {
         ai ++;
     } else {
         ai = 0;
-        graph->update(accumulator / sqrt(window) / 2);
+        graph->update(accumulator / window);
         accumulator = 0;
     }
 }
