@@ -6,35 +6,54 @@
 #define PD_SINE_H
 
 #include "Instruments/Instrument.h"
+#include "ADSR.h"
 #include <GUI/Encoder.h>
+#include <GUI/Graph.h>
 
 class SineState : public InstrumentState{
 public:
     double beat;
-    unsigned char note;
     unsigned char velocity;
+
+    ADSR adsr;
 
     float volume;
     double phase;
     double frequency;
     double phase_increment;
-
-    float phase2;
 };
 
 class Sine : public Instrument<SineState>{
 
-    Encoder * enc;
+    Encoder * enc_coarse;
+    Encoder * enc_fine;
+    Encoder * enc_level;
+    Encoder * enc_attack;
+    Encoder * enc_decay;
+    Encoder * enc_sustain;
+    Encoder * enc_release;
+
+    float A, D, S, R;
+
+    TimeGraph * graph;
+
+    int graph_phase;
 
     float k;
 
+    double phase_shift;
+    float ratio;
+    float fine;
+
 public:
 
-    Sine();
+    float level;
 
-    void updateState(SineState * state, MData md) override;
+    Sine(unsigned int num_voices);
 
-    void render(SineState * state, double beat, float * lsample, float * rsample) override ;
+    void IUpdateState(SineState * state, MData md) override;
+
+    void IARender(SineState * state, double beat, float * lsample, float * rsample) override ;
 };
 
 

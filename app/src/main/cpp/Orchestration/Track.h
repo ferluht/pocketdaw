@@ -116,10 +116,10 @@ public:
         Instr = instr_;
         GAttach(Instr);
 
-        Instr->place(0.2, 0, 1, 0.2);
+        Instr->place(0.2, 0, 1, 0.4);
 
-        AEffects.place(0.4, 0, 1, 0.6);
-        MEffects.place(0, 0, 1, 0.2);
+        AEffects.place(0.6, 0, 1, 0.6);
+        MEffects.place(0.1, 0, 1, 0.1);
 
         GAttach(&MEffects);
         GAttach(&AEffects);
@@ -165,12 +165,11 @@ public:
     AMGRack Rack;
 
     AMGTrack(){
-        Rack.RAttachInsrument(new Operator());
+        Rack.RAttachInsrument(new Operator(8));
         GAttach(&Rack);
         GAttachTexture("Textures/track_canvas.bmp");
         Rack.place(0.02, 0.01, 0.98, 0.98);
         MConnect(&Rack);
-
         Rack.AEffects.AMGChainPushBack(new Waveform(200));
 
 //        Rack.MEffects.AMGChainPushBack(new Arpeggiator());
@@ -201,6 +200,8 @@ public:
         isPlaying = true;
         auto tr = new AMGTrack();
         AddTrack(tr);
+//        auto tr2 = new AMGTrack();
+//        AddTrack(tr2);
     }
 
     void ARender(float * audioData, int numFrames) override;

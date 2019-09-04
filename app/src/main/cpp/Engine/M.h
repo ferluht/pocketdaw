@@ -10,6 +10,11 @@
 #include <queue>
 #include <cmath>
 #include <list>
+#include <jni.h>
+
+#include <android_native_app_glue.h>
+#include <android/native_window_jni.h>
+#include <string>
 
 #define NOTEOFF_HEADER 128
 #define NOTEON_HEADER 144
@@ -33,7 +38,7 @@
 
 #define BASE_NOTE 61.0
 #define POWER_BASE 2.0
-#define SEMITONES 24.0
+#define SEMITONES 12.0
 
 struct MData {
     double beat;
@@ -86,6 +91,8 @@ public:
 
 class MEngine : public MObject {
 
+    android_app *app_;
+
 public:
 
     static MEngine &getMEngine() {
@@ -97,6 +104,13 @@ public:
     MEngine(MEngine &&) = delete;                  // Move construct
     MEngine &operator=(MEngine const &) = delete;  // Copy assign
     MEngine &operator=(MEngine &&) = delete;      // Move assign
+
+    std::list<std::string> getDevices();
+    void connectDevice(std::string deviceName);
+
+    void attachApp(android_app *app) {
+        app_ = app;
+    }
 
 protected:
 

@@ -6,37 +6,57 @@
 #define PD_OPERATOR_H
 
 #include "Instruments/Instrument.h"
+#include "ADSR.h"
+#include "Sine.h"
 #include <GUI/Encoder.h>
+#include <GUI/Graph.h>
 
 class OperatorState : public InstrumentState{
 public:
     double beat;
     unsigned char velocity;
 
+    SineState sinestates[4];
+
     float volume;
-    double phases[4];
     double frequency;
     double phase_increment;
+
+//    void setPhaseActive(int i, bool isactive_) {
+//        phase_isactive[i] = isactive_;
+//        setActive(phase_isactive[0] || phase_isactive[1] || phase_isactive[2] || phase_isactive[3]);
+//    }
 };
 
 class Operator : public Instrument<OperatorState>{
 
-    Encoder * enc_ratios[4];
-    Encoder * enc_levels[4];
+    Sine * sines[4];
+
+    TimeGraph * graph;
+
+    int graph_phase;
+
+    Encoder * enc_mode;
 
     float k;
 
-    double phase_shifts[4];
-    float ratios[4];
-    float levels[4];
+    unsigned int mode;
+
+    int op_focus;
+
+    float level;
 
 public:
 
-    Operator();
+    Operator(unsigned int num_voices);
 
-    void updateState(OperatorState * state, MData md) override;
+    void IUpdateState(OperatorState * state, MData md) override;
 
-    void render(OperatorState * state, double beat, float * lsample, float * rsample) override ;
+    void IARender(OperatorState * state, double beat, float * lsample, float * rsample) override ;
+
+    void MIn(MData cmd) override ;
+
+    void ARender(double beat, float * lsample, float * rsample) override ;
 };
 
 

@@ -19,13 +19,13 @@ Encoder::Encoder(wchar_t * label, float default_value_, std::function<void(float
     wheel->GAttachShaders("Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlain.fsh");
     wheel->GAttachTexture("Textures/encoder.bmp");
     wheel->GSaveRatio(true);
-    wheel->place(0.2, 0.05, 0.7, 0.7);
+    wheel->place(0.15, 0.05, 0.6, 0.6);
     GAttach(wheel);
     keymap = default_map_;
     setvalue(default_value_);
 
     auto txt = new Text("Fonts/Roboto-Regular.ttf", label);
-    txt->place(0.07, 0.77, 0.2, 0.9);
+    txt->place(0.07, 0.77, 0.18, 0.9);
     GAttach(txt);
 
     info_overlay.GAttachShaders("Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlainColor.fsh");
@@ -33,6 +33,11 @@ Encoder::Encoder(wchar_t * label, float default_value_, std::function<void(float
     info_overlay.place(0, 0, 1, 1);
     info_overlay.GSaveRatio(true);
     GAttach(&info_overlay);
+}
+
+void Encoder::GSetVisible(bool visible_) {
+    GObject::GSetVisible(visible_);
+    info_overlay.GSetVisible(false);
 }
 
 void Encoder::GDragHandler(const ndk_helper::Vec2 &v) {

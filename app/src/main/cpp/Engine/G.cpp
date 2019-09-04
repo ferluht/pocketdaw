@@ -104,17 +104,9 @@ void GObject::GRender_(float dTime) {
     }
 }
 
-void GObject::GSetVisible(bool visible_) {
-    visible = visible_;
-    changed = true;
-    for (auto const &gr : Graphics) {
-        gr->GSetVisible(visible_);
-    }
-}
-
 void GObject::GAttach(GObject *go) {
     go->GAttachTo(this);
-    Graphics.push_back(go);
+    Graphics.push_front(go);
     //draw_();
 }
 

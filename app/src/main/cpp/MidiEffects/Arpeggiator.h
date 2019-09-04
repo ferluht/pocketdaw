@@ -15,7 +15,11 @@ public:
 
     double scale;
 
+    float rate;
+    float gate;
+
     int cycles;
+
 
     std::map<unsigned char, MData> notes;
     unsigned char last_played_note;

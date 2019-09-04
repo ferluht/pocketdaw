@@ -27,6 +27,12 @@ void AMGMasterTrack::ARender(float *audioData, int numFrames) {
 
     double increment = bpm / 60.0 / sample_rate * numFrames;
 
+//    MData cmd;
+//    cmd.status = 0x80;
+//    cmd.data1 = 50;
+//    cmd.data2 = 100;
+//    MOut(cmd);
+
     for (int i = 0; i < numFrames; i++) {
         audioData[2*i] = 0;
         audioData[2*i+1] = 0;

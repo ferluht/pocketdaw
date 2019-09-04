@@ -48,6 +48,9 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.UUID;
 
 public class MainActivity extends NativeActivity {
@@ -70,6 +73,9 @@ public class MainActivity extends NativeActivity {
     static {
         System.loadLibrary("native-lib");
     }
+
+    private HashMap<String, MidiDeviceInfo> midiDevices;
+    private MidiDeviceInfo currentMidiDevice = null;
 
     private native void midiEvent(byte cmd, byte val1, byte val2);
 
@@ -94,7 +100,7 @@ public class MainActivity extends NativeActivity {
             });
         }
 
-
+        midiDevices = new HashMap<String, MidiDeviceInfo>();
         mHandler = new Handler();
 
         // Use this check to determine whether BLE is supported on the device.  Then you can
@@ -121,38 +127,18 @@ public class MainActivity extends NativeActivity {
         mLeDeviceListAdapter.clear();
         scanLeDevice(true);
 
-
-//        startEngine();
-
         final MidiManager m = (MidiManager)this.getSystemService(Context.MIDI_SERVICE);
-//        MidiDeviceInfo[] infos = m.getDevices();
 
-        //Toast.makeText(MainActivity.this, "on create", Toast.LENGTH_SHORT).show();
+        scanMidiDevices();
 
         m.registerDeviceCallback(new MidiManager.DeviceCallback() {
             public void onDeviceAdded( final MidiDeviceInfo info ) {
-                Bundle properties = info.getProperties();
-                String manufacturer = properties
-                        .getString(MidiDeviceInfo.PROPERTY_MANUFACTURER);
-                //   Toast.makeText(MainActivity.this, manufacturer + " connected", Toast.LENGTH_SHORT).show();
-
-                m.openDevice(info, new MidiManager.OnDeviceOpenedListener() {
-                    @Override
-                    public void onDeviceOpened(MidiDevice device) {
-                        if (device == null) {
-                            Log.e("", "could not open device " + info);
-                        } else {
-                            //Toast.makeText(getApplicationContext(), "opened", Toast.LENGTH_SHORT).show();
-                            MidiOutputPort outputPort = device.openOutputPort(0);
-                            outputPort.connect(new MainActivity.MyReceiver());
-                        }
-                    }}, null);
+                String name = info.getProperties().getString(MidiDeviceInfo.PROPERTY_NAME);
+                midiDevices.put(name, info);
             }
             public void onDeviceRemoved( MidiDeviceInfo info ) {
-                Bundle properties = info.getProperties();
-                String manufacturer = properties
-                        .getString(MidiDeviceInfo.PROPERTY_MANUFACTURER);
-                //Toast.makeText(getApplicationContext(), manufacturer + " disconnected", Toast.LENGTH_SHORT).show();
+                String name = info.getProperties().getString(MidiDeviceInfo.PROPERTY_NAME);
+                midiDevices.remove(name);
             }
         }, null);
 
@@ -270,7 +256,49 @@ public class MainActivity extends NativeActivity {
             }});
     }
 
+    private void scanMidiDevices()
+    {
+        final MidiManager m = (MidiManager)this.getSystemService(Context.MIDI_SERVICE);
+        MidiDeviceInfo[] devices = m.getDevices();
 
+        for (MidiDeviceInfo device : devices) {
+            String name = device.getProperties().getString(MidiDeviceInfo.PROPERTY_NAME);
+            midiDevices.put(name, device);
+        }
+    }
+
+    public String[] getMidiDevices()
+    {
+        String[] ret = new String[midiDevices.size()];
+
+        int i = 0;
+        for (String key : midiDevices.keySet()) {
+            ret[i]= key;
+            i++;
+        }
+
+        return ret;
+    }
+
+    public void connectMidiDevice(String name)
+    {
+        final MidiManager m = (MidiManager)this.getSystemService(Context.MIDI_SERVICE);
+        MidiDeviceInfo info = midiDevices.get(name);
+        if (info != null) {
+            m.openDevice(info, new MidiManager.OnDeviceOpenedListener() {
+                @Override
+                public void onDeviceOpened(MidiDevice device) {
+                    if (device == null) {
+                        Log.e("", "could not open device");
+                    } else {
+                        //Toast.makeText(getApplicationContext(), "opened", Toast.LENGTH_SHORT).show();
+                        MidiOutputPort outputPort = device.openOutputPort(0);
+                        outputPort.connect(new MainActivity.MyReceiver());
+                    }
+                }
+            }, null);
+        }
+    }
 
     private void scanLeDevice(final boolean enable) {
         if (enable) {
