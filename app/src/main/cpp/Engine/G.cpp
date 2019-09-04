@@ -38,13 +38,24 @@ void GObject::GDraw_(){
         globalPosition.x = parent->globalPosition.x + x * parent->globalPosition.width;
         globalPosition.y = parent->globalPosition.y + y * parent->globalPosition.height;
         globalPosition.z = parent->globalPosition.z + 1;
-        globalPosition.height = height * parent->globalPosition.height;
-        globalPosition.width = width * parent->globalPosition.width;
-        if (saveRatio) {
-            globalPosition.ratio = ratio;
+        if (width) {
+            if (height) {
+                globalPosition.height = height * parent->globalPosition.height;
+                globalPosition.width = width * parent->globalPosition.width;
+            } else {
+                globalPosition.width = width * parent->globalPosition.width;
+                globalPosition.height = globalPosition.width / ratio;
+            }
         } else {
-            globalPosition.ratio = globalPosition.width / globalPosition.height;
+            if (height) {
+                globalPosition.height = height * parent->globalPosition.height;
+                globalPosition.width = globalPosition.height * ratio;
+            } else {
+                globalPosition.height = parent->globalPosition.height;
+                globalPosition.width = parent->globalPosition.width;
+            }
         }
+        globalPosition.ratio = globalPosition.width / globalPosition.height;
     } else {
         globalPosition.x = x * GEngine::screen_width;
         globalPosition.y = y * GEngine::screen_height;

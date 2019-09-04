@@ -6,10 +6,13 @@
 
 Operator::Operator(unsigned int num_voices) : Instrument<OperatorState>(num_voices){
     GAttachTexture("Textures/effect_canvas.bmp");
+    setRatio(1);
 
     for (int i = 0; i < 4; i++) {
         sines[i] = new Sine(1);
-        sines[i]->place(0.03, 0.03, 0.4, 0.9);
+        sines[i]->place(0.03, 0.03);
+        sines[i]->setWidth(0.94);
+        sines[i]->setRatio(0.94/0.44);
         GAttach(sines[i]);
         sines[i]->GSetVisible(false);
     }
@@ -20,7 +23,9 @@ Operator::Operator(unsigned int num_voices) : Instrument<OperatorState>(num_voic
 
 
     graph = new TimeGraph(200);
-    graph->place(0.03, 0.5, 0.5, 0.9);
+    graph->place(0.03, 0.5);
+    graph->setHeight(0.5);
+    graph->setWidth(0.94);
     GAttach(graph);
     graph_phase = 0;
 
@@ -28,7 +33,8 @@ Operator::Operator(unsigned int num_voices) : Instrument<OperatorState>(num_voic
     enc_mode = new Encoder(L"mode", -1, [this](float value) {
         mode = (int) (2.2 * (value + 1));
     }, 4);
-    enc_mode->place(0.0, 0.7, 0.3, 0.3);
+    enc_mode->place(0.05, 0.8);
+    enc_mode->setHeight(0.2);
     GAttach(enc_mode);
     MConnect(enc_mode);
 

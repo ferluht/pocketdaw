@@ -15,7 +15,9 @@ Menu::Menu(std::vector<std::pair<wchar_t *, std::function<void(void)>>> items_) 
     int i = 0;
 
     cursor = new MGCanvas();
-    cursor->place(0.05, 0.05, 0.07, 0.9);
+    cursor->place(0.05, 0.05);
+    cursor->setHeight(0.07);
+    cursor->setWidth(0.9);
     cursor->GAttachTexture("Textures/effect_canvas.bmp");
     cursor->GSaveRatio(false);
     GAttach(cursor);
@@ -23,7 +25,8 @@ Menu::Menu(std::vector<std::pair<wchar_t *, std::function<void(void)>>> items_) 
     size = 0;
     for (auto const& item : items){
         auto txt = new Text("Fonts/Roboto-Regular.ttf", item.first);
-        txt->place(0.05, 0.05 + i*0.08, 2, 0.07);
+        txt->place(0.05, 0.05 + i*0.08);
+        txt->setHeight(0.08);
         GAttach(txt);
         i++;
         size ++;
@@ -37,7 +40,7 @@ void Menu::MIn(MData cmd)
         switch (cmd.data1){
             case 0x01:
                 focus = (float)cmd.data2/127.f*((float)items.size()-1);
-                cursor->place(0.05, 0.05 + focus * 0.08, 0.07, 0.9);
+                cursor->place(0.05, 0.05 + focus * 0.08);
                 break;
             case 0x017:
                 items[focus].second();

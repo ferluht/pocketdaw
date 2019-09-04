@@ -56,9 +56,11 @@ public:
         }
         mo->MConnect(AMGObjects.back());
         if (size == 1) {
-            mo->place(0, 0, 1, 0.4);
+            mo->place(0, 0);
+            mo->setHeight(1);
         } else {
-            mo->place(AMGObjects[size - 2]->x + 0.02, 0, 1, 0.4);
+            mo->place(AMGObjects[size - 2]->x + 0.02, 0);
+            mo->setHeight(1);
         }
         AMGObjects.insert(AMGObjects.end() - 1, mo);
         GAttach(mo);
@@ -109,17 +111,24 @@ public:
         Instr->MConnect(&AEffects);
 
         GAttachTexture("Textures/effect_canvas.bmp");
-        place(0, 0, 1, 1);
+        place(0, 0);
+        setHeight(1);
+        setWidth(1);
     }
 
     inline void RAttachInsrument(AMGObject * instr_) {
         Instr = instr_;
         GAttach(Instr);
 
-        Instr->place(0.2, 0, 1, 0.4);
+        Instr->place(0.2, 0);
+        Instr->setHeight(1);
 
-        AEffects.place(0.6, 0, 1, 0.6);
-        MEffects.place(0.1, 0, 1, 0.1);
+        AEffects.place(0.6, 0);
+        AEffects.setHeight(1);
+        AEffects.setRatio(2);
+        MEffects.place(0.1, 0);
+        MEffects.setHeight(1);
+        AEffects.setRatio(2);
 
         GAttach(&MEffects);
         GAttach(&AEffects);
@@ -168,7 +177,9 @@ public:
         Rack.RAttachInsrument(new Operator(8));
         GAttach(&Rack);
         GAttachTexture("Textures/track_canvas.bmp");
-        Rack.place(0.02, 0.01, 0.98, 0.98);
+        Rack.place(0.02, 0.01);
+        Rack.setWidth(0.98);
+        Rack.setHeight(0.98);
         MConnect(&Rack);
         Rack.AEffects.AMGChainPushBack(new Waveform(200));
 
@@ -196,6 +207,7 @@ public:
     AMGChain AEffects;
 
     AMGMasterTrack() : link(120.0) {
+        GAttachTexture("Textures/background.bmp");
         size_denominator = 4;
         isPlaying = true;
         auto tr = new AMGTrack();
@@ -208,7 +220,9 @@ public:
 
     void AddTrack(AMGTrack * track) {
         Tracks.push_back(track);
-        track->place(0, 0.5, 0.5, 1);
+        track->place(0, 0.5);
+        track->setHeight(0.5);
+        track->setWidth(1);
         GAttach(track);
         MConnect(track);
     }

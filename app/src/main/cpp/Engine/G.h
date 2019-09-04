@@ -63,16 +63,31 @@ public:
 
     BBox(float x_, float y_, float z_, float height_, float width_, float angle_)
             : x(x_), y(y_), z(z_), height(height_), width(width_), angle(angle_) {
-        ratio = width / height;
+        ratio = (height * width) ? width / height : 0;
         changed = true;
     }
 
-    inline virtual void place(float x_, float y_, float height_, float width_) {
-        place(x_, y_, z, height_, width_, angle);
+    inline virtual void setRatio(float ratio_) {
+        ratio = ratio_;
+        changed = true;
     }
 
-    inline virtual void place(float x_, float y_, float z_, float height_, float width_, float rotation_) {
-        x = x_, y = y_, z = z_, height = height_, width = width_, angle = rotation_, ratio = width_/height_;
+    inline virtual void setWidth(float width_) {
+        width = width_;
+        changed = true;
+    }
+
+    inline virtual void setHeight(float height_) {
+        height = height_;
+        changed = true;
+    }
+
+    inline virtual void place(float x_, float y_) {
+        place(x_, y_, z);
+    }
+
+    inline virtual void place(float x_, float y_, float z_) {
+        x = x_, y = y_, z = z_;
         changed = true;
     }
 
@@ -81,13 +96,13 @@ public:
         changed = true;
     }
 
-    inline virtual void rotate(float angle) {
-        this->angle += angle;
+    inline virtual void rotate(float angle_) {
+        angle += angle_;
         changed = true;
     }
 
-    inline virtual void set_angle(float angle) {
-        this->angle = angle;
+    inline virtual void setAngle(float angle_) {
+        angle = angle_;
         changed = true;
     }
 

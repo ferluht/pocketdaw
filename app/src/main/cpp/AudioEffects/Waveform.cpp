@@ -10,17 +10,21 @@ Waveform::Waveform(float n) {
 
     window = n;
 
+    setRatio(0.5);
 //    GAttach(new Text("Fonts/Roboto-Regular.ttf", L"waveform", 0.05, 0.05, 2, 0.07));
 
     auto enc = new Encoder(L"scale", 0, [this, n](float value){
         this->window = (value/2 + 0.5f) * n + 1;
     });
-    enc->place(0.02, 0.65, 0.25, 0.25);
+    enc->place(0.02, 0.65);
+    enc->setHeight(0.25);
     GAttach(enc);
     MConnect(enc);
 
     graph = new TimeGraph(n);
-    graph->place(0.05, 0.05, 0.9, 0.9);
+    graph->place(0.05, 0.05);
+    graph->setHeight(0.9);
+    graph->setWidth(0.9);
     GAttach(graph);
 }
 
