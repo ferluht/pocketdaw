@@ -19,11 +19,11 @@ void GObject::GInit_() {
     if (vshader && fshader) shader = Shader::CreateShaderProgram(vshader, fshader);
     if (texture_name) texture = ndk_helper::texture::loadBMP(texture_name);
 
-    GInit();
-
     glGenBuffers(1, &vbo_);
     glGenVertexArrays(1, &vao_);
     glGenBuffers(1, &ibo_);
+
+    GInit();
 
     for (auto const &gr : Graphics) {
         gr->GInit_();
@@ -33,6 +33,8 @@ void GObject::GInit_() {
 }
 
 void GObject::GDraw_(){
+
+    if (!initialized) GInit_();
 
     if (parent){
         globalPosition.x = parent->globalPosition.x + x * parent->globalPosition.width;
@@ -76,7 +78,6 @@ void GObject::GDraw_(){
 
 void GObject::GRender_(float dTime) {
 
-    if (!initialized) GInit_();
     if (focusObject && !focusObject->initialized) focusObject->GInit_();
 
     if (visible) {
