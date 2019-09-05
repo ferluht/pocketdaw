@@ -23,9 +23,9 @@ Menu::Menu(std::vector<std::pair<wchar_t *, std::function<void(void)>>> items_) 
     GAttach(cursor);
 
     unfold_background = new GCanvas();
-    unfold_background->place(0, 0);
+    unfold_background->place(0, 1);
     unfold_background->setWidth(1);
-    unfold_background->setRatio(0.2);
+    unfold_background->setRatio(1);
     unfold_background->GAttachTexture("Textures/effect_canvas.bmp");
     unfold_background->GSetVisible(false);
     GAttach(unfold_background);
@@ -54,10 +54,11 @@ GObject * Menu::GTapEnd() {
         changed = true;
 
         midi->connectDevice(name);
-//            auto txt = new Text("Fonts/Roboto-Regular.ttf", items.back().first);
-//            txt->place(0.05, 0.05 + size*0.08, 0.2, 0.07);
-//            GAttach(txt);
-//            size++;
+        auto txt = new Text("Fonts/Roboto-Regular.ttf", wide_string);
+        txt->place(0.05, 0.05 + size*0.08);
+        txt->setWidth(0.7);
+        GAttach(txt);
+        size++;
 
         delete [] wide_string;
     }
