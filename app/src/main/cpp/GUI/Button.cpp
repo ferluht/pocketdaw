@@ -24,9 +24,10 @@ Button::Button(wchar_t * label, std::function<void(bool)> callback_){
     GAttach(&info_overlay);
 }
 
-void Button::GTapEnd()
+GObject * Button::GTapEnd()
 {
     state = !state;
     info_overlay.GSetVisible(state);
     callback(state);
+    return nullptr;
 }

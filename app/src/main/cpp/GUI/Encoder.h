@@ -63,8 +63,8 @@ public:
 
     void GSetVisible(bool visible_) override ;
 
-    void GDragHandler(const ndk_helper::Vec2& v) override ;
-    void GDragBegin(const ndk_helper::Vec2& v) override ;
+    GObject * GDragHandler(const ndk_helper::Vec2& v) override ;
+    GObject * GDragBegin(const ndk_helper::Vec2& v) override ;
 };
 
 

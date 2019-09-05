@@ -22,16 +22,55 @@ Menu::Menu(std::vector<std::pair<wchar_t *, std::function<void(void)>>> items_) 
     cursor->GSaveRatio(false);
     GAttach(cursor);
 
+    unfold_background = new GCanvas();
+    unfold_background->place(0, 0);
+    unfold_background->setWidth(1);
+    unfold_background->setRatio(0.2);
+    unfold_background->GAttachTexture("Textures/effect_canvas.bmp");
+    unfold_background->GSetVisible(false);
+    GAttach(unfold_background);
+
     size = 0;
     for (auto const& item : items){
         auto txt = new Text("Fonts/Roboto-Regular.ttf", item.first);
         txt->place(0.05, 0.05 + i*0.08);
-        txt->setHeight(0.08);
-        GAttach(txt);
+        txt->setWidth(0.7);
+        unfold_background->GAttach(txt);
         i++;
         size ++;
     }
     focus = 0;
+}
+
+GObject * Menu::GTapEnd() {
+    auto midi = &MEngine::getMEngine();
+    auto mnames = midi->getDevices();
+    for (auto const& name : mnames) {
+        wchar_t* wide_string = new wchar_t[ name.length() + 1 ];
+        std::copy( name.begin(), name.end(), wide_string );
+        wide_string[ name.length() ] = 0;
+
+        items.push_back({wide_string, [midi, name](){midi->connectDevice(name);}});
+        changed = true;
+
+        midi->connectDevice(name);
+//            auto txt = new Text("Fonts/Roboto-Regular.ttf", items.back().first);
+//            txt->place(0.05, 0.05 + size*0.08, 0.2, 0.07);
+//            GAttach(txt);
+//            size++;
+
+        delete [] wide_string;
+    }
+
+    return this;
+}
+
+void Menu::GLoseFocus() {
+    unfold_background->GSetVisible(false);
+}
+
+void Menu::GGainFocus(){
+    unfold_background->GSetVisible(true);
 }
 
 void Menu::MIn(MData cmd)

@@ -15,11 +15,14 @@ public:
 
     Button(wchar_t * label, std::function<void(bool)> callback_);
 
-    void GTapEnd() override ;
+    GObject * GTapEnd() override ;
 
     operator bool() const { return state; }
 
-    GObject * GFindFocusObject(const ndk_helper::Vec2& point) override {return this;}
+    GObject * GFindFocusObject(const ndk_helper::Vec2& point) override {
+        if (visible && globalPosition.contains(point)) return this;
+        return nullptr;
+    }
 };
 
 

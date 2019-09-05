@@ -39,7 +39,10 @@ public:
     void MIn(MData cmd) override {
         MOut(cmd);
     }
-};
 
+    static void HandleCmd(struct android_app *app, int32_t cmd);
+
+    static int32_t HandleInput(android_app *app, AInputEvent *event);
+};
 
 #endif //PD_META_H

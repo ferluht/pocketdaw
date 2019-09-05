@@ -12,8 +12,10 @@ class Menu : public MGCanvas {
 
 public:
 
-//    MGObject * focusObject;
     unsigned int focus;
+
+    GCanvas * unfold_background;
+
     unsigned int size;
     GCanvas * cursor;
     std::vector<std::pair<wchar_t *, std::function<void(void)>>> items;
@@ -22,27 +24,10 @@ public:
 
     void MIn(MData cmd) override ;
 
-    void GTapEnd() override {
-        auto midi = &MEngine::getMEngine();
-        auto mnames = midi->getDevices();
-        for (auto const& name : mnames) {
-            wchar_t* wide_string = new wchar_t[ name.length() + 1 ];
-            std::copy( name.begin(), name.end(), wide_string );
-            wide_string[ name.length() ] = 0;
+    GObject * GTapEnd() override;
 
-            items.push_back({wide_string, [midi, name](){midi->connectDevice(name);}});
-            changed = true;
-
-            midi->connectDevice(name);
-//            auto txt = new Text("Fonts/Roboto-Regular.ttf", items.back().first);
-//            txt->place(0.05, 0.05 + size*0.08, 0.2, 0.07);
-//            GAttach(txt);
-//            size++;
-
-            delete [] wide_string;
-        }
-    }
-
+    void GGainFocus() override;
+    void GLoseFocus() override;
 };
 
 
