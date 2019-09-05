@@ -33,8 +33,8 @@ Menu::Menu(std::vector<std::pair<wchar_t *, std::function<void(void)>>> items_) 
     size = 0;
     for (auto const& item : items){
         auto txt = new Text("Fonts/Roboto-Regular.ttf", item.first);
-        txt->place(0.05, 0.05 + i*0.08);
-        txt->setWidth(0.7);
+        txt->place(0.05, 0.05 + i*0.1);
+        txt->setHeight(0.1);
         unfold_background->GAttach(txt);
         i++;
         size ++;
@@ -51,14 +51,15 @@ GObject * Menu::GTapEnd() {
         wide_string[ name.length() ] = 0;
 
         items.push_back({wide_string, [midi, name](){midi->connectDevice(name);}});
-        changed = true;
 
         midi->connectDevice(name);
         auto txt = new Text("Fonts/Roboto-Regular.ttf", wide_string);
-        txt->place(0.05, 0.05 + size*0.08);
-        txt->setWidth(0.7);
-        GAttach(txt);
+        txt->place(0.05, 0.05 + size*0.1);
+        txt->setHeight(0.1);
+        unfold_background->GAttach(txt);
         size++;
+
+        unfold_background->changed = true;
 
         delete [] wide_string;
     }
