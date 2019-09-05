@@ -45,12 +45,14 @@ void Encoder::GSetVisible(bool visible_) {
     info_overlay.GSetVisible(false);
 }
 
-void Encoder::GDragHandler(const ndk_helper::Vec2 &v) {
+GObject * Encoder::GDragHandler(const ndk_helper::Vec2 &v) {
     wheel->angle = old_angle + (v.x_ - drag_from.x_)/100;
     setangle(wheel->angle);
+    return this;
 }
 
-void Encoder::GDragBegin(const ndk_helper::Vec2 &v) {
+GObject * Encoder::GDragBegin(const ndk_helper::Vec2 &v) {
     drag_from = v;
     old_angle = wheel->angle;
+    return this;
 }

@@ -57,6 +57,7 @@ add_library(
         Engine/A.cpp
         Engine/G.cpp
         Engine/M.cpp
+        Engine/Engine.cpp
 
         GUI/Button.cpp
         GUI/Encoder.cpp

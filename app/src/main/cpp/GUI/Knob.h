@@ -33,7 +33,10 @@ public:
         info_overlay.GSetVisible(state);
     }
 
-    GObject * GFindFocusObject(const ndk_helper::Vec2& point) override {return this;}
+    GObject * GFindFocusObject(const ndk_helper::Vec2& point) override {
+        if (visible && globalPosition.contains(point)) return this;
+        return nullptr;
+    }
 };
 
 

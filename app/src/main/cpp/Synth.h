@@ -50,11 +50,12 @@ public:
         GAttach(midiLed);
 
         std::vector<std::pair<wchar_t *, std::function<void(void)>>> midiDevices;
+        midiDevices.push_back({L"AAAAAA", [](){}});
         midiDeviceMenu = new Menu(midiDevices);
         midiDeviceMenu->place(0.1, 0);
         midiDeviceMenu->setHeight(0.05);
         midiDeviceMenu->setRatio(6);
-        midiDeviceMenu->GSetVisible(true);
+//        midiDeviceMenu->GSetVisible(true);
         GAttach(midiDeviceMenu);
         MConnect(midiDeviceMenu);
     }

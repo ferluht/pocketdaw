@@ -216,29 +216,35 @@ public:
 
     // Event handlers
 
+    virtual void GGainFocus() {}
+
+    virtual void GLoseFocus() {}
+
     virtual GObject * GFindFocusObject(const ndk_helper::Vec2& point)
     {
-        for (auto const &gr : Graphics)
-            if (gr->visible && gr->globalPosition.contains(point))
-                return gr->GFindFocusObject(point);
-        return this;
+        for (auto const &gr : Graphics) {
+            auto fo = gr->GFindFocusObject(point);
+            if (fo) return fo;
+        }
+        if (visible && globalPosition.contains(point)) return this;
+        return nullptr;
     }
 
-    virtual void GTapBegin(const ndk_helper::Vec2& v) {};
-    virtual void GTapHandler(const ndk_helper::Vec2& v) {};
-    virtual void GTapEnd() {};
+    virtual GObject * GTapBegin(const ndk_helper::Vec2& v) {return this;};
+    virtual GObject * GTapHandler(const ndk_helper::Vec2& v) {return this;};
+    virtual GObject * GTapEnd() {return nullptr;};
 
-    virtual void GDoubleTapBegin(const ndk_helper::Vec2& v) {};
-    virtual void GDoubleTapHandler(const ndk_helper::Vec2& v) {};
-    virtual void GDoubleTapEnd() {};
+    virtual GObject * GDoubleTapBegin(const ndk_helper::Vec2& v) {return this;};
+    virtual GObject * GDoubleTapHandler(const ndk_helper::Vec2& v) {return this;};
+    virtual GObject * GDoubleTapEnd() {return nullptr;};
 
-    virtual void GDragBegin(const ndk_helper::Vec2& v) {};
-    virtual void GDragHandler(const ndk_helper::Vec2& v) {};
-    virtual void GDragEnd() {};
+    virtual GObject * GDragBegin(const ndk_helper::Vec2& v) {return this;};
+    virtual GObject * GDragHandler(const ndk_helper::Vec2& v) {return this;};
+    virtual GObject * GDragEnd() {return nullptr;};
 
-    virtual void GPinchBegin(const ndk_helper::Vec2& v) {};
-    virtual void GPinchHandler(const ndk_helper::Vec2& v) {};
-    virtual void GPinchEnd() {};
+    virtual GObject * GPinchBegin(const ndk_helper::Vec2& v) {return this;};
+    virtual GObject * GPinchHandler(const ndk_helper::Vec2& v) {return this;};
+    virtual GObject * GPinchEnd() {return nullptr;};
 
 };
 
@@ -251,8 +257,6 @@ struct android_app;
 class GEngine {
 
 public:
-
-    GObject * root;
 
     ndk_helper::GLContext *gl_context_;
 
@@ -274,7 +278,7 @@ public:
 
     android_app *app_;
 
-    GObject * focus_object;
+    std::list<GObject *> focus;
 
     static GEngine& getGEngine()
     {
@@ -283,7 +287,7 @@ public:
     }
 
     void setRoot(GObject * root_) {
-        root = root_;
+        focus.push_back(root_);
     }
 
     void UpdateFPS(float fFPS);
