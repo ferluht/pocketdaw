@@ -61,7 +61,6 @@ add_library(
 
         GUI/Button.cpp
         GUI/Encoder.cpp
-        GUI/Font.cpp
         GUI/Text.cpp
         GUI/Canvas.cpp
         GUI/Knob.cpp
