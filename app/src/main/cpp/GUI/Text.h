@@ -19,18 +19,20 @@ public:
     const char * ttf_file;
     wchar_t * text;
 
+    float maxWidth, maxRatio;
+
     FT_Face face = 0;
 
-    int width;
-    int height;
+    int twidth;
+    int theight;
 
     FT_Library ft_library;
 
-    Text(const char * font, wchar_t * text_);
+    Text(const char * font, const wchar_t * text_);
 
     void generateTexture();
 
-    float init ( wchar_t *text, int fontSize, int align, int valign, int space, uint8_t r, uint8_t g, uint8_t b );
+    void setMaxWidth(float maxWidth_);
 
     void GInit() override;
 };

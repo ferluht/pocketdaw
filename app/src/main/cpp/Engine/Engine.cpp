@@ -32,7 +32,9 @@ int32_t Engine::HandleInput(android_app *app, AInputEvent *event) {
             eng->drag_detector_.GetPointer(v);
             auto new_focus = eng->focus.back()->GDragHandler(v);
         } else if (dragState & ndk_helper::GESTURE_STATE_END) {
-            auto new_focus = eng->focus.back()->GDragEnd();
+            ndk_helper::Vec2 v;
+            eng->drag_detector_.GetPointer(v);
+            auto new_focus = eng->focus.back()->GDragEnd(v);
             if (eng->focus.size() != 1){
                 eng->focus.back()->GLoseFocus();
                 eng->focus.pop_back();
@@ -57,7 +59,7 @@ int32_t Engine::HandleInput(android_app *app, AInputEvent *event) {
                 focus->GGainFocus();
                 eng->focus.push_back(focus);
             }
-            auto new_focus = eng->focus.back()->GTapEnd();
+            auto new_focus = eng->focus.back()->GTapEnd(v);
             if (eng->focus.size() != 1){
                 eng->focus.back()->GLoseFocus();
                 eng->focus.pop_back();

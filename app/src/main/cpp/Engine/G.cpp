@@ -16,6 +16,11 @@ GObject::GObject()
 GObject::~GObject() { GUnload(); }
 
 void GObject::GInit_() {
+
+    for (auto const &gr : Graphics) {
+        gr->GInit_();
+    }
+
     if (vshader && fshader) shader = Shader::CreateShaderProgram(vshader, fshader);
     if (texture_name) texture = ndk_helper::texture::loadBMP(texture_name);
 
@@ -24,10 +29,6 @@ void GObject::GInit_() {
     glGenBuffers(1, &ibo_);
 
     GInit();
-
-    for (auto const &gr : Graphics) {
-        gr->GInit_();
-    }
 
     initialized = true;
 }
@@ -118,6 +119,7 @@ void GObject::GRender_(float dTime) {
 
 void GObject::GAttach(GObject *go) {
     go->GAttachTo(this);
+//    go->GSetVisible(this->visible);
     Graphics.push_front(go);
     //draw_();
 }

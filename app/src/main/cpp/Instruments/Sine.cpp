@@ -9,7 +9,7 @@ Sine::Sine(unsigned int num_voices) : Instrument<SineState>(num_voices){
 
     setRatio(2);
 
-    enc_coarse = new Encoder(L"course", -1, [this](float value) {
+    enc_coarse = new Encoder(L"coarse", -1, [this](float value) {
         ratio = (int) (10 * (value + 1)) - 1;
     }, 1);
     enc_coarse->place(0.025, 0.05);

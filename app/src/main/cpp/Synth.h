@@ -20,7 +20,7 @@ private:
     Button * mapping_mode;
     MGObject * mapping_object;
     Menu * midiDeviceMenu;
-    Led * midiLed;
+    Led * midiLeds[2];
 
 public:
 
@@ -41,17 +41,20 @@ public:
         mapping_mode = new Button(L"MIDI MAP", [this](bool state){ MEnableMapping(state); });
         mapping_mode->place(0.89, 0);
         mapping_mode->setHeight(0.05);
-        mapping_mode->setRatio(4);
+        mapping_mode->setWidth(0.11);
         GAttach(mapping_mode);
 
-        midiLed = new Led();
-        midiLed->place(0, 0);
-        midiLed->setHeight(0.05);
-        GAttach(midiLed);
+        midiLeds[0] = new Led(false);
+        midiLeds[0]->place(0.001, 0.001);
+        midiLeds[0]->setHeight(0.0235);
+        GAttach(midiLeds[0]);
 
-        std::vector<std::pair<wchar_t *, std::function<void(void)>>> midiDevices;
-        midiDevices.push_back({L"AAAAAA", [](){}});
-        midiDeviceMenu = new Menu(midiDevices);
+        midiLeds[1] = new Led(true);
+        midiLeds[1]->place(0.001, 0.0274);
+        midiLeds[1]->setHeight(0.0235);
+        GAttach(midiLeds[1]);
+
+        midiDeviceMenu = new Menu(L"MIDI device");
         midiDeviceMenu->place(0.1, 0);
         midiDeviceMenu->setHeight(0.05);
         midiDeviceMenu->setRatio(6);
@@ -68,7 +71,8 @@ public:
         if (*mapping_mode && mapping_object) {
             mapping_object->MMap(cmd);
         }
-        midiLed->toggle(2);
+        midiLeds[0]->toggle();
+        midiLeds[1]->toggle();
         MOut(cmd);
     }
 

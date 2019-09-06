@@ -45,6 +45,8 @@ class Sine : public Instrument<SineState>{
     float ratio;
     float fine;
 
+    const float textheight = 0.3;
+
 public:
 
     float level;

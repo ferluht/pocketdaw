@@ -4,75 +4,110 @@
 
 #include "Menu.h"
 #include "Text.h"
+#include <Utils/Utils.h>
 
-
-Menu::Menu(std::vector<std::pair<wchar_t *, std::function<void(void)>>> items_) {
+Menu::Menu(wchar_t * label_) {
 
     GAttachTexture("Textures/effect_canvas.bmp");
     GSaveRatio(true);
 
-    items = items_;
     int i = 0;
 
-    cursor = new MGCanvas();
-    cursor->place(0.05, 0.05);
-    cursor->setHeight(0.07);
-    cursor->setWidth(0.9);
-    cursor->GAttachTexture("Textures/effect_canvas.bmp");
-    cursor->GSaveRatio(false);
-    GAttach(cursor);
+    label = new Text("Fonts/Roboto-Regular.ttf", label_);
+    label->place(0.05, 0.05);
+    label->setHeight(0.7);
+//    label->setMaxWidth(0.9);
+    GAttach(label);
 
     unfold_background = new GCanvas();
     unfold_background->place(0, 1);
     unfold_background->setWidth(1);
     unfold_background->setRatio(1);
     unfold_background->GAttachTexture("Textures/effect_canvas.bmp");
-    unfold_background->GSetVisible(false);
     GAttach(unfold_background);
+    unfold_background->GSetVisible(false);
+
+    cursor = new GCanvas();
+    cursor->place(0.05, 0.05);
+    cursor->setHeight(item_height);
+    cursor->setWidth(0.9);
+    cursor->GAttachShaders("Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlainColor.fsh");
+    cursor->GSetColor(1, 0, 0, 0.2);
+    unfold_background->GAttach(cursor);
 
     size = 0;
-    for (auto const& item : items){
-        auto txt = new Text("Fonts/Roboto-Regular.ttf", item.first);
-        txt->place(0.05, 0.05 + i*0.1);
-        txt->setHeight(0.1);
-        unfold_background->GAttach(txt);
-        i++;
-        size ++;
-    }
     focus = 0;
+
+    unfold = false;
 }
 
-GObject * Menu::GTapEnd() {
-    auto midi = &MEngine::getMEngine();
-    auto mnames = midi->getDevices();
-    for (auto const& name : mnames) {
-        wchar_t* wide_string = new wchar_t[ name.length() + 1 ];
-        std::copy( name.begin(), name.end(), wide_string );
-        wide_string[ name.length() ] = 0;
+void Menu::addItem(const wchar_t * text_, std::function<void(void)> callback_) {
 
-        items.push_back({wide_string, [midi, name](){midi->connectDevice(name);}});
-
-        midi->connectDevice(name);
-        auto txt = new Text("Fonts/Roboto-Regular.ttf", wide_string);
-        txt->place(0.05, 0.05 + size*0.1);
-        txt->setHeight(0.1);
-        unfold_background->GAttach(txt);
-        size++;
-
-        unfold_background->changed = true;
-
-        delete [] wide_string;
+    for (auto item = items.begin(); item != items.end(); ++item){
+        if (wcscmp(item->first->text, text_) == 0) {
+            item->second = callback_;
+            return;
+        }
     }
+
+    auto txt = new Text("Fonts/Roboto-Regular.ttf", text_);
+    txt->place(0.1, 0.05 + size*item_height);
+    txt->setHeight(item_height);
+    txt->setMaxWidth(0.8);
+    items.push_back({txt, callback_});
+    unfold_background->GAttach(txt);
+    unfold_background->changed = true;
+    size ++;
+}
+
+GObject * Menu::GDragHandler(const ndk_helper::Vec2 &v){
+
+    if (unfold_background->globalPosition.contains(v)) {
+        focus = (int)((abs(v.y_ - unfold_background->globalPosition.y) - 0.05*unfold_background->globalPosition.height)/item_height/unfold_background->globalPosition.height);
+        cursor->place(0.05, 0.05 + focus * item_height);
+    }
+
+    last_touch = v;
 
     return this;
 }
 
+GObject * Menu::GDragEnd(const ndk_helper::Vec2 &v) {
+
+    if (cursor->globalPosition.contains(last_touch)) {
+        items[focus].second();
+    }
+
+    return nullptr;
+}
+
+//GObject * Menu::GTapEnd(const ndk_helper::Vec2& v) {
+//    auto midi = &MEngine::getMEngine();
+//    auto mnames = midi->getDevices();
+//    for (auto const& name : mnames) {
+//        std::wstring wide_string = utils::UTF8toUnicode(name);
+//        addItem(wide_string.c_str(), [midi, name](){midi->connectDevice(name);});
+//    }
+//
+//    return this;
+//}
+
 void Menu::GLoseFocus() {
-    unfold_background->GSetVisible(false);
+    unfold = false;
+    unfold_background->GSetVisible(unfold);
 }
 
 void Menu::GGainFocus(){
-    unfold_background->GSetVisible(true);
+
+    auto midi = &MEngine::getMEngine();
+    auto mnames = midi->getDevices();
+    for (auto const& name : mnames) {
+        std::wstring wide_string = utils::UTF8toUnicode(name);
+        addItem(wide_string.c_str(), [midi, name](){midi->connectDevice(name);});
+    }
+
+    unfold = true;
+    unfold_background->GSetVisible(unfold);
 }
 
 void Menu::MIn(MData cmd)
