@@ -13,12 +13,12 @@ public:
     bool state;
     unsigned char counter;
 
-    Led() {
+    Led(bool state_) {
         GAttachShaders("Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlainColor.fsh");
         setRatio(1);
         counter = 0;
-        state = true;
-        GSetColor(1, 0.8, 0, 1);
+        state = state_;
+        GSetColor(1, 0.8, 0, 1*state_);
     }
 
     inline void on(){

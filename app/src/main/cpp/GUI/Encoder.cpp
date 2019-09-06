@@ -28,16 +28,8 @@ Encoder::Encoder(wchar_t * label, float default_value_, std::function<void(float
 
     auto txt = new Text("Fonts/Roboto-Regular.ttf", label);
     txt->place(0.07, 0.77);
-    txt->setHeight(0.18);
+    txt->setHeight(0.15);
     GAttach(txt);
-
-    info_overlay.GAttachShaders("Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlainColor.fsh");
-    info_overlay.GSetColor(0, 0, 1, 0.2);
-    info_overlay.place(0, 0);
-    info_overlay.setHeight(1);
-    info_overlay.setWidth(1);
-    info_overlay.GSaveRatio(true);
-    GAttach(&info_overlay);
 }
 
 void Encoder::GSetVisible(bool visible_) {

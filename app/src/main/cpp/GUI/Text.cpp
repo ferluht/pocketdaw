@@ -4,12 +4,19 @@
 
 #include "Text.h"
 
-Text::Text(const char * font, wchar_t * text_){
+Text::Text(const char * font, const wchar_t * text_){
     FT_Init_FreeType( &ft_library );
 
     GAttachShaders("Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlainRect.fsh");
     ttf_file = font;
-    text = text_;
+
+    size_t len = wcslen (text_);
+    text = new wchar_t[len + 1];
+    wcsncpy ( text, text_, len );
+    text[len] = 0;
+
+    maxRatio = 0;
+    maxWidth = 0;
 }
 
 void Text::GInit(){
@@ -37,9 +44,13 @@ void Text::GInit(){
     generateTexture();
 }
 
+void Text::setMaxWidth(float maxWidth_) {
+    maxWidth = maxWidth_;
+    maxRatio = maxWidth/height;
+}
 
 void Text::generateTexture() {
-    int fontSize = 40;
+    int fontSize = 15;
     int align = 1;
     int vert = 4;
     int space = 4;
@@ -74,14 +85,14 @@ void Text::generateTexture() {
     FT_BitmapGlyph bitmap_glyph = (FT_BitmapGlyph) glyph;
     FT_Bitmap bitmap = bitmap_glyph->bitmap;
     /* теперь надо узнать ширину символа */
-    maxh = bitmap.width;
+    h = bitmap.rows;
 
     /* узнать разницу высоты шрифта и отступа от верха. */
     int resize = bitmap.rows > bitmap_glyph->top ? bitmap.rows - bitmap_glyph->top : bitmap_glyph->top - bitmap.rows;
     /* теперь высота значиться как высота символа плюс отступ */
     if ( h < bitmap.rows + resize ) h = bitmap.rows + resize;
     /* здесь надо знать самую большую высоту символа */
-    maxh = (unsigned int)h*1.7;
+    maxh = h;
 
 
 
@@ -197,17 +208,21 @@ void Text::generateTexture() {
     }
 
     iw = maxwidth;
-    width = iw;
-    height = h;
+    twidth = iw;
+    theight = h;
 
-    unsigned int size = width * height;
+    unsigned int size = twidth * theight;
+    if (maxRatio && (twidth/theight > maxRatio)){
+        twidth = theight * maxRatio;
+        size = theight * twidth;
+    }
     /* а вот это уже будущая текстура */
     uint8_t *image_data = new uint8_t [ size * 4 ];
     /* заполняет белым цветом всю текстуру */
     memset ( image_data, 255, size * 4 * sizeof ( uint8_t ) );
 
     for ( unsigned int i = 0, y = 0; i < size; y++ ) {
-        for ( int x = 0; x < width; x++, i++ ) {
+        for ( int x = 0; x < twidth; x++, i++ ) {
             /* сюда помещаем из нашего массива значение в альфа канал */
             image_data[ 4 * i + 3] = im [ y ][ x ];
             /* сюда цвет текста */
@@ -221,7 +236,7 @@ void Text::generateTexture() {
     /* стандартные действия для заполнения текстуры */
     glGenTextures ( 1, &texture );
     glBindTexture ( GL_TEXTURE_2D, texture );
-    glTexImage2D ( GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image_data );
+    glTexImage2D ( GL_TEXTURE_2D, 0, GL_RGBA, twidth, theight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image_data );
 
 //    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 //    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -231,5 +246,5 @@ void Text::generateTexture() {
     /* и удалить текстуру, она уже загружена в буфер и image_data больше не требуется. */
     delete[] image_data;
 
-    ratio = (float)width/(float)height;
+    ratio = (float)twidth/(float)theight;
 }

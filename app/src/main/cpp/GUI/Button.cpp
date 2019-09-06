@@ -3,7 +3,6 @@
 //
 
 #include "Button.h"
-#include "Text.h"
 
 Button::Button(wchar_t * label, std::function<void(bool)> callback_){
     callback = callback_;
@@ -11,20 +10,20 @@ Button::Button(wchar_t * label, std::function<void(bool)> callback_){
     GAttachShaders("Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlainRect.fsh");
     GAttachTexture("Textures/button.bmp");
 
-    auto txt = new Text("Fonts/Roboto-Regular.ttf", label);
-    txt->place(0.07, 0.1);
-    txt->setHeight(0.7);
-    GAttach(txt);
+    text = new Text("Fonts/Roboto-Regular.ttf", label);
+    text->setWidth(textwidth);
+    GAttach(text);
 
-    info_overlay.GAttachShaders("Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlainColor.fsh");
     info_overlay.GSetColor(1, 0, 0, 0.2);
-    info_overlay.place(0, 0);
-    info_overlay.setHeight(1);
-    info_overlay.setWidth(1);
-    GAttach(&info_overlay);
+    info_overlay.GSetVisible(state);
 }
 
-GObject * Button::GTapEnd()
+void Button::GInit()
+{
+    text->place(0.07, (1 - textwidth/text->ratio)/4);
+}
+
+GObject * Button::GTapEnd(const ndk_helper::Vec2& v)
 {
     state = !state;
     info_overlay.GSetVisible(state);

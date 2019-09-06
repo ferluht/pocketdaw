@@ -68,6 +68,8 @@ add_library(
         GUI/Menu.cpp
         GUI/Led.cpp
 
+        Utils/TextConversion.cpp
+
 #        Instruments/ModularSynth/VCO.cpp
 #        Instruments/ModularSynth/Module.cpp
 #        Instruments/ModularSynth/Modular.cpp

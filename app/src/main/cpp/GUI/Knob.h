@@ -18,6 +18,12 @@ public:
     unsigned int keymap;
 
     Knob(){
+        info_overlay.GAttachShaders("Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlainColor.fsh");
+        info_overlay.GSetColor(0, 0, 1, 0.2);
+        info_overlay.place(0, 0);
+        info_overlay.setHeight(1);
+        info_overlay.setWidth(1);
+        GAttach(&info_overlay);
         info_overlay.GSetVisible(false);
     }
 

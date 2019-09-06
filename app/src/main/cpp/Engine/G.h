@@ -232,19 +232,19 @@ public:
 
     virtual GObject * GTapBegin(const ndk_helper::Vec2& v) {return this;};
     virtual GObject * GTapHandler(const ndk_helper::Vec2& v) {return this;};
-    virtual GObject * GTapEnd() {return nullptr;};
+    virtual GObject * GTapEnd(const ndk_helper::Vec2& v) {return nullptr;};
 
     virtual GObject * GDoubleTapBegin(const ndk_helper::Vec2& v) {return this;};
     virtual GObject * GDoubleTapHandler(const ndk_helper::Vec2& v) {return this;};
-    virtual GObject * GDoubleTapEnd() {return nullptr;};
+    virtual GObject * GDoubleTapEnd(const ndk_helper::Vec2& v) {return nullptr;};
 
     virtual GObject * GDragBegin(const ndk_helper::Vec2& v) {return this;};
     virtual GObject * GDragHandler(const ndk_helper::Vec2& v) {return this;};
-    virtual GObject * GDragEnd() {return nullptr;};
+    virtual GObject * GDragEnd(const ndk_helper::Vec2& v) {return nullptr;};
 
     virtual GObject * GPinchBegin(const ndk_helper::Vec2& v) {return this;};
     virtual GObject * GPinchHandler(const ndk_helper::Vec2& v) {return this;};
-    virtual GObject * GPinchEnd() {return nullptr;};
+    virtual GObject * GPinchEnd(const ndk_helper::Vec2& v) {return nullptr;};
 
 };
 
