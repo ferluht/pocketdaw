@@ -18,6 +18,8 @@ private:
     int focus_track;
     AMGMasterTrack * Master;
     Button * mapping_mode;
+    Button * metronome_button;
+    ProgressButton * linkButton;
     MGObject * mapping_object;
     Menu * midiDeviceMenu;
     Led * midiLeds[2];
@@ -38,10 +40,22 @@ public:
         GAttach(Master);
         MConnect(Master);
 
-        mapping_mode = new Button(L"MIDI MAP", [this](bool state){ MEnableMapping(state); });
+        metronome_button = Master->metronome_button;
+        metronome_button->place(0.69, 0);
+        metronome_button->setHeight(0.05);
+        metronome_button->setRatio(3);
+        GAttach(metronome_button);
+
+        linkButton = Master->linkButton;
+        linkButton->place(0.79, 0);
+        linkButton->setHeight(0.05);
+        linkButton->setRatio(3);
+        GAttach(linkButton);
+
+        mapping_mode = new Button(L"MIDI", [this](bool state){ MEnableMapping(state); });
         mapping_mode->place(0.89, 0);
         mapping_mode->setHeight(0.05);
-        mapping_mode->setWidth(0.11);
+        mapping_mode->setRatio(3);
         GAttach(mapping_mode);
 
         midiLeds[0] = new Led(false);

@@ -25,6 +25,8 @@ public:
 
 class Sine : public Instrument<SineState>{
 
+public:
+
     Encoder * enc_coarse;
     Encoder * enc_fine;
     Encoder * enc_level;
@@ -46,8 +48,6 @@ class Sine : public Instrument<SineState>{
     float fine;
 
     const float textheight = 0.3;
-
-public:
 
     float level;
 

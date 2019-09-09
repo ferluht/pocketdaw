@@ -196,7 +196,7 @@ int GEngine::InitDisplay(android_app *app) {
 
     SetupView();
 
-    focus.front()->GInit_();
+    focusStack.front()->GInit_();
 
     ShowUI();
 
@@ -246,7 +246,7 @@ void GEngine::DrawFrame() {
     glClearColor(0.5f, 0.5f, 0.5f, 1.f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    focus.front()->GRender_((float)monitor_.GetCurrentTime());
+    focusStack.front()->GRender_((float)monitor_.GetCurrentTime());
 
     // Swap
     if (EGL_SUCCESS != gl_context_->Swap()) {

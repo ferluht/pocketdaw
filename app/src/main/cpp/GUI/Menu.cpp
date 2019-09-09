@@ -113,16 +113,18 @@ void Menu::GGainFocus(){
 void Menu::MIn(MData cmd)
 {
     if (cmd.status == 0xb0){
+        auto geng = &GEngine::getGEngine();
         switch (cmd.data1){
             case 0x01:
                 focus = (float)cmd.data2/127.f*((float)items.size()-1);
                 cursor->place(0.05, 0.05 + focus * 0.08);
                 break;
-            case 0x017:
-                items[focus].second();
-                parent->GSetVisible(true);
-                parent->focusObject = nullptr;
-                GSetVisible(false);
+            case 0x0A:
+                geng->focusOn(this);
+//                items[focus].second();
+//                parent->GSetVisible(true);
+//                parent->focusObject = nullptr;
+//                GSetVisible(false);
                 break;
             default:
                 break;

@@ -61,6 +61,24 @@ public:
         callback(value);
     }
 
+    Encoder& operator=(const float &value_)
+    {
+        setvalue(value_);
+        return *this;
+    }
+
+    Encoder& operator=(const double &value_)
+    {
+        setvalue(value_);
+        return *this;
+    }
+
+    Encoder& operator=(const int &value_)
+    {
+        setvalue(value_);
+        return *this;
+    }
+
     void GSetVisible(bool visible_) override ;
 
     GObject * GDragHandler(const ndk_helper::Vec2& v) override ;

@@ -11,6 +11,7 @@
 class Button : public Knob{
 
     const float textwidth = 0.86;
+    const float textheight = 0.8;
 
 public:
 
@@ -35,6 +36,21 @@ public:
         Knob::GSetVisible(visible_);
         info_overlay.GSetVisible(state);
     }
+};
+
+class ProgressButton : public Button{
+
+public:
+
+    ProgressButton(wchar_t * label, std::function<void(bool)> callback_) :
+    Button(label, callback_){
+        info_overlay.GSetColor(1, 0.8, 0, 0.5);
+    }
+
+    void progress(float percent_) {
+        info_overlay.setWidth(percent_);
+    }
+
 };
 
 

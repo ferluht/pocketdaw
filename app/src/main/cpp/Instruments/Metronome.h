@@ -5,30 +5,35 @@
 #ifndef PD_METRONOME_H
 #define PD_METRONOME_H
 
-#include "Instrument.h"
-#include "ADSR.h"
-#include <cmath>
+#include "Sine.h"
 
-class MetronomeState : public InstrumentState{
-public:
-
-    ADSR ad;
-
-    double phase2;
-};
-
-class Metronome : public Instrument<MetronomeState>{
+class Metronome : public Sine{
 
 public:
 
-    float A = 0.1, D = 0.2, S = 0.7, R = 0.1;
-    float cnt = 0.001;
+    Metronome() : Sine(1) {
+        *enc_level = 0;
+        *enc_attack = -1;
+        *enc_sustain = -1;
+        *enc_decay = -0.98;
+    }
 
-    Metronome();
+    void tic(){
+        MData md;
+        md.status = 0x80;
+        md.data1 = 90;
+        md.data2 = 100;
+        MIn(md);
+    }
 
-    void updateState(MetronomeState * state, MData md) override;
+    void tac(){
+        MData md;
+        md.status = 0x80;
+        md.data1 = 95;
+        md.data2 = 100;
+        MIn(md);
+    }
 
-    void render(MetronomeState * state, double beat, float * lsample, float * rsample) override ;
 };
 
 

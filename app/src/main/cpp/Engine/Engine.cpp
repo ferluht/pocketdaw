@@ -17,32 +17,19 @@ int32_t Engine::HandleInput(android_app *app, AInputEvent *event) {
             // Otherwise, start dragging
             ndk_helper::Vec2 v;
             eng->drag_detector_.GetPointer(v);
-            while (eng->focus.back()->GFindFocusObject(v) == nullptr){
-                eng->focus.back()->GLoseFocus();
-                eng->focus.pop_back();
-            }
-            auto focus = eng->focus.back()->GFindFocusObject(v);
-            if (focus != eng->focus.back()) {
-                focus->GGainFocus();
-                eng->focus.push_back(focus);
-            }
-            auto new_focus = eng->focus.back()->GDragBegin(v);
+            while (eng->focusStack.back()->GFindFocusObject(v) == nullptr) eng->unfocus();
+            eng->focusOn(eng->focusStack.back()->GFindFocusObject(v));
+            auto new_focus = eng->focusStack.back()->GDragBegin(v);
         } else if (dragState & ndk_helper::GESTURE_STATE_MOVE) {
             ndk_helper::Vec2 v;
             eng->drag_detector_.GetPointer(v);
-            auto new_focus = eng->focus.back()->GDragHandler(v);
+            auto new_focus = eng->focusStack.back()->GDragHandler(v);
         } else if (dragState & ndk_helper::GESTURE_STATE_END) {
             ndk_helper::Vec2 v;
             eng->drag_detector_.GetPointer(v);
-            auto new_focus = eng->focus.back()->GDragEnd(v);
-            if (eng->focus.size() != 1){
-                eng->focus.back()->GLoseFocus();
-                eng->focus.pop_back();
-            }
-            if (new_focus != nullptr) {
-                new_focus->GGainFocus();
-                eng->focus.push_back(new_focus);
-            }
+            auto new_focus = eng->focusStack.back()->GDragEnd(v);
+            eng->unfocus();
+            eng->focusOn(new_focus);
         }
 
         // Handle drag state
@@ -50,24 +37,11 @@ int32_t Engine::HandleInput(android_app *app, AInputEvent *event) {
             // Otherwise, start dragging
             ndk_helper::Vec2 v;
             eng->tap_detector_.GetPointer(v);
-            while (eng->focus.back()->GFindFocusObject(v) == nullptr){
-                eng->focus.back()->GLoseFocus();
-                eng->focus.pop_back();
-            }
-            auto focus = eng->focus.back()->GFindFocusObject(v);
-            if (focus != eng->focus.back()) {
-                focus->GGainFocus();
-                eng->focus.push_back(focus);
-            }
-            auto new_focus = eng->focus.back()->GTapEnd(v);
-            if (eng->focus.size() != 1){
-                eng->focus.back()->GLoseFocus();
-                eng->focus.pop_back();
-            }
-            if (new_focus != nullptr) {
-                new_focus->GGainFocus();
-                eng->focus.push_back(new_focus);
-            }
+            while (eng->focusStack.back()->GFindFocusObject(v) == nullptr) eng->unfocus();
+            eng->focusOn(eng->focusStack.back()->GFindFocusObject(v));
+            auto new_focus = eng->focusStack.back()->GTapEnd(v);
+            eng->unfocus();
+            eng->focusOn(new_focus);
         }
 
         return 1;

@@ -12,7 +12,7 @@ set (LINK_DIR D:/link)
 include(${LINK_DIR}/AbletonLinkConfig.cmake)
 include_directories(${LINK_DIR}/include)
 include_directories(${LINK_DIR}/modules/asio-standalone/asio/include)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Link/android-ifaddrs)
+include_directories(src/main/cpp/Link/android-ifaddrs)
 
 # set up common compile options
 set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -fno-exceptions")
@@ -74,7 +74,7 @@ add_library(
 #        Instruments/ModularSynth/Module.cpp
 #        Instruments/ModularSynth/Modular.cpp
         Instruments/Instrument.cpp
-#        Instruments/Metronome.cpp
+        Instruments/Metronome.cpp
         Instruments/ADSR.cpp
         Instruments/Sine.cpp
         Instruments/Operator.cpp
