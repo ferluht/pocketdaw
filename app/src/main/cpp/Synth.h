@@ -22,6 +22,7 @@ private:
     ProgressButton * linkButton;
     MGObject * mapping_object;
     Menu * midiDeviceMenu;
+    Menu * addDeviceMenu;
     Led * midiLeds[2];
 
 public:
@@ -75,6 +76,14 @@ public:
 //        midiDeviceMenu->GSetVisible(true);
         GAttach(midiDeviceMenu);
         MConnect(midiDeviceMenu);
+
+        addDeviceMenu = Master->addDeviceMenu;
+        addDeviceMenu->place(0.3, 0);
+        addDeviceMenu->setHeight(0.05);
+        addDeviceMenu->setRatio(6);
+//        midiDeviceMenu->GSetVisible(true);
+        GAttach(addDeviceMenu);
+        MConnect(addDeviceMenu);
     }
 
     inline void ARender(float * audioData, int numFrames) override {

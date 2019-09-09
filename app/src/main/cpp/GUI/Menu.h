@@ -5,9 +5,20 @@
 #ifndef PD_MENU_H
 #define PD_MENU_H
 
+#include <functional>
 #include "Canvas.h"
 #include "Text.h"
 #include "Knob.h"
+
+class Menu;
+
+struct MenuItem {
+
+    Menu * menu;
+    std::function<void(void)> callback;
+    int centering;
+
+};
 
 class Menu : public Knob {
 
@@ -27,11 +38,12 @@ public:
 
     ndk_helper::Vec2 last_touch;
 
-    std::vector<std::pair<Text *, std::function<void(void)>>> items;
+    std::vector<std::pair<Text *, MenuItem *>> items;
 
     Menu(wchar_t * label_);
 
     void addItem(const wchar_t * text_, std::function<void(void)> callback_);
+    void addItem(const wchar_t * text_, Menu * menu);
 
     void MIn(MData cmd) override ;
 

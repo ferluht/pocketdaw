@@ -17,6 +17,7 @@
 #include <Instruments/Operator.h>
 #include <AudioEffects/Waveform.h>
 #include <MidiEffects/Arpeggiator.h>
+#include <GUI/Menu.h>
 
 class AMGChain : public AMGObject {
 
@@ -210,6 +211,7 @@ public:
     ProgressButton * linkButton;
     Button * metronome_button;
     Metronome * metronome;
+    Menu * addDeviceMenu;
 
     std::vector<AMGTrack*> Tracks;
     AMGChain AEffects;
@@ -219,13 +221,19 @@ public:
         GAttachTexture("Textures/background.bmp");
         size_denominator = 4;
         isPlaying = true;
-        auto tr = new AMGTrack();
-        AddTrack(tr);
 
-        linkButton = new ProgressButton(L"Link", [this](bool state){  });
+        linkButton = new ProgressButton(L"Link", [this](bool state){ this->link.enable(state); });
         metronome = new Metronome();
-        metronome_button = new Button(L"Metr", [this](bool state){ this->link.enable(state); });
+        metronome_button = new Button(L"Metr", [](bool state){});
         beat = 0;
+
+        addDeviceMenu = new Menu(L"Add device");
+        addDeviceMenu->addItem(L"Operator",
+                [this](){
+                    auto tr = new AMGTrack();
+                    AddTrack(tr);
+                });
+//        midiDeviceMenu->GSetVisible(true);
 //        auto tr2 = new AMGTrack();
 //        AddTrack(tr2);
     }
