@@ -6,6 +6,7 @@
 //#include <GUI/Menu.h>
 //#include <AudioEffects/StereoDelay.h>
 //#include <AudioEffects/Lissajous.h>
+#include <chrono>
 #include "Track.h"
 
 void AMGRack::ARender(double beat, float *lsample, float *rsample){
@@ -24,8 +25,10 @@ void AMGMasterTrack::ARender(float *audioData, int numFrames) {
         ableton::Link::SessionState state = link.captureAppSessionState();
         bpm = state.tempo();
         std::chrono::microseconds time = link.clock().micros();
-        phase = state.phaseAtTime(time, size_denominator);
-        beat = state.beatAtTime(time, size_denominator);
+        std::chrono::microseconds second{1000000};
+        std::chrono::microseconds lag = std::chrono::duration_cast<std::chrono::microseconds> ((second * numFrames) / sample_rate);
+        phase = state.phaseAtTime(time + lag, size_denominator);
+        beat = state.beatAtTime(time + lag, size_denominator);
     }
 
     linkButton->progress(phase/size_denominator);

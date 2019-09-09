@@ -251,7 +251,7 @@ public class MainActivity extends NativeActivity {
         this.runOnUiThread(new Runnable()  {
             @Override
             public void run()  {
-                _label.setText(String.format("%2.2f FPS", fFPS));
+                _label.setText(String.format("   %2.2f FPS", fFPS));
 
             }});
     }

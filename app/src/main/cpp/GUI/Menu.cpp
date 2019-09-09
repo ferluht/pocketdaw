@@ -45,7 +45,12 @@ void Menu::addItem(const wchar_t * text_, std::function<void(void)> callback_) {
 
     for (auto item = items.begin(); item != items.end(); ++item){
         if (wcscmp(item->first->text, text_) == 0) {
-            item->second = callback_;
+            //delete item->second->callback;
+            item->second->callback = callback_;
+            if (item->second->menu){
+                delete item->second->menu;
+                item->second->menu = nullptr;
+            }
             return;
         }
     }
@@ -54,7 +59,38 @@ void Menu::addItem(const wchar_t * text_, std::function<void(void)> callback_) {
     txt->place(0.1, 0.05 + size*item_height);
     txt->setHeight(item_height);
     txt->setMaxWidth(0.8);
-    items.push_back({txt, callback_});
+
+    auto item = new MenuItem();
+    item->callback = callback_;
+
+    items.push_back({txt, item});
+    unfold_background->GAttach(txt);
+    unfold_background->changed = true;
+    size ++;
+}
+
+void Menu::addItem(const wchar_t * text_, Menu * menu) {
+
+    for (auto item = items.begin(); item != items.end(); ++item){
+        if (wcscmp(item->first->text, text_) == 0) {
+            if (item->second->menu){
+                delete item->second->menu;
+                item->second->menu = nullptr;
+            }
+            item->second->menu = menu;
+            return;
+        }
+    }
+
+    auto txt = new Text("Fonts/Roboto-Regular.ttf", text_);
+    txt->place(0.1, 0.05 + size*item_height);
+    txt->setHeight(item_height);
+    txt->setMaxWidth(0.8);
+
+    auto item = new MenuItem();
+    item->menu = menu;
+
+    items.push_back({txt, item});
     unfold_background->GAttach(txt);
     unfold_background->changed = true;
     size ++;
@@ -75,7 +111,7 @@ GObject * Menu::GDragHandler(const ndk_helper::Vec2 &v){
 GObject * Menu::GDragEnd(const ndk_helper::Vec2 &v) {
 
     if (cursor->globalPosition.contains(last_touch)) {
-        items[focus].second();
+        items[focus].second->callback();
     }
 
     return nullptr;
