@@ -11,8 +11,9 @@
 #include <queue>
 #include "Engine/Engine.h"
 #include "GUI/Canvas.h"
+#include "GUI/Button.h"
 #include <ableton/Link.hpp>
-#include <Instruments/Sine.h>
+#include <Instruments/Metronome.h>
 #include <Instruments/Operator.h>
 #include <AudioEffects/Waveform.h>
 #include <MidiEffects/Arpeggiator.h>
@@ -196,22 +197,35 @@ public:
 
 class AMGMasterTrack : public AMGCanvas{
 
+private:
+
+    double last_phase = 0;
+
 public:
 
     ableton::Link link;
     unsigned char size_denominator;
     double bpm, beat, phase;
     bool isPlaying;
+    ProgressButton * linkButton;
+    Button * metronome_button;
+    Metronome * metronome;
 
     std::vector<AMGTrack*> Tracks;
     AMGChain AEffects;
 
     AMGMasterTrack() : link(120.0) {
+        link.enable(true);
         GAttachTexture("Textures/background.bmp");
         size_denominator = 4;
         isPlaying = true;
         auto tr = new AMGTrack();
         AddTrack(tr);
+
+        linkButton = new ProgressButton(L"Link", [this](bool state){  });
+        metronome = new Metronome();
+        metronome_button = new Button(L"Metr", [this](bool state){ this->link.enable(state); });
+        beat = 0;
 //        auto tr2 = new AMGTrack();
 //        AddTrack(tr2);
     }

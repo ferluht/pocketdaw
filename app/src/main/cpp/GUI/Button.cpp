@@ -11,7 +11,7 @@ Button::Button(wchar_t * label, std::function<void(bool)> callback_){
     GAttachTexture("Textures/button.bmp");
 
     text = new Text("Fonts/Roboto-Regular.ttf", label);
-    text->setWidth(textwidth);
+    text->setHeight(textheight);
     GAttach(text);
 
     info_overlay.GSetColor(1, 0, 0, 0.2);
@@ -20,7 +20,7 @@ Button::Button(wchar_t * label, std::function<void(bool)> callback_){
 
 void Button::GInit()
 {
-    text->place(0.07, (1 - textwidth/text->ratio)/4);
+    text->place(0.07 + (0.86 - text->ratio*textheight/ratio)/2 , (1 - textheight)/2);
 }
 
 GObject * Button::GTapEnd(const ndk_helper::Vec2& v)

@@ -17,6 +17,9 @@ void AMGRack::ARender(double beat, float *lsample, float *rsample){
 }
 
 void AMGMasterTrack::ARender(float *audioData, int numFrames) {
+
+    double end_beat = beat;
+
     if (isPlaying) {
         ableton::Link::SessionState state = link.captureAppSessionState();
         bpm = state.tempo();
@@ -25,7 +28,9 @@ void AMGMasterTrack::ARender(float *audioData, int numFrames) {
         beat = state.beatAtTime(time, size_denominator);
     }
 
-    double increment = bpm / 60.0 / sample_rate * numFrames;
+    linkButton->progress(phase/size_denominator);
+
+    double increment = bpm / 60.0 / sample_rate / size_denominator;// + (beat - end_beat)/numFrames;
 
 //    MData cmd;
 //    cmd.status = 0x80;
@@ -36,6 +41,14 @@ void AMGMasterTrack::ARender(float *audioData, int numFrames) {
     for (int i = 0; i < numFrames; i++) {
         audioData[2*i] = 0;
         audioData[2*i+1] = 0;
+
+        if (*metronome_button) {
+            if ((int)phase > (int)last_phase) metronome->tic();
+            else if ((int)phase < (int)last_phase) metronome->tac();
+            last_phase = phase;
+            metronome->ARender(beat, &audioData[2*i], &audioData[2*i + 1]);
+        }
+
         for (auto const& track : Tracks) {
             float l = 0, r = 0;
             track->ARender(beat, &l, &r);
@@ -44,6 +57,7 @@ void AMGMasterTrack::ARender(float *audioData, int numFrames) {
         }
         AEffects.ARender(beat, &audioData[2*i], &audioData[2*i + 1]);
         beat += increment;
+        phase = fmod(phase + increment, size_denominator);
     }
 }
 

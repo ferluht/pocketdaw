@@ -105,27 +105,27 @@ public class MainActivity extends NativeActivity {
 
         // Use this check to determine whether BLE is supported on the device.  Then you can
         // selectively disable BLE-related features.
-        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
-            Toast.makeText(this, "ble_not_supported", Toast.LENGTH_SHORT).show();
-            finish();
-        }
+//        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
+//            Toast.makeText(this, "ble_not_supported", Toast.LENGTH_SHORT).show();
+//            finish();
+//        }
 
         // Initializes a Bluetooth adapter.  For API level 18 and above, get a reference to
         // BluetoothAdapter through BluetoothManager.
-        final BluetoothManager bluetoothManager =
-                (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
-        mBluetoothAdapter = bluetoothManager.getAdapter();
+//        final BluetoothManager bluetoothManager =
+//                (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+//        mBluetoothAdapter = bluetoothManager.getAdapter();
+//
+//        // Checks if Bluetooth is supported on the device.
+//        if (mBluetoothAdapter == null) {
+//            Toast.makeText(this, "error_bluetooth_not_supported", Toast.LENGTH_SHORT).show();
+//            finish();
+//            return;
+//        }
 
-        // Checks if Bluetooth is supported on the device.
-        if (mBluetoothAdapter == null) {
-            Toast.makeText(this, "error_bluetooth_not_supported", Toast.LENGTH_SHORT).show();
-            finish();
-            return;
-        }
-
-        mLeDeviceListAdapter = new LeDeviceListAdapter();
-        mLeDeviceListAdapter.clear();
-        scanLeDevice(true);
+//        mLeDeviceListAdapter = new LeDeviceListAdapter();
+//        mLeDeviceListAdapter.clear();
+//        scanLeDevice(true);
 
         final MidiManager m = (MidiManager)this.getSystemService(Context.MIDI_SERVICE);
 
@@ -173,16 +173,16 @@ public class MainActivity extends NativeActivity {
             setImmersiveSticky();
         }
 
-        if (!mBluetoothAdapter.isEnabled()) {
-            if (!mBluetoothAdapter.isEnabled()) {
-                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-            }
-        }
-
-        // Initializes list view adapter.
-        mLeDeviceListAdapter = new LeDeviceListAdapter();
-        scanLeDevice(true);
+//        if (!mBluetoothAdapter.isEnabled()) {
+//            if (!mBluetoothAdapter.isEnabled()) {
+//                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+//                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+//            }
+//        }
+//
+//        // Initializes list view adapter.
+//        mLeDeviceListAdapter = new LeDeviceListAdapter();
+//        scanLeDevice(true);
     }
     // Our popup window, you will call it from your C/C++ code later
 
@@ -238,8 +238,8 @@ public class MainActivity extends NativeActivity {
     protected void onPause()
     {
         super.onPause();
-        scanLeDevice(false);
-        mLeDeviceListAdapter.clear();
+//        scanLeDevice(false);
+//        mLeDeviceListAdapter.clear();
     }
 
     public void updateFPS(final float fFPS)

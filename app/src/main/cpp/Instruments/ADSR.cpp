@@ -13,6 +13,9 @@ void ADSR::Attack(float A_, float D_, float S_, float R_)
     A = sample_rate*A_;
     D = sample_rate*D_;
     R = sample_rate*R_;
+    if (A == 0) A = 1;
+    if (D == 0) D = 1;
+    if (R == 0) R = 1;
     S = S_;
     if (amp < 0) amp = 0;
     position = (int)(amp*A);

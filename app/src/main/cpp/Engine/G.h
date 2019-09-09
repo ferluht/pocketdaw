@@ -278,7 +278,7 @@ public:
 
     android_app *app_;
 
-    std::list<GObject *> focus;
+    std::list<GObject *> focusStack;
 
     static GEngine& getGEngine()
     {
@@ -287,7 +287,21 @@ public:
     }
 
     void setRoot(GObject * root_) {
-        focus.push_back(root_);
+        focusStack.push_back(root_);
+    }
+
+    void focusOn(GObject * focus_obj) {
+        if (focus_obj && (focus_obj != focusStack.back())) {
+            focus_obj->GGainFocus();
+            focusStack.push_back(focus_obj);
+        }
+    }
+
+    void unfocus(){
+        if (focusStack.size() != 1){
+            focusStack.back()->GLoseFocus();
+            focusStack.pop_back();
+        }
     }
 
     void UpdateFPS(float fFPS);
