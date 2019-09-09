@@ -15,7 +15,7 @@ include_directories(${LINK_DIR}/modules/asio-standalone/asio/include)
 include_directories(src/main/cpp/Link/android-ifaddrs)
 
 # set up common compile options
-set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -fno-exceptions")
+#set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -fno-exceptions")
 #set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Ofast")
 
 # 3rd party library dir
@@ -103,8 +103,9 @@ target_link_libraries(
         native-lib
         aaudio
         ${log-lib}
+        freetype
+
         native_app_glue
         Ableton::Link
-        freetype
         NdkHelper
         )
