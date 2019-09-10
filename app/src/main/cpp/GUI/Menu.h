@@ -41,6 +41,9 @@ public:
     std::vector<std::pair<Text *, MenuItem *>> items;
 
     Menu(wchar_t * label_);
+    void setGainCallback(std::function<void(void)> gainCallback_);
+
+    std::function<void(void)> gainCallback;
 
     void addItem(const wchar_t * text_, std::function<void(void)> callback_);
     void addSubmenu(const wchar_t * text_, Menu * menu);

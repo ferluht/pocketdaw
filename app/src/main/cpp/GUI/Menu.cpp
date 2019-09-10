@@ -8,6 +8,8 @@
 
 Menu::Menu(wchar_t * label_) {
 
+    gainCallback = [](){};
+
     GAttachTexture("Textures/effect_canvas.bmp");
     GSaveRatio(true);
 
@@ -41,6 +43,10 @@ Menu::Menu(wchar_t * label_) {
     unfold = false;
 }
 
+void Menu::setGainCallback(std::function<void(void)> gainCallback_) {
+    gainCallback = gainCallback_;
+}
+
 void Menu::addItem(const wchar_t * text_, std::function<void(void)> callback_) {
 
     for (auto item = items.begin(); item != items.end(); ++item){
@@ -48,7 +54,7 @@ void Menu::addItem(const wchar_t * text_, std::function<void(void)> callback_) {
             //delete item->second->callback;
             item->second->callback = callback_;
             if (item->second->menu){
-                delete item->second->menu;
+//                delete item->second->menu;
                 item->second->menu = nullptr;
             }
             return;
@@ -169,12 +175,7 @@ void Menu::GLoseFocus() {
 
 void Menu::GGainFocus(){
 
-    auto midi = &MEngine::getMEngine();
-    auto mnames = midi->getDevices();
-    for (auto const& name : mnames) {
-        std::wstring wide_string = utils::UTF8toUnicode(name);
-        addItem(wide_string.c_str(), [midi, name](){midi->connectDevice(name);});
-    }
+    gainCallback();
 
     unfold = true;
     unfold_background->GSetVisible(unfold);

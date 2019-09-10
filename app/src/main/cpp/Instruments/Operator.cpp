@@ -51,6 +51,11 @@ Operator::Operator(const wchar_t * name, unsigned int num_voices) : Instrument<O
     level = 1;
 }
 
+void Operator::GSetVisible(bool visible_) {
+    sines[op_focus]->GSetVisible(true);
+    sines[op_focus]->sinename->GSetVisible(true);
+}
+
 void Operator::IUpdateState(OperatorState *state, MData md){
     if (md.data2 != 0) state->setActive(true);
     state->note = md.data1;
@@ -66,18 +71,22 @@ void Operator::MIn(MData cmd) {
             case 0x15:
                 MDisconnect(sines[op_focus]);
                 sines[op_focus]->GSetVisible(false);
+                sines[op_focus]->sinename->GSetVisible(false);
                 op_focus ++;
                 if (op_focus > 3) op_focus = 3;
                 MConnect(sines[op_focus]);
                 sines[op_focus]->GSetVisible(true);
+                sines[op_focus]->sinename->GSetVisible(true);
                 break;
             case 0x16:
                 MDisconnect(sines[op_focus]);
                 sines[op_focus]->GSetVisible(false);
+                sines[op_focus]->sinename->GSetVisible(false);
                 op_focus --;
                 if (op_focus < 0) op_focus = 0;
                 MConnect(sines[op_focus]);
                 sines[op_focus]->GSetVisible(true);
+                sines[op_focus]->sinename->GSetVisible(true);
                 return;
             default:
                 break;
