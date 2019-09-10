@@ -11,7 +11,7 @@ class Metronome : public Sine{
 
 public:
 
-    Metronome() : Sine(1) {
+    Metronome() : Sine(L"metr", 1) {
         *enc_level = 0;
         *enc_attack = -1;
         *enc_sustain = -1;

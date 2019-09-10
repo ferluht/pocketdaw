@@ -61,6 +61,8 @@ void AMGMasterTrack::ARender(float *audioData, int numFrames) {
         AEffects.ARender(beat, &audioData[2*i], &audioData[2*i + 1]);
         beat += increment;
         phase = fmod(phase + increment, size_denominator);
+
+        masterWaveform->ARender(beat, &audioData[2*i], &audioData[2*i + 1]);
     }
 }
 

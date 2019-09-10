@@ -35,6 +35,8 @@ public:
     Encoder * enc_sustain;
     Encoder * enc_release;
 
+    Text * sinename;
+
     float A, D, S, R;
 
     TimeGraph * graph;
@@ -51,7 +53,7 @@ public:
 
     float level;
 
-    Sine(unsigned int num_voices);
+    Sine(const wchar_t * name, unsigned int num_voices);
 
     void IUpdateState(SineState * state, MData md) override;
 

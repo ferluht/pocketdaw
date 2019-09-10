@@ -46,9 +46,11 @@ class Operator : public Instrument<OperatorState>{
 
     float level;
 
+    Text * opname;
+
 public:
 
-    Operator(unsigned int num_voices);
+    Operator(const wchar_t * name, unsigned int num_voices);
 
     void IUpdateState(OperatorState * state, MData md) override;
 

@@ -22,8 +22,9 @@ private:
     ProgressButton * linkButton;
     MGObject * mapping_object;
     Menu * midiDeviceMenu;
-    Menu * addDeviceMenu;
+    Menu * addMenu;
     Led * midiLeds[2];
+    Waveform * masterWaveform;
 
 public:
 
@@ -77,13 +78,19 @@ public:
         GAttach(midiDeviceMenu);
         MConnect(midiDeviceMenu);
 
-        addDeviceMenu = Master->addDeviceMenu;
-        addDeviceMenu->place(0.3, 0);
-        addDeviceMenu->setHeight(0.05);
-        addDeviceMenu->setRatio(6);
+        addMenu = Master->addMenu;
+        addMenu->place(0.3, 0);
+        addMenu->setHeight(0.05);
+        addMenu->setRatio(6);
 //        midiDeviceMenu->GSetVisible(true);
-        GAttach(addDeviceMenu);
-        MConnect(addDeviceMenu);
+        GAttach(addMenu);
+        MConnect(addMenu);
+
+        masterWaveform = Master->masterWaveform;
+        masterWaveform->place(0.5, 0);
+        masterWaveform->setHeight(0.05);
+        masterWaveform->setWidth(0.06);
+        GAttach(masterWaveform);
     }
 
     inline void ARender(float * audioData, int numFrames) override {

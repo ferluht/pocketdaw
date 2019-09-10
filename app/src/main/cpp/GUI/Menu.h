@@ -22,11 +22,11 @@ struct MenuItem {
 
 class Menu : public Knob {
 
-    float item_height = 0.1;
+    float item_height = 0.15;
 
 public:
 
-    unsigned int focus;
+    int focus;
     unsigned int size;
 
     bool unfold;
@@ -43,7 +43,7 @@ public:
     Menu(wchar_t * label_);
 
     void addItem(const wchar_t * text_, std::function<void(void)> callback_);
-    void addItem(const wchar_t * text_, Menu * menu);
+    void addSubmenu(const wchar_t * text_, Menu * menu);
 
     void MIn(MData cmd) override ;
 
