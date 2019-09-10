@@ -11,12 +11,13 @@ Arpeggiator::Arpeggiator(double scale_)
 {
     GAttachTexture("Textures/effect_canvas.bmp");
 
-    auto enc = new Encoder(L"scale", 0, [this](float value){
-        this->scale = value/2 + 0.5f;
-    }, 5);
-    enc->place(0.02, 0.65, 0.25, 0.25);
-    GAttach(enc);
-    MConnect(enc);
+//    auto enc = new Encoder(L"scale", 0, [this](float value){
+//        this->scale = value/2 + 0.5f;
+//    }, 5);
+//    enc->place(0.02, 0.65);
+//    0.25, 0.25);
+//    GAttach(enc);
+//    MConnect(enc);
 
     scale = scale_;
     last_played_note = 0;

@@ -50,7 +50,7 @@ void Text::setMaxWidth(float maxWidth_) {
 }
 
 void Text::generateTexture() {
-    int fontSize = 40;
+    int fontSize = 25;
     int align = 1;
     int vert = 4;
     int space = 4;

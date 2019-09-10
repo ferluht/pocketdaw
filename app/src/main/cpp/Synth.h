@@ -71,6 +71,14 @@ public:
         GAttach(midiLeds[1]);
 
         midiDeviceMenu = new Menu(L"MIDI device");
+        midiDeviceMenu->setGainCallback([this](){
+            auto midi = &MEngine::getMEngine();
+            auto mnames = midi->getDevices();
+            for (auto const& name : mnames) {
+                std::wstring wide_string = utils::UTF8toUnicode(name);
+                this->midiDeviceMenu->addItem(wide_string.c_str(), [midi, name](){midi->connectDevice(name);});
+            }
+        });
         midiDeviceMenu->place(0.1, 0);
         midiDeviceMenu->setHeight(0.05);
         midiDeviceMenu->setRatio(6);

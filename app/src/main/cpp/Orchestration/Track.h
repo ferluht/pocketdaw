@@ -51,6 +51,16 @@ public:
         AMGObjects.back()->MDisconnect(mo);
     }
 
+    void Rearrange() {
+        float cur_ratio = 0;
+        for (auto const &obj : AMGObjects) {
+            obj->place(cur_ratio/ratio, 0);
+            obj->setHeight(1);
+            cur_ratio += obj->ratio;
+        }
+        changed = true;
+    }
+
     inline void AMGChainPushBack(AMGObject * mo) {
         auto size = AMGObjects.size();
         if (size > 1) {
@@ -58,19 +68,15 @@ public:
             AMGObjects[size - 2]->MConnect(mo);
         }
         mo->MConnect(AMGObjects.back());
-        if (size == 1) {
-            mo->place(0, 0);
-            mo->setHeight(1);
-        } else {
-            mo->place(AMGObjects[size - 2]->x + 0.02, 0);
-            mo->setHeight(1);
-        }
+        setRatio(ratio + mo->ratio);
         AMGObjects.insert(AMGObjects.end() - 1, mo);
         GAttach(mo);
+        Rearrange();
     }
 
     inline void AMGChainDel(int pos) {
         auto size = AMGObjects.size();
+        setRatio(ratio - AMGObjects[pos]->ratio);
         if (pos > 0 && pos < size - 1) {
             AMGObjects[pos]->MDisconnect(AMGObjects[pos + 1]);
             AMGObjects[pos - 1]->MDisconnect(AMGObjects[pos]);
@@ -82,6 +88,7 @@ public:
             GDetach(AMGObjects[pos]);
             AMGObjects.erase(AMGObjects.begin() + pos);
         }
+        Rearrange();
     }
 
     inline void MRender(double beat) override {
@@ -115,23 +122,22 @@ public:
 
         GAttachTexture("Textures/effect_canvas.bmp");
         place(0, 0);
-        setHeight(1);
-        setWidth(1);
+        setRatio(1);
     }
 
     inline void RAttachInsrument(AMGObject * instr_) {
         Instr = instr_;
         GAttach(Instr);
 
-        Instr->place(0.2, 0);
-        Instr->setHeight(1);
+//        Instr->place(0.2, 0);
+//        Instr->setHeight(1);
 
-        AEffects.place(0.6, 0);
-        AEffects.setHeight(1);
-        AEffects.setRatio(2);
-        MEffects.place(0.1, 0);
-        MEffects.setHeight(1);
-        AEffects.setRatio(2);
+//        AEffects.place(0.6, 0);
+//        AEffects.setHeight(1);
+//        AEffects.setRatio(2);
+//        MEffects.place(0.1, 0);
+//        MEffects.setHeight(1);
+//        AEffects.setRatio(2);
 
         GAttach(&MEffects);
         GAttach(&AEffects);
@@ -142,6 +148,17 @@ public:
         Instr->MConnect(&AEffects);
     }
 
+    inline void GDraw() override {
+//        setRatio(MEffects.ratio + Instr->ratio + AEffects.ratio);
+        MEffects.place(0, 0);
+        MEffects.setHeight(1);
+        Instr->place(MEffects.ratio/globalPosition.ratio, 0);
+        Instr->setHeight(1);
+        Instr->setRatio(1/globalPosition.ratio);
+        AEffects.place((MEffects.ratio + Instr->ratio)/globalPosition.ratio, 0);
+        AEffects.setHeight(1);
+    }
+
     inline void RDetachInsrument() {
         MEffects.MDisconnect(Instr);
         Instr->MDisconnect(&AEffects);
@@ -149,6 +166,14 @@ public:
         GDetach(Instr);
         MEffects.MConnect(Instr);
         Instr->MConnect(&AEffects);
+    }
+
+    inline void RAddMidiEffect(AMGObject * meffect){
+        MEffects.AMGChainPushBack(meffect);
+    }
+
+    inline void RDelMidiEffect(){
+
     }
 
     inline void MIn(MData cmd) override {
@@ -189,7 +214,6 @@ public:
 //        GAttach(&Rack);
         GAttachTexture("Textures/track_canvas.bmp");
         Rack.place(0.02, 0.01);
-        Rack.setWidth(0.98);
         Rack.setHeight(0.98);
         MConnect(&Rack);
 //        Rack.AEffects.AMGChainPushBack(new );
@@ -204,6 +228,10 @@ public:
 
     inline void setInstrument(AMGObject * instrument){
         Rack.RAttachInsrument(instrument);
+    }
+
+    inline void addMidiEffect(AMGObject * effect){
+        Rack.RAddMidiEffect(effect);
     }
 //    void GDragHandler(const ndk_helper::Vec2& v) override ;
 //    void GDragBegin(const ndk_helper::Vec2& v) override ;
@@ -227,6 +255,7 @@ public:
     Metronome * metronome;
     Menu * addMenu;
     Menu * addDeviceMenu;
+    Menu * addMidiMenu;
     Waveform * masterWaveform;
 
     std::vector<AMGTrack*> Tracks;
@@ -253,7 +282,16 @@ public:
                                    }
                                });
 
+        addMidiMenu = new Menu(L"Midi effect");
+        addMidiMenu->addItem(L"Arpeggiator",
+                               [this](){
+                                   if (focus_track > -1) {
+                                       Tracks[focus_track]->addMidiEffect(new Arpeggiator());
+                                   }
+                               });
+
         addMenu->addSubmenu(L"Device", addDeviceMenu);
+        addMenu->addSubmenu(L"Midi", addMidiMenu);
         addMenu->addItem(L"Track",
                 [this](){
                     std::string tracknum = std::to_string(Tracks.size());
@@ -276,7 +314,7 @@ public:
         track->setHeight(0.5);
         track->setWidth(1);
         GAttach(track);
-        MConnect(track);
+//        MConnect(track);
     }
 
     void changeTrackFocus(int i){
