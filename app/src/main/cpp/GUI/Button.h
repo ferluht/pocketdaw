@@ -5,6 +5,7 @@
 #ifndef PD_BUTTON_H
 #define PD_BUTTON_H
 
+#include <functional>
 #include "Knob.h"
 #include "Text.h"
 

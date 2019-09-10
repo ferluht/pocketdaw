@@ -4,13 +4,20 @@
 
 #include "Operator.h"
 
-Operator::Operator(unsigned int num_voices) : Instrument<OperatorState>(num_voices){
+Operator::Operator(const wchar_t * name, unsigned int num_voices) : Instrument<OperatorState>(num_voices){
     GAttachTexture("Textures/effect_canvas.bmp");
     setRatio(1);
 
+    opname = new Text("Fonts/Roboto-Regular.ttf", name);
+    opname->place(0.03, 0.03);
+    opname->setHeight(0.1);
+    GAttach(opname);
+
+    const wchar_t * names[] = {L"A", L"B", L"C", L"D"};
+
     for (int i = 0; i < 4; i++) {
-        sines[i] = new Sine(1);
-        sines[i]->place(0.03, 0.03);
+        sines[i] = new Sine(names[i], 1);
+        sines[i]->place(0.03, 0.13);
         sines[i]->setWidth(0.94);
         sines[i]->setRatio(0.94/0.44);
         GAttach(sines[i]);
@@ -23,8 +30,8 @@ Operator::Operator(unsigned int num_voices) : Instrument<OperatorState>(num_voic
 
 
     graph = new TimeGraph(200);
-    graph->place(0.03, 0.5);
-    graph->setHeight(0.5);
+    graph->place(0.03, 0.6);
+    graph->setHeight(0.4);
     graph->setWidth(0.94);
     GAttach(graph);
     graph_phase = 0;

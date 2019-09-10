@@ -4,7 +4,7 @@
 
 #include "Sine.h"
 
-Sine::Sine(unsigned int num_voices) : Instrument<SineState>(num_voices){
+Sine::Sine(const wchar_t * name, unsigned int num_voices) : Instrument<SineState>(num_voices){
     GAttachTexture("Textures/effect_canvas.bmp");
 
     setRatio(2);
@@ -64,6 +64,11 @@ Sine::Sine(unsigned int num_voices) : Instrument<SineState>(num_voices){
     enc_release->setHeight(0.4);
     GAttach(enc_release);
     MConnect(enc_release);
+
+    sinename = new Text("Fonts/Roboto-Regular.ttf", name);
+    sinename->place(0.85, 0.1);
+    sinename->setHeight(0.2);
+    GAttach(sinename);
 
     A = 0.02;
     D = 1.2;

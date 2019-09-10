@@ -126,7 +126,7 @@ void GObject::GAttach(GObject *go) {
 
 void GObject::GDetach(GObject *go) {
     Graphics.remove(go);
-    go->GUnload();
+//    go->GUnload();
     //draw_();
 }
 

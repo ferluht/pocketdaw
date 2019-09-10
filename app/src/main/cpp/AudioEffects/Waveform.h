@@ -12,7 +12,7 @@ class Waveform : public AudioEffect{
 public:
 
     int r = 1;
-    float window = 3;
+    float window = 30;
     float accumulator = 0;
     int ai = 0;
 

@@ -18,6 +18,7 @@
 #include <AudioEffects/Waveform.h>
 #include <MidiEffects/Arpeggiator.h>
 #include <GUI/Menu.h>
+#include <Utils/Utils.h>
 
 class AMGChain : public AMGObject {
 
@@ -175,15 +176,23 @@ public:
     MGObject * trackMenu;
     AMGRack Rack;
 
-    AMGTrack(){
-        Rack.RAttachInsrument(new Operator(8));
+    Text * trackname;
+
+    AMGTrack(std::string name){
         GAttach(&Rack);
+        std::wstring wide_string = utils::UTF8toUnicode(std::string("Track") + name);
+        trackname = new Text("Fonts/Roboto-Regular.ttf", wide_string.c_str());
+        trackname->place(0, -0.1);
+        trackname->setHeight(0.1);
+        GAttach(trackname);
+
+//        GAttach(&Rack);
         GAttachTexture("Textures/track_canvas.bmp");
         Rack.place(0.02, 0.01);
         Rack.setWidth(0.98);
         Rack.setHeight(0.98);
         MConnect(&Rack);
-        Rack.AEffects.AMGChainPushBack(new Waveform(200));
+//        Rack.AEffects.AMGChainPushBack(new );
 
 //        Rack.MEffects.AMGChainPushBack(new Arpeggiator());
     }
@@ -191,6 +200,10 @@ public:
 
     inline void ARender(double beat, float *lsample, float *rsample) override {
         Rack.ARender(beat, lsample, rsample);
+    }
+
+    inline void setInstrument(AMGObject * instrument){
+        Rack.RAttachInsrument(instrument);
     }
 //    void GDragHandler(const ndk_helper::Vec2& v) override ;
 //    void GDragBegin(const ndk_helper::Vec2& v) override ;
@@ -201,6 +214,7 @@ class AMGMasterTrack : public AMGCanvas{
 private:
 
     double last_phase = 0;
+    int focus_track = -1;
 
 public:
 
@@ -211,7 +225,9 @@ public:
     ProgressButton * linkButton;
     Button * metronome_button;
     Metronome * metronome;
+    Menu * addMenu;
     Menu * addDeviceMenu;
+    Waveform * masterWaveform;
 
     std::vector<AMGTrack*> Tracks;
     AMGChain AEffects;
@@ -227,12 +243,25 @@ public:
         metronome_button = new Button(L"Metr", [](bool state){});
         beat = 0;
 
-        addDeviceMenu = new Menu(L"Add device");
+        addMenu = new Menu(L"Add");
+
+        addDeviceMenu = new Menu(L"Device");
         addDeviceMenu->addItem(L"Operator",
+                               [this](){
+                                   if (focus_track > -1) {
+                                       Tracks[focus_track]->setInstrument(new Operator(L"Operator", 8));
+                                   }
+                               });
+
+        addMenu->addSubmenu(L"Device", addDeviceMenu);
+        addMenu->addItem(L"Track",
                 [this](){
-                    auto tr = new AMGTrack();
+                    std::string tracknum = std::to_string(Tracks.size());
+                    auto tr = new AMGTrack(tracknum);
                     AddTrack(tr);
                 });
+
+        masterWaveform = new Waveform(50);
 //        midiDeviceMenu->GSetVisible(true);
 //        auto tr2 = new AMGTrack();
 //        AddTrack(tr2);
@@ -242,11 +271,38 @@ public:
 
     void AddTrack(AMGTrack * track) {
         Tracks.push_back(track);
+        changeTrackFocus(Tracks.size() - 1);
         track->place(0, 0.5);
         track->setHeight(0.5);
         track->setWidth(1);
         GAttach(track);
         MConnect(track);
+    }
+
+    void changeTrackFocus(int i){
+        if (focus_track > -1) {
+            Tracks[focus_track]->GSetVisible(false);
+        }
+        if (i > (int)Tracks.size() - 1) i = Tracks.size() - 1;
+        if (i < 0) i = 0;
+        focus_track = i;
+        Tracks[focus_track]->GSetVisible(true);
+    }
+
+    inline void MIn(MData cmd) override{
+        if (cmd.status == 0xb0 && cmd.data2 > 0){
+            switch (cmd.data1){
+                case 0x16:
+                    changeTrackFocus(focus_track - 1);
+                    break;
+                case 0x15:
+                    changeTrackFocus(focus_track + 1);
+                    break;
+                default:
+                    break;
+            }
+        }
+        if (focus_track > -1) Tracks[focus_track]->MOut(cmd);
     }
 
 //    void GDragHandler(const ndk_helper::Vec2& v) override ;
