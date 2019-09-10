@@ -10,22 +10,31 @@ Arpeggiator::Arpeggiator() : Arpeggiator(1) {}
 Arpeggiator::Arpeggiator(double scale_)
 {
     GAttachTexture("Textures/effect_canvas.bmp");
+    setRatio(0.5);
 
-//    auto enc = new Encoder(L"scale", 0, [this](float value){
-//        this->scale = value/2 + 0.5f;
-//    }, 5);
-//    enc->place(0.02, 0.65);
-//    0.25, 0.25);
-//    GAttach(enc);
-//    MConnect(enc);
+    auto opname = new Text("Fonts/Roboto-Regular.ttf", L"Arpeggiator");
+    opname->place(0.03, 0.03);
+    opname->setHeight(0.05);
+    GAttach(opname);
+
+    auto enc_release = new Encoder(L"rate", 0, [this](float value) {
+//        this->scale = (value + 1)/2 * 10;
+    }, 8);
+    enc_release->place(0.2, 0.2);
+    enc_release->setHeight(0.4);
+    GAttach(enc_release);
+    MConnect(enc_release);
 
     scale = scale_;
     last_played_note = 0;
     cycles = 0;
+    isplaying = false;
+    last_played_beat = 0;
+    gate = 0.4;
 }
 
 void Arpeggiator::MIn(MData cmd) {
-    if ((cmd.status & 0xF0) == NOTEON_HEADER) {
+    if (((cmd.status & 0xF0) == NOTEON_HEADER) || ((cmd.status & 0xF0) == NOTEOFF_HEADER)) {
         if (cmd.data2) notes.insert({cmd.data1, cmd});
         else notes.erase(cmd.data1);
     } else {
@@ -41,6 +50,16 @@ void Arpeggiator::MRender(double beat) {
         md.beat = beat;
         MOut(md);
         last_played_note = md.data1;
+        last_played_beat = beat;
         cycles = (int)(beat / scale);
+        isplaying = true;
+    }
+    if ( isplaying && ((beat - last_played_beat) / scale > gate)){
+        MData md;
+        md.status = 0x80;
+        md.data1 = last_played_note;
+        md.data2 = 0;
+        MOut(md);
+        isplaying = false;
     }
 }

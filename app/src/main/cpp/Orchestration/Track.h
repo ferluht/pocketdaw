@@ -105,7 +105,8 @@ class AMGRack : public AMGCanvas{
 
 private:
 
-    AMGObject dummy_instr;
+    float padding = 0.01;
+
     MObject mout;
 
 public:
@@ -115,54 +116,44 @@ public:
     AMGChain AEffects;
 
     AMGRack(){
-        Instr = &dummy_instr;
+        Instr = new AMGObject();
         MEffects.MConnect(Instr);
         MEffects.MConnect(&mout);
         Instr->MConnect(&AEffects);
 
-        GAttachTexture("Textures/effect_canvas.bmp");
-        place(0, 0);
-        setRatio(1);
-    }
-
-    inline void RAttachInsrument(AMGObject * instr_) {
-        Instr = instr_;
-        GAttach(Instr);
-
-//        Instr->place(0.2, 0);
-//        Instr->setHeight(1);
-
-//        AEffects.place(0.6, 0);
-//        AEffects.setHeight(1);
-//        AEffects.setRatio(2);
-//        MEffects.place(0.1, 0);
-//        MEffects.setHeight(1);
-//        AEffects.setRatio(2);
+        GAttachTexture("Textures/track_canvas.bmp");
 
         GAttach(&MEffects);
         GAttach(&AEffects);
-
-        MEffects.MDisconnect(&dummy_instr);
-        dummy_instr.MDisconnect(&AEffects);
-        MEffects.MConnect(Instr);
-        Instr->MConnect(&AEffects);
     }
 
-    inline void GDraw() override {
-//        setRatio(MEffects.ratio + Instr->ratio + AEffects.ratio);
-        MEffects.place(0, 0);
-        MEffects.setHeight(1);
-        Instr->place(MEffects.ratio/globalPosition.ratio, 0);
-        Instr->setHeight(1);
-        Instr->setRatio(1/globalPosition.ratio);
-        AEffects.place((MEffects.ratio + Instr->ratio)/globalPosition.ratio, 0);
-        AEffects.setHeight(1);
+    inline void RAttachInsrument(AMGObject * instr_) {
+        MEffects.MDisconnect(Instr);
+        Instr->MDisconnect(&AEffects);
+        GDetach(Instr);
+        delete Instr;
+
+        Instr = instr_;
+        GAttach(Instr);
+
+        Instr->MConnect(&AEffects);
+        MEffects.MConnect(Instr);
+        Rearrange();
+    }
+
+    void Rearrange(){
+        MEffects.place(padding, padding);
+        MEffects.setHeight(1 - 2*padding);
+        Instr->place((MEffects.ratio + padding)/globalPosition.ratio + padding, padding);
+        Instr->setHeight(1 - 2*padding);
+        AEffects.place((MEffects.ratio + Instr->ratio + 2*padding)/globalPosition.ratio + padding, padding);
+        AEffects.setHeight(1 - 2*padding);
     }
 
     inline void RDetachInsrument() {
         MEffects.MDisconnect(Instr);
         Instr->MDisconnect(&AEffects);
-        Instr = &dummy_instr;
+        Instr = new AMGObject();
         GDetach(Instr);
         MEffects.MConnect(Instr);
         Instr->MConnect(&AEffects);
@@ -170,6 +161,7 @@ public:
 
     inline void RAddMidiEffect(AMGObject * meffect){
         MEffects.AMGChainPushBack(meffect);
+        Rearrange();
     }
 
     inline void RDelMidiEffect(){
@@ -186,6 +178,12 @@ public:
         AEffects.MEnableMapping(state);
     }
 
+    inline void MRender(double beat) override {
+        MEffects.MRender(beat);
+        Instr->MRender(beat);
+        AEffects.MRender(beat);
+    }
+
 //    void MConnect(MObject * mo) override ;
 //    void MDisconnect(MObject * mo) override ;
 
@@ -193,46 +191,24 @@ public:
 };
 
 
-class AMGTrack : public AMGCanvas{
+class AMGTrack : public AMGRack{
 
 public:
-
-    MGObject * focusObject;
-    MGObject * trackMenu;
-    AMGRack Rack;
 
     Text * trackname;
 
     AMGTrack(std::string name){
-        GAttach(&Rack);
+        GAttachTexture("Textures/track_canvas.bmp");
+
         std::wstring wide_string = utils::UTF8toUnicode(std::string("Track") + name);
         trackname = new Text("Fonts/Roboto-Regular.ttf", wide_string.c_str());
         trackname->place(0, -0.1);
         trackname->setHeight(0.1);
         GAttach(trackname);
-
-//        GAttach(&Rack);
-        GAttachTexture("Textures/track_canvas.bmp");
-        Rack.place(0.02, 0.01);
-        Rack.setHeight(0.98);
-        MConnect(&Rack);
-//        Rack.AEffects.AMGChainPushBack(new );
-
-//        Rack.MEffects.AMGChainPushBack(new Arpeggiator());
     }
+
     ~AMGTrack(){}
 
-    inline void ARender(double beat, float *lsample, float *rsample) override {
-        Rack.ARender(beat, lsample, rsample);
-    }
-
-    inline void setInstrument(AMGObject * instrument){
-        Rack.RAttachInsrument(instrument);
-    }
-
-    inline void addMidiEffect(AMGObject * effect){
-        Rack.RAddMidiEffect(effect);
-    }
 //    void GDragHandler(const ndk_helper::Vec2& v) override ;
 //    void GDragBegin(const ndk_helper::Vec2& v) override ;
 };
@@ -274,11 +250,17 @@ public:
 
         addMenu = new Menu(L"Add");
 
+//        auto tr = new Arpeggiator();
+//        tr->place(0, 0);
+//        tr->setHeight(0.5);
+//        tr->setRatio(1);
+//        GAttach(tr);
+
         addDeviceMenu = new Menu(L"Device");
         addDeviceMenu->addItem(L"Operator",
                                [this](){
                                    if (focus_track > -1) {
-                                       Tracks[focus_track]->setInstrument(new Operator(L"Operator", 8));
+                                       Tracks[focus_track]->RAttachInsrument(new Operator(L"Operator", 8));
                                    }
                                });
 
@@ -286,7 +268,7 @@ public:
         addMidiMenu->addItem(L"Arpeggiator",
                                [this](){
                                    if (focus_track > -1) {
-                                       Tracks[focus_track]->addMidiEffect(new Arpeggiator());
+                                       Tracks[focus_track]->RAddMidiEffect(new Arpeggiator());
                                    }
                                });
 
@@ -340,7 +322,7 @@ public:
                     break;
             }
         }
-        if (focus_track > -1) Tracks[focus_track]->MOut(cmd);
+        if (focus_track > -1) Tracks[focus_track]->MIn(cmd);
     }
 
 //    void GDragHandler(const ndk_helper::Vec2& v) override ;
