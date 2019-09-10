@@ -10,7 +10,7 @@ Operator::Operator(const wchar_t * name, unsigned int num_voices) : Instrument<O
 
     opname = new Text("Fonts/Roboto-Regular.ttf", name);
     opname->place(0.03, 0.03);
-    opname->setHeight(0.1);
+    opname->setHeight(0.05);
     GAttach(opname);
 
     const wchar_t * names[] = {L"A", L"B", L"C", L"D"};

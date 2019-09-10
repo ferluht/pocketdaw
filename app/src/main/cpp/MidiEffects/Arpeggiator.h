@@ -20,6 +20,9 @@ public:
 
     int cycles;
 
+    bool isplaying;
+
+    double last_played_beat;
 
     std::map<unsigned char, MData> notes;
     unsigned char last_played_note;
