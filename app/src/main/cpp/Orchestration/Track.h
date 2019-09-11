@@ -190,11 +190,94 @@ public:
     void ARender(double beat, float * lsample, float * rsample) override ;
 };
 
+class MidiNote : public MData, public GCanvas{
+
+public:
+
+    double end_beat;
+
+    MidiNote() {
+        GAttachTexture("Textures/track_canvas.bmp");
+    }
+
+    MidiNote& operator=(const MData &cmd)
+    {
+        status = cmd.status;
+        data1 = cmd.data1;
+        data2 = cmd.data2;
+        beat = cmd.beat;
+        end_beat = cmd.beat;
+        return *this;
+    }
+
+    void MNSetEnd(double beat_) {
+        end_beat = beat_;
+    }
+};
+
+class MidiClip : public MGCanvas{
+
+public:
+
+    std::list<MidiNote> Notes;
+
+    double length;
+    bool record;
+    bool record_automation;
+    std::list<MidiNote>::iterator position;
+
+    std::map<unsigned char, MidiNote *> unfinished_notes;
+
+    MidiClip(){
+        GAttachTexture("Textures/midi_canvas.bmp");
+        length = 4;
+
+        record = true;
+        record_automation = false;
+        position = Notes.begin();
+    }
+
+    void MIn(MData cmd) override {
+        if (record) {
+            if ((cmd.status == NOTEON_HEADER) || (cmd.status == NOTEOFF_HEADER)) {
+                if (cmd.data2){
+                    auto note = new MidiNote();
+                    *note = cmd;
+                    GAttach(note);
+                    unfinished_notes.insert({cmd.data1, note});
+                } else {
+                    auto note = unfinished_notes.find(cmd.data1)->second;
+                    note->MNSetEnd(cmd.beat);
+                    note->place(note->beat / length, (float)note->data1/50.0);
+                    note->setWidth(abs(note->beat - note->end_beat) / length);
+                    note->setHeight(1.0/50.0);
+                    unfinished_notes.erase(cmd.data1);
+                }
+            } else if (record_automation) {
+
+            }
+        }
+        MOut(cmd);
+    }
+
+    void MRender(double beat) override {
+//        for (auto const& pair : unfinished_notes) {
+//            auto note = pair.second;
+//            note->place(note->beat / length, note->data1/50);
+//            note->setWidth((note->beat - note->end_beat) / length);
+//            note->setHeight(1.0/50.0);
+//        }
+//        if (beat > position->) ;
+    }
+
+//    void GDraw() override;
+};
 
 class AMGTrack : public AMGRack{
 
 public:
 
+    MidiClip * mc;
     Text * trackname;
 
     AMGTrack(std::string name){
@@ -205,6 +288,18 @@ public:
         trackname->place(0, -0.1);
         trackname->setHeight(0.1);
         GAttach(trackname);
+
+        mc = new MidiClip();
+        mc->MConnect(&MEffects);
+    }
+
+    inline void MIn(MData cmd) override {
+        mc->MIn(cmd);
+    }
+
+    inline void MRender(double beat) override {
+        mc->MRender(beat);
+        AMGRack::MRender(beat);
     }
 
     ~AMGTrack(){}
@@ -286,7 +381,6 @@ public:
 //        auto tr2 = new AMGTrack();
 //        AddTrack(tr2);
     }
-
     void ARender(float * audioData, int numFrames) override;
 
     void AddTrack(AMGTrack * track) {
@@ -296,20 +390,28 @@ public:
         track->setHeight(0.5);
         track->setWidth(1);
         GAttach(track);
+
+        track->mc->place(0.4, 0.01, 0.1);
+        track->mc->setHeight(0.48);
+        track->mc->setWidth(0.59);
+        GAttach(track->mc);
 //        MConnect(track);
     }
 
     void changeTrackFocus(int i){
         if (focus_track > -1) {
             Tracks[focus_track]->GSetVisible(false);
+            Tracks[focus_track]->mc->GSetVisible(false);
         }
         if (i > (int)Tracks.size() - 1) i = Tracks.size() - 1;
         if (i < 0) i = 0;
         focus_track = i;
         Tracks[focus_track]->GSetVisible(true);
+        Tracks[focus_track]->mc->GSetVisible(true);
     }
 
     inline void MIn(MData cmd) override{
+        cmd.beat = phase;
         if (cmd.status == 0xb0 && cmd.data2 > 0){
             switch (cmd.data1){
                 case 0x16:
@@ -323,6 +425,10 @@ public:
             }
         }
         if (focus_track > -1) Tracks[focus_track]->MIn(cmd);
+    }
+
+    inline void MRender(double beat) override {
+        for (auto const& track : Tracks) track->MRender(beat);
     }
 
 //    void GDragHandler(const ndk_helper::Vec2& v) override ;

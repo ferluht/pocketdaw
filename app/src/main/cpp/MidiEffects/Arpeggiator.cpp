@@ -59,6 +59,7 @@ void Arpeggiator::MRender(double beat) {
         md.status = 0x80;
         md.data1 = last_played_note;
         md.data2 = 0;
+        md.beat = beat;
         MOut(md);
         isplaying = false;
     }

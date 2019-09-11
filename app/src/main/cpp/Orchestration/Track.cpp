@@ -10,10 +10,10 @@
 #include "Track.h"
 
 void AMGRack::ARender(double beat, float *lsample, float *rsample){
-    MEffects.MRender(beat);
-    Instr->MRender(beat);
+//    MEffects.MRender(beat);
+//    Instr->MRender(beat);
     Instr->ARender(beat, lsample, rsample);
-    AEffects.MRender(beat);
+//    AEffects.MRender(beat);
     AEffects.ARender(beat, lsample, rsample);
 }
 
@@ -45,16 +45,18 @@ void AMGMasterTrack::ARender(float *audioData, int numFrames) {
         audioData[2*i] = 0;
         audioData[2*i+1] = 0;
 
+        MRender(phase);
+
         if (*metronome_button) {
             if ((int)phase > (int)last_phase) metronome->tic();
             else if ((int)phase < (int)last_phase) metronome->tac();
             last_phase = phase;
-            metronome->ARender(beat, &audioData[2*i], &audioData[2*i + 1]);
+            metronome->ARender(phase, &audioData[2*i], &audioData[2*i + 1]);
         }
 
         for (auto const& track : Tracks) {
             float l = 0, r = 0;
-            track->ARender(beat, &l, &r);
+            track->ARender(phase, &l, &r);
             audioData[2*i] += l;
             audioData[2*i + 1] += r;
         }

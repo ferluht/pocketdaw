@@ -59,7 +59,7 @@ public:
 
     BBox() : BBox (0, 0, 0, 0) {}
 
-    BBox(float x_, float y_, float height_, float width_) : BBox(x_, y_, 0, height_, width_, 0) {}
+    BBox(float x_, float y_, float height_, float width_) : BBox(x_, y_, 1, height_, width_, 0) {}
 
     BBox(float x_, float y_, float z_, float height_, float width_, float angle_)
             : x(x_), y(y_), z(z_), height(height_), width(width_), angle(angle_) {
