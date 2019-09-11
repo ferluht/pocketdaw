@@ -56,6 +56,8 @@ public:
 
 //    GObject * GTapEnd(const ndk_helper::Vec2& v) override;
 
+//    GObject * GFindFocusObject(const ndk_helper::Vec2& point) override;
+
     void GGainFocus() override;
     void GLoseFocus() override;
 

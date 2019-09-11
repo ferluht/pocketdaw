@@ -126,8 +126,9 @@ GObject * Menu::GDragHandler(const ndk_helper::Vec2 &v){
             cursor->GSetVisible(true);
         }
         else cursor->GSetVisible(false);
-    } else if (focus > -1) {
-        if (items[focus].second->menu) {
+    } else {
+        cursor->GSetVisible(false);
+        if (focus > -1 && items[focus].second->menu) {
             items[focus].second->menu->GDragHandler(v);
         }
     }
@@ -145,6 +146,8 @@ GObject * Menu::GDragEnd(const ndk_helper::Vec2 &v) {
     } else {
         if ((focus > -1) && items[focus].second->menu) {
             items[focus].second->menu->GDragEnd(v);
+            unfold_background->GDetach(items[focus].second->menu);
+            items[focus].second->menu->GLoseFocus();
         }
     }
 
@@ -153,13 +156,55 @@ GObject * Menu::GDragEnd(const ndk_helper::Vec2 &v) {
     return nullptr;
 }
 
-//GObject * Menu::GTapEnd(const ndk_helper::Vec2& v) {
-//    auto midi = &MEngine::getMEngine();
-//    auto mnames = midi->getDevices();
-//    for (auto const& name : mnames) {
-//        std::wstring wide_string = utils::UTF8toUnicode(name);
-//        addItem(wide_string.c_str(), [midi, name](){midi->connectDevice(name);});
+//GObject * Menu::GFindFocusObject(const ndk_helper::Vec2 &point) {
+//    if (unfold && unfold_background->globalPosition.contains(point)){
+//        return this;
 //    }
+//    return Knob::GFindFocusObject(point);
+//}
+//
+//GObject * Menu::GTapEnd(const ndk_helper::Vec2& v) {
+//    if (contains(v)){
+//        return this;
+//    }
+//
+//    if (unfold && unfold_background->globalPosition.contains(v)) {
+//        int new_focus = (int)((abs(v.y_ - unfold_background->globalPosition.y) - 0.05*unfold_background->globalPosition.height)/item_height/unfold_background->globalPosition.height);
+//        if (new_focus > items.size() - 1) new_focus = -1;
+//        if (new_focus != focus) {
+//            if ((new_focus > -1) && items[new_focus].second->menu) {
+//                unfold_background->GAttach(items[new_focus].second->menu);
+//                items[new_focus].second->menu->place(1, 0.05 + new_focus * item_height);
+//                items[new_focus].second->menu->setHeight(item_height);
+//                items[new_focus].second->menu->setRatio(globalPosition.ratio);
+//                items[new_focus].second->menu->GGainFocus();
+//            }
+//            if ((focus > -1) && items[focus].second->menu) {
+//                unfold_background->GDetach(items[focus].second->menu);
+//                items[focus].second->menu->GLoseFocus();
+//            }
+//        }
+//        focus = new_focus;
+//        if (focus > -1) {
+//            cursor->place(0.05, 0.05 + focus * item_height);
+//            cursor->GSetVisible(true);
+//        }
+//        else cursor->GSetVisible(false);
+//
+//        if (items[focus].second->menu == nullptr) {
+//            items[focus].second->callback();
+//            return this;
+//        } else {
+//            return items[focus].second->menu;
+//        }
+//    }
+////
+////    auto midi = &MEngine::getMEngine();
+////    auto mnames = midi->getDevices();
+////    for (auto const& name : mnames) {
+////        std::wstring wide_string = utils::UTF8toUnicode(name);
+////        addItem(wide_string.c_str(), [midi, name](){midi->connectDevice(name);});
+////    }
 //
 //    return this;
 //}
@@ -179,6 +224,7 @@ void Menu::GGainFocus(){
 
     unfold = true;
     unfold_background->GSetVisible(unfold);
+    cursor->GSetVisible(false);
 }
 
 void Menu::MIn(MData cmd)

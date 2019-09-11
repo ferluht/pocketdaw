@@ -40,7 +40,7 @@ void GObject::GDraw_(){
     if (parent){
         globalPosition.x = parent->globalPosition.x + x * parent->globalPosition.width;
         globalPosition.y = parent->globalPosition.y + y * parent->globalPosition.height;
-        globalPosition.z = parent->globalPosition.z + 1;
+        globalPosition.z = parent->globalPosition.z + z;
         if (width) {
             if (height) {
                 globalPosition.height = height * parent->globalPosition.height;
@@ -121,6 +121,7 @@ void GObject::GAttach(GObject *go) {
     go->GAttachTo(this);
 //    go->GSetVisible(this->visible);
     Graphics.push_front(go);
+    go->changed = true;
     //draw_();
 }
 
