@@ -5,7 +5,7 @@
 #include "Master.h"
 #include <Instruments/Metronome.h>
 #include <GUI/Button.h>
-#include <AudioEffects/Waveform.h>
+#include "../AudioEffects/Oscilloscope.h"
 #include <AudioEffects/Lissajous.h>
 #include <GUI/Menu.h>
 #include "AudioEffects/StereoDelay.h"
@@ -46,7 +46,7 @@ link(DEFAULT_BPM)
 //    cue->addAudioEffect(new Delay(0.2, 0.09));
 //    cue->addAudioEffect(new Delay(0.2, 0.09));
 //    cue->addAudioEffect(new Delay(8000, 0.3));
-//    cue->addAudioEffect(new Waveform(0.01, 0.5, 0.5));
+//    cue->addAudioEffect(new Oscilloscope(0.01, 0.5, 0.5));
 
 
 //    attach(new Button(0,0,0,0, "Textures/container.bmp", []{}));

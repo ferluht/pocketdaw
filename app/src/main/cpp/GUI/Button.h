@@ -26,6 +26,14 @@ public:
 
     operator bool() const { return state; }
 
+    Button& operator=(const bool &state_)
+    {
+        state = state_;
+        info_overlay.GSetVisible(state);
+        callback(state);
+        return *this;
+    }
+
     GObject * GFindFocusObject(const ndk_helper::Vec2& point) override {
         if (visible && globalPosition.contains(point)) return this;
         return nullptr;

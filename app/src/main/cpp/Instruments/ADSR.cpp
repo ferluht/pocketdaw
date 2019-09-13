@@ -3,48 +3,30 @@
 //
 
 #include "ADSR.h"
+#include <math.h>
 
-ADSR::ADSR()
-{}
-
-void ADSR::Attack(float A_, float D_, float S_, float R_)
-{
-    released = false;
-    A = sample_rate*A_;
-    D = sample_rate*D_;
-    R = sample_rate*R_;
-    if (A == 0) A = 1;
-    if (D == 0) D = 1;
-    if (R == 0) R = 1;
-    S = S_;
-    if (amp < 0) amp = 0;
-    position = (int)(amp*A);
-    ad = 1.0f/A;
-    ds = (S - 1.0F)/D;
-    sr = -S/R;
-}
-
-void ADSR::Release(std::function<void(bool)> callback_)
-{
-    callback = callback_;
-    released = true;
-}
-
-void ADSR::ARender(double beat, float *lsample, float *rsample) {
-    if (released){
-        if (amp > 0) {
-            amp += sr;
-        } else {
-            amp = 0;
-            released = false;
-            callback(false);
+bool ADSR::ARender(double beat, float *lsample, float *rsample) {
+    float old_level = level;
+    if (release_beat > 0){
+        auto time = (float)(beat - release_beat);
+        level = release_level * (1 - time / R);
+        if (level < 0) {
+            level = 0;
+            *lsample = 0;
+            *rsample = 0;
+            return false;
         }
-    } else if (position < A){
-        amp += ad;
-    } else if (position < A + D){
-        amp += ds;
+    } else {
+        auto time = (float)(beat - attack_beat + attack_level*A);
+        if (time < A) {
+            level = time / A;
+        } else if (time < A + D) {
+            level = (A + D - time) / D + S * (time - A) / D;
+        } else {
+            level = S;
+        }
     }
-
-    position ++;
-    if (amp > 1) amp = 1;
+    *lsample *= level;
+    *rsample *= level;
+    return true;
 }

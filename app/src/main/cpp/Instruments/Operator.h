@@ -58,7 +58,7 @@ public:
 
     void MIn(MData cmd) override ;
 
-    void ARender(double beat, float * lsample, float * rsample) override ;
+    bool ARender(double beat, float * lsample, float * rsample) override ;
 
     void GSetVisible(bool visible_) override ;
 };

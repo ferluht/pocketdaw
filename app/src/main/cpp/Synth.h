@@ -24,7 +24,7 @@ private:
     Menu * midiDeviceMenu;
     Menu * addMenu;
     Led * midiLeds[2];
-    Waveform * masterWaveform;
+    Oscilloscope * masterWaveform;
 
 public:
 
@@ -101,8 +101,8 @@ public:
         GAttach(masterWaveform);
     }
 
-    inline void ARender(float * audioData, int numFrames) override {
-        Master->ARender(audioData, numFrames);
+    inline bool ARender(float * audioData, int numFrames) override {
+        return Master->ARender(audioData, numFrames);
     }
 
     void MIn(MData cmd) override {

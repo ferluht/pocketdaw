@@ -5,6 +5,7 @@
 #ifndef PD_ENCODER_H
 #define PD_ENCODER_H
 
+#include <functional>
 #include "Knob.h"
 
 class Encoder : public Knob{
@@ -22,7 +23,6 @@ private:
     }
 
     inline void setangle(float angle_){
-
         if (angle_ < -1.25f*(float)M_PI) {
             angle_ = -1.25f*(float)M_PI;
         }
@@ -32,17 +32,17 @@ private:
         }
 
         wheel->angle = angle_;
-        value = angle2value(angle);
+        value = angle2value(angle_);
         callback(value);
     }
-
-public:
 
     std::function<void(float)> callback;
 
     float value;
 
     GCanvas * wheel;
+
+public:
 
     Encoder(wchar_t * label, float default_value_, std::function<void(float)> callback_);
     Encoder(wchar_t * label, float default_value_, std::function<void(float)> callback_, unsigned int default_map_);
@@ -78,6 +78,8 @@ public:
         setvalue(value_);
         return *this;
     }
+
+    operator float() const { return value; }
 
     void GSetVisible(bool visible_) override ;
 

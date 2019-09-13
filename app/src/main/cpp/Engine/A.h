@@ -17,11 +17,11 @@ public:
 
     inline void ASetSampleRate(float sample_rate_) {sample_rate = sample_rate_;}
 
-    virtual void ARender(float * audioData, int numFrames) {}
+    virtual bool ARender(float * audioData, int numFrames) {return true;}
 
-    virtual void ARender(float * lsample, float * rsample) {};
+    virtual bool ARender(float * lsample, float * rsample) {return true;}
 
-    virtual void ARender(double beat, float * lsample, float * rsample) {};
+    virtual bool ARender(double beat, float * lsample, float * rsample) {return true;}
 };
 
 class AEngine {
