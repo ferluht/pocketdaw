@@ -10,23 +10,34 @@
 
 class ADSR : public AObject{
 
+    double attack_beat;
+    double release_beat;
+
+    float attack_level;
+    float release_level;
+
+    float level;
+
 public:
 
-    bool released;
-
-    std::function<void(bool)> callback;
-
     float A, D, S, R;
-    int position;
-    float amp;
-    float ad, ds, sr;
 
-    ADSR();
-    void Attack(float A_, float D_, float S_, float R_);
-    void Release(std::function<void(bool)> callback_);
-    void ARender(double beat, float * lsample, float * rsample) override ;
+    ADSR() {
+        level = 0;
+    }
 
-    operator float() const {return amp;}
+    inline void attack(double beat) {
+        attack_beat = beat;
+        attack_level = level;
+        release_beat = -1;
+    }
+
+    inline void release(double beat) {
+        release_beat = beat;
+        release_level = level;
+    }
+
+    bool ARender(double beat, float * lsample, float * rsample) override ;
 };
 
 

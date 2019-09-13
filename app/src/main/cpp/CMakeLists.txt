@@ -16,7 +16,7 @@ include_directories(src/main/cpp/Link/android-ifaddrs)
 
 # set up common compile options
 #set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -fno-exceptions")
-#set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Ofast")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Ofast")
 
 # 3rd party library dir
 get_filename_component(commonDir ${CMAKE_CURRENT_SOURCE_DIR}/../../../../common ABSOLUTE)
@@ -48,9 +48,10 @@ add_library(
         MainActivity.cpp
 
         AudioEffects/AudioEffect.cpp
-#        AudioEffects/Delay.cpp
+        AudioEffects/Delay.cpp
 #        AudioEffects/StereoDelay.cpp
-        AudioEffects/Waveform.cpp
+        AudioEffects/Oscilloscope.cpp
+        AudioEffects/MoogFilter.cpp
 #        AudioEffects/Lissajous.cpp
 #        AudioEffects/Spectrum.cpp
 
@@ -78,6 +79,7 @@ add_library(
         Instruments/ADSR.cpp
         Instruments/Sine.cpp
         Instruments/Operator.cpp
+        Instruments/SingleTone.cpp
 
         Link/LinkManager.cpp
         Link/android-ifaddrs/ifaddrs.cpp

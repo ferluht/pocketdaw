@@ -5,7 +5,6 @@
 #include "Sine.h"
 
 Sine::Sine(const wchar_t * name, unsigned int num_voices) : Instrument<SineState>(num_voices){
-    GAttachTexture("Textures/effect_canvas.bmp");
 
     setRatio(2);
 
@@ -35,6 +34,8 @@ Sine::Sine(const wchar_t * name, unsigned int num_voices) : Instrument<SineState
 
     enc_attack = new Encoder(L"attack", 0, [this](float value) {
         A = (value + 1)/10;
+        for (auto const& state : States)
+            state->adsr.A = A;
     }, 5);
     enc_attack->place(0.625, 0.05);
     enc_attack->setHeight(0.4);
@@ -43,6 +44,8 @@ Sine::Sine(const wchar_t * name, unsigned int num_voices) : Instrument<SineState
 
     enc_decay = new Encoder(L"decay", 0, [this](float value) {
         D = (value + 1)*2;
+        for (auto const& state : States)
+            state->adsr.D = D;
     }, 6);
     enc_decay->place(0.025, 0.5);
     enc_decay->setHeight(0.4);
@@ -51,6 +54,8 @@ Sine::Sine(const wchar_t * name, unsigned int num_voices) : Instrument<SineState
 
     enc_sustain = new Encoder(L"sustain", 0, [this](float value) {
         S = (value + 1)/2;
+        for (auto const& state : States)
+            state->adsr.S = S;
     }, 7);
     enc_sustain->place(0.225, 0.5);
     enc_sustain->setHeight(0.4);
@@ -59,6 +64,8 @@ Sine::Sine(const wchar_t * name, unsigned int num_voices) : Instrument<SineState
 
     enc_release = new Encoder(L"release", 0, [this](float value) {
         R = (value + 1)*5;
+        for (auto const& state : States)
+            state->adsr.R = R;
     }, 8);
     enc_release->place(0.425, 0.5);
     enc_release->setHeight(0.4);
@@ -86,22 +93,20 @@ void Sine::IUpdateState(SineState *state, MData md){
         state->note = md.data1;
         state->volume = (float)md.data2/127.f;
         if (!state->active) state->phase = 0;
-        state->adsr.Attack(A, D, S, R);
+        state->adsr.attack(md.beat);
         state->setActive(true);
         graph_phase = 0;
     }else{
-        state->adsr.Release([state](bool active) {
-            state->setActive(active);
-        });
+        state->adsr.release(md.beat);
     }
 }
 
 void Sine::IARender(SineState * state, double beat, float * lsample, float * rsample)
 {
 
-    state->adsr.ARender(beat, lsample, rsample);
+    float sample = sinf(state->phase) * state->volume * level;
 
-    float sample = sinf(state->phase) * state->volume * level * state->adsr;
+    if (!state->adsr.ARender(beat, lsample, rsample)) state->setActive(false);
 
     state->phase += getPhaseIncrement(state->note + 12*ratio, fine);
 

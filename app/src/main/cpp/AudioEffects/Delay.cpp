@@ -5,33 +5,55 @@
 #include <GUI/Button.h>
 #include "Delay.h"
 
-Delay::Delay(float delayTime_, float feedback_) : AudioEffect(300,500,200,200)
+Delay::Delay()
 {
+    auto name = new Text("Fonts/Roboto-Regular.ttf", L"Delau");
+    name->place(0.01, 0.01);
+    name->setHeight(0.05);
+    GAttach(name);
 
-//    attach(new Text("Fonts/Roboto-Regular.ttf", L"feedback\n", 0.3, 0.1));
-//    attach(new Encoder("Textures/encoder.bmp", 0.6f, 0.2f, &feedback));
-//    attach(new Text("Fonts/Roboto-Regular.ttf", L"delay time\n", -0.2, 0.1));
-//    attach(new Encoder("Textures/encoder.bmp", 0.1f, 0.2f, &delayTime));
+    setRatio(0.45f);
 
-    attach(new Button(L"ON/OFF", 400, 600, 100, 100, "Textures/button.bmp", [this](bool state){this->isOn = state;}));
+    delay_time = new Encoder(L"time", -1, [this](float value) {}, 1);
+    delay_time->place(0.25, 0.1);
+    delay_time->setHeight(0.25);
+    GAttach(delay_time);
+    MConnect(delay_time);
 
-    for (int i = 0; i < 50000; i ++){
-        buffer[i] = 0;
-    }
-    delayTime = delayTime_;
-    feedback = feedback_;
+    feedback = new Encoder(L"feedback", -1, [this](float value) {}, 2);
+    feedback->place(0.25, 0.4);
+    feedback->setHeight(0.25);
+    GAttach(feedback);
+    MConnect(feedback);
+
+    drywet = new Encoder(L"dru/wet", -1, [this](float value) {}, 3);
+    drywet->place(0.25, 0.7);
+    drywet->setHeight(0.25);
+    GAttach(drywet);
+    MConnect(drywet);
+
+    buffer = new float[buffer_size];
+    for (int i = 0; i < buffer_size; i ++) buffer[i] = 0;
+    *delay_time = 0;
+    *feedback = 0;
     position = 0;
 }
 
-void Delay::apply(float * lsample, float * rsample)
-{
+bool Delay::ARender(double beat, float *lsample, float *rsample){
     float sample = (*lsample + *rsample)/2;
-    if (isOn) {
-        int index = (int) (delayTime * 50000) - position;
+    if (*isOn) {
+        int window_size = (int)((*delay_time + 1)/2 * buffer_size);
+        if (window_size == 0) return false;
+        int index = window_size - position;
+        if (index < 0) index += window_size;
         sample += buffer[index];
-        buffer[index] = sample * feedback;
-        position = (position + 1) % ((int) (delayTime * 50000));
+        buffer[index] = sample * (*feedback);
+        position = (position + 1) % window_size;
     }
-    *lsample = sample;
-    *rsample = sample;
+
+    float prop = (*drywet + 1)/2;
+
+    *lsample = sample*prop + *lsample * (1-prop);
+    *rsample = sample*prop + *rsample * (1-prop);
+    return *isOn;
 }

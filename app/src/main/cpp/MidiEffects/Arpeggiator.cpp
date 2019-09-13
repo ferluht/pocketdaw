@@ -12,10 +12,10 @@ Arpeggiator::Arpeggiator(double scale_)
     GAttachTexture("Textures/effect_canvas.bmp");
     setRatio(0.5);
 
-    auto opname = new Text("Fonts/Roboto-Regular.ttf", L"Arpeggiator");
-    opname->place(0.03, 0.03);
-    opname->setHeight(0.05);
-    GAttach(opname);
+    auto name = new Text("Fonts/Roboto-Regular.ttf", L"Arpeggiator");
+    name->place(0.01, 0.01);
+    name->setHeight(0.05);
+    GAttach(name);
 
     auto enc_release = new Encoder(L"rate", 0, [this](float value) {
 //        this->scale = (value + 1)/2 * 10;

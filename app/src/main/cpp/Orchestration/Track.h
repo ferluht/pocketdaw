@@ -15,16 +15,20 @@
 #include <ableton/Link.hpp>
 #include <Instruments/Metronome.h>
 #include <Instruments/Operator.h>
-#include <AudioEffects/Waveform.h>
+#include <AudioEffects/Oscilloscope.h>
 #include <MidiEffects/Arpeggiator.h>
 #include <GUI/Menu.h>
 #include <Utils/Utils.h>
+#include <Instruments/SingleTone.h>
+#include <AudioEffects/Delay.h>
+#include <AudioEffects/MoogFilter.h>
 
 class AMGChain : public AMGObject {
 
 private:
 
     std::vector<AMGObject*> AMGObjects;
+    const float spacing = 0.01;
 
 public:
 
@@ -33,10 +37,11 @@ public:
         AMGObjects.push_back(dummy);
     }
 
-    inline void ARender(double beat, float * lsample, float * rsample) override {
+    inline bool ARender(double beat, float * lsample, float * rsample) override {
         for (auto const &ao : AMGObjects) {
             ao->ARender(beat, lsample, rsample);
         }
+        return true;
     }
 
     inline void MIn(MData cmd) override {
@@ -53,10 +58,12 @@ public:
 
     void Rearrange() {
         float cur_ratio = 0;
+        int i = 0;
         for (auto const &obj : AMGObjects) {
-            obj->place(cur_ratio/ratio, 0);
+            obj->place(cur_ratio/ratio + spacing * i, 0);
             obj->setHeight(1);
             cur_ratio += obj->ratio;
+            i ++;
         }
         changed = true;
     }
@@ -68,7 +75,7 @@ public:
             AMGObjects[size - 2]->MConnect(mo);
         }
         mo->MConnect(AMGObjects.back());
-        setRatio(ratio + mo->ratio);
+        setRatio(ratio + mo->ratio + spacing);
         AMGObjects.insert(AMGObjects.end() - 1, mo);
         GAttach(mo);
         Rearrange();
@@ -105,7 +112,7 @@ class AMGRack : public AMGCanvas{
 
 private:
 
-    float padding = 0.01;
+    const float padding = 0.01;
 
     MObject mout;
 
@@ -168,6 +175,15 @@ public:
 
     }
 
+    inline void RAddAudioEffect(AMGObject * aeffect){
+        AEffects.AMGChainPushBack(aeffect);
+        Rearrange();
+    }
+
+    inline void RDelAudioEffect(){
+
+    }
+
     inline void MIn(MData cmd) override {
         MEffects.MIn(cmd);
     }
@@ -187,7 +203,7 @@ public:
 //    void MConnect(MObject * mo) override ;
 //    void MDisconnect(MObject * mo) override ;
 
-    void ARender(double beat, float * lsample, float * rsample) override ;
+    bool ARender(double beat, float * lsample, float * rsample) override ;
 };
 
 class MidiNote : public MData, public GCanvas{
@@ -232,7 +248,7 @@ public:
         GAttachTexture("Textures/midi_canvas.bmp");
         length = 4;
 
-        record = true;
+        record = false;
         record_automation = false;
         position = Notes.begin();
     }
@@ -327,7 +343,8 @@ public:
     Menu * addMenu;
     Menu * addDeviceMenu;
     Menu * addMidiMenu;
-    Waveform * masterWaveform;
+    Menu * addAudioMenu;
+    Oscilloscope * masterWaveform;
 
     std::vector<AMGTrack*> Tracks;
     AMGChain AEffects;
@@ -336,12 +353,13 @@ public:
         link.enable(true);
         GAttachTexture("Textures/background.bmp");
         size_denominator = 4;
-        isPlaying = true;
-
+//        isPlaying = true;
+        bpm = 120;
         linkButton = new ProgressButton(L"Link", [this](bool state){ this->link.enable(state); });
         metronome = new Metronome();
         metronome_button = new Button(L"Metr", [](bool state){});
         beat = 0;
+        phase = 0;
 
         addMenu = new Menu(L"Add");
 
@@ -359,16 +377,46 @@ public:
                                    }
                                });
 
+        addDeviceMenu->addItem(L"SingleTone",
+                               [this](){
+                                   if (focus_track > -1) {
+                                       Tracks[focus_track]->RAttachInsrument(new SingleTone());
+                                   }
+                               });
+
         addMidiMenu = new Menu(L"Midi effect");
-        addMidiMenu->addItem(L"Arpeggiator",
+        addMidiMenu->addItem(L"Arp",
                                [this](){
                                    if (focus_track > -1) {
                                        Tracks[focus_track]->RAddMidiEffect(new Arpeggiator());
                                    }
                                });
 
+        addAudioMenu = new Menu(L"Audio effect");
+        addAudioMenu->addItem(L"Oscill",
+                             [this](){
+                                 if (focus_track > -1) {
+                                     Tracks[focus_track]->RAddAudioEffect(new Oscilloscope(50));
+                                 }
+                             });
+
+        addAudioMenu->addItem(L"Del",
+                              [this](){
+                                  if (focus_track > -1) {
+                                      Tracks[focus_track]->RAddAudioEffect(new Delay());
+                                  }
+                              });
+
+        addAudioMenu->addItem(L"Filter",
+                              [this](){
+                                  if (focus_track > -1) {
+                                      Tracks[focus_track]->RAddAudioEffect(new MoogFilter());
+                                  }
+                              });
+
         addMenu->addSubmenu(L"Device", addDeviceMenu);
         addMenu->addSubmenu(L"Midi", addMidiMenu);
+        addMenu->addSubmenu(L"Audio", addAudioMenu);
         addMenu->addItem(L"Track",
                 [this](){
                     std::string tracknum = std::to_string(Tracks.size());
@@ -376,12 +424,13 @@ public:
                     AddTrack(tr);
                 });
 
-        masterWaveform = new Waveform(50);
+        masterWaveform = new Oscilloscope(50);
 //        midiDeviceMenu->GSetVisible(true);
 //        auto tr2 = new AMGTrack();
 //        AddTrack(tr2);
     }
-    void ARender(float * audioData, int numFrames) override;
+
+    bool ARender(float * audioData, int numFrames) override;
 
     void AddTrack(AMGTrack * track) {
         Tracks.push_back(track);
@@ -411,7 +460,7 @@ public:
     }
 
     inline void MIn(MData cmd) override{
-        cmd.beat = phase;
+        cmd.beat = beat;
         if (cmd.status == 0xb0 && cmd.data2 > 0){
             switch (cmd.data1){
                 case 0x16:

@@ -49,12 +49,13 @@ public:
 	unsigned char active_states;
 
     Instrument(int num_voices){
+        GAttachTexture("Textures/effect_canvas.bmp");
         for (int i = 0; i < num_voices; i++) States.insert(new State());
     }
 
     void MIn(MData md) override;
 
-    void ARender(double beat, float * lsample, float * rsample) override;
+    bool ARender(double beat, float * lsample, float * rsample) override;
 
     void IKeyPressed(MData md);
 
@@ -154,7 +155,7 @@ void Instrument<State>::IKeyPressed(MData md)
 
 
 template <class State>
-void Instrument<State>::ARender(double beat, float * lsample, float * rsample)
+bool Instrument<State>::ARender(double beat, float * lsample, float * rsample)
 {
     keyPressedLock.lock();
 
@@ -168,6 +169,8 @@ void Instrument<State>::ARender(double beat, float * lsample, float * rsample)
 
     *lsample /= (float)num_voices;
     *rsample /= (float)num_voices;
+
+    return true;
 }
 
 

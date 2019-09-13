@@ -5,20 +5,26 @@
 #ifndef PD_DELAY_H
 #define PD_DELAY_H
 
+#include <GUI/Encoder.h>
 #include "AudioEffect.h"
 
 class Delay : public AudioEffect{
-public:
-    float delayTime = 0;
+
+    const int buffer_size = 5*48000;
+
     int position = 0;
-    float feedback = 0.4;
 
-    Delay(float delayTime_, float feedback_);
+    float * buffer;
 
-    void apply(float * lsample, float * rsample);
+    Encoder * delay_time;
+    Encoder * feedback;
+    Encoder * drywet;
 
-private:
-    float buffer[50000];
+public:
+
+    Delay();
+
+    bool ARender(double beat, float * lsample, float * rsample) override;
 };
 
 

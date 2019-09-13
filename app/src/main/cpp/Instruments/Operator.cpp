@@ -95,12 +95,13 @@ void Operator::MIn(MData cmd) {
     if ((cmd.status != NOTEON_HEADER) || cmd.data2 != 0) graph_phase = 0;
 }
 
-void Operator::ARender(double beat, float *lsample, float *rsample) {
+bool Operator::ARender(double beat, float *lsample, float *rsample) {
     Instrument<OperatorState>::ARender(beat, lsample, rsample);
     if (graph_phase < 200) {
         graph->update(*lsample);
         graph_phase ++;
     }
+    return true;
 }
 
 void Operator::IARender(OperatorState * state, double beat, float * lsample, float * rsample)
