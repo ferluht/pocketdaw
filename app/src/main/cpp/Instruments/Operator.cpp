@@ -4,14 +4,9 @@
 
 #include "Operator.h"
 
-Operator::Operator(const wchar_t * name, unsigned int num_voices) : Instrument<OperatorState>(num_voices){
+Operator::Operator(unsigned int num_voices) : Instrument<OperatorState>(num_voices, L"Operator"){
     GAttachTexture("Textures/effect_canvas.bmp");
     setRatio(1);
-
-    opname = new Text("Fonts/Roboto-Regular.ttf", name);
-    opname->place(0.03, 0.03);
-    opname->setHeight(0.05);
-    GAttach(opname);
 
     const wchar_t * names[] = {L"A", L"B", L"C", L"D"};
 

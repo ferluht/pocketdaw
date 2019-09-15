@@ -64,6 +64,7 @@ add_library(
         GUI/Encoder.cpp
         GUI/Text.cpp
         GUI/Canvas.cpp
+        GUI/IECanvas.cpp
         GUI/Knob.cpp
         GUI/Graph.cpp
         GUI/Menu.cpp

@@ -6,7 +6,7 @@
 #define PD_INSTRUMENT_H
 
 #include "Engine/Engine.h"
-#include "GUI/Canvas.h"
+#include "GUI/IECanvas.h"
 #include <cmath>
 #include <set>
 
@@ -23,7 +23,7 @@ public:
 };
 
 template <class State>
-class Instrument : public AMGCanvas{
+class Instrument : public IECanvas{
 public:
 
     unsigned int num_voices = 8;
@@ -48,7 +48,7 @@ public:
 
 	unsigned char active_states;
 
-    Instrument(int num_voices){
+    Instrument(int num_voices, const wchar_t * name_) : IECanvas(name_){
         GAttachTexture("Textures/effect_canvas.bmp");
         for (int i = 0; i < num_voices; i++) States.insert(new State());
     }

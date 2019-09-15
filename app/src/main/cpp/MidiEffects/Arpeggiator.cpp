@@ -7,34 +7,31 @@
 
 Arpeggiator::Arpeggiator() : Arpeggiator(1) {}
 
-Arpeggiator::Arpeggiator(double scale_)
+Arpeggiator::Arpeggiator(double scale_) : IECanvas(L"Arpeggiator")
 {
     GAttachTexture("Textures/effect_canvas.bmp");
     setRatio(0.5);
 
-    auto name = new Text("Fonts/Roboto-Regular.ttf", L"Arpeggiator");
-    name->place(0.01, 0.01);
-    name->setHeight(0.05);
-    GAttach(name);
-
     auto enc_release = new Encoder(L"rate", 0, [this](float value) {
-//        this->scale = (value + 1)/2 * 10;
+        scale = (int)((value + 1)*2);
+        scale /= 4;
+        cycles = (int)(last_played_beat / scale);
     }, 8);
     enc_release->place(0.2, 0.2);
     enc_release->setHeight(0.4);
     GAttach(enc_release);
     MConnect(enc_release);
 
-    scale = scale_;
+//    scale = scale_;
     last_played_note = 0;
     cycles = 0;
     isplaying = false;
     last_played_beat = 0;
-    gate = 0.4;
+    gate = 0.5;
 }
 
 void Arpeggiator::MIn(MData cmd) {
-    if (((cmd.status & 0xF0) == NOTEON_HEADER) || ((cmd.status & 0xF0) == NOTEOFF_HEADER)) {
+    if (*isOn && (((cmd.status & 0xF0) == NOTEON_HEADER) || ((cmd.status & 0xF0) == NOTEOFF_HEADER))) {
         if (cmd.data2) notes.insert({cmd.data1, cmd});
         else notes.erase(cmd.data1);
     } else {

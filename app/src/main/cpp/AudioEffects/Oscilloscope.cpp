@@ -4,27 +4,13 @@
 
 #include <GUI/Encoder.h>
 #include "Oscilloscope.h"
-#include "../GUI/Text.h"
 
-Oscilloscope::Oscilloscope(float n) {
+Oscilloscope::Oscilloscope(float n) : AudioEffect(L"Oscill")
+{
 
     window = n;
 
     setRatio(1.5);
-
-    auto name = new Text("Fonts/Roboto-Regular.ttf", L"Oscill");
-    name->place(0.01, 0.01);
-    name->setHeight(0.05);
-    GAttach(name);
-//    GAttach(new Text("Fonts/Roboto-Regular.ttf", L"waveform", 0.05, 0.05, 2, 0.07));
-
-//    auto enc = new Encoder(L"scale", 0, [this, n](float value){
-//        this->window = (value/2 + 0.5f) * n + 1;
-//    });
-//    enc->place(0.02, 0.65);
-//    enc->setHeight(0.25);
-//    GAttach(enc);
-//    MConnect(enc);
 
     graph = new TimeGraph(n);
     graph->place(0.05, 0.05);

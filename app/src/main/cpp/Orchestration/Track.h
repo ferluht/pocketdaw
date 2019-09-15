@@ -29,10 +29,21 @@ private:
 
     std::vector<AMGObject*> AMGObjects;
     const float spacing = 0.01;
+    std::vector<AMGObject*>::iterator moving_from, moving_to;
+    GCanvas * moving_overlay;
+    int moving_focus = 0;
+    ndk_helper::Vec2 last_touch;
 
 public:
 
     AMGChain() {
+
+        moving_overlay = new GCanvas();
+        moving_overlay->GAttachShaders("Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlainColor.fsh");
+        moving_overlay->GSetColor(1, 1, 1, 0.2);
+        moving_overlay->GSetVisible(false);
+        GAttach(moving_overlay);
+
         auto dummy = new AMGObject();
         AMGObjects.push_back(dummy);
     }
@@ -81,6 +92,31 @@ public:
         Rearrange();
     }
 
+    inline void AMGChainPushFront(AMGObject * mo) {
+        mo->MConnect(AMGObjects[0]);
+        AMGObjects.insert(AMGObjects.begin(), mo);
+        setRatio(ratio + mo->ratio + spacing);
+        GAttach(mo);
+        Rearrange();
+    }
+
+    inline void AMGChainInsert(AMGObject * mo, int pos) {
+        auto size = AMGObjects.size();
+        if (pos > size) pos = size;
+        if (pos < 0) pos = 0;
+        if (pos == size - 1) AMGChainPushBack(mo);
+        else if (pos == 0) AMGChainPushFront(mo);
+        else {
+            AMGObjects[pos - 1]->MDisconnect(AMGObjects[pos]);
+            AMGObjects[pos - 1]->MConnect(mo);
+            mo->MConnect(AMGObjects[pos]);
+            setRatio(ratio + mo->ratio + spacing);
+            AMGObjects.insert(AMGObjects.begin() + pos, mo);
+            GAttach(mo);
+            Rearrange();
+        }
+    }
+
     inline void AMGChainDel(int pos) {
         auto size = AMGObjects.size();
         setRatio(ratio - AMGObjects[pos]->ratio);
@@ -106,17 +142,43 @@ public:
         for (auto const& mo : AMGObjects) mo->MEnableMapping(state);
     }
 
+    GObject * GFindFocusObject(const ndk_helper::Vec2& point) override
+    {
+        if (visible && globalPosition.contains(point)){
+            for (auto const &gr : Graphics) {
+                auto fo = gr->GFindFocusObject(point);
+                if (fo){
+                    if (fo == this) return parent;
+                    if (fo == gr) return this;
+                    return fo;
+                }
+            }
+        }
+
+        return nullptr;
+    }
+
+    void GSetVisible(bool visible_) override {
+        AMGObject::GSetVisible(visible_);
+        moving_overlay->GSetVisible(false);
+    }
+
+    GObject * GDragHandler(const ndk_helper::Vec2& v) override ;
+    GObject * GDragBegin(const ndk_helper::Vec2& v) override ;
+    GObject * GDragEnd(const ndk_helper::Vec2& v) override ;
 };
 
 class AMGRack : public AMGCanvas{
 
 private:
 
-    const float padding = 0.01;
-
     MObject mout;
 
 public:
+
+    const float padding = 0.01;
+
+    float x_offset = 0;
 
     AMGChain MEffects;
     AMGObject * Instr;
@@ -149,11 +211,11 @@ public:
     }
 
     void Rearrange(){
-        MEffects.place(padding, padding);
+        MEffects.place(x_offset + padding, padding);
         MEffects.setHeight(1 - 2*padding);
-        Instr->place((MEffects.ratio + padding)/globalPosition.ratio + padding, padding);
+        Instr->place(x_offset + (MEffects.ratio + padding)/globalPosition.ratio + padding, padding);
         Instr->setHeight(1 - 2*padding);
-        AEffects.place((MEffects.ratio + Instr->ratio + 2*padding)/globalPosition.ratio + padding, padding);
+        AEffects.place(x_offset + (MEffects.ratio + Instr->ratio + 2*padding)/globalPosition.ratio + padding, padding);
         AEffects.setHeight(1 - 2*padding);
     }
 
@@ -320,8 +382,8 @@ public:
 
     ~AMGTrack(){}
 
-//    void GDragHandler(const ndk_helper::Vec2& v) override ;
-//    void GDragBegin(const ndk_helper::Vec2& v) override ;
+    GObject * GDragHandler(const ndk_helper::Vec2& v) override ;
+    GObject * GDragBegin(const ndk_helper::Vec2& v) override ;
 };
 
 class AMGMasterTrack : public AMGCanvas{
@@ -353,7 +415,7 @@ public:
         link.enable(true);
         GAttachTexture("Textures/background.bmp");
         size_denominator = 4;
-//        isPlaying = true;
+        isPlaying = true;
         bpm = 120;
         linkButton = new ProgressButton(L"Link", [this](bool state){ this->link.enable(state); });
         metronome = new Metronome();
@@ -373,7 +435,7 @@ public:
         addDeviceMenu->addItem(L"Operator",
                                [this](){
                                    if (focus_track > -1) {
-                                       Tracks[focus_track]->RAttachInsrument(new Operator(L"Operator", 8));
+                                       Tracks[focus_track]->RAttachInsrument(new Operator(8));
                                    }
                                });
 
@@ -425,6 +487,7 @@ public:
                 });
 
         masterWaveform = new Oscilloscope(50);
+        masterWaveform->NoHeader();
 //        midiDeviceMenu->GSetVisible(true);
 //        auto tr2 = new AMGTrack();
 //        AddTrack(tr2);
@@ -435,15 +498,15 @@ public:
     void AddTrack(AMGTrack * track) {
         Tracks.push_back(track);
         changeTrackFocus(Tracks.size() - 1);
-        track->place(0, 0.5);
-        track->setHeight(0.5);
+        track->place(0, 0.4);
+        track->setHeight(0.6);
         track->setWidth(1);
         GAttach(track);
 
-        track->mc->place(0.4, 0.01, 0.1);
-        track->mc->setHeight(0.48);
-        track->mc->setWidth(0.59);
-        GAttach(track->mc);
+//        track->mc->place(0.4, 0.01, 0.1);
+//        track->mc->setHeight(0.48);
+//        track->mc->setWidth(0.59);
+//        GAttach(track->mc);
 //        MConnect(track);
     }
 
