@@ -122,7 +122,7 @@ public:
         BBox rel;
         rel.x = (x - ref.x) / ref.width;
         rel.y = (y - ref.y) / ref.height;
-        rel.z = 0;
+        rel.z = ref.z;
         rel.height = height / ref.height;
         rel.width = width / ref.width;
         rel.angle = -ref.angle;
@@ -216,8 +216,15 @@ public:
 
     // Hierarchy
 
-    void GAttach(GObject * go);
-    void GDetach(GObject * go);
+    virtual void GAttach(GObject * go) {
+        go->GAttachTo(this);
+        Graphics.push_front(go);
+        go->changed = true;
+    }
+
+    virtual void GDetach(GObject * go) {
+        Graphics.remove(go);
+    }
 
     inline void GAttachTo(GObject * go) { parent = go; }
 

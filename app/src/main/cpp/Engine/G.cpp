@@ -117,20 +117,6 @@ void GObject::GRender_(float dTime) {
     }
 }
 
-void GObject::GAttach(GObject *go) {
-    go->GAttachTo(this);
-//    go->GSetVisible(this->visible);
-    Graphics.push_front(go);
-    go->changed = true;
-    //draw_();
-}
-
-void GObject::GDetach(GObject *go) {
-    Graphics.remove(go);
-//    go->GUnload();
-    //draw_();
-}
-
 void GObject::GUnload() {
     if (vbo_) {
         glDeleteBuffers(1, &vbo_);

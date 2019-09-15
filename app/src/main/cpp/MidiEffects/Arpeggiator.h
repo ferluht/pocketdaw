@@ -7,9 +7,9 @@
 
 #include <map>
 #include <random>
-#include <GUI/Canvas.h>
+#include <GUI/IECanvas.h>
 
-class Arpeggiator : public AMGCanvas{
+class Arpeggiator : public IECanvas{
 
 public:
 

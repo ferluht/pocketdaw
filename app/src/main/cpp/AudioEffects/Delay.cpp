@@ -5,13 +5,8 @@
 #include <GUI/Button.h>
 #include "Delay.h"
 
-Delay::Delay()
+Delay::Delay() : AudioEffect(L"Delau")
 {
-    auto name = new Text("Fonts/Roboto-Regular.ttf", L"Delau");
-    name->place(0.01, 0.01);
-    name->setHeight(0.05);
-    GAttach(name);
-
     setRatio(0.45f);
 
     delay_time = new Encoder(L"time", -1, [this](float value) {}, 1);

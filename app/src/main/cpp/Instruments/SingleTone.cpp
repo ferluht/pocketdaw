@@ -5,7 +5,7 @@
 #include <GUI/Text.h>
 #include "SingleTone.h"
 
-SingleTone::SingleTone() : Instrument<SingleToneState>(1){
+SingleTone::SingleTone() : Instrument<SingleToneState>(1, L"SingleTone"){
 
     setRatio(1);
 
@@ -50,12 +50,6 @@ SingleTone::SingleTone() : Instrument<SingleToneState>(1){
     crossmod->setHeight(encoder_height);
     GAttach(crossmod);
     MConnect(crossmod);
-
-    auto name = new Text("Fonts/Roboto-Regular.ttf", L"SingleTone");
-    name->place(0.01, 0.01);
-    name->setHeight(0.05);
-    GAttach(name);
-
 
     *A = 0.01;
     *D = 0.05;

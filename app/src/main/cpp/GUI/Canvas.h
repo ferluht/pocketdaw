@@ -5,8 +5,9 @@
 #ifndef PD_GCanvas_H
 #define PD_GCanvas_H
 
-
 #include "Engine/Engine.h"
+
+class Button;
 
 class GCanvas : virtual public GObject{
 public:
@@ -22,7 +23,6 @@ public:
 class AGCanvas : virtual public AGObject, virtual public GCanvas {};
 class MGCanvas : virtual public MGObject, virtual public GCanvas {};
 class AMGCanvas : virtual public AMGObject, virtual public GCanvas {};
-
 
 #endif //PD_GCanvas_H
  

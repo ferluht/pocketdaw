@@ -4,14 +4,13 @@
 
 #include "MoogFilter.h"
 
-MoogFilter::MoogFilter()
+MoogFilter::MoogFilter() : AudioEffect(L"Filter")
 {
-    auto name = new Text("Fonts/Roboto-Regular.ttf", L"Filter");
-    name->place(0.01, 0.01);
-    name->setHeight(0.05);
-    GAttach(name);
-
     setRatio(0.45f);
+
+    fs=48000.0;
+
+    init();
 
     cutoff_enc = new Encoder(L"cutoff", 1, [this](float value) {
         setCutoff ((value + 1)*8000);
@@ -21,18 +20,13 @@ MoogFilter::MoogFilter()
     GAttach(cutoff_enc);
     MConnect(cutoff_enc);
 
-    resonance_enc = new Encoder(L"resonance", 1, [this](float value) {
+    resonance_enc = new Encoder(L"resonance", -1, [this](float value) {
         setRes ((value + 1)/2);
     }, 1);
     resonance_enc->place(0.25, 0.4);
     resonance_enc->setHeight(0.25);
     GAttach(resonance_enc);
     MConnect(resonance_enc);
-
-    fs=48000.0;
-
-    init();
-    setCutoff(400);
 }
 
 void MoogFilter::init()

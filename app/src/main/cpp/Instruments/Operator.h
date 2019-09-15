@@ -50,7 +50,7 @@ class Operator : public Instrument<OperatorState>{
 
 public:
 
-    Operator(const wchar_t * name, unsigned int num_voices);
+    Operator(unsigned int num_voices);
 
     void IUpdateState(OperatorState * state, MData md) override;
 
