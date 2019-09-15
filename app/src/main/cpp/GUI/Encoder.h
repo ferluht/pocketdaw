@@ -12,14 +12,15 @@ class Encoder : public Knob{
 
 private:
 
+    float lower_bound, upper_bound;
     float old_angle;
 
     inline float angle2value(float angle_) {
-        return (angle_/(float)M_PI+0.5f)/0.75f;
+        return ((angle_/(float)M_PI+0.5f)/0.75f + 1) / 2 * (upper_bound - lower_bound) + lower_bound;
     }
 
     inline float value2angle(float value_){
-        return (value_*0.75f - 0.5f)*(float)M_PI;
+        return (((value_ - lower_bound)/(upper_bound - lower_bound) * 2 - 1) * 0.75f - 0.5f)*(float)M_PI;
     }
 
     inline void setangle(float angle_){
@@ -46,16 +47,18 @@ public:
 
     Encoder(wchar_t * label, float default_value_, std::function<void(float)> callback_);
     Encoder(wchar_t * label, float default_value_, std::function<void(float)> callback_, unsigned int default_map_);
+    Encoder(wchar_t * label, float default_value_, std::function<void(float)> callback_, float lower_bound_, float upper_bound_);
+    Encoder(wchar_t * label, float default_value_, std::function<void(float)> callback_, unsigned int default_map_, float lower_bound_, float upper_bound_);
 
     inline void MIn(MData cmd) override {
         if (cmd.status == 0xB0 && keymap && cmd.data1 == keymap){
-            setvalue(cmd.data2/127.f*2.f - 1.f);
+            setvalue(cmd.data2/127.f*(upper_bound - lower_bound) + lower_bound);
         }
     }
 
     inline void setvalue(float value_){
-        if (value_ < -1) value_ = -1;
-        if (value_ > 1) value_ = 1;
+        if (value_ < lower_bound) value_ = lower_bound;
+        if (value_ > upper_bound) value_ = upper_bound;
         value = value_;
         wheel->angle = value2angle(value);
         callback(value);

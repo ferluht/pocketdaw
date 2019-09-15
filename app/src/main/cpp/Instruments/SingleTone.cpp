@@ -9,43 +9,43 @@ SingleTone::SingleTone() : Instrument<SingleToneState>(1, L"SingleTone"){
 
     setRatio(1);
 
-    interp1 = new Encoder(L"waveform1", -1, [this](float value) {}, 1);
+    interp1 = new Encoder(L"waveform1", 0, [this](float value) {}, 1, 0, 1);
     interp1->place(encoder_spacing, row_1st);
     interp1->setHeight(encoder_height);
     GAttach(interp1);
     MConnect(interp1);
 
-    interp2 = new Encoder(L"waveform2", -1, [this](float value) {}, 2);
+    interp2 = new Encoder(L"waveform2", 0, [this](float value) {}, 2, 0, 1);
     interp2->place(encoder_spacing + encoder_height, row_1st);
     interp2->setHeight(encoder_height);
     GAttach(interp2);
     MConnect(interp2);
 
-    A = new Encoder(L"A", -1, [this](float value) {}, 3);
+    A = new Encoder(L"A", 0, [this](float value) {}, 3, 0, 1);
     A->place(encoder_spacing, row_1st + encoder_height);
     A->setHeight(encoder_height);
     GAttach(A);
     MConnect(A);
 
-    D = new Encoder(L"D", -1, [this](float value) {}, 4);
+    D = new Encoder(L"D", 0, [this](float value) {}, 4, 0, 1);
     D->place(encoder_spacing + encoder_height, row_1st + encoder_height);
     D->setHeight(encoder_height);
     GAttach(D);
     MConnect(D);
 
-    S = new Encoder(L"S", -1, [this](float value) {}, 5);
+    S = new Encoder(L"S", 0, [this](float value) {}, 5, 0, 1);
     S->place(encoder_spacing + encoder_height*2, row_1st + encoder_height);
     S->setHeight(encoder_height);
     GAttach(S);
     MConnect(S);
 
-    R = new Encoder(L"R", -1, [this](float value) {}, 6);
+    R = new Encoder(L"R", 0, [this](float value) {}, 6, 0, 1);
     R->place(encoder_spacing + encoder_height*3, row_1st + encoder_height);
     R->setHeight(encoder_height);
     GAttach(R);
     MConnect(R);
 
-    crossmod = new Encoder(L"crossmod", -1, [this](float value) {}, 7);
+    crossmod = new Encoder(L"crossmod", 0, [this](float value) {}, 7, 0, 1);
     crossmod->place(encoder_spacing, row_1st + 2*encoder_height);
     crossmod->setHeight(encoder_height);
     GAttach(crossmod);
@@ -78,19 +78,19 @@ void SingleTone::IUpdateState(SingleToneState *state, MData md) {
 }
 
 void SingleTone::IARender(SingleToneState *state, double beat, float *lsample, float *rsample) {
-    float first = sinf(state->phase1) * ((*interp1 + 1)/2) + (state->phase1 / 6.283f * 2 - 1) * (1 - (*interp1 + 1)/2);
-    float second = sinf(state->phase2) * ((*interp2 + 1)/2);
+    float first = sinf(state->phase1) * (*interp1) + (state->phase1 / 6.283f * 2 - 1) * (1 - (*interp1));
+    float second = sinf(state->phase2) * (*interp2);
 
-    if (state->phase2 / 6.283f > 0.5) second += (1 - (*interp2 + 1)/2);
-    else second -= (1 - (*interp2 + 1)/2);
+    if (state->phase2 / 6.283f > 0.5) second += 1 - (*interp2);
+    else second -= 1 - (*interp2);
 //    + (state->phase2 / 6.283f * 2 - 1) * (1 - (*interp2 + 1)/2);
 
-    float sample = (first * ((*crossmod + 1)/2) + first * second * (1 - (*crossmod + 1)/2)) * state->volume;
+    float sample = (first * (*crossmod) + first * second * (1 - (*crossmod))) * state->volume;
 
-    state->adsr.A = (*A + 1)/2 * (*A + 1)/2;
-    state->adsr.D = (*D + 1)/2 * (*D + 1)/2;
-    state->adsr.S = (*S + 1)/2 * (*S + 1)/2;
-    state->adsr.R = (*R + 1)/2 * (*R + 1)/2;
+    state->adsr.A = (*A) * (*A);
+    state->adsr.D = (*D) * (*D);
+    state->adsr.S = (*S) * (*S);
+    state->adsr.R = (*R) * (*R);
     if(!state->adsr.ARender(beat, &sample, &sample)) state->setActive(false);
 
     state->phase1 += getPhaseIncrement(state->note, 0);

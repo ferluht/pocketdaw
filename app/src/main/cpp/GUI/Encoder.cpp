@@ -6,11 +6,19 @@
 #include "Text.h"
 
 Encoder::Encoder(wchar_t *label, float default_value_, std::function<void(float)> callback_) :
-Encoder(label, default_value_, callback_, 0) {}
+        Encoder(label, default_value_, callback_, 0) {}
+
+Encoder::Encoder(wchar_t * label, float default_value_, std::function<void(float)> callback_, unsigned int default_map_) :
+        Encoder(label, default_value_, callback_, default_map_, -1, 1) {}
+
+Encoder::Encoder(wchar_t * label, float default_value_, std::function<void(float)> callback_, float lower_bound_, float upper_bound_) :
+        Encoder(label, default_value_, callback_, 0, lower_bound_, upper_bound_) {}
 
 Encoder::Encoder(wchar_t * label, float default_value_, std::function<void(float)> callback_,
-                 unsigned int default_map_){
+                 unsigned int default_map_, float lower_bound_, float upper_bound_){
     callback = callback_;
+    lower_bound = lower_bound_;
+    upper_bound = upper_bound_;
 
     GAttachTexture("Textures/effect_canvas.bmp");
     setRatio(0.8);
