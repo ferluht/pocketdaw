@@ -5,23 +5,24 @@
 #ifndef PD_METRONOME_H
 #define PD_METRONOME_H
 
-#include "Sine.h"
+#include "Oscillator.h"
 
-class Metronome : public Sine{
+class Metronome : public Oscillator{
 
 public:
 
-    Metronome() : Sine(L"metr", 1) {
-        *enc_level = 0;
-        *enc_attack = -1;
-        *enc_sustain = -1;
-        *enc_decay = -0.98;
+    Metronome() : Oscillator(L"metr", 1) {
+        *A = 0.05;
+        *D = 0.1;
+        *S = 0.02;
+        *R = 0.02;
+        *level = 0.8;
     }
 
     void tic(){
         MData md;
         md.status = 0x80;
-        md.data1 = 90;
+        md.data1 = 80;
         md.data2 = 100;
         MIn(md);
     }
@@ -29,7 +30,7 @@ public:
     void tac(){
         MData md;
         md.status = 0x80;
-        md.data1 = 95;
+        md.data1 = 85;
         md.data2 = 100;
         MIn(md);
     }

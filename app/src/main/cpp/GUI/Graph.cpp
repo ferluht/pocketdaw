@@ -32,7 +32,7 @@ void BaseGraph::GRender(float dTime) {
 void TimeGraph::fillGLBuffer() {
     for (int i = 0; i < buffer_size; i++) {
         g_vertex_buffer_data[i*2] = globalPosition.x + i*globalPosition.width/(float)buffer_size;
-        g_vertex_buffer_data[i*2+1] = globalPosition.y + buffer[r]*globalPosition.height;
+        g_vertex_buffer_data[i*2+1] = globalPosition.y + (1 - buffer[r])*globalPosition.height;
         r++;
         if(r>=buffer_size) r = 0;
     };
@@ -40,7 +40,7 @@ void TimeGraph::fillGLBuffer() {
 
 void TimeGraph::update(float sample) {
     changed = true;
-    buffer[r] = sample + 0.5;
+    buffer[r] = sample/2 + 0.5;
     r = (r + 1)%buffer_size;
 }
 

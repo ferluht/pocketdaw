@@ -7,7 +7,7 @@
 
 #include "Instruments/Instrument.h"
 #include "ADSR.h"
-#include "Sine.h"
+#include "Oscillator.h"
 #include <GUI/Encoder.h>
 #include <GUI/Graph.h>
 
@@ -30,7 +30,7 @@ public:
 
 class Operator : public Instrument<OperatorState>{
 
-    Sine * sines[4];
+    Oscillator * sines[4];
 
     TimeGraph * graph;
 
@@ -57,8 +57,6 @@ public:
     void IARender(OperatorState * state, double beat, float * lsample, float * rsample) override ;
 
     void MIn(MData cmd) override ;
-
-    bool ARender(double beat, float * lsample, float * rsample) override ;
 
     void GSetVisible(bool visible_) override ;
 };

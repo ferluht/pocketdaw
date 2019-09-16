@@ -78,7 +78,7 @@ add_library(
         Instruments/Instrument.cpp
         Instruments/Metronome.cpp
         Instruments/ADSR.cpp
-        Instruments/Sine.cpp
+        Instruments/Oscillator.cpp
         Instruments/Operator.cpp
         Instruments/SingleTone.cpp
 

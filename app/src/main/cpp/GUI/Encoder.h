@@ -45,8 +45,12 @@ private:
 
 public:
 
+    Encoder(wchar_t * label, float default_value_);
+    Encoder(wchar_t * label, float default_value_, unsigned int default_map_);
     Encoder(wchar_t * label, float default_value_, std::function<void(float)> callback_);
+    Encoder(wchar_t * label, float default_value_, float lower_bound_, float upper_bound_);
     Encoder(wchar_t * label, float default_value_, std::function<void(float)> callback_, unsigned int default_map_);
+    Encoder(wchar_t * label, float default_value_, unsigned int default_map_, float lower_bound_, float upper_bound_);
     Encoder(wchar_t * label, float default_value_, std::function<void(float)> callback_, float lower_bound_, float upper_bound_);
     Encoder(wchar_t * label, float default_value_, std::function<void(float)> callback_, unsigned int default_map_, float lower_bound_, float upper_bound_);
 
