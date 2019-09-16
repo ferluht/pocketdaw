@@ -415,9 +415,12 @@ public:
         link.enable(true);
         GAttachTexture("Textures/background.bmp");
         size_denominator = 4;
-        isPlaying = true;
+//        isPlaying = true;
         bpm = 120;
-        linkButton = new ProgressButton(L"Link", [this](bool state){ this->link.enable(state); });
+        linkButton = new ProgressButton(L"Link", [this](bool state){
+            this->link.enable(state);
+            isPlaying = state;
+        });
         metronome = new Metronome();
         metronome_button = new Button(L"Metr", [](bool state){});
         beat = 0;
@@ -432,6 +435,14 @@ public:
 //        GAttach(tr);
 
         addDeviceMenu = new Menu(L"Device");
+
+        addDeviceMenu->addItem(L"Oscillator",
+                               [this](){
+                                   if (focus_track > -1) {
+                                       Tracks[focus_track]->RAttachInsrument(new Oscillator(L"Oscillator", 1));
+                                   }
+                               });
+
         addDeviceMenu->addItem(L"Operator",
                                [this](){
                                    if (focus_track > -1) {

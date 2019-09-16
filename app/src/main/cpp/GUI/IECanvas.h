@@ -21,6 +21,10 @@ class IECanvas : public AMGCanvas{
 
     GCanvas * header;
 
+    Text * name;
+
+    bool no_header = false;
+
 public:
 
     Button * isOn;
@@ -35,7 +39,7 @@ public:
         header->setWidth(1);
         GAttach(header);
 
-        auto name = new Text("Fonts/Roboto-Regular.ttf", name_);
+        name = new Text("Fonts/Roboto-Regular.ttf", name_);
         name->place(name_padding, (1-name_height)/2);
         name->setHeight(name_height);
         header->GAttach(name);
@@ -59,6 +63,7 @@ public:
 
     void NoHeader(){
         header->visible = false;
+        no_header = true;
         body->place(0, 0);
         body->setHeight(1);
         body->setWidth(1);
@@ -80,7 +85,7 @@ public:
 
     GObject * GFindFocusObject(const ndk_helper::Vec2& point) override
     {
-        if (visible && body->globalPosition.contains(point)){
+        if (visible && body->visible && body->globalPosition.contains(point)){
             for (auto const &gr : body->Graphics) {
                 auto fo = gr->GFindFocusObject(point);
                 if (fo) return fo;
@@ -88,12 +93,21 @@ public:
             return this->parent;
         }
 
-        if (visible && header->globalPosition.contains(point)){
+        if (visible && header->visible && header->globalPosition.contains(point)){
             if (isOn->globalPosition.contains(point)) return isOn;
             return this;
         }
 
         return nullptr;
+    }
+
+    void GSetVisible(bool visible_) override {
+        if (no_header) {
+            body->GSetVisible(visible_);
+        } else {
+            AMGCanvas::GSetVisible(visible_);
+        }
+        visible = visible_;
     }
 };
 

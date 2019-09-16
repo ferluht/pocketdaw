@@ -5,11 +5,23 @@
 #include "Encoder.h"
 #include "Text.h"
 
+Encoder::Encoder(wchar_t * label, float default_value_) :
+        Encoder(label, default_value_, [](float value){}, 0) {}
+
+Encoder::Encoder(wchar_t * label, float default_value_, unsigned int default_map_) :
+        Encoder(label, default_value_, [](float value){}, default_map_) {}
+
 Encoder::Encoder(wchar_t *label, float default_value_, std::function<void(float)> callback_) :
         Encoder(label, default_value_, callback_, 0) {}
 
+Encoder::Encoder(wchar_t * label, float default_value_, float lower_bound_, float upper_bound_) :
+        Encoder(label, default_value_, [](float value){}, 0, lower_bound_, upper_bound_) {}
+
 Encoder::Encoder(wchar_t * label, float default_value_, std::function<void(float)> callback_, unsigned int default_map_) :
         Encoder(label, default_value_, callback_, default_map_, -1, 1) {}
+
+Encoder::Encoder(wchar_t * label, float default_value_, unsigned int default_map_, float lower_bound_, float upper_bound_) :
+        Encoder(label, default_value_, [](float value){}, default_map_, lower_bound_, upper_bound_) {}
 
 Encoder::Encoder(wchar_t * label, float default_value_, std::function<void(float)> callback_, float lower_bound_, float upper_bound_) :
         Encoder(label, default_value_, callback_, 0, lower_bound_, upper_bound_) {}
