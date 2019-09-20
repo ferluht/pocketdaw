@@ -6,5 +6,6 @@
 #define PD_UTILS_H
 
 #include "TextConversion.h"
+#include "AudioFile.h"
 
 #endif //PD_UTILS_H

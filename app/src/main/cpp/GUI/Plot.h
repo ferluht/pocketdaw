@@ -8,8 +8,16 @@
 #include "Graph.h"
 #include "Canvas.h"
 
-class Plot : public Canvas{
+class TimePlot : public MGCanvas{
 
+public:
+    TimeGraph * graph;
+
+    TimePlot(unsigned int points);
+
+    inline void update(float sample) {
+        graph->update(sample);
+    }
 };
 
 

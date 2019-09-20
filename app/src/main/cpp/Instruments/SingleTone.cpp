@@ -5,7 +5,7 @@
 #include <GUI/Text.h>
 #include "SingleTone.h"
 
-SingleTone::SingleTone() : Instrument<SingleToneState>(1, L"SingleTone"){
+SingleTone::SingleTone() : Instrument<SingleToneState>(1, L"ST"){
 
     setRatio(1);
 
@@ -58,17 +58,26 @@ SingleTone::SingleTone() : Instrument<SingleToneState>(1, L"SingleTone"){
 
     *interp1 = 1.0;
     *interp2 = 0.7;
+
+    glide_time = sample_rate*0.1;
 }
 
 void SingleTone::IUpdateState(SingleToneState *state, MData md) {
     if (md.data2 != 0) {
-        state->note = md.data1;
-        state->volume = (float)md.data2/127.f;
-        if (!state->active) {
+        if (!state->isActive()) {
+            state->glide = 0;
+            state->glide_inc = 0;
+            state->glide_dir = 0;
             state->phase1 = 0;
             state->phase2 = 0;
+            state->adsr.attack(md.beat);
+        } else {
+            state->glide = - md.data1 + state->note;
+            state->glide_dir = state->glide / abs(state->glide);
+            state->glide_inc = - state->glide / glide_time;
         }
-        state->adsr.attack(md.beat);
+        state->note = md.data1;
+        state->volume = (float)md.data2/127.f;
         state->setActive(true);
     }else{
         if (md.data1 == state->note){
@@ -93,11 +102,14 @@ void SingleTone::IARender(SingleToneState *state, double beat, float *lsample, f
     state->adsr.R = (*R) * (*R);
     if(!state->adsr.ARender(beat, &sample, &sample)) state->setActive(false);
 
-    state->phase1 += getPhaseIncrement(state->note, 0);
+    state->phase1 += getPhaseIncrement(state->note + state->glide);
     if (state->phase1 > 6.283f) state->phase1 -= 6.283f;
 
-    state->phase2 += getPhaseIncrement(state->note + 12, 0);
+    state->phase2 += getPhaseIncrement(state->note + 12 + state->glide);
     if (state->phase2 > 6.283f) state->phase2 -= 6.283f;
+
+    if (state->glide * state->glide_dir > 0)
+        state->glide += state->glide_inc;
 
     *lsample += sample;
     *rsample += sample;

@@ -92,7 +92,7 @@ void Text::generateTexture() {
     /* теперь высота значиться как высота символа плюс отступ */
     if ( h < bitmap.rows + resize ) h = bitmap.rows + resize;
     /* здесь надо знать самую большую высоту символа */
-    maxh = h;
+    maxh = h*2;
 
 
 

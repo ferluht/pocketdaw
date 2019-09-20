@@ -10,46 +10,53 @@
 #include <cmath>
 #include <set>
 
-#define MAX_VOICES 8
-
 class InstrumentState {
-public:
+
+    unsigned char key;
     bool active;
 
-    unsigned char note;
+public:
 
-	InstrumentState();
-	void setActive(bool isactive);
+	InstrumentState() {
+	    active = false;
+	};
+
+	inline void setActive(bool isactive) { active = isactive; };
+    inline bool isActive() { return active; }
+
+	template <class State> friend class Instrument;
 };
 
 template <class State>
 class Instrument : public IECanvas{
-public:
 
     unsigned int num_voices = 8;
-	std::multiset<State *> States;
+    std::multiset<State *> States;
 
     std::mutex keyPressedLock;
 
+    bool damper_pedal;
+    bool portamento;
+    bool sostenuto;
+    bool soft_pedal;
+    bool chorus;
+    bool celeste;
+    bool phaser;
+
+public:
+
+    float base_note = 69.0;
+    float power_base = 2.0;
+    float semitones = 24.0;
 	double base_frequency = 440.0;
-	double sample_rate = 48000.0;
 
-	unsigned char modwheel;
-	unsigned char pitchwheel;
-	unsigned char volume;
-	
-	bool damper_pedal;
-	bool portamento;
-	bool sostenuto;
-	bool soft_pedal;
-	bool chorus;
-	bool celeste;
-	bool phaser;
+	float pitch;
+    float pitch_distance = 12.0;
 
-	unsigned char active_states;
-
-    Instrument(int num_voices, const wchar_t * name_) : IECanvas(name_){
+    Instrument(int num_voices_, const wchar_t * name_) : IECanvas(name_){
         GAttachTexture("Textures/effect_canvas.bmp");
+        num_voices = num_voices_;
+        pitch = 0;
         for (int i = 0; i < num_voices; i++) States.insert(new State());
     }
 
@@ -59,29 +66,14 @@ public:
 
     void IKeyPressed(MData md);
 
-    inline double getFrequency(unsigned char note)
+    inline double getFrequency(double note)
     {
-    	return base_frequency*(pow(POWER_BASE, (note - BASE_NOTE)/SEMITONES));
+    	return base_frequency*(pow(power_base, (note - base_note + pitch)/semitones));
 	}
 
-	inline double getFrequency(unsigned char note, float cents)
+	inline double getPhaseIncrement(double note)
     {
-    	return base_frequency*(pow(POWER_BASE, (note - BASE_NOTE)/SEMITONES))*(pow(POWER_BASE, cents/SEMITONES));
-	}
-
-	inline double getPhaseIncrement(double frequency)
-    {
-    	return 2*M_PI*frequency/sample_rate;
-	}
-
-	inline double getPhaseIncrement(unsigned char note)
-    {
-    	return getPhaseIncrement(getFrequency(note));
-	}
-
-	inline double getPhaseIncrement(unsigned char note, float cents)
-    {
-    	return getPhaseIncrement(getFrequency(note, cents));
+    	return 2*M_PI*getFrequency(note)/sample_rate;
 	}
 
     virtual void IUpdateState(State * state, MData cmd) {};
@@ -110,6 +102,9 @@ void Instrument<State>::MIn(MData cmd)
                     MOut(cmd);
             }
             break;
+        case PITCHWHEEL_HEADER:
+            pitch = (cmd.data1 + cmd.data2*128.0) / (float)0xFFFF * pitch_distance;
+            break;
         default:
             MOut(cmd);
     }
@@ -122,10 +117,11 @@ void Instrument<State>::IKeyPressed(MData md)
 
     for (auto it = States.begin(); it != States.end(); it++ )
     {
-        if ((*it)->note == md.data1){
+        if ((*it)->key == md.data1){
             State * state = (*it);
             States.erase(it);
             IUpdateState(state, md);
+            state->key = md.data1;
             States.insert(state);
             keyPressedLock.unlock();
             return;
@@ -138,6 +134,7 @@ void Instrument<State>::IKeyPressed(MData md)
             State * state = (*it);
             States.erase(it);
             IUpdateState(state, md);
+            state->key = md.data1;
             States.insert(state);
             keyPressedLock.unlock();
             return;
@@ -146,10 +143,12 @@ void Instrument<State>::IKeyPressed(MData md)
 
     State * state = *States.begin();
     IUpdateState(state, md);
+    state->key = md.data1;
     if(num_voices > 1) {
         States.erase(States.begin());
         States.insert(state);
     }
+
     keyPressedLock.unlock();
 }
 

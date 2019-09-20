@@ -13,6 +13,11 @@ class SingleToneState : public InstrumentState{
 public:
     double beat;
     unsigned char velocity;
+    float note;
+
+    float glide;
+    float glide_inc;
+    float glide_dir;
 
     ADSR adsr;
 
@@ -37,6 +42,8 @@ class SingleTone : public Instrument<SingleToneState> {
     const float encoder_height = 0.25;
     const float encoder_spacing = 0.028;
     const float row_1st = 0.1;
+
+    float glide_time;
 
 public:
 

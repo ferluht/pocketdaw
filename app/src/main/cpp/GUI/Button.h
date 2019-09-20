@@ -62,5 +62,44 @@ public:
 
 };
 
+class TexturedMultiButton : public Knob{
+
+    const float textwidth = 0.86;
+    const float textheight = 0.8;
+
+    const char ** textures;
+    unsigned int num_states;
+
+public:
+
+    unsigned int state;
+    std::function<void(unsigned int)> callback;
+
+    TexturedMultiButton(unsigned int num_states_, const char ** textures_);
+    TexturedMultiButton(std::function<void(unsigned int)> callback_, unsigned int num_states_, const char ** textures_);
+
+    GObject * GTapEnd(const ndk_helper::Vec2& v) override ;
+
+    operator unsigned int() const { return state; }
+
+    TexturedMultiButton& operator=(const unsigned int &state_)
+    {
+        state = state_;
+        info_overlay.GSetVisible(state);
+        callback(state);
+        return *this;
+    }
+
+    GObject * GFindFocusObject(const ndk_helper::Vec2& point) override {
+        if (visible && globalPosition.contains(point)) return this;
+        return nullptr;
+    }
+
+    void GSetVisible(bool visible_) override {
+        Knob::GSetVisible(visible_);
+        info_overlay.GSetVisible(state);
+    }
+};
+
 
 #endif //PD_BUTTON_H

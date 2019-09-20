@@ -23,27 +23,91 @@ Operator::Operator(unsigned int num_voices) : Instrument<OperatorState>(num_voic
     sines[op_focus]->GSetVisible(true);
     MConnect(sines[op_focus]);
 
-    enc_mode = new Encoder(L"mode", -1, 4, 0, 4);
-    enc_mode->place(0.05, 0.7);
-    enc_mode->setHeight(0.2);
-    GAttach(enc_mode);
-    MConnect(enc_mode);
+    algo = new TexturedMultiButton([this](unsigned int value){setAlgo(value);}, 11, algos);
+    algo->place(0.01, 0.6);
+    algo->setHeight(0.38);
+    GAttach(algo);
+    MConnect(algo);
 
     mode = 0;
+    setAlgo(0);
 
     level = 1;
 }
 
+void Operator::setAlgo(unsigned int value) {
+    mode = value;
+    for (int i = 0; i < 4; i++) {
+        sines[i]->OResetPhaseModulator();
+        sines[i]->OResetAmpModulator();
+    }
+    switch (value) {
+        case 0:
+            sines[0]->OSetPhaseModulator(*sines[1]);
+            sines[1]->OSetPhaseModulator(*sines[2]);
+            sines[2]->OSetPhaseModulator(*sines[3]);
+            break;
+        case 1:
+            sines[1]->OSetPhaseModulator(&c);
+            sines[0]->OSetPhaseModulator(*sines[1]);
+            break;
+        case 2:
+            sines[1]->OSetPhaseModulator(*sines[2]);
+            sines[0]->OSetPhaseModulator(&b);
+        case 3:
+            sines[1]->OSetPhaseModulator(*sines[3]);
+            sines[2]->OSetPhaseModulator(*sines[3]);
+            sines[0]->OSetPhaseModulator(&b);
+        case 4:
+            sines[2]->OSetPhaseModulator(*sines[3]);
+            sines[1]->OSetPhaseModulator(*sines[2]);
+            sines[0]->OSetPhaseModulator(*sines[2]);
+        case 5:
+            sines[2]->OSetPhaseModulator(*sines[3]);
+            sines[1]->OSetPhaseModulator(*sines[2]);
+        default:
+            break;
+    }
+}
+
 void Operator::GSetVisible(bool visible_) {
-    sines[op_focus]->GSetVisible(true);
+    IECanvas::GSetVisible(visible_);
+    for (int i = 0; i < 4; i++) if (i != op_focus) sines[i]->GSetVisible(false);
 }
 
 void Operator::IUpdateState(OperatorState *state, MData md){
-    if (md.data2 != 0) state->setActive(true);
     state->note = md.data1;
     for (int i = 0; i < 4; i++){
+        if (state->isActive()) state->sinestates[i].setActive(true);
         sines[i]->IUpdateState(&state->sinestates[i], md);
     }
+    if (md.data2 != 0) state->setActive(true);
+}
+
+GObject * Operator::GTapEnd(const ndk_helper::Vec2& v)
+{
+    if (visible && sines[op_focus]->globalPosition.contains(v)){
+        nextOsc();
+    }
+    return nullptr;
+}
+
+void Operator::prevOsc() {
+    MDisconnect(sines[op_focus]);
+    sines[op_focus]->GSetVisible(false);
+    op_focus --;
+    if (op_focus < 0) op_focus = 3;
+    MConnect(sines[op_focus]);
+    sines[op_focus]->GSetVisible(true);
+}
+
+void Operator::nextOsc() {
+    MDisconnect(sines[op_focus]);
+    sines[op_focus]->GSetVisible(false);
+    op_focus ++;
+    if (op_focus > 3) op_focus = 0;
+    MConnect(sines[op_focus]);
+    sines[op_focus]->GSetVisible(true);
 }
 
 void Operator::MIn(MData cmd) {
@@ -51,20 +115,10 @@ void Operator::MIn(MData cmd) {
     if (cmd.status == 0xb0 && cmd.data2 == 0){
         switch (cmd.data1){
             case 0x13:
-                MDisconnect(sines[op_focus]);
-                sines[op_focus]->GSetVisible(false);
-                op_focus ++;
-                if (op_focus > 3) op_focus = 3;
-                MConnect(sines[op_focus]);
-                sines[op_focus]->GSetVisible(true);
+                nextOsc();
                 break;
             case 0x14:
-                MDisconnect(sines[op_focus]);
-                sines[op_focus]->GSetVisible(false);
-                op_focus --;
-                if (op_focus < 0) op_focus = 0;
-                MConnect(sines[op_focus]);
-                sines[op_focus]->GSetVisible(true);
+                prevOsc();
                 return;
             default:
                 break;
@@ -76,27 +130,46 @@ void Operator::MIn(MData cmd) {
 void Operator::IARender(OperatorState * state, double beat, float * lsample, float * rsample)
 {
     float sample = 0;
-    float a = 0, b = 0, c = 0, d = 0;
+    a = 0, b = 0, c = 0, d = 0;
 
-    sines[0]->IARender(&state->sinestates[0], beat, &a, &a);
-    state->sinestates[0].phase += getPhaseIncrement(state->note + 12*((unsigned char)*(sines[0]->coarse)), *(sines[0]->fine));
-    sines[1]->IARender(&state->sinestates[1], beat, &b, &b);
-    state->sinestates[0].phase += getPhaseIncrement(state->note + 12*((unsigned char)*(sines[1]->coarse)), *(sines[1]->fine)) * (a + 1);
-    sines[2]->IARender(&state->sinestates[2], beat, &c, &c);
-    sines[3]->IARender(&state->sinestates[3], beat, &d, &d);
-
-    switch ((int)(*enc_mode)){
+    switch (mode){
         case 0:
-            sample = (a + b + c + d) / (*(sines[0]->level) + *(sines[1]->level) + *(sines[2]->level) + *(sines[3]->level));
+            sines[3]->IARender(&state->sinestates[3], beat, &d, &d);
+            sines[2]->IARender(&state->sinestates[2], beat, &c, &c);
+            sines[1]->IARender(&state->sinestates[1], beat, &b, &b);
+            sines[0]->IARender(&state->sinestates[0], beat, &a, &a);
+            sample = a;
             break;
         case 1:
-            sample = (a * b + c * d) / (*(sines[0]->level) + *(sines[1]->level) + *(sines[2]->level) * *(sines[3]->level));
+            sines[3]->IARender(&state->sinestates[3], beat, &d, &d);
+            sines[2]->IARender(&state->sinestates[2], beat, &c, &c);
+            c = (*sines[3] + *sines[2])/2;
+            sines[1]->IARender(&state->sinestates[1], beat, &b, &b);
+            sines[0]->IARender(&state->sinestates[0], beat, &a, &a);
+            sample = a;
             break;
         case 2:
-            sample = (a + b * c * d) / (*(sines[0]->level) + *(sines[1]->level) * *(sines[2]->level) * *(sines[3]->level));
+            sines[3]->IARender(&state->sinestates[3], beat, &d, &d);
+            sines[2]->IARender(&state->sinestates[2], beat, &c, &c);
+            sines[1]->IARender(&state->sinestates[1], beat, &b, &b);
+            b = (*sines[3] + *sines[1])/2;
+            sines[0]->IARender(&state->sinestates[0], beat, &a, &a);
+            sample = a;
             break;
         case 3:
-            sample = (a * b * c * d) / (*(sines[0]->level) * *(sines[1]->level) * *(sines[2]->level) * *(sines[3]->level));
+            sines[3]->IARender(&state->sinestates[3], beat, &d, &d);
+            sines[2]->IARender(&state->sinestates[2], beat, &c, &c);
+            sines[1]->IARender(&state->sinestates[1], beat, &b, &b);
+            b = (*sines[3] + *sines[2])/2;
+            sines[0]->IARender(&state->sinestates[0], beat, &a, &a);
+            sample = a;
+            break;
+        case 4:
+            sines[3]->IARender(&state->sinestates[3], beat, &d, &d);
+            sines[2]->IARender(&state->sinestates[2], beat, &c, &c);
+            sines[1]->IARender(&state->sinestates[1], beat, &b, &b);
+            sines[0]->IARender(&state->sinestates[0], beat, &a, &a);
+            sample = (a + b) / 2;
             break;
         default:
             break;
@@ -104,7 +177,7 @@ void Operator::IARender(OperatorState * state, double beat, float * lsample, flo
 
     sample *= level;
 
-    state->setActive(state->sinestates[0].active || state->sinestates[1].active || state->sinestates[2].active || state->sinestates[3].active);
+    state->setActive(state->sinestates[0].isActive() || state->sinestates[1].isActive() || state->sinestates[2].isActive() || state->sinestates[3].isActive());
 
     *lsample += sample;
     *rsample += sample;

@@ -69,8 +69,10 @@ add_library(
         GUI/Graph.cpp
         GUI/Menu.cpp
         GUI/Led.cpp
+        GUI/Plot.cpp
 
         Utils/TextConversion.cpp
+        Utils/AudioFile.cpp
 
 #        Instruments/ModularSynth/VCO.cpp
 #        Instruments/ModularSynth/Module.cpp
@@ -81,6 +83,8 @@ add_library(
         Instruments/Oscillator.cpp
         Instruments/Operator.cpp
         Instruments/SingleTone.cpp
+        Instruments/Sampler.cpp
+        Instruments/DrumRack.cpp
 
         Link/LinkManager.cpp
         Link/android-ifaddrs/ifaddrs.cpp
