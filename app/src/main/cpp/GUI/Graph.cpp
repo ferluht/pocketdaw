@@ -40,6 +40,10 @@ void TimeGraph::fillGLBuffer() {
 
 void TimeGraph::update(float sample) {
     changed = true;
+
+    if (sample > 1) sample = 1;
+    if (sample < -1) sample = -1;
+
     buffer[r] = sample/2 + 0.5;
     r = (r + 1)%buffer_size;
 }
@@ -55,6 +59,12 @@ void XYGraph::fillGLBuffer() {
 
 void XYGraph::update(float x, float y) {
     changed = true;
+
+    if (x > 1) x = 1;
+    if (x < -1) x = -1;
+    if (y > 1) y = 1;
+    if (y < -1) y = -1;
+
     buffer[2*r] = x;
     buffer[2*r+1] = y;
     r = (r + 1)%buffer_size;

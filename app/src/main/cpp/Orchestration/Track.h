@@ -22,6 +22,8 @@
 #include <Instruments/SingleTone.h>
 #include <AudioEffects/Delay.h>
 #include <AudioEffects/MoogFilter.h>
+#include <Instruments/Sampler.h>
+#include <Instruments/DrumRack.h>
 
 class AMGChain : public AMGObject {
 
@@ -200,7 +202,7 @@ public:
         MEffects.MDisconnect(Instr);
         Instr->MDisconnect(&AEffects);
         GDetach(Instr);
-        delete Instr;
+//        delete Instr;
 
         Instr = instr_;
         GAttach(Instr);
@@ -446,11 +448,31 @@ public:
         addDeviceMenu->addItem(L"Operator",
                                [this](){
                                    if (focus_track > -1) {
-                                       Tracks[focus_track]->RAttachInsrument(new Operator(8));
+                                       Tracks[focus_track]->RAttachInsrument(new Operator(4));
                                    }
                                });
 
-        addDeviceMenu->addItem(L"SingleTone",
+        addDeviceMenu->addItem(L"Samler",
+                               [this](){
+                                   if (focus_track > -1) {
+                                       Tracks[focus_track]->RAttachInsrument(new Sampler("/storage/emulated/0/808.wav"));
+                                   }
+                               });
+
+        addDeviceMenu->addItem(L"drack",
+                               [this](){
+                                   if (focus_track > -1) {
+                                       auto drack = new DrumRack();
+                                       drack->addSample("/storage/emulated/0/808.wav", 35);
+                                       drack->addSample("/storage/emulated/0/Kick.wav", 35);
+                                       drack->addSample("/storage/emulated/0/Snare.wav", 35);
+                                       drack->addSample("/storage/emulated/0/ClosedHH.wav", 35);
+                                       drack->addSample("/storage/emulated/0/Shaker.wav", 35);
+                                       Tracks[focus_track]->RAttachInsrument(drack);
+                                   }
+                               });
+
+        addDeviceMenu->addItem(L"ST",
                                [this](){
                                    if (focus_track > -1) {
                                        Tracks[focus_track]->RAttachInsrument(new SingleTone());
@@ -469,7 +491,7 @@ public:
         addAudioMenu->addItem(L"Oscill",
                              [this](){
                                  if (focus_track > -1) {
-                                     Tracks[focus_track]->RAddAudioEffect(new Oscilloscope(50));
+                                     Tracks[focus_track]->RAddAudioEffect(new Oscilloscope());
                                  }
                              });
 
@@ -497,8 +519,13 @@ public:
                     AddTrack(tr);
                 });
 
-        masterWaveform = new Oscilloscope(50);
+        masterWaveform = new Oscilloscope();
         masterWaveform->NoHeader();
+
+        std::string tracknum = std::to_string(Tracks.size());
+        auto tr = new AMGTrack(tracknum);
+        AddTrack(tr);
+
 //        midiDeviceMenu->GSetVisible(true);
 //        auto tr2 = new AMGTrack();
 //        AddTrack(tr2);

@@ -6,19 +6,23 @@
 #define PD_WAVEFORM_H
 
 #include "AudioEffect.h"
-#include <GUI/Graph.h>
+#include <GUI/Plot.h>
 
 class Oscilloscope : public AudioEffect{
+
+    Encoder * trig;
+    Encoder * time;
+    Encoder * scale;
+
+    int sample_counter = 0;
+    int after_trig = 0;
+    const int graph_points = 200;
+
+    TimePlot * graph;
+
 public:
 
-    int r = 1;
-    float window = 30;
-    float accumulator = 0;
-    int ai = 0;
-
-    TimeGraph * graph;
-
-    Oscilloscope(float n);
+    Oscilloscope();
 
     bool ARender(double beat, float * lsample, float * rsample) override ;
 

@@ -35,11 +35,6 @@
 #define CC_SOFT_PEDAL 67
 #define CC_CHORUS 93
 
-
-#define BASE_NOTE 61.0
-#define POWER_BASE 2.0
-#define SEMITONES 12.0
-
 struct MData {
     double beat;
     unsigned char status;

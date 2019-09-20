@@ -3,12 +3,3 @@
 //
 
 #include "Instrument.h"
-
-InstrumentState::InstrumentState()
-{
-    active = false;
-}
-
-void InstrumentState::setActive(bool isactive){
-    active = isactive;
-}

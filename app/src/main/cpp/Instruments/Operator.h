@@ -15,6 +15,7 @@ class OperatorState : public InstrumentState{
 public:
     double beat;
     unsigned char velocity;
+    float note;
 
     SineState sinestates[4];
 
@@ -30,7 +31,23 @@ public:
 
 class Operator : public Instrument<OperatorState>{
 
+    const char * algos[11] = {
+            "Textures/fm_algos/alg0.bmp",
+            "Textures/fm_algos/alg1.bmp",
+            "Textures/fm_algos/alg2.bmp",
+            "Textures/fm_algos/alg3.bmp",
+            "Textures/fm_algos/alg4.bmp",
+            "Textures/fm_algos/alg5.bmp",
+            "Textures/fm_algos/alg6.bmp",
+            "Textures/fm_algos/alg7.bmp",
+            "Textures/fm_algos/alg8.bmp",
+            "Textures/fm_algos/alg9.bmp",
+            "Textures/fm_algos/alg10.bmp"
+    };
+
     Oscillator * sines[4];
+
+    float a = 0, b = 0, c = 0, d = 0;
 
     TimeGraph * graph;
 
@@ -48,6 +65,13 @@ class Operator : public Instrument<OperatorState>{
 
     Text * opname;
 
+    void prevOsc();
+    void nextOsc();
+
+    TexturedMultiButton * algo;
+
+    void setAlgo(unsigned int value);
+
 public:
 
     Operator(unsigned int num_voices);
@@ -57,6 +81,17 @@ public:
     void IARender(OperatorState * state, double beat, float * lsample, float * rsample) override ;
 
     void MIn(MData cmd) override ;
+
+    GObject * GFindFocusObject(const ndk_helper::Vec2& point) override
+    {
+        if (visible && globalPosition.contains(point)){
+            if (sines[op_focus]->name->globalPosition.contains(point)) return this;
+            return Instrument::GFindFocusObject(point);
+        }
+        return nullptr;
+    }
+
+    GObject * GTapEnd(const ndk_helper::Vec2& v) override ;
 
     void GSetVisible(bool visible_) override ;
 };
