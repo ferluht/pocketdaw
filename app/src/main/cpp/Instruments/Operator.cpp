@@ -65,6 +65,17 @@ void Operator::setAlgo(unsigned int value) {
         case 5:
             sines[2]->OSetPhaseModulator(*sines[3]);
             sines[1]->OSetPhaseModulator(*sines[2]);
+        case 6:
+            sines[0]->OSetPhaseModulator(&b);
+        case 7:
+            sines[2]->OSetPhaseModulator(*sines[3]);
+            sines[0]->OSetPhaseModulator(*sines[1]);
+        case 8:
+            sines[0]->OSetPhaseModulator(*sines[3]);
+            sines[1]->OSetPhaseModulator(*sines[3]);
+            sines[2]->OSetPhaseModulator(*sines[3]);
+        case 9:
+            sines[2]->OSetPhaseModulator(*sines[3]);
         default:
             break;
     }
@@ -170,6 +181,49 @@ void Operator::IARender(OperatorState * state, double beat, float * lsample, flo
             sines[1]->IARender(&state->sinestates[1], beat, &b, &b);
             sines[0]->IARender(&state->sinestates[0], beat, &a, &a);
             sample = (a + b) / 2;
+            break;
+        case 5:
+            sines[3]->IARender(&state->sinestates[3], beat, &d, &d);
+            sines[2]->IARender(&state->sinestates[2], beat, &c, &c);
+            sines[1]->IARender(&state->sinestates[1], beat, &b, &b);
+            sines[0]->IARender(&state->sinestates[0], beat, &a, &a);
+            sample = (a + b) / 2;
+            break;
+        case 6:
+            sines[3]->IARender(&state->sinestates[3], beat, &d, &d);
+            sines[2]->IARender(&state->sinestates[2], beat, &c, &c);
+            sines[1]->IARender(&state->sinestates[1], beat, &b, &b);
+            b = (b + c + d) / 3;
+            sines[0]->IARender(&state->sinestates[0], beat, &a, &a);
+            sample = a;
+            break;
+        case 7:
+            sines[3]->IARender(&state->sinestates[3], beat, &d, &d);
+            sines[2]->IARender(&state->sinestates[2], beat, &c, &c);
+            sines[1]->IARender(&state->sinestates[1], beat, &b, &b);
+            sines[0]->IARender(&state->sinestates[0], beat, &a, &a);
+            sample = (a + b) / 2;
+            break;
+        case 8:
+            sines[3]->IARender(&state->sinestates[3], beat, &d, &d);
+            sines[2]->IARender(&state->sinestates[2], beat, &c, &c);
+            sines[1]->IARender(&state->sinestates[1], beat, &b, &b);
+            sines[0]->IARender(&state->sinestates[0], beat, &a, &a);
+            sample = (a + b + c) / 3;
+            break;
+        case 9:
+            sines[3]->IARender(&state->sinestates[3], beat, &d, &d);
+            sines[2]->IARender(&state->sinestates[2], beat, &c, &c);
+            sines[1]->IARender(&state->sinestates[1], beat, &b, &b);
+            sines[0]->IARender(&state->sinestates[0], beat, &a, &a);
+            sample = (a + b + c) / 3;
+            break;
+        case 10:
+            sines[3]->IARender(&state->sinestates[3], beat, &d, &d);
+            sines[2]->IARender(&state->sinestates[2], beat, &c, &c);
+            sines[1]->IARender(&state->sinestates[1], beat, &b, &b);
+            sines[0]->IARender(&state->sinestates[0], beat, &a, &a);
+            sample = (a + b + c + d) / 4;
             break;
         default:
             break;

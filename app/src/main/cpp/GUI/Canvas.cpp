@@ -6,6 +6,8 @@
 
 void GCanvas::GDraw()
 {
+    GObject::GDraw();
+
     GLfloat g_vertex_buffer_data[] = {
             globalPosition.x + globalPosition.width, globalPosition.y + globalPosition.height, 1.0f, 1.0f,
             globalPosition.x + globalPosition.width, globalPosition.y, 1.0f, 0.0f,

@@ -97,7 +97,7 @@ public:
 
     void GSetVisible(bool visible_) override {
         Knob::GSetVisible(visible_);
-        info_overlay.GSetVisible(state);
+        info_overlay.GSetVisible(false);
     }
 };
 

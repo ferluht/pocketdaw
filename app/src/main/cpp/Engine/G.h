@@ -195,7 +195,9 @@ public:
     virtual void GInit() {};
 
     void GDraw_();
-    virtual void GDraw() {};
+    virtual void GDraw() {changed = false;};
+
+    virtual void GPlace() {};
 
     void GRender_(float dTime);
     virtual void GRender(float dTime) {};

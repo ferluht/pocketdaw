@@ -9,6 +9,7 @@
 #include <GUI/Menu.h>
 #include "GUI/Canvas.h"
 #include <GUI/Led.h>
+#include <Orchestration/Master.h>
 #include "Orchestration/Track.h"
 
 class Synth : public AMGCanvas {

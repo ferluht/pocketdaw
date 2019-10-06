@@ -22,7 +22,7 @@ Oscilloscope::Oscilloscope() : AudioEffect(L"Oscill")
     GAttach(trig);
     MConnect(trig);
 
-    time = new Encoder(L"time", 0, 0, 0, 50);
+    time = new Encoder(L"time", 100, 0, 0, 100);
     time->place(0.2, 0.72);
     time->setHeight(0.26);
     GAttach(time);

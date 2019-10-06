@@ -38,6 +38,9 @@ void GObject::GDraw_(){
     if (!initialized) GInit_();
 
     if (parent){
+
+        GPlace();
+
         globalPosition.x = parent->globalPosition.x + x * parent->globalPosition.width;
         globalPosition.y = parent->globalPosition.y + y * parent->globalPosition.height;
         globalPosition.z = parent->globalPosition.z + z;
@@ -69,8 +72,6 @@ void GObject::GDraw_(){
     }
 
     GDraw();
-
-    changed = false;
 
     for (auto const &gr : Graphics) {
         gr->GDraw_();
