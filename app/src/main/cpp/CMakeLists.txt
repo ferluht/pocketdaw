@@ -93,9 +93,11 @@ add_library(
 
         MidiEffects/Arpeggiator.cpp
 
-#        Orchestration/Master.cpp
+        Orchestration/Master.cpp
+        Orchestration/Chain.cpp
+        Orchestration/Rack.cpp
         Orchestration/Track.cpp
-#        Orchestration/Midi.cpp
+        Orchestration/Midi.cpp
         )
 
 target_compile_definitions(native-lib PRIVATE ANDROID=1 LINK_PLATFORM_LINUX=1 PD=1 ABL_LINK_OFFSET_MS=23)

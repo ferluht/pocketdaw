@@ -7,6 +7,7 @@
 
 #include <Utils/Utils.h>
 #include <GUI/Plot.h>
+#include <GUI/Encoder.h>
 #include "Instrument.h"
 
 class SamplerState : public InstrumentState{
@@ -30,6 +31,9 @@ class Sampler : public Instrument<SamplerState> {
     AudioFile<float> sample;
     const char * sample_name;
 
+    Encoder * pitch;
+    bool const_pitch;
+
     TimePlot * graph;
 
 public:
@@ -40,6 +44,8 @@ public:
     float InterpolateHermite4pt3oX(float x0, float x1, float x2, float x3, float t);
 
     void IUpdateState(SamplerState * state, MData md) override;
+
+    inline void setConstPitch(bool const_pitch_) {const_pitch = const_pitch_;};
 
     void IARender(SamplerState * state, double beat, float * lsample, float * rsample) override ;
 

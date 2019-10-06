@@ -3,185 +3,61 @@
 //
 
 #include "Master.h"
-#include <Instruments/Metronome.h>
-#include <GUI/Button.h>
-#include "../AudioEffects/Oscilloscope.h"
-#include <AudioEffects/Lissajous.h>
-#include <GUI/Menu.h>
-#include "AudioEffects/StereoDelay.h"
 
-Master::Master() :
-Canvas(0, 0, 1, 1, "Textures/background.bmp", false),
-link(DEFAULT_BPM)
-{
-    link.enable(true);
+bool AMGMasterTrack::ARender(float *audioData, int numFrames) {
 
-    focusTrack = 0;
-
-    auto * cue = new Track;
-    auto metr = new Metronome;
-    cue->initInstrument(metr);
-    cue->setVisible(true);
-
-    auto * cue2 = new Track;
-    auto metr2 = new Metronome;
-    cue2->initInstrument(metr2);
-    cue2->setVisible(false);
-
-    cue->addAudioEffect(new StereoDelay(0.7));
-
-    addTrack(cue);
-    addTrack(cue2);
-
-//    auto graph = new SimpleGraph(100, 0.05, 0.05, 3, 0.9, 0.9);
-//    attach(graph);
-
-    //    attach(new Button(0.5, 0.5, 0.1, 0.1, "Textures/encoder.bmp", [cue](bool state){cue->addAudioEffect(new Delay(0.2, 0.09));}));
-//    cue->addAudioEffect(new Delay(0.2, 0.09));
-//    cue->addAudioEffect(new Delay(0.2, 0.09));
-//    cue->addAudioEffect(new Delay(0.2, 0.09));
-//    cue->addAudioEffect(new Delay(0.2, 0.09));
-//    cue->addAudioEffect(new Delay(0.2, 0.09));
-//    cue->addAudioEffect(new Delay(0.2, 0.09));
-//    cue->addAudioEffect(new Delay(0.2, 0.09));
-//    cue->addAudioEffect(new Delay(0.2, 0.09));
-//    cue->addAudioEffect(new Delay(8000, 0.3));
-//    cue->addAudioEffect(new Oscilloscope(0.01, 0.5, 0.5));
-
-
-//    attach(new Button(0,0,0,0, "Textures/container.bmp", []{}));
-//    addChildObject(new Button("Textures/container.bmp", 0.9, 0.7));
-
-//    addAudioEffect(new Delay(3300, 0.2));
-//    addAudioEffect(new Delay(900, 0.4));
-//    addAudioEffect(new Delay(17000, 0.2));
-//    addAudioEffect(new Delay(10000, 0.3));
-//    addAudioEffect(new Delay(8000, 0.6));
-
-    addAudioEffect(new Waveform(200, 0, 0));
-    addAudioEffect(new Lissajous(200, 0, 0));
-
-    size_denominator = 4;
-    stopPressed_ = 0;
-    isPlaying = true;
-    beat = -1;
-    phase = -1;
-}
-
-
-void Master::render(float *audioData, int32_t numFrames) {
+    double end_beat = beat;
 
     if (isPlaying) {
         ableton::Link::SessionState state = link.captureAppSessionState();
         bpm = state.tempo();
         std::chrono::microseconds time = link.clock().micros();
-        phase = state.phaseAtTime(time, size_denominator);
-        beat = state.beatAtTime(time, size_denominator);
+        std::chrono::microseconds second{1000000};
+        std::chrono::microseconds lag = std::chrono::duration_cast<std::chrono::microseconds> ((second * numFrames) / sample_rate);
+        phase = state.phaseAtTime(time + lag, size_denominator);
+        beat = state.beatAtTime(time + lag, size_denominator);
     }
 
-    double increment = bpm / 60.0 / sample_rate * numFrames;
+    linkButton->progress(phase/size_denominator);
+
+    double increment = bpm / 60.0 / sample_rate;// + (beat - end_beat)/numFrames;
+
+//    MData cmd;
+//    cmd.status = 0x80;
+//    cmd.data1 = 50;
+//    cmd.data2 = 100;
+//    MOut(cmd);
 
     for (int i = 0; i < numFrames; i++) {
         audioData[2*i] = 0;
         audioData[2*i+1] = 0;
+
+        if (i % 50 == 0) {
+            MRender(beat);
+        }
+
+        if (*metronome_button) {
+            if ((int)phase > (int)last_phase) metronome->tic();
+            else if ((int)phase < (int)last_phase) metronome->tac();
+            last_phase = phase;
+            metronome->ARender(beat, &audioData[2*i], &audioData[2*i + 1]);
+        }
+
         for (auto const& track : Tracks) {
             float l = 0, r = 0;
-            track->render(beat, &l, &r);
+            track->ARender(beat, &l, &r);
             audioData[2*i] += l;
             audioData[2*i + 1] += r;
-            beat += increment;
         }
-        for (auto const& effect : AudioEffects) {
-            effect->apply(&audioData[2*i], &audioData[2*i + 1]);
-        }
+        AEffects.ARender(beat, &audioData[2*i], &audioData[2*i + 1]);
+        beat += increment;
+        phase = fmod(phase + increment, size_denominator);
 
-//        audioData[i] = (audioData[i] + prev_sample)/2;
-//        prev_sample = audioData[i];
-    }
-}
+        audioData[2*i] *= 0.5;
+        audioData[2*i + 1] *= 0.5;
 
-void Master::start()
-{
-    isPlaying = true;
-    stopPressed_ = 0;
-    beat = -1;
-    phase = -1;
-}
-
-void Master::stop()
-{
-    isPlaying = false;
-    if(stopPressed_ ++ > 1) beat = -1, phase = -1;
-}
-
-//void Master::addGraphic(GraphicObject *gr)
-//{
-//    Graphics.push_back(gr);
-//}
-//
-//void Master::delGraphic(int pos)
-//{
-//    Graphics.erase(Graphics.begin() + pos);
-//}
-//
-void Master::addTrack(Track *track)
-{
-    track->place(0,0.5,0.5,1);
-    Tracks.push_back(track);
-    attach(track);
-}
-
-void Master::delTrack(int pos)
-{
-    Tracks.erase(Tracks.begin() + pos);
-}
-
-void Master::addAudioEffect(AudioEffect *effect)
-{
-    if (AudioEffects.empty()) {
-        effect->place(0.01f, 0.01f, 0.48, 0.3);
-    } else {
-        effect->place(AudioEffects.back()->x + AudioEffects.back()->width + 0.01f, AudioEffects.back()->y, 0.48, 0.3);
+        masterWaveform->ARender(beat, &audioData[2*i], &audioData[2*i + 1]);
     }
 
-    AudioEffects.push_back(effect);
-    attach(effect);
-}
-
-void Master::delAudioEffect(int pos)
-{
-    AudioEffects.erase(AudioEffects.begin() + pos);
-}
-
-void Master::setSampleRate(int samplerate)
-{
-    sample_rate = samplerate;
-}
-
-void Master::MIn(MData cmd)
-{
-    ableton::Link::SessionState state = link.captureAppSessionState();
-    bpm = state.tempo();
-    std::chrono::microseconds time = link.clock().micros();
-    phase = state.phaseAtTime(time, size_denominator);
-    beat = state.beatAtTime(time, size_denominator);
-
-    if (cmd.status == 0xb0){
-        switch (cmd.data1){
-            case 0x15:
-                Tracks[focusTrack]->setVisible(false);
-                if (focusTrack < Tracks.size() - 1) focusTrack ++;
-                Tracks[focusTrack]->setVisible(true);
-                return;
-            case 0x16:
-                Tracks[focusTrack]->setVisible(false);
-                if (focusTrack > 0) focusTrack --;
-                Tracks[focusTrack]->setVisible(true);
-                return;
-            default:
-                break;
-        }
-    }
-
-    Tracks[focusTrack]->MIn(cmd);
+    return true;
 }

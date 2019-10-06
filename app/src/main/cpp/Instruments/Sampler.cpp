@@ -8,6 +8,8 @@ Sampler::Sampler(const char * sample_name_) : Instrument<SamplerState>(1, L"Saml
     setRatio(1);
     sample_name = sample_name_;
 
+    setConstPitch(true);
+
     sample.load(sample_name);
 
     graph = new TimePlot(200);
@@ -15,6 +17,12 @@ Sampler::Sampler(const char * sample_name_) : Instrument<SamplerState>(1, L"Saml
     graph->setHeight(0.7);
     graph->setWidth(0.98);
     GAttach(graph);
+
+    pitch = new Encoder(L"pitch", 0, 2, -12, 12);
+    pitch->place(0.1, 0.73);
+    pitch->setHeight(0.25);
+    GAttach(pitch);
+    MConnect(pitch);
 
     base_frequency = sample_rate / 2 / M_PI;
 
@@ -25,7 +33,8 @@ Sampler::Sampler(const char * sample_name_) : Instrument<SamplerState>(1, L"Saml
 
 void Sampler::IUpdateState(SamplerState *state, MData md) {
     if (md.data2 != 0) {
-        state->note = md.data1;
+        if (const_pitch) state->note = base_note;
+        else state->note = md.data1;
         state->volume = (float)md.data2/127.f;
         if (state->isActive()){
             state->transient = true;
@@ -85,7 +94,7 @@ void Sampler::IARender(SamplerState *state, double beat, float *lsample, float *
 
         *lsample += state->out;
         *rsample += state->out;
-        state->time += getPhaseIncrement(state->note);
+        state->time += getPhaseIncrement(state->note + *pitch);
 
     } else state->setActive(false);
 

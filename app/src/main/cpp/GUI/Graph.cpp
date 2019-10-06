@@ -6,6 +6,8 @@
 
 void BaseGraph::GDraw() {
 
+    GObject::GDraw();
+
     fillGLBuffer();
 
     glBindVertexArray(vao_);
