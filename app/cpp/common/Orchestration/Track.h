@@ -33,9 +33,9 @@ public:
 //        mc->MConnect(&MEffects);
     }
 
-    inline void MIn(MData cmd) override {
-//        mc->MIn(cmd);
-    }
+//    inline void MIn(MData cmd) override {
+////        mc->MIn(cmd);
+//    }
 
     inline void MRender(double beat) override {
 //        mc->MRender(beat);
