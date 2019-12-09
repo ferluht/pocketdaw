@@ -1,6 +1,8 @@
 PocketDaw
 ================================================================================================
 
+![main screen](pic/screen.jpg)
+
 # Prerequisites
 
 **Remark**: Although those build instructions assume a linux platform to generate the APKs, the used tools are available for OSX and MSWindows. As a result, the specified commands should be easily adapted to work for those platforms.
