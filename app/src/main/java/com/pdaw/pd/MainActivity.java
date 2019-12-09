@@ -20,11 +20,13 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.NativeActivity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.PixelFormat;
@@ -38,6 +40,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -79,7 +84,11 @@ public class MainActivity extends NativeActivity {
 
     private static final int PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 9500; // arbitrary
 
+    // Olds permission request result
+    private static final int readExternalStoragePermission = 1;
+
     static {
+        System.loadLibrary("c++_shared");
         System.loadLibrary("native-lib");
     }
 
@@ -94,19 +103,27 @@ public class MainActivity extends NativeActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Hide toolbar
-        int SDK_INT = android.os.Build.VERSION.SDK_INT;
-        if(SDK_INT >= 19)
-        {
-            setImmersiveSticky();
+//        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+//        if(SDK_INT >= 19)
+//        {
+//            setImmersiveSticky();
+//
+//            View decorView = getWindow().getDecorView();
+//            decorView.setOnSystemUiVisibilityChangeListener
+//                    (new View.OnSystemUiVisibilityChangeListener() {
+//                @Override
+//                public void onSystemUiVisibilityChange(int visibility) {
+//                    setImmersiveSticky();
+//                }
+//            });
+//        }
 
-            View decorView = getWindow().getDecorView();
-            decorView.setOnSystemUiVisibilityChangeListener
-                    (new View.OnSystemUiVisibilityChangeListener() {
-                @Override
-                public void onSystemUiVisibilityChange(int visibility) {
-                    setImmersiveSticky();
-                }
-            });
+        // Check permission
+        // Since Android 23, permissions must explicitly be confirmed by user.
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+        {
+            // We absolutly need this permission to run some of the examples, so ask it again even if it was refused before.
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, readExternalStoragePermission);
         }
 
         midiDevices = new HashMap<String, MidiDeviceInfo>();
@@ -163,7 +180,34 @@ public class MainActivity extends NativeActivity {
         }
     }
 
-    @TargetApi(19)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode)
+        {
+            case readExternalStoragePermission:
+            {
+                if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED)
+                {
+                    // Permission refused, show a warning!
+                    AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+                    alertDialog.setTitle("Warning");
+                    alertDialog.setMessage("Some examples needs to load data from the sdcard, those will crash if data can't be loaded!");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            dialog.dismiss();
+                        }
+                    });
+                    alertDialog.show();
+                }
+            }
+        }
+    }
+
+    @TargetApi(26)
     protected void onResume() {
         super.onResume();
 
@@ -195,7 +239,7 @@ public class MainActivity extends NativeActivity {
     }
     // Our popup window, you will call it from your C/C++ code later
 
-    @TargetApi(19)
+    @TargetApi(26)
     void setImmersiveSticky() {
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -224,11 +268,6 @@ public class MainActivity extends NativeActivity {
                 LayoutInflater layoutInflater
                 = (LayoutInflater)getBaseContext()
                 .getSystemService(LAYOUT_INFLATER_SERVICE);
-                View popupView = layoutInflater.inflate(R.layout.widgets, null);
-                _popupWindow = new PopupWindow(
-                        popupView,
-                        LayoutParams.WRAP_CONTENT,
-                        LayoutParams.WRAP_CONTENT);
 
                 LinearLayout mainLayout = new LinearLayout(_activity);
                 MarginLayoutParams params = new MarginLayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
@@ -239,8 +278,6 @@ public class MainActivity extends NativeActivity {
                 _popupWindow.showAtLocation(mainLayout, Gravity.TOP | Gravity.START, 10, 10);
                 _popupWindow.update();
 
-                _label = (TextView)popupView.findViewById(R.id.textViewFPS);
-
             }});
     }
 
@@ -249,20 +286,6 @@ public class MainActivity extends NativeActivity {
         super.onPause();
 //        scanLeDevice(false);
 //        mLeDeviceListAdapter.clear();
-    }
-
-    public void updateFPS(final float fFPS)
-    {
-        if( _label == null )
-            return;
-
-        _activity = this;
-        this.runOnUiThread(new Runnable()  {
-            @Override
-            public void run()  {
-                _label.setText(String.format("   %2.2f FPS", fFPS));
-
-            }});
     }
 
     private void scanMidiDevices()
@@ -329,18 +352,6 @@ public class MainActivity extends NativeActivity {
                     PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION);
         } else {
             startScanningLeDevices();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                           int[] grantResults) {
-        if (requestCode == PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            startScanningLeDevices();
-        } else {
-            setResult(RESULT_CANCELED);
-            finish();
         }
     }
 
