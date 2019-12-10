@@ -48,6 +48,7 @@ You may need to reboot in order to reload those environment variables.
 ```shell
 mkdir pocketdaw
 cd pocketdaw
+git clone https://github.com/Ableton/link && cd link && git submodule update --init --recursive && cd ..
 git clone https://github.com/bkaradzic/bx.git
 git clone https://github.com/bkaradzic/bimg.git
 git clone https://github.com/bkaradzic/bgfx.git
