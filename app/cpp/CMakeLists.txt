@@ -120,8 +120,8 @@ add_library(
         common/Link/LinkManager.cpp
         common/Link/android-ifaddrs/ifaddrs.cpp
 
-#        common/AudioEffects/AudioEffect.cpp
-#        common/AudioEffects/Delay.cpp
+        common/AudioEffects/AudioEffect.cpp
+        common/AudioEffects/Delay.cpp
 #        common/AudioEffects/Lissajous.cpp
 #        common/AudioEffects/MoogFilter.cpp
 #        common/AudioEffects/Oscilloscope.cpp

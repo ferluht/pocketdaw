@@ -16,9 +16,9 @@ class Delay : public AudioEffect{
 
     float * buffer;
 
-    Encoder * delay_time;
-    Encoder * feedback;
-    Encoder * drywet;
+    GUI::Encoder * delay_time;
+    GUI::Encoder * feedback;
+    GUI::Encoder * drywet;
 
 public:
 

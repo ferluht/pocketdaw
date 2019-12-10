@@ -5,25 +5,25 @@
 #include <GUI/Button.h>
 #include "Delay.h"
 
-Delay::Delay() : AudioEffect(L"Delau")
+Delay::Delay() : AudioEffect("Delay")
 {
-    setRatio(0.45f);
+    shape->setRatio(0.45f);
 
-    delay_time = new Encoder(L"time", -1, [this](float value) {}, 1);
-    delay_time->place(0.25, 0.1);
-    delay_time->setHeight(0.25);
+    delay_time = new GUI::Encoder("time", -1, [this](float value) {}, 1);
+    delay_time->shape->lPlace({0.25, 0.1});
+    delay_time->shape->lSetHeight(0.25);
     GAttach(delay_time);
     MConnect(delay_time);
 
-    feedback = new Encoder(L"feedback", -1, [this](float value) {}, 2);
-    feedback->place(0.25, 0.4);
-    feedback->setHeight(0.25);
+    feedback = new GUI::Encoder("feedback", -1, [this](float value) {}, 2);
+    feedback->shape->lPlace({0.25, 0.4});
+    feedback->shape->lSetHeight(0.25);
     GAttach(feedback);
     MConnect(feedback);
 
-    drywet = new Encoder(L"dru/wet", -1, [this](float value) {}, 3);
-    drywet->place(0.25, 0.7);
-    drywet->setHeight(0.25);
+    drywet = new GUI::Encoder("dry/wet", -1, [this](float value) {}, 3);
+    drywet->shape->lPlace({0.25, 0.7});
+    drywet->shape->lSetHeight(0.25);
     GAttach(drywet);
     MConnect(drywet);
 
@@ -36,7 +36,7 @@ Delay::Delay() : AudioEffect(L"Delau")
 
 bool Delay::ARender(double beat, float *lsample, float *rsample){
     float sample = (*lsample + *rsample)/2;
-    if (*isOn) {
+    if (enabled()) {
         int window_size = (int)((*delay_time + 1)/2 * buffer_size);
         if (window_size == 0) return false;
         int index = window_size - position;
@@ -50,5 +50,5 @@ bool Delay::ARender(double beat, float *lsample, float *rsample){
 
     *lsample = sample*prop + *lsample * (1-prop);
     *rsample = sample*prop + *rsample * (1-prop);
-    return *isOn;
+    return enabled();
 }

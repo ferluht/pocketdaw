@@ -97,6 +97,10 @@ namespace GUI {
             attach_to_body = true;
         }
 
+        inline bool enabled() {
+            return *header->isOn;
+        }
+
         void NoHeader() {
             header->visible = false;
             no_header = true;

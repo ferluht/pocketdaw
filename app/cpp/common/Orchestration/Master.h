@@ -14,6 +14,7 @@
 #include <common/Instruments/Oscillator.h>
 #include <common/Instruments/Metronome.h>
 #include <common/Instruments/SingleTone.h>
+#include <common/AudioEffects/Delay.h>
 #include "Track.h"
 //#include <Instruments/Metronome.h>
 //#include <GUI/Menu.h>
@@ -160,12 +161,12 @@ public:
 //                                  }
 //                              });
 //
-//        addAudioMenu->addItem(L"Del",
-//                              [this](){
-//                                  if (focus_track > -1) {
-//                                      Tracks[focus_track]->RAddAudioEffect(new Delay());
-//                                  }
-//                              });
+        addAudioMenu->addButton(new GUI::Button("Delay",
+                              [this](bool a){
+                                  if (focus_track > -1) {
+                                      Tracks[focus_track]->RAddAudioEffect(new Delay());
+                                  }
+                              }));
 //
 //        addAudioMenu->addItem(L"Filter",
 //                              [this](){
