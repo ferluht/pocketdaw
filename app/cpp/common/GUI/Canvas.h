@@ -12,11 +12,16 @@ namespace GUI {
 
     class GCanvas : virtual public GObject {
 
+        NVGcolor color;
+
     public:
 
         GCanvas() {
             setShapeType(BOX);
+            color.a = 0;
         }
+
+        inline void setColor(NVGcolor color_) { color = color_; }
 
         void GDraw(NVGcontext * nvg) override;
 

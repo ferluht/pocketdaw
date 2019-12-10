@@ -62,7 +62,7 @@ SingleTone::SingleTone() : Instrument<SingleToneState>(1, "ST"){
 }
 
 void SingleTone::IUpdateState(SingleToneState *state, MData md) {
-    if (md.data2 != 0) {
+    if (((md.status & 0xF0) == NOTEON_HEADER) && (md.data2 != 0)) {
         if (!state->isActive()) {
             state->glide = 0;
             state->glide_inc = 0;

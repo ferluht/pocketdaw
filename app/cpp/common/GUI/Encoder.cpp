@@ -35,11 +35,9 @@ namespace GUI {
                      unsigned int default_map_, float lower_bound_, float upper_bound_) {
         setShapeType(BOX);
         shape->setRatio(0.8);
-        callback = callback_;
+        callback = std::move(callback_);
         lower_bound = lower_bound_;
         upper_bound = upper_bound_;
-
-//        setRatio(0.8);
 
         size_t len = strlen(label_);
         label = new char[len + 1];
@@ -90,7 +88,7 @@ namespace GUI {
         nvgTextAlign(nvg,NVG_ALIGN_CENTER|NVG_ALIGN_MIDDLE);
 
         char buffer[64];
-        snprintf(buffer, sizeof buffer, "val: %f", value);
+        snprintf(buffer, sizeof buffer, "val: %.2f", value);
 
         nvgFillColor(nvg, RED);
         nvgText(nvg, shape->global.c.x + shape->global.s.x/2, shape->global.c.y + shape->global.s.y * 0.9f, buffer, NULL);

@@ -1,4 +1,4 @@
-# Install script for directory: /home/ibelikov/Documents/GitHub/pd/app/cpp/ndk_helper
+# Install script for directory: /home/ibelikov/Documents/GitHub/pd/pd/app/cpp/ndk_helper
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

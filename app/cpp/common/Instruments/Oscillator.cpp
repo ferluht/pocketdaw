@@ -81,7 +81,7 @@ void Oscillator::draw_waveform() {
 }
 
 void Oscillator::IUpdateState(SineState *state, MData md){
-    if (md.data2 != 0) {
+    if (((md.status & 0xF0) == NOTEON_HEADER) && (md.data2 != 0)) {
         state->note = md.data1;
         state->volume = (float)md.data2/127.f;
         if (!state->isActive()) state->phase = -2*M_PI;
