@@ -20,6 +20,7 @@ namespace GUI {
         const float header_height = 0.1;
 
         GObject *body;
+        GObject *header;
         bool attach_to_body = false;
 
         char *name;
@@ -32,18 +33,20 @@ namespace GUI {
 
         IECanvas(const char *name_) {
 
+            header = new GObject();
+            header->setShapeType(BOX);
+            header->shape->lPlace({0, 0});
+            header->shape->lSetHeight(header_height);
+            header->shape->lSetWidth(1);
+            GAttach(header);
 
-//            name = new Text("Fonts/Roboto-Regular.ttf", name_);
-//            name->place(name_padding, (1 - name_height) / 2);
-//            name->setHeight(name_height);
-//            header->GAttach(name);
-//
-//            GAttachTexture("Textures/effect_canvas.bmp");
             isOn = new Button("ON/OFF", [](bool state) {});
+            isOn->shape->lPlace({0, 0.});
             isOn->shape->lSetHeight(onoff_button_height);
             isOn->shape->setRatio(onoff_button_ratio);
-//            header->GAttach(isOn);
-//
+            header->GAttach(isOn);
+            *isOn = true;
+
             body = new GObject();
             body->setShapeType(BOX);
             body->shape->lPlace({0, header_height});
@@ -52,8 +55,6 @@ namespace GUI {
             GAttach(body);
 
             attach_to_body = true;
-
-//            *isOn = true;
         }
 
         void NoHeader() {
@@ -72,11 +73,11 @@ namespace GUI {
             }
         }
 
-        void GInit() override {
+//        void GInit() override {
 //            isOn->place(1 - onoff_button_padding -
 //                        onoff_button_height * onoff_button_ratio / ratio * header_height,
 //                        (1 - onoff_button_height) / 2);
-        }
+//        }
 
 //        GObject *GFindFocusObject(const ndk_helper::Vec2 &point) override {
 //            if (visible && body->visible && body->globalPosition.contains(point)) {
