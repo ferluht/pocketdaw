@@ -8,7 +8,7 @@ cmake_minimum_required(VERSION 3.4.1)
 project(native-lib LANGUAGES C CXX)
 
 # Ableton Link
-set (LINK_DIR /home/ibelikov/Documents/GitHub/link)
+set (LINK_DIR ${CMAKE_CURRENT_LIST_DIR}/../../../link)
 include(${LINK_DIR}/AbletonLinkConfig.cmake)
 include_directories(${LINK_DIR}/include)
 include_directories(${LINK_DIR}/modules/asio-standalone/asio/include)
