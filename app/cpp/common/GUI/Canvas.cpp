@@ -7,7 +7,15 @@
 namespace GUI {
 
     void GCanvas::GDraw(NVGcontext * nvg) {
-        GObject::GDraw(nvg);
+
+        nvgBeginPath(nvg);
+        nvgRect(nvg,
+        shape->global.c.x,
+        shape->global.c.y,
+        shape->global.s.x, shape->global.s.y);
+        nvgFillColor(nvg, color);
+        nvgFill(nvg);
+        nvgClosePath(nvg);
 
 //        vd->drawBox(shape->global.c.x - shape->global.s.x/2,
 //                    shape->global.c.y - shape->global.s.y/2,

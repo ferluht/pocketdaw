@@ -10,91 +10,121 @@
 
 namespace GUI {
 
-    class IECanvas : public AMGCanvas {
+    class Header : public GCanvas {
 
-        const float onoff_button_padding = 0.02;
-        const float onoff_button_height = 0.7;
+        char * label;
+
+        const float onoff_button_padding = 0.01;
+        const float onoff_button_height = 0.9;
         const float onoff_button_ratio = 3.2;
-        const float name_padding = 0.01;
-        const float name_height = 0.5;
-        const float header_height = 0.1;
-
-        GObject *body;
-        GObject *header;
-        bool attach_to_body = false;
-
-        char *name;
-
-        bool no_header = false;
+        const float name_height = 0.9;
 
     public:
 
         Button *isOn;
 
+        Header(const char * label_) {
+            setColor(GREY);
+            size_t len = strlen(label_);
+            label = new char[len + 1];
+            strncpy(label, label_, len);
+            label[len] = 0;
+
+            isOn = new Button("ON/OFF", [](bool state) {});
+            isOn->shape->lPlace({onoff_button_padding, (1-onoff_button_height)/2});
+            isOn->shape->lSetHeight(onoff_button_height);
+            isOn->shape->setRatio(onoff_button_ratio);
+            GAttach(isOn);
+            *isOn = true;
+        }
+
+        void GDraw(NVGcontext *nvg) override {
+            GCanvas::GDraw(nvg);
+
+            nvgBeginPath(nvg);
+            nvgFontSize(nvg, shape->global.s.y * name_height);
+            nvgFontFace(nvg, "sans");
+            nvgTextAlign(nvg,NVG_ALIGN_MIDDLE|NVG_ALIGN_MIDDLE);
+
+            nvgFillColor(nvg, BLACK);
+            nvgText(nvg, shape->global.c.x + shape->global.s.x/2, shape->global.c.y + shape->global.s.y/2, label, NULL);
+            nvgClosePath(nvg);
+        };
+
+        GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) override {
+            auto fo = isOn->GFindFocusObject(point, trace);
+            if (fo) {
+                trace->push_front(this);
+                return fo;
+            }
+            if (visible && shape->contains(point)) {
+                return this;
+            }
+
+            return nullptr;
+        }
+
+    };
+
+    class IECanvas : public AMGCanvas {
+
+        const float header_height = 0.1;
+
+        GObject *body;
+        Header *header;
+        bool attach_to_body = false;
+
+        bool no_header = false;
+
+    public:
+
+
         IECanvas(const char *name_) {
 
-            header = new GObject();
-            header->setShapeType(BOX);
+            header = new Header(name_);
             header->shape->lPlace({0, 0});
             header->shape->lSetHeight(header_height);
             header->shape->lSetWidth(1);
-            GAttach(header);
-
-            isOn = new Button("ON/OFF", [](bool state) {});
-            isOn->shape->lPlace({0, 0.});
-            isOn->shape->lSetHeight(onoff_button_height);
-            isOn->shape->setRatio(onoff_button_ratio);
-            header->GAttach(isOn);
-            *isOn = true;
+            AMGCanvas::GAttach(header);
 
             body = new GObject();
             body->setShapeType(BOX);
             body->shape->lPlace({0, header_height});
             body->shape->lSetHeight(0.9);
             body->shape->lSetWidth(1);
-            GAttach(body);
+            AMGCanvas::GAttach(body);
 
             attach_to_body = true;
         }
 
         void NoHeader() {
-//            header->visible = false;
-//            no_header = true;
-//            body->place(0, 0);
-//            body->setHeight(1);
-//            body->setWidth(1);
+            header->visible = false;
+            no_header = true;
+            body->shape->lPlace({0, 0});
+            body->shape->lSetHeight(1);
+            body->shape->lSetWidth(1);
         }
 
-        void GAttach(GObject *go) override {
-            if (attach_to_body) {
-                body->GAttach(go);
-            } else {
-                AMGCanvas::GAttach(go);
+        GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) override {
+            auto fo = body->GFindFocusObject(point, trace);
+            if (fo) {
+                trace->push_front(this);
+                return fo;
             }
+            fo = header->GFindFocusObject(point, trace);
+            if (fo == header) {
+                return this;
+            }
+            return nullptr;
         }
 
-//        void GInit() override {
-//            isOn->place(1 - onoff_button_padding -
-//                        onoff_button_height * onoff_button_ratio / ratio * header_height,
-//                        (1 - onoff_button_height) / 2);
-//        }
+        void GAttach(GObject * go) override {
+            body->GAttach(go);
+        }
 
-//        GObject *GFindFocusObject(const ndk_helper::Vec2 &point) override {
-//            if (visible && body->visible && body->globalPosition.contains(point)) {
-//                for (auto const &gr : body->Graphics) {
-//                    auto fo = gr->GFindFocusObject(point);
-//                    if (fo) return fo;
-//                }
-//                return this->parent;
-//            }
-//
-//            if (visible && header->visible && header->globalPosition.contains(point)) {
-//                if (isOn->globalPosition.contains(point)) return isOn;
-//                return this;
-//            }
-//
-//            return nullptr;
-//        }
+        void GDetach(GObject * go) override {
+            body->GDetach(go);
+        }
 
         void GSetVisible(bool visible_) override {
             if (no_header) {
@@ -113,6 +143,8 @@ namespace GUI {
                     shape->global.s.x, shape->global.s.y);
             nvgFillColor(nvg, DARK);
             nvgFill(nvg);
+            nvgStrokeColor(nvg, BLACK);
+            nvgStroke(nvg);
             nvgClosePath(nvg);
         };
     };
