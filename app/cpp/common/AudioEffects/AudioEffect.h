@@ -8,11 +8,11 @@
 #include <GUI/Button.h>
 #include "GUI/IECanvas.h"
 
-class AudioEffect : public IECanvas{
+class AudioEffect : public GUI::IECanvas{
 
 public:
 
-    AudioEffect(wchar_t * name_) : IECanvas(name_){
+    AudioEffect(const char * name_) : GUI::IECanvas(name_){
 
     }
 };

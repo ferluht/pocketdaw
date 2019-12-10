@@ -194,6 +194,7 @@ namespace GUI {
             this->parent = nullptr;
             this->visible = true;
             this->initialized = false;
+            infocus = false;
         }
 
         virtual ~GObject() {}
@@ -244,8 +245,7 @@ namespace GUI {
                 GRender(nvg, dTime);
 
                 for (auto gr = Graphics.rbegin(); gr != Graphics.rend(); ++gr) {
-//                    if (!(*gr)->infocus)
-                    (*gr)->GRender_(nvg, dTime);
+                    if (!(*gr)->infocus) (*gr)->GRender_(nvg, dTime);
                 }
             }
         }
