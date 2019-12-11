@@ -15,6 +15,7 @@
 #include <common/Instruments/Metronome.h>
 #include <common/Instruments/SingleTone.h>
 #include <common/AudioEffects/Delay.h>
+#include <common/MidiEffects/Arpeggiator.h>
 #include "Track.h"
 //#include <Instruments/Metronome.h>
 //#include <GUI/Menu.h>
@@ -97,14 +98,14 @@ public:
         addDeviceMenu->addButton(new GUI::Button("Oscillator",
                                [this](bool a){
                                    if (focus_track > -1) {
-                                       Tracks[focus_track]->RAttachInsrument(new Oscillator("Oscillator", 1));
+                                       Tracks[focus_track]->RAdd(new Oscillator("Oscillator", 1));
                                    }
                                }));
 
         addDeviceMenu->addButton(new GUI::Button("SingleTone",
                                                  [this](bool a){
                                                      if (focus_track > -1) {
-                                                         Tracks[focus_track]->RAttachInsrument(new SingleTone());
+                                                         Tracks[focus_track]->RAdd(new SingleTone());
                                                      }
                                                  }));
 
@@ -146,12 +147,12 @@ public:
 //                               });
 //
 //        addMidiMenu = new Menu(L"Midi effect");
-//        addMidiMenu->addItem(L"Arp",
-//                             [this](){
-//                                 if (focus_track > -1) {
-//                                     Tracks[focus_track]->RAddMidiEffect(new Arpeggiator());
-//                                 }
-//                             });
+        addMidiMenu->addButton(new GUI::Button("Arp",
+                             [this](bool a){
+                                 if (focus_track > -1) {
+                                     Tracks[focus_track]->RAdd(new Arpeggiator());
+                                 }
+                             }));
 //
 //        addAudioMenu = new Menu(L"Audio effect");
 //        addAudioMenu->addItem(L"Oscill",
@@ -164,10 +165,10 @@ public:
         addAudioMenu->addButton(new GUI::Button("Delay",
                               [this](bool a){
                                   if (focus_track > -1) {
-                                      Tracks[focus_track]->RAddAudioEffect(new Delay());
+                                      Tracks[focus_track]->RAdd(new Delay());
                                   }
                               }));
-//
+
 //        addAudioMenu->addItem(L"Filter",
 //                              [this](){
 //                                  if (focus_track > -1) {

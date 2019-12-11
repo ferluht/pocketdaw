@@ -10,10 +10,10 @@
 #include "Track.h"
 
 GUI::GObject * AMGTrack::GDragHandler(const ndk_helper::Vec2 &v) {
-    x_offset += (v.x - drag_from.x)/shape->global.s.x;
-    if ((MEffects.shape->local.ratio + Instr->shape->local.ratio + AEffects.shape->local.ratio)/shape->global.ratio + x_offset + 2*padding < 1)
-        x_offset = 1 - (MEffects.shape->local.ratio + Instr->shape->local.ratio + AEffects.shape->local.ratio)/shape->global.ratio - 2*padding;
-    if (x_offset > 0) x_offset = 0;
+//    x_offset += (v.x - drag_from.x)/shape->global.s.x;
+//    if ((MEffects.shape->local.ratio + Instr->shape->local.ratio + AEffects.shape->local.ratio)/shape->global.ratio + x_offset + 2*padding < 1)
+//        x_offset = 1 - (MEffects.shape->local.ratio + Instr->shape->local.ratio + AEffects.shape->local.ratio)/shape->global.ratio - 2*padding;
+//    if (x_offset > 0) x_offset = 0;
 //    changed = true;
     drag_from = v;
     return this;

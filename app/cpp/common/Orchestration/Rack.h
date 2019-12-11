@@ -6,7 +6,11 @@
 #define PD_RACK_H
 
 #include <GUI/Canvas.h>
+#include <common/MidiEffects/MidiEffect.h>
+#include <common/Instruments/Instrument.h>
+#include <common/AudioEffects/AudioEffect.h>
 #include "Chain.h"
+#include <algorithm>
 
 class AMGRack : public GUI::AMGCanvas{
 
@@ -20,97 +24,124 @@ public:
 
     float x_offset = 0;
 
-    AMGChain MEffects;
-    GUI::IECanvas * Instr;
-    AMGChain AEffects;
+    std::list<GUI::IECanvas *> objects;
+    int midi_devices;
+
+    Vec2 drag_from;
 
     AMGRack(){
-        Instr = new GUI::IECanvas("dummy");
-        MEffects.MConnect(Instr);
-        MEffects.MConnect(&mout);
-        Instr->MConnect(&AEffects);
 
-        GAttach(&MEffects);
-        GAttach(&AEffects);
+        midi_devices = 0;
+//        Instr = new GUI::IECanvas("dummy");
+//        MEffects.MConnect(Instr);
+//        MEffects.MConnect(&mout);
+//        Instr->MConnect(&AEffects);
+//
+//        GAttach(&MEffects);
+//        GAttach(&AEffects);
     }
 
     AMGRack(GUI::IECanvas * instr_) : AMGRack() {
-        RAttachInsrument(instr_);
+//        RAttachInsrument(instr_);
     }
 
-    inline void RAttachInsrument(GUI::IECanvas * instr_) {
-        MEffects.MDisconnect(Instr);
-        Instr->MDisconnect(&AEffects);
-        GDetach(Instr);
-//        delete Instr;
+//    inline void RAttachInsrument(GUI::IECanvas * instr_) {
+//        MEffects.MDisconnect(Instr);
+//        Instr->MDisconnect(&AEffects);
+//        GDetach(Instr);
+////        delete Instr;
+//
+//        Instr = instr_;
+//        Instr->shape->lPlace({x_offset + (MEffects.shape->local.ratio + padding)/shape->global.ratio + padding, padding});
+//        Instr->shape->lSetHeight(1 - 2*padding);
+//        GAttach(Instr);
+//
+//        Instr->MConnect(&AEffects);
+//        MEffects.MConnect(Instr);
+////        changed = true;
+//    }
 
-        Instr = instr_;
-        Instr->shape->lPlace({x_offset + (MEffects.shape->local.ratio + padding)/shape->global.ratio + padding, padding});
-        Instr->shape->lSetHeight(1 - 2*padding);
-        GAttach(Instr);
+//    inline void RDetachInsrument() {
+//        MEffects.MDisconnect(Instr);
+//        Instr->MDisconnect(&AEffects);
+//        Instr = new GUI::IECanvas("dummy");
+//        GDetach(Instr);
+//        MEffects.MConnect(Instr);
+//        Instr->MConnect(&AEffects);
+//    }
 
-        Instr->MConnect(&AEffects);
-        MEffects.MConnect(Instr);
-//        changed = true;
+    void RAdd(GUI::IECanvas * obj){
+        obj->shape->lSetHeight(1);
+
+        if (isAudioEffect(obj)) {
+            if (!objects.empty()) objects.back()->MConnect(obj);
+            objects.push_back(obj);
+        }
+        if (isMidiEffect(obj)) {
+            if (!objects.empty()) obj->MConnect(objects.front());
+            objects.push_front(obj);
+        }
+        if (isInstrument(obj)) {
+
+            auto it = objects.begin();
+            for (it; (it != objects.end()) && isMidiEffect(*it); ++it);
+            if (isInstrument(*it)) {
+                objects.erase(it);
+                it = objects.begin();
+                for (it; (it != objects.end()) && isMidiEffect(*it); ++it);
+            }
+
+            if (it != objects.begin()) (*std::prev(it, 1))->MConnect(obj);
+            if (it != objects.end()) obj->MConnect(*std::next(it, 1));
+
+//            if (!objects.empty()) obj->MConnect(objects.front());
+            objects.insert(it, obj);
+        }
+
+        updatePositions();
+
+        GAttach(obj);
     }
 
-    void GDraw(NVGcontext *nvg) override {
-        MEffects.shape->lPlace({x_offset + padding, padding});
-        MEffects.shape->lSetHeight(1 - 2*padding);
-        Instr->shape->lPlace({x_offset + (MEffects.shape->local.ratio + padding)/shape->global.ratio + padding, padding});
-        Instr->shape->lSetHeight(1 - 2*padding);
-        AEffects.shape->lPlace({x_offset + (MEffects.shape->local.ratio + Instr->shape->global.ratio + 2*padding)/shape->global.ratio + padding, padding});
-        AEffects.shape->lSetHeight(1 - 2*padding);
-//        GUI::AMGCanvas::GDraw(nvg);
+    void RDel(GUI::IECanvas * obj){
+        auto it = std::find(objects.begin(), objects.end(), obj);
+
+        if (it != objects.begin()) (*std::prev(it, 1))->MDisconnect(obj);
+        if (it != objects.end()) (*it)->MDisconnect(*std::next(it, 1));
+
+        objects.remove(obj);
     }
 
-    inline void RDetachInsrument() {
-        MEffects.MDisconnect(Instr);
-        Instr->MDisconnect(&AEffects);
-        Instr = new GUI::IECanvas("dummy");
-        GDetach(Instr);
-        MEffects.MConnect(Instr);
-        Instr->MConnect(&AEffects);
-    }
+    void updatePositions() {
+        float ratio = 0;
+        for (auto const& obj : objects) ratio += obj->shape->local.ratio;
 
-    inline void RAddMidiEffect(GUI::IECanvas * meffect){
-        MEffects.AMGChainPushBack(meffect);
-//        changed = true;
-    }
-
-    inline void RDelMidiEffect(){
-
-    }
-
-    inline void RAddAudioEffect(GUI::IECanvas * aeffect){
-        AEffects.AMGChainPushBack(aeffect);
-//        changed = true;
-    }
-
-    inline void RDelAudioEffect(){
-
+        float x = padding + x_offset;
+        for (auto const& obj : objects) {
+            obj->shape->lPlace({x, padding});
+            x += obj->shape->local.ratio / shape->global.ratio + padding;
+        }
     }
 
     inline void MIn(MData cmd) override {
-        MEffects.MIn(cmd);
+        if (objects.size()) objects.front()->MIn(cmd);
     }
 
     inline void MEnableMapping(bool state) override {
-        MEffects.MEnableMapping(state);
-        Instr->MEnableMapping(state);
-        AEffects.MEnableMapping(state);
+        for (auto const& obj : objects) obj->MEnableMapping(state);
     }
 
     inline void MRender(double beat) override {
-        MEffects.MRender(beat);
-        Instr->MRender(beat);
-        AEffects.MRender(beat);
+        for (auto const& obj : objects) obj->MRender(beat);
     }
 
 //    void MConnect(MObject * mo) override ;
 //    void MDisconnect(MObject * mo) override ;
 
     bool ARender(double beat, float * lsample, float * rsample) override ;
+
+//    GUI::GObject * GDragHandler(const ndk_helper::Vec2& v) override ;
+//    GUI::GObject * GDragBegin(const ndk_helper::Vec2& v) override ;
 };
 
 

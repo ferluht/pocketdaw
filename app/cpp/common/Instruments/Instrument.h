@@ -27,8 +27,13 @@ public:
 	template <class State> friend class Instrument;
 };
 
+class InstrumentBase : public GUI::IECanvas{
+public:
+    InstrumentBase(const char * name_) : GUI::IECanvas(name_) {}
+};
+
 template <class State>
-class Instrument : public GUI::IECanvas{
+class Instrument : public InstrumentBase{
 
     unsigned int num_voices = 8;
     std::multiset<State *> States;
@@ -53,7 +58,7 @@ public:
 	float pitch;
     float pitch_distance = 12.0;
 
-    Instrument(unsigned int num_voices_, const char * name_) : IECanvas(name_){
+    Instrument(unsigned int num_voices_, const char * name_) : InstrumentBase(name_){
         num_voices = num_voices_;
         pitch = 0;
         for (int i = 0; i < num_voices; i++) States.insert(new State());
@@ -171,5 +176,6 @@ bool Instrument<State>::ARender(double beat, float * lsample, float * rsample)
     return true;
 }
 
+static auto isInstrument = GUI::IsType<InstrumentBase>;
 
 #endif //PD_INSTRUMENT_H
