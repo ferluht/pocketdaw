@@ -154,7 +154,8 @@ add_library(
 #        common/Instruments/Sampler.cpp
         common/Instruments/SingleTone.cpp
 
-#        common/MidiEffects/Arpeggiator.cpp
+        common/MidiEffects/MidiEffect.cpp
+        common/MidiEffects/Arpeggiator.cpp
 #        common/MidiEffects/MidiDelay.cpp
 #        common/MidiEffects/Scale.cpp
 

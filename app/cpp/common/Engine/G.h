@@ -327,14 +327,15 @@ namespace GUI {
 
     };
 
-    template <class DstType, class SrcType>
-    bool IsType(const SrcType* src)
+
+    template <class DstType>
+    bool IsType(const GObject* src)
     {
         return dynamic_cast<const DstType*>(src) != nullptr;
     }
 
 
-//-------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 // Shared state for our app.
 //-------------------------------------------------------------------------
     struct android_app;

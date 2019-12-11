@@ -68,7 +68,7 @@ namespace GUI {
 
     class IECanvas : public AMGCanvas {
 
-        const float header_height = 0.1;
+        const float header_height = 0.08;
 
         GObject *body;
         Header *header;

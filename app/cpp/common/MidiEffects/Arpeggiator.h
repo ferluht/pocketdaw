@@ -8,8 +8,9 @@
 #include <map>
 #include <random>
 #include <GUI/IECanvas.h>
+#include "MidiEffect.h"
 
-class Arpeggiator : public IECanvas{
+class Arpeggiator : public MidiEffect{
 
 public:
 

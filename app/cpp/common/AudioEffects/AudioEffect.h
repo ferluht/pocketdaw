@@ -17,5 +17,6 @@ public:
     }
 };
 
+static auto isAudioEffect = GUI::IsType<AudioEffect>;
 
 #endif //PD_AUDIOEFFECT_H

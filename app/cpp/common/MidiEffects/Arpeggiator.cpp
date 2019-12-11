@@ -7,18 +7,17 @@
 
 Arpeggiator::Arpeggiator() : Arpeggiator(1) {}
 
-Arpeggiator::Arpeggiator(double scale_) : IECanvas(L"Arpeggiator")
+Arpeggiator::Arpeggiator(double scale_) : MidiEffect("Arpeggiator")
 {
-    GAttachTexture("Textures/effect_canvas.bmp");
-    setRatio(0.5);
+    shape->setRatio(0.5);
 
-    auto enc_release = new Encoder(L"rate", 0, [this](float value) {
+    auto enc_release = new GUI::Encoder("rate", 0, [this](float value) {
         scale = (int)((value + 1)*2);
         scale /= 4;
         cycles = (int)(last_played_beat / scale);
     }, 8);
-    enc_release->place(0.2, 0.2);
-    enc_release->setHeight(0.4);
+    enc_release->shape->lPlace({0.2, 0.2});
+    enc_release->shape->lSetHeight(0.4);
     GAttach(enc_release);
     MConnect(enc_release);
 
@@ -31,8 +30,8 @@ Arpeggiator::Arpeggiator(double scale_) : IECanvas(L"Arpeggiator")
 }
 
 void Arpeggiator::MIn(MData cmd) {
-    if (*isOn && (((cmd.status & 0xF0) == NOTEON_HEADER) || ((cmd.status & 0xF0) == NOTEOFF_HEADER))) {
-        if (cmd.data2) notes.insert({cmd.data1, cmd});
+    if (enabled() && (((cmd.status & 0xF0) == NOTEON_HEADER) || ((cmd.status & 0xF0) == NOTEOFF_HEADER))) {
+        if (((cmd.status & 0xF0) == NOTEON_HEADER) && cmd.data2) notes.insert({cmd.data1, cmd});
         else notes.erase(cmd.data1);
     } else {
         MOut(cmd);
