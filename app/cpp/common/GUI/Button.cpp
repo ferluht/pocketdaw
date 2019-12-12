@@ -6,39 +6,27 @@
 
 namespace GUI {
 
-    Button::Button(const char *label_, std::function<void(bool)> callback_) {
+    Button::Button(const char *label_, std::function<void(bool)> callback_) :
+    Button(label_, label_, callback_){}
+
+    Button::Button(const char *labelOn_, const char *labelOff_, std::function<void(bool)> callback_) {
         setShapeType(BOX);
         callback = callback_;
         state = false;
 
-        size_t len = strlen(label_);
-        label = new char[len + 1];
-        strncpy(label, label_, len);
-        label[len] = 0;
-    }
+        size_t len = strlen(labelOn_);
+        labelOn = new char[len + 1];
+        strncpy(labelOn, labelOn_, len);
+        labelOn[len] = 0;
 
-    GObject *Button::GTapEnd(const ndk_helper::Vec2 &v) {
-        state = !state;
-        callback(state);
-        return nullptr;
-    }
-
-
-    TexturedMultiButton::TexturedMultiButton(unsigned int num_states_, const char **textures_)
-            : TexturedMultiButton([](unsigned int state) {}, num_states_, textures_) {}
-
-    TexturedMultiButton::TexturedMultiButton(std::function<void(unsigned int)> callback_,
-                                             unsigned int num_states_, const char **textures_) {
-        callback = callback_;
-        state = 0;
-        num_states = num_states_;
-        textures = textures_;
-    }
-
-    GObject *TexturedMultiButton::GTapEnd(const ndk_helper::Vec2 &v) {
-        state = (state + 1) % num_states;
-        callback(state);
-        return nullptr;
+        if (labelOn_ == labelOff_) {
+            labelOff = labelOn;
+        } else {
+            len = strlen(labelOff_);
+            labelOff = new char[len + 1];
+            strncpy(labelOff, labelOff_, len);
+            labelOff[len] = 0;
+        }
     }
 
     void Button::GDraw(NVGcontext * nvg) {
@@ -62,8 +50,33 @@ namespace GUI {
         nvgTextAlign(nvg,NVG_ALIGN_CENTER|NVG_ALIGN_MIDDLE);
 
         nvgFillColor(nvg, BLACK);
+        char * label = labelOff;
+        if (state) label = labelOn;
         nvgText(nvg, shape->global.c.x + shape->global.s.x/2, shape->global.c.y + shape->global.s.y/2, label, NULL);
         nvgClosePath(nvg);
+    }
+
+    GObject * Button::GTapEnd(const ndk_helper::Vec2 &v) {
+        state = !state;
+        callback(state);
+        return nullptr;
+    }
+
+    TexturedMultiButton::TexturedMultiButton(unsigned int num_states_, const char **textures_)
+            : TexturedMultiButton([](unsigned int state) {}, num_states_, textures_) {}
+
+    TexturedMultiButton::TexturedMultiButton(std::function<void(unsigned int)> callback_,
+                                             unsigned int num_states_, const char **textures_) {
+        callback = callback_;
+        state = 0;
+        num_states = num_states_;
+        textures = textures_;
+    }
+
+    GObject *TexturedMultiButton::GTapEnd(const ndk_helper::Vec2 &v) {
+        state = (state + 1) % num_states;
+        callback(state);
+        return nullptr;
     }
 
     void ProgressButton::GDraw(NVGcontext *nvg) {
@@ -90,6 +103,8 @@ namespace GUI {
         nvgFontFace(nvg, "sans");
         nvgTextAlign(nvg,NVG_ALIGN_CENTER|NVG_ALIGN_MIDDLE);
 
+        char * label = labelOff;
+        if (state) label = labelOn;
         nvgFillColor(nvg, BLACK);
         nvgText(nvg, shape->global.c.x + shape->global.s.x/2, shape->global.c.y + shape->global.s.y/2, label, NULL);
         nvgClosePath(nvg);

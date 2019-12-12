@@ -4,27 +4,27 @@
 
 #include "MoogFilter.h"
 
-MoogFilter::MoogFilter() : AudioEffect(L"Filter")
+MoogFilter::MoogFilter() : AudioEffect("Filter")
 {
-    setRatio(0.45f);
+    shape->setRatio(0.45f);
 
     fs=48000.0;
 
     init();
 
-    cutoff_enc = new Encoder(L"cutoff", 1, [this](float value) {
+    cutoff_enc = new GUI::Encoder("cutoff", 1, [this](float value) {
         setCutoff ((value + 1)*8000);
     }, 1);
-    cutoff_enc->place(0.25, 0.1);
-    cutoff_enc->setHeight(0.25);
+    cutoff_enc->shape->lPlace({0.25, 0.1});
+    cutoff_enc->shape->lSetHeight(0.25);
     GAttach(cutoff_enc);
     MConnect(cutoff_enc);
 
-    resonance_enc = new Encoder(L"resonance", -1, [this](float value) {
+    resonance_enc = new GUI::Encoder("resonance", -1, [this](float value) {
         setRes ((value + 1)/2);
     }, 1);
-    resonance_enc->place(0.25, 0.4);
-    resonance_enc->setHeight(0.25);
+    resonance_enc->shape->lPlace({0.25, 0.4});
+    resonance_enc->shape->lSetHeight(0.25);
     GAttach(resonance_enc);
     MConnect(resonance_enc);
 }
@@ -49,7 +49,7 @@ void MoogFilter::calc()
 
 bool MoogFilter::ARender(double beat, float *lsample, float *rsample) {
 
-    if (!*isOn) return false;
+    if (!enabled()) return false;
 
     float input = (*lsample + *rsample)/2;
 // process input
@@ -67,7 +67,7 @@ bool MoogFilter::ARender(double beat, float *lsample, float *rsample) {
     oldx = x; oldy1 = y1; oldy2 = y2; oldy3 = y3;
     *lsample = y4;
     *rsample = y4;
-    return *isOn;
+    return enabled();
 }
 
 float MoogFilter::getCutoff()

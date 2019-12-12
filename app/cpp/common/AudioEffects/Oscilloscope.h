@@ -6,19 +6,19 @@
 #define PD_WAVEFORM_H
 
 #include "AudioEffect.h"
-#include <GUI/Plot.h>
+#include <GUI/Graph.h>
 
 class Oscilloscope : public AudioEffect{
 
-    Encoder * trig;
-    Encoder * time;
-    Encoder * scale;
+    GUI::Encoder * trig;
+    GUI::Encoder * time;
+    GUI::Encoder * scale;
 
     int sample_counter = 0;
     int after_trig = 0;
     const int graph_points = 200;
 
-    TimePlot * graph;
+    GUI::TimeGraph * graph;
 
 public:
 

@@ -45,31 +45,6 @@ public:
 //        RAttachInsrument(instr_);
     }
 
-//    inline void RAttachInsrument(GUI::IECanvas * instr_) {
-//        MEffects.MDisconnect(Instr);
-//        Instr->MDisconnect(&AEffects);
-//        GDetach(Instr);
-////        delete Instr;
-//
-//        Instr = instr_;
-//        Instr->shape->lPlace({x_offset + (MEffects.shape->local.ratio + padding)/shape->global.ratio + padding, padding});
-//        Instr->shape->lSetHeight(1 - 2*padding);
-//        GAttach(Instr);
-//
-//        Instr->MConnect(&AEffects);
-//        MEffects.MConnect(Instr);
-////        changed = true;
-//    }
-
-//    inline void RDetachInsrument() {
-//        MEffects.MDisconnect(Instr);
-//        Instr->MDisconnect(&AEffects);
-//        Instr = new GUI::IECanvas("dummy");
-//        GDetach(Instr);
-//        MEffects.MConnect(Instr);
-//        Instr->MConnect(&AEffects);
-//    }
-
     void RAdd(GUI::IECanvas * obj){
         obj->shape->lSetHeight(1);
 
@@ -94,7 +69,6 @@ public:
             if (it != objects.begin()) (*std::prev(it, 1))->MConnect(obj);
             if (it != objects.end()) obj->MConnect(*std::next(it, 1));
 
-//            if (!objects.empty()) obj->MConnect(objects.front());
             objects.insert(it, obj);
         }
 

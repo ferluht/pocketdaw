@@ -224,12 +224,7 @@ namespace GUI {
 
             shape->updateGlobal();
 
-
             GDraw(nvg);
-
-//            for (auto const &gr : Graphics) {
-//                gr->GDraw_(nvg);
-//            }
         }
 
         virtual void GDraw(NVGcontext *nvg) {};
@@ -248,6 +243,8 @@ namespace GUI {
                     if (!(*gr)->infocus) (*gr)->GRender_(nvg, dTime);
                 }
             }
+
+            infocus = false;
         }
 
         virtual void GRender(NVGcontext *nvg, float dTime) {};
@@ -258,6 +255,8 @@ namespace GUI {
                 gr->GSetVisible(visible_);
             }
         }
+
+        inline void markInFocus() { infocus = true; }
 
         // Hierarchy
 
@@ -279,11 +278,11 @@ namespace GUI {
         // Event handlers
 
         virtual void GGainFocus() {
-            infocus = true;
+//            infocus = true;
         }
 
         virtual void GLoseFocus() {
-            infocus = false;
+//            infocus = false;
         }
 
         virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
@@ -345,9 +344,6 @@ namespace GUI {
 
     public:
 
-        bool initialized_resources_;
-        bool has_focus_;
-
         static float screen_width;
         static float screen_height;
         static float screen_ratio;
@@ -377,6 +373,7 @@ namespace GUI {
             nvg = nvg_;
             screen_width = sw;
             screen_height = sh;
+            screen_ratio = sw / sh;
         }
 
         void focusOn(GObject *focus_obj) {
@@ -403,9 +400,9 @@ namespace GUI {
 
             nvgBeginFrame(nvg, float(screen_width), float(screen_height), 1.0f);
 
-            for (auto const& root : focusStack) {
-                root->GRender_(nvg, (float) monitor_.GetCurrentTime());
-            }
+            for (auto const& root : focusStack) root->markInFocus();
+
+            for (auto const& root : focusStack) root->GRender_(nvg, (float) monitor_.GetCurrentTime());
 
             nvgEndFrame(nvg);
 
