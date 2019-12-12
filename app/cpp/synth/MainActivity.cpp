@@ -1,7 +1,6 @@
 #include <bx/uint32_t.h>
 #include <common.h>
 #include <bgfx_utils.h>
-#include "logo.h"
 #include <GUI/vectordisplay/vectordisplay.h>
 #include <imgui/imgui.h>
 #include <common/nanovg/nanovg_bgfx.h>
@@ -64,8 +63,8 @@ namespace
             float texelHalf = bgfx::RendererType::Direct3D9 == renderer ? 0.5f : 0.0f;
             bool originBottomLeft = bgfx::RendererType::OpenGL == renderer
                                     || bgfx::RendererType::OpenGLES == renderer;
-            m_vd.init(originBottomLeft, texelHalf);
-            m_vd.setup(uint16_t(m_width), uint16_t(m_height) );
+//            m_vd.init(originBottomLeft, texelHalf);
+//            m_vd.setup(uint16_t(m_width), uint16_t(m_height) );
 
             imguiCreate();
 
@@ -89,7 +88,7 @@ namespace
         {
             imguiDestroy();
 
-            m_vd.teardown();
+//            m_vd.teardown();
 
             nvgDelete(m_nvg);
 
@@ -149,7 +148,7 @@ namespace
 
         entry::MouseState m_mouseState;
 
-        VectorDisplay m_vd;
+//        VectorDisplay m_vd;
 
         NVGcontext* m_nvg;
 

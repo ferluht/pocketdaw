@@ -16,7 +16,7 @@ namespace GUI {
 
         const float onoff_button_padding = 0.01;
         const float onoff_button_height = 0.9;
-        const float onoff_button_ratio = 3.2;
+        const float onoff_button_ratio = 2.5;
         const float name_height = 0.9;
 
     public:
@@ -30,7 +30,7 @@ namespace GUI {
             strncpy(label, label_, len);
             label[len] = 0;
 
-            isOn = new Button("ON/OFF", [](bool state) {});
+            isOn = new Button("ON", "OFF", [](bool state) {});
             isOn->shape->lPlace({onoff_button_padding, (1-onoff_button_height)/2});
             isOn->shape->lSetHeight(onoff_button_height);
             isOn->shape->setRatio(onoff_button_ratio);

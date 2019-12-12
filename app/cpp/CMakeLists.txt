@@ -114,7 +114,6 @@ add_library(
         SHARED
 
         synth/MainActivity.cpp
-#        synth/helloworld.cpp
         synth/Synth.cpp
 
         common/Link/LinkManager.cpp
@@ -123,11 +122,11 @@ add_library(
         common/AudioEffects/AudioEffect.cpp
         common/AudioEffects/Delay.cpp
 #        common/AudioEffects/Lissajous.cpp
-#        common/AudioEffects/MoogFilter.cpp
-#        common/AudioEffects/Oscilloscope.cpp
+        common/AudioEffects/MoogFilter.cpp
+        common/AudioEffects/Oscilloscope.cpp
 #        common/AudioEffects/Spectrum.cpp
-#        common/AudioEffects/StereoDelay.cpp
-#
+        common/AudioEffects/StereoDelay.cpp
+
         common/Engine/A.cpp
         common/Engine/G.cpp
         common/Engine/M.cpp
@@ -136,14 +135,13 @@ add_library(
         common/GUI/Button.cpp
         common/GUI/Canvas.cpp
         common/GUI/Encoder.cpp
-#        common/GUI/Graph.cpp
+        common/GUI/Graph.cpp
         common/GUI/IECanvas.cpp
         common/GUI/Knob.cpp
         common/GUI/Led.cpp
         common/GUI/Menu.cpp
 #        common/GUI/Plot.cpp
-#        common/GUI/Text.cpp
-        common/GUI/vectordisplay/vectordisplay.cpp
+#        common/GUI/vectordisplay/vectordisplay.cpp
 
         common/Instruments/ADSR.cpp
 #        common/Instruments/DrumRack.cpp
@@ -182,9 +180,6 @@ add_library(
 #        common/nanovg/nanovg.cpp
 
         )
-
-#target_compile_definitions(native-lib PRIVATE ANDROID=1 LINK_PLATFORM_LINUX=1 PD=1 ABL_LINK_OFFSET_MS=23 -DANDROID_STL=c++_shared)
-
 
 target_compile_definitions(native-lib PRIVATE ANDROID=1 LINK_PLATFORM_LINUX=1 PD=1 ABL_LINK_OFFSET_MS=23)
 

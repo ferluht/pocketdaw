@@ -5,32 +5,32 @@
 #include <GUI/Encoder.h>
 #include "Oscilloscope.h"
 
-Oscilloscope::Oscilloscope() : AudioEffect(L"Oscill")
+Oscilloscope::Oscilloscope() : AudioEffect("Oscill")
 {
 
-    setRatio(1.5);
+    shape->setRatio(1.5);
 
-    graph = new TimePlot(200);
-    graph->place(0.01, 0.01);
-    graph->setHeight(0.7);
-    graph->setWidth(0.98);
+    graph = new GUI::TimeGraph(200);
+    graph->shape->lPlace({0.01, 0.01});
+    graph->shape->lSetHeight(0.7);
+    graph->shape->lSetWidth(0.98);
     GAttach(graph);
 
-    trig = new Encoder(L"trig", 0, 0, -1, 1);
-    trig->place(0.05, 0.72);
-    trig->setHeight(0.26);
+    trig = new GUI::Encoder("trig", 0, 0, -1, 1);
+    trig->shape->lPlace({0.05, 0.72});
+    trig->shape->lSetHeight(0.26);
     GAttach(trig);
     MConnect(trig);
 
-    time = new Encoder(L"time", 100, 0, 0, 100);
-    time->place(0.2, 0.72);
-    time->setHeight(0.26);
+    time = new GUI::Encoder("time", 100, 0, 0, 100);
+    time->shape->lPlace({0.2, 0.72});
+    time->shape->lSetHeight(0.26);
     GAttach(time);
     MConnect(time);
 
-    scale = new Encoder(L"scale", 1, 0, 0, 5);
-    scale->place(0.35, 0.72);
-    scale->setHeight(0.26);
+    scale = new GUI::Encoder("scale", 1, 0, 0, 5);
+    scale->shape->lPlace({0.35, 0.72});
+    scale->shape->lSetHeight(0.26);
     GAttach(scale);
     MConnect(scale);
 }

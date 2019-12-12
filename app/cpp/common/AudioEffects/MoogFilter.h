@@ -11,8 +11,8 @@
 
 class MoogFilter : public AudioEffect
 {
-    Encoder * cutoff_enc;
-    Encoder * resonance_enc;
+    GUI::Encoder * cutoff_enc;
+    GUI::Encoder * resonance_enc;
 
 public:
     MoogFilter();

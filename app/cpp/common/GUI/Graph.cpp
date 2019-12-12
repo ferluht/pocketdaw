@@ -4,70 +4,63 @@
 
 #include "Graph.h"
 
-void BaseGraph::GDraw() {
+namespace GUI {
 
-    GObject::GDraw();
 
-    fillGLBuffer();
+    void TimeGraph::update(float sample) {
+        if (sample > 1) sample = 1;
+        if (sample < -1) sample = -1;
 
-    glBindVertexArray(vao_);
+        points[current_position] = sample / 2 + 0.5f;
+        current_position = (current_position + 1) % number_of_points;
+    }
 
-    // The following commands will talk about our 'vertexbuffer' buffer
-    glBindBuffer(GL_ARRAY_BUFFER, vbo_);
-    // Give our vertices to OpenGL.
-    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 2 * buffer_size, g_vertex_buffer_data, GL_DYNAMIC_DRAW);
+    void TimeGraph::GDraw(NVGcontext * nvg) {
 
-    // 1st attribute buffer : vertices
-    glBindBuffer(GL_ARRAY_BUFFER, vbo_);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (void*) nullptr);
-    glEnableVertexAttribArray(0);
+        BaseGraph::GDraw(nvg);
 
-    glBindVertexArray(0);
-}
+        unsigned int r = current_position;
 
-void BaseGraph::GRender(float dTime) {
-    glBindVertexArray(vao_);
-    glDrawArrays(GL_LINE_STRIP, 0, buffer_size);
-    glBindVertexArray(0);
-}
+        nvgBeginPath(nvg);
 
-void TimeGraph::fillGLBuffer() {
-    for (int i = 0; i < buffer_size; i++) {
-        g_vertex_buffer_data[i*2] = globalPosition.x + i*globalPosition.width/(float)buffer_size;
-        g_vertex_buffer_data[i*2+1] = globalPosition.y + (1 - buffer[r])*globalPosition.height;
-        r++;
-        if(r>=buffer_size) r = 0;
-    };
-}
+        nvgMoveTo(nvg, shape->global.c.x, shape->global.c.y + (1 - points[r]) * shape->global.s.y);
+        r = (r + 1) % number_of_points;
 
-void TimeGraph::update(float sample) {
-    changed = true;
+        float dx = shape->global.s.x / (float)number_of_points;
 
-    if (sample > 1) sample = 1;
-    if (sample < -1) sample = -1;
+        for (int i = 1; i < number_of_points; i++) {
+            nvgLineTo(nvg, shape->global.c.x + i * dx, shape->global.c.y + (1 - points[r]) * shape->global.s.y);
+            r = (r + 1) % number_of_points;
+        };
 
-    buffer[r] = sample/2 + 0.5;
-    r = (r + 1)%buffer_size;
-}
+        nvgStrokeColor(nvg, GREEN);
+        nvgStrokeWidth(nvg, 2);
+        nvgStroke(nvg);
 
-void XYGraph::fillGLBuffer() {
-    for (int i = 0; i < buffer_size; i++) {
-        g_vertex_buffer_data[i*2] = globalPosition.x + buffer[2*r]*globalPosition.width;
-        g_vertex_buffer_data[i*2+1] = globalPosition.y + buffer[2*r + 1]*globalPosition.height;
-        r++;
-        if(r>=buffer_size) r = 0;
-    };
-}
+        nvgClosePath(nvg);
+    }
 
-void XYGraph::update(float x, float y) {
-    changed = true;
+//    void XYGraph::GDraw(NVGcontext * nvg) {
+//        for (int i = 0; i < buffer_size; i++) {
+//            g_vertex_buffer_data[i * 2] = globalPosition.x + buffer[2 * r] * globalPosition.width;
+//            g_vertex_buffer_data[i * 2 + 1] =
+//                    globalPosition.y + buffer[2 * r + 1] * globalPosition.height;
+//            r++;
+//            if (r >= buffer_size) r = 0;
+//        };
+//    }
+//
+//    void XYGraph::update(float x, float y) {
+//        changed = true;
+//
+//        if (x > 1) x = 1;
+//        if (x < -1) x = -1;
+//        if (y > 1) y = 1;
+//        if (y < -1) y = -1;
+//
+//        buffer[2 * r] = x;
+//        buffer[2 * r + 1] = y;
+//        r = (r + 1) % buffer_size;
+//    }
 
-    if (x > 1) x = 1;
-    if (x < -1) x = -1;
-    if (y > 1) y = 1;
-    if (y < -1) y = -1;
-
-    buffer[2*r] = x;
-    buffer[2*r+1] = y;
-    r = (r + 1)%buffer_size;
 }

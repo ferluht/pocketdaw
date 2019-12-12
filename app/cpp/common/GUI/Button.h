@@ -18,12 +18,13 @@ namespace GUI {
         const float textwidth = 0.86;
         const float textheight = 0.8;
 
-        char * label;
+        char * labelOn, * labelOff;
 
         bool state;
         std::function<void(bool)> callback;
 
         Button(const char *label_, std::function<void(bool)> callback_);
+        Button(const char *labelOn_, const char *labelOff_, std::function<void(bool)> callback_);
 
         virtual GObject *GTapEnd(const ndk_helper::Vec2 &v) override;
 

@@ -16,6 +16,9 @@
 #include <common/Instruments/SingleTone.h>
 #include <common/AudioEffects/Delay.h>
 #include <common/MidiEffects/Arpeggiator.h>
+#include <common/AudioEffects/Oscilloscope.h>
+#include <common/AudioEffects/MoogFilter.h>
+#include <common/AudioEffects/StereoDelay.h>
 #include "Track.h"
 //#include <Instruments/Metronome.h>
 //#include <GUI/Menu.h>
@@ -168,6 +171,27 @@ public:
                                       Tracks[focus_track]->RAdd(new Delay());
                                   }
                               }));
+
+        addAudioMenu->addButton(new GUI::Button("Stereo delay",
+                                                [this](bool a){
+                                                    if (focus_track > -1) {
+                                                        Tracks[focus_track]->RAdd(new StereoDelay());
+                                                    }
+                                                }));
+
+        addAudioMenu->addButton(new GUI::Button("Oscilloscope",
+                                               [this](bool a){
+                                                   if (focus_track > -1) {
+                                                       Tracks[focus_track]->RAdd(new Oscilloscope());
+                                                   }
+                                               }));
+
+        addAudioMenu->addButton(new GUI::Button("Moog filter",
+                                                [this](bool a){
+                                                    if (focus_track > -1) {
+                                                        Tracks[focus_track]->RAdd(new MoogFilter());
+                                                    }
+                                                }));
 
 //        addAudioMenu->addItem(L"Filter",
 //                              [this](){
