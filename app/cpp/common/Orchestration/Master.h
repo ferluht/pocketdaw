@@ -19,6 +19,8 @@
 #include <common/AudioEffects/Oscilloscope.h>
 #include <common/AudioEffects/MoogFilter.h>
 #include <common/AudioEffects/StereoDelay.h>
+#include <common/Instruments/Sampler.h>
+#include <common/Instruments/DrumRack.h>
 #include "Track.h"
 //#include <Instruments/Metronome.h>
 //#include <GUI/Menu.h>
@@ -109,6 +111,26 @@ public:
                                                  [this](bool a){
                                                      if (focus_track > -1) {
                                                          Tracks[focus_track]->RAdd(new SingleTone());
+                                                     }
+                                                 }));
+
+        addDeviceMenu->addButton(new GUI::Button("Sampler",
+                                                 [this](bool a){
+                                                     if (focus_track > -1) {
+                                                         Tracks[focus_track]->RAdd(new Sampler("/storage/emulated/0/808.wav"));
+                                                     }
+                                                 }));
+
+        addDeviceMenu->addButton(new GUI::Button("Drum rack",
+                                                 [this](bool a){
+                                                     if (focus_track > -1) {
+                                                         auto drack = new DrumRack();
+                                                         drack->addSample("/storage/emulated/0/808.wav", 36);
+                                                         drack->addSample("/storage/emulated/0/Kick.wav", 37);
+                                                         drack->addSample("/storage/emulated/0/Snare.wav", 38);
+                                                         drack->addSample("/storage/emulated/0/ClosedHH.wav", 39);
+                                                         drack->addSample("/storage/emulated/0/Shaker.wav", 40);
+                                                         Tracks[focus_track]->RAdd(drack);
                                                      }
                                                  }));
 

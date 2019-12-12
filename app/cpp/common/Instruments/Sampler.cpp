@@ -4,23 +4,23 @@
 
 #include "Sampler.h"
 
-Sampler::Sampler(const char * sample_name_) : Instrument<SamplerState>(1, L"Samler"){
-    setRatio(1);
+Sampler::Sampler(const char * sample_name_) : Instrument<SamplerState>(1, "Sampler"){
+    shape->setRatio(1);
     sample_name = sample_name_;
 
     setConstPitch(true);
 
     sample.load(sample_name);
 
-    graph = new TimePlot(200);
-    graph->place(0.01, 0.01);
-    graph->setHeight(0.7);
-    graph->setWidth(0.98);
+    graph = new GUI::TimeGraph(200);
+    graph->shape->lPlace({0.01, 0.01});
+    graph->shape->lSetHeight(0.7);
+    graph->shape->lSetWidth(0.98);
     GAttach(graph);
 
-    pitch = new Encoder(L"pitch", 0, 2, -12, 12);
-    pitch->place(0.1, 0.73);
-    pitch->setHeight(0.25);
+    pitch = new GUI::Encoder("pitch", 0, 2, -12, 12);
+    pitch->shape->lPlace({0.1, 0.73});
+    pitch->shape->lSetHeight(0.25);
     GAttach(pitch);
     MConnect(pitch);
 

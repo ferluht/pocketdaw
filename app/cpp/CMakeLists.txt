@@ -144,12 +144,12 @@ add_library(
 #        common/GUI/vectordisplay/vectordisplay.cpp
 
         common/Instruments/ADSR.cpp
-#        common/Instruments/DrumRack.cpp
+        common/Instruments/DrumRack.cpp
         common/Instruments/Instrument.cpp
         common/Instruments/Metronome.cpp
 #        common/Instruments/Operator.cpp
         common/Instruments/Oscillator.cpp
-#        common/Instruments/Sampler.cpp
+        common/Instruments/Sampler.cpp
         common/Instruments/SingleTone.cpp
 
         common/MidiEffects/MidiEffect.cpp
@@ -163,8 +163,7 @@ add_library(
         common/Orchestration/Rack.cpp
         common/Orchestration/Track.cpp
 
-#        common/Utils/AudioFile.cpp
-#        common/Utils/TextConversion.cpp
+        common/Utils/AudioFile.cpp
 
         common/bgfx_utils.cpp
         common/example-glue.cpp
