@@ -23,6 +23,7 @@ public:
     const float padding = 0.01;
 
     float x_offset = 0;
+    float max_x_offset = 0;
 
     std::list<GUI::IECanvas *> objects;
     int midi_devices;
@@ -90,11 +91,13 @@ public:
         float ratio = 0;
         for (auto const& obj : objects) ratio += obj->shape->local.ratio;
 
-        float x = padding + x_offset;
+        float x = padding;
         for (auto const& obj : objects) {
-            obj->shape->lPlace({x, padding});
+            obj->shape->lPlace({x + x_offset, padding});
             x += obj->shape->local.ratio / shape->global.ratio + padding;
         }
+
+        max_x_offset = - x + 1;
     }
 
     inline void MIn(MData cmd) override {
