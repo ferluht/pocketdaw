@@ -6,7 +6,7 @@
 #define PD_SAMPLER_H
 
 #include <Utils/Utils.h>
-#include <GUI/Plot.h>
+#include <GUI/Graph.h>
 #include <GUI/Encoder.h>
 #include "Instrument.h"
 
@@ -31,10 +31,10 @@ class Sampler : public Instrument<SamplerState> {
     AudioFile<float> sample;
     const char * sample_name;
 
-    Encoder * pitch;
+    GUI::Encoder * pitch;
     bool const_pitch;
 
-    TimePlot * graph;
+    GUI::TimeGraph * graph;
 
 public:
 
