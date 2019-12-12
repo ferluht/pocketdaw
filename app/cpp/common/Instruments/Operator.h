@@ -49,11 +49,11 @@ class Operator : public Instrument<OperatorState>{
 
     float a = 0, b = 0, c = 0, d = 0;
 
-    TimeGraph * graph;
+    GUI::TimeGraph * graph;
 
     int graph_phase;
 
-    Encoder * enc_mode;
+    GUI::Encoder * enc_mode;
 
     float k;
 
@@ -62,8 +62,6 @@ class Operator : public Instrument<OperatorState>{
     int op_focus;
 
     float level;
-
-    Text * opname;
 
     void prevOsc();
     void nextOsc();
@@ -84,7 +82,7 @@ public:
 
     GObject * GFindFocusObject(const ndk_helper::Vec2& point) override
     {
-        if (visible && globalPosition.contains(point)){
+        if (visible && shape->contains(point)){
             if (sines[op_focus]->name->globalPosition.contains(point)) return this;
             return Instrument::GFindFocusObject(point);
         }

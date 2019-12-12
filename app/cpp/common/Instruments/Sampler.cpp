@@ -32,7 +32,7 @@ Sampler::Sampler(const char * sample_name_) : Instrument<SamplerState>(1, "Sampl
 }
 
 void Sampler::IUpdateState(SamplerState *state, MData md) {
-    if (md.data2 != 0) {
+    if (((md.status & 0xF0) == NOTEON_HEADER) && (md.data2 != 0)) {
         if (const_pitch) state->note = base_note;
         else state->note = md.data1;
         state->volume = (float)md.data2/127.f;
