@@ -7,7 +7,7 @@
 
 #include <GUI/Encoder.h>
 #include "Instrument.h"
-#include "ADSR.h"
+#include "common/Instruments/Envelopes/ADSR.h"
 
 class SingleToneState : public InstrumentState{
 public:

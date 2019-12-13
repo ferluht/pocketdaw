@@ -143,7 +143,10 @@ add_library(
 #        common/GUI/Plot.cpp
 #        common/GUI/vectordisplay/vectordisplay.cpp
 
-        common/Instruments/ADSR.cpp
+        common/Instruments/Envelopes/ADSR.cpp
+        common/Instruments/Envelopes/ADS.cpp
+        common/Instruments/Envelopes/AD.cpp
+
         common/Instruments/DrumRack.cpp
         common/Instruments/Instrument.cpp
         common/Instruments/Metronome.cpp
@@ -151,6 +154,9 @@ add_library(
         common/Instruments/Oscillator.cpp
         common/Instruments/Sampler.cpp
         common/Instruments/SingleTone.cpp
+
+        common/Instruments/AnalogDrums/Kick.cpp
+
 
         common/MidiEffects/MidiEffect.cpp
         common/MidiEffects/Arpeggiator.cpp

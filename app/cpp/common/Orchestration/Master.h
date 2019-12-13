@@ -21,6 +21,7 @@
 #include <common/AudioEffects/StereoDelay.h>
 #include <common/Instruments/Sampler.h>
 #include <common/Instruments/DrumRack.h>
+#include <common/Instruments/AnalogDrums/Kick.h>
 #include "Track.h"
 //#include <Instruments/Metronome.h>
 //#include <GUI/Menu.h>
@@ -118,6 +119,13 @@ public:
                                                  [this](bool a){
                                                      if (focus_track > -1) {
                                                          Tracks[focus_track]->RAdd(new Sampler("/storage/emulated/0/808.wav"));
+                                                     }
+                                                 }));
+
+        addDeviceMenu->addButton(new GUI::Button("Analog kick",
+                                                 [this](bool a){
+                                                     if (focus_track > -1) {
+                                                         Tracks[focus_track]->RAdd(new Kick());
                                                      }
                                                  }));
 

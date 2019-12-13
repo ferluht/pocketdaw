@@ -6,7 +6,7 @@
 #define PD_OPERATOR_H
 
 #include "Instruments/Instrument.h"
-#include "ADSR.h"
+#include "Envelopes/ADSR.h"
 #include "Oscillator.h"
 #include <GUI/Encoder.h>
 #include <GUI/Graph.h>
