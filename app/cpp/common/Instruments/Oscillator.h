@@ -6,7 +6,7 @@
 #define PD_SINE_H
 
 #include "Instrument.h"
-#include "ADSR.h"
+#include "common/Instruments/Envelopes/ADSR.h"
 #include <GUI/Encoder.h>
 //#include <GUI/Plot.h>
 #include <random>
