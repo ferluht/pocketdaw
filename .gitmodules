@@ -1,0 +1,3 @@
+[submodule "app/cpp/common/AudioEffects/FFTConvolver"]
+	path = app/cpp/common/AudioEffects/FFTConvolver
+	url = https://github.com/HiFi-LoFi/FFTConvolver
