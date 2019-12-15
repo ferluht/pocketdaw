@@ -29,23 +29,19 @@ ConvolutionReverb::ConvolutionReverb(const char * ir_file) : AudioEffect("Convol
 
 }
 
-void ConvolutionReverb::processBuffer() {
-    convolver.process(&inBuf[active_buffer][0], &outBuf[active_buffer][0], blockSize);
-}
-
 bool ConvolutionReverb::ARender(double beat, float *lsample, float *rsample){
     float sample = (*lsample + *rsample)/2;
 
     if (enabled()) {
 
         if (sample_counter == 0) {
+//            std::async([this](){
+            convolver.process(&inBuf[active_buffer][0], &outBuf[active_buffer][0], blockSize);
+//            });
             active_buffer = 1 - active_buffer;
-            std::async([this](){
-                convolver.process(&inBuf[active_buffer][0], &outBuf[active_buffer][0], blockSize);
-            });
         }
 
-        inBuf[1 - active_buffer][sample_counter] = sample;
+        inBuf[active_buffer][sample_counter] = sample;
 
         sample = outBuf[active_buffer][sample_counter];
         sample_counter = (sample_counter + 1) % blockSize;
