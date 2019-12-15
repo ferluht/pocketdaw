@@ -1,16 +1,16 @@
 //
-// Created by ibelikov on 12.12.19.
+// Created by ibelikov on 13.12.19.
 //
 
-#ifndef PD_KICK_H
-#define PD_KICK_H
-
+#ifndef PD_SNARE_H
+#define PD_SNARE_H
 
 #include "../Instrument.h"
 #include <GUI/Encoder.h>
 #include <common/Instruments/Envelopes/AD.h>
+#include <random>
 
-class KickState : public InstrumentState {
+class SnareState : public InstrumentState {
 public:
 
     float note;
@@ -25,12 +25,12 @@ public:
     double frequency;
     double phase_increment;
 
-    KickState () {
+    SnareState () {
         sweep_env.A = 0;
     }
 };
 
-class Kick : public Instrument<KickState> {
+class Snare : public Instrument<SnareState> {
 
     GUI::Encoder * attack;
     GUI::Encoder * tone;
@@ -39,29 +39,33 @@ class Kick : public Instrument<KickState> {
     GUI::Encoder * decay;
     GUI::Encoder * waveform;
 
-    GUI::Button * trig;
+    GUI::TapButton * trig;
+
+    std::random_device dev;
+    std::mt19937 * rng;
+    std::uniform_real_distribution<float> * dist;
 
     bool triggered = false;
 
     inline double osc(double phase) {
         phase = phase < -M_PI ? M_PI + fmod(phase + M_PI, 2*M_PI) : -M_PI + fmod(phase + M_PI, 2*M_PI);
         float s = -sin(phase), w = 0;
-        if (phase < 0) w = 1;
-        else w = -1;
+        w = (*dist)(*rng);
         return s * (1 - *waveform) + *waveform * w;
     }
 
 public:
 
-    Kick();
+    Snare();
 
     void MRender(double beat) override ;
 
-    void IUpdateState(KickState * state, MData md) override;
+    void IUpdateState(SnareState * state, MData md) override;
 
-    void IARender(KickState * state, double beat, float * lsample, float * rsample) override ;
+    void IARender(SnareState * state, double beat, float * lsample, float * rsample) override ;
 
 };
 
 
-#endif //PD_KICK_H
+
+#endif //PD_SNARE_H

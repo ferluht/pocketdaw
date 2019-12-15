@@ -31,9 +31,7 @@ bool AMGMasterTrack::ARender(float *audioData, int numFrames) {
         audioData[2*i] = 0;
         audioData[2*i+1] = 0;
 
-        if (i % 50 == 0) {
-            MRender(beat);
-        }
+        MRender(beat);
 
         if (*metronome_button) {
             if ((int)phase > (int)last_phase) metronome->tic(beat);

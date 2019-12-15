@@ -13,6 +13,9 @@ namespace GUI {
 
     class Button : public Knob {
 
+        bool lighted = false;
+        NVGcolor lightColor;
+
     public:
 
         const float textwidth = 0.86;
@@ -36,11 +39,34 @@ namespace GUI {
             return *this;
         }
 
+        inline void lightOn(NVGcolor color) {
+            lightColor = color;
+            lighted = true;
+        }
+
+        inline void lightOff() {
+            lighted = false;
+        }
+
         void GDraw(NVGcontext * nvg) override;
 
         void GSetVisible(bool visible_) override {
             Knob::GSetVisible(visible_);
         }
+    };
+
+    class TapButton : public Button {
+    public:
+        TapButton(char * label, std::function<void(bool)> callback_) :
+                Button(label, callback_) {
+
+        }
+
+        GObject * GTapEnd(const ndk_helper::Vec2 &v) override {
+            callback(true);
+            return nullptr;
+        }
+
     };
 
     class ProgressButton : public Button {
