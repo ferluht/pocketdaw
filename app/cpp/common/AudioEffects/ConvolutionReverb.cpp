@@ -3,13 +3,23 @@
 //
 
 #include "ConvolutionReverb.h"
+#include <future>
 
 ConvolutionReverb::ConvolutionReverb(const char * ir_file) : AudioEffect("Convolution reverb"){
     shape->setRatio(2);
 
     ir.load(ir_file);
 
+    active_buffer = 0;
+
     convolver.init(blockSize, &ir.samples[0][0], ir.samples.size());
+
+    for (int i = 0; i < blockSize; i++){
+        inBuf[0].push_back(0);
+        inBuf[1].push_back(0);
+        outBuf[0].push_back(0);
+        outBuf[1].push_back(0);
+    }
 
     drywet = new GUI::Encoder("dry/wet", -1, [this](float value) {}, 3);
     drywet->shape->lPlace({0.05, 0.05});
@@ -20,24 +30,7 @@ ConvolutionReverb::ConvolutionReverb(const char * ir_file) : AudioEffect("Convol
 }
 
 void ConvolutionReverb::processBuffer() {
-//    const size_t blockSize = blockSizeMin + (static_cast<size_t>(rand()) % (1+(blockSizeMax-blockSizeMin)));
-//
-//    const size_t remainingOut = out.size() - processedOut;
-//    const size_t remainingIn = in.size() - processedIn;
-//
-//    const size_t processingOut = std::min(remainingOut, blockSize);
-//    const size_t processingIn = std::min(remainingIn, blockSize);
-//
-//    memset(&inBuf[0], 0, inBuf.size() * sizeof(fftconvolver::Sample));
-//    if (processingIn > 0)
-//    {
-//        memcpy(&inBuf[0], &in[processedIn], processingIn * sizeof(fftconvolver::Sample));
-//    }
-//
-//    convolver.process(&inBuf[0], &out[processedOut], processingOut);
-//
-//    processedOut += processingOut;
-//    processedIn += processingIn;
+    convolver.process(&inBuf[active_buffer][0], &outBuf[active_buffer][0], blockSize);
 }
 
 bool ConvolutionReverb::ARender(double beat, float *lsample, float *rsample){
@@ -45,16 +38,17 @@ bool ConvolutionReverb::ARender(double beat, float *lsample, float *rsample){
 
     if (enabled()) {
 
-        if (sample_counter < blockSize) {
-            pushBuffer(sample);
-            sample_counter ++;
-        } else {
-            sample_counter = 0;
-            getResult();
-            processBuffer();
-            swapBuffers();
+        if (sample_counter == 0) {
+            active_buffer = 1 - active_buffer;
+            std::async([this](){
+                convolver.process(&inBuf[active_buffer][0], &outBuf[active_buffer][0], blockSize);
+            });
         }
 
+        inBuf[1 - active_buffer][sample_counter] = sample;
+
+        sample = outBuf[active_buffer][sample_counter];
+        sample_counter = (sample_counter + 1) % blockSize;
     }
 
     float prop = (*drywet + 1)/2;

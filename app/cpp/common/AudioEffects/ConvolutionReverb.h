@@ -22,20 +22,16 @@ class ConvolutionReverb : public AudioEffect{
 
     AudioFile<float> ir;
 
-    std::vector<fftconvolver::Sample> inBuf;
+    int active_buffer;
+
+    std::vector<fftconvolver::Sample> inBuf[2];
+    std::vector<fftconvolver::Sample> outBuf[2];
 
     fftconvolver::FFTConvolver convolver;
 
-    void processBuffer();
-
-    inline void pushBuffer(float sample) {
-
-    }
-
-    void swapBuffers();
-    void getResult();
-
 public:
+
+    void processBuffer();
 
     ConvolutionReverb(const char * ir);
 

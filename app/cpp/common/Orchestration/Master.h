@@ -24,6 +24,7 @@
 #include <common/Instruments/AnalogDrums/Kick.h>
 #include <common/Instruments/AnalogDrums/Snare.h>
 #include <common/Instruments/Brute.h>
+#include <common/AudioEffects/ConvolutionReverb.h>
 #include "Track.h"
 //#include <Instruments/Metronome.h>
 //#include <GUI/Menu.h>
@@ -216,6 +217,14 @@ public:
 //                                  }
 //                              });
 //
+
+        addAudioMenu->addButton(new GUI::Button("Convolution reverb",
+                                                [this](bool a){
+                                                    if (focus_track > -1) {
+                                                        Tracks[focus_track]->RAdd(new ConvolutionReverb("/storage/emulated/0/impulse_response_left.wav"));
+                                                    }
+                                                }));
+
         addAudioMenu->addButton(new GUI::Button("Delay",
                               [this](bool a){
                                   if (focus_track > -1) {
