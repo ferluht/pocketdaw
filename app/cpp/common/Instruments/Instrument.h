@@ -111,6 +111,7 @@ void Instrument<State>::MIn(MData cmd)
             break;
         default:
             MOut(cmd);
+            break;
     }
 }
 

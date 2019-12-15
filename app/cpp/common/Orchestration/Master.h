@@ -121,7 +121,7 @@ public:
         addDeviceMenu->addButton(new GUI::Button("Sampler",
                                                  [this](bool a){
                                                      if (focus_track > -1) {
-                                                         Tracks[focus_track]->RAdd(new Sampler("/storage/emulated/0/808.wav"));
+                                                         Tracks[focus_track]->RAdd(new Sampler("/storage/emulated/0/test.wav"));
                                                      }
                                                  }));
 
@@ -166,6 +166,7 @@ public:
 
         auto tr = new AMGTrack(std::string("0"));
         AddTrack(tr);
+//        Tracks[focus_track]->RAdd(new Sampler("/storage/emulated/0/test.wav"));
 
 //        addDeviceMenu->addItem(L"Operator",
 //                               [this](){
