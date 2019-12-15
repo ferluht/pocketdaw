@@ -126,6 +126,12 @@ add_library(
         common/AudioEffects/Oscilloscope.cpp
 #        common/AudioEffects/Spectrum.cpp
         common/AudioEffects/StereoDelay.cpp
+        common/AudioEffects/ConvolutionReverb.cpp
+
+        common/AudioEffects/FFTConvolver/AudioFFT.cpp
+        common/AudioEffects/FFTConvolver/FFTConvolver.cpp
+        common/AudioEffects/FFTConvolver/TwoStageFFTConvolver.cpp
+        common/AudioEffects/FFTConvolver/Utilities.cpp
 
         common/Engine/A.cpp
         common/Engine/G.cpp
