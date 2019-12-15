@@ -22,6 +22,8 @@
 #include <common/Instruments/Sampler.h>
 #include <common/Instruments/DrumRack.h>
 #include <common/Instruments/AnalogDrums/Kick.h>
+#include <common/Instruments/AnalogDrums/Snare.h>
+#include <common/Instruments/Brute.h>
 #include "Track.h"
 //#include <Instruments/Metronome.h>
 //#include <GUI/Menu.h>
@@ -126,6 +128,25 @@ public:
                                                  [this](bool a){
                                                      if (focus_track > -1) {
                                                          Tracks[focus_track]->RAdd(new Kick());
+                                                     }
+                                                 }));
+
+        addDeviceMenu->addButton(new GUI::Button("Analog snare",
+                                                 [this](bool a){
+                                                     if (focus_track > -1) {
+                                                         Tracks[focus_track]->RAdd(new Snare());
+                                                     }
+                                                 }));
+
+        addDeviceMenu->addButton(new GUI::Button("Brute",
+                                                 [this](bool a){
+                                                     if (focus_track > -1) {
+                                                         auto br = new Brute();
+                                                         Tracks[focus_track]->RAdd(br);
+                                                         br->upper_panel->shape->lPlace({0, 0});
+                                                         br->upper_panel->shape->lSetHeight(0.4);
+                                                         br->upper_panel->shape->lSetWidth(1);
+                                                         GAttach(br->upper_panel);
                                                      }
                                                  }));
 

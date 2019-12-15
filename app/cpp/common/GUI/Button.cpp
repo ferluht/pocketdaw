@@ -35,10 +35,14 @@ namespace GUI {
                 shape->global.c.x,
                 shape->global.c.y,
                 shape->global.s.x, shape->global.s.y);
-        if (state) {
-            nvgFillColor(nvg, YELLOW);
+        if (!lighted) {
+            if (state) {
+                nvgFillColor(nvg, YELLOW);
+            } else {
+                nvgFillColor(nvg, GREY);
+            }
         } else {
-            nvgFillColor(nvg, GREY);
+            nvgFillColor(nvg, lightColor);
         }
         nvgFill(nvg);
 

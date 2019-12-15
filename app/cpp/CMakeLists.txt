@@ -154,8 +154,10 @@ add_library(
         common/Instruments/Oscillator.cpp
         common/Instruments/Sampler.cpp
         common/Instruments/SingleTone.cpp
+        common/Instruments/Brute.cpp
 
         common/Instruments/AnalogDrums/Kick.cpp
+        common/Instruments/AnalogDrums/Snare.cpp
 
 
         common/MidiEffects/MidiEffect.cpp

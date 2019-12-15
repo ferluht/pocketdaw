@@ -1,11 +1,14 @@
 //
-// Created by ibelikov on 12.12.19.
+// Created by ibelikov on 13.12.19.
 //
 
-#include "Kick.h"
+#include "Snare.h"
 
-Kick::Kick() : Instrument<KickState>(1, "KickDrum") {
+Snare::Snare() : Instrument<SnareState>(1, "SnareDrum") {
     shape->setRatio(0.4);
+
+    rng = new std::mt19937(dev());
+    dist = new std::uniform_real_distribution<float>(-1, 1);
 
     attack = new GUI::Encoder("attack", 0, 1, 0, 1);
     attack->shape->lPlace({0.05, 0.01});
@@ -43,7 +46,7 @@ Kick::Kick() : Instrument<KickState>(1, "KickDrum") {
     GAttach(sweep_amt);
     MConnect(sweep_amt);
 
-    trig = new GUI::TapButton("kick", [this] (bool state) {});
+    trig = new GUI::TapButton("snare", [this] (bool state) {triggered = true;});
     trig->shape->lPlace({0.05, 0.75});
     trig->shape->lSetHeight(0.2);
     trig->shape->lSetWidth(0.9);
@@ -51,14 +54,14 @@ Kick::Kick() : Instrument<KickState>(1, "KickDrum") {
     MConnect(trig);
 }
 
-void Kick::MRender(double beat) {
-    if (*trig) {
+void Snare::MRender(double beat) {
+    if (triggered) {
         MIn({beat, NOTEON_HEADER, 62, 100});
-        trig->state = false;
+        triggered = false;
     }
 }
 
-void Kick::IUpdateState(KickState *state, MData md) {
+void Snare::IUpdateState(SnareState *state, MData md) {
     if (((md.status & 0xF0) == NOTEON_HEADER) && (md.data2 != 0)) {
         state->note = 0;
         state->volume = (float)md.data2/127.f;
@@ -69,7 +72,7 @@ void Kick::IUpdateState(KickState *state, MData md) {
     }
 }
 
-void Kick::IARender(KickState *state, double beat, float *lsample, float *rsample) {
+void Snare::IARender(SnareState *state, double beat, float *lsample, float *rsample) {
     if (state->phase > M_PI) state->phase -= 2*M_PI;
 
     float output = osc(state->phase) * state->volume;
