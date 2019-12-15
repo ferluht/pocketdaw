@@ -20,6 +20,8 @@ ConvolutionReverb::ConvolutionReverb(const char * ir_file) : AudioEffect("Convol
         inBuf[1].push_back(0);
         outBuf[0].push_back(0);
         outBuf[1].push_back(0);
+        inBufClean[0].push_back(0);
+        inBufClean[1].push_back(0);
     }
 
     drywet = new GUI::Encoder("dry/wet", 1, [this](float value) {}, 3);
@@ -28,42 +30,6 @@ ConvolutionReverb::ConvolutionReverb(const char * ir_file) : AudioEffect("Convol
     GAttach(drywet);
     MConnect(drywet);
 
-}
-
-template<typename T>
-void SimpleConvolve(const T* input, size_t inLen, const T* ir, size_t irLen, T* output)
-{
-    if (irLen > inLen)
-    {
-        SimpleConvolve(ir, irLen, input, inLen, output);
-        return;
-    }
-
-    ::memset(output, 0, (inLen+irLen-1) * sizeof(T));
-
-    for (size_t n=0; n<irLen; ++n)
-    {
-        for (size_t m=0; m<=n; ++m)
-        {
-            output[n] += ir[m] * input[n-m];
-        }
-    }
-
-    for (size_t n=irLen; n<inLen; ++n)
-    {
-        for (size_t m=0; m<irLen; ++m)
-        {
-            output[n] += ir[m] * input[n-m];
-        }
-    }
-
-    for (size_t n=inLen; n<inLen+irLen-1; ++n)
-    {
-        for (size_t m=n-inLen+1; m<irLen; ++m)
-        {
-            output[n] += ir[m] * input[n-m];
-        }
-    }
 }
 
 bool ConvolutionReverb::ARender(double beat, float *lsample, float *rsample){
@@ -86,7 +52,13 @@ bool ConvolutionReverb::ARender(double beat, float *lsample, float *rsample){
 
     float prop = (*drywet + 1)/2;
 
-    *lsample = sample*prop + *lsample * (1-prop);
-    *rsample = sample*prop + *rsample * (1-prop);
+    float l = *lsample, r = *rsample;
+
+    *lsample = sample*prop + inBufClean[0][sample_counter] * (1-prop);
+    *rsample = sample*prop + inBufClean[1][sample_counter] * (1-prop);
+
+    inBufClean[0][sample_counter] = l;
+    inBufClean[1][sample_counter] = r;
+
     return enabled();
 }
