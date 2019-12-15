@@ -27,6 +27,7 @@ class ConvolutionReverb : public AudioEffect{
 
     std::vector<fftconvolver::Sample> inBuf[2];
     std::vector<fftconvolver::Sample> outBuf[2];
+    std::vector<fftconvolver::Sample> inBufClean[2];
 
     fftconvolver::FFTConvolver convolver;
     fftconvolver::TwoStageFFTConvolver tsconvolver;
