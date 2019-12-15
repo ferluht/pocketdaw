@@ -31,8 +31,11 @@ class Sampler : public Instrument<SamplerState> {
     AudioFile<float> sample;
     const char * sample_name;
 
+    GUI::TapButton * trig;
     GUI::Encoder * pitch;
     bool const_pitch;
+
+    bool triggered = false;
 
     GUI::TimeGraph * graph;
 
@@ -44,6 +47,8 @@ public:
     float InterpolateHermite4pt3oX(float x0, float x1, float x2, float x3, float t);
 
     void IUpdateState(SamplerState * state, MData md) override;
+
+    void MRender(double beat) override ;
 
     inline void setConstPitch(bool const_pitch_) {const_pitch = const_pitch_;};
 

@@ -29,6 +29,20 @@ Sampler::Sampler(const char * sample_name_) : Instrument<SamplerState>(1, "Sampl
     for (int i = 0; i < sample.getNumSamplesPerChannel() / 200; i ++){
         graph->update(sample.samples[0][i*200] * 10);
     }
+
+    trig = new GUI::TapButton("trig", [this] (bool state) {triggered = true;});
+    trig->shape->lPlace({0.75, 0.75});
+    trig->shape->lSetHeight(0.2);
+    trig->shape->lSetWidth(0.2);
+    GAttach(trig);
+    MConnect(trig);
+}
+
+void Sampler::MRender(double beat) {
+    if (triggered) {
+        MIn({beat, NOTEON_HEADER, 62, 100});
+        triggered = false;
+    }
 }
 
 void Sampler::IUpdateState(SamplerState *state, MData md) {

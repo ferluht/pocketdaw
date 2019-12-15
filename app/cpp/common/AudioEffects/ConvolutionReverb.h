@@ -11,6 +11,7 @@
 #include <common/Utils/AudioFile.h>
 #include <common/AudioEffects/FFTConvolver/Utilities.h>
 #include <common/AudioEffects/FFTConvolver/FFTConvolver.h>
+#include <common/AudioEffects/FFTConvolver/TwoStageFFTConvolver.h>
 
 class ConvolutionReverb : public AudioEffect{
 
@@ -28,6 +29,7 @@ class ConvolutionReverb : public AudioEffect{
     std::vector<fftconvolver::Sample> outBuf[2];
 
     fftconvolver::FFTConvolver convolver;
+    fftconvolver::TwoStageFFTConvolver tsconvolver;
 
 public:
 
