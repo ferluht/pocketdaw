@@ -6,7 +6,7 @@
 #define PD_WAVEFORM_H
 
 #include "AudioEffect.h"
-#include <GUI/Graph.h>
+#include <common/GUI/Plot.h>
 
 class Oscilloscope : public AudioEffect{
 
@@ -18,7 +18,7 @@ class Oscilloscope : public AudioEffect{
     int after_trig = 0;
     const int graph_points = 200;
 
-    GUI::TimeGraph * graph;
+    GUI::Plot<GUI::TimeGraph> * plot;
 
 public:
 

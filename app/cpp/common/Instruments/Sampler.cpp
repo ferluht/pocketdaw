@@ -12,11 +12,11 @@ Sampler::Sampler(const char * sample_name_) : Instrument<SamplerState>(1, "Sampl
 
     sample.load(sample_name);
 
-    graph = new GUI::TimeGraph(200);
-    graph->shape->lPlace({0.01, 0.01});
-    graph->shape->lSetHeight(0.7);
-    graph->shape->lSetWidth(0.98);
-    GAttach(graph);
+    plot = new GUI::Plot<GUI::TimeGraph>(200);
+    plot->shape->lPlace({0.01, 0.01});
+    plot->shape->lSetHeight(0.7);
+    plot->shape->lSetWidth(0.98);
+    GAttach(plot);
 
     pitch = new GUI::Encoder("pitch", 0, 2, -12, 12);
     pitch->shape->lPlace({0.1, 0.73});
@@ -32,9 +32,9 @@ Sampler::Sampler(const char * sample_name_) : Instrument<SamplerState>(1, "Sampl
     for (int i = 1; i < sample.getNumSamplesPerChannel() - 1; i ++){
         if (i % stride == 0) {
             if (point)
-                graph->update(min);
+                plot->graph->update(min);
             else
-                graph->update(max);
+                plot->graph->update(max);
             point = 1 - point;
         }
         if ((sample.samples[0][i + 1] > sample.samples[0][i]) && (sample.samples[0][i] < sample.samples[0][i-1]))

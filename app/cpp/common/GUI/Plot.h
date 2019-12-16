@@ -8,17 +8,29 @@
 #include "Graph.h"
 #include "Canvas.h"
 
-class TimePlot : public MGCanvas{
+namespace GUI {
 
-public:
-    TimeGraph * graph;
+    template <class T>
+    class Plot : public MGCanvas {
 
-    TimePlot(unsigned int points);
+    public:
+        T *graph;
 
-    inline void update(float sample) {
-        graph->update(sample);
-    }
-};
+        Plot(unsigned int points) {
+            setColor(BLACK);
 
+            graph = new TimeGraph(points);
+            graph->shape->lPlace({0, 0});
+            graph->shape->lSetHeight(1);
+            graph->shape->lSetWidth(1);
+            GAttach(graph);
+        }
+
+        inline void update(float sample) {
+            graph->update(sample);
+        }
+    };
+
+}
 
 #endif //PD_PLOT_H
