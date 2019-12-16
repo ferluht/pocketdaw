@@ -13,7 +13,7 @@ ConvolutionReverb::ConvolutionReverb(const char * ir_file) : AudioEffect("Convol
     active_buffer = 0;
     sample_counter = 0;
 
-    convolver.init(blockSize, &ir.samples[0][0], ir.samples.size());
+    convolver.init(blockSize, &ir.samples[0][0], ir.samples[0].size()/5);
 
     for (int i = 0; i < blockSize; i++){
         inBuf[0].push_back(0);
@@ -38,15 +38,15 @@ bool ConvolutionReverb::ARender(double beat, float *lsample, float *rsample){
     if (enabled()) {
 
         if (sample_counter == 0) {
-//            std::async([this](){
-            convolver.process(&inBuf[active_buffer][0], &outBuf[active_buffer][0], blockSize);
-//            });
+            std::async([this](){
+                convolver.process(&inBuf[active_buffer][0], &outBuf[active_buffer][0], blockSize);
+            });
             active_buffer = 1 - active_buffer;
         }
 
         inBuf[active_buffer][sample_counter] = sample;
 
-        sample = outBuf[active_buffer][sample_counter] * 50;
+        sample = outBuf[active_buffer][sample_counter];
         sample_counter = (sample_counter + 1) % blockSize;
     }
 
