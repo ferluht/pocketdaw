@@ -13,7 +13,52 @@ ConvolutionReverb::ConvolutionReverb(const char * ir_file) : AudioEffect("Convol
     active_buffer = 0;
     sample_counter = 0;
 
+    ir_vis = new GUI::Plot<GUI::TimeGraph>(200);
+    ir_vis->shape->lPlace({0.35, 0.05});
+    ir_vis->shape->lSetHeight(0.9);
+    ir_vis->shape->lSetWidth(0.625);
+    GAttach(ir_vis);
+
+    low = new GUI::Slider("low", 0, -1, 1);
+    low->shape->lPlace({0.125, 0.05});
+    low->shape->lSetHeight(0.6);
+    low->shape->lSetWidth(0.05);
+    GAttach(low);
+
+    mid = new GUI::Slider("mid", 0, -1, 1);
+    mid->shape->lPlace({0.2, 0.05});
+    mid->shape->lSetHeight(0.6);
+    mid->shape->lSetWidth(0.05);
+    GAttach(mid);
+
+    high = new GUI::Slider("high", 0, -1, 1);
+    high->shape->lPlace({0.275, 0.05});
+    high->shape->lSetHeight(0.6);
+    high->shape->lSetWidth(0.05);
+    GAttach(high);
+
+    int stride = ir.getNumSamplesPerChannel()/200;
+    float min = 0, max = 0;
+    int point = 0;
+    for (int i = 1; i < ir.getNumSamplesPerChannel() - 1; i ++){
+        if (i % stride == 0) {
+            if (point)
+                ir_vis->graph->update(min);
+            else
+                ir_vis->graph->update(max);
+            point = 1 - point;
+        }
+        if ((ir.samples[0][i + 1] > ir.samples[0][i]) && (ir.samples[0][i] < ir.samples[0][i-1]))
+            min = ir.samples[0][i];
+        if ((ir.samples[0][i + 1] < ir.samples[0][i]) && (ir.samples[0][i] > ir.samples[0][i-1]))
+            max = ir.samples[0][i];
+    }
+
     convolver.init(blockSize, &ir.samples[0][0], ir.samples[0].size()/5);
+
+    eq.lg = 0.5;  // Boost bass by 50%
+    eq.mg = 1.75; // Cut mid by 25%
+    eq.hg = 2.0;  // Leave high band alone
 
     for (int i = 0; i < blockSize; i++){
         inBuf[0].push_back(0);
@@ -25,15 +70,41 @@ ConvolutionReverb::ConvolutionReverb(const char * ir_file) : AudioEffect("Convol
     }
 
     drywet = new GUI::Encoder("dry/wet", 1, [this](float value) {}, 3);
-    drywet->shape->lPlace({0.05, 0.05});
+    drywet->shape->lPlace({0.01, 0.05});
     drywet->shape->lSetHeight(0.25);
     GAttach(drywet);
     MConnect(drywet);
+
+    low_freq = new GUI::Encoder("low", 1, [this](float value) {}, 3, 0, 800);
+    low_freq->shape->lPlace({0.125, 0.7});
+    low_freq->shape->lSetHeight(0.25);
+    GAttach(low_freq);
+    MConnect(low_freq);
+
+    high_freq = new GUI::Encoder("high", 1, [this](float value) {}, 3, 1000, sample_rate/4);
+    high_freq->shape->lPlace({0.232, 0.7});
+    high_freq->shape->lSetHeight(0.25);
+    GAttach(high_freq);
+    MConnect(high_freq);
 
 }
 
 bool ConvolutionReverb::ARender(double beat, float *lsample, float *rsample){
     float sample = (*lsample + *rsample)/2;
+
+    eq.lg = 1 + *low;
+    eq.mg = 1 + *mid;
+    eq.hg = 1 + *high;
+
+    if ((*low_freq != last_low_freq) || (*high_freq != last_high_freq)) {
+        init_3band_state(&eq, *low_freq, *high_freq, sample_rate);
+        last_high_freq = *high_freq;
+        last_low_freq = *low_freq;
+    }
+
+    float input = sample;
+    float diff = sample - do_3band(&eq, sample);
+    sample += diff;
 
     if (enabled()) {
 
@@ -47,12 +118,13 @@ bool ConvolutionReverb::ARender(double beat, float *lsample, float *rsample){
         inBuf[active_buffer][sample_counter] = sample * 0.1f;
 
         sample = outBuf[active_buffer][sample_counter];
-        sample_counter = (sample_counter + 1) % blockSize;
     }
+
+    sample_counter = (sample_counter + 1) % blockSize;
 
     float prop = (*drywet + 1)/2;
 
-    float l = *lsample, r = *rsample;
+    float l = input, r = input;
 
     *lsample = sample*prop + inBufClean[0][sample_counter] * (1-prop);
     *rsample = sample*prop + inBufClean[1][sample_counter] * (1-prop);

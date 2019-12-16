@@ -8,8 +8,8 @@
 #include "Instrument.h"
 #include "common/Instruments/Envelopes/ADSR.h"
 #include <GUI/Encoder.h>
-//#include <GUI/Plot.h>
 #include <random>
+#include <common/GUI/Plot.h>
 
 class SineState : public InstrumentState{
 public:
@@ -79,7 +79,7 @@ public:
     GUI::Encoder * S;
     GUI::Encoder * R;
 
-//    TimePlot * graph;
+    GUI::Plot<GUI::TimeGraph> * plot;
 
     Vec2 drag_from;
 

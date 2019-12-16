@@ -12,7 +12,10 @@
 
 namespace GUI {
 
-    class BaseGraph : public GCanvas {
+    class BaseGraph : public GObject {
+
+        NVGcolor line_color;
+        int width;
 
     public:
 
@@ -21,11 +24,27 @@ namespace GUI {
         float * points;
 
         BaseGraph() {
-            setColor(BLACK);
+            setShapeType(BOX);
+            line_color = GREEN;
+            width = 2;
         }
 
         ~BaseGraph() {
             delete points;
+        }
+
+        inline void setLineColor(NVGcolor line_color_) {
+            line_color = line_color_;
+        }
+
+        inline void setLineWidth(int width_) {
+            width = width_;
+        }
+
+        virtual inline void GDraw(NVGcontext * nvg) override {
+            nvgStrokeColor(nvg, line_color);
+            nvgStrokeWidth(nvg, width);
+            nvgStroke(nvg);
         }
     };
 
@@ -45,22 +64,23 @@ namespace GUI {
         void GDraw(NVGcontext * nvg) override ;
     };
 
-//    class XYGraph : public BaseGraph {
-//
-//    public:
-//
-//        XYGraph(unsigned int points) {
-//            this->buffer = new float[points * 2];
-//            this->g_vertex_buffer_data = new GLfloat[points * 2];
-//            this->buffer_size = points;
-//            this->r = 0;
-//            color[0] = 0, color[1] = 1;
-//        }
-//
-//        void update(float x, float y);
-//
-//        void fillGLBuffer() override;
-//    };
+    class XYGraph : public BaseGraph {
+
+        int r;
+
+    public:
+
+        XYGraph(unsigned int num_points_) {
+            number_of_points = num_points_;
+            points = new float[num_points_ * 2];
+
+            r = 0;
+        }
+
+        void update(float x, float y);
+
+        void GDraw(NVGcontext * nvg) override ;
+    };
 
 }
 

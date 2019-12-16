@@ -65,18 +65,18 @@ Oscillator::Oscillator(const char * name_, unsigned int num_voices) : Instrument
     *S = 0.7;
     *R = 0.5;
 
-//    graph = new TimePlot(waveform_vis_size);
-//    graph->place(0.625, 0.5);
-//    graph->setHeight(0.4);
-//    graph->setWidth(0.35);
-//    GAttach(graph);
+    plot = new GUI::Plot<GUI::TimeGraph>(waveform_vis_size);
+    plot->shape->lPlace({0.625, 0.5});
+    plot->shape->lSetHeight(0.4);
+    plot->shape->lSetWidth(0.35);
+    GAttach(plot);
 
     draw_waveform();
 }
 
 void Oscillator::draw_waveform() {
     for (int i = 0; i < waveform_vis_size; i++){
-//        graph->update(osc(i*(M_PI*2/waveform_vis_size) - M_PI) * 0.9);
+        plot->graph->update(osc(i*(M_PI*2/waveform_vis_size) - M_PI) * 0.9);
     }
 }
 
@@ -95,23 +95,23 @@ void Oscillator::IUpdateState(SineState *state, MData md){
 
 GUI::GObject * Oscillator::GTapEnd(const ndk_helper::Vec2& v)
 {
-//    if (graph->globalPosition.contains(v)){
-//        type ++;
-//        if (type > 3) type = 0;
-//        draw_waveform();
-//    }
+    if (plot->shape->contains(v)){
+        type ++;
+        if (type > 3) type = 0;
+        draw_waveform();
+    }
     return nullptr;
 }
 
 GUI::GObject * Oscillator::GDragHandler(const ndk_helper::Vec2 &v) {
 
-//    if (graph->globalPosition.contains(drag_from)) {
-//        float wf = old_waveform + (v.y_ - drag_from.y_)/100;
-//        if (wf > 1) wf = 1;
-//        if (wf < 0) wf = 0;
-//        waveform = wf;
-//        draw_waveform();
-//    }
+    if (plot->shape->contains(drag_from)) {
+        float wf = old_waveform + (v.y - drag_from.y)/100;
+        if (wf > 1) wf = 1;
+        if (wf < 0) wf = 0;
+        waveform = wf;
+        draw_waveform();
+    }
 
     return this;
 }

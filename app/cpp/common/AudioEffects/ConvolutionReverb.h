@@ -12,6 +12,9 @@
 #include <common/AudioEffects/FFTConvolver/Utilities.h>
 #include <common/AudioEffects/FFTConvolver/FFTConvolver.h>
 #include <common/AudioEffects/FFTConvolver/TwoStageFFTConvolver.h>
+#include <common/GUI/Plot.h>
+#include <common/GUI/Slider.h>
+#include "ThreeBandEQ.h"
 
 class ConvolutionReverb : public AudioEffect{
 
@@ -25,12 +28,25 @@ class ConvolutionReverb : public AudioEffect{
 
     int active_buffer;
 
+    EQSTATE eq;
+
+    GUI::Slider * low;
+    GUI::Slider * mid;
+    GUI::Slider * high;
+
+    GUI::Encoder * low_freq;
+    GUI::Encoder * high_freq;
+
+    float last_low_freq = 0;
+    float last_high_freq = 0;
+
     std::vector<fftconvolver::Sample> inBuf[2];
     std::vector<fftconvolver::Sample> outBuf[2];
     std::vector<fftconvolver::Sample> inBufClean[2];
 
+    GUI::Plot<GUI::TimeGraph> * ir_vis;
+
     fftconvolver::FFTConvolver convolver;
-    fftconvolver::TwoStageFFTConvolver tsconvolver;
 
 public:
 

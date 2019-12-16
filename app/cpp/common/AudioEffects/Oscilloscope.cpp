@@ -10,11 +10,11 @@ Oscilloscope::Oscilloscope() : AudioEffect("Oscill")
 
     shape->setRatio(1.5);
 
-    graph = new GUI::TimeGraph(200);
-    graph->shape->lPlace({0.01, 0.01});
-    graph->shape->lSetHeight(0.7);
-    graph->shape->lSetWidth(0.98);
-    GAttach(graph);
+    plot = new GUI::Plot<GUI::TimeGraph>(200);
+    plot->shape->lPlace({0.01, 0.01});
+    plot->shape->lSetHeight(0.7);
+    plot->shape->lSetWidth(0.98);
+    GAttach(plot);
 
     trig = new GUI::Encoder("trig", 0, 0, -1, 1);
     trig->shape->lPlace({0.05, 0.72});
@@ -43,7 +43,7 @@ bool Oscilloscope::ARender(double beat, float *lsample, float *rsample) {
         if (sample_counter < *time) {
             sample_counter++;
         } else {
-            graph->update(*rsample * *scale);
+            plot->graph->update(*rsample * *scale);
             sample_counter = 0;
             after_trig ++;
         }

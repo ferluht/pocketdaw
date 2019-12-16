@@ -6,8 +6,8 @@
 #define PD_SAMPLER_H
 
 #include <Utils/Utils.h>
-#include <GUI/Graph.h>
 #include <GUI/Encoder.h>
+#include <common/GUI/Plot.h>
 #include "Instrument.h"
 
 class SamplerState : public InstrumentState{
@@ -37,7 +37,7 @@ class Sampler : public Instrument<SamplerState> {
 
     bool triggered = false;
 
-    GUI::TimeGraph * graph;
+    GUI::Plot<GUI::TimeGraph> * plot;
 
 public:
 

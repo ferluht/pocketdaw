@@ -17,8 +17,6 @@ namespace GUI {
 
     void TimeGraph::GDraw(NVGcontext * nvg) {
 
-        BaseGraph::GDraw(nvg);
-
         unsigned int r = current_position;
 
         nvgBeginPath(nvg);
@@ -33,34 +31,37 @@ namespace GUI {
             r = (r + 1) % number_of_points;
         };
 
-        nvgStrokeColor(nvg, GREEN);
-        nvgStrokeWidth(nvg, 2);
-        nvgStroke(nvg);
+        BaseGraph::GDraw(nvg);
 
         nvgClosePath(nvg);
     }
 
-//    void XYGraph::GDraw(NVGcontext * nvg) {
-//        for (int i = 0; i < buffer_size; i++) {
-//            g_vertex_buffer_data[i * 2] = globalPosition.x + buffer[2 * r] * globalPosition.width;
-//            g_vertex_buffer_data[i * 2 + 1] =
-//                    globalPosition.y + buffer[2 * r + 1] * globalPosition.height;
-//            r++;
-//            if (r >= buffer_size) r = 0;
-//        };
-//    }
-//
-//    void XYGraph::update(float x, float y) {
-//        changed = true;
-//
-//        if (x > 1) x = 1;
-//        if (x < -1) x = -1;
-//        if (y > 1) y = 1;
-//        if (y < -1) y = -1;
-//
-//        buffer[2 * r] = x;
-//        buffer[2 * r + 1] = y;
-//        r = (r + 1) % buffer_size;
-//    }
+    void XYGraph::GDraw(NVGcontext * nvg) {
+
+        nvgBeginPath(nvg);
+
+        nvgMoveTo(nvg, shape->global.c.x + points[0] * shape->global.s.x, shape->global.c.y + (1 - points[1]) * shape->global.s.y);
+
+        for (int i = 1; i < number_of_points; i++) {
+            nvgLineTo(nvg,
+                    shape->global.c.x + points[2 * i] * shape->global.s.x,
+                    shape->global.c.y + points[2 * i + 1] * shape->global.s.y);
+        };
+
+        BaseGraph::GDraw(nvg);
+
+        nvgClosePath(nvg);
+    }
+
+    void XYGraph::update(float x, float y) {
+        if (x > 1) x = 1;
+        if (x < -1) x = -1;
+        if (y > 1) y = 1;
+        if (y < -1) y = -1;
+
+        points[2 * r] = x;
+        points[2 * r + 1] = y;
+        r = (r + 1) % number_of_points;
+    }
 
 }

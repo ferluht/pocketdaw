@@ -127,6 +127,7 @@ add_library(
 #        common/AudioEffects/Spectrum.cpp
         common/AudioEffects/StereoDelay.cpp
         common/AudioEffects/ConvolutionReverb.cpp
+        common/AudioEffects/ThreeBandEQ.cpp
 
         common/AudioEffects/FFTConvolver/AudioFFT.cpp
         common/AudioEffects/FFTConvolver/FFTConvolver.cpp
@@ -146,7 +147,8 @@ add_library(
         common/GUI/Knob.cpp
         common/GUI/Led.cpp
         common/GUI/Menu.cpp
-#        common/GUI/Plot.cpp
+        common/GUI/Plot.cpp
+        common/GUI/Slider.cpp
 #        common/GUI/vectordisplay/vectordisplay.cpp
 
         common/Instruments/Envelopes/ADSR.cpp
