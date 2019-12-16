@@ -15,7 +15,7 @@
 
 class ConvolutionReverb : public AudioEffect{
 
-    const size_t blockSize = 2048;
+    const size_t blockSize = 1024;
 
     GUI::Encoder * drywet;
 

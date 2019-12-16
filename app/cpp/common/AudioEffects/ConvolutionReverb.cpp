@@ -44,7 +44,7 @@ bool ConvolutionReverb::ARender(double beat, float *lsample, float *rsample){
             active_buffer = 1 - active_buffer;
         }
 
-        inBuf[active_buffer][sample_counter] = sample;
+        inBuf[active_buffer][sample_counter] = sample * 0.1f;
 
         sample = outBuf[active_buffer][sample_counter];
         sample_counter = (sample_counter + 1) % blockSize;
