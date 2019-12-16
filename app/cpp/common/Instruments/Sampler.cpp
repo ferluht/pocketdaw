@@ -26,8 +26,21 @@ Sampler::Sampler(const char * sample_name_) : Instrument<SamplerState>(1, "Sampl
 
     base_frequency = sample_rate / 2 / M_PI;
 
-    for (int i = 0; i < sample.getNumSamplesPerChannel() / 200; i ++){
-        graph->update(abs(sample.samples[0][i*200] * 10));
+    int stride = sample.getNumSamplesPerChannel()/200;
+    float min = 0, max = 0;
+    int point = 0;
+    for (int i = 1; i < sample.getNumSamplesPerChannel() - 1; i ++){
+        if (i % stride == 0) {
+            if (point)
+                graph->update(min);
+            else
+                graph->update(max);
+            point = 1 - point;
+        }
+        if ((sample.samples[0][i + 1] > sample.samples[0][i]) && (sample.samples[0][i] < sample.samples[0][i-1]))
+            min = sample.samples[0][i];
+        if ((sample.samples[0][i + 1] < sample.samples[0][i]) && (sample.samples[0][i] > sample.samples[0][i-1]))
+            max = sample.samples[0][i];
     }
 
     trig = new GUI::TapButton("trig", [this] (bool state) {triggered = true;});
