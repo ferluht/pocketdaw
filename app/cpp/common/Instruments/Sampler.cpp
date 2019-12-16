@@ -27,7 +27,7 @@ Sampler::Sampler(const char * sample_name_) : Instrument<SamplerState>(1, "Sampl
     base_frequency = sample_rate / 2 / M_PI;
 
     for (int i = 0; i < sample.getNumSamplesPerChannel() / 200; i ++){
-        graph->update(sample.samples[0][i*200] * 10);
+        graph->update(abs(sample.samples[0][i*200] * 10));
     }
 
     trig = new GUI::TapButton("trig", [this] (bool state) {triggered = true;});
