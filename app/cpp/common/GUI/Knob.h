@@ -14,21 +14,17 @@ namespace GUI {
     public:
 
         unsigned int keymap;
+        bool mapping_mode;
 
         Knob() {
-
+            mapping_mode = false;
         }
 
-        inline bool MMap(MData cmd) override {
-            if (cmd.status == 0xB0) {
+        void MIn(MData cmd) override {
+            if (mapping_mode && ((cmd.status & 0xF0) == 0xB0)) {
                 keymap = cmd.data1;
-                return true;
+                mapping_mode = false;
             }
-            return false;
-        }
-
-        inline void MEnableMapping(bool state) override {
-
         }
 
         GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) override {
@@ -38,6 +34,13 @@ namespace GUI {
             }
             return nullptr;
         }
+
+        virtual GObject *GDoubleTapEnd(const Vec2 &v) override {
+            mapping_mode = !mapping_mode;
+            return this;
+        };
+
+        void GDraw(NVGcontext * nvg) override;
     };
 
 }

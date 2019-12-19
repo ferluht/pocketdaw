@@ -101,6 +101,7 @@ public:
         } else {
             for (auto const & drum : drums) drum->MIn(cmd);
         }
+        MOut(cmd);
     }
 
     void MRender(double beat) override {

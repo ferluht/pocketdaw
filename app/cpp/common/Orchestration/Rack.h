@@ -104,10 +104,6 @@ public:
         if (objects.size()) objects.front()->MIn(cmd);
     }
 
-    inline void MEnableMapping(bool state) override {
-        for (auto const& obj : objects) obj->MEnableMapping(state);
-    }
-
     inline void MRender(double beat) override {
         for (auto const& obj : objects) obj->MRender(beat);
     }

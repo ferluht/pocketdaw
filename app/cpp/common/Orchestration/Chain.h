@@ -137,10 +137,6 @@ public:
         for (auto const& mo : IEObjects) mo->MRender(beat);
     }
 
-    inline void MEnableMapping(bool state) override {
-        for (auto const& mo : IEObjects) mo->MEnableMapping(state);
-    }
-
 //    GObject * GFindFocusObject(const ndk_helper::Vec2& point) override
 //    {
 //        if (visible && globalPosition.contains(point)){

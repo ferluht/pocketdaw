@@ -48,7 +48,6 @@ private:
 
     MObject * MInput;
     std::list<MObject *> MOutputs;
-    bool mapping_mode;
 
 public:
 
@@ -75,13 +74,6 @@ public:
     }
 
     virtual void MRender(double beat) {}
-
-    inline virtual bool MMap(MData) { return false; }
-
-    inline virtual void MEnableMapping(bool state) {
-        mapping_mode = state;
-        for (auto const& out : MOutputs) out->MEnableMapping(state);
-    }
 };
 
 class MEngine : public MObject {

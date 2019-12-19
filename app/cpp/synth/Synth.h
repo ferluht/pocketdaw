@@ -61,7 +61,7 @@ public:
         linkButton = Master->linkButton;
         add_upper_panel_button(linkButton);
 
-        mapping_mode = new GUI::Button("MIDI", [this](bool state){ MEnableMapping(state); });
+        mapping_mode = new GUI::Button("MIDI", [this](bool state){ });
         add_upper_panel_button(mapping_mode);
 
         float led_height = panel_height * 0.4f;
@@ -131,9 +131,6 @@ public:
     }
 
     void MIn(MData cmd) override {
-        if (*mapping_mode && mapping_object) {
-            mapping_object->MMap(cmd);
-        }
         midiLeds[0]->toggle();
         midiLeds[1]->toggle();
         MOut(cmd);

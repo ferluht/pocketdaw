@@ -101,6 +101,7 @@ class DoubletapDetector : public GestureDetector {
   virtual ~DoubletapDetector() {}
   virtual GESTURE_STATE Detect(const AInputEvent* motion_event);
   virtual void SetConfiguration(AConfiguration* config);
+  bool GetPointer(Vec2& v);
 };
 
 /******************************************************************
@@ -140,6 +141,27 @@ class DragDetector : public GestureDetector {
   virtual GESTURE_STATE Detect(const AInputEvent* event);
   bool GetPointer(Vec2& v);
 };
+
+/******************************************************************
+ * Pinch gesture detector
+ * Returns GESTURE_STATE_ACTION when a double-tap gesture is detected
+ *
+ */
+class LongtapDetector : public GestureDetector {
+private:
+  TapDetector tap_detector_;
+  int64_t last_tap_time_;
+  float last_tap_x_;
+  float last_tap_y_;
+
+public:
+  LongtapDetector();
+  virtual ~LongtapDetector() {}
+  virtual GESTURE_STATE Detect(const AInputEvent* motion_event);
+  virtual void SetConfiguration(AConfiguration* config);
+  bool GetPointer(Vec2& v);
+};
+
 
 }  // namespace ndkHelper
 #endif /* GESTUREDETECTOR_H_ */

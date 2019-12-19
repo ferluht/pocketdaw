@@ -394,6 +394,17 @@ namespace entry
 					eng->focusOn(new_focus);
 				}
 
+				// Handle drag state
+				if (doubleTapState & ndk_helper::GESTURE_STATE_ACTION) {
+					// Otherwise, start dragging
+					ndk_helper::Vec2 v;
+					eng->doubletap_detector_.GetPointer(v);
+					eng->FindFocusObject(v);
+					auto new_focus = eng->focusStack.back()->GDoubleTapEnd(v);
+//					eng->unfocus();
+					eng->focusOn(new_focus);
+				}
+
 				return 1;
 			}
 

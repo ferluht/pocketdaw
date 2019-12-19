@@ -96,6 +96,8 @@ namespace GUI {
         nvgFillColor(nvg, GREEN);
         nvgText(nvg, shape->global.c.x + shape->global.s.x/2, shape->global.c.y + shape->global.s.y * 0.1f, label, NULL);
         nvgClosePath(nvg);
+
+        Knob::GDraw(nvg);
     }
 
 

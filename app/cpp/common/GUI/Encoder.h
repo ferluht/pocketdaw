@@ -80,6 +80,7 @@ namespace GUI {
                 unsigned int default_map_, float lower_bound_, float upper_bound_);
 
         inline void MIn(MData cmd) override {
+            Knob::MIn(cmd);
             if (cmd.status == 0xB0 && keymap && cmd.data1 == keymap) {
                 setvalue(cmd.data2 / 127.f * (upper_bound - lower_bound) + lower_bound);
             }
