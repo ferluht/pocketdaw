@@ -4,64 +4,31 @@
 
 #include "Snare.h"
 
-Snare::Snare() : Instrument<SnareState>(1, "SnareDrum") {
-    shape->setRatio(0.4);
-
+Snare::Snare() : AnalogDrum<SnareState>("Snare") {
     rng = new std::mt19937(dev());
     dist = new std::uniform_real_distribution<float>(-1, 1);
 
     attack = new GUI::Encoder("attack", 0, 0, 1);
-    attack->shape->lPlace({0.05, 0.01});
-    attack->shape->lSetHeight(0.2);
-    GAttach(attack);
-    MConnect(attack);
+    placeEncoder(attack, 0, 0);
 
     tone = new GUI::Encoder("tone", 0, 0, 10);
-    tone->shape->lPlace({0.05, 0.25});
-    tone->shape->lSetHeight(0.2);
-    GAttach(tone);
-    MConnect(tone);
+    placeEncoder(tone, 0, 1);
 
     sweep_time = new GUI::Encoder("sweep", 0, 0, 1);
-    sweep_time->shape->lPlace({0.05, 0.5});
-    sweep_time->shape->lSetHeight(0.2);
-    GAttach(sweep_time);
-    MConnect(sweep_time);
+    placeEncoder(sweep_time, 0, 2);
 
     decay = new GUI::Encoder("decay", 0.05, 0.05, 1);
-    decay->shape->lPlace({0.55, 0.5});
-    decay->shape->lSetHeight(0.2);
-    GAttach(decay);
-    MConnect(decay);
+    placeEncoder(decay, 1, 2);
 
     waveform = new GUI::Encoder("shape", 0, 0, 1);
-    waveform->shape->lPlace({0.55, 0.01});
-    waveform->shape->lSetHeight(0.2);
-    GAttach(waveform);
-    MConnect(waveform);
+    placeEncoder(waveform, 1, 0);
 
     sweep_amt = new GUI::Encoder("sweep lvl", 0, 0, 48);
-    sweep_amt->shape->lPlace({0.55, 0.25});
-    sweep_amt->shape->lSetHeight(0.2);
-    GAttach(sweep_amt);
-    MConnect(sweep_amt);
-
-    trig = new GUI::TapButton("snare", [this] (bool state) {triggered = true;});
-    trig->shape->lPlace({0.05, 0.75});
-    trig->shape->lSetHeight(0.2);
-    trig->shape->lSetWidth(0.9);
-    GAttach(trig);
-    MConnect(trig);
-}
-
-void Snare::MRender(double beat) {
-    if (triggered) {
-        MIn({beat, NOTEON_HEADER, 62, 100});
-        triggered = false;
-    }
+    placeEncoder(sweep_amt, 1, 1);
 }
 
 void Snare::IUpdateState(SnareState *state, MData md) {
+    AnalogDrum::IUpdateState(state, md);
     if (((md.status & 0xF0) == NOTEON_HEADER) && (md.data2 != 0)) {
         state->note = 0;
         state->volume = (float)md.data2/127.f;

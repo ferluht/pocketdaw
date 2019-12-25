@@ -6,32 +6,55 @@
 
 namespace GUI {
 
-    Encoder::Encoder(char *label_, float default_value_) :
+    void EncoderOverlay::GDraw(NVGcontext *nvg) {
+        nvgBeginPath(nvg);
+        nvgRect(nvg, 0, 0, GEngine::screen_width, GEngine::screen_height);
+        auto fc = DARKER;
+        fc.a = 0.2;
+        nvgFillColor(nvg, fc);
+        nvgFill(nvg);
+        nvgClosePath(nvg);
+
+        nvgBeginPath(nvg);
+        nvgFontSize(nvg, GEngine::screen_height * 0.2f);
+        nvgFontFace(nvg, "sans");
+        nvgTextAlign(nvg, NVG_ALIGN_CENTER | NVG_ALIGN_MIDDLE);
+
+        char buffer[64];
+        snprintf(buffer, sizeof buffer, "%s: %.2f", enc->label, enc->value);
+
+        nvgFillColor(nvg, WHITE);
+
+        nvgText(nvg, GEngine::screen_width / 2, GEngine::screen_height / 2, buffer, NULL);
+    }
+
+
+    Encoder::Encoder(const char *label_, float default_value_) :
             Encoder(label_, default_value_, [](float value) {}, 0) {}
 
-    Encoder::Encoder(char *label_, float default_value_, unsigned int default_map_) :
+    Encoder::Encoder(const char *label_, float default_value_, unsigned int default_map_) :
             Encoder(label_, default_value_, [](float value) {}, default_map_) {}
 
-    Encoder::Encoder(char *label_, float default_value_, std::function<void(float)> callback_) :
+    Encoder::Encoder(const char *label_, float default_value_, std::function<void(float)> callback_) :
             Encoder(label_, default_value_, callback_, 0) {}
 
-    Encoder::Encoder(char *label_, float default_value_, float lower_bound_, float upper_bound_) :
+    Encoder::Encoder(const char *label_, float default_value_, float lower_bound_, float upper_bound_) :
             Encoder(label_, default_value_, [](float value) {}, 0, lower_bound_, upper_bound_) {}
 
-    Encoder::Encoder(char *label_, float default_value_, std::function<void(float)> callback_,
+    Encoder::Encoder(const char *label_, float default_value_, std::function<void(float)> callback_,
                      unsigned int default_map_) :
             Encoder(label_, default_value_, callback_, default_map_, -1, 1) {}
 
-    Encoder::Encoder(char *label_, float default_value_, unsigned int default_map_,
+    Encoder::Encoder(const char *label_, float default_value_, unsigned int default_map_,
                      float lower_bound_, float upper_bound_) :
             Encoder(label_, default_value_, [](float value) {}, default_map_, lower_bound_,
                     upper_bound_) {}
 
-    Encoder::Encoder(char *label_, float default_value_, std::function<void(float)> callback_,
+    Encoder::Encoder(const char *label_, float default_value_, std::function<void(float)> callback_,
                      float lower_bound_, float upper_bound_) :
             Encoder(label_, default_value_, callback_, 0, lower_bound_, upper_bound_) {}
 
-    Encoder::Encoder(char *label_, float default_value_, std::function<void(float)> callback_,
+    Encoder::Encoder(const char *label_, float default_value_, std::function<void(float)> callback_,
                      unsigned int default_map_, float lower_bound_, float upper_bound_) {
         setShapeType(BOX);
         shape->setRatio(0.8);
@@ -45,6 +68,10 @@ namespace GUI {
 
         keymap = default_map_;
         setvalue(default_value_);
+
+        overlay = new EncoderOverlay(this);
+        GAttach(overlay);
+        overlay->GSetVisible(false);
     }
 
 
@@ -103,10 +130,17 @@ namespace GUI {
 
     void Encoder::GSetVisible(bool visible_) {
         GObject::GSetVisible(visible_);
-//    info_overlay.GSetVisible(false);
+        overlay->GSetVisible(false);
+    }
+
+    GObject *Encoder::GDragEnd(const Vec2 &v) {
+        overlay->GSetVisible(false);
+        Knob::GDragEnd(v);
+        return this;
     }
 
     GObject *Encoder::GDragHandler(const Vec2 &v) {
+        overlay->GSetVisible(true);
         angle = old_angle + (v.x - drag_from.x) / 100;
         setangle(angle);
         return this;
@@ -115,7 +149,7 @@ namespace GUI {
     GObject *Encoder::GDragBegin(const Vec2 &v) {
         drag_from = v;
         old_angle = angle;
+        Knob::GDragBegin(v);
         return this;
     }
-
 }

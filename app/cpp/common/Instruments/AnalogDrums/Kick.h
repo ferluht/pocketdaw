@@ -7,6 +7,7 @@
 
 
 #include "../Instrument.h"
+#include "AnalogDrum.h"
 #include <GUI/Encoder.h>
 #include <common/Instruments/Envelopes/AD.h>
 
@@ -30,7 +31,7 @@ public:
     }
 };
 
-class Kick : public Instrument<KickState> {
+class Kick : public AnalogDrum<KickState> {
 
     GUI::Encoder * attack;
     GUI::Encoder * tone;
@@ -38,10 +39,6 @@ class Kick : public Instrument<KickState> {
     GUI::Encoder * sweep_amt;
     GUI::Encoder * decay;
     GUI::Encoder * waveform;
-
-    GUI::Button * trig;
-
-    bool triggered = false;
 
     inline double osc(double phase) {
         phase = phase < -M_PI ? M_PI + fmod(phase + M_PI, 2*M_PI) : -M_PI + fmod(phase + M_PI, 2*M_PI);
@@ -54,8 +51,6 @@ class Kick : public Instrument<KickState> {
 public:
 
     Kick();
-
-    void MRender(double beat) override ;
 
     void IUpdateState(KickState * state, MData md) override;
 

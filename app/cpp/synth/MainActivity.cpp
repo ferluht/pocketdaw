@@ -72,14 +72,14 @@ namespace
 
             createFont(m_nvg, "sans", "font/droidsans.ttf");
 
+            GUI::GEngine::getGEngine().setDisplay(m_nvg, m_width, m_height);
+
             S = new Synth();
             S->shape->lPlace({0, 0});
             S->shape->lSetHeight(1);
             S->shape->lSetWidth(1);
 
             eng = new Engine(S);
-
-            GUI::GEngine::getGEngine().setDisplay(m_nvg, m_width, m_height);
 
             eng->audio->start();
         }

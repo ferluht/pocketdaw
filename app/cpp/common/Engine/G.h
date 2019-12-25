@@ -92,37 +92,7 @@ namespace GUI {
 
         inline virtual bool contains(const Vec2 &v) {}
 
-        void updateGlobal() {
-            if (parent && !fixed_global) {
-                global.c = parent->global.c + local.c * parent->global.s;
-
-                if (local.s.x > 0) {
-                    if (local.s.y > 0) {
-                        global.s = local.s * parent->global.s;
-                    } else {
-                        global.s.x = local.s.x * parent->global.s.x;
-                        global.s.y = global.s.x / local.ratio;
-                    }
-                } else {
-                    if (local.s.y > 0) {
-                        global.s.y = local.s.y * parent->global.s.y;
-                        global.s.x = global.s.y * local.ratio;
-                    } else {
-                        global.s = parent->global.s;
-                    }
-                }
-                global.ratio = global.s.x / global.s.y;
-            } else {
-                local.c = {0, 0};
-                local.s = {1, 1};
-                local.angle = 0;
-                local.ratio = 0;
-                Vec2 screen_size = {1280, 720};
-                global.c = local.c * screen_size;
-                global.s = local.s * screen_size;
-                global.ratio = global.s.x/global.s.y;
-            }
-        }
+        void updateGlobal();
     };
 
     class BoxShape : public Shape {
@@ -228,6 +198,8 @@ namespace GUI {
         }
 
         virtual void GDraw(NVGcontext *nvg) {};
+
+//        virtual void GDrawScreenOverlay(NVGcontext *nvg) {};
 
         virtual void GPlace() {};
 

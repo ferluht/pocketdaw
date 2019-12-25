@@ -8,12 +8,33 @@
 #include <functional>
 #include "Knob.h"
 #include "styles.h"
+#include "Button.h"
 
 namespace GUI {
+
+    class Encoder;
+
+    class EncoderOverlay : public GObject {
+
+        Encoder * enc;
+
+    public:
+
+        EncoderOverlay(Encoder * enc_) {
+            setShapeType(BOX);
+            enc = enc_;
+        }
+
+        void GDraw(NVGcontext * nvg) override;
+
+    };
 
     class Encoder : public Knob {
 
     private:
+
+        friend class EncoderButton;
+        friend class EncoderOverlay;
 
 //        const float wheel_radius = 0.4; // of width
 //        const float text_height = 0.8; // of space under wheel
@@ -24,6 +45,8 @@ namespace GUI {
         float lower_bound, upper_bound;
         float old_angle;
         Vec2 drag_from;
+
+        EncoderOverlay * overlay;
 
         char * label;
 
@@ -59,24 +82,24 @@ namespace GUI {
 
     public:
 
-        Encoder(char *label_, float default_value_);
+        Encoder(const char *label_, float default_value_);
 
-        Encoder(char *label_, float default_value_, unsigned int default_map_);
+        Encoder(const char *label_, float default_value_, unsigned int default_map_);
 
-        Encoder(char *label_, float default_value_, std::function<void(float)> callback_);
+        Encoder(const char *label_, float default_value_, std::function<void(float)> callback_);
 
-        Encoder(char *label_, float default_value_, float lower_bound_, float upper_bound_);
+        Encoder(const char *label_, float default_value_, float lower_bound_, float upper_bound_);
 
-        Encoder(char *label_, float default_value_, std::function<void(float)> callback_,
+        Encoder(const char *label_, float default_value_, std::function<void(float)> callback_,
                 unsigned int default_map_);
 
-        Encoder(char *label_, float default_value_, unsigned int default_map_, float lower_bound_,
+        Encoder(const char *label_, float default_value_, unsigned int default_map_, float lower_bound_,
                 float upper_bound_);
 
-        Encoder(char *label_, float default_value_, std::function<void(float)> callback_,
+        Encoder(const char *label_, float default_value_, std::function<void(float)> callback_,
                 float lower_bound_, float upper_bound_);
 
-        Encoder(char *label_, float default_value_, std::function<void(float)> callback_,
+        Encoder(const char *label_, float default_value_, std::function<void(float)> callback_,
                 unsigned int default_map_, float lower_bound_, float upper_bound_);
 
         inline void MIn(MData cmd) override {
@@ -113,14 +136,14 @@ namespace GUI {
 
         void GSetVisible(bool visible_) override;
 
-        void GDraw(NVGcontext * nvg) override;
+        virtual void GDraw(NVGcontext * nvg) override;
 
         GObject *GDragHandler(const Vec2 &v) override;
 
         GObject *GDragBegin(const Vec2 &v) override;
-    };
 
-    
+        GObject *GDragEnd(const Vec2 &v) override;
+    };
 
 }
 

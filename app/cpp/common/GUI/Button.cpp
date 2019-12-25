@@ -35,16 +35,16 @@ namespace GUI {
                 shape->global.c.x,
                 shape->global.c.y,
                 shape->global.s.x, shape->global.s.y);
-        if (!lighted) {
-            if (state) {
-                nvgFillColor(nvg, YELLOW);
-            } else {
-                nvgFillColor(nvg, GREY);
-            }
+        if (state) {
+            nvgFillColor(nvg, YELLOW);
         } else {
-            nvgFillColor(nvg, lightColor);
+            nvgFillColor(nvg, GREY);
         }
         nvgFill(nvg);
+        if (lighted) {
+            nvgFillColor(nvg, lightColor);
+            nvgFill(nvg);
+        }
 
         nvgStrokeColor(nvg, BLACK);
         nvgStroke(nvg);
@@ -113,5 +113,36 @@ namespace GUI {
         nvgText(nvg, shape->global.c.x + shape->global.s.x/2, shape->global.c.y + shape->global.s.y/2, label, NULL);
         nvgClosePath(nvg);
     }
+
+//    void ValueButton::GDraw(NVGcontext *nvg) {
+//        nvgBeginPath(nvg);
+//        nvgRect(nvg,
+//                shape->global.c.x,
+//                shape->global.c.y,
+//                shape->global.s.x, shape->global.s.y);
+//        nvgFillColor(nvg, GREY);
+//        nvgFill(nvg);
+//
+//        nvgStrokeColor(nvg, BLACK);
+//        nvgStroke(nvg);
+//
+//        nvgBeginPath(nvg);
+//        nvgRect(nvg,
+//                shape->global.c.x,
+//                shape->global.c.y + 0.02f,
+//                shape->global.s.x * 0.96f, shape->global.s.y * value);
+//        nvgFillColor(nvg, YELLOW);
+//        nvgFill(nvg);
+//
+//        nvgFontSize(nvg, shape->global.s.y * 0.7);
+//        nvgFontFace(nvg, "sans");
+//        nvgTextAlign(nvg,NVG_ALIGN_CENTER|NVG_ALIGN_MIDDLE);
+//
+//        char * label = labelOff;
+//        if (state) label = labelOn;
+//        nvgFillColor(nvg, BLACK);
+//        nvgText(nvg, shape->global.c.x + shape->global.s.x/2, shape->global.c.y + shape->global.s.y/2, label, NULL);
+//        nvgClosePath(nvg);
+//    }
 
 }
