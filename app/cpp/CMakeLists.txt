@@ -149,6 +149,7 @@ add_library(
         common/GUI/Menu.cpp
         common/GUI/Plot.cpp
         common/GUI/Slider.cpp
+        common/GUI/EncoderButton.cpp
 #        common/GUI/vectordisplay/vectordisplay.cpp
 
         common/Instruments/Envelopes/ADSR.cpp
@@ -164,6 +165,7 @@ add_library(
         common/Instruments/SingleTone.cpp
         common/Instruments/Brute.cpp
 
+        common/Instruments/AnalogDrums/AnalogDrum.cpp
         common/Instruments/AnalogDrums/Kick.cpp
         common/Instruments/AnalogDrums/Snare.cpp
 
@@ -178,6 +180,7 @@ add_library(
 #        common/Orchestration/Midi.cpp
         common/Orchestration/Rack.cpp
         common/Orchestration/Track.cpp
+        common/MidiEffects/Sequencer.cpp
 
         common/Utils/AudioFile.cpp
 

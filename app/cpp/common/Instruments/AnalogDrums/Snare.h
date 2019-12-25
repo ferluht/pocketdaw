@@ -6,6 +6,7 @@
 #define PD_SNARE_H
 
 #include "../Instrument.h"
+#include "AnalogDrum.h"
 #include <GUI/Encoder.h>
 #include <common/Instruments/Envelopes/AD.h>
 #include <random>
@@ -30,7 +31,7 @@ public:
     }
 };
 
-class Snare : public Instrument<SnareState> {
+class Snare : public AnalogDrum<SnareState> {
 
     GUI::Encoder * attack;
     GUI::Encoder * tone;
@@ -39,13 +40,9 @@ class Snare : public Instrument<SnareState> {
     GUI::Encoder * decay;
     GUI::Encoder * waveform;
 
-    GUI::TapButton * trig;
-
     std::random_device dev;
     std::mt19937 * rng;
     std::uniform_real_distribution<float> * dist;
-
-    bool triggered = false;
 
     inline double osc(double phase) {
         phase = phase < -M_PI ? M_PI + fmod(phase + M_PI, 2*M_PI) : -M_PI + fmod(phase + M_PI, 2*M_PI);
@@ -57,8 +54,6 @@ class Snare : public Instrument<SnareState> {
 public:
 
     Snare();
-
-    void MRender(double beat) override ;
 
     void IUpdateState(SnareState * state, MData md) override;
 

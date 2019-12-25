@@ -25,6 +25,7 @@
 #include <common/Instruments/AnalogDrums/Snare.h>
 #include <common/Instruments/Brute.h>
 #include <common/AudioEffects/ConvolutionReverb.h>
+#include <common/MidiEffects/Sequencer.h>
 #include "Track.h"
 //#include <Instruments/Metronome.h>
 //#include <GUI/Menu.h>
@@ -144,10 +145,6 @@ public:
                                                      if (focus_track > -1) {
                                                          auto br = new Brute();
                                                          Tracks[focus_track]->RAdd(br);
-                                                         br->upper_panel->shape->lPlace({0, 0});
-                                                         br->upper_panel->shape->lSetHeight(0.4);
-                                                         br->upper_panel->shape->lSetWidth(1);
-                                                         GAttach(br->upper_panel);
                                                      }
                                                  }));
 
@@ -209,6 +206,13 @@ public:
                                      Tracks[focus_track]->RAdd(new Arpeggiator());
                                  }
                              }));
+
+        addMidiMenu->addButton(new GUI::Button("Sequencer",
+                                               [this](bool a){
+                                                   if (focus_track > -1) {
+                                                       Tracks[focus_track]->RAdd(new Sequencer(4));
+                                                   }
+                                               }));
 //
 //        addAudioMenu = new Menu(L"Audio effect");
 //        addAudioMenu->addItem(L"Oscill",
@@ -326,10 +330,10 @@ public:
         if (cmd.status == 0xb0 && cmd.data2 > 0){
             switch (cmd.data1){
                 case 0x16:
-//                    changeTrackFocus(focus_track - 1);
+                    changeTrackFocus(focus_track - 1);
                     break;
                 case 0x15:
-//                    changeTrackFocus(focus_track + 1);
+                    changeTrackFocus(focus_track + 1);
                     break;
                 default:
                     break;

@@ -13,6 +13,8 @@ namespace GUI {
 
     class Button : public Knob {
 
+        friend class EncoderButton;
+
         bool lighted = false;
         NVGcolor lightColor;
 
@@ -39,8 +41,9 @@ namespace GUI {
             return *this;
         }
 
-        inline void lightOn(NVGcolor color) {
+        inline void lightOn(NVGcolor color, float opacity=1.0) {
             lightColor = color;
+            lightColor.a *= opacity;
             lighted = true;
         }
 
@@ -57,7 +60,7 @@ namespace GUI {
 
     class TapButton : public Button {
     public:
-        TapButton(char * label, std::function<void(bool)> callback_) :
+        TapButton(const char * label, std::function<void(bool)> callback_) :
                 Button(label, callback_) {
 
         }
@@ -145,6 +148,22 @@ namespace GUI {
         }
 
     };
+
+//    class ValueButton : public Button {
+//
+//        float value;
+//
+//    public:
+//
+//        ValueButton(char *label, std::function<void(bool)> callback_) :
+//                Button(label, callback_) {
+//            value = 0;
+//        }
+//
+//        virtual GObject *GTapEnd(const ndk_helper::Vec2 &v) override;
+//
+//        void GDraw(NVGcontext * nvg) override;
+//    };
 }
 
 #endif //PD_BUTTON_H
