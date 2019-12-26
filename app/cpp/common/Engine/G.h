@@ -26,18 +26,13 @@ typedef ndk_helper::Vec2 Vec2;
 
 namespace GUI {
 
-    class Shape {
-
-        bool fixed_global;
+    class BaseShape {
 
     public:
-
-        Shape * parent;
 
         struct Position {
             Vec2 c;
             Vec2 s;
-            float angle;
             float ratio;
 
             Position () {}
@@ -47,14 +42,9 @@ namespace GUI {
 
         bool changed;
 
-        Shape () {
-            parent = NULL;
-
-            fixed_global = false;
-
+        BaseShape () {
             local.c = {0, 0};
             local.s = {0, 0};
-            local.angle = 0;
             local.ratio = 0;
 
             global.c = {0, 0};
@@ -62,17 +52,7 @@ namespace GUI {
             global.ratio = 0;
         }
 
-        inline void attach(Shape * parent_) { parent = parent_; }
-
-        inline void detach() { parent = NULL; }
-
         inline virtual void lPlace(Vec2 c_) { local.c = c_; }
-
-        inline virtual void lMove(Vec2 v) { local.c += v; }
-
-        inline virtual void lRotate(float angle_) { local.angle += angle_; }
-
-        inline virtual void lSetAngle(float angle_) { local.angle = angle_; }
 
         inline virtual void setRatio(float ratio_) { local.ratio = ratio_; }
 
@@ -80,25 +60,19 @@ namespace GUI {
 
         inline virtual void lSetHeight(float height_) { local.s.y = height_; }
 
-        inline virtual void setGlobal(Vec2 c_, Vec2 s_) {
-            global.c = c_;
-            global.s = s_;
-            global.ratio = s_.x / s_.y;
-            fixed_global = true;
-        }
-
-        inline virtual void fixGlobal() { fixed_global = true; }
-        inline virtual void freeGlobal() { fixed_global = false; }
-
         inline virtual bool contains(const Vec2 &v) {}
 
-        void updateGlobal();
+        inline virtual bool containsX(const Vec2 &v) {}
+
+        inline virtual bool containsY(const Vec2 &v) {}
+
+        void updateGlobalPosition(BaseShape * parent);
     };
 
-    class BoxShape : public Shape {
+    class BoxShape : virtual public BaseShape {
     public:
 
-        BoxShape() : Shape() {}
+        BoxShape() : BaseShape() {}
 
         inline virtual bool contains(const Vec2 &v) {
             return containsX(v) && containsY(v);
@@ -113,11 +87,11 @@ namespace GUI {
         }
     };
 
-    class CircleShape : public Shape {
+    class CircleShape : virtual public BaseShape {
 
     public:
 
-        CircleShape() : Shape() {}
+        CircleShape() : BaseShape() {}
 
         inline virtual bool contains(const Vec2 &v) {
             return sqrt(pow(global.c.x + global.s.x/2 - v.x, 2) + pow(global.c.y + global.s.y/2 - v.y, 2)) < global.s.x / 2;
@@ -134,13 +108,11 @@ namespace GUI {
         inline virtual void lSetWidth(float width_) {
             local.s.x = width_;
             local.s.y = width_;
-            updateGlobal();
         }
 
         inline virtual void lSetHeight(float height_) {
             lSetWidth(height_);
         }
-
 
     };
 
@@ -149,55 +121,82 @@ namespace GUI {
         CIRCLE
     };
 
-//    template <class ShapeClass>
-//    class GObject : public ShapeClass {
-//        static_assert(std::is_base_of<Shape, ShapeClass>::value, "ShapeClass must derive from Shape");
+    class Shape : virtual public BoxShape, virtual public CircleShape, virtual public BaseShape {
 
-    class GObject {
+        unsigned int type;
 
     public:
 
-        Shape * shape;
-        GObject *parent;
+        Shape (unsigned int type_) {
+            type = type_;
+        }
+
+        inline virtual bool contains(const Vec2 &v) {
+            switch (type) {
+                case BOX:
+                    return BoxShape::contains(v);
+                case CIRCLE:
+                    return CircleShape::contains(v);
+                default:
+                    return false;
+            }
+        }
+
+        inline virtual bool containsX(const Vec2 &v) {
+            switch (type) {
+                case BOX:
+                    return BoxShape::containsX(v);
+                case CIRCLE:
+                    return CircleShape::containsX(v);
+                default:
+                    return false;
+            }
+        }
+
+        inline virtual bool containsY(const Vec2 &v) {
+            switch (type) {
+                case BOX:
+                    return BoxShape::containsY(v);
+                case CIRCLE:
+                    return CircleShape::containsY(v);
+                default:
+                    return false;
+            }
+        }
+
+    };
+
+
+    class GObject : public Shape {
+
+    public:
+
         std::list<GObject *> Graphics;
+
+        GObject * parent;
 
         bool visible;
         bool initialized;
         bool infocus;
 
-        GObject(float scale_=1) {
-            this->parent = nullptr;
+        GObject(unsigned int shape_type_) : Shape(shape_type_) {
             this->visible = true;
             this->initialized = false;
             infocus = false;
+            parent = nullptr;
         }
 
         virtual ~GObject() {}
 
         virtual void GInit() {};
 
-        void setShapeType(SHAPE_TYPES shape_type){
-
-            switch (shape_type){
-                case BOX:
-                    shape = new BoxShape();
-                    break;
-                case CIRCLE:
-                    shape = new CircleShape();
-                    break;
-                default:
-                    assert(0);
-                    break;
-            }
-        }
-
         void GDraw_(NVGcontext *nvg) {
             if (!initialized) GInit();
 
-            if (parent)
+            if (this->parent)
                 GPlace();
 
-            shape->updateGlobal();
+            updateGlobalPosition(parent);
 
             GDraw(nvg);
         }
@@ -242,12 +241,11 @@ namespace GUI {
 
         virtual void GDetach(GObject *go) {
             Graphics.remove(go);
-            go->shape->detach();
+            go->parent = nullptr;
         }
 
         inline void GAttachTo(GObject *go) {
-            parent = go;
-            shape->attach(go->shape);
+            this->parent = go;
         }
 
         // Event handlers
@@ -268,7 +266,7 @@ namespace GUI {
                     return fo;
                 }
             }
-            if (visible && shape->contains(point)) {
+            if (visible && this->contains(point)) {
                 trace->push_front(this);
                 return this;
             }
@@ -307,7 +305,6 @@ namespace GUI {
     {
         return dynamic_cast<const DstType*>(src) != nullptr;
     }
-
 
     //-------------------------------------------------------------------------
 // Shared state for our app.
@@ -387,7 +384,7 @@ namespace GUI {
         GObject * FindFocusObject(const Vec2 &point) {
             GObject * ret = nullptr;
             for (auto root = focusStack.rbegin(); root != focusStack.rend(); ++root) {
-                if ((*root)->shape->contains(point)) {
+                if ((*root)->contains(point)) {
                     std::list<GObject *> trace;
                     ret = (*root)->GFindFocusObject(point, &trace);
                     focusStack.erase(std::next(root).base(), focusStack.end());

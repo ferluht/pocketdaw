@@ -6,47 +6,47 @@
 
 SingleTone::SingleTone() : Instrument<SingleToneState>(1, "ST"){
 
-    shape->setRatio(1);
+    setRatio(1);
 
     interp1 = new GUI::Encoder("waveform1", 0, [this](float value) {}, 1, 0, 1);
-    interp1->shape->lPlace({encoder_spacing, row_1st});
-    interp1->shape->lSetHeight(encoder_height);
+    interp1->lPlace({encoder_spacing, row_1st});
+    interp1->lSetHeight(encoder_height);
     GAttach(interp1);
     MConnect(interp1);
 
     interp2 = new GUI::Encoder("waveform2", 0, [this](float value) {}, 2, 0, 1);
-    interp2->shape->lPlace({encoder_spacing + encoder_height, row_1st});
-    interp2->shape->lSetHeight(encoder_height);
+    interp2->lPlace({encoder_spacing + encoder_height, row_1st});
+    interp2->lSetHeight(encoder_height);
     GAttach(interp2);
     MConnect(interp2);
 
     A = new GUI::Encoder("A", 0, [this](float value) {}, 3, 0, 1);
-    A->shape->lPlace({encoder_spacing, row_1st + encoder_height});
-    A->shape->lSetHeight(encoder_height);
+    A->lPlace({encoder_spacing, row_1st + encoder_height});
+    A->lSetHeight(encoder_height);
     GAttach(A);
     MConnect(A);
 
     D = new GUI::Encoder("D", 0, [this](float value) {}, 4, 0, 1);
-    D->shape->lPlace({encoder_spacing + encoder_height, row_1st + encoder_height});
-    D->shape->lSetHeight(encoder_height);
+    D->lPlace({encoder_spacing + encoder_height, row_1st + encoder_height});
+    D->lSetHeight(encoder_height);
     GAttach(D);
     MConnect(D);
 
     S = new GUI::Encoder("S", 0, [this](float value) {}, 5, 0, 1);
-    S->shape->lPlace({encoder_spacing + encoder_height*2, row_1st + encoder_height});
-    S->shape->lSetHeight(encoder_height);
+    S->lPlace({encoder_spacing + encoder_height*2, row_1st + encoder_height});
+    S->lSetHeight(encoder_height);
     GAttach(S);
     MConnect(S);
 
     R = new GUI::Encoder("R", 0, [this](float value) {}, 6, 0, 1);
-    R->shape->lPlace({encoder_spacing + encoder_height*3, row_1st + encoder_height});
-    R->shape->lSetHeight(encoder_height);
+    R->lPlace({encoder_spacing + encoder_height*3, row_1st + encoder_height});
+    R->lSetHeight(encoder_height);
     GAttach(R);
     MConnect(R);
 
     crossmod = new GUI::Encoder("crossmod", 0, [this](float value) {}, 7, 0, 1);
-    crossmod->shape->lPlace({encoder_spacing, row_1st + 2*encoder_height});
-    crossmod->shape->lSetHeight(encoder_height);
+    crossmod->lPlace({encoder_spacing, row_1st + 2*encoder_height});
+    crossmod->lSetHeight(encoder_height);
     GAttach(crossmod);
     MConnect(crossmod);
 

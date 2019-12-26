@@ -6,7 +6,7 @@
 
 MoogFilter::MoogFilter() : AudioEffect("Filter")
 {
-    shape->setRatio(0.45f);
+    setRatio(0.45f);
 
     fs=48000.0;
 
@@ -15,16 +15,16 @@ MoogFilter::MoogFilter() : AudioEffect("Filter")
     cutoff_enc = new GUI::Encoder("cutoff", 1, [this](float value) {
         setCutoff ((value + 1)*8000);
     }, 1);
-    cutoff_enc->shape->lPlace({0.25, 0.1});
-    cutoff_enc->shape->lSetHeight(0.25);
+    cutoff_enc->lPlace({0.25, 0.1});
+    cutoff_enc->lSetHeight(0.25);
     GAttach(cutoff_enc);
     MConnect(cutoff_enc);
 
     resonance_enc = new GUI::Encoder("resonance", -1, [this](float value) {
         setRes ((value + 1)/2);
     }, 1);
-    resonance_enc->shape->lPlace({0.25, 0.4});
-    resonance_enc->shape->lSetHeight(0.25);
+    resonance_enc->lPlace({0.25, 0.4});
+    resonance_enc->lSetHeight(0.25);
     GAttach(resonance_enc);
     MConnect(resonance_enc);
 }

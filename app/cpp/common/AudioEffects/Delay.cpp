@@ -7,23 +7,23 @@
 
 Delay::Delay() : AudioEffect("Delay")
 {
-    shape->setRatio(0.45f);
+    setRatio(0.45f);
 
     delay_time = new GUI::Encoder("time", -1, [this](float value) {}, 1);
-    delay_time->shape->lPlace({0.25, 0.1});
-    delay_time->shape->lSetHeight(0.25);
+    delay_time->lPlace({0.25, 0.1});
+    delay_time->lSetHeight(0.25);
     GAttach(delay_time);
     MConnect(delay_time);
 
     feedback = new GUI::Encoder("feedback", -1, [this](float value) {}, 2);
-    feedback->shape->lPlace({0.25, 0.4});
-    feedback->shape->lSetHeight(0.25);
+    feedback->lPlace({0.25, 0.4});
+    feedback->lSetHeight(0.25);
     GAttach(feedback);
     MConnect(feedback);
 
     drywet = new GUI::Encoder("dry/wet", -1, [this](float value) {}, 3);
-    drywet->shape->lPlace({0.25, 0.7});
-    drywet->shape->lSetHeight(0.25);
+    drywet->lPlace({0.25, 0.7});
+    drywet->lSetHeight(0.25);
     GAttach(drywet);
     MConnect(drywet);
 

@@ -65,7 +65,6 @@ public:
 
     AMGMasterTrack() : link(120.0) {
         link.enable(true);
-        setShapeType(GUI::BOX);
 //        GAttachTexture("Textures/background.bmp");
         size_denominator = 4;
 //        isPlaying = true;
@@ -300,9 +299,9 @@ public:
     void AddTrack(AMGTrack * track) {
         Tracks.push_back(track);
         changeTrackFocus(Tracks.size() - 1);
-        track->shape->lPlace({0, 0.4});
-        track->shape->lSetHeight(0.6);
-        track->shape->lSetWidth(1);
+        track->lPlace({0, 0.4});
+        track->lSetHeight(0.6);
+        track->lSetWidth(1);
         GAttach(track);
 
 //        track->mc->place(0.4, 0.01, 0.1);

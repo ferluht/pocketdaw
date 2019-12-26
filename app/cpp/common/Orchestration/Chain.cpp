@@ -8,14 +8,14 @@ GUI::GObject * AMGChain::GDragHandler(const ndk_helper::Vec2 &v) {
 
     auto old_moving_to = moving_to;
 
-    while ((moving_to != IEObjects.begin()) && (v.x < (*moving_to)->shape->global.c.x)){
+    while ((moving_to != IEObjects.begin()) && (v.x < (*moving_to)->global.c.x)){
         moving_to --;
     }
-    while ((moving_to != IEObjects.end() - 2) && (v.x > (*moving_to)->shape->global.c.x + (*moving_to)->shape->global.s.x)){
+    while ((moving_to != IEObjects.end() - 2) && (v.x > (*moving_to)->global.c.x + (*moving_to)->global.s.x)){
         moving_to ++;
     }
 
-    if (!(*moving_to)->shape->contains(v)) moving_overlay->GSetVisible(false);
+    if (!(*moving_to)->contains(v)) moving_overlay->GSetVisible(false);
 
     if (old_moving_to != moving_to){
 //        auto position = (*moving_to)->globalPosition.toRelative(this->globalPosition);

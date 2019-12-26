@@ -9,15 +9,13 @@ namespace GUI {
 
     Menu::Menu(char *label_) {
 
-        setShapeType(BOX);
-
         gainCallback = []() {};
 
         int i = 0;
 
-        shape->lPlace({padding, padding});
-        shape->lSetHeight(1 - 2*padding);
-        shape->lSetWidth(1 - 2*padding);
+        lPlace({padding, padding});
+        lSetHeight(1 - 2*padding);
+        lSetWidth(1 - 2*padding);
 
         open(false);
 
@@ -25,9 +23,9 @@ namespace GUI {
         focus = -1;
 
 //        auto back = new FocusButton("back", [this](bool a){this->open(a);}, nullptr);
-//        back->shape->lPlace({-0.4f, -0.4f });
-//        back->shape->lSetHeight(0.1f);
-//        back->shape->lSetWidth(0.1f);
+//        back->lPlace({-0.4f, -0.4f });
+//        back->lSetHeight(0.1f);
+//        back->lSetWidth(0.1f);
 //        GAttach(back);
 
         unfold = false;
@@ -250,9 +248,9 @@ namespace GUI {
 
         nvgBeginPath(nvg);
         nvgRect(nvg,
-                shape->global.c.x,
-                shape->global.c.y,
-                shape->global.s.x, shape->global.s.y);
+                global.c.x,
+                global.c.y,
+                global.s.x, global.s.y);
         nvgFillColor(nvg, DARK);
         nvgFill(nvg);
         nvgClosePath(nvg);

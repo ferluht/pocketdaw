@@ -47,9 +47,9 @@ public:
     void GDraw(NVGcontext *nvg) override {
         nvgBeginPath(nvg);
         nvgRect(nvg,
-                shape->global.c.x,
-                shape->global.c.y,
-                shape->global.s.x, shape->global.s.y);
+                global.c.x,
+                global.c.y,
+                global.s.x, global.s.y);
         nvgFillColor(nvg, DARKER);
         nvgFill(nvg);
         nvgClosePath(nvg);

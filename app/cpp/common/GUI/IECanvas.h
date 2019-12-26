@@ -10,7 +10,7 @@
 
 namespace GUI {
 
-    class Header : public GCanvas {
+    class Header : public AMGCanvas {
 
         char * label;
 
@@ -31,23 +31,23 @@ namespace GUI {
             label[len] = 0;
 
             isOn = new Button("ON", "OFF", [](bool state) {});
-            isOn->shape->lPlace({onoff_button_padding, (1-onoff_button_height)/2});
-            isOn->shape->lSetHeight(onoff_button_height);
-            isOn->shape->setRatio(onoff_button_ratio);
+            isOn->lPlace({onoff_button_padding, (1-onoff_button_height)/2});
+            isOn->lSetHeight(onoff_button_height);
+            isOn->setRatio(onoff_button_ratio);
             GAttach(isOn);
             *isOn = true;
         }
 
         void GDraw(NVGcontext *nvg) override {
-            GCanvas::GDraw(nvg);
+            AMGCanvas::GDraw(nvg);
 
             nvgBeginPath(nvg);
-            nvgFontSize(nvg, shape->global.s.y * name_height);
+            nvgFontSize(nvg, global.s.y * name_height);
             nvgFontFace(nvg, "sans");
             nvgTextAlign(nvg,NVG_ALIGN_MIDDLE|NVG_ALIGN_MIDDLE);
 
             nvgFillColor(nvg, BLACK);
-            nvgText(nvg, shape->global.c.x + shape->global.s.x/2, shape->global.c.y + shape->global.s.y/2, label, NULL);
+            nvgText(nvg, global.c.x + global.s.x/2, global.c.y + global.s.y/2, label, NULL);
             nvgClosePath(nvg);
         };
 
@@ -57,7 +57,7 @@ namespace GUI {
                 trace->push_front(this);
                 return fo;
             }
-            if (visible && shape->contains(point)) {
+            if (visible && contains(point)) {
                 return this;
             }
 
@@ -82,16 +82,15 @@ namespace GUI {
         IECanvas(const char *name_) {
 
             header = new Header(name_);
-            header->shape->lPlace({0, 0});
-            header->shape->lSetHeight(header_height);
-            header->shape->lSetWidth(1);
+            header->lPlace({0, 0});
+            header->lSetHeight(header_height);
+            header->lSetWidth(1);
             AMGCanvas::GAttach(header);
 
-            body = new GObject();
-            body->setShapeType(BOX);
-            body->shape->lPlace({0, header_height});
-            body->shape->lSetHeight(0.9);
-            body->shape->lSetWidth(1);
+            body = new GObject(BOX);
+            body->lPlace({0, header_height});
+            body->lSetHeight(0.9);
+            body->lSetWidth(1);
             AMGCanvas::GAttach(body);
 
             attach_to_body = true;
@@ -104,9 +103,9 @@ namespace GUI {
         void NoHeader() {
             header->visible = false;
             no_header = true;
-            body->shape->lPlace({0, 0});
-            body->shape->lSetHeight(1);
-            body->shape->lSetWidth(1);
+            body->lPlace({0, 0});
+            body->lSetHeight(1);
+            body->lSetWidth(1);
         }
 
         GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) override {
@@ -142,9 +141,9 @@ namespace GUI {
         void GDraw(NVGcontext *nvg) override {
             nvgBeginPath(nvg);
             nvgRect(nvg,
-                    shape->global.c.x,
-                    shape->global.c.y,
-                    shape->global.s.x, shape->global.s.y);
+                    global.c.x,
+                    global.c.y,
+                    global.s.x, global.s.y);
             nvgFillColor(nvg, DARK);
             nvgFill(nvg);
             nvgStrokeColor(nvg, BLACK);

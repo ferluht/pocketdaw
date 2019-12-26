@@ -9,13 +9,10 @@
 #include "G.h"
 #include "M.h"
 
-class AGObject : virtual public AObject, virtual public GUI::GObject {};
-
-class AMObject : virtual public AObject, virtual public MObject {};
-
-class MGObject : virtual public MObject, virtual public GUI::GObject {};
-
-class AMGObject : virtual public AObject, virtual public GUI::GObject, virtual public MObject {};
+class AMGObject : public AObject, public GUI::GObject, public MObject {
+public:
+    AMGObject(unsigned int shape_type_) : GUI::GObject(shape_type_) {}
+};
 
 
 class Engine : MObject{
@@ -26,7 +23,7 @@ public:
     MEngine * midi;
     GUI::GEngine * graphic;
 
-    Engine(AMGObject * root_){
+    Engine(AMGObject* root_){
         audio = &AEngine::getAEngine();
         midi = &MEngine::getMEngine();
         graphic = &GUI::GEngine::getGEngine();

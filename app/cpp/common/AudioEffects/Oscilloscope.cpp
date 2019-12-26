@@ -8,29 +8,29 @@
 Oscilloscope::Oscilloscope() : AudioEffect("Oscill")
 {
 
-    shape->setRatio(1.5);
+    setRatio(1.5);
 
     plot = new GUI::Plot<GUI::TimeGraph>(200);
-    plot->shape->lPlace({0.01, 0.01});
-    plot->shape->lSetHeight(0.7);
-    plot->shape->lSetWidth(0.98);
+    plot->lPlace({0.01, 0.01});
+    plot->lSetHeight(0.7);
+    plot->lSetWidth(0.98);
     GAttach(plot);
 
     trig = new GUI::Encoder("trig", 0, 0, -1, 1);
-    trig->shape->lPlace({0.05, 0.72});
-    trig->shape->lSetHeight(0.26);
+    trig->lPlace({0.05, 0.72});
+    trig->lSetHeight(0.26);
     GAttach(trig);
     MConnect(trig);
 
     time = new GUI::Encoder("time", 100, 0, 0, 100);
-    time->shape->lPlace({0.2, 0.72});
-    time->shape->lSetHeight(0.26);
+    time->lPlace({0.2, 0.72});
+    time->lSetHeight(0.26);
     GAttach(time);
     MConnect(time);
 
     scale = new GUI::Encoder("scale", 1, 0, 0, 5);
-    scale->shape->lPlace({0.35, 0.72});
-    scale->shape->lSetHeight(0.26);
+    scale->lPlace({0.35, 0.72});
+    scale->lSetHeight(0.26);
     GAttach(scale);
     MConnect(scale);
 }

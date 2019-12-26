@@ -13,8 +13,8 @@ StereoDelay::StereoDelay() : AudioEffect("Stereo delay"){
                 if (this->delayTime < 0.01f) this->delayTime = 0.01f;
                 if (this->delayTime > 0.99f) this->delayTime = 0.99f;
         }, 1);
-    delay_time->shape->lPlace({0.25f, 0.1f});
-    delay_time->shape->lSetHeight(0.25f);
+    delay_time->lPlace({0.25f, 0.1f});
+    delay_time->lSetHeight(0.25f);
     GAttach(delay_time);
     MConnect(delay_time);
 
