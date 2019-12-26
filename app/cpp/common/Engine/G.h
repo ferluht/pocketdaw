@@ -149,7 +149,12 @@ namespace GUI {
         CIRCLE
     };
 
+//    template <class ShapeClass>
+//    class GObject : public ShapeClass {
+//        static_assert(std::is_base_of<Shape, ShapeClass>::value, "ShapeClass must derive from Shape");
+
     class GObject {
+
     public:
 
         Shape * shape;
@@ -160,7 +165,7 @@ namespace GUI {
         bool initialized;
         bool infocus;
 
-        GObject() {
+        GObject(float scale_=1) {
             this->parent = nullptr;
             this->visible = true;
             this->initialized = false;
@@ -198,8 +203,6 @@ namespace GUI {
         }
 
         virtual void GDraw(NVGcontext *nvg) {};
-
-//        virtual void GDrawScreenOverlay(NVGcontext *nvg) {};
 
         virtual void GPlace() {};
 
