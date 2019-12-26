@@ -20,8 +20,7 @@ namespace GUI {
 
     public:
 
-        EncoderOverlay(Encoder * enc_) {
-            setShapeType(BOX);
+        EncoderOverlay(Encoder * enc_) : GObject(BOX) {
             enc = enc_;
         }
 

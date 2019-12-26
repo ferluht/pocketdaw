@@ -9,7 +9,7 @@
 
 namespace GUI {
 
-    class Knob : public MGObject {
+    class Knob : public AMGObject {
 
         int overlay_type;
 
@@ -18,7 +18,7 @@ namespace GUI {
         unsigned int keymap;
         bool mapping_mode;
 
-        Knob() {
+        Knob(unsigned int shape_type_) : AMGObject(shape_type_) {
             mapping_mode = false;
             overlay_type = BOX;
         }
@@ -35,7 +35,7 @@ namespace GUI {
         }
 
         GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) override {
-            if (visible && shape->contains(point)) {
+            if (visible && contains(point)) {
                 trace->push_front(this);
                 return this;
             }

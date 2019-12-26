@@ -22,7 +22,7 @@ namespace GUI {
 
     };
 
-    class Menu : public MGCanvas {
+    class Menu : public AMGCanvas {
 
         float item_height = 0.15;
         float padding = 0.1;
@@ -50,9 +50,9 @@ namespace GUI {
         std::function<void(void)> gainCallback;
 
         void addButton(Button * b) {
-            b->shape->lPlace({0.5f - button_width/2, (buttons.size() + 1)*(button_height + button_spacing) });
-            b->shape->lSetHeight(button_height);
-            b->shape->lSetWidth(button_width);
+            b->lPlace({0.5f - button_width/2, (buttons.size() + 1)*(button_height + button_spacing) });
+            b->lSetHeight(button_height);
+            b->lSetWidth(button_width);
             GAttach(b);
             buttons.push_back(b);
         }

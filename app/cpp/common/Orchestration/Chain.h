@@ -17,15 +17,14 @@ private:
     std::vector<GUI::IECanvas *> IEObjects;
     const float spacing = 0.01;
     std::vector<GUI::IECanvas *>::iterator moving_from, moving_to;
-    GUI::GCanvas * moving_overlay;
+    GUI::AMGCanvas * moving_overlay;
     int moving_focus = 0;
     ndk_helper::Vec2 last_touch;
 
 public:
 
-    AMGChain() {
+    AMGChain() : AMGObject(GUI::BOX) {
 
-        setShapeType(GUI::BOX);
 //        moving_overlay = new GCanvas();
 //        moving_overlay->GAttachShaders("Shaders/VS_ShaderPlain.vsh", "Shaders/ShaderPlainColor.fsh");
 //        moving_overlay->GSetColor(1, 1, 1, 0.2);
@@ -57,23 +56,23 @@ public:
 
     void GDraw(NVGcontext *nvg) override {
 
-        if (shape->changed) {
+        if (changed) {
 
             float cur_ratio = 0;
             int i = 0;
             for (auto const &obj : IEObjects) {
-                obj->shape->lPlace({cur_ratio / shape->local.ratio + spacing * i, 0});
-                obj->shape->lSetHeight(1);
-                cur_ratio += obj->shape->local.ratio;
+                obj->lPlace({cur_ratio / local.ratio + spacing * i, 0});
+                obj->lSetHeight(1);
+                cur_ratio += obj->local.ratio;
                 i++;
             }
         }
 
 //        nvgBeginPath(nvg);
 //        nvgRect(nvg,
-//                shape->global.c.x,
-//                shape->global.c.y,
-//                shape->global.s.x, shape->global.s.y);
+//                global.c.x,
+//                global.c.y,
+//                global.s.x, global.s.y);
 //        nvgFillColor(nvg, BLUE);
 //        nvgFill(nvg);
     }
@@ -85,18 +84,18 @@ public:
             IEObjects[size - 2]->MConnect(ieo);
         }
         ieo->MConnect(IEObjects.back());
-        shape->setRatio(shape->local.ratio + ieo->shape->local.ratio + spacing);
+        setRatio(local.ratio + ieo->local.ratio + spacing);
         IEObjects.insert(IEObjects.end() - 1, ieo);
         GAttach(ieo);
-        shape->changed = true;
+        changed = true;
     }
 
     inline void AMGChainPushFront(GUI::IECanvas * ieo) {
         ieo->MConnect(IEObjects[0]);
         IEObjects.insert(IEObjects.begin(), ieo);
-        shape->setRatio(shape->local.ratio + ieo->shape->local.ratio + spacing);
+        setRatio(local.ratio + ieo->local.ratio + spacing);
         GAttach(ieo);
-        shape->changed = true;
+        changed = true;
     }
 
     inline void AMGChainInsert(GUI::IECanvas * ieo, int pos) {
@@ -109,16 +108,16 @@ public:
             IEObjects[pos - 1]->MDisconnect(IEObjects[pos]);
             IEObjects[pos - 1]->MConnect(ieo);
             ieo->MConnect(IEObjects[pos]);
-            shape->setRatio(shape->local.ratio + ieo->shape->local.ratio + spacing);
+            setRatio(local.ratio + ieo->local.ratio + spacing);
             IEObjects.insert(IEObjects.begin() + pos, ieo);
             GAttach(ieo);
-            shape->changed = true;
+            changed = true;
         }
     }
 
     inline void AMGChainDel(int pos) {
         auto size = IEObjects.size();
-        shape->setRatio(shape->local.ratio - IEObjects[pos]->shape->local.ratio);
+        setRatio(local.ratio - IEObjects[pos]->local.ratio);
         if (pos > 0 && pos < size - 1) {
             IEObjects[pos]->MDisconnect(IEObjects[pos + 1]);
             IEObjects[pos - 1]->MDisconnect(IEObjects[pos]);
@@ -130,7 +129,7 @@ public:
             GDetach(IEObjects[pos]);
             IEObjects.erase(IEObjects.begin() + pos);
         }
-        shape->changed = true;
+        changed = true;
     }
 
     inline void MRender(double beat) override {
@@ -163,7 +162,7 @@ public:
                 return fo;
             }
         }
-        if (visible && shape->contains(point)) {
+        if (visible && contains(point)) {
             trace->push_front(this);
             return this;
         }

@@ -11,7 +11,7 @@
 namespace GUI {
 
     template <class T>
-    class Plot : public MGCanvas {
+    class Plot : public AMGCanvas {
 
     public:
         T *graph;
@@ -20,9 +20,9 @@ namespace GUI {
             setColor(BLACK);
 
             graph = new TimeGraph(points);
-            graph->shape->lPlace({0, 0});
-            graph->shape->lSetHeight(1);
-            graph->shape->lSetWidth(1);
+            graph->lPlace({0, 0});
+            graph->lSetHeight(1);
+            graph->lSetWidth(1);
             GAttach(graph);
         }
 

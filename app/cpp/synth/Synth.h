@@ -22,7 +22,7 @@ private:
     GUI::Button * metronome_button;
     GUI::Button * device_menu;
     GUI::ProgressButton * linkButton;
-    MGObject * mapping_object;
+    AMGObject * mapping_object;
     GUI::Menu * midiDeviceMenu;
     GUI::Button * midi_device_menu;
     GUI::Led * midiLeds[2];
@@ -36,9 +36,9 @@ private:
     std::list<GUI::Button *> upper_panel_buttons;
 
     void add_upper_panel_button(GUI::Button * b){
-        b->shape->lPlace({panel_buttons_start_x + upper_panel_buttons.size()*panel_button_width, 0});
-        b->shape->lSetWidth(panel_button_width);
-        b->shape->lSetHeight(panel_height);
+        b->lPlace({panel_buttons_start_x + upper_panel_buttons.size()*panel_button_width, 0});
+        b->lSetWidth(panel_button_width);
+        b->lSetHeight(panel_height);
         upper_panel_buttons.push_back(b);
         GAttach(b);
     }
@@ -46,12 +46,11 @@ private:
 public:
 
     Synth(){
-        setShapeType(GUI::BOX);
 
         Master = new AMGMasterTrack();
-        Master->shape->lPlace({0, panel_height});
-        Master->shape->lSetHeight(1 - panel_height);
-        Master->shape->lSetWidth(1);
+        Master->lPlace({0, panel_height});
+        Master->lSetHeight(1 - panel_height);
+        Master->lSetWidth(1);
         GAttach(Master);
         MConnect(Master);
 
@@ -66,13 +65,13 @@ public:
 
         float led_height = panel_height * 0.4f;
         midiLeds[0] = new GUI::Led(false);
-        midiLeds[0]->shape->lPlace({led_height/2 + 0.001f, led_height/2 + panel_height * .05f});
-        midiLeds[0]->shape->lSetHeight(led_height);
+        midiLeds[0]->lPlace({led_height/2 + 0.001f, led_height/2 + panel_height * .05f});
+        midiLeds[0]->lSetHeight(led_height);
         GAttach(midiLeds[0]);
 
         midiLeds[1] = new GUI::Led(true);
-        midiLeds[1]->shape->lPlace({led_height/2 + 0.001f, led_height*1.5f + panel_height * .15f});
-        midiLeds[1]->shape->lSetHeight(led_height);
+        midiLeds[1]->lPlace({led_height/2 + 0.001f, led_height*1.5f + panel_height * .15f});
+        midiLeds[1]->lSetHeight(led_height);
         GAttach(midiLeds[1]);
 
         device_menu = new GUI::FocusButton("Add", [this](bool state){}, Master->addMenu);
@@ -139,7 +138,7 @@ public:
     GObject * GFindFocusObject(const ndk_helper::Vec2& point, std::list<GObject *> * trace) override {
         auto object = AMGCanvas::GFindFocusObject(point, trace);
         if (*mapping_mode) {
-            mapping_object = dynamic_cast<MGObject *> (object);
+            mapping_object = dynamic_cast<AMGObject *> (object);
         }
         return object;
     }
@@ -147,9 +146,9 @@ public:
     virtual void GDraw(NVGcontext *nvg) {
         nvgBeginPath(nvg);
         nvgRect(nvg,
-                shape->global.c.x,
-                shape->global.c.y,
-                shape->global.s.x, shape->global.s.y * panel_height);
+                global.c.x,
+                global.c.y,
+                global.s.x, global.s.y * panel_height);
         nvgFillColor(nvg, MIDGREY);
         nvgFill(nvg);
         nvgClosePath(nvg);

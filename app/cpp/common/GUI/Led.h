@@ -10,15 +10,14 @@
 
 namespace GUI {
 
-    class Led : public GCanvas {
+    class Led : public AMGCanvas {
     public:
 
         bool state;
         unsigned char counter;
 
         Led(bool state_) {
-            setShapeType(BOX);
-            shape->setRatio(1);
+            setRatio(1);
             counter = 0;
             state = state_;
         }

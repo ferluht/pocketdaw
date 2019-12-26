@@ -15,8 +15,8 @@ namespace GUI {
     }
 
     void EncoderButton::drawLed(NVGcontext *nvg) {
-        Vec2 led_center(shape->global.c.x + shape->global.s.x/2, shape->global.c.y + shape->global.s.y/2);
-        float led_radius = shape->global.s.x * 0.2f;
+        Vec2 led_center(global.c.x + global.s.x/2, global.c.y + global.s.y/2);
+        float led_radius = global.s.x * 0.2f;
 
         nvgBeginPath(nvg);
         nvgCircle(nvg, led_center.x, led_center.y, led_radius);
@@ -35,8 +35,8 @@ namespace GUI {
     }
 
     void EncoderButton::drawButton(NVGcontext *nvg) {
-        Vec2 button_center(shape->global.c.x + shape->global.s.x/2, shape->global.c.y + shape->global.s.y/2);
-        float button_radius = shape->global.s.x * 0.4f;
+        Vec2 button_center(global.c.x + global.s.x/2, global.c.y + global.s.y/2);
+        float button_radius = global.s.x * 0.4f;
 
         nvgBeginPath(nvg);
         nvgCircle(nvg, button_center.x, button_center.y, button_radius);
@@ -46,12 +46,12 @@ namespace GUI {
     }
 
     void EncoderButton::drawArc(NVGcontext *nvg) {
-        Vec2 button_center(shape->global.c.x + shape->global.s.x/2, shape->global.c.y + shape->global.s.y/2);
-        float button_radius = shape->global.s.x * 0.4f;
+        Vec2 button_center(global.c.x + global.s.x/2, global.c.y + global.s.y/2);
+        float button_radius = global.s.x * 0.4f;
 
         nvgBeginPath(nvg);
         nvgArc(nvg, button_center.x, button_center.y, button_radius, M_PI * (0.5f + 2 * (value - lower_bound)/(upper_bound - lower_bound)), M_PI * 0.5f, NVG_CCW);
-        nvgStrokeWidth(nvg, shape->global.s.x * 0.1f);
+        nvgStrokeWidth(nvg, global.s.x * 0.1f);
         nvgStrokeColor(nvg, VIOLET);
         nvgStroke(nvg);
         nvgClosePath(nvg);

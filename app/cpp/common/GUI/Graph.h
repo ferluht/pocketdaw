@@ -12,7 +12,7 @@
 
 namespace GUI {
 
-    class BaseGraph : public GObject {
+    class BaseGraph : public AMGObject {
 
         NVGcolor line_color;
         int width;
@@ -23,8 +23,7 @@ namespace GUI {
         unsigned int number_of_points;
         float * points;
 
-        BaseGraph() {
-            setShapeType(BOX);
+        BaseGraph() : AMGObject(BOX) {
             line_color = GREEN;
             width = 2;
         }

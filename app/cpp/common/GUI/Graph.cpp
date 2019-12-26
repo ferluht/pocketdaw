@@ -21,13 +21,13 @@ namespace GUI {
 
         nvgBeginPath(nvg);
 
-        nvgMoveTo(nvg, shape->global.c.x, shape->global.c.y + (1 - points[r]) * shape->global.s.y);
+        nvgMoveTo(nvg, global.c.x, global.c.y + (1 - points[r]) * global.s.y);
         r = (r + 1) % number_of_points;
 
-        float dx = shape->global.s.x / (float)number_of_points;
+        float dx = global.s.x / (float)number_of_points;
 
         for (int i = 1; i < number_of_points; i++) {
-            nvgLineTo(nvg, shape->global.c.x + i * dx, shape->global.c.y + (1 - points[r]) * shape->global.s.y);
+            nvgLineTo(nvg, global.c.x + i * dx, global.c.y + (1 - points[r]) * global.s.y);
             r = (r + 1) % number_of_points;
         };
 
@@ -40,12 +40,12 @@ namespace GUI {
 
         nvgBeginPath(nvg);
 
-        nvgMoveTo(nvg, shape->global.c.x + points[0] * shape->global.s.x, shape->global.c.y + (1 - points[1]) * shape->global.s.y);
+        nvgMoveTo(nvg, global.c.x + points[0] * global.s.x, global.c.y + (1 - points[1]) * global.s.y);
 
         for (int i = 1; i < number_of_points; i++) {
             nvgLineTo(nvg,
-                    shape->global.c.x + points[2 * i] * shape->global.s.x,
-                    shape->global.c.y + points[2 * i + 1] * shape->global.s.y);
+                    global.c.x + points[2 * i] * global.s.x,
+                    global.c.y + points[2 * i + 1] * global.s.y);
         };
 
         BaseGraph::GDraw(nvg);

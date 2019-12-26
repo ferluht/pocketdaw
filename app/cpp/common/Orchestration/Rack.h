@@ -47,7 +47,7 @@ public:
     }
 
     void RAdd(GUI::IECanvas * obj){
-        obj->shape->lSetHeight(1);
+        obj->lSetHeight(1);
 
         if (isAudioEffect(obj)) {
             if (!objects.empty()) objects.back()->MConnect(obj);
@@ -89,12 +89,12 @@ public:
 
     void updatePositions() {
         float ratio = 0;
-        for (auto const& obj : objects) ratio += obj->shape->local.ratio;
+        for (auto const& obj : objects) ratio += obj->local.ratio;
 
         float x = padding;
         for (auto const& obj : objects) {
-            obj->shape->lPlace({x + x_offset, padding});
-            x += obj->shape->local.ratio / shape->global.ratio + padding;
+            obj->lPlace({x + x_offset, padding});
+            x += obj->local.ratio / global.ratio + padding;
         }
 
         max_x_offset = - x + 1;

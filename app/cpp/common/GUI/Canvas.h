@@ -10,32 +10,21 @@
 
 namespace GUI {
 
-    class GCanvas : virtual public GObject {
+    class AMGCanvas : public AMGObject {
 
         NVGcolor color;
 
     public:
 
-        GCanvas() {
-            setShapeType(BOX);
+        AMGCanvas() : AMGObject(BOX) {
             color.a = 0;
         }
 
         inline void setColor(NVGcolor color_) { color = color_; }
 
         void GDraw(NVGcontext * nvg) override;
-
-        void GRender(NVGcontext * nvg, float dTime) override;
     };
 
-    class AGCanvas : virtual public AGObject, virtual public GCanvas {
-    };
-
-    class MGCanvas : virtual public MGObject, virtual public GCanvas {
-    };
-
-    class AMGCanvas : virtual public AMGObject, virtual public GCanvas {
-    };
 
 }
 
