@@ -55,6 +55,7 @@ namespace GUI {
         nvgStrokeColor(nvg, VIOLET);
         nvgStroke(nvg);
         nvgClosePath(nvg);
+        nvgStrokeWidth(nvg, 1);
     }
 
     GObject * EncoderButton::GTapEnd(const ndk_helper::Vec2 &v) {

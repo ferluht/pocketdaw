@@ -67,7 +67,7 @@ public:
         link.enable(true);
 //        GAttachTexture("Textures/background.bmp");
         size_denominator = 4;
-//        isPlaying = true;
+        isPlaying = false;
         bpm = 120;
         linkButton = new GUI::ProgressButton("Link", [this](bool state){
             this->link.enable(state);

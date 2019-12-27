@@ -99,7 +99,7 @@ namespace GUI {
                 float lower_bound_, float upper_bound_);
 
         Encoder(const char *label_, float default_value_, std::function<void(float)> callback_,
-                unsigned int default_map_, float lower_bound_, float upper_bound_);
+                unsigned int default_map_, float lower_bound_, float upper_bound_, unsigned int shape_type_=BOX);
 
         inline void MIn(MData cmd) override {
             Knob::MIn(cmd);

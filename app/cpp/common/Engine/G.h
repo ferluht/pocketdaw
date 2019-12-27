@@ -26,7 +26,14 @@ typedef ndk_helper::Vec2 Vec2;
 
 namespace GUI {
 
-    class BaseShape {
+    enum SHAPE_TYPES {
+        BOX,
+        CIRCLE
+    };
+
+    class Shape {
+
+        unsigned int type;
 
     public:
 
@@ -42,7 +49,9 @@ namespace GUI {
 
         bool changed;
 
-        BaseShape () {
+        Shape (unsigned int type_=BOX) {
+            type = type_;
+
             local.c = {0, 0};
             local.s = {0, 0};
             local.ratio = 0;
@@ -56,87 +65,40 @@ namespace GUI {
 
         inline virtual void setRatio(float ratio_) { local.ratio = ratio_; }
 
-        inline virtual void lSetWidth(float width_) { local.s.x = width_; }
-
-        inline virtual void lSetHeight(float height_) { local.s.y = height_; }
-
-        inline virtual bool contains(const Vec2 &v) {}
-
-        inline virtual bool containsX(const Vec2 &v) {}
-
-        inline virtual bool containsY(const Vec2 &v) {}
-
-        void updateGlobalPosition(BaseShape * parent);
-    };
-
-    class BoxShape : virtual public BaseShape {
-    public:
-
-        BoxShape() : BaseShape() {}
-
-        inline virtual bool contains(const Vec2 &v) {
-            return containsX(v) && containsY(v);
-        }
-
-        inline virtual bool containsX(const Vec2 &v) {
-            return (global.c.x < v.x) && (global.c.x + global.s.x > v.x);
-        }
-
-        inline virtual bool containsY(const Vec2 &v) {
-            return (global.c.y < v.y) && (global.c.y + global.s.y > v.y);
-        }
-    };
-
-    class CircleShape : virtual public BaseShape {
-
-    public:
-
-        CircleShape() : BaseShape() {}
-
-        inline virtual bool contains(const Vec2 &v) {
-            return sqrt(pow(global.c.x + global.s.x/2 - v.x, 2) + pow(global.c.y + global.s.y/2 - v.y, 2)) < global.s.x / 2;
-        }
-
-        inline virtual bool containsX(const Vec2 &v) {
-            return (global.c.x < v.x) && (global.c.x + global.s.x > v.x);
-        }
-
-        inline virtual bool containsY(const Vec2 &v) {
-            return (global.c.y < v.y) && (global.c.y + global.s.y > v.y);
-        }
-
         inline virtual void lSetWidth(float width_) {
-            local.s.x = width_;
-            local.s.y = width_;
+            switch (type) {
+                case BOX:
+                    local.s.x = width_;
+                    break;
+                case CIRCLE:
+                    local.s.x = width_;
+                    local.s.y = width_;
+                    break;
+                default:
+                    break;
+            }
         }
 
         inline virtual void lSetHeight(float height_) {
-            lSetWidth(height_);
-        }
-
-    };
-
-    enum SHAPE_TYPES {
-        BOX,
-        CIRCLE
-    };
-
-    class Shape : virtual public BoxShape, virtual public CircleShape, virtual public BaseShape {
-
-        unsigned int type;
-
-    public:
-
-        Shape (unsigned int type_) {
-            type = type_;
+            switch (type) {
+                case BOX:
+                    local.s.y = height_;
+                    break;
+                case CIRCLE:
+                    local.s.x = height_;
+                    local.s.y = height_;
+                    break;
+                default:
+                    break;
+            }
         }
 
         inline virtual bool contains(const Vec2 &v) {
             switch (type) {
                 case BOX:
-                    return BoxShape::contains(v);
+                    return containsX(v) && containsY(v);
                 case CIRCLE:
-                    return CircleShape::contains(v);
+                    return sqrt(pow(global.c.x + global.s.x/2 - v.x, 2) + pow(global.c.y + global.s.y/2 - v.y, 2)) < global.s.x / 2;
                 default:
                     return false;
             }
@@ -145,9 +107,9 @@ namespace GUI {
         inline virtual bool containsX(const Vec2 &v) {
             switch (type) {
                 case BOX:
-                    return BoxShape::containsX(v);
+                    return (global.c.x < v.x) && (global.c.x + global.s.x > v.x);
                 case CIRCLE:
-                    return CircleShape::containsX(v);
+                    return (global.c.x < v.x) && (global.c.x + global.s.x > v.x);
                 default:
                     return false;
             }
@@ -156,14 +118,15 @@ namespace GUI {
         inline virtual bool containsY(const Vec2 &v) {
             switch (type) {
                 case BOX:
-                    return BoxShape::containsY(v);
+                    return (global.c.y < v.y) && (global.c.y + global.s.y > v.y);
                 case CIRCLE:
-                    return CircleShape::containsY(v);
+                    return (global.c.y < v.y) && (global.c.y + global.s.y > v.y);
                 default:
                     return false;
             }
         }
 
+        void updateGlobalPosition(Shape * parent);
     };
 
 
