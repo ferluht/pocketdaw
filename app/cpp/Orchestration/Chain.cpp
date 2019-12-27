@@ -15,7 +15,7 @@ GUI::GObject * AMGChain::GDragHandler(const ndk_helper::Vec2 &v) {
         moving_to ++;
     }
 
-    if (!(*moving_to)->contains(v)) moving_overlay->GSetVisible(false);
+    if (!(*moving_to)->GContains(v)) moving_overlay->GSetVisible(false);
 
     if (old_moving_to != moving_to){
 //        auto position = (*moving_to)->globalPosition.toRelative(this->globalPosition);
@@ -40,7 +40,7 @@ GUI::GObject * AMGChain::GDragBegin(const ndk_helper::Vec2 &v) {
 }
 
 GUI::GObject * AMGChain::GDragEnd(const ndk_helper::Vec2 &v) {
-//    if ((*moving_to)->globalPosition.contains(last_touch)){
+//    if ((*moving_to)->globalPosition.GContains(last_touch)){
 //        auto go = (*moving_from);
 //        AMGChainDel(moving_from - AMGObjects.begin());
 //        AMGChainInsert(go, moving_to - AMGObjects.begin());

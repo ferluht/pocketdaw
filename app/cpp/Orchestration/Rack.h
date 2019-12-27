@@ -47,7 +47,7 @@ public:
     }
 
     void RAdd(GUI::IECanvas * obj){
-        obj->lSetHeight(1);
+        obj->GSetHeight(1);
 
         if (isAudioEffect(obj)) {
             if (!objects.empty()) objects.back()->MConnect(obj);
@@ -93,7 +93,7 @@ public:
 
         float x = padding;
         for (auto const& obj : objects) {
-            obj->lPlace({x + x_offset, padding});
+            obj->GPlace({x + x_offset, padding});
             x += obj->local.ratio / global.ratio + padding;
         }
 

@@ -17,7 +17,7 @@ namespace GUI {
         unsigned char counter;
 
         Led(bool state_) {
-            setRatio(1);
+            GSetRatio(1);
             counter = 0;
             state = state_;
         }

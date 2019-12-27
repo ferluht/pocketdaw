@@ -9,15 +9,15 @@ Arpeggiator::Arpeggiator() : Arpeggiator(1) {}
 
 Arpeggiator::Arpeggiator(double scale_) : MidiEffect("Arpeggiator")
 {
-    setRatio(0.5);
+    GSetRatio(0.5);
 
     auto enc_release = new GUI::Encoder("rate", 0, [this](float value) {
         scale = (int)((value + 1)*2);
         scale /= 4;
         cycles = (int)(last_played_beat / scale);
     }, 8);
-    enc_release->lPlace({0.2, 0.2});
-    enc_release->lSetHeight(0.4);
+    enc_release->GPlace({0.2, 0.2});
+    enc_release->GSetHeight(0.4);
     GAttach(enc_release);
     MConnect(enc_release);
 

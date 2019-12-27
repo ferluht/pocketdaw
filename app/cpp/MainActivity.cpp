@@ -1,7 +1,6 @@
 #include <AMGEngine/bx/include/bx/uint32_t.h>
 #include <AMGEngine/bgfx_utils/common.h>
 #include <AMGEngine/bgfx_utils/bgfx_utils.h>
-#include <GUI/vectordisplay/vectordisplay.h>
 #include <AMGEngine/imgui/imgui.h>
 #include <AMGEngine/nanovg/nanovg_bgfx.h>
 #include <AMGEngine/nanovg/nanovg.h>
@@ -73,9 +72,9 @@ namespace
             GUI::GEngine::getGEngine().setDisplay(m_nvg, m_width, m_height);
 
             S = new Synth();
-            S->lPlace({0, 0});
-            S->lSetHeight(1);
-            S->lSetWidth(1);
+            S->GPlace({0, 0});
+            S->GSetHeight(1);
+            S->GSetWidth(1);
 
             eng = new AMGEngine(S);
 

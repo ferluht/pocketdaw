@@ -18,24 +18,24 @@ class Brute : public InstrumentBase{
 public:
 
     Brute() : InstrumentBase("brute") {
-        setRatio(0.4 * SOUNDS);
+        GSetRatio(0.4 * SOUNDS);
 
         drums[0] = new Kick();
         drums[0]->NoHeader();
-        drums[0]->lPlace({0, 0});
-        drums[0]->lSetHeight(1);
+        drums[0]->GPlace({0, 0});
+        drums[0]->GSetHeight(1);
         GAttach(drums[0]);
 
         drums[1] = new Snare();
         drums[1]->NoHeader();
-        drums[1]->lPlace({0.5, 0});
-        drums[1]->lSetHeight(1);
+        drums[1]->GPlace({0.5, 0});
+        drums[1]->GSetHeight(1);
         GAttach(drums[1]);
     }
 
     virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
 //        for (int i = 0; i < SOUNDS; i++) {
-//            if (drums[i]->visible && drums[i]->contains(point)) focusOnDrum(i);
+//            if (drums[i]->visible && drums[i]->GContains(point)) focusOnDrum(i);
 //        }
         return AMGCanvas::GFindFocusObject(point, trace);
     }

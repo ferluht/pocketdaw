@@ -25,9 +25,9 @@ namespace GUI {
             mapping_mode = false;
             overlay_type = shape_type_;
             properties_window = new AMGCanvas();
-            properties_window->lPlace({0.1, 0.1});
-            properties_window->lSetHeight(0.8);
-            properties_window->lSetWidth(0.8);
+            properties_window->GPlace({0.1, 0.1});
+            properties_window->GSetHeight(0.8);
+            properties_window->GSetWidth(0.8);
             properties_window->setColor(DARK);
         }
 
@@ -39,7 +39,7 @@ namespace GUI {
         }
 
         GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) override {
-            if (visible && contains(point)) {
+            if (visible && GContains(point)) {
                 trace->push_front(this);
                 return this;
             }

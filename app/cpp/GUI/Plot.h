@@ -20,9 +20,9 @@ namespace GUI {
             setColor(BLACK);
 
             graph = new TimeGraph(points);
-            graph->lPlace({0, 0});
-            graph->lSetHeight(1);
-            graph->lSetWidth(1);
+            graph->GPlace({0, 0});
+            graph->GSetHeight(1);
+            graph->GSetWidth(1);
             GAttach(graph);
         }
 

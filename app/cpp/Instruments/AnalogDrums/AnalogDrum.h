@@ -20,11 +20,11 @@ public:
     AD button_light_env;
 
     AnalogDrum(const char * name_) : Instrument<ADState>(1, name_) {
-        this->setRatio(0.4);
+        this->GSetRatio(0.4);
         this->trig = new GUI::Button(name_, [this] (bool state) {});
-        this->trig->lPlace({0.05, 0.75});
-        this->trig->lSetHeight(0.2);
-        this->trig->lSetWidth(0.9);
+        this->trig->GPlace({0.05, 0.75});
+        this->trig->GSetHeight(0.2);
+        this->trig->GSetWidth(0.9);
         this->GAttach(this->trig);
         this->MConnect(this->trig);
 
@@ -33,8 +33,8 @@ public:
     }
 
     void placeEncoder(GUI::Encoder * enc, int posx, int posy) {
-        enc->lPlace({0.05f + 0.5f * posx, 0.25f * posy});
-        enc->lSetHeight(0.2);
+        enc->GPlace({0.05f + 0.5f * posx, 0.25f * posy});
+        enc->GSetHeight(0.2);
         this->GAttach(enc);
         this->MConnect(enc);
     }

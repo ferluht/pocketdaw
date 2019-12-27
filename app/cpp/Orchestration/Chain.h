@@ -61,8 +61,8 @@ public:
             float cur_ratio = 0;
             int i = 0;
             for (auto const &obj : IEObjects) {
-                obj->lPlace({cur_ratio / local.ratio + spacing * i, 0});
-                obj->lSetHeight(1);
+                obj->GPlace({cur_ratio / local.ratio + spacing * i, 0});
+                obj->GSetHeight(1);
                 cur_ratio += obj->local.ratio;
                 i++;
             }
@@ -84,7 +84,7 @@ public:
             IEObjects[size - 2]->MConnect(ieo);
         }
         ieo->MConnect(IEObjects.back());
-        setRatio(local.ratio + ieo->local.ratio + spacing);
+        GSetRatio(local.ratio + ieo->local.ratio + spacing);
         IEObjects.insert(IEObjects.end() - 1, ieo);
         GAttach(ieo);
         changed = true;
@@ -93,7 +93,7 @@ public:
     inline void AMGChainPushFront(GUI::IECanvas * ieo) {
         ieo->MConnect(IEObjects[0]);
         IEObjects.insert(IEObjects.begin(), ieo);
-        setRatio(local.ratio + ieo->local.ratio + spacing);
+        GSetRatio(local.ratio + ieo->local.ratio + spacing);
         GAttach(ieo);
         changed = true;
     }
@@ -108,7 +108,7 @@ public:
             IEObjects[pos - 1]->MDisconnect(IEObjects[pos]);
             IEObjects[pos - 1]->MConnect(ieo);
             ieo->MConnect(IEObjects[pos]);
-            setRatio(local.ratio + ieo->local.ratio + spacing);
+            GSetRatio(local.ratio + ieo->local.ratio + spacing);
             IEObjects.insert(IEObjects.begin() + pos, ieo);
             GAttach(ieo);
             changed = true;
@@ -117,7 +117,7 @@ public:
 
     inline void AMGChainDel(int pos) {
         auto size = IEObjects.size();
-        setRatio(local.ratio - IEObjects[pos]->local.ratio);
+        GSetRatio(local.ratio - IEObjects[pos]->local.ratio);
         if (pos > 0 && pos < size - 1) {
             IEObjects[pos]->MDisconnect(IEObjects[pos + 1]);
             IEObjects[pos - 1]->MDisconnect(IEObjects[pos]);
@@ -138,7 +138,7 @@ public:
 
 //    GObject * GFindFocusObject(const ndk_helper::Vec2& point) override
 //    {
-//        if (visible && globalPosition.contains(point)){
+//        if (visible && globalPosition.GContains(point)){
 //            for (auto const &gr : Graphics) {
 //                auto fo = gr->GFindFocusObject(point);
 //                if (fo){
@@ -162,7 +162,7 @@ public:
                 return fo;
             }
         }
-        if (visible && contains(point)) {
+        if (visible && GContains(point)) {
             trace->push_front(this);
             return this;
         }

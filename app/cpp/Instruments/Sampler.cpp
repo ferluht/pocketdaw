@@ -5,7 +5,7 @@
 #include "Sampler.h"
 
 Sampler::Sampler(const char * sample_name_) : Instrument<SamplerState>(1, "Sampler"){
-    setRatio(1);
+    GSetRatio(1);
     sample_name = sample_name_;
 
     setConstPitch(true);
@@ -13,14 +13,14 @@ Sampler::Sampler(const char * sample_name_) : Instrument<SamplerState>(1, "Sampl
     sample.load(sample_name);
 
     plot = new GUI::Plot<GUI::TimeGraph>(200);
-    plot->lPlace({0.01, 0.01});
-    plot->lSetHeight(0.7);
-    plot->lSetWidth(0.98);
+    plot->GPlace({0.01, 0.01});
+    plot->GSetHeight(0.7);
+    plot->GSetWidth(0.98);
     GAttach(plot);
 
     pitch = new GUI::Encoder("pitch", 0, 2, -12, 12);
-    pitch->lPlace({0.1, 0.73});
-    pitch->lSetHeight(0.25);
+    pitch->GPlace({0.1, 0.73});
+    pitch->GSetHeight(0.25);
     GAttach(pitch);
     MConnect(pitch);
 
@@ -44,9 +44,9 @@ Sampler::Sampler(const char * sample_name_) : Instrument<SamplerState>(1, "Sampl
     }
 
     trig = new GUI::TapButton("trig", [this] (bool state) {triggered = true;});
-    trig->lPlace({0.75, 0.75});
-    trig->lSetHeight(0.2);
-    trig->lSetWidth(0.2);
+    trig->GPlace({0.75, 0.75});
+    trig->GSetHeight(0.2);
+    trig->GSetWidth(0.2);
     GAttach(trig);
     MConnect(trig);
 }

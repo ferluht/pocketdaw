@@ -9,7 +9,6 @@
 #include <GUI/Menu.h>
 #include <GUI/Led.h>
 #include <Orchestration/Master.h>
-//#include <Orchestration/Track.h>
 #include <GUI/Canvas.h>
 
 class Synth : public GUI::AMGCanvas {
@@ -36,9 +35,9 @@ private:
     std::list<GUI::Button *> upper_panel_buttons;
 
     void add_upper_panel_button(GUI::Button * b){
-        b->lPlace({panel_buttons_start_x + upper_panel_buttons.size()*panel_button_width, 0});
-        b->lSetWidth(panel_button_width);
-        b->lSetHeight(panel_height);
+        b->GPlace({panel_buttons_start_x + upper_panel_buttons.size() * panel_button_width, 0});
+        b->GSetWidth(panel_button_width);
+        b->GSetHeight(panel_height);
         upper_panel_buttons.push_back(b);
         GAttach(b);
     }
@@ -48,9 +47,9 @@ public:
     Synth(){
 
         Master = new AMGMasterTrack();
-        Master->lPlace({0, panel_height});
-        Master->lSetHeight(1 - panel_height);
-        Master->lSetWidth(1);
+        Master->GPlace({0, panel_height});
+        Master->GSetHeight(1 - panel_height);
+        Master->GSetWidth(1);
         GAttach(Master);
         MConnect(Master);
 
@@ -65,13 +64,13 @@ public:
 
         float led_height = panel_height * 0.4f;
         midiLeds[0] = new GUI::Led(false);
-        midiLeds[0]->lPlace({led_height/2 + 0.001f, led_height/2 + panel_height * .05f});
-        midiLeds[0]->lSetHeight(led_height);
+        midiLeds[0]->GPlace({led_height / 2 + 0.001f, led_height / 2 + panel_height * .05f});
+        midiLeds[0]->GSetHeight(led_height);
         GAttach(midiLeds[0]);
 
         midiLeds[1] = new GUI::Led(true);
-        midiLeds[1]->lPlace({led_height/2 + 0.001f, led_height*1.5f + panel_height * .15f});
-        midiLeds[1]->lSetHeight(led_height);
+        midiLeds[1]->GPlace({led_height / 2 + 0.001f, led_height * 1.5f + panel_height * .15f});
+        midiLeds[1]->GSetHeight(led_height);
         GAttach(midiLeds[1]);
 
         device_menu = new GUI::FocusButton("Add", [this](bool state){}, Master->addMenu);
@@ -105,7 +104,7 @@ public:
 //        });
 //        midiDeviceMenu->place(0.1, 0);
 //        midiDeviceMenu->setHeight(0.05);
-//        midiDeviceMenu->setRatio(6);
+//        midiDeviceMenu->GSetRatio(6);
 ////        midiDeviceMenu->GSetVisible(true);
 //        GAttach(midiDeviceMenu);
 //        MConnect(midiDeviceMenu);
@@ -113,7 +112,7 @@ public:
 //        addMenu = Master->addMenu;
 //        addMenu->place(0.3, 0);
 //        addMenu->setHeight(0.05);
-//        addMenu->setRatio(6);
+//        addMenu->GSetRatio(6);
 ////        midiDeviceMenu->GSetVisible(true);
 //        GAttach(addMenu);
 //        MConnect(addMenu);
