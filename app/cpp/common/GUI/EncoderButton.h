@@ -26,9 +26,8 @@ namespace GUI {
                       float upper_bound_=1, unsigned int default_map_=0,
                       std::function<void(float)> drag_callback_=[](float a){},
                       std::function<void(bool)> tap_callback_=[](bool a){})
-                : Encoder(label_, default_value_, drag_callback_, default_map_, lower_bound_, upper_bound_) {
+                : Encoder(label_, default_value_, drag_callback_, default_map_, lower_bound_, upper_bound_, CIRCLE) {
             state = false;
-            setOverlayType(CIRCLE);
         }
 
         void GDraw(NVGcontext * nvg) override;

@@ -6,7 +6,7 @@ namespace GUI {
     float GEngine::screen_height;
     float GEngine::screen_ratio;
 
-    void BaseShape::updateGlobalPosition(BaseShape * parent) {
+    void Shape::updateGlobalPosition(Shape * parent) {
         if (parent) {
             global.c = parent->global.c + local.c * parent->global.s;
 
@@ -27,9 +27,6 @@ namespace GUI {
             }
             global.ratio = global.s.x / global.s.y;
         } else {
-            local.c = {0, 0};
-            local.s = {1, 1};
-            local.ratio = 0;
             Vec2 screen_size = {GEngine::screen_width, GEngine::screen_height};
             global.c = local.c * screen_size;
             global.s = local.s * screen_size;

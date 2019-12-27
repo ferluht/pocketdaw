@@ -6,12 +6,15 @@
 #define PD_KNOB_H
 
 #include <common/Engine/Engine.h>
+#include "Canvas.h"
+#include "styles.h"
 
 namespace GUI {
 
     class Knob : public AMGObject {
 
         int overlay_type;
+        AMGCanvas * properties_window;
 
     public:
 
@@ -20,11 +23,12 @@ namespace GUI {
 
         Knob(unsigned int shape_type_) : AMGObject(shape_type_) {
             mapping_mode = false;
-            overlay_type = BOX;
-        }
-
-        inline void setOverlayType(int overlay_type_) {
-            overlay_type = overlay_type_;
+            overlay_type = shape_type_;
+            properties_window = new AMGCanvas();
+            properties_window->lPlace({0.1, 0.1});
+            properties_window->lSetHeight(0.8);
+            properties_window->lSetWidth(0.8);
+            properties_window->setColor(DARK);
         }
 
         void MIn(MData cmd) override {
@@ -42,10 +46,9 @@ namespace GUI {
             return nullptr;
         }
 
-//        virtual GObject *GDoubleTapEnd(const Vec2 &v) override {
-//            mapping_mode = !mapping_mode;
-//            return this;
-//        }
+        virtual GObject *GDoubleTapEnd(const Vec2 &v) override {
+            return properties_window;
+        }
 
         virtual GObject *GDragBegin(const Vec2 &v) override {
             mapping_mode = true;

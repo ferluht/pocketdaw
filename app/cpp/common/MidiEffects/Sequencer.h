@@ -187,7 +187,7 @@ public:
             for (const auto &channel: channels) {
                 button = channel->get(focus_pattern, step)->trig;
                 if (*button) {
-                    MOut({beat, NOTEON_HEADER, channel->mapping, 100});
+                    MOut({beat, NOTEON_HEADER, channel->mapping, (unsigned char)((float)(*button) * 64 + 64)});
                 }
             }
         }

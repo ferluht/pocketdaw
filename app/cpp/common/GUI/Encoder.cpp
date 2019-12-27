@@ -55,7 +55,7 @@ namespace GUI {
             Encoder(label_, default_value_, callback_, 0, lower_bound_, upper_bound_) {}
 
     Encoder::Encoder(const char *label_, float default_value_, std::function<void(float)> callback_,
-                     unsigned int default_map_, float lower_bound_, float upper_bound_) : Knob(BOX) {
+                     unsigned int default_map_, float lower_bound_, float upper_bound_, unsigned int shape_type_) : Knob(shape_type_) {
         setRatio(0.8);
         callback = std::move(callback_);
         lower_bound = lower_bound_;
