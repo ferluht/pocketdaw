@@ -13,9 +13,9 @@ namespace GUI {
 
         int i = 0;
 
-        lPlace({padding, padding});
-        lSetHeight(1 - 2*padding);
-        lSetWidth(1 - 2*padding);
+        GPlace({padding, padding});
+        GSetHeight(1 - 2 * padding);
+        GSetWidth(1 - 2 * padding);
 
         open(false);
 
@@ -23,9 +23,9 @@ namespace GUI {
         focus = -1;
 
 //        auto back = new FocusButton("back", [this](bool a){this->open(a);}, nullptr);
-//        back->lPlace({-0.4f, -0.4f });
-//        back->lSetHeight(0.1f);
-//        back->lSetWidth(0.1f);
+//        back->GPlace({-0.4f, -0.4f });
+//        back->GSetHeight(0.1f);
+//        back->GSetWidth(0.1f);
 //        GAttach(back);
 
         unfold = false;
@@ -92,7 +92,7 @@ namespace GUI {
 //
 //    GObject *Menu::GDragHandler(const ndk_helper::Vec2 &v) {
 //
-//        if (unfold_background->globalPosition.contains(v)) {
+//        if (unfold_background->globalPosition.GContains(v)) {
 //            int new_focus = (int) ((abs(v.y_ - unfold_background->globalPosition.y) -
 //                                    0.05 * unfold_background->globalPosition.height) / item_height /
 //                                   unfold_background->globalPosition.height);
@@ -102,7 +102,7 @@ namespace GUI {
 //                    unfold_background->GAttach(items[new_focus].second->menu);
 //                    items[new_focus].second->menu->place(1, 0.05 + new_focus * item_height);
 //                    items[new_focus].second->menu->setHeight(item_height);
-//                    items[new_focus].second->menu->setRatio(globalPosition.ratio);
+//                    items[new_focus].second->menu->GSetRatio(globalPosition.ratio);
 //                    items[new_focus].second->menu->GGainFocus();
 //                }
 //                if ((focus > -1) && items[focus].second->menu) {
@@ -129,7 +129,7 @@ namespace GUI {
 //
 //    GObject *Menu::GDragEnd(const ndk_helper::Vec2 &v) {
 //
-//        if (cursor->globalPosition.contains(last_touch)) {
+//        if (cursor->globalPosition.GContains(last_touch)) {
 //            if (items[focus].second->menu == nullptr)
 //                items[focus].second->callback();
 //        } else {

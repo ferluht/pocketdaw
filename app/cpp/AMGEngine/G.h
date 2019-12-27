@@ -60,11 +60,11 @@ namespace GUI {
             global.ratio = 0;
         }
 
-        inline virtual void lPlace(Vec2 c_) { local.c = c_; }
+        inline virtual void GPlace(Vec2 c_) { local.c = c_; }
 
-        inline virtual void setRatio(float ratio_) { local.ratio = ratio_; }
+        inline virtual void GSetRatio(float ratio_) { local.ratio = ratio_; }
 
-        inline virtual void lSetWidth(float width_) {
+        inline virtual void GSetWidth(float width_) {
             switch (type) {
                 case BOX:
                     local.s.x = width_;
@@ -78,7 +78,7 @@ namespace GUI {
             }
         }
 
-        inline virtual void lSetHeight(float height_) {
+        inline virtual void GSetHeight(float height_) {
             switch (type) {
                 case BOX:
                     local.s.y = height_;
@@ -92,10 +92,10 @@ namespace GUI {
             }
         }
 
-        inline virtual bool contains(const Vec2 &v) {
+        inline virtual bool GContains(const Vec2 &v) {
             switch (type) {
                 case BOX:
-                    return containsX(v) && containsY(v);
+                    return GContainsX(v) && GContainsY(v);
                 case CIRCLE:
                     return sqrt(pow(global.c.x + global.s.x/2 - v.x, 2) + pow(global.c.y + global.s.y/2 - v.y, 2)) < global.s.x / 2;
                 default:
@@ -103,7 +103,7 @@ namespace GUI {
             }
         }
 
-        inline virtual bool containsX(const Vec2 &v) {
+        inline virtual bool GContainsX(const Vec2 &v) {
             switch (type) {
                 case BOX:
                     return (global.c.x < v.x) && (global.c.x + global.s.x > v.x);
@@ -114,7 +114,7 @@ namespace GUI {
             }
         }
 
-        inline virtual bool containsY(const Vec2 &v) {
+        inline virtual bool GContainsY(const Vec2 &v) {
             switch (type) {
                 case BOX:
                     return (global.c.y < v.y) && (global.c.y + global.s.y > v.y);
@@ -125,7 +125,7 @@ namespace GUI {
             }
         }
 
-        void updateGlobalPosition(Shape * parent);
+        void GUpdateGlobalPosition(Shape *parent);
     };
 
 
@@ -155,17 +155,12 @@ namespace GUI {
         void GDraw_(NVGcontext *nvg) {
             if (!initialized) GInit();
 
-            if (this->parent)
-                GPlace();
-
-            updateGlobalPosition(parent);
+            GUpdateGlobalPosition(parent);
 
             GDraw(nvg);
         }
 
         virtual void GDraw(NVGcontext *nvg) {};
-
-        virtual void GPlace() {};
 
         void GRender_(NVGcontext *nvg, float dTime) {
 
@@ -192,7 +187,7 @@ namespace GUI {
             }
         }
 
-        inline void markInFocus() { infocus = true; }
+        inline void GMarkInFocus() { infocus = true; }
 
         // Hierarchy
 
@@ -228,7 +223,7 @@ namespace GUI {
                     return fo;
                 }
             }
-            if (visible && this->contains(point)) {
+            if (visible && this->GContains(point)) {
                 trace->push_front(this);
                 return this;
             }
@@ -327,7 +322,7 @@ namespace GUI {
 
             nvgBeginFrame(nvg, float(screen_width), float(screen_height), 1.0f);
 
-            for (auto const& root : focusStack) root->markInFocus();
+            for (auto const& root : focusStack) root->GMarkInFocus();
 
             for (auto const& root : focusStack) root->GRender_(nvg, (float) monitor_.GetCurrentTime());
 
@@ -339,7 +334,7 @@ namespace GUI {
         GObject * FindFocusObject(const Vec2 &point) {
             GObject * ret = nullptr;
             for (auto root = focusStack.rbegin(); root != focusStack.rend(); ++root) {
-                if ((*root)->contains(point)) {
+                if ((*root)->GContains(point)) {
                     std::list<GObject *> trace;
                     ret = (*root)->GFindFocusObject(point, &trace);
                     focusStack.erase(std::next(root).base(), focusStack.end());

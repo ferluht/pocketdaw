@@ -31,9 +31,9 @@ namespace GUI {
             label[len] = 0;
 
             isOn = new Button("ON", "OFF", [](bool state) {});
-            isOn->lPlace({onoff_button_padding, (1-onoff_button_height)/2});
-            isOn->lSetHeight(onoff_button_height);
-            isOn->setRatio(onoff_button_ratio);
+            isOn->GPlace({onoff_button_padding, (1 - onoff_button_height) / 2});
+            isOn->GSetHeight(onoff_button_height);
+            isOn->GSetRatio(onoff_button_ratio);
             GAttach(isOn);
             *isOn = true;
         }
@@ -57,7 +57,7 @@ namespace GUI {
                 trace->push_front(this);
                 return fo;
             }
-            if (visible && contains(point)) {
+            if (visible && GContains(point)) {
                 return this;
             }
 
@@ -82,15 +82,15 @@ namespace GUI {
         IECanvas(const char *name_) {
 
             header = new Header(name_);
-            header->lPlace({0, 0});
-            header->lSetHeight(header_height);
-            header->lSetWidth(1);
+            header->GPlace({0, 0});
+            header->GSetHeight(header_height);
+            header->GSetWidth(1);
             AMGCanvas::GAttach(header);
 
             body = new GObject(BOX);
-            body->lPlace({0, header_height});
-            body->lSetHeight(0.9);
-            body->lSetWidth(1);
+            body->GPlace({0, header_height});
+            body->GSetHeight(0.9);
+            body->GSetWidth(1);
             AMGCanvas::GAttach(body);
 
             attach_to_body = true;
@@ -103,9 +103,9 @@ namespace GUI {
         void NoHeader() {
             header->visible = false;
             no_header = true;
-            body->lPlace({0, 0});
-            body->lSetHeight(1);
-            body->lSetWidth(1);
+            body->GPlace({0, 0});
+            body->GSetHeight(1);
+            body->GSetWidth(1);
         }
 
         GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) override {

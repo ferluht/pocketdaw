@@ -7,7 +7,6 @@
 
 #include <ableton/Link.hpp>
 #include <GUI/Canvas.h>
-#include <GUI/vectordisplay/vectordisplay.h>
 #include <GUI/Encoder.h>
 #include <GUI/Button.h>
 #include <GUI/Menu.h>
@@ -71,7 +70,7 @@ public:
 //        auto tr = new Arpeggiator();
 //        tr->place(0, 0);
 //        tr->setHeight(0.5);
-//        tr->setRatio(1);
+//        tr->GSetRatio(1);
 //        GAttach(tr);
 
         addMenu = new GUI::Menu("Add");
@@ -289,9 +288,9 @@ public:
     void AddTrack(AMGTrack * track) {
         Tracks.push_back(track);
         changeTrackFocus(Tracks.size() - 1);
-        track->lPlace({0, 0.4});
-        track->lSetHeight(0.6);
-        track->lSetWidth(1);
+        track->GPlace({0, 0.4});
+        track->GSetHeight(0.6);
+        track->GSetWidth(1);
         GAttach(track);
 
 //        track->mc->place(0.4, 0.01, 0.1);

@@ -104,8 +104,8 @@ public:
 
 //    GUI::GObject * GFindFocusObject(const ndk_helper::Vec2& point) override
 //    {
-//        if (visible && globalPosition.contains(point)){
-//            if (graph->globalPosition.contains(point)) return this;
+//        if (visible && globalPosition.GContains(point)){
+//            if (graph->globalPosition.GContains(point)) return this;
 //            return Instrument::GFindFocusObject(point);
 //        }
 //        return nullptr;

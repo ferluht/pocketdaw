@@ -6,7 +6,7 @@
 
 Operator::Operator(unsigned int num_voices) : Instrument<OperatorState>(num_voices, L"Operator"){
     GAttachTexture("Textures/effect_canvas.bmp");
-    setRatio(1);
+    GSetRatio(1);
 
     const wchar_t * names[] = {L"A", L"B", L"C", L"D"};
 

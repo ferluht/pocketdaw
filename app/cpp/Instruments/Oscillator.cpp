@@ -6,7 +6,7 @@
 
 Oscillator::Oscillator(const char * name_, unsigned int num_voices) : Instrument<SineState>(num_voices, "Osc"){
 
-    setRatio(2);
+    GSetRatio(2);
 
     rng = new std::mt19937(dev());
     dist = new std::uniform_real_distribution<float>(-1, 1);
@@ -14,44 +14,44 @@ Oscillator::Oscillator(const char * name_, unsigned int num_voices) : Instrument
     amp_mod = &zero;
 
     coarse = new GUI::Encoder("coarse", 0, 1, -1, 10);
-    coarse->lPlace({0.025, 0.05});
-    coarse->lSetHeight(0.4);
+    coarse->GPlace({0.025, 0.05});
+    coarse->GSetHeight(0.4);
     GAttach(coarse);
     MConnect(coarse);
 
     fine = new GUI::Encoder("fine", 0, 2, 0, 1);
-    fine->lPlace({0.225, 0.05});
-    fine->lSetHeight(0.4);
+    fine->GPlace({0.225, 0.05});
+    fine->GSetHeight(0.4);
     GAttach(fine);
     MConnect(fine);
 
     level = new GUI::Encoder("level", 0, 3, 0, 1);
-    level->lPlace({0.425, 0.05});
-    level->lSetHeight(0.4);
+    level->GPlace({0.425, 0.05});
+    level->GSetHeight(0.4);
     GAttach(level);
     MConnect(level);
 
     A = new GUI::Encoder("attack", 0, 5, 0, 1);
-    A->lPlace({0.625, 0.05});
-    A->lSetHeight(0.4);
+    A->GPlace({0.625, 0.05});
+    A->GSetHeight(0.4);
     GAttach(A);
     MConnect(A);
 
     D = new GUI::Encoder("decay", 0, 6, 0, 1);
-    D->lPlace({0.025, 0.5});
-    D->lSetHeight(0.4);
+    D->GPlace({0.025, 0.5});
+    D->GSetHeight(0.4);
     GAttach(D);
     MConnect(D);
 
     S = new GUI::Encoder("sustain", 0, 7, 0, 1);
-    S->lPlace({0.225, 0.5});
-    S->lSetHeight(0.4);
+    S->GPlace({0.225, 0.5});
+    S->GSetHeight(0.4);
     GAttach(S);
     MConnect(S);
 
     R = new GUI::Encoder("release", 0, 8, 0, 5);
-    R->lPlace({0.425, 0.5});
-    R->lSetHeight(0.4);
+    R->GPlace({0.425, 0.5});
+    R->GSetHeight(0.4);
     GAttach(R);
     MConnect(R);
 
@@ -66,9 +66,9 @@ Oscillator::Oscillator(const char * name_, unsigned int num_voices) : Instrument
     *R = 0.5;
 
     plot = new GUI::Plot<GUI::TimeGraph>(waveform_vis_size);
-    plot->lPlace({0.625, 0.5});
-    plot->lSetHeight(0.4);
-    plot->lSetWidth(0.35);
+    plot->GPlace({0.625, 0.5});
+    plot->GSetHeight(0.4);
+    plot->GSetWidth(0.35);
     GAttach(plot);
 
     draw_waveform();
@@ -95,7 +95,7 @@ void Oscillator::IUpdateState(SineState *state, MData md){
 
 GUI::GObject * Oscillator::GTapEnd(const ndk_helper::Vec2& v)
 {
-    if (plot->contains(v)){
+    if (plot->GContains(v)){
         type ++;
         if (type > 3) type = 0;
         draw_waveform();
@@ -105,7 +105,7 @@ GUI::GObject * Oscillator::GTapEnd(const ndk_helper::Vec2& v)
 
 GUI::GObject * Oscillator::GDragHandler(const ndk_helper::Vec2 &v) {
 
-    if (plot->contains(drag_from)) {
+    if (plot->GContains(drag_from)) {
         float wf = old_waveform + (v.y - drag_from.y)/100;
         if (wf > 1) wf = 1;
         if (wf < 0) wf = 0;

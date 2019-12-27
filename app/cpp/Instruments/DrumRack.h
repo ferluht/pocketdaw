@@ -21,15 +21,15 @@ class DrumRack : public Instrument<DrumRackState> {
 public:
 
     DrumRack() : Instrument(1, "drack") {
-        setRatio(2);
+        GSetRatio(2);
         focus_chain = nullptr;
     }
 
     void addSample(const char * sample_name_, const char note) {
         auto chain = new AMGRack();
-        chain->lPlace({0.51, 0.01});
-        chain->lSetHeight(0.98);
-        chain->lSetWidth(0.48);
+        chain->GPlace({0.51, 0.01});
+        chain->GSetHeight(0.98);
+        chain->GSetWidth(0.48);
         GAttach(chain);
         MConnect(chain);
         focusOn(chain);

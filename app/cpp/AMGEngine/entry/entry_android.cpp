@@ -256,7 +256,7 @@ namespace entry
 				case APP_CMD_TERM_WINDOW:
 					// Command from main thread: the existing ANativeWindow needs to be
 					// terminated.  Upon receiving this command, android_app->window still
-					// contains the existing window; after calling android_app_exec_cmd
+					// GContains the existing window; after calling android_app_exec_cmd
 					// it will be set to NULL.
 					break;
 

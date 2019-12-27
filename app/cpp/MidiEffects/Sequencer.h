@@ -22,9 +22,9 @@ public:
 
     SequencerStep(const char * name_) {
         trig = new GUI::EncoderButton(name_);
-        trig->lPlace({0.05f, 0.02f});
-        trig->setRatio(1);
-        trig->lSetWidth(0.9f);
+        trig->GPlace({0.05f, 0.02f});
+        trig->GSetRatio(1);
+        trig->GSetWidth(0.9f);
         GAttach(trig);
     }
 
@@ -51,9 +51,9 @@ public:
             snprintf(buffer, sizeof buffer, "step %d", i);
             auto step = new SequencerStep(buffer);
             steps.push_back(step);
-            step->lPlace({1.0f / (float) n_steps_ * i, 0.02f});
-            step->setRatio(1);
-            step->lSetWidth(1.0f / (float) n_steps_);
+            step->GPlace({1.0f / (float) n_steps_ * i, 0.02f});
+            step->GSetRatio(1);
+            step->GSetWidth(1.0f / (float) n_steps_);
             GAttach(step);
         }
     }
@@ -79,9 +79,9 @@ public:
         for (int i = 0; i < n_patterns_; i++) {
             auto pattern = new SequencerPattern(n_steps_);
             patterns.push_back(pattern);
-            pattern->lPlace({0, 0});
-            pattern->lSetWidth(1);
-            pattern->lSetHeight(1);
+            pattern->GPlace({0, 0});
+            pattern->GSetWidth(1);
+            pattern->GSetHeight(1);
             GAttach(pattern);
             pattern->GSetVisible(false);
         }
@@ -127,14 +127,14 @@ public:
 
     Sequencer(int n_channels_, int n_steps_=16, int n_patterns_=8) : MidiEffect("Sequencer") {
 
-        setRatio(2);
+        GSetRatio(2);
 
         for (int i = 0; i < n_channels_; i++) {
             auto channel = new SequencerChannel(n_patterns_, n_steps_);
             channels.push_back(channel);
-            channel->lPlace({0, 0});
-            channel->lSetWidth(1);
-            channel->lSetHeight(0.5);
+            channel->GPlace({0, 0});
+            channel->GSetWidth(1);
+            channel->GSetHeight(0.5);
             GAttach(channel);
             channel->GSetVisible(false);
             channel->map(36 + i);
@@ -142,15 +142,15 @@ public:
 
 
         prev = new GUI::TapButton("prev", [this](bool a){selectChannel(focus_channel - 1);});
-        prev->lPlace({0.05,0.7});
-        prev->lSetHeight(0.2);
-        prev->setRatio(2);
+        prev->GPlace({0.05, 0.7});
+        prev->GSetHeight(0.2);
+        prev->GSetRatio(2);
         GAttach(prev);
 
         next = new GUI::TapButton("next", [this](bool a){selectChannel(focus_channel + 1);});
-        next->lPlace({0.25,0.7});
-        next->lSetHeight(0.2);
-        next->setRatio(2);
+        next->GPlace({0.25, 0.7});
+        next->GSetHeight(0.2);
+        next->GSetRatio(2);
         GAttach(next);
 
         step = 0;

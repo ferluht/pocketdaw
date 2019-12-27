@@ -217,8 +217,8 @@ NVGcolor nvgHSLA(float h, float s, float l, unsigned char a);
 //
 // State Handling
 //
-// NanoVG contains state which represents how paths will be rendered.
-// The state contains transform, fill and stroke styles, text and font styles,
+// NanoVG GContains state which represents how paths will be rendered.
+// The state GContains transform, fill and stroke styles, text and font styles,
 // and scissor clipping.
 
 // Pushes and saves the current render state into a state stack.

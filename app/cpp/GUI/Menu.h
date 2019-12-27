@@ -50,9 +50,10 @@ namespace GUI {
         std::function<void(void)> gainCallback;
 
         void addButton(Button * b) {
-            b->lPlace({0.5f - button_width/2, (buttons.size() + 1)*(button_height + button_spacing) });
-            b->lSetHeight(button_height);
-            b->lSetWidth(button_width);
+            b->GPlace({0.5f - button_width / 2,
+                       (buttons.size() + 1) * (button_height + button_spacing)});
+            b->GSetHeight(button_height);
+            b->GSetWidth(button_width);
             GAttach(b);
             buttons.push_back(b);
         }
