@@ -364,6 +364,30 @@ namespace entry
 				ndk_helper::GESTURE_STATE dragState = eng->drag_detector_.Detect(event);
 				ndk_helper::GESTURE_STATE pinchState = eng->pinch_detector_.Detect(event);
 
+                // Handle drag state
+                if (tapState & ndk_helper::GESTURE_STATE_ACTION) {
+                    // Otherwise, start dragging
+                    ndk_helper::Vec2 v;
+                    eng->tap_detector_.GetPointer(v);
+                    eng->FindFocusObject(v);
+                    auto new_focus = eng->focusStack.back()->GTapEnd(v);
+//					eng->unfocus();
+                    eng->focusOn(new_focus);
+                    return 1;
+                }
+
+				// Handle drag state
+				if (doubleTapState & ndk_helper::GESTURE_STATE_ACTION) {
+					// Otherwise, start dragging
+					ndk_helper::Vec2 v;
+					eng->doubletap_detector_.GetPointer(v);
+					eng->FindFocusObject(v);
+					auto new_focus = eng->focusStack.back()->GDoubleTapEnd(v);
+//					eng->unfocus();
+					eng->focusOn(new_focus);
+					return 1;
+				}
+
 				// Handle drag state
 				if (dragState & ndk_helper::GESTURE_STATE_START) {
 					// Otherwise, start dragging
@@ -379,28 +403,6 @@ namespace entry
 					ndk_helper::Vec2 v;
 					eng->drag_detector_.GetPointer(v);
 					auto new_focus = eng->focusStack.back()->GDragEnd(v);
-//					eng->unfocus();
-					eng->focusOn(new_focus);
-				}
-
-				// Handle drag state
-				if (tapState & ndk_helper::GESTURE_STATE_ACTION) {
-					// Otherwise, start dragging
-					ndk_helper::Vec2 v;
-					eng->tap_detector_.GetPointer(v);
-					eng->FindFocusObject(v);
-					auto new_focus = eng->focusStack.back()->GTapEnd(v);
-//					eng->unfocus();
-					eng->focusOn(new_focus);
-				}
-
-				// Handle drag state
-				if (doubleTapState & ndk_helper::GESTURE_STATE_ACTION) {
-					// Otherwise, start dragging
-					ndk_helper::Vec2 v;
-					eng->doubletap_detector_.GetPointer(v);
-					eng->FindFocusObject(v);
-					auto new_focus = eng->focusStack.back()->GDoubleTapEnd(v);
 //					eng->unfocus();
 					eng->focusOn(new_focus);
 				}

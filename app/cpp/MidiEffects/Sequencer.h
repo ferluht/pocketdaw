@@ -11,6 +11,7 @@
 #include <GUI/IECanvas.h>
 #include <GUI/Encoder.h>
 #include <GUI/EncoderButton.h>
+#include <GUI/Jack.h>
 #include "MidiEffect.h"
 
 
@@ -123,6 +124,9 @@ class Sequencer : public MidiEffect {
     GUI::TapButton * next;
     GUI::TapButton * prev;
 
+    GUI::Jack * jack;
+    GUI::Jack * jack1;
+
 public:
 
     Sequencer(int n_channels_, int n_steps_=16, int n_patterns_=8) : MidiEffect("Sequencer") {
@@ -139,6 +143,16 @@ public:
             channel->GSetVisible(false);
             channel->map(36 + i);
         }
+
+        jack = new GUI::Jack();
+        jack->GPlace({0.6, 0.6});
+        jack->GSetHeight(0.05);
+        GAttach(jack);
+
+        jack1 = new GUI::Jack();
+        jack1->GPlace({0.8, 0.6});
+        jack1->GSetHeight(0.1);
+        GAttach(jack1);
 
 
         prev = new GUI::TapButton("prev", [this](bool a){selectChannel(focus_channel - 1);});
