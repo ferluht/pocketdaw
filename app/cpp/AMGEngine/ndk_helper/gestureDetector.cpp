@@ -248,17 +248,21 @@ namespace ndk_helper {
         event_ = event;
 
         int32_t count = AMotionEvent_getPointerCount(event);
+        last_x = AMotionEvent_getX(event, 0);
+        last_y = AMotionEvent_getY(event, 0);
         switch (flags) {
             case AMOTION_EVENT_ACTION_DOWN:
                 vec_pointers_.push_back(AMotionEvent_getPointerId(event, 0));
-                ret = GESTURE_STATE_START;
+                start_x = AMotionEvent_getX(event, 0);
+                start_y = AMotionEvent_getY(event, 0);
+                drag_started = false;
                 break;
             case AMOTION_EVENT_ACTION_POINTER_DOWN:
                 vec_pointers_.push_back(AMotionEvent_getPointerId(event, index));
                 break;
             case AMOTION_EVENT_ACTION_UP:
                 vec_pointers_.pop_back();
-                ret = GESTURE_STATE_END;
+                if (drag_started) ret = GESTURE_STATE_END;
                 break;
             case AMOTION_EVENT_ACTION_POINTER_UP: {
                 int32_t released_pointer_id = AMotionEvent_getPointerId(event, index);
@@ -273,19 +277,24 @@ namespace ndk_helper {
                     }
                 }
 
-                if (i <= 1) {
-                    // Reset pinch or drag
-                    if (count == 2) {
-                        ret = GESTURE_STATE_START;
-                    }
-                }
+//                if (i <= 1) {
+//                    // Reset pinch or drag
+//                    if (count == 2) {
+//                        ret = GESTURE_STATE_START;
+//                    }
+//                }
                 break;
             }
             case AMOTION_EVENT_ACTION_MOVE:
                 switch (count) {
                     case 1:
                         // Drag
-                        ret = GESTURE_STATE_MOVE;
+                        if (!drag_started && (sqrt(pow(start_y - last_y, 2) + pow(start_x - last_x, 2)) > threshold)) {
+                            ret = GESTURE_STATE_START;
+                            drag_started = true;
+                        } else if (drag_started) {
+                            ret = GESTURE_STATE_MOVE;
+                        }
                         break;
                     default:
                         break;
@@ -299,15 +308,7 @@ namespace ndk_helper {
     }
 
     bool DragDetector::GetPointer(Vec2 &v) {
-        if (vec_pointers_.size() < 1) return false;
-
-        int32_t iIndex = FindIndex(event_, vec_pointers_[0]);
-        if (iIndex == -1) return false;
-
-        float x = AMotionEvent_getX(event_, iIndex);
-        float y = AMotionEvent_getY(event_, iIndex);
-
-        v = Vec2(x, y);
+        v = Vec2(last_x, last_y);
 
         return true;
     }

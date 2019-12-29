@@ -8,15 +8,18 @@
 #include <AMGEngine/AMGEngine.h>
 #include "Canvas.h"
 #include "styles.h"
+#include "FullscreenWindow.h"
 
 namespace GUI {
 
     class Knob : public AMGObject {
 
         int overlay_type;
-        AMGCanvas * properties_window;
+        FullscreenWindow * properties_window;
 
     public:
+
+//        float value;
 
         unsigned int keymap;
         bool mapping_mode;
@@ -24,10 +27,7 @@ namespace GUI {
         Knob(unsigned int shape_type_) : AMGObject(shape_type_) {
             mapping_mode = false;
             overlay_type = shape_type_;
-            properties_window = new AMGCanvas();
-            properties_window->GPlace({0.1, 0.1});
-            properties_window->GSetHeight(0.8);
-            properties_window->GSetWidth(0.8);
+            properties_window = new FullscreenWindow("Properties");
             properties_window->setColor(DARK);
         }
 

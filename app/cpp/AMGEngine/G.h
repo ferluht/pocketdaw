@@ -272,6 +272,8 @@ namespace GUI {
         static float screen_height;
         static float screen_ratio;
 
+        std::mutex renderLock;
+
         ndk_helper::DoubletapDetector doubletap_detector_;
         ndk_helper::PinchDetector pinch_detector_;
         ndk_helper::DragDetector drag_detector_;
@@ -280,7 +282,10 @@ namespace GUI {
 
         NVGcontext * nvg;
 
+        std::set<GObject *> overlays;
+
         std::list<GObject *> focusStack;
+        std::list<GObject *> focusStackCopy;
 
         static GEngine &getGEngine() {
             static GEngine gengine;
@@ -312,6 +317,17 @@ namespace GUI {
             }
         }
 
+        void unfocusTo(GObject * uf) {
+            while ((focusStack.size() != 1) && (focusStack.back() != uf)) {
+                focusStack.back()->GLoseFocus();
+                focusStack.pop_back();
+            }
+            if (focusStack.size() != 1) {
+                focusStack.back()->GLoseFocus();
+                focusStack.pop_back();
+            }
+        }
+
         void Render() {
             // Set view 0 default viewport.
             bgfx::setViewRect(0, 0, 0, uint16_t(screen_width), uint16_t(screen_height) );
@@ -322,16 +338,37 @@ namespace GUI {
 
             nvgBeginFrame(nvg, float(screen_width), float(screen_height), 1.0f);
 
-            for (auto const& root : focusStack) root->GMarkInFocus();
+            renderLock.lock();
 
-            for (auto const& root : focusStack) root->GRender_(nvg, (float) monitor_.GetCurrentTime());
+            for (auto const& root : focusStack) focusStackCopy.push_back(root);
+
+            renderLock.unlock();
+
+            for (auto const& root : focusStackCopy) root->GMarkInFocus();
+
+            for (auto const& root : focusStackCopy) root->GRender_(nvg, (float) monitor_.GetCurrentTime());
+
+            focusStackCopy.clear();
+
+            for (auto const& overlay : overlays) overlay->GRender_(nvg, (float) monitor_.GetCurrentTime());
 
             nvgEndFrame(nvg);
 
             bgfx::frame();
         }
 
+        void addOverlay(GObject * go) {
+            overlays.insert(go);
+        }
+
+        void delOverlay(GObject * go) {
+            overlays.erase(go);
+        }
+
         GObject * FindFocusObject(const Vec2 &point) {
+
+            renderLock.lock();
+
             GObject * ret = nullptr;
             for (auto root = focusStack.rbegin(); root != focusStack.rend(); ++root) {
                 if ((*root)->GContains(point)) {
@@ -340,11 +377,14 @@ namespace GUI {
                     focusStack.erase(std::next(root).base(), focusStack.end());
                     for (auto const& obj : trace) obj->GGainFocus();
                     focusStack.splice(focusStack.end(), trace);
+                    renderLock.unlock();
                     return ret;
                 } else {
                     (*root)->GLoseFocus();
                 }
             }
+
+            renderLock.unlock();
         }
 
         GEngine(const GEngine &) {}

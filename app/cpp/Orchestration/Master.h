@@ -281,6 +281,13 @@ public:
 //        midiDeviceMenu->GSetVisible(true);
 //        auto tr2 = new AMGTrack();
 //        AddTrack(tr2);
+
+//        auto t = new GUI::Text("aaa");
+//        t->GPlace({0.5, 0.2});
+//        t->GSetHeight(0.1);
+//        t->GSetWidth(1);
+//        GAttach(t);
+
     }
 
     bool ARender(float * audioData, int numFrames) override;

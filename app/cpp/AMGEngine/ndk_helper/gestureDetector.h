@@ -134,9 +134,17 @@ class DragDetector : public GestureDetector {
   int32_t FindIndex(const AInputEvent* event, int32_t id);
   const AInputEvent* event_;
   std::vector<int32_t> vec_pointers_;
+  float start_x;
+  float start_y;
+  bool drag_started;
+  float threshold = 15;
+  float last_x;
+  float last_y;
 
  public:
-  DragDetector() : event_(nullptr) {}
+  DragDetector() : event_(nullptr) {
+      drag_started = false;
+  }
   virtual ~DragDetector() {}
   virtual GESTURE_STATE Detect(const AInputEvent* event);
   bool GetPointer(Vec2& v);
