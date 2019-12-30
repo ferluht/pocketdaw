@@ -31,6 +31,11 @@ public:
         drums[1]->GPlace({0.5, 0});
         drums[1]->GSetHeight(1);
         GAttach(drums[1]);
+
+//        auto jack = new GUI::Jack(GUI::Jack::INPUT);
+//        jack->GPlace({0.2, 0.4});
+//        jack->GSetHeight(0.4);
+//        GAttach(jack);
     }
 
     virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {

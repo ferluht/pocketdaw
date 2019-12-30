@@ -19,18 +19,11 @@ class DrumRack : public Instrument<DrumRackState> {
     std::map<int, AMGRack *> chains;
     AMGRack * focus_chain;
 
-    GUI::Jack * jack;
-
 public:
 
     DrumRack() : Instrument(1, "drack") {
         GSetRatio(2);
         focus_chain = nullptr;
-
-        jack = new GUI::Jack();
-        jack->GPlace({0.2, 0.6});
-        jack->GSetHeight(0.1);
-        GAttach(jack);
     }
 
     void addSample(const char * sample_name_, const char note) {

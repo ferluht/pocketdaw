@@ -12,11 +12,41 @@ namespace GUI {
 
     class Wire : public GObject {
 
-        GObject * a;
-        GObject * b;
-        Vec2 c;
+        GObject * a_obj;
+        GObject * b_obj;
+        Vec2 a_vec;
+        Vec2 b_vec;
 
         NVGcolor color;
+
+        void drawShadow(NVGcontext * nvg, Vec2 a, Vec2 b, float rad_a, float rad_b) {
+            nvgBeginPath(nvg);
+            nvgMoveTo(nvg, a.x, a.y + rad_a);
+            nvgStrokeColor(nvg, DARKER);
+            nvgStrokeWidth(nvg, rad_a * 0.5f);
+            nvgBezierTo(nvg, a.x - 0.2f * (a.x - b.x), a.y + 110, b.x + 0.2f * (a.x - b.x), b.y + 120, b.x, b.y + rad_b);
+            nvgStroke(nvg);
+            nvgClosePath(nvg);
+        }
+
+        void drawWire(NVGcontext * nvg, Vec2 a, Vec2 b, float rad_a, float rad_b) {
+            nvgBeginPath(nvg);
+            nvgMoveTo(nvg, a.x, a.y + rad_a);
+            nvgStrokeColor(nvg, color);
+            nvgStrokeWidth(nvg, rad_a * 0.5f);
+            nvgBezierTo(nvg, a.x - 0.2f * (a.x - b.x), a.y + 100, b.x + 0.2f * (a.x - b.x), b.y + 100, b.x, b.y + rad_b);
+            nvgStroke(nvg);
+            nvgClosePath(nvg);
+        }
+
+        void drawCircle(NVGcontext * nvg, Vec2 a, float rad_a) {
+            nvgBeginPath(nvg);
+            nvgCircle(nvg, a.x, a.y, rad_a);
+            nvgStrokeWidth(nvg, rad_a / 2);
+            nvgStrokeColor(nvg, color);
+            nvgStroke(nvg);
+            nvgClosePath(nvg);
+        }
 
     public:
 
@@ -25,8 +55,10 @@ namespace GUI {
             unsigned char G = rand() % 255;
             unsigned char B = rand() % 255;
             color = nvgRGB(R, G, B);
-            a = nullptr;
-            b = nullptr;
+            a_obj = nullptr;
+            b_obj = nullptr;
+            a_vec = {0, 0};
+            b_vec = {0, 0};
             auto & eng = GEngine::getGEngine();
             eng.addOverlay(this);
         }
@@ -36,76 +68,45 @@ namespace GUI {
             eng.delOverlay(this);
         }
 
-        inline void connect(GObject * a_, GObject * b_) {
-            a = a_;
-            b = b_;
-            c = {0, 0};
-            auto & eng = GEngine::getGEngine();
-            eng.addOverlay(this);
-        }
+        inline void from(GObject * f) { a_obj = f; }
+        inline void from(Vec2 f) { a_obj = nullptr, a_vec = f; }
 
-        inline void drawPreviewTo(GObject * a_, Vec2 v) {
-            a = a_;
-            c = v;
-        }
+        inline void to(GObject * t) { b_obj = t; }
+        inline void to(Vec2 t) { b_obj = nullptr, b_vec = t; }
 
         void GDraw(NVGcontext * nvg) override {
 
-            float a_x = a->global.c.x + a->global.s.x / 2;
-            float a_y = a->global.c.y + a->global.s.y / 2;
+            Vec2 a = a_vec;
+            Vec2 b = b_vec;
 
-            float b_x = 0;
-            float b_y = 0;
+            float a_rad = 0;
+            float b_rad = 0;
 
-            if (b) {
-                b_x = b->global.c.x + b->global.s.x / 2;
-                b_y = b->global.c.y + b->global.s.y / 2;
+            if (a_obj) {
+                a.x = a_obj->global.c.x + a_obj->global.s.x / 2;
+                a.y = a_obj->global.c.y + a_obj->global.s.y / 2;
+                a_rad = a_obj->global.s.x / 4;
             }
 
-            // Shadow
-
-            nvgBeginPath(nvg);
-            nvgMoveTo(nvg, a_x, a_y + a->global.s.y * 0.5f);
-            nvgStrokeColor(nvg, DARKER);
-            nvgStrokeWidth(nvg, a->global.s.x * 0.2f);
-            if (c.x != 0 && c.y != 0) nvgBezierTo(nvg, a_x, a_y + 120, c.x, c.y + 200, c.x, c.y + a->global.s.y * 0.5f);
-            else nvgBezierTo(nvg, a_x, a_y + 120, b_x, b_y + 200, b_x, b_y + b->global.s.y * 0.5f);
-            nvgStroke(nvg);
-            nvgClosePath(nvg);
-
-            // Wire
-
-            nvgBeginPath(nvg);
-            nvgMoveTo(nvg, a_x, a_y + a->global.s.y * 0.5f);
-            nvgStrokeColor(nvg, color);
-            if (c.x != 0 && c.y != 0) nvgBezierTo(nvg, a_x, a_y + 100, c.x, c.y + 100, c.x, c.y + a->global.s.y * 0.5f);
-            else nvgBezierTo(nvg, a_x, a_y + 100, b_x, b_y + 100, b_x, b_y + b->global.s.y * 0.5f);
-            nvgStroke(nvg);
-            nvgClosePath(nvg);
-
-            // A circle
-
-            nvgBeginPath(nvg);
-            nvgCircle(nvg, a_x, a_y, a->global.s.x * 0.25f);
-            nvgStrokeColor(nvg, color);
-            nvgStrokeWidth(nvg, a->global.s.x * 0.1f);
-            nvgStroke(nvg);
-            nvgClosePath(nvg);
-
-            // B circle
-
-            nvgBeginPath(nvg);
-            if (c.x != 0 && c.y != 0) {
-                nvgCircle(nvg, c.x, c.y, a->global.s.x * 0.25f);
-                nvgStrokeWidth(nvg, a->global.s.x * 0.1f);
-            } else {
-                nvgCircle(nvg, b_x, b_y, b->global.s.x * 0.25f);
-                nvgStrokeWidth(nvg, b->global.s.x * 0.1f);
+            if (b_obj) {
+                b.x = b_obj->global.c.x + b_obj->global.s.x / 2;
+                b.y = b_obj->global.c.y + b_obj->global.s.y / 2;
+                b_rad = b_obj->global.s.x / 4;
             }
-            nvgStrokeColor(nvg, color);
-            nvgStroke(nvg);
-            nvgClosePath(nvg);
 
+            if (a_rad == 0 && b_rad != 0) {
+                a_rad = b_rad;
+            } else if (b_rad == 0 && a_rad != 0) {
+                b_rad = a_rad;
+            } else if (a_rad == 0 && b_rad == 0) {
+                a_rad = 10;
+                b_rad = 10;
+            }
+
+            drawShadow(nvg, a, b, a_rad, b_rad);
+            drawWire(nvg, a, b, a_rad, b_rad);
+            drawCircle(nvg, a, a_rad);
+            drawCircle(nvg, b, b_rad);
             nvgStrokeWidth(nvg, 1);
         }
 

@@ -11,45 +11,88 @@
 
 namespace GUI {
 
-    class Jack;
-
-    static auto isJack = GUI::IsType<Jack>;
-
     class Jack : public AMGObject {
 
-        std::list<Wire *> wires;
+        std::map<Wire *, Jack *> outputs;
+        std::pair<Wire *, Jack *> input;
+
+        Wire * focusWire;
+
+        int type;
+
+        inline bool canConnect(Jack * jack) {
+            return jack && (jack != this) && (jack->type != type)
+                   && ((type == INPUT && input.first == nullptr) || (type == OUTPUT));
+        }
+
+        void connect(Wire * wire, Jack * jack) {
+            wire->from(this);
+            wire->to(jack);
+            if (this->type == OUTPUT && jack->type == INPUT) {
+                outputs.insert({wire, jack});
+                jack->input = {wire, this};
+            } else {
+                input = {wire, jack};
+                jack->outputs.insert({wire, this});
+            }
+        }
 
     public:
 
-        Jack() : AMGObject(CIRCLE) {
+        static enum {
+            INPUT,
+            OUTPUT
+        };
+
+        float value;
+
+        Jack(int type_) : AMGObject(CIRCLE) {
             GSetRatio(1);
+            type = type_;
+            value = 0;
+        }
+
+        inline void propagate(){
+            for (const auto & out : outputs) {
+                out.second->value = value;
+            }
         }
 
         GObject *GDragBegin(const Vec2 &v) override {
-            wires.push_back(new Wire());
-            wires.back()->drawPreviewTo(this, v);
+            if (type == OUTPUT && !outputs.empty()) {
+                auto wire = outputs.begin()->first;
+                auto jack = outputs.begin()->second;
+                jack->focusWire = wire;
+                outputs.erase(wire);
+                return jack;
+            } else if (type == INPUT && input.first != nullptr) {
+                auto jack = input.second;
+                jack->focusWire = input.first;
+                input = {nullptr, nullptr};
+                return jack;
+            }
+            focusWire = new Wire();
+            focusWire->from(this);
+            focusWire->to(v);
             return this;
         }
 
         GObject *GDragHandler(const Vec2 &v) override {
-            wires.back()->drawPreviewTo(this, v);
+            focusWire->from(this);
+            focusWire->to(v);
             return this;
         }
 
         GObject *GDragEnd(const Vec2 &v) override {
-
             auto & eng = GEngine::getGEngine();
-
             std::list<GObject *> trace;
-            auto obj = eng.focusStack.front()->GFindFocusObject(v, &trace);
+            Jack * jack = dynamic_cast<Jack *>(eng.focusStack.front()->GFindFocusObject(v, &trace));
 
-            Wire * w = wires.back();
-
-            if (isJack(obj) && obj != this) {
-                w->connect(this, obj);
-            } else {
-                wires.pop_back();
-                delete w;
+            if (this->canConnect(jack)) connect(focusWire, jack);
+            else {
+                if (type == OUTPUT) outputs.erase(focusWire);
+                else input = {nullptr, nullptr};
+                delete focusWire;
             }
             return this;
         }

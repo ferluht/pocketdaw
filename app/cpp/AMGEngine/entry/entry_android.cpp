@@ -395,6 +395,7 @@ namespace entry
 					eng->drag_detector_.GetPointer(v);
 					eng->FindFocusObject(v);
 					auto new_focus = eng->focusStack.back()->GDragBegin(v);
+					eng->focusOn(new_focus);
 				} else if (dragState & ndk_helper::GESTURE_STATE_MOVE) {
 					ndk_helper::Vec2 v;
 					eng->drag_detector_.GetPointer(v);

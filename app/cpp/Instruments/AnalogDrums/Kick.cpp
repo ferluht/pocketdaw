@@ -23,6 +23,11 @@ Kick::Kick() : AnalogDrum<KickState>("Kick") {
 
     sweep_amt = new GUI::Encoder("sweep lvl", 0, 0, 48);
     placeEncoder(sweep_amt, 1, 1);
+
+    jack = new GUI::Jack(GUI::Jack::INPUT);
+    jack->GPlace({0.2, 0.4});
+    jack->GSetHeight(0.4);
+    GAttach(jack);
 }
 
 void Kick::IUpdateState(KickState *state, MData md) {
@@ -41,6 +46,8 @@ void Kick::IARender(KickState *state, double beat, float *lsample, float *rsampl
     if (state->phase > M_PI) state->phase -= 2*M_PI;
 
     float output = osc(state->phase) * state->volume;
+
+    *tone = jack->value + 1;
 
     state->ad.A = (*attack) * (*attack);
     state->ad.D = (*decay) * (*decay);
