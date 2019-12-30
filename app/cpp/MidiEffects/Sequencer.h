@@ -125,7 +125,6 @@ class Sequencer : public MidiEffect {
     GUI::TapButton * prev;
 
     GUI::Jack * jack;
-    GUI::Jack * jack1;
 
 public:
 
@@ -144,15 +143,10 @@ public:
             channel->map(36 + i);
         }
 
-        jack = new GUI::Jack();
+        jack = new GUI::Jack(GUI::Jack::OUTPUT);
         jack->GPlace({0.6, 0.6});
-        jack->GSetHeight(0.05);
+        jack->GSetHeight(0.1);
         GAttach(jack);
-
-        jack1 = new GUI::Jack();
-        jack1->GPlace({0.8, 0.6});
-        jack1->GSetHeight(0.1);
-        GAttach(jack1);
 
 
         prev = new GUI::TapButton("prev", [this](bool a){selectChannel(focus_channel - 1);});
@@ -201,7 +195,9 @@ public:
             for (const auto &channel: channels) {
                 button = channel->get(focus_pattern, step)->trig;
                 if (*button) {
-                    MOut({beat, NOTEON_HEADER, channel->mapping, (unsigned char)((float)(*button) * 64 + 64)});
+                    MOut({beat, NOTEON_HEADER, channel->mapping, 100});
+                    jack->value = (float)(*button);
+                    jack->propagate();
                 }
             }
         }

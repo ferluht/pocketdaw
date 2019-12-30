@@ -54,6 +54,7 @@ namespace GUI {
             local.c = {0, 0};
             local.s = {0, 0};
             local.ratio = 0;
+            if (type_ == CIRCLE) local.ratio = 1;
 
             global.c = {0, 0};
             global.s = {0, 0};
@@ -71,7 +72,7 @@ namespace GUI {
                     break;
                 case CIRCLE:
                     local.s.x = width_;
-                    local.s.y = width_;
+                    local.s.y = 0;
                     break;
                 default:
                     break;
@@ -84,7 +85,7 @@ namespace GUI {
                     local.s.y = height_;
                     break;
                 case CIRCLE:
-                    local.s.x = height_;
+                    local.s.x = 0;
                     local.s.y = height_;
                     break;
                 default:
@@ -273,6 +274,7 @@ namespace GUI {
         static float screen_ratio;
 
         std::mutex renderLock;
+        std::mutex overlayLock;
 
         ndk_helper::DoubletapDetector doubletap_detector_;
         ndk_helper::PinchDetector pinch_detector_;
@@ -350,7 +352,11 @@ namespace GUI {
 
             focusStackCopy.clear();
 
+            overlayLock.lock();
+
             for (auto const& overlay : overlays) overlay->GRender_(nvg, (float) monitor_.GetCurrentTime());
+
+            overlayLock.unlock();
 
             nvgEndFrame(nvg);
 
@@ -358,7 +364,9 @@ namespace GUI {
         }
 
         void addOverlay(GObject * go) {
+            overlayLock.lock();
             overlays.insert(go);
+            overlayLock.unlock();
         }
 
         void delOverlay(GObject * go) {

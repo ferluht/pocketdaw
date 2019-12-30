@@ -9,6 +9,7 @@
 #include "../Instrument.h"
 #include "AnalogDrum.h"
 #include <GUI/Encoder.h>
+#include <GUI/Jack.h>
 #include <Instruments/Envelopes/AD.h>
 
 class KickState : public InstrumentState {
@@ -39,6 +40,8 @@ class Kick : public AnalogDrum<KickState> {
     GUI::Encoder * sweep_amt;
     GUI::Encoder * decay;
     GUI::Encoder * waveform;
+
+    GUI::Jack * jack;
 
     inline double osc(double phase) {
         phase = phase < -M_PI ? M_PI + fmod(phase + M_PI, 2*M_PI) : -M_PI + fmod(phase + M_PI, 2*M_PI);
