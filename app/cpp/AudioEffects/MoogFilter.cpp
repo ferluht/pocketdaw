@@ -12,7 +12,7 @@ MoogFilter::MoogFilter() : AudioEffect("Filter")
 
     init();
 
-    cutoff_enc = new GUI::Encoder("cutoff", 1, [this](float value) {
+    cutoff_enc = new GUI::Encoder("cutoff", 1, -1, 1, [this](float value) {
         setCutoff ((value + 1)*8000);
     }, 1);
     cutoff_enc->GPlace({0.25, 0.1});
@@ -20,7 +20,7 @@ MoogFilter::MoogFilter() : AudioEffect("Filter")
     GAttach(cutoff_enc);
     MConnect(cutoff_enc);
 
-    resonance_enc = new GUI::Encoder("resonance", -1, [this](float value) {
+    resonance_enc = new GUI::Encoder("resonance", -1, -1, 1, [this](float value) {
         setRes ((value + 1)/2);
     }, 1);
     resonance_enc->GPlace({0.25, 0.4});

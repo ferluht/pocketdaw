@@ -8,6 +8,7 @@
 #include <Utils/Utils.h>
 #include <GUI/Encoder.h>
 #include <GUI/Plot.h>
+#include <GUI/AnalogEncoder.h>
 #include "Instrument.h"
 
 class SamplerState : public InstrumentState{
@@ -32,7 +33,7 @@ class Sampler : public Instrument<SamplerState> {
     const char * sample_name;
 
     GUI::TapButton * trig;
-    GUI::Encoder * pitch;
+    GUI::AnalogEncoder * pitch;
     bool const_pitch;
 
     bool triggered = false;

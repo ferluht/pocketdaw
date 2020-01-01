@@ -41,8 +41,6 @@ class Kick : public AnalogDrum<KickState> {
     GUI::Encoder * decay;
     GUI::Encoder * waveform;
 
-    GUI::Jack * jack;
-
     inline double osc(double phase) {
         phase = phase < -M_PI ? M_PI + fmod(phase + M_PI, 2*M_PI) : -M_PI + fmod(phase + M_PI, 2*M_PI);
         float s = -sin(phase), w = 0;
@@ -58,6 +56,10 @@ public:
     void IUpdateState(KickState * state, MData md) override;
 
     void IARender(KickState * state, double beat, float * lsample, float * rsample) override ;
+
+    void MRender(double beat) {
+        sweep_time->MRender(beat);
+    }
 
 };
 

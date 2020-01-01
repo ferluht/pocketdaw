@@ -37,93 +37,54 @@ namespace GUI {
             }
         }
 
+        float value;
+
     public:
+
+        static const float RATIO;
 
         static enum {
             INPUT,
             OUTPUT
         };
 
-        float value;
-
         Jack(int type_) : AMGObject(CIRCLE) {
-            GSetRatio(1);
+            GSetRatio(RATIO);
             type = type_;
             value = 0;
         }
 
-        inline void propagate(){
-            for (const auto & out : outputs) {
-                out.second->value = value;
-            }
+        bool isConnected() {
+            if (type == INPUT) return input.first != nullptr;
+            return !outputs.empty();
         }
 
-        GObject *GDragBegin(const Vec2 &v) override {
-            if (type == OUTPUT && !outputs.empty()) {
-                auto wire = outputs.begin()->first;
-                auto jack = outputs.begin()->second;
-                jack->focusWire = wire;
-                outputs.erase(wire);
-                return jack;
-            } else if (type == INPUT && input.first != nullptr) {
-                auto jack = input.second;
-                jack->focusWire = input.first;
-                input = {nullptr, nullptr};
-                return jack;
-            }
-            focusWire = new Wire();
-            focusWire->from(this);
-            focusWire->to(v);
-            return this;
+        Jack &operator=(const float &value_) {
+            value = value_;
+            return *this;
         }
 
-        GObject *GDragHandler(const Vec2 &v) override {
-            focusWire->from(this);
-            focusWire->to(v);
-            return this;
+        Jack &operator=(const double &value_) {
+            value = (float)value_;
+            return *this;
         }
 
-        GObject *GDragEnd(const Vec2 &v) override {
-            auto & eng = GEngine::getGEngine();
-            std::list<GObject *> trace;
-            Jack * jack = dynamic_cast<Jack *>(eng.focusStack.front()->GFindFocusObject(v, &trace));
-
-            if (this->canConnect(jack)) connect(focusWire, jack);
-            else {
-                if (type == OUTPUT) outputs.erase(focusWire);
-                else input = {nullptr, nullptr};
-                delete focusWire;
-            }
-            return this;
+        Jack &operator=(const int &value_) {
+            value = value_;
+            return *this;
         }
 
-        void GDraw(NVGcontext * nvg) override {
+        operator float() const { return value; }
 
-            Vec2 wheel_center(global.c.x + global.s.x/2, global.c.y + global.s.y / 2);
-            float wheel_radius = global.s.x * 0.5f;
+        inline void MRender(double beat) override { for (const auto & out : outputs) *out.second = value; }
 
-            nvgBeginPath(nvg);
-            nvgCircle(nvg, wheel_center.x, wheel_center.y, wheel_radius * 0.9);
-            nvgStrokeColor(nvg, DARKER);
-            nvgStrokeWidth(nvg, wheel_radius * 0.15);
-            nvgStroke(nvg);
-            nvgClosePath(nvg);
+        GObject *GDragBegin(const Vec2 &v) override ;
 
-            nvgBeginPath(nvg);
-            nvgCircle(nvg, wheel_center.x, wheel_center.y, wheel_radius * 0.8);
-            nvgStrokeColor(nvg, GREY);
-            nvgStrokeWidth(nvg, wheel_radius * 0.15);
-            nvgStroke(nvg);
-            nvgClosePath(nvg);
+        GObject *GDragHandler(const Vec2 &v) override ;
 
-            nvgBeginPath(nvg);
-            nvgCircle(nvg, wheel_center.x, wheel_center.y, wheel_radius * 0.7);
-            nvgFillColor(nvg, BLACK);
-            nvgFill(nvg);
-            nvgClosePath(nvg);
+        GObject *GDragEnd(const Vec2 &v) override ;
 
-            nvgStrokeWidth(nvg, 1);
-        }
+        void GDraw(NVGcontext * nvg) override ;
 
     };
 

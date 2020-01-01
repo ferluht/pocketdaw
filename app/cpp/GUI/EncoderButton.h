@@ -26,7 +26,7 @@ namespace GUI {
                       float upper_bound_=1, unsigned int default_map_=0,
                       std::function<void(float)> drag_callback_=[](float a){},
                       std::function<void(bool)> tap_callback_=[](bool a){})
-                : Encoder(label_, default_value_, drag_callback_, default_map_, lower_bound_, upper_bound_, CIRCLE) {
+                : Encoder(label_, default_value_, lower_bound_, upper_bound_, drag_callback_, default_map_, CIRCLE) {
             state = false;
         }
 
@@ -42,7 +42,7 @@ namespace GUI {
             lighted = false;
         }
 
-        operator bool() const { return state; }
+        operator bool() { return state; }
 
         virtual GObject *GTapEnd(const ndk_helper::Vec2 &v) override;
     };

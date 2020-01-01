@@ -8,7 +8,7 @@
 
 StereoDelay::StereoDelay() : AudioEffect("Stereo delay"){
 
-    delay_time = new GUI::Encoder("size", -1, [this](float value) {
+    delay_time = new GUI::Encoder("size", -1, -1, 1, [this](float value) {
                 this->delayTime = value/2 + 0.5f;
                 if (this->delayTime < 0.01f) this->delayTime = 0.01f;
                 if (this->delayTime > 0.99f) this->delayTime = 0.99f;

@@ -16,19 +16,19 @@ Oscilloscope::Oscilloscope() : AudioEffect("Oscill")
     plot->GSetWidth(0.98);
     GAttach(plot);
 
-    trig = new GUI::Encoder("trig", 0, 0, -1, 1);
+    trig = new GUI::Encoder("trig", 0, -1, 1);
     trig->GPlace({0.05, 0.72});
     trig->GSetHeight(0.26);
     GAttach(trig);
     MConnect(trig);
 
-    time = new GUI::Encoder("time", 100, 0, 0, 100);
+    time = new GUI::Encoder("time", 100, 0, 100);
     time->GPlace({0.2, 0.72});
     time->GSetHeight(0.26);
     GAttach(time);
     MConnect(time);
 
-    scale = new GUI::Encoder("scale", 1, 0, 0, 5);
+    scale = new GUI::Encoder("scale", 1, 0, 5);
     scale->GPlace({0.35, 0.72});
     scale->GSetHeight(0.26);
     GAttach(scale);

@@ -7,6 +7,7 @@
 
 #include <Orchestration/Rack.h>
 #include <GUI/Jack.h>
+#include <GUI/AnalogEncoder.h>
 #include "Instrument.h"
 #include "Sampler.h"
 
@@ -16,14 +17,25 @@ class DrumRackState : public InstrumentState{
 
 class DrumRack : public Instrument<DrumRackState> {
 
-    std::map<int, AMGRack *> chains;
+    AMGRack * notes[128];
+    std::list<AMGRack *> activeChains;
     AMGRack * focus_chain;
+
+    GUI::AnalogEncoder * enc;
 
 public:
 
-    DrumRack() : Instrument(1, "drack") {
+    DrumRack() : Instrument(1, "Drum rack") {
         GSetRatio(2);
         focus_chain = nullptr;
+
+        for (int i = 0; i < 128; i ++) notes[i] = nullptr;
+
+        enc = new GUI::AnalogEncoder("test");
+        enc->GPlace({0.1, 0.5});
+        enc->GSetHeight(0.4);
+        GAttach(enc);
+        MConnect(enc);
     }
 
     void addSample(const char * sample_name_, const char note) {
@@ -35,7 +47,8 @@ public:
         MConnect(chain);
         focusOn(chain);
         chain->RAdd(new Sampler(sample_name_));
-        chains.insert({note, chain});
+        notes[note] = chain;
+        activeChains.push_back(chain);
     }
 
     void focusOn(AMGRack * chain){
@@ -45,31 +58,34 @@ public:
     }
 
     void MIn(MData cmd) override {
-        switch (cmd.status & 0xF0){
+        switch (cmd.status & 0xF0) {
             case NOTEON_HEADER:
-            case NOTEOFF_HEADER:
-                {
-                    auto chain = chains.find(cmd.data1);
-                    if (chain != chains.end()){
-                        chain->second->MIn(cmd);
-                        focusOn(chain->second);
-                    }
-                    break;
+            case NOTEOFF_HEADER: {
+                if (notes[cmd.data1]) {
+                    notes[cmd.data1]->MIn(cmd);
+                    focusOn(notes[cmd.data1]);
                 }
+                break;
+            }
             default:
                 MOut(cmd);
         }
     }
 
     bool ARender(double beat, float * lsample, float * rsample) override {
-        for (auto const& chain : chains) chain.second->ARender(beat, lsample, rsample);
+        for (auto const& chain : activeChains) chain->ARender(beat, lsample, rsample);
         return true;
     }
 
     void GSetVisible(bool visible_) {
         Instrument::GSetVisible(visible_);
-        for (auto const& chain : chains) chain.second->GSetVisible(false);
+        for (auto const& chain : activeChains) chain->GSetVisible(false);
         if (focus_chain) focus_chain->GSetVisible(visible_);
+    }
+
+    void MRender(double beat) {
+        enc->MRender(beat);
+        for (const auto & chain : activeChains) chain->MRender(beat);
     }
 };
 
