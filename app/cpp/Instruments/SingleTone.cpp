@@ -8,43 +8,43 @@ SingleTone::SingleTone() : Instrument<SingleToneState>(1, "ST"){
 
     GSetRatio(1);
 
-    interp1 = new GUI::Encoder("waveform1", 0, [this](float value) {}, 1, 0, 1);
+    interp1 = new GUI::Encoder("waveform1", 0, 0, 1);
     interp1->GPlace({encoder_spacing, row_1st});
     interp1->GSetHeight(encoder_height);
     GAttach(interp1);
     MConnect(interp1);
 
-    interp2 = new GUI::Encoder("waveform2", 0, [this](float value) {}, 2, 0, 1);
+    interp2 = new GUI::Encoder("waveform2", 0, 0, 1);
     interp2->GPlace({encoder_spacing + encoder_height, row_1st});
     interp2->GSetHeight(encoder_height);
     GAttach(interp2);
     MConnect(interp2);
 
-    A = new GUI::Encoder("A", 0, [this](float value) {}, 3, 0, 1);
+    A = new GUI::Encoder("A", 0, 0, 1);
     A->GPlace({encoder_spacing, row_1st + encoder_height});
     A->GSetHeight(encoder_height);
     GAttach(A);
     MConnect(A);
 
-    D = new GUI::Encoder("D", 0, [this](float value) {}, 4, 0, 1);
+    D = new GUI::Encoder("D", 0, 0, 1);
     D->GPlace({encoder_spacing + encoder_height, row_1st + encoder_height});
     D->GSetHeight(encoder_height);
     GAttach(D);
     MConnect(D);
 
-    S = new GUI::Encoder("S", 0, [this](float value) {}, 5, 0, 1);
+    S = new GUI::Encoder("S", 0, 0, 1);
     S->GPlace({encoder_spacing + encoder_height * 2, row_1st + encoder_height});
     S->GSetHeight(encoder_height);
     GAttach(S);
     MConnect(S);
 
-    R = new GUI::Encoder("R", 0, [this](float value) {}, 6, 0, 1);
+    R = new GUI::Encoder("R", 0, 0, 1);
     R->GPlace({encoder_spacing + encoder_height * 3, row_1st + encoder_height});
     R->GSetHeight(encoder_height);
     GAttach(R);
     MConnect(R);
 
-    crossmod = new GUI::Encoder("crossmod", 0, [this](float value) {}, 7, 0, 1);
+    crossmod = new GUI::Encoder("crossmod", 0, 0, 1);
     crossmod->GPlace({encoder_spacing, row_1st + 2 * encoder_height});
     crossmod->GSetHeight(encoder_height);
     GAttach(crossmod);

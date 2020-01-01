@@ -18,7 +18,7 @@ Sampler::Sampler(const char * sample_name_) : Instrument<SamplerState>(1, "Sampl
     plot->GSetWidth(0.98);
     GAttach(plot);
 
-    pitch = new GUI::Encoder("pitch", 0, 2, -12, 12);
+    pitch = new GUI::AnalogEncoder("pitch", 0, -24, 24);
     pitch->GPlace({0.1, 0.73});
     pitch->GSetHeight(0.25);
     GAttach(pitch);
@@ -56,6 +56,7 @@ void Sampler::MRender(double beat) {
         MIn({beat, NOTEON_HEADER, 62, 100});
         triggered = false;
     }
+    pitch->MRender(beat);
 }
 
 void Sampler::IUpdateState(SamplerState *state, MData md) {

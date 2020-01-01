@@ -196,8 +196,8 @@ public:
                 button = channel->get(focus_pattern, step)->trig;
                 if (*button) {
                     MOut({beat, NOTEON_HEADER, channel->mapping, 100});
-                    jack->value = (float)(*button);
-                    jack->propagate();
+                    *jack = (float)(*button);
+                    jack->MRender(beat);
                 }
             }
         }

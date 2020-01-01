@@ -69,19 +69,19 @@ ConvolutionReverb::ConvolutionReverb(const char * ir_file) : AudioEffect("Convol
         inBufClean[1].push_back(0);
     }
 
-    drywet = new GUI::Encoder("dry/wet", 1, [this](float value) {}, 3);
+    drywet = new GUI::Encoder("dry/wet", 1);
     drywet->GPlace({0.01, 0.05});
     drywet->GSetHeight(0.25);
     GAttach(drywet);
     MConnect(drywet);
 
-    low_freq = new GUI::Encoder("low", 1, [this](float value) {}, 3, 0, 800);
+    low_freq = new GUI::Encoder("low", 1, 0, 800);
     low_freq->GPlace({0.125, 0.7});
     low_freq->GSetHeight(0.25);
     GAttach(low_freq);
     MConnect(low_freq);
 
-    high_freq = new GUI::Encoder("high", 1, [this](float value) {}, 3, 1000, sample_rate/4);
+    high_freq = new GUI::Encoder("high", 1, 1000, sample_rate/4);
     high_freq->GPlace({0.232, 0.7});
     high_freq->GSetHeight(0.25);
     GAttach(high_freq);

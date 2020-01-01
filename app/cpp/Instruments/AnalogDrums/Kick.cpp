@@ -2,6 +2,7 @@
 // Created by ibelikov on 12.12.19.
 //
 
+#include <GUI/AnalogEncoder.h>
 #include "Kick.h"
 
 Kick::Kick() : AnalogDrum<KickState>("Kick") {
@@ -12,7 +13,10 @@ Kick::Kick() : AnalogDrum<KickState>("Kick") {
     tone = new GUI::Encoder("tone", 0, 0, 10);
     placeEncoder(tone, 0, 1);
 
-    sweep_time = new GUI::Encoder("sweep", 0, 0, 1);
+//    sweep_time = new GUI::Encoder("sweep", 0, 0, 1);
+//    placeEncoder(sweep_time, 0, 2);
+
+    sweep_time = new GUI::AnalogEncoder("decay mod");
     placeEncoder(sweep_time, 0, 2);
 
     decay = new GUI::Encoder("decay", 0.05, 0.05, 1);
@@ -23,11 +27,6 @@ Kick::Kick() : AnalogDrum<KickState>("Kick") {
 
     sweep_amt = new GUI::Encoder("sweep lvl", 0, 0, 48);
     placeEncoder(sweep_amt, 1, 1);
-
-    jack = new GUI::Jack(GUI::Jack::INPUT);
-    jack->GPlace({0.2, 0.4});
-    jack->GSetHeight(0.4);
-    GAttach(jack);
 }
 
 void Kick::IUpdateState(KickState *state, MData md) {
@@ -47,10 +46,12 @@ void Kick::IARender(KickState *state, double beat, float *lsample, float *rsampl
 
     float output = osc(state->phase) * state->volume;
 
-    *tone = jack->value + 1;
+//    *tone = *jack + 1;
 
     state->ad.A = (*attack) * (*attack);
-    state->ad.D = (*decay) * (*decay);
+
+    float dec = *decay * (1 + *sweep_time);
+    state->ad.D = (dec) * (dec);
     if (!state->ad.ARender(beat, &output, &output)) state->setActive(false);
 
     float sweep_level = 1;

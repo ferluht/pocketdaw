@@ -34,14 +34,18 @@ namespace GUI {
 
         friend class EncoderButton;
         friend class EncoderOverlay;
+        friend class ModulatedEncoder;
 
-//        const float wheel_radius = 0.4; // of width
-//        const float text_height = 0.8; // of space under wheel
-//        const float center_wheel_offset = 0.02;
-//        const float inner_circle_radius = 0.2;
+        const float wheel_radius = 0.42; // of width
+        const float text_height = 0.16; // of space under wheel
+        const Vec2 text_position = {0.5, 0.075};
+        const Vec2 wheel_center = {0.5, 0.55};
+        const float inner_circle_radius = 0.2;
+        const int text_max_length = 12;
 
         float angle = 0;
         float lower_bound, upper_bound;
+        float range;
         float old_angle;
         Vec2 drag_from;
 
@@ -49,27 +53,31 @@ namespace GUI {
 
         char * label;
 
+        inline float value_range_guard(float value_) {
+            if (value_ < lower_bound) value_ = lower_bound;
+            if (value_ > upper_bound) value_ = upper_bound;
+            return value_;
+        }
+
+        inline float angle_range_guard(float angle_) {
+            if (angle_ < -1.25f * (float) M_PI) angle_ = -1.25f * (float) M_PI;
+            if (angle_ > 0.25f * (float) M_PI) angle_ = 0.25f * (float) M_PI;
+            return angle_;
+        }
+
         inline float angle2value(float angle_) {
-            return ((angle_ / (float) M_PI + 0.5f) / 0.75f + 1) / 2 * (upper_bound - lower_bound) +
-                   lower_bound;
+            angle_ = ((angle_ / (float) M_PI + 0.5f) / 0.75f + 1) / 2 * (upper_bound - lower_bound) + lower_bound;
+            return value_range_guard(angle_);
         }
 
         inline float value2angle(float value_) {
-            return (((value_ - lower_bound) / (upper_bound - lower_bound) * 2 - 1) * 0.75f - 0.5f) *
-                   (float) M_PI;
+            value_ = (((value_ - lower_bound) / (upper_bound - lower_bound) * 2 - 1) * 0.75f - 0.5f) * (float) M_PI;
+            return angle_range_guard(value_);
         }
 
         inline void setangle(float angle_) {
-            if (angle_ < -1.25f * (float) M_PI) {
-                angle_ = -1.25f * (float) M_PI;
-            }
-
-            if (angle_ > 0.25f * (float) M_PI) {
-                angle_ = 0.25f * (float) M_PI;
-            }
-
-            angle = angle_;
-            value = angle2value(angle_);
+            angle = angle_range_guard(angle_);
+            value = angle2value(angle);
             callback(value);
         }
 
@@ -77,29 +85,13 @@ namespace GUI {
 
         float value;
 
-//    GCanvas * wheel;
-
     public:
 
-        Encoder(const char *label_, float default_value_);
+        static const float RATIO;
 
-        Encoder(const char *label_, float default_value_, unsigned int default_map_);
-
-        Encoder(const char *label_, float default_value_, std::function<void(float)> callback_);
-
-        Encoder(const char *label_, float default_value_, float lower_bound_, float upper_bound_);
-
-        Encoder(const char *label_, float default_value_, std::function<void(float)> callback_,
-                unsigned int default_map_);
-
-        Encoder(const char *label_, float default_value_, unsigned int default_map_, float lower_bound_,
-                float upper_bound_);
-
-        Encoder(const char *label_, float default_value_, std::function<void(float)> callback_,
-                float lower_bound_, float upper_bound_);
-
-        Encoder(const char *label_, float default_value_, std::function<void(float)> callback_,
-                unsigned int default_map_, float lower_bound_, float upper_bound_, unsigned int shape_type_=BOX);
+        Encoder(const char *label_, float default_value_=0, float lower_bound_=-1, float upper_bound_=1,
+                std::function<void(float)> callback_=[](float val){},
+                unsigned int default_map_=0, unsigned int shape_type_=BOX);
 
         inline void MIn(MData cmd) override {
             Knob::MIn(cmd);
@@ -108,40 +100,118 @@ namespace GUI {
             }
         }
 
-        inline void setvalue(float value_) {
-            if (value_ < lower_bound) value_ = lower_bound;
-            if (value_ > upper_bound) value_ = upper_bound;
-            value = value_;
+        inline virtual void setvalue(float value_) {
+            value = value_range_guard(value_);
             angle = value2angle(value);
             callback(value);
         }
 
-        Encoder &operator=(const float &value_) {
+        virtual Encoder &operator=(const float &value_) {
             setvalue(value_);
             return *this;
         }
 
-        Encoder &operator=(const double &value_) {
+        virtual Encoder &operator=(const double &value_) {
             setvalue(value_);
             return *this;
         }
 
-        Encoder &operator=(const int &value_) {
+        virtual Encoder &operator=(const int &value_) {
             setvalue(value_);
             return *this;
         }
 
-        operator float() const { return value; }
+        inline float get() { return value; }
+
+        virtual operator float() { return value; }
 
         void GSetVisible(bool visible_) override;
 
         virtual void GDraw(NVGcontext * nvg) override;
 
-        GObject *GDragHandler(const Vec2 &v) override;
+        virtual GObject *GDragHandler(const Vec2 &v) override;
 
-        GObject *GDragBegin(const Vec2 &v) override;
+        virtual GObject *GDragBegin(const Vec2 &v) override;
 
-        GObject *GDragEnd(const Vec2 &v) override;
+        virtual GObject *GDragEnd(const Vec2 &v) override;
+    };
+
+
+    class ModulatedEncoder : public Encoder {
+
+        float base_value;
+        float mod_depth;
+        float mod;
+
+        bool dragging;
+
+        float old_mod_depth;
+
+    public:
+
+        ModulatedEncoder(const char *label_, float default_value_=0, float lower_bound_=-1, float upper_bound_=1,
+                         std::function<void(float)> callback_=[](float val){},
+                         unsigned int default_map_=0, unsigned int shape_type_=BOX) :
+                         Encoder(label_, default_value_, lower_bound_, upper_bound_, callback_, default_map_, shape_type_) {
+            base_value = default_value_;
+            mod_depth = 0.3;
+            mod = 0;
+            dragging = false;
+        }
+
+        ModulatedEncoder &operator=(const float &value_) override {
+            base_value = value_range_guard(value_);
+            if (!dragging) Encoder::operator=((float)(*this));
+            return *this;
+        }
+
+        ModulatedEncoder &operator=(const double &value_) override {
+            base_value = (float)value_;
+            if (!dragging) Encoder::operator=((float)(*this));
+            return *this;
+        }
+
+        ModulatedEncoder &operator=(const int &value_) override {
+            base_value = value_;
+            if (!dragging) Encoder::operator=((float)(*this));
+            return *this;
+        }
+
+        ModulatedEncoder &operator*=(const float &value_) {
+            mod_depth = value_;
+            return *this;
+        }
+
+        ModulatedEncoder &operator<<(const float &value_) {
+            mod = value_;
+            if (!dragging) Encoder::operator=((float)(*this));
+            return *this;
+        }
+
+        ModulatedEncoder &operator<<(const int &value_) {
+            mod = value_;
+            if (!dragging) Encoder::operator=((float)(*this));
+            return *this;
+        }
+
+        ModulatedEncoder &operator<<(const double &value_) {
+            mod = (float)value_;
+            if (!dragging) Encoder::operator=((float)(*this));
+            return *this;
+        }
+
+//        inline float get() { return value; }
+
+        operator float() override { return value_range_guard(base_value + range * mod_depth * mod); }
+
+        virtual void GDraw(NVGcontext * nvg) override;
+
+        virtual GObject *GDragHandler(const Vec2 &v) override;
+
+        virtual GObject *GDragBegin(const Vec2 &v) override;
+
+        virtual GObject *GDragEnd(const Vec2 &v) override;
+
     };
 
 }

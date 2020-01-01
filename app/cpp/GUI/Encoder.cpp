@@ -6,6 +6,8 @@
 
 namespace GUI {
 
+    const float Encoder::RATIO = 0.92;
+
     void EncoderOverlay::GDraw(NVGcontext *nvg) {
         nvgBeginPath(nvg);
         nvgRect(nvg, 0, 0, GEngine::screen_width, GEngine::screen_height);
@@ -28,38 +30,14 @@ namespace GUI {
         nvgText(nvg, GEngine::screen_width / 2, GEngine::screen_height / 2, buffer, NULL);
     }
 
-
-    Encoder::Encoder(const char *label_, float default_value_) :
-            Encoder(label_, default_value_, [](float value) {}, 0) {}
-
-    Encoder::Encoder(const char *label_, float default_value_, unsigned int default_map_) :
-            Encoder(label_, default_value_, [](float value) {}, default_map_) {}
-
-    Encoder::Encoder(const char *label_, float default_value_, std::function<void(float)> callback_) :
-            Encoder(label_, default_value_, callback_, 0) {}
-
-    Encoder::Encoder(const char *label_, float default_value_, float lower_bound_, float upper_bound_) :
-            Encoder(label_, default_value_, [](float value) {}, 0, lower_bound_, upper_bound_) {}
-
-    Encoder::Encoder(const char *label_, float default_value_, std::function<void(float)> callback_,
-                     unsigned int default_map_) :
-            Encoder(label_, default_value_, callback_, default_map_, -1, 1) {}
-
-    Encoder::Encoder(const char *label_, float default_value_, unsigned int default_map_,
-                     float lower_bound_, float upper_bound_) :
-            Encoder(label_, default_value_, [](float value) {}, default_map_, lower_bound_,
-                    upper_bound_) {}
-
-    Encoder::Encoder(const char *label_, float default_value_, std::function<void(float)> callback_,
-                     float lower_bound_, float upper_bound_) :
-            Encoder(label_, default_value_, callback_, 0, lower_bound_, upper_bound_) {}
-
-    Encoder::Encoder(const char *label_, float default_value_, std::function<void(float)> callback_,
-                     unsigned int default_map_, float lower_bound_, float upper_bound_, unsigned int shape_type_) : Knob(shape_type_) {
-        GSetRatio(0.8);
+    Encoder::Encoder(const char *label_, float default_value_, float lower_bound_, float upper_bound_,
+            std::function<void(float)> callback_, unsigned int default_map_, unsigned int shape_type_)
+            : Knob(shape_type_) {
+        GSetRatio(RATIO);
         callback = std::move(callback_);
         lower_bound = lower_bound_;
         upper_bound = upper_bound_;
+        range = upper_bound_ - lower_bound_;
 
         size_t len = strlen(label_);
         label = new char[len + 1];
@@ -82,20 +60,20 @@ namespace GUI {
         nvgStroke(nvg);
         nvgClosePath(nvg);
 
-        Vec2 wheel_center(global.c.x + global.s.x/2, global.c.y + (0.5f - 0.02f) * global.s.y);
-        float wheel_radius = global.s.x * 0.4f;
+        Vec2 wc(global.c.x + global.s.x * wheel_center.x, global.c.y + global.s.y * wheel_center.y);
+        float wr = global.s.x * wheel_radius;
 
         nvgBeginPath(nvg);
-        nvgCircle(nvg, wheel_center.x, wheel_center.y, wheel_radius);
+        nvgCircle(nvg, wc.x, wc.y, wr);
         nvgFillColor(nvg, GREY);
         nvgFill(nvg);
         nvgClosePath(nvg);
 
         nvgSave(nvg);
-        nvgTranslate(nvg, wheel_center.x, wheel_center.y);
+        nvgTranslate(nvg, wc.x, wc.y);
         nvgRotate(nvg, angle);
         nvgBeginPath(nvg);
-        nvgRect(nvg, 0, -2, wheel_radius, 4);
+        nvgRect(nvg, 0, -2, wr, 4);
         nvgFillColor(nvg, DARK);
         nvgFill(nvg);
         nvgRestore(nvg);
@@ -103,24 +81,22 @@ namespace GUI {
 
 
         nvgBeginPath(nvg);
-        nvgCircle(nvg, wheel_center.x, wheel_center.y, wheel_radius*0.2);
+        nvgCircle(nvg, wc.x, wc.y, wr*inner_circle_radius);
         nvgFillColor(nvg, DARK);
         nvgFill(nvg);
         nvgClosePath(nvg);
 
         nvgBeginPath(nvg);
-        nvgFontSize(nvg, global.s.y * 0.2 * 0.8);
+        nvgFontSize(nvg, global.s.y * text_height);
         nvgFontFace(nvg, "sans");
         nvgTextAlign(nvg,NVG_ALIGN_CENTER|NVG_ALIGN_MIDDLE);
 
         char buffer[64];
-        snprintf(buffer, sizeof buffer, "val: %.2f", value);
-
-        nvgFillColor(nvg, RED);
-        nvgText(nvg, global.c.x + global.s.x/2, global.c.y + global.s.y * 0.9f, buffer, NULL);
+        snprintf(buffer, sizeof buffer, "%s: %.2f", label, value);
+        buffer[text_max_length] = 0;
 
         nvgFillColor(nvg, GREEN);
-        nvgText(nvg, global.c.x + global.s.x/2, global.c.y + global.s.y * 0.1f, label, NULL);
+        nvgText(nvg, global.c.x + global.s.x * text_position.x, global.c.y + global.s.y * text_position.y, buffer, NULL);
         nvgClosePath(nvg);
 
         Knob::GDraw(nvg);
@@ -149,6 +125,45 @@ namespace GUI {
         drag_from = v;
         old_angle = angle;
         Knob::GDragBegin(v);
+        return this;
+    }
+
+    void ModulatedEncoder::GDraw(NVGcontext * nvg) {
+        Vec2 ac(global.c.x + global.s.x * wheel_center.x, global.c.y + global.s.y * wheel_center.y);
+        float ar = global.s.x * wheel_radius;
+
+        nvgBeginPath(nvg);
+        float a_from = value2angle(base_value - range * mod_depth);
+        float a_to = value2angle(base_value + range * mod_depth);
+        nvgArc(nvg, ac.x, ac.y, ar, a_from, a_to, NVG_CW);
+        nvgStrokeWidth(nvg, global.s.x * 0.09f);
+        nvgStrokeColor(nvg, BLUE);
+        nvgStroke(nvg);
+        nvgClosePath(nvg);
+        nvgStrokeWidth(nvg, 1);
+
+        Encoder::GDraw(nvg);
+    }
+
+    GObject *ModulatedEncoder::GDragHandler(const Vec2 &v) {
+        Encoder::GDragHandler(v);
+        base_value = (Encoder)(*this);
+        mod_depth = old_mod_depth - (v.y - drag_from.y) / 1000;
+        if (mod_depth > 1) mod_depth = 1;
+        if (mod_depth < 0) mod_depth = 0.01;
+        return this;
+    }
+
+    GObject *ModulatedEncoder::GDragBegin(const Vec2 &v) {
+        Encoder::GDragBegin(v);
+        dragging = true;
+        old_mod_depth = mod_depth;
+        return this;
+    }
+
+    GObject *ModulatedEncoder::GDragEnd(const Vec2 &v) {
+        Encoder::GDragEnd(v);
+        dragging = false;
         return this;
     }
 }

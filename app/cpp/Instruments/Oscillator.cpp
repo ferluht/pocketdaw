@@ -13,43 +13,43 @@ Oscillator::Oscillator(const char * name_, unsigned int num_voices) : Instrument
     phase_mod = &zero;
     amp_mod = &zero;
 
-    coarse = new GUI::Encoder("coarse", 0, 1, -1, 10);
+    coarse = new GUI::Encoder("coarse", 0, -1, 10);
     coarse->GPlace({0.025, 0.05});
     coarse->GSetHeight(0.4);
     GAttach(coarse);
     MConnect(coarse);
 
-    fine = new GUI::Encoder("fine", 0, 2, 0, 1);
+    fine = new GUI::Encoder("fine", 0, 0, 1);
     fine->GPlace({0.225, 0.05});
     fine->GSetHeight(0.4);
     GAttach(fine);
     MConnect(fine);
 
-    level = new GUI::Encoder("level", 0, 3, 0, 1);
+    level = new GUI::Encoder("level", 0, 0, 1);
     level->GPlace({0.425, 0.05});
     level->GSetHeight(0.4);
     GAttach(level);
     MConnect(level);
 
-    A = new GUI::Encoder("attack", 0, 5, 0, 1);
+    A = new GUI::Encoder("attack", 0, 0, 1);
     A->GPlace({0.625, 0.05});
     A->GSetHeight(0.4);
     GAttach(A);
     MConnect(A);
 
-    D = new GUI::Encoder("decay", 0, 6, 0, 1);
+    D = new GUI::Encoder("decay", 0, 0, 1);
     D->GPlace({0.025, 0.5});
     D->GSetHeight(0.4);
     GAttach(D);
     MConnect(D);
 
-    S = new GUI::Encoder("sustain", 0, 7, 0, 1);
+    S = new GUI::Encoder("sustain", 0, 0, 1);
     S->GPlace({0.225, 0.5});
     S->GSetHeight(0.4);
     GAttach(S);
     MConnect(S);
 
-    R = new GUI::Encoder("release", 0, 8, 0, 5);
+    R = new GUI::Encoder("release", 0, 0, 5);
     R->GPlace({0.425, 0.5});
     R->GSetHeight(0.4);
     GAttach(R);
