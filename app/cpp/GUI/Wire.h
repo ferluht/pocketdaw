@@ -74,7 +74,12 @@ namespace GUI {
         inline void to(GObject * t) { b_obj = t; }
         inline void to(Vec2 t) { b_obj = nullptr, b_vec = t; }
 
+        inline bool isVisible() { return a_obj && b_obj && (a_obj->visible && b_obj->visible); }
+
         void GDraw(NVGcontext * nvg) override {
+
+//            if (!isVisible())
+//                return;
 
             Vec2 a = a_vec;
             Vec2 b = b_vec;

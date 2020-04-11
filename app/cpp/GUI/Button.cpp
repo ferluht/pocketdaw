@@ -26,6 +26,12 @@ namespace GUI {
             strncpy(labelOff, labelOff_, len);
             labelOff[len] = 0;
         }
+
+        GSetTapEndCallback([this](const Vec2& v) -> GUI::GObject * {
+            state = !state;
+            callback(state);
+            return nullptr;
+        });
     }
 
     void Button::GDraw(NVGcontext * nvg) {
@@ -56,12 +62,6 @@ namespace GUI {
         nvgClosePath(nvg);
     }
 
-    GObject * Button::GTapEnd(const ndk_helper::Vec2 &v) {
-        state = !state;
-        callback(state);
-        return nullptr;
-    }
-
     TexturedMultiButton::TexturedMultiButton(unsigned int num_states_, const char **textures_)
             : TexturedMultiButton([](unsigned int state) {}, num_states_, textures_) {}
 
@@ -71,12 +71,12 @@ namespace GUI {
         state = 0;
         num_states = num_states_;
         textures = textures_;
-    }
 
-    GObject *TexturedMultiButton::GTapEnd(const ndk_helper::Vec2 &v) {
-        state = (state + 1) % num_states;
-        callback(state);
-        return nullptr;
+        GSetTapEndCallback([this](const Vec2& v) -> GUI::GObject * {
+            state = (state + 1) % num_states;
+            callback(state);
+            return nullptr;
+        });
     }
 
     void ProgressButton::GDraw(NVGcontext *nvg) {

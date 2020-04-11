@@ -8,7 +8,7 @@
 
 #include "../Instrument.h"
 #include "AnalogDrum.h"
-#include <GUI/Encoder.h>
+#include <GUI/AnalogEncoder.h>
 #include <GUI/Jack.h>
 #include <Instruments/Envelopes/AD.h>
 
@@ -34,12 +34,12 @@ public:
 
 class Kick : public AnalogDrum<KickState> {
 
-    GUI::Encoder * attack;
-    GUI::Encoder * tone;
-    GUI::Encoder * sweep_time;
-    GUI::Encoder * sweep_amt;
-    GUI::Encoder * decay;
-    GUI::Encoder * waveform;
+    GUI::AnalogEncoder * attack;
+    GUI::AnalogEncoder * tone;
+    GUI::AnalogEncoder * sweep_time;
+    GUI::AnalogEncoder * sweep_amt;
+    GUI::AnalogEncoder * decay;
+    GUI::AnalogEncoder * waveform;
 
     inline double osc(double phase) {
         phase = phase < -M_PI ? M_PI + fmod(phase + M_PI, 2*M_PI) : -M_PI + fmod(phase + M_PI, 2*M_PI);
@@ -58,7 +58,12 @@ public:
     void IARender(KickState * state, double beat, float * lsample, float * rsample) override ;
 
     void MRender(double beat) {
+        attack->MRender(beat);
+        tone->MRender(beat);
         sweep_time->MRender(beat);
+        sweep_amt->MRender(beat);
+        decay->MRender(beat);
+        waveform->MRender(beat);
     }
 
 };

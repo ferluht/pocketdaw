@@ -33,7 +33,7 @@ class Sampler : public Instrument<SamplerState> {
     const char * sample_name;
 
     GUI::TapButton * trig;
-    GUI::AnalogEncoder * pitch;
+    GUI::Encoder * pitch;
     bool const_pitch;
 
     bool triggered = false;
@@ -42,7 +42,7 @@ class Sampler : public Instrument<SamplerState> {
 
 public:
 
-    Sampler(const char * sample_name_);
+    Sampler(const char * sample_name_, bool const_pitch_=true);
 
     float InterpolateCubic(float x0, float x1, float x2, float x3, float t);
     float InterpolateHermite4pt3oX(float x0, float x1, float x2, float x3, float t);

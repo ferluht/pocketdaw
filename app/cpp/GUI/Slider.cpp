@@ -18,6 +18,21 @@ namespace GUI {
 
         min = min_;
         max = max_;
+
+        GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
+            drag_from = v;
+            old_value = value;
+            return this;
+        });
+
+        GSetDragHandlerCallback([this](const Vec2& v) -> GUI::GObject * {
+            value = old_value - (v.y - drag_from.y) / 100;
+
+            if (value < min) value = min;
+            if (value > max) value = max;
+
+            return this;
+        });
     }
 
     void Slider::GDraw(NVGcontext *nvg) {
@@ -67,21 +82,6 @@ namespace GUI {
         nvgFillColor(nvg, GREY);
         nvgFill(nvg);
         nvgClosePath(nvg);
-    }
-
-    GObject *Slider::GDragHandler(const Vec2 &v) {
-        value = old_value - (v.y - drag_from.y) / 100;
-
-        if (value < min) value = min;
-        if (value > max) value = max;
-
-        return this;
-    }
-
-    GObject *Slider::GDragBegin(const Vec2 &v) {
-        drag_from = v;
-        old_value = value;
-        return this;
     }
 
 }

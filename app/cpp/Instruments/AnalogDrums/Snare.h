@@ -8,6 +8,7 @@
 #include "../Instrument.h"
 #include "AnalogDrum.h"
 #include <GUI/Encoder.h>
+#include <GUI/AnalogEncoder.h>
 #include <Instruments/Envelopes/AD.h>
 #include <random>
 

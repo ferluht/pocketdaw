@@ -52,7 +52,7 @@ public:
 
     float base_note = 69.0;
     float power_base = 2.0;
-    float semitones = 24.0;
+    float semitones = 12.0;
 	double base_frequency = 440.0;
 
 	float pitch;

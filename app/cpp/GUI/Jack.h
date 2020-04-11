@@ -52,6 +52,45 @@ namespace GUI {
             GSetRatio(RATIO);
             type = type_;
             value = 0;
+
+            GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
+                if (type == OUTPUT && !outputs.empty()) {
+                    auto wire = outputs.begin()->first;
+                    auto jack = outputs.begin()->second;
+                    jack->focusWire = wire;
+                    outputs.erase(wire);
+                    return jack;
+                } else if (type == INPUT && input.first != nullptr) {
+                    auto jack = input.second;
+                    jack->focusWire = input.first;
+                    input = {nullptr, nullptr};
+                    return jack;
+                }
+                focusWire = new Wire();
+                focusWire->from(this);
+                focusWire->to(v);
+                return this;
+            });
+
+            GSetDragHandlerCallback([this](const Vec2& v) -> GUI::GObject * {
+                focusWire->from(this);
+                focusWire->to(v);
+                return this;
+            });
+
+            GSetDragEndCallback([this](const Vec2& v) -> GUI::GObject * {
+                auto & eng = GEngine::getGEngine();
+                std::list<GObject *> trace;
+                Jack * jack = dynamic_cast<Jack *>(eng.focusStack.front()->GFindFocusObject(v, &trace));
+
+                if (this->canConnect(jack)) connect(focusWire, jack);
+                else {
+                    if (type == OUTPUT) outputs.erase(focusWire);
+                    else input = {nullptr, nullptr};
+                    delete focusWire;
+                }
+                return this;
+            });
         }
 
         bool isConnected() {
@@ -74,15 +113,14 @@ namespace GUI {
             return *this;
         }
 
+        void GSetVisible(bool visible_) override {
+            for (const auto & out : outputs) out.first->GSetVisible(visible_);
+            if (input.first != nullptr) input.first->GSetVisible(visible_);
+        }
+
         operator float() const { return value; }
 
         inline void MRender(double beat) override { for (const auto & out : outputs) *out.second = value; }
-
-        GObject *GDragBegin(const Vec2 &v) override ;
-
-        GObject *GDragHandler(const Vec2 &v) override ;
-
-        GObject *GDragEnd(const Vec2 &v) override ;
 
         void GDraw(NVGcontext * nvg) override ;
 

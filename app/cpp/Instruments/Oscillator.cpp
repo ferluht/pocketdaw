@@ -72,6 +72,28 @@ Oscillator::Oscillator(const char * name_, unsigned int num_voices) : Instrument
     GAttach(plot);
 
     draw_waveform();
+
+    plot->GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
+        drag_from = v;
+        old_waveform = waveform;
+        return plot;
+    });
+
+    plot->GSetDragHandlerCallback([this](const Vec2& v) -> GUI::GObject * {
+        float wf = old_waveform + (v.y - drag_from.y)/100;
+        if (wf > 1) wf = 1;
+        if (wf < 0) wf = 0;
+        waveform = wf;
+        draw_waveform();
+        return plot;
+    });
+
+    plot->GSetTapEndCallback([this](const Vec2& v) -> GUI::GObject * {
+        type ++;
+        if (type > 3) type = 0;
+        draw_waveform();
+        return nullptr;
+    });
 }
 
 void Oscillator::draw_waveform() {
@@ -91,35 +113,6 @@ void Oscillator::IUpdateState(SineState *state, MData md){
     }else{
         state->adsr.release(md.beat);
     }
-}
-
-GUI::GObject * Oscillator::GTapEnd(const ndk_helper::Vec2& v)
-{
-    if (plot->GContains(v)){
-        type ++;
-        if (type > 3) type = 0;
-        draw_waveform();
-    }
-    return nullptr;
-}
-
-GUI::GObject * Oscillator::GDragHandler(const ndk_helper::Vec2 &v) {
-
-    if (plot->GContains(drag_from)) {
-        float wf = old_waveform + (v.y - drag_from.y)/100;
-        if (wf > 1) wf = 1;
-        if (wf < 0) wf = 0;
-        waveform = wf;
-        draw_waveform();
-    }
-
-    return this;
-}
-
-GUI::GObject * Oscillator::GDragBegin(const ndk_helper::Vec2 &v) {
-    drag_from = v;
-    old_waveform = waveform;
-    return this;
 }
 
 void Oscillator::IARender(SineState * state, double beat, float * lsample, float * rsample)

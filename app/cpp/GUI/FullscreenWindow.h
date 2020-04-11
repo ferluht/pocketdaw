@@ -33,6 +33,28 @@ namespace GUI {
             GAttach(name);
 
             last_point = {0, 0};
+
+            GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
+                GUpdateGlobalPosition(nullptr);
+                drag_from = v - global.c;
+                return this;
+            });
+
+            GSetDragHandlerCallback([this](const Vec2& v) -> GUI::GObject * {
+                if (drag_from.y < global.s.y * 0.1f) GPlace({(v - drag_from).x / global.s.x, (v - drag_from).y / global.s.y});
+                last_point = v;
+                return this;
+            });
+
+            GSetDragEndCallback([this](const Vec2& v) -> GUI::GObject * {
+                if ((drag_from.y < global.s.y * 0.1f) && (last_point.y > global.s.y * 0.5f)){
+                    GEngine::getGEngine().unfocusTo(this);
+                    GPlace({0, 0});
+                    return nullptr;
+                }
+                GPlace({0, 0});
+                return this;
+            });
         }
 
         virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
@@ -58,29 +80,6 @@ namespace GUI {
 //            }
 //            return this;
 //        }
-
-        GObject *GDragBegin(const Vec2 &v) override {
-            GUpdateGlobalPosition(nullptr);
-            drag_from = v - global.c;
-            return this;
-        }
-
-        GObject *GDragHandler(const Vec2 &v) override {
-            if (drag_from.y < global.s.y * 0.1f) GPlace({(v - drag_from).x / global.s.x, (v - drag_from).y / global.s.y});
-            last_point = v;
-            return this;
-        }
-
-        GObject *GDragEnd(const Vec2 &v) override {
-
-            if ((drag_from.y < global.s.y * 0.1f) && (last_point.y > global.s.y * 0.5f)){
-                GEngine::getGEngine().unfocusTo(this);
-                GPlace({0, 0});
-                return nullptr;
-            }
-            GPlace({0, 0});
-            return this;
-        }
 
         void GRender(NVGcontext *nvg, float dTime) {
 

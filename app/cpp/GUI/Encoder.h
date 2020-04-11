@@ -128,12 +128,6 @@ namespace GUI {
         void GSetVisible(bool visible_) override;
 
         virtual void GDraw(NVGcontext * nvg) override;
-
-        virtual GObject *GDragHandler(const Vec2 &v) override;
-
-        virtual GObject *GDragBegin(const Vec2 &v) override;
-
-        virtual GObject *GDragEnd(const Vec2 &v) override;
     };
 
 
@@ -157,6 +151,40 @@ namespace GUI {
             mod_depth = 0.3;
             mod = 0;
             dragging = false;
+
+            GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
+                drag_from = v;
+                old_angle = angle;
+                mapping_mode = true;
+                dragging = true;
+                old_mod_depth = mod_depth;
+                return this;
+            });
+
+            GSetDragHandlerCallback([this](const Vec2& v) -> GUI::GObject * {
+                overlay->GSetVisible(true);
+                angle = old_angle + (v.x - drag_from.x) / 100;
+                setangle(angle);
+                base_value = (Encoder)(*this);
+                mod_depth = old_mod_depth - (v.y - drag_from.y) / 1000;
+                if (mod_depth > 1) mod_depth = 1;
+                if (mod_depth < 0) mod_depth = 0.01;
+                return this;
+            });
+
+            GSetDragEndCallback([this](const Vec2& v) -> GUI::GObject * {
+                overlay->GSetVisible(false);
+                mapping_mode = false;
+                dragging = false;
+                return this;
+            });
+        }
+
+        inline void MIn(MData cmd) override {
+            Knob::MIn(cmd);
+            if (cmd.status == 0xB0 && keymap && cmd.data1 == keymap) {
+                base_value = cmd.data2 / 127.f * (upper_bound - lower_bound) + lower_bound;
+            }
         }
 
         ModulatedEncoder &operator=(const float &value_) override {
@@ -205,12 +233,6 @@ namespace GUI {
         operator float() override { return value_range_guard(base_value + range * mod_depth * mod); }
 
         virtual void GDraw(NVGcontext * nvg) override;
-
-        virtual GObject *GDragHandler(const Vec2 &v) override;
-
-        virtual GObject *GDragBegin(const Vec2 &v) override;
-
-        virtual GObject *GDragEnd(const Vec2 &v) override;
 
     };
 

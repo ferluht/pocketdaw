@@ -7,25 +7,22 @@
 
 Kick::Kick() : AnalogDrum<KickState>("Kick") {
 
-    attack = new GUI::Encoder("attack", 0, 0, 1);
+    attack = new GUI::AnalogEncoder("attack", 0, 0, 1);
     placeEncoder(attack, 0, 0);
 
-    tone = new GUI::Encoder("tone", 0, 0, 10);
+    tone = new GUI::AnalogEncoder("tone", 0, 0, 10);
     placeEncoder(tone, 0, 1);
 
-//    sweep_time = new GUI::Encoder("sweep", 0, 0, 1);
-//    placeEncoder(sweep_time, 0, 2);
-
-    sweep_time = new GUI::AnalogEncoder("decay mod");
+    sweep_time = new GUI::AnalogEncoder("sweep", 0, 0, 1);
     placeEncoder(sweep_time, 0, 2);
 
-    decay = new GUI::Encoder("decay", 0.05, 0.05, 1);
+    decay = new GUI::AnalogEncoder("decay", 0.05, 0.05, 1);
     placeEncoder(decay, 1, 2);
 
-    waveform = new GUI::Encoder("shape", 0, 0, 1);
+    waveform = new GUI::AnalogEncoder("shape", 0, 0, 1);
     placeEncoder(waveform, 1, 0);
 
-    sweep_amt = new GUI::Encoder("sweep lvl", 0, 0, 48);
+    sweep_amt = new GUI::AnalogEncoder("sweep lvl", 0, 0, 48);
     placeEncoder(sweep_amt, 1, 1);
 }
 
@@ -49,9 +46,7 @@ void Kick::IARender(KickState *state, double beat, float *lsample, float *rsampl
 //    *tone = *jack + 1;
 
     state->ad.A = (*attack) * (*attack);
-
-    float dec = *decay * (1 + *sweep_time);
-    state->ad.D = (dec) * (dec);
+    state->ad.D = (*decay) * (*decay);
     if (!state->ad.ARender(beat, &output, &output)) state->setActive(false);
 
     float sweep_level = 1;

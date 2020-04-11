@@ -102,19 +102,17 @@ public:
         return this->output + osc2.output;
     }
 
-//    GUI::GObject * GFindFocusObject(const ndk_helper::Vec2& point) override
+//    GUI::GObject * GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) override
 //    {
-//        if (visible && globalPosition.GContains(point)){
-//            if (graph->globalPosition.GContains(point)) return this;
-//            return Instrument::GFindFocusObject(point);
+//        if (visible && GContains(point)){
+//            if (plot->GContains(point)) {
+//                trace->push_front(this);
+//                return this;
+//            }
+//            return Instrument::GFindFocusObject(point, trace);
 //        }
 //        return nullptr;
 //    }
-
-    GUI::GObject * GTapEnd(const ndk_helper::Vec2& v) override ;
-
-    GUI::GObject * GDragHandler(const ndk_helper::Vec2& v) override ;
-    GUI::GObject * GDragBegin(const ndk_helper::Vec2& v) override ;
 
     void IUpdateState(SineState * state, MData md) override;
 

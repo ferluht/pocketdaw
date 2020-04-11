@@ -4,16 +4,16 @@
 
 #include "Operator.h"
 
-Operator::Operator(unsigned int num_voices) : Instrument<OperatorState>(num_voices, L"Operator"){
-    GAttachTexture("Textures/effect_canvas.bmp");
+Operator::Operator(unsigned int num_voices) : Instrument<OperatorState>(num_voices, "Operator"){
+//    GAttachTexture("Textures/effect_canvas.bmp");
     GSetRatio(1);
 
-    const wchar_t * names[] = {L"A", L"B", L"C", L"D"};
+    const char * names[] = {"A", "B", "C", "D"};
 
     for (int i = 0; i < 4; i++) {
         sines[i] = new Oscillator(names[i], 1);
-        sines[i]->place(0.01, 0.01);
-        sines[i]->setWidth(0.98);
+        sines[i]->GPlace({0.01, 0.01});
+        sines[i]->GSetWidth(0.98);
         sines[i]->NoHeader();
         GAttach(sines[i]);
         sines[i]->GSetVisible(false);
@@ -23,11 +23,11 @@ Operator::Operator(unsigned int num_voices) : Instrument<OperatorState>(num_voic
     sines[op_focus]->GSetVisible(true);
     MConnect(sines[op_focus]);
 
-    algo = new TexturedMultiButton([this](unsigned int value){setAlgo(value);}, 11, algos);
-    algo->place(0.01, 0.6);
-    algo->setHeight(0.38);
-    GAttach(algo);
-    MConnect(algo);
+//    algo = new TexturedMultiButton([this](unsigned int value){setAlgo(value);}, 11, algos);
+//    algo->place(0.01, 0.6);
+//    algo->setHeight(0.38);
+//    GAttach(algo);
+//    MConnect(algo);
 
     mode = 0;
     setAlgo(0);
@@ -95,13 +95,13 @@ void Operator::IUpdateState(OperatorState *state, MData md){
     if (md.data2 != 0) state->setActive(true);
 }
 
-GObject * Operator::GTapEnd(const ndk_helper::Vec2& v)
-{
-    if (visible && sines[op_focus]->globalPosition.contains(v)){
-        nextOsc();
-    }
-    return nullptr;
-}
+//GUI::GObject * Operator::TapEnd(const ndk_helper::Vec2& v)
+//{
+//    if (visible && sines[op_focus]->GContains(v)){
+//        nextOsc();
+//    }
+//    return nullptr;
+//}
 
 void Operator::prevOsc() {
     MDisconnect(sines[op_focus]);
