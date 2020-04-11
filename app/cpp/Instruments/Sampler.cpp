@@ -4,11 +4,11 @@
 
 #include "Sampler.h"
 
-Sampler::Sampler(const char * sample_name_) : Instrument<SamplerState>(1, "Sampler"){
+Sampler::Sampler(const char * sample_name_, bool const_pitch_) : Instrument<SamplerState>(1, "Sampler"){
     GSetRatio(1);
     sample_name = sample_name_;
 
-    setConstPitch(true);
+    setConstPitch(const_pitch_);
 
     sample.load(sample_name);
 
@@ -18,7 +18,7 @@ Sampler::Sampler(const char * sample_name_) : Instrument<SamplerState>(1, "Sampl
     plot->GSetWidth(0.98);
     GAttach(plot);
 
-    pitch = new GUI::AnalogEncoder("pitch", 0, -24, 24);
+    pitch = new GUI::Encoder("pitch", 0, -24, 24);
     pitch->GPlace({0.1, 0.73});
     pitch->GSetHeight(0.25);
     GAttach(pitch);

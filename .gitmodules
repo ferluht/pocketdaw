@@ -1,15 +1,15 @@
-[submodule "app/cpp/common/AudioEffects/FFTConvolver"]
-	path = app/cpp/common/AudioEffects/FFTConvolver
+[submodule "app/cpp/AudioEffects/FFTConvolver"]
+	path = app/cpp/AudioEffects/FFTConvolver
 	url = https://github.com/HiFi-LoFi/FFTConvolver
 [submodule "app/cpp/AMGEngine/bgfx"]
 	path = app/cpp/AMGEngine/bgfx
-	url = https://github.com/bkaradzic/bgfx.git
+	url = https://github.com/bkaradzic/bgfx
 [submodule "app/cpp/AMGEngine/bx"]
 	path = app/cpp/AMGEngine/bx
-	url = https://github.com/bkaradzic/bx.git
+	url = https://github.com/bkaradzic/bx
 [submodule "app/cpp/AMGEngine/bimg"]
 	path = app/cpp/AMGEngine/bimg
-	url = https://github.com/bkaradzic/bimg.git
+	url = https://github.com/bkaradzic/bimg
 [submodule "app/cpp/AMGEngine/link"]
 	path = app/cpp/AMGEngine/link
 	url = https://github.com/Ableton/link

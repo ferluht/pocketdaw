@@ -58,9 +58,4 @@ namespace GUI {
         nvgStrokeWidth(nvg, 1);
     }
 
-    GObject * EncoderButton::GTapEnd(const ndk_helper::Vec2 &v) {
-        state = !state;
-        return nullptr;
-    }
-
 }

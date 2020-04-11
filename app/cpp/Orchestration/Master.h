@@ -25,6 +25,8 @@
 #include <Instruments/Brute.h>
 #include <AudioEffects/ConvolutionReverb.h>
 #include <MidiEffects/Sequencer.h>
+#include <MidiEffects/LFO.h>
+#include <Instruments/Operator.h>
 #include "Track.h"
 
 class AMGMasterTrack : public GUI::AMGCanvas{
@@ -100,6 +102,13 @@ public:
                                    }
                                }));
 
+        addDeviceMenu->addButton(new GUI::Button("Operator",
+                                                 [this](bool a){
+                                                     if (focus_track > -1) {
+                                                         Tracks[focus_track]->RAdd(new Operator(4));
+                                                     }
+                                                 }));
+
         addDeviceMenu->addButton(new GUI::Button("SingleTone",
                                                  [this](bool a){
                                                      if (focus_track > -1) {
@@ -110,7 +119,7 @@ public:
         addDeviceMenu->addButton(new GUI::Button("Sampler",
                                                  [this](bool a){
                                                      if (focus_track > -1) {
-                                                         Tracks[focus_track]->RAdd(new Sampler("/storage/emulated/0/test.wav"));
+                                                         Tracks[focus_track]->RAdd(new Sampler("/storage/emulated/0/808.wav", false));
                                                      }
                                                  }));
 
@@ -141,9 +150,9 @@ public:
                                                      if (focus_track > -1) {
                                                          auto drack = new DrumRack();
                                                          drack->addSample("/storage/emulated/0/808.wav", 36);
-                                                         drack->addSample("/storage/emulated/0/Kick.wav", 37);
-                                                         drack->addSample("/storage/emulated/0/Snare.wav", 38);
-                                                         drack->addSample("/storage/emulated/0/ClosedHH.wav", 39);
+                                                         drack->addSample("/storage/emulated/0/Kick8081.wav", 37);
+                                                         drack->addSample("/storage/emulated/0/Snare8081.wav", 38);
+                                                         drack->addSample("/storage/emulated/0/ClosedHH808.wav", 39);
                                                          drack->addSample("/storage/emulated/0/Shaker.wav", 40);
                                                          Tracks[focus_track]->RAdd(drack);
                                                      }
@@ -199,6 +208,13 @@ public:
                                                [this](bool a){
                                                    if (focus_track > -1) {
                                                        Tracks[focus_track]->RAdd(new Sequencer(4));
+                                                   }
+                                               }));
+
+        addMidiMenu->addButton(new GUI::Button("LFO",
+                                               [this](bool a){
+                                                   if (focus_track > -1) {
+                                                       Tracks[focus_track]->RAdd(new LFO());
                                                    }
                                                }));
 //
@@ -295,27 +311,20 @@ public:
     void AddTrack(AMGTrack * track) {
         Tracks.push_back(track);
         changeTrackFocus(Tracks.size() - 1);
-        track->GPlace({0, 0.4});
-        track->GSetHeight(0.6);
+        track->GPlace({0, 0});
+        track->GSetHeight(1);
         track->GSetWidth(1);
         GAttach(track);
-
-//        track->mc->place(0.4, 0.01, 0.1);
-//        track->mc->setHeight(0.38);
-//        track->mc->setWidth(0.59);
-//        GAttach(track->mc);
     }
 
     void changeTrackFocus(int i){
         if (focus_track > -1) {
             Tracks[focus_track]->GSetVisible(false);
-//            Tracks[focus_track]->mc->GSetVisible(false);
         }
         if (i > (int)Tracks.size() - 1) i = Tracks.size() - 1;
         if (i < 0) i = 0;
         focus_track = i;
         Tracks[focus_track]->GSetVisible(true);
-//        Tracks[focus_track]->mc->GSetVisible(true);
     }
 
 
@@ -329,6 +338,9 @@ public:
                     break;
                 case 0x15:
                     changeTrackFocus(focus_track + 1);
+                    break;
+                case 0x17:
+                    isPlaying ^= true;
                     break;
                 default:
                     break;

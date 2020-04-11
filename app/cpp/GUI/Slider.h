@@ -31,9 +31,9 @@ namespace GUI {
 
         void GDraw(NVGcontext * nvg) override;
 
-        GObject *GDragBegin(const Vec2 &v) override ;
+        GObject *DragBegin(const Vec2 &v) ;
 
-        GObject *GDragHandler(const Vec2 &v) override ;
+        GObject *DragHandler(const Vec2 &v) ;
 
         operator float() const { return value; }
 

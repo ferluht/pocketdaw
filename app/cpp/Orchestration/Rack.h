@@ -26,6 +26,10 @@ public:
     float max_x_offset = 0;
 
     std::list<GUI::IECanvas *> objects;
+    Vec2 obj_space_c;
+    Vec2 obj_space_s;
+
+    MObject * m_in, * m_out;
     int midi_devices;
 
     Vec2 drag_from;
@@ -33,6 +37,11 @@ public:
     AMGRack(){
 
         midi_devices = 0;
+        m_in = new MObject;
+        m_out = new MObject;
+
+        obj_space_c = {0, 0};
+        obj_space_s = {1, 1};
 //        Instr = new GUI::IECanvas("dummy");
 //        MEffects.MConnect(Instr);
 //        MEffects.MConnect(&mout);
@@ -46,29 +55,63 @@ public:
 //        RAttachInsrument(instr_);
     }
 
+
     void RAdd(GUI::IECanvas * obj){
-        obj->GSetHeight(1);
+        obj->GSetHeight(obj_space_s.y * (1 - 2 * padding));
+
+        if (objects.empty()) m_in->MDisconnect(m_out);
 
         if (isAudioEffect(obj)) {
-            if (!objects.empty()) objects.back()->MConnect(obj);
+            if (!objects.empty()) {
+                objects.back()->MDisconnect(m_out);
+                objects.back()->MConnect(obj);
+            }
             objects.push_back(obj);
+            objects.back()->MConnect(m_out);
         }
         if (isMidiEffect(obj)) {
-            if (!objects.empty()) obj->MConnect(objects.front());
+            if (!objects.empty()) {
+                m_in->MDisconnect(objects.front());
+                obj->MConnect(objects.front());
+            }
             objects.push_front(obj);
+            m_in->MConnect(objects.front());
         }
         if (isInstrument(obj)) {
 
             auto it = objects.begin();
             for (it; (it != objects.end()) && isMidiEffect(*it); ++it);
             if (isInstrument(*it)) {
+                auto instr = *it;
                 objects.erase(it);
+                delete(instr);
                 it = objects.begin();
                 for (it; (it != objects.end()) && isMidiEffect(*it); ++it);
             }
 
-            if (it != objects.begin()) (*std::prev(it, 1))->MConnect(obj);
-            if (it != objects.end()) obj->MConnect(*std::next(it, 1));
+            if (it == objects.begin()) {
+                if (!objects.empty()) {
+                    m_in->MDisconnect(objects.front());
+                    obj->MConnect(objects.front());
+                } else {
+                    m_in->MDisconnect(m_out);
+                    obj->MConnect(m_out);
+                }
+                m_in->MConnect(obj);
+            } else if (it == objects.end()) {
+                if (!objects.empty()) {
+                    objects.back()->MDisconnect(m_out);
+                    objects.back()->MConnect(obj);
+                } else {
+                    m_in->MDisconnect(m_out);
+                    m_in->MConnect(obj);
+                }
+                obj->MConnect(m_out);
+            } else {
+                (*std::prev(it, 1))->MDisconnect(*it);
+                (*std::prev(it, 1))->MConnect(obj);
+                obj->MConnect(*it);
+            }
 
             objects.insert(it, obj);
         }
@@ -93,28 +136,31 @@ public:
 
         float x = padding;
         for (auto const& obj : objects) {
-            obj->GPlace({x + x_offset, padding});
-            x += obj->local.ratio / global.ratio + padding;
+            obj->GPlace({x + x_offset, obj_space_c.y + padding * obj_space_s.y});
+            x += obj->local.ratio / (global.ratio * obj_space_s.x / obj_space_s.y) +
+                    padding * obj_space_s.y / obj_space_s.x;
         }
 
         max_x_offset = - x + 1;
     }
 
     inline void MIn(MData cmd) override {
-        if (objects.size()) objects.front()->MIn(cmd);
+        m_in->MIn(cmd);
     }
 
     inline void MRender(double beat) override {
         for (auto const& obj : objects) obj->MRender(beat);
     }
 
-//    void MConnect(MObject * mo) override ;
-//    void MDisconnect(MObject * mo) override ;
+    void MConnect(MObject * mo) override {
+        m_out->MConnect(mo);
+    }
+
+    void MDisconnect(MObject * mo) override {
+        m_out->MDisconnect(mo);
+    }
 
     bool ARender(double beat, float * lsample, float * rsample) override ;
-
-//    GUI::GObject * GDragHandler(const ndk_helper::Vec2& v) override ;
-//    GUI::GObject * GDragBegin(const ndk_helper::Vec2& v) override ;
 };
 
 

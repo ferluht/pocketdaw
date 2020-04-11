@@ -31,8 +31,6 @@ namespace GUI {
         Button(const char *label_, std::function<void(bool)> callback_);
         Button(const char *labelOn_, const char *labelOff_, std::function<void(bool)> callback_);
 
-        virtual GObject *GTapEnd(const ndk_helper::Vec2 &v) override;
-
         operator bool() const { return state; }
 
         Button &operator=(const bool &state_) {
@@ -62,14 +60,11 @@ namespace GUI {
     public:
         TapButton(const char * label, std::function<void(bool)> callback_) :
                 Button(label, callback_) {
-
+            GSetTapEndCallback([this](const Vec2& v) -> GUI::GObject * {
+                callback(true);
+                return nullptr;
+            });
         }
-
-        GObject * GTapEnd(const ndk_helper::Vec2 &v) override {
-            callback(true);
-            return nullptr;
-        }
-
     };
 
     class ProgressButton : public Button {
@@ -109,7 +104,7 @@ namespace GUI {
         TexturedMultiButton(std::function<void(unsigned int)> callback_, unsigned int num_states_,
                             const char **textures_);
 
-        GObject *GTapEnd(const ndk_helper::Vec2 &v) override;
+        GObject *TapEnd(const ndk_helper::Vec2 &v);
 
         operator unsigned int() const { return state; }
 
@@ -133,13 +128,13 @@ namespace GUI {
         FocusButton(const char *label, std::function<void(bool)> callback_, GObject * focus_object_) :
                 Button(label, callback_) {
             focus_object = focus_object_;
-        }
-
-        virtual GObject *GTapEnd(const ndk_helper::Vec2 &v) override {
-            Button::GTapEnd(v);
-            if (state)
-                return focus_object;
-            return nullptr;
+            GSetTapEndCallback([this](const Vec2& v) -> GUI::GObject * {
+                state = !state;
+                callback(state);
+                if (state)
+                    return focus_object;
+                return nullptr;
+            });
         }
 
         virtual void GLoseFocus() override {

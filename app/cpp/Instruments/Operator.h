@@ -66,7 +66,7 @@ class Operator : public Instrument<OperatorState>{
     void prevOsc();
     void nextOsc();
 
-    TexturedMultiButton * algo;
+//    TexturedMultiButton * algo;
 
     void setAlgo(unsigned int value);
 
@@ -80,16 +80,20 @@ public:
 
     void MIn(MData cmd) override ;
 
-    GObject * GFindFocusObject(const ndk_helper::Vec2& point) override
+    GObject * GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) override
     {
-        if (visible && shape->contains(point)){
-            if (sines[op_focus]->name->globalPosition.contains(point)) return this;
-            return Instrument::GFindFocusObject(point);
+        if (visible && GContains(point)){
+            auto focus = Instrument::GFindFocusObject(point, trace);
+//            if (focus == sines[op_focus]) {
+//                trace->pop_front();
+//                return this;
+//            }
+            return focus;
         }
         return nullptr;
     }
 
-    GObject * GTapEnd(const ndk_helper::Vec2& v) override ;
+//    GObject * TapEnd(const ndk_helper::Vec2& v) ;
 
     void GSetVisible(bool visible_) override ;
 };

@@ -49,6 +49,26 @@ namespace GUI {
         overlay = new EncoderOverlay(this);
         GAttach(overlay);
         overlay->GSetVisible(false);
+
+        GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
+            drag_from = v;
+            old_angle = angle;
+            mapping_mode = true;
+            return this;
+        });
+
+        GSetDragHandlerCallback([this](const Vec2& v) -> GUI::GObject * {
+            overlay->GSetVisible(true);
+            angle = old_angle + (v.x - drag_from.x) / 100;
+            setangle(angle);
+            return this;
+        });
+
+        GSetDragEndCallback([this](const Vec2& v) -> GUI::GObject * {
+            overlay->GSetVisible(false);
+            mapping_mode = false;
+            return this;
+        });
     }
 
 
@@ -108,26 +128,6 @@ namespace GUI {
         overlay->GSetVisible(false);
     }
 
-    GObject *Encoder::GDragEnd(const Vec2 &v) {
-        overlay->GSetVisible(false);
-        Knob::GDragEnd(v);
-        return this;
-    }
-
-    GObject *Encoder::GDragHandler(const Vec2 &v) {
-        overlay->GSetVisible(true);
-        angle = old_angle + (v.x - drag_from.x) / 100;
-        setangle(angle);
-        return this;
-    }
-
-    GObject *Encoder::GDragBegin(const Vec2 &v) {
-        drag_from = v;
-        old_angle = angle;
-        Knob::GDragBegin(v);
-        return this;
-    }
-
     void ModulatedEncoder::GDraw(NVGcontext * nvg) {
         Vec2 ac(global.c.x + global.s.x * wheel_center.x, global.c.y + global.s.y * wheel_center.y);
         float ar = global.s.x * wheel_radius;
@@ -143,27 +143,5 @@ namespace GUI {
         nvgStrokeWidth(nvg, 1);
 
         Encoder::GDraw(nvg);
-    }
-
-    GObject *ModulatedEncoder::GDragHandler(const Vec2 &v) {
-        Encoder::GDragHandler(v);
-        base_value = (Encoder)(*this);
-        mod_depth = old_mod_depth - (v.y - drag_from.y) / 1000;
-        if (mod_depth > 1) mod_depth = 1;
-        if (mod_depth < 0) mod_depth = 0.01;
-        return this;
-    }
-
-    GObject *ModulatedEncoder::GDragBegin(const Vec2 &v) {
-        Encoder::GDragBegin(v);
-        dragging = true;
-        old_mod_depth = mod_depth;
-        return this;
-    }
-
-    GObject *ModulatedEncoder::GDragEnd(const Vec2 &v) {
-        Encoder::GDragEnd(v);
-        dragging = false;
-        return this;
     }
 }

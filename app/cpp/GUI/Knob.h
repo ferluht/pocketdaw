@@ -19,8 +19,6 @@ namespace GUI {
 
     public:
 
-//        float value;
-
         unsigned int keymap;
         bool mapping_mode;
 
@@ -29,6 +27,20 @@ namespace GUI {
             overlay_type = shape_type_;
             properties_window = new FullscreenWindow("Properties");
             properties_window->setColor(DARK);
+
+            GSetDoubleTapEndCallback([this](const Vec2& v) -> GUI::GObject * {
+                return properties_window;
+            });
+
+            GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
+                mapping_mode = true;
+                return this;
+            });
+
+            GSetDragEndCallback([this](const Vec2& v) -> GUI::GObject * {
+                mapping_mode = false;
+                return this;
+            });
         }
 
         void MIn(MData cmd) override {
@@ -44,20 +56,6 @@ namespace GUI {
                 return this;
             }
             return nullptr;
-        }
-
-        virtual GObject *GDoubleTapEnd(const Vec2 &v) override {
-            return properties_window;
-        }
-
-        virtual GObject *GDragBegin(const Vec2 &v) override {
-            mapping_mode = true;
-            return this;
-        }
-
-        virtual GObject *GDragEnd(const Vec2 &v) override {
-            mapping_mode = false;
-            return this;
         }
 
         void GDraw(NVGcontext * nvg) override;

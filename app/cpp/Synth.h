@@ -24,6 +24,7 @@ private:
     AMGObject * mapping_object;
     GUI::Menu * midiDeviceMenu;
     GUI::Button * midi_device_menu;
+    GUI::Button * record_button;
     GUI::Led * midiLeds[2];
 //    Oscilloscope * masterWaveform;
 
@@ -79,6 +80,13 @@ public:
         midiDeviceMenu = new GUI::Menu("Midi device");
         GAttach(midiDeviceMenu);
 
+
+        auto midi = &MEngine::getMEngine();
+        auto mnames = midi->getDevices();
+        if (mnames.size()) {
+            midi->connectDevice(mnames.front());
+        }
+
         midi_device_menu = new GUI::FocusButton("Midi device",
                 [this](bool state){
                     midiDeviceMenu->clear();
@@ -93,6 +101,10 @@ public:
                 }, midiDeviceMenu);
         add_upper_panel_button(midi_device_menu);
 
+        record_button = new GUI::Button("REC", [this](bool state){
+            MOut({0, 0xB0, 100, static_cast<unsigned char> (state * 127)});
+        });
+        add_upper_panel_button(record_button);
 
 //        midiDeviceMenu->setGainCallback([this](){
 //            auto midi = &MEngine::getMEngine();
@@ -131,6 +143,9 @@ public:
     void MIn(MData cmd) override {
         midiLeds[0]->toggle();
         midiLeds[1]->toggle();
+        if (cmd.status == 0xB0 && cmd.data1 == 100) {
+            if (cmd.data2 > 0) record_button->state ^= true;
+        }
         MOut(cmd);
     }
 

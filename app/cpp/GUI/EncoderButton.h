@@ -28,6 +28,11 @@ namespace GUI {
                       std::function<void(bool)> tap_callback_=[](bool a){})
                 : Encoder(label_, default_value_, lower_bound_, upper_bound_, drag_callback_, default_map_, CIRCLE) {
             state = false;
+
+            GSetTapEndCallback([this](const Vec2& v) -> GUI::GObject * {
+                state = !state;
+                return nullptr;
+            });
         }
 
         void GDraw(NVGcontext * nvg) override;
@@ -43,8 +48,6 @@ namespace GUI {
         }
 
         operator bool() { return state; }
-
-        virtual GObject *GTapEnd(const ndk_helper::Vec2 &v) override;
     };
 
 }

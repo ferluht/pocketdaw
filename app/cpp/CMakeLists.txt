@@ -15,8 +15,8 @@ include_directories(${LINK_DIR}/modules/asio-standalone/asio/include)
 include_directories(src/main/cpp/Link/android-ifaddrs)
 
 # set up common compile options
-set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -w -fno-exceptions")
-#set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Ofast")
+#set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -w -fno-exceptions")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Ofast")
 
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/AMGEngine/ndk_helper ${CMAKE_CURRENT_LIST_DIR}/.build/ndkHelper/${CMAKE_BUILD_TYPE}/${ANDROID_ABI})
 
@@ -163,7 +163,7 @@ add_library(
         Instruments/DrumRack.cpp
         Instruments/Instrument.cpp
         Instruments/Metronome.cpp
-#        Instruments/Operator.cpp
+        Instruments/Operator.cpp
         Instruments/Oscillator.cpp
         Instruments/Sampler.cpp
         Instruments/SingleTone.cpp
@@ -173,7 +173,7 @@ add_library(
         Instruments/AnalogDrums/Kick.cpp
         Instruments/AnalogDrums/Snare.cpp
 
-
+        MidiEffects/LFO.cpp
         MidiEffects/MidiEffect.cpp
         MidiEffects/Arpeggiator.cpp
 #        MidiEffects/MidiDelay.cpp
@@ -181,7 +181,7 @@ add_library(
 
         Orchestration/Chain.cpp
         Orchestration/Master.cpp
-#        Orchestration/Midi.cpp
+        Orchestration/Midi.cpp
         Orchestration/Rack.cpp
         Orchestration/Track.cpp
         MidiEffects/Sequencer.cpp
