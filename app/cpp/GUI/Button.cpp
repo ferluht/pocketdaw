@@ -104,6 +104,38 @@ namespace GUI {
         nvgClosePath(nvg);
     }
 
+    ListButton::ListButton(const char ** labels_, std::function<void(int)> callback_) : Knob(BOX){
+//        memcpy(labels, labels_, sizeof (char) * 1 * 4);
+        state = 0;
+        callback = callback_;
+
+        GSetTapEndCallback([this](const Vec2& v) -> GUI::GObject * {
+            state = (state + 1) % 4;
+            callback(state);
+            return nullptr;
+        });
+    }
+
+    void ListButton::GDraw(NVGcontext *nvg) {
+        nvgBeginPath(nvg);
+        nvgRect(nvg, global.c.x, global.c.y, global.s.x, global.s.y);
+        nvgFillColor(nvg, GREY);
+        nvgFill(nvg);
+
+        nvgStrokeColor(nvg, BLACK);
+        nvgStroke(nvg);
+
+        nvgFontSize(nvg, global.s.y * 0.7);
+        nvgFontFace(nvg, "sans");
+        nvgTextAlign(nvg,NVG_ALIGN_CENTER|NVG_ALIGN_MIDDLE);
+
+        nvgFillColor(nvg, BLACK);
+        std::string s = std::to_string(state);
+        char const *label = s.c_str();
+        nvgText(nvg, global.c.x + global.s.x/2, global.c.y + global.s.y/2, label, NULL);
+        nvgClosePath(nvg);
+    }
+
 //    void ValueButton::GDraw(NVGcontext *nvg) {
 //        nvgBeginPath(nvg);
 //        nvgRect(nvg,

@@ -7,7 +7,7 @@
 
 
 #include <GUI/Jack.h>
-#include <GUI/AnalogEncoder.h>
+#include <GUI/Encoder.h>
 #include <GUI/Graph.h>
 #include <GUI/Plot.h>
 #include "MidiEffect.h"

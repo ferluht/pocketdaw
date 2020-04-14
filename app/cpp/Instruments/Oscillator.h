@@ -71,13 +71,13 @@ class Oscillator : public Instrument<SineState>{
 
 public:
 
-    GUI::Encoder * coarse;
-    GUI::Encoder * fine;
-    GUI::Encoder * level;
-    GUI::Encoder * A;
-    GUI::Encoder * D;
-    GUI::Encoder * S;
-    GUI::Encoder * R;
+    GUI::AnalogEncoder * coarse;
+    GUI::AnalogEncoder * fine;
+    GUI::AnalogEncoder * level;
+    GUI::AnalogEncoder * A;
+    GUI::AnalogEncoder * D;
+    GUI::AnalogEncoder * S;
+    GUI::AnalogEncoder * R;
 
     GUI::Plot<GUI::TimeGraph> * plot;
 
@@ -113,6 +113,16 @@ public:
 //        }
 //        return nullptr;
 //    }
+
+    void MRender(double beat) override {
+        coarse->MRender(beat);
+        fine->MRender(beat);
+        level->MRender(beat);
+        A->MRender(beat);
+        D->MRender(beat);
+        S->MRender(beat);
+        R->MRender(beat);
+    }
 
     void IUpdateState(SineState * state, MData md) override;
 

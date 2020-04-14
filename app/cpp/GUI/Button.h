@@ -144,6 +144,31 @@ namespace GUI {
 
     };
 
+    class ListButton : public Knob {
+
+        NVGcolor lightColor;
+
+    public:
+
+        const float textwidth = 0.86;
+        const float textheight = 0.8;
+
+        const char ** labels;
+
+        int state;
+        std::function<void(int)> callback;
+
+        ListButton(const char ** labels_, std::function<void(int)> callback_);
+
+        operator int() const { return state; }
+
+        void GDraw(NVGcontext * nvg) override;
+
+//        void GSetVisible(bool visible_) override {
+//            Knob::GSetVisible(visible_);
+//        }
+    };
+
 //    class ValueButton : public Button {
 //
 //        float value;

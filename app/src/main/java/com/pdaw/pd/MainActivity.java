@@ -175,6 +175,7 @@ public class MainActivity extends NativeActivity {
         public void onSend(byte[] data, int offset,
                            int count, long timestamp) throws IOException {
             midiEvent(data[offset], data[offset + 1], data[offset + 2]);
+            Log.w("MIDI", String.format("received 0x%x 0x%x 0x%x", data[offset] & 0xFF, data[offset + 1] & 0xFF, data[offset + 2] & 0xFF));
             // parse MIDI or whatever
             //Toast.makeText(getApplicationContext(), "received midi", Toast.LENGTH_SHORT).show();
         }

@@ -11,8 +11,9 @@
 
 class MoogFilter : public AudioEffect
 {
-    GUI::Encoder * cutoff_enc;
-    GUI::Encoder * resonance_enc;
+    GUI::AnalogEncoder * cutoff_enc;
+    GUI::AnalogEncoder * resonance_enc;
+    GUI::AnalogEncoder * drive_enc;
 
 public:
     MoogFilter();
@@ -23,6 +24,7 @@ public:
     float getRes();
     void setRes(float r);
     bool ARender(double beat, float * lsample, float * rsample) override;
+    void MRender(double beat) override;
 protected:
     float cutoff;
     float res;

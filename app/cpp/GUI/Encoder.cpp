@@ -128,7 +128,7 @@ namespace GUI {
         overlay->GSetVisible(false);
     }
 
-    void ModulatedEncoder::GDraw(NVGcontext * nvg) {
+    void AnalogEncoder::GDraw(NVGcontext * nvg) {
         Vec2 ac(global.c.x + global.s.x * wheel_center.x, global.c.y + global.s.y * wheel_center.y);
         float ar = global.s.x * wheel_radius;
 

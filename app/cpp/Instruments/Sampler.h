@@ -8,7 +8,6 @@
 #include <Utils/Utils.h>
 #include <GUI/Encoder.h>
 #include <GUI/Plot.h>
-#include <GUI/AnalogEncoder.h>
 #include "Instrument.h"
 
 class SamplerState : public InstrumentState{

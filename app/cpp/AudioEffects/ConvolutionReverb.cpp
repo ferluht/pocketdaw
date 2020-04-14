@@ -6,7 +6,7 @@
 #include <future>
 
 ConvolutionReverb::ConvolutionReverb(const char * ir_file) : AudioEffect("Convolution reverb"){
-    GSetRatio(2);
+    GSetRatio(0.6);
 
     ir.load(ir_file);
 
@@ -14,27 +14,27 @@ ConvolutionReverb::ConvolutionReverb(const char * ir_file) : AudioEffect("Convol
     sample_counter = 0;
 
     ir_vis = new GUI::Plot<GUI::TimeGraph>(200);
-    ir_vis->GPlace({0.35, 0.05});
-    ir_vis->GSetHeight(0.9);
-    ir_vis->GSetWidth(0.625);
+    ir_vis->GPlace({0.01, 0.65});
+    ir_vis->GSetHeight(0.35);
+    ir_vis->GSetWidth(0.98);
     GAttach(ir_vis);
 
     low = new GUI::Slider("low", 0, -1, 1);
-    low->GPlace({0.125, 0.05});
-    low->GSetHeight(0.6);
-    low->GSetWidth(0.05);
+    low->GPlace({0.31, 0.01});
+    low->GSetHeight(0.62);
+    low->GSetWidth(0.2);
     GAttach(low);
 
     mid = new GUI::Slider("mid", 0, -1, 1);
-    mid->GPlace({0.2, 0.05});
-    mid->GSetHeight(0.6);
-    mid->GSetWidth(0.05);
+    mid->GPlace({0.54, 0.01});
+    mid->GSetHeight(0.62);
+    mid->GSetWidth(0.2);
     GAttach(mid);
 
     high = new GUI::Slider("high", 0, -1, 1);
-    high->GPlace({0.275, 0.05});
-    high->GSetHeight(0.6);
-    high->GSetWidth(0.05);
+    high->GPlace({0.77, 0.01});
+    high->GSetHeight(0.62);
+    high->GSetWidth(0.2);
     GAttach(high);
 
     int stride = ir.getNumSamplesPerChannel()/200;
@@ -70,20 +70,20 @@ ConvolutionReverb::ConvolutionReverb(const char * ir_file) : AudioEffect("Convol
     }
 
     drywet = new GUI::Encoder("dry/wet", 1);
-    drywet->GPlace({0.01, 0.05});
-    drywet->GSetHeight(0.25);
+    drywet->GPlace({0.01, 0.01});
+    drywet->GSetHeight(0.2);
     GAttach(drywet);
     MConnect(drywet);
 
     low_freq = new GUI::Encoder("low", 1, 0, 800);
-    low_freq->GPlace({0.125, 0.7});
-    low_freq->GSetHeight(0.25);
+    low_freq->GPlace({0.01, 0.22});
+    low_freq->GSetHeight(0.2);
     GAttach(low_freq);
     MConnect(low_freq);
 
     high_freq = new GUI::Encoder("high", 1, 1000, sample_rate/4);
-    high_freq->GPlace({0.232, 0.7});
-    high_freq->GSetHeight(0.25);
+    high_freq->GPlace({0.01, 0.43});
+    high_freq->GSetHeight(0.2);
     GAttach(high_freq);
     MConnect(high_freq);
 

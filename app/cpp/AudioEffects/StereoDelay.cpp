@@ -8,6 +8,8 @@
 
 StereoDelay::StereoDelay() : AudioEffect("Stereo delay"){
 
+    GSetRatio(0.4);
+
     delay_time = new GUI::Encoder("size", -1, -1, 1, [this](float value) {
                 this->delayTime = value/2 + 0.5f;
                 if (this->delayTime < 0.01f) this->delayTime = 0.01f;
@@ -23,7 +25,7 @@ StereoDelay::StereoDelay() : AudioEffect("Stereo delay"){
     position = 0;
 }
 
-void StereoDelay::apply(float * lsample, float * rsample)
+bool StereoDelay::ARender(double beat, float * lsample, float * rsample)
 {
     if (enabled()) {
         int del_position = position - (int) (delayTime * 500);
@@ -32,4 +34,6 @@ void StereoDelay::apply(float * lsample, float * rsample)
         *rsample = buffer[del_position];
         position = (position + 1) % 500;
     }
+
+    return true;
 }

@@ -9,6 +9,7 @@
 #include "Knob.h"
 #include "styles.h"
 #include "Button.h"
+#include "Jack.h"
 
 namespace GUI {
 
@@ -34,7 +35,7 @@ namespace GUI {
 
         friend class EncoderButton;
         friend class EncoderOverlay;
-        friend class ModulatedEncoder;
+        friend class AnalogEncoder;
 
         const float wheel_radius = 0.42; // of width
         const float text_height = 0.16; // of space under wheel
@@ -131,7 +132,7 @@ namespace GUI {
     };
 
 
-    class ModulatedEncoder : public Encoder {
+    class AnalogEncoder : public Encoder {
 
         float base_value;
         float mod_depth;
@@ -141,9 +142,11 @@ namespace GUI {
 
         float old_mod_depth;
 
+        Jack * jack;
+
     public:
 
-        ModulatedEncoder(const char *label_, float default_value_=0, float lower_bound_=-1, float upper_bound_=1,
+        AnalogEncoder(const char *label_, float default_value_=0, float lower_bound_=-1, float upper_bound_=1,
                          std::function<void(float)> callback_=[](float val){},
                          unsigned int default_map_=0, unsigned int shape_type_=BOX) :
                          Encoder(label_, default_value_, lower_bound_, upper_bound_, callback_, default_map_, shape_type_) {
@@ -151,6 +154,11 @@ namespace GUI {
             mod_depth = 0.3;
             mod = 0;
             dragging = false;
+
+            jack = new Jack(Jack::INPUT);
+            jack->GPlace({0.5, 0.54});
+            jack->GSetWidth(0.5);
+            GAttach(jack);
 
             GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
                 drag_from = v;
@@ -187,42 +195,60 @@ namespace GUI {
             }
         }
 
-        ModulatedEncoder &operator=(const float &value_) override {
+        void MRender(double beat) override {
+            if (jack->isConnected()) *this << *jack;
+            else *this << 0;
+        }
+
+        GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) override {
+            if (jack->visible && jack->GContains(point)) {
+                trace->push_front(jack);
+                trace->push_front(this);
+                return jack;
+            }
+            if (visible && GContains(point)) {
+                trace->push_front(this);
+                return this;
+            }
+            return nullptr;
+        }
+
+        AnalogEncoder &operator=(const float &value_) override {
             base_value = value_range_guard(value_);
             if (!dragging) Encoder::operator=((float)(*this));
             return *this;
         }
 
-        ModulatedEncoder &operator=(const double &value_) override {
+        AnalogEncoder &operator=(const double &value_) override {
             base_value = (float)value_;
             if (!dragging) Encoder::operator=((float)(*this));
             return *this;
         }
 
-        ModulatedEncoder &operator=(const int &value_) override {
+        AnalogEncoder &operator=(const int &value_) override {
             base_value = value_;
             if (!dragging) Encoder::operator=((float)(*this));
             return *this;
         }
 
-        ModulatedEncoder &operator*=(const float &value_) {
+        AnalogEncoder &operator*=(const float &value_) {
             mod_depth = value_;
             return *this;
         }
 
-        ModulatedEncoder &operator<<(const float &value_) {
+        AnalogEncoder &operator<<(const float &value_) {
             mod = value_;
             if (!dragging) Encoder::operator=((float)(*this));
             return *this;
         }
 
-        ModulatedEncoder &operator<<(const int &value_) {
+        AnalogEncoder &operator<<(const int &value_) {
             mod = value_;
             if (!dragging) Encoder::operator=((float)(*this));
             return *this;
         }
 
-        ModulatedEncoder &operator<<(const double &value_) {
+        AnalogEncoder &operator<<(const double &value_) {
             mod = (float)value_;
             if (!dragging) Encoder::operator=((float)(*this));
             return *this;

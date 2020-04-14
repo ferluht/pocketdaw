@@ -59,7 +59,7 @@ public:
         last_beat = 0;
 
         record = false;
-        record_automation = true;
+//        record_automation = true;
         hot_restart = false;
         notes_position = notes.begin();
         automation_position = automation.begin();

@@ -8,7 +8,6 @@
 
 #include "../Instrument.h"
 #include "AnalogDrum.h"
-#include <GUI/AnalogEncoder.h>
 #include <GUI/Jack.h>
 #include <Instruments/Envelopes/AD.h>
 

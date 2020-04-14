@@ -7,7 +7,6 @@
 
 #include <Orchestration/Rack.h>
 #include <GUI/Jack.h>
-#include <GUI/AnalogEncoder.h>
 #include "Instrument.h"
 #include "Sampler.h"
 
