@@ -6,27 +6,38 @@
 
 MoogFilter::MoogFilter() : AudioEffect("Filter")
 {
-    GSetRatio(0.45f);
+    GSetRatio(0.2);
 
     fs=48000.0;
 
     init();
 
-    cutoff_enc = new GUI::Encoder("cutoff", 1, -1, 1, [this](float value) {
-        setCutoff ((value + 1)*8000);
+    cutoff_enc = new GUI::AnalogEncoder("cutoff", 25, 0, 100, [this](float value) {
+        setCutoff (value*value);
     }, 1);
-    cutoff_enc->GPlace({0.25, 0.1});
-    cutoff_enc->GSetHeight(0.25);
+    cutoff_enc->GPlace({0.09, 0.1});
+    cutoff_enc->GSetHeight(0.2);
     GAttach(cutoff_enc);
     MConnect(cutoff_enc);
 
-    resonance_enc = new GUI::Encoder("resonance", -1, -1, 1, [this](float value) {
+    resonance_enc = new GUI::AnalogEncoder("resonance", -1, -1, 1, [this](float value) {
         setRes ((value + 1)/2);
     }, 1);
-    resonance_enc->GPlace({0.25, 0.4});
-    resonance_enc->GSetHeight(0.25);
+    resonance_enc->GPlace({0.09, 0.4});
+    resonance_enc->GSetHeight(0.2);
     GAttach(resonance_enc);
     MConnect(resonance_enc);
+
+    drive_enc = new GUI::AnalogEncoder("drive", -1, -1, 1, [this](float value) {}, 1);
+    drive_enc->GPlace({0.09, 0.7});
+    drive_enc->GSetHeight(0.2);
+    GAttach(drive_enc);
+    MConnect(drive_enc);
+}
+
+void MoogFilter::MRender(double beat) {
+    cutoff_enc->MRender(beat);
+    resonance_enc->MRender(beat);
 }
 
 void MoogFilter::init()

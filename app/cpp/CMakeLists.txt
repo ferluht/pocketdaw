@@ -153,7 +153,7 @@ add_library(
         GUI/FullscreenWindow.cpp
         GUI/Jack.cpp
         GUI/Wire.cpp
-        GUI/AnalogEncoder.cpp
+#        GUI/AnalogEncoder.cpp
 #        GUI/vectordisplay/vectordisplay.cpp
 
         Instruments/Envelopes/ADSR.cpp
@@ -168,6 +168,7 @@ add_library(
         Instruments/Sampler.cpp
         Instruments/SingleTone.cpp
         Instruments/Brute.cpp
+        Instruments/SoundObject5.cpp
 
         Instruments/AnalogDrums/AnalogDrum.cpp
         Instruments/AnalogDrums/Kick.cpp
@@ -176,6 +177,7 @@ add_library(
         MidiEffects/LFO.cpp
         MidiEffects/MidiEffect.cpp
         MidiEffects/Arpeggiator.cpp
+        MidiEffects/MidiMonitor.cpp
 #        MidiEffects/MidiDelay.cpp
 #        MidiEffects/Scale.cpp
 

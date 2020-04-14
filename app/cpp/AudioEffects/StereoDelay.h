@@ -16,7 +16,7 @@ public:
 
     StereoDelay();
 
-    void apply(float * lsample, float * rsample);
+    bool ARender(double beat, float * lsample, float * rsample) override ;
 
 private:
     float buffer[500];

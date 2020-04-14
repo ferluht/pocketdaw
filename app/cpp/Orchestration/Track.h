@@ -36,7 +36,7 @@ public:
             patterns[i]->MConnect(m_in);
 
             patterns[i]->GPlace({0, 0.01});
-            patterns[i]->GSetHeight(0.38);
+            patterns[i]->GSetHeight(0.23);
             patterns[i]->GSetWidth(1);
             GAttach(patterns[i]);
             patterns[i]->GSetVisible(false);
@@ -45,8 +45,8 @@ public:
         focus_pattern = 0;
         patterns[focus_pattern]->GSetVisible(true);
 
-        obj_space_c = {0, 0.4};
-        obj_space_s = {1, 0.6};
+        obj_space_c = {0, 0.25};
+        obj_space_s = {1, 0.75};
 
         GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
             drag_from = v;

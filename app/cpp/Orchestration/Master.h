@@ -27,6 +27,8 @@
 #include <MidiEffects/Sequencer.h>
 #include <MidiEffects/LFO.h>
 #include <Instruments/Operator.h>
+#include <Instruments/SoundObject5.h>
+#include <MidiEffects/MidiMonitor.h>
 #include "Track.h"
 
 class AMGMasterTrack : public GUI::AMGCanvas{
@@ -116,6 +118,13 @@ public:
                                                      }
                                                  }));
 
+        addDeviceMenu->addButton(new GUI::Button("Object5",
+                                                 [this](bool a){
+                                                     if (focus_track > -1) {
+                                                         Tracks[focus_track]->RAdd(new SoundObject5());
+                                                     }
+                                                 }));
+
         addDeviceMenu->addButton(new GUI::Button("Sampler",
                                                  [this](bool a){
                                                      if (focus_track > -1) {
@@ -123,19 +132,19 @@ public:
                                                      }
                                                  }));
 
-        addDeviceMenu->addButton(new GUI::Button("Analog kick",
-                                                 [this](bool a){
-                                                     if (focus_track > -1) {
-                                                         Tracks[focus_track]->RAdd(new Kick());
-                                                     }
-                                                 }));
+//        addDeviceMenu->addButton(new GUI::Button("Analog kick",
+//                                                 [this](bool a){
+//                                                     if (focus_track > -1) {
+//                                                         Tracks[focus_track]->RAdd(new Kick());
+//                                                     }
+//                                                 }));
 
-        addDeviceMenu->addButton(new GUI::Button("Analog snare",
-                                                 [this](bool a){
-                                                     if (focus_track > -1) {
-                                                         Tracks[focus_track]->RAdd(new Snare());
-                                                     }
-                                                 }));
+//        addDeviceMenu->addButton(new GUI::Button("Analog snare",
+//                                                 [this](bool a){
+//                                                     if (focus_track > -1) {
+//                                                         Tracks[focus_track]->RAdd(new Snare());
+//                                                     }
+//                                                 }));
 
         addDeviceMenu->addButton(new GUI::Button("Brute",
                                                  [this](bool a){
@@ -215,6 +224,13 @@ public:
                                                [this](bool a){
                                                    if (focus_track > -1) {
                                                        Tracks[focus_track]->RAdd(new LFO());
+                                                   }
+                                               }));
+
+        addMidiMenu->addButton(new GUI::Button("MidiMonitor",
+                                               [this](bool a){
+                                                   if (focus_track > -1) {
+                                                       Tracks[focus_track]->RAdd(new MidiMonitor());
                                                    }
                                                }));
 //

@@ -6,14 +6,14 @@
 
 Operator::Operator(unsigned int num_voices) : Instrument<OperatorState>(num_voices, "Operator"){
 //    GAttachTexture("Textures/effect_canvas.bmp");
-    GSetRatio(1);
+    GSetRatio(1.5);
 
     const char * names[] = {"A", "B", "C", "D"};
 
     for (int i = 0; i < 4; i++) {
         sines[i] = new Oscillator(names[i], 1);
-        sines[i]->GPlace({0.01, 0.01});
-        sines[i]->GSetWidth(0.98);
+        sines[i]->GPlace({0, 0});
+        sines[i]->GSetHeight(0.55);
         sines[i]->NoHeader();
         GAttach(sines[i]);
         sines[i]->GSetVisible(false);
@@ -22,6 +22,24 @@ Operator::Operator(unsigned int num_voices) : Instrument<OperatorState>(num_voic
     op_focus = 0;
     sines[op_focus]->GSetVisible(true);
     MConnect(sines[op_focus]);
+
+    opname = new GUI::ListButton(names, [this](int state){
+        sines[op_focus]->GSetVisible(false);
+        op_focus = state;
+        sines[op_focus]->GSetVisible(true);
+    });
+    opname->GPlace({0.7, 0.01});
+    opname->GSetHeight(0.2);
+    opname->GSetWidth(0.1);
+    GAttach(opname);
+
+    algo = new GUI::ListButton(names, [this](int state){
+        setAlgo(state);
+    });
+    algo->GPlace({0.85, 0.01});
+    algo->GSetHeight(0.2);
+    algo->GSetWidth(0.1);
+    GAttach(algo);
 
 //    algo = new TexturedMultiButton([this](unsigned int value){setAlgo(value);}, 11, algos);
 //    algo->place(0.01, 0.6);
@@ -79,6 +97,10 @@ void Operator::setAlgo(unsigned int value) {
         default:
             break;
     }
+}
+
+void Operator::MRender(double beat) {
+    for (auto sine : sines) sine->MRender(beat);
 }
 
 void Operator::GSetVisible(bool visible_) {

@@ -47,6 +47,9 @@ class Operator : public Instrument<OperatorState>{
 
     Oscillator * sines[4];
 
+    GUI::ListButton * opname;
+    GUI::ListButton * algo;
+
     float a = 0, b = 0, c = 0, d = 0;
 
     GUI::TimeGraph * graph;
@@ -80,18 +83,7 @@ public:
 
     void MIn(MData cmd) override ;
 
-    GObject * GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) override
-    {
-        if (visible && GContains(point)){
-            auto focus = Instrument::GFindFocusObject(point, trace);
-//            if (focus == sines[op_focus]) {
-//                trace->pop_front();
-//                return this;
-//            }
-            return focus;
-        }
-        return nullptr;
-    }
+    void MRender(double beat) override ;
 
 //    GObject * TapEnd(const ndk_helper::Vec2& v) ;
 

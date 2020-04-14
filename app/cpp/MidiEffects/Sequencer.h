@@ -105,11 +105,11 @@ public:
     }
 
     virtual void GSetVisible(bool visible_) override {
-        GUI::AMGCanvas::GSetVisible(false);
-        if (visible_) {
-            selectPattern(focus_pattern);
-            visible = true;
+        GUI::AMGCanvas::GSetVisible(visible_);
+        for (auto pattern : patterns) {
+            pattern->GSetVisible(false);
         }
+        patterns[focus_pattern]->GSetVisible(visible_);
     }
 
 };
