@@ -67,7 +67,7 @@ namespace
 
             m_nvg = nvgCreate(1, 0);
 
-            createFont(m_nvg, "sans", "font/droidsans.ttf");
+            createFont(m_nvg, "sans", "droidsans.ttf");
 
             GUI::GEngine::getGEngine().setDisplay(m_nvg, m_width, m_height);
 
