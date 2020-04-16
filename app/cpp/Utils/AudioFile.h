@@ -124,6 +124,8 @@ public:
      *      samples[channel][sampleIndex]
      */
     AudioBuffer samples;
+
+    int16_t sampleToSixteenBitInt (T sample);
     
 private:
     
@@ -153,7 +155,6 @@ private:
     
     //=============================================================
     T sixteenBitIntToSample (int16_t sample);
-    int16_t sampleToSixteenBitInt (T sample);
     
     //=============================================================
     uint8_t sampleToSingleByte (T sample);

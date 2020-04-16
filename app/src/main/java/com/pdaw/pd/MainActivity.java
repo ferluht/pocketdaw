@@ -29,6 +29,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.graphics.PixelFormat;
 import android.media.midi.MidiDevice;
 import android.media.midi.MidiDeviceInfo;
@@ -38,6 +39,7 @@ import android.media.midi.MidiReceiver;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -58,14 +60,21 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
+
+import static android.os.Environment.getExternalStorageDirectory;
 
 public class MainActivity extends NativeActivity {
 
@@ -126,8 +135,31 @@ public class MainActivity extends NativeActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, readExternalStoragePermission);
         }
 
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    readExternalStoragePermission);
+        }
+
         midiDevices = new HashMap<String, MidiDeviceInfo>();
         mHandler = new Handler();
+
+        getFilesDir();
+
+        File sdcard = Environment.getExternalStorageDirectory();
+        File dir = new File(sdcard.getAbsolutePath() + "/Music/pocketdaw/");
+        dir.mkdirs();
+        dir = new File(sdcard.getAbsolutePath() + "/.pocketdaw/");
+        dir.mkdirs();
+
+        copyAssets();
+//        Files.copy(origin.toPath(), dest.toPath());
+
+        Log.w("mem", getExternalStorageDirectory().getAbsolutePath());
+
 
         // Use this check to determine whether BLE is supported on the device.  Then you can
         // selectively disable BLE-related features.
@@ -170,6 +202,43 @@ public class MainActivity extends NativeActivity {
 
     }
 
+    private void copyAssets() {
+        AssetManager assetManager = getAssets();
+        String[] files = null;
+        try {
+            files = assetManager.list("");
+        } catch (IOException e) {
+            Log.e("tag", "Failed to get asset file list.", e);
+        }
+        for(String filename : files) {
+            InputStream in = null;
+            OutputStream out = null;
+            try {
+                in = assetManager.open(filename);
+
+                String outDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/.pocketdaw/" ;
+
+                File outFile = new File(outDir, filename);
+
+                out = new FileOutputStream(outFile);
+                copyFile(in, out);
+                in.close();
+                in = null;
+                out.flush();
+                out.close();
+                out = null;
+            } catch(IOException e) {
+                Log.e("tag", "Failed to copy asset file: " + filename, e);
+            }
+        }
+    }
+    private void copyFile(InputStream in, OutputStream out) throws IOException {
+        byte[] buffer = new byte[1024];
+        int read;
+        while((read = in.read(buffer)) != -1){
+            out.write(buffer, 0, read);
+        }
+    }
 
     class MyReceiver extends MidiReceiver {
         public void onSend(byte[] data, int offset,

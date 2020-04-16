@@ -10,6 +10,7 @@
 #include <GUI/Led.h>
 #include <Orchestration/Master.h>
 #include <GUI/Canvas.h>
+#include <time.h>
 
 class Synth : public GUI::AMGCanvas {
 
@@ -25,13 +26,17 @@ private:
     GUI::Menu * midiDeviceMenu;
     GUI::Button * midi_device_menu;
     GUI::Button * record_button;
+    GUI::Button * save_button;
     GUI::Led * midiLeds[2];
 //    Oscilloscope * masterWaveform;
 
     float panel_height = 0.05f;
-    float panel_buttons_start_x = 0.1f;
+    float panel_buttons_start_x = 0.06f;
     float panel_button_ratio = 3;
     float panel_button_width = 0.1;
+
+    AudioFile<float> audioFile;
+    char filename[100];
 
     std::list<GUI::Button *> upper_panel_buttons;
 
@@ -106,6 +111,23 @@ public:
         });
         add_upper_panel_button(record_button);
 
+        save_button = new GUI::Button("SAVE", [this](bool state){
+            if (state) {
+                struct timespec res;
+                clock_gettime(CLOCK_REALTIME, &res);
+                double t = 1000.0 * res.tv_sec + (double) res.tv_nsec / 1e6;
+                sprintf(filename, "/storage/emulated/0/Music/pocketdaw/%lld.wav", static_cast<long long>(t));
+
+                audioFile.setBitDepth (16);
+                audioFile.setSampleRate (static_cast<unsigned int>(sample_rate));
+                audioFile.setNumChannels(2);
+//                audioFile.setNumSamplesPerChannel(100000);
+
+                audioFile.save (filename);
+            }
+        });
+        add_upper_panel_button(save_button);
+
 //        midiDeviceMenu->setGainCallback([this](){
 //            auto midi = &MEngine::getMEngine();
 //            auto mnames = midi->getDevices();
@@ -137,7 +159,27 @@ public:
     }
 
     inline bool ARender(float * audioData, int numFrames) override {
-        return Master->ARender(audioData, numFrames);
+        bool ret = Master->ARender(audioData, numFrames);
+        if (*save_button) {
+
+            FILE* f= fopen(filename, "ab");
+
+            uint8_t bytes[4*numFrames];
+            for (int i = 0; i < numFrames; i++)
+            {
+                int16_t l = audioFile.sampleToSixteenBitInt (audioData[i*2]);
+                int16_t r = audioFile.sampleToSixteenBitInt (audioData[i*2 + 1]);
+                bytes[4*i + 3] = (uint8_t) (r >> 8) & 0xFF;
+                bytes[4*i + 2] = (uint8_t) r & 0xFF;
+                bytes[4*i + 1] = (uint8_t) (l >> 8) & 0xFF;
+                bytes[4*i + 0] = (uint8_t) l & 0xFF;
+            }
+
+            fwrite(bytes, sizeof(uint8_t), 4*numFrames, f);
+
+            fclose(f);
+        }
+        return ret;
     }
 
     void MIn(MData cmd) override {
