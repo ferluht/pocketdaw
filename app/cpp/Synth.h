@@ -27,6 +27,7 @@ private:
     GUI::Button * midi_device_menu;
     GUI::Button * record_button;
     GUI::Button * save_button;
+    GUI::ProgressButton * cpuload;
     GUI::Led * midiLeds[2];
 //    Oscilloscope * masterWaveform;
 
@@ -37,6 +38,9 @@ private:
 
     AudioFile<float> audioFile;
     char filename[100];
+
+    double render_time = 0;
+    double last_render_time = 0;
 
     std::list<GUI::Button *> upper_panel_buttons;
 
@@ -128,6 +132,11 @@ public:
         });
         add_upper_panel_button(save_button);
 
+        cpuload = new GUI::ProgressButton("CPU", [this](bool state){
+
+        });
+        add_upper_panel_button(cpuload);
+
 //        midiDeviceMenu->setGainCallback([this](){
 //            auto midi = &MEngine::getMEngine();
 //            auto mnames = midi->getDevices();
@@ -160,6 +169,15 @@ public:
 
     inline bool ARender(float * audioData, int numFrames) override {
         bool ret = Master->ARender(audioData, numFrames);
+
+        struct timespec res;
+        clock_gettime(CLOCK_THREAD_CPUTIME_ID, &res);
+//        clock_gettime(CLOCK_THREAD_CPUTIME_ID, )
+        render_time = res.tv_sec + (double) res.tv_nsec / 1e9;
+        float load = static_cast<float>(render_time - last_render_time);
+        last_render_time = render_time;
+        cpuload->progress(load / ((float)numFrames / sample_rate));
+
         if (*save_button) {
 
             FILE* f= fopen(filename, "ab");
