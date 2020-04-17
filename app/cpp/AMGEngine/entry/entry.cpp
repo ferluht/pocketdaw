@@ -567,12 +567,15 @@ BX_PRAGMA_DIAGNOSTIC_POP();
 		BX_FREE(g_allocator, apps);
 	}
 
-	int main(int _argc, const char* const* _argv)
+	int main(int height, int width, int _argc, const char* const* _argv)
 	{
 		//DBG(BX_COMPILER_NAME " / " BX_CPU_NAME " / " BX_ARCH_NAME " / " BX_PLATFORM_NAME);
 
 		s_fileReader = BX_NEW(g_allocator, FileReader);
 		s_fileWriter = BX_NEW(g_allocator, FileWriter);
+
+		s_width = static_cast<uint32_t >(width);
+		s_height = static_cast<uint32_t >(height);
 
 		cmdInit();
 		cmdAdd("mouselock", cmdMouseLock);
@@ -590,7 +593,7 @@ BX_PRAGMA_DIAGNOSTIC_POP();
 		bx::strCopy(title, BX_COUNTOF(title), fp.getBaseName() );
 
 		entry::setWindowTitle(defaultWindow, title);
-		setWindowSize(defaultWindow, ENTRY_DEFAULT_WIDTH, ENTRY_DEFAULT_HEIGHT);
+		setWindowSize(defaultWindow, width, height);
 
 		sortApps();
 
@@ -621,6 +624,7 @@ restart:
 
 		int32_t result = bx::kExitSuccess;
 		s_restartArgs[0] = '\0';
+
 		if (0 == s_numApps)
 		{
 			result = ::_main_(_argc, (char**)_argv);
@@ -738,6 +742,8 @@ restart:
 						win.m_handle = size->m_handle;
 						win.m_width  = size->m_width;
 						win.m_height = size->m_height;
+						s_height = size->m_height;
+						s_width = size->m_width;
 
 						handle  = size->m_handle;
 						_width  = size->m_width;

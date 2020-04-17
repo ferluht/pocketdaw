@@ -88,6 +88,8 @@ namespace entry
 
 	struct MainThreadEntry
 	{
+	    int height;
+	    int width;
 		int m_argc;
 		const char* const* m_argv;
 
@@ -194,6 +196,7 @@ namespace entry
 			m_app->userData = (void*) this;
 			m_app->onAppCmd = onAppCmdCB;
 			m_app->onInputEvent = onInputEventCB;
+
 			ANativeActivity_setWindowFlags(m_app->activity, 0
 				| AWINDOW_FLAG_FULLSCREEN
 				| AWINDOW_FLAG_KEEP_SCREEN_ON
@@ -240,6 +243,19 @@ namespace entry
 
 						int32_t width  = ANativeWindow_getWidth(m_window);
 						int32_t height = ANativeWindow_getHeight(m_window);
+
+						m_mte.height = height;
+						m_mte.width = width;
+
+//						char width_char[10];
+//                        char height_char[10];
+//
+//                        sprintf(width_char, "%d", width);
+//                        sprintf(height_char, "%d", height);
+//
+//						m_mte.m_argc = 3;
+//                        const char* const argv[3] = { "android.so", width_char, height_char};
+//                        m_mte.m_argv = argv;
 
 						DBG("ANativeWindow width %d, height %d", width, height);
 						WindowHandle defaultWindow = { 0 };
@@ -505,7 +521,8 @@ namespace entry
 		BX_CHECK(0 == result, "Failed to chdir to dir. android.permission.WRITE_EXTERNAL_STORAGE?", errno);
 
 		MainThreadEntry* self = (MainThreadEntry*)_userData;
-		result = main(self->m_argc, self->m_argv);
+
+		result = main(self->height, self->width, self->m_argc, self->m_argv);
 //		PostMessage(s_ctx.m_hwnd, WM_QUIT, 0, 0);
 		return result;
 	}
