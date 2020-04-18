@@ -35,6 +35,7 @@ private:
     float panel_buttons_start_x = 0.06f;
     float panel_button_ratio = 3;
     float panel_button_width = 0.1;
+    float mc_height = 0;
 
     AudioFile<float> audioFile;
     char filename[100];
@@ -69,7 +70,18 @@ public:
         linkButton = Master->linkButton;
         add_upper_panel_button(linkButton);
 
-        mapping_mode = new GUI::Button("MIDI", [this](bool state){ });
+        mapping_mode = new GUI::Button("MIDI", [this](bool state){
+            if (!state && mc_height < 1) {
+                mc_height = 1;
+                mapping_mode->state = true;
+            } else if (!state) {
+                mc_height = 0;
+            } else {
+                mc_height = 0.25;
+            }
+            Master->MSetMCHeight(mc_height);
+        });
+        *mapping_mode = true;
         add_upper_panel_button(mapping_mode);
 
         float led_height = panel_height * 0.4f;
@@ -174,9 +186,10 @@ public:
         clock_gettime(CLOCK_THREAD_CPUTIME_ID, &res);
 //        clock_gettime(CLOCK_THREAD_CPUTIME_ID, )
         render_time = res.tv_sec + (double) res.tv_nsec / 1e9;
-        float load = static_cast<float>(render_time - last_render_time);
+        float load = static_cast<float>(render_time - last_render_time) / ((float)numFrames / sample_rate);
         last_render_time = render_time;
-        cpuload->progress(load / ((float)numFrames / sample_rate));
+        if (load > 1) load = 1;
+        cpuload->progress(load);
 
         if (*save_button) {
 

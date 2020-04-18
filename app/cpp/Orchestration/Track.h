@@ -35,18 +35,16 @@ public:
             patterns.push_back(new MidiClip());
             patterns[i]->MConnect(m_in);
 
-            patterns[i]->GPlace({0, 0.01});
-            patterns[i]->GSetHeight(0.23);
+            patterns[i]->GPlace({0, 0});
             patterns[i]->GSetWidth(1);
             GAttach(patterns[i]);
             patterns[i]->GSetVisible(false);
         }
 
+        TSetMCHeight(0.23);
+
         focus_pattern = 0;
         patterns[focus_pattern]->GSetVisible(true);
-
-        obj_space_c = {0, 0.25};
-        obj_space_s = {1, 0.75};
 
         GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
             drag_from = v;
@@ -63,6 +61,13 @@ public:
         });
 
         setColor(DARKER);
+    }
+
+    void TSetMCHeight(float height) {
+        for (int i = 0; i < 4; i++) patterns[i]->GSetHeight(height);
+        obj_space_c = {0, height};
+        obj_space_s = {1, 1 - height};
+        updatePositions();
     }
 
     inline void MIn(MData cmd) override {

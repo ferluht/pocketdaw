@@ -14,9 +14,9 @@ namespace GUI {
 
         char * label;
 
-        const float onoff_button_padding = 0.01;
+        const float onoff_button_padding = 0.002;
         const float onoff_button_height = 0.9;
-        const float onoff_button_ratio = 2;
+        const float onoff_button_ratio = 1.2;
         const float name_height = 0.5;
 
     public:

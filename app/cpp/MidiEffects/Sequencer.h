@@ -47,15 +47,17 @@ public:
 
     SequencerPattern (int n_steps_=64) {
 
-        for (int i = 0; i < n_steps_; i++) {
-            char buffer[64];
-            snprintf(buffer, sizeof buffer, "step %d", i);
-            auto step = new SequencerStep(buffer);
-            steps.push_back(step);
-            step->GPlace({1.0f / (float) n_steps_ * i, 0.02f});
-            step->GSetRatio(1);
-            step->GSetWidth(1.0f / (float) n_steps_);
-            GAttach(step);
+        for (int j = 0; j < n_steps_/4; j++) {
+            for (int i = 0; i < 4; i++) {
+                char buffer[64];
+                snprintf(buffer, sizeof buffer, "step %d", i);
+                auto step = new SequencerStep(buffer);
+                steps.push_back(step);
+                step->GPlace({1.0f / (float) n_steps_ * 4 * (0.125f + i), 0.25f * j + 0.01f});
+                step->GSetRatio(1);
+                step->GSetWidth(1.0f / 5.f);
+                GAttach(step);
+            }
         }
     }
 
@@ -80,7 +82,7 @@ public:
         for (int i = 0; i < n_patterns_; i++) {
             auto pattern = new SequencerPattern(n_steps_);
             patterns.push_back(pattern);
-            pattern->GPlace({0, 0});
+            pattern->GPlace({0, 0.02});
             pattern->GSetWidth(1);
             pattern->GSetHeight(1);
             GAttach(pattern);
@@ -130,7 +132,7 @@ public:
 
     Sequencer(int n_channels_, int n_steps_=16, int n_patterns_=8) : MidiEffect("Sequencer") {
 
-        GSetRatio(2);
+        GSetRatio(0.5);
 
         for (int i = 0; i < n_channels_; i++) {
             auto channel = new SequencerChannel(n_patterns_, n_steps_);
@@ -151,13 +153,13 @@ public:
 
         prev = new GUI::TapButton("prev", [this](bool a){selectChannel(focus_channel - 1);});
         prev->GPlace({0.05, 0.7});
-        prev->GSetHeight(0.2);
+        prev->GSetWidth(0.3);
         prev->GSetRatio(2);
         GAttach(prev);
 
         next = new GUI::TapButton("next", [this](bool a){selectChannel(focus_channel + 1);});
         next->GPlace({0.25, 0.7});
-        next->GSetHeight(0.2);
+        next->GSetWidth(0.3);
         next->GSetRatio(2);
         GAttach(next);
 
@@ -178,11 +180,11 @@ public:
     }
 
     virtual void GSetVisible(bool visible_) {
-        MidiEffect::GSetVisible(false);
-        if (visible_) {
-            selectChannel(focus_channel);
-            visible = true;
+        MidiEffect::GSetVisible(visible_);
+        for (auto channel : channels) {
+            channel->GSetVisible(false);
         }
+        channels[focus_channel]->GSetVisible(visible_);
     }
 
     void MRender(double beat) override {

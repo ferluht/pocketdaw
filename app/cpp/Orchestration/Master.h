@@ -29,6 +29,7 @@
 #include <Instruments/Operator.h>
 #include <Instruments/SoundObject5.h>
 #include <MidiEffects/MidiMonitor.h>
+#include <AudioEffects/Saturator.h>
 #include "Track.h"
 
 class AMGMasterTrack : public GUI::AMGCanvas{
@@ -44,6 +45,7 @@ public:
     unsigned char size_denominator;
     double bpm, beat, phase;
     bool isPlaying;
+    float mc_height;
     GUI::ProgressButton * linkButton;
     GUI::Button * metronome_button;
     Metronome * metronome;
@@ -70,6 +72,8 @@ public:
         metronome_button = new GUI::Button("Metr", [](bool state){});
         beat = 0;
         phase = 0;
+
+        mc_height = 0;
 
 //        auto tr = new Arpeggiator();
 //        tr->place(0, 0);
@@ -278,6 +282,13 @@ public:
                                                     }
                                                 }));
 
+        addAudioMenu->addButton(new GUI::Button("Saturator",
+                                                [this](bool a){
+                                                    if (focus_track > -1) {
+                                                        Tracks[focus_track]->RAdd(new Saturator());
+                                                    }
+                                                }));
+
 //        addAudioMenu->addItem(L"Filter",
 //                              [this](){
 //                                  if (focus_track > -1) {
@@ -330,6 +341,7 @@ public:
         track->GPlace({0, 0});
         track->GSetHeight(1);
         track->GSetWidth(1);
+        track->TSetMCHeight(mc_height);
         GAttach(track);
     }
 
@@ -340,10 +352,14 @@ public:
         if (i > (int)Tracks.size() - 1) i = Tracks.size() - 1;
         if (i < 0) i = 0;
         focus_track = i;
+        Tracks[focus_track]->TSetMCHeight(mc_height);
         Tracks[focus_track]->GSetVisible(true);
     }
 
-
+    void MSetMCHeight(float height) {
+        mc_height = height;
+        for (auto const& track : Tracks) track->TSetMCHeight(mc_height);
+    }
 
     inline void MIn(MData cmd) override{
         cmd.beat = beat;

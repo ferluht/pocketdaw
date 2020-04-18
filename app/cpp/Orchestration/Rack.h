@@ -20,7 +20,7 @@ private:
 
 public:
 
-    const float padding = 0.01;
+    const float padding = 0.004;
 
     float x_offset = 0;
     float max_x_offset = 0;
@@ -137,6 +137,7 @@ public:
         float x = padding;
         for (auto const& obj : objects) {
             obj->GPlace({x + x_offset, obj_space_c.y + padding * obj_space_s.y});
+            obj->GSetHeight(obj_space_s.y);
             x += obj->local.ratio / (global.ratio * obj_space_s.x / obj_space_s.y) +
                     padding * obj_space_s.y / obj_space_s.x;
         }

@@ -193,7 +193,10 @@ public:
         dist = new std::uniform_real_distribution<float>(-1, 1);
 
         o_waveform[0] = 0;
-        o_waveform[0] = 0;
+        o_waveform[1] = 0;
+
+        o_type[0] = 0;
+        o_type[1] = 0;
 
         for (int i = 0; i < waveform_vis_size; i++){
             o1_wave->update(osc(i*(M_PI*2/waveform_vis_size) - M_PI, 0) * 0.9);

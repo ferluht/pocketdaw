@@ -8,36 +8,37 @@
 Oscilloscope::Oscilloscope() : AudioEffect("Oscill")
 {
 
-    GSetRatio(1.5);
+    GSetRatio(0.3f);
 
-    plot = new GUI::Plot<GUI::TimeGraph>(200);
+    plot = new GUI::Plot<GUI::TimeGraph>(graph_points);
     plot->GPlace({0.01, 0.01});
-    plot->GSetHeight(0.7);
+    plot->GSetHeight(0.98*0.3);
     plot->GSetWidth(0.98);
     GAttach(plot);
 
     trig = new GUI::Encoder("trig", 0, -1, 1);
-    trig->GPlace({0.05, 0.72});
-    trig->GSetHeight(0.26);
+    trig->GPlace({0.225, 0.35});
+    trig->GSetHeight(0.2);
     GAttach(trig);
     MConnect(trig);
 
     time = new GUI::Encoder("time", 100, 0, 100);
-    time->GPlace({0.2, 0.72});
-    time->GSetHeight(0.26);
+    time->GPlace({0.225, 0.575});
+    time->GSetHeight(0.2);
     GAttach(time);
     MConnect(time);
 
     scale = new GUI::Encoder("scale", 1, 0, 5);
-    scale->GPlace({0.35, 0.72});
-    scale->GSetHeight(0.26);
+    scale->GPlace({0.225, 0.8});
+    scale->GSetHeight(0.2);
     GAttach(scale);
     MConnect(scale);
 }
 
 bool Oscilloscope::ARender(double beat, float *lsample, float *rsample) {
 
-    if (*rsample > *trig / *scale) after_trig = 0;
+//    if (*rsample > *trig / *scale) after_trig = 0;
+    if (*rsample > max) after_trig = 0;
 
     if (after_trig < graph_points) {
         if (sample_counter < *time) {
@@ -48,6 +49,8 @@ bool Oscilloscope::ARender(double beat, float *lsample, float *rsample) {
             after_trig ++;
         }
     }
+    if (*rsample > max) max = *rsample;
+    max -= 0.00001;
     return true;
 }
 
