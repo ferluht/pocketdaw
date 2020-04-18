@@ -49,7 +49,7 @@ public:
     bool hot_restart;
 
     float root_note = 32, old_root_note;
-    float vert_notes = 10;
+    float vert_notes = 16;
     Vec2 drag_start;
 
     MidiClip(){
@@ -118,6 +118,12 @@ public:
         }
 
         midiLock.unlock();
+    }
+
+    void GSetHeight(float height) override {
+        GUI::AMGCanvas::GSetHeight(height);
+        if (height < 0.5) vert_notes = 10;
+        else vert_notes = 24;
     }
 
     inline void MCHotRestart() {

@@ -16,7 +16,8 @@ class Oscilloscope : public AudioEffect{
 
     int sample_counter = 0;
     int after_trig = 0;
-    const int graph_points = 200;
+    const int graph_points = 100;
+    float max = 0;
 
     GUI::Plot<GUI::TimeGraph> * plot;
 

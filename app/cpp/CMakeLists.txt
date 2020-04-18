@@ -127,6 +127,7 @@ add_library(
         AudioEffects/StereoDelay.cpp
         AudioEffects/ConvolutionReverb.cpp
         AudioEffects/ThreeBandEQ.cpp
+        AudioEffects/Saturator.cpp
 
         AudioEffects/FFTConvolver/AudioFFT.cpp
         AudioEffects/FFTConvolver/FFTConvolver.cpp
