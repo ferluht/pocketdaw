@@ -19,7 +19,7 @@
 #include <GUI/Menu.h>
 #include <Utils/Utils.h>
 
-class AMGTrack : public AMGRack{
+class AMGTrack : public AMGRack {
 
 public:
 
@@ -27,6 +27,17 @@ public:
     int focus_pattern;
 
     Vec2 drag_from;
+    bool mc_visible;
+    std::thread * track_thread;
+    std::mutex run_lock;
+    std::mutex stop_lock;
+    std::mutex end_lock;
+    std::mutex destroy_lock;
+
+    double beat;
+    double increment;
+    float * audioData;
+    int numFrames;
 
     AMGTrack(std::string name) : AMGRack() {
         drag_from = {0, 0};
@@ -44,27 +55,24 @@ public:
         TSetMCHeight(0.23);
 
         focus_pattern = 0;
-        patterns[focus_pattern]->GSetVisible(true);
-
-        GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
-            drag_from = v;
-            return this;
-        });
-
-        GSetDragHandlerCallback([this](const Vec2& v) -> GUI::GObject * {
-            x_offset += (v.x - drag_from.x)/global.s.x;
-            if ((max_x_offset > 0) || (x_offset > 0)) x_offset = 0;
-            if ((max_x_offset < 0) && (x_offset < max_x_offset)) x_offset = max_x_offset;
-            updatePositions();
-            drag_from = v;
-            return this;
-        });
+        patterns[focus_pattern]->GSetVisible(mc_visible);
 
         setColor(DARKER);
+
+        run_lock.lock();
+        stop_lock.unlock();
+        end_lock.unlock();
+        destroy_lock.lock();
+        track_thread = new std::thread(AMGTrackRun, this);
     }
 
     void TSetMCHeight(float height) {
-        for (int i = 0; i < 4; i++) patterns[i]->GSetHeight(height);
+        mc_visible = height != 0;
+        for (int i = 0; i < 4; i++) {
+            patterns[i]->GSetHeight(height);
+            patterns[i]->GSetVisible(false);
+        }
+        patterns[focus_pattern]->GSetVisible(mc_visible);
         obj_space_c = {0, height};
         obj_space_s = {1, 1 - height};
         updatePositions();
@@ -80,7 +88,7 @@ public:
                 patterns[focus_pattern]->GSetVisible(false);
                 patterns[cmd.data2 - 1]->MCHotRestart();
                 focus_pattern = cmd.data2 - 1;
-                patterns[focus_pattern]->GSetVisible(true);
+                patterns[focus_pattern]->GSetVisible(mc_visible);
             }
             return;
         }
@@ -90,7 +98,7 @@ public:
                 patterns[cmd.data2 - 1]->MCHotRestart();
                 patterns[focus_pattern]->MCCopyTo(patterns[cmd.data2 - 1]);
                 focus_pattern = cmd.data2 - 1;
-                patterns[focus_pattern]->GSetVisible(true);
+                patterns[focus_pattern]->GSetVisible(mc_visible);
             }
             return;
         }
@@ -108,7 +116,49 @@ public:
         patterns[focus_pattern]->GSetVisible(visible_);
     }
 
-    ~AMGTrack(){}
+    void AMGTrackProcess(double beat_, double increment_, float * audioData_, int numFrames_) {
+        stop_lock.lock();
+        beat = beat_;
+        increment = increment_;
+        audioData = audioData_;
+        numFrames = numFrames_;
+
+        stop_lock.unlock();
+        end_lock.lock();
+        run_lock.unlock();
+    }
+
+    void AMGTrackWait() {
+        end_lock.lock();
+        end_lock.unlock();
+    }
+
+    static void AMGTrackRun(AMGTrack * track) {
+        while(!track->destroy_lock.try_lock()) {
+            track->run_lock.lock();
+            track->stop_lock.lock();
+
+            for (int i = 0; i < track->numFrames; i++) {
+                track->audioData[2 * i] = 0;
+                track->audioData[2 * i + 1] = 0;
+
+                track->MRender(track->beat);
+
+                track->ARender(track->beat, &track->audioData[2 * i], &track->audioData[2 * i + 1]);
+
+                track->beat += track->increment;
+
+                track->MRender(track->beat);
+            }
+
+            track->stop_lock.unlock();
+            track->end_lock.unlock();
+        }
+    }
+
+    ~AMGTrack(){
+        destroy_lock.unlock();
+    }
 };
 
 

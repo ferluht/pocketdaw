@@ -19,6 +19,8 @@ public:
 
     virtual bool ARender(float * audioData, int numFrames) {return true;}
 
+    virtual bool ARender(double beat, float * audioData, int numFrames) {return true;}
+
     virtual bool ARender(float * lsample, float * rsample) {return true;}
 
     virtual bool ARender(double beat, float * lsample, float * rsample) {return true;}

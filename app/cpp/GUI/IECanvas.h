@@ -10,7 +10,7 @@
 
 namespace GUI {
 
-    class Header : public AMGCanvas {
+    class IEHeader : public AMGCanvas {
 
         char * label;
 
@@ -23,7 +23,7 @@ namespace GUI {
 
         Button *isOn;
 
-        Header(const char * label_) {
+        IEHeader(const char * label_) {
             setColor(GREY);
             size_t len = strlen(label_);
             label = new char[len + 1];
@@ -51,27 +51,16 @@ namespace GUI {
             nvgClosePath(nvg);
         };
 
-        GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) override {
-            auto fo = isOn->GFindFocusObject(point, trace);
-            if (fo) {
-                trace->push_front(this);
-                return fo;
-            }
-            if (visible && GContains(point)) {
-                return this;
-            }
-
-            return nullptr;
-        }
-
     };
+
+    static auto isIEHeader = GUI::IsType<IEHeader>;
 
     class IECanvas : public AMGCanvas {
 
         const float header_height = 0.08;
 
         GObject *body;
-        Header *header;
+        IEHeader *header;
         bool attach_to_body = false;
 
         bool no_header = false;
@@ -81,7 +70,7 @@ namespace GUI {
 
         IECanvas(const char *name_) {
 
-            header = new Header(name_);
+            header = new IEHeader(name_);
             header->GPlace({0, 0});
             header->GSetHeight(header_height);
             header->GSetWidth(1);
@@ -106,19 +95,6 @@ namespace GUI {
             body->GPlace({0, 0});
             body->GSetHeight(1);
             body->GSetWidth(1);
-        }
-
-        GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) override {
-            auto fo = body->GFindFocusObject(point, trace);
-            if (fo) {
-                trace->push_front(this);
-                return fo;
-            }
-            fo = header->GFindFocusObject(point, trace);
-            if (fo == header) {
-                return this;
-            }
-            return nullptr;
         }
 
         void GAttach(GObject * go) override {
@@ -151,6 +127,8 @@ namespace GUI {
             nvgClosePath(nvg);
         };
     };
+
+    static auto isIECanvas = GUI::IsType<IECanvas>;
 
 }
 

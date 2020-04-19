@@ -135,7 +135,7 @@ public:
     }
 
     void MRender(double beat) override {
-
+//        return;
         midiLock.lock();
 
         double m_beat = fmod(beat - start, length);

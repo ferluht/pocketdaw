@@ -27,11 +27,31 @@ bool AMGMasterTrack::ARender(float *audioData, int numFrames) {
 //    cmd.data2 = 100;
 //    MOut(cmd);
 
-    for (int i = 0; i < numFrames; i++) {
-        audioData[2*i] = 0;
-        audioData[2*i+1] = 0;
+    track_lock.lock();
 
-        MRender(beat);
+    float * samples[Tracks.size()];
+
+    for (int i = 0; i < Tracks.size(); i ++) {
+        samples[i] = new float[numFrames * 2];
+        Tracks[i]->AMGTrackProcess(beat, increment, samples[i], numFrames);
+    }
+
+    for (int i = 0; i < numFrames; i++) {
+        audioData[2 * i] = 0;
+        audioData[2 * i + 1] = 0;
+    }
+
+    for (int i = 0; i < Tracks.size(); i ++) {
+        Tracks[i]->AMGTrackWait();
+        for (int j = 0; j < numFrames; j++) {
+            audioData[2*j] += samples[i][2*j];
+            audioData[2*j + 1] += samples[i][2*j + 1];
+        }
+    }
+
+    track_lock.unlock();
+
+    for (int i = 0; i < numFrames; i++) {
 
         if (*metronome_button) {
             if ((int)phase > (int)last_phase) metronome->tic(beat);
@@ -40,12 +60,6 @@ bool AMGMasterTrack::ARender(float *audioData, int numFrames) {
             metronome->ARender(beat, &audioData[2*i], &audioData[2*i + 1]);
         }
 
-        for (auto const& track : Tracks) {
-            float l = 0, r = 0;
-            track->ARender(beat, &l, &r);
-            audioData[2*i] += l;
-            audioData[2*i + 1] += r;
-        }
         AEffects.ARender(beat, &audioData[2*i], &audioData[2*i + 1]);
         beat += increment;
         phase = fmod(phase + increment, size_denominator);
