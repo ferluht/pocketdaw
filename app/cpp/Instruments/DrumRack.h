@@ -20,28 +20,20 @@ class DrumRack : public Instrument<DrumRackState> {
     std::list<AMGRack *> activeChains;
     AMGRack * focus_chain;
 
-    GUI::AnalogEncoder * enc;
-
 public:
 
     DrumRack() : Instrument(1, "Drum rack") {
-        GSetRatio(2);
+        GSetRatio(1);
         focus_chain = nullptr;
 
         for (int i = 0; i < 128; i ++) notes[i] = nullptr;
-
-        enc = new GUI::AnalogEncoder("test");
-        enc->GPlace({0.1, 0.5});
-        enc->GSetHeight(0.4);
-        GAttach(enc);
-        MConnect(enc);
     }
 
     void addSample(const char * sample_name_, const char note) {
         auto chain = new AMGRack();
-        chain->GPlace({0.51, 0.01});
+        chain->GPlace({0.01, 0.01});
         chain->GSetHeight(0.98);
-        chain->GSetWidth(0.48);
+        chain->GSetWidth(0.98);
         GAttach(chain);
         MConnect(chain);
         focusOn(chain);
@@ -83,7 +75,6 @@ public:
     }
 
     void MRender(double beat) {
-        enc->MRender(beat);
         for (const auto & chain : activeChains) chain->MRender(beat);
     }
 };

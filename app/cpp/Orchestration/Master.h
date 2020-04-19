@@ -38,6 +38,7 @@ private:
 
     double last_phase = 0;
     int focus_track = -1;
+    std::mutex track_lock;
 
 public:
 
@@ -58,12 +59,12 @@ public:
     std::vector<AMGTrack*> Tracks;
     AMGChain AEffects;
 
-    AMGMasterTrack() : link(120.0) {
+    AMGMasterTrack() : link(170.0) {
         link.enable(true);
 //        GAttachTexture("Textures/background.bmp");
         size_denominator = 4;
         isPlaying = false;
-        bpm = 120;
+        bpm = 170;
         linkButton = new GUI::ProgressButton("Link", [this](bool state){
             this->link.enable(state);
             isPlaying = state;
@@ -162,10 +163,10 @@ public:
                                                  [this](bool a){
                                                      if (focus_track > -1) {
                                                          auto drack = new DrumRack();
-                                                         drack->addSample("/storage/emulated/0/808.wav", 36);
-                                                         drack->addSample("/storage/emulated/0/Kick8081.wav", 37);
-                                                         drack->addSample("/storage/emulated/0/Snare8081.wav", 38);
-                                                         drack->addSample("/storage/emulated/0/ClosedHH808.wav", 39);
+                                                         drack->addSample("/storage/emulated/0/000_AMENCUT_001.wav", 36);
+                                                         drack->addSample("/storage/emulated/0/000_AMENCUT_002.wav", 37);
+                                                         drack->addSample("/storage/emulated/0/000_AMENCUT_003.wav", 38);
+                                                         drack->addSample("/storage/emulated/0/000_AMENCUT_004.wav", 39);
                                                          drack->addSample("/storage/emulated/0/Shaker.wav", 40);
                                                          Tracks[focus_track]->RAdd(drack);
                                                      }
@@ -336,6 +337,7 @@ public:
     bool ARender(float * audioData, int numFrames) override;
 
     void AddTrack(AMGTrack * track) {
+        track_lock.lock();
         Tracks.push_back(track);
         changeTrackFocus(Tracks.size() - 1);
         track->GPlace({0, 0});
@@ -343,6 +345,7 @@ public:
         track->GSetWidth(1);
         track->TSetMCHeight(mc_height);
         GAttach(track);
+        track_lock.unlock();
     }
 
     void changeTrackFocus(int i){
