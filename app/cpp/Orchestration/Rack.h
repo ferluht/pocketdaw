@@ -20,7 +20,7 @@ private:
 
 public:
 
-    const float padding = 0.004;
+    const float padding = 0; //0.004;
 
     float x_offset = 0;
     float max_x_offset = 0;

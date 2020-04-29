@@ -378,6 +378,35 @@ namespace GUI {
     }
 
 
+    static struct Theme {
+
+        NVGcolor BACKGROUND_COLOR = nvgRGB(14,13,18);
+        NVGcolor FULLSCREEN_MENU_BODY_COLOR = nvgRGB(30,30,38);
+        NVGcolor HEADER_COLOR = nvgRGB(27,21,35);
+        NVGcolor ENCODER_VALUE_ARC_COLOR = nvgRGB(60, 242, 19);
+        NVGcolor ENCODER_MODULATION_ARC_COLOR = nvgRGB(0,156,245);
+        NVGcolor GRAPH_COLOR = nvgRGB(60, 242, 19);
+        NVGcolor PLOT_BODY_COLOR = nvgRGB(24,23,31);
+        NVGcolor MIDI_BODY_COLOR = nvgRGB(14,13,20);
+        NVGcolor MIDI_DELIMITER_COLOR = nvgRGB(100,100,150);
+        NVGcolor MIDI_NOTE_COLOR = nvgRGB(0,156,245);
+        NVGcolor IECANVAS_BODY_COLOR = nvgRGB(24,23,31);
+        NVGcolor MIDI_EFFECT_BODY_COLOR;
+        NVGcolor AUDIO_EFFECT_BODY_COLOR;
+        NVGcolor BUTTON_OFF_COLOR = nvgRGBA(0,0,0,0);
+        NVGcolor BUTTON_ON_COLOR = nvgRGBA(0,0,0,0);
+        NVGcolor BUTTON_TEXT_OFF_COLOR = nvgRGB(80,80,80);
+        NVGcolor BUTTON_TEXT_ON_COLOR = nvgRGB(250,250,250);
+        NVGcolor BUTTON_OUTLINE_OFF_COLOR = nvgRGBA(0,0,0,0);
+        NVGcolor BUTTON_OUTLINE_ON_COLOR = nvgRGBA(0,0,0,0);
+        NVGcolor PROGRESS_BUTTON_BODY_COLOR = nvgRGB(60,242,19);
+        NVGcolor ENCODER_BODY_COLOR = nvgRGB(56,49,56);
+        NVGcolor ENCODER_TEXT_COLOR = nvgRGB(250,250,250);
+        NVGcolor ENCODER_OUTLINE_COLOR = nvgRGBA(0,0,0,0);
+
+    } DEFAULT_THEME;
+
+
     class GEngine {
 
     public:
@@ -385,6 +414,8 @@ namespace GUI {
         static float screen_width;
         static float screen_height;
         static float screen_ratio;
+
+        static struct Theme * ui_theme;
 
         std::mutex renderLock;
         std::mutex overlayLock;
@@ -441,6 +472,10 @@ namespace GUI {
                 focusStack.back()->GLoseFocus();
                 focusStack.pop_back();
             }
+        }
+
+        virtual void SetTheme(struct Theme * theme_) {
+
         }
 
         void Render() {
@@ -513,7 +548,7 @@ namespace GUI {
     private:
         // Private constructor
         GEngine() {
-
+            ui_theme = &DEFAULT_THEME;
         }
 
         ~GEngine() {}

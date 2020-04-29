@@ -76,7 +76,7 @@ namespace GUI {
 
         nvgBeginPath(nvg);
         nvgRect(nvg, global.c.x, global.c.y, global.s.x, global.s.y);
-        nvgStrokeColor(nvg, RED);
+        nvgStrokeColor(nvg, GEngine::ui_theme->ENCODER_OUTLINE_COLOR);
         nvgStroke(nvg);
         nvgClosePath(nvg);
 
@@ -85,37 +85,55 @@ namespace GUI {
 
         nvgBeginPath(nvg);
         nvgCircle(nvg, wc.x, wc.y, wr);
-        nvgFillColor(nvg, GREY);
+        nvgFillColor(nvg, GEngine::ui_theme->ENCODER_BODY_COLOR);
         nvgFill(nvg);
         nvgClosePath(nvg);
 
-        nvgSave(nvg);
-        nvgTranslate(nvg, wc.x, wc.y);
-        nvgRotate(nvg, angle);
+//        nvgSave(nvg);
+//        nvgTranslate(nvg, wc.x, wc.y);
+//        nvgRotate(nvg, angle);
+//        nvgBeginPath(nvg);
+//        nvgRect(nvg, 0, -2, wr, 4);
+//        nvgFillColor(nvg, DARK);
+//        nvgFill(nvg);
+//        nvgRestore(nvg);
+//        nvgClosePath(nvg);
+//
+//
+//        nvgBeginPath(nvg);
+//        nvgCircle(nvg, wc.x, wc.y, wr*inner_circle_radius);
+//        nvgFillColor(nvg, DARK);
+//        nvgFill(nvg);
+//        nvgClosePath(nvg);
+
         nvgBeginPath(nvg);
-        nvgRect(nvg, 0, -2, wr, 4);
-        nvgFillColor(nvg, DARK);
-        nvgFill(nvg);
-        nvgRestore(nvg);
+        float a_from = value2angle(lower_bound);
+        float a_to = value2angle(value);
+        nvgArc(nvg, wc.x, wc.y, wr * (1 - value_circle_width), a_from, a_to, NVG_CW);
+        nvgStrokeWidth(nvg, wr * value_circle_width);
+        nvgStrokeColor(nvg, GEngine::ui_theme->ENCODER_VALUE_ARC_COLOR);
+        nvgStroke(nvg);
         nvgClosePath(nvg);
-
-
-        nvgBeginPath(nvg);
-        nvgCircle(nvg, wc.x, wc.y, wr*inner_circle_radius);
-        nvgFillColor(nvg, DARK);
-        nvgFill(nvg);
-        nvgClosePath(nvg);
+        nvgStrokeWidth(nvg, 1);
 
         nvgBeginPath(nvg);
-        nvgFontSize(nvg, global.s.y * text_height);
+        nvgFontSize(nvg, wr * 0.7f);
         nvgFontFace(nvg, "sans");
         nvgTextAlign(nvg,NVG_ALIGN_CENTER|NVG_ALIGN_MIDDLE);
 
         char buffer[64];
-        snprintf(buffer, sizeof buffer, "%s: %.2f", label, value);
+        snprintf(buffer, sizeof buffer, "%.2f", value);
         buffer[text_max_length] = 0;
 
-        nvgFillColor(nvg, GREEN);
+        nvgFillColor(nvg, GEngine::ui_theme->ENCODER_TEXT_COLOR);
+        nvgText(nvg, wc.x, wc.y, buffer, NULL);
+        nvgClosePath(nvg);
+
+        nvgFontSize(nvg, global.s.y * text_height);
+        snprintf(buffer, sizeof buffer, "%s", label);
+        buffer[text_max_length] = 0;
+
+        nvgFillColor(nvg, GEngine::ui_theme->ENCODER_TEXT_COLOR);
         nvgText(nvg, global.c.x + global.s.x * text_position.x, global.c.y + global.s.y * text_position.y, buffer, NULL);
         nvgClosePath(nvg);
 
@@ -132,16 +150,18 @@ namespace GUI {
         Vec2 ac(global.c.x + global.s.x * wheel_center.x, global.c.y + global.s.y * wheel_center.y);
         float ar = global.s.x * wheel_radius;
 
-        nvgBeginPath(nvg);
-        float a_from = value2angle(base_value - range * mod_depth);
-        float a_to = value2angle(base_value + range * mod_depth);
-        nvgArc(nvg, ac.x, ac.y, ar, a_from, a_to, NVG_CW);
-        nvgStrokeWidth(nvg, global.s.x * 0.09f);
-        nvgStrokeColor(nvg, BLUE);
-        nvgStroke(nvg);
-        nvgClosePath(nvg);
-        nvgStrokeWidth(nvg, 1);
-
         Encoder::GDraw(nvg);
+
+        if (jack->isConnected()) {
+            nvgBeginPath(nvg);
+            float a_from = value2angle(base_value - range * mod_depth);
+            float a_to = value2angle(base_value + range * mod_depth);
+            nvgArc(nvg, ac.x, ac.y, ar * (1 - 2.5f * value_circle_width), a_from, a_to, NVG_CW);
+            nvgStrokeWidth(nvg, ar * value_circle_width);
+            nvgStrokeColor(nvg, GEngine::ui_theme->ENCODER_MODULATION_ARC_COLOR);
+            nvgStroke(nvg);
+            nvgClosePath(nvg);
+            nvgStrokeWidth(nvg, 1);
+        }
     }
 }

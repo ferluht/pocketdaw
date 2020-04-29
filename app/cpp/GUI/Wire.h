@@ -54,7 +54,8 @@ namespace GUI {
             unsigned char R = rand() % 255;
             unsigned char G = rand() % 255;
             unsigned char B = rand() % 255;
-            color = nvgRGB(R, G, B);
+//            color = nvgRGB(R, G, B);
+            color = nvgRGB(0, 156, 245);
             a_obj = nullptr;
             b_obj = nullptr;
             a_vec = {0, 0};

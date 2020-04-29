@@ -6,6 +6,8 @@ namespace GUI {
     float GEngine::screen_height;
     float GEngine::screen_ratio;
 
+    struct Theme * GEngine::ui_theme;
+
     void Shape::GUpdateGlobalPosition(Shape *parent) {
         if (parent) {
             global.c = parent->global.c + local.c * parent->global.s;

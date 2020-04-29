@@ -49,7 +49,7 @@ public:
     bool hot_restart;
 
     float root_note = 32, old_root_note;
-    float vert_notes = 16;
+    float vert_notes = 6;
     Vec2 drag_start;
 
     MidiClip(){
@@ -64,7 +64,7 @@ public:
         notes_position = notes.begin();
         automation_position = automation.begin();
 
-        setColor(GREY);
+        setColor(GUI::GEngine::ui_theme->MIDI_BODY_COLOR);
 
         GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
             drag_start = v;
@@ -122,7 +122,7 @@ public:
 
     void GSetHeight(float height) override {
         GUI::AMGCanvas::GSetHeight(height);
-        if (height < 0.5) vert_notes = 10;
+        if (height < 0.5) vert_notes = 6;
         else vert_notes = 24;
     }
 
@@ -192,7 +192,7 @@ public:
 
                 nvgBeginPath(nvg);
                 nvgRect(nvg, global.c.x + global.s.x * x, global.c.y + global.s.y * (1 - (float) (note.data1 - root_note) / vert_notes), 50, global.s.y/vert_notes);
-                nvgFillColor(nvg, DARK);
+                nvgFillColor(nvg, GUI::GEngine::ui_theme->MIDI_NOTE_COLOR);
                 nvgFill(nvg);
                 nvgClosePath(nvg);
             }
@@ -202,21 +202,21 @@ public:
             for (int j = 0; j < 16; j++) {
                 nvgBeginPath(nvg);
                 nvgRect(nvg, global.c.x + global.s.x * ((float)i / length + (float)j/16), global.c.y, 1, global.s.y);
-                nvgFillColor(nvg, DARK);
+                nvgFillColor(nvg, GUI::GEngine::ui_theme->MIDI_DELIMITER_COLOR);
                 nvgFill(nvg);
                 nvgClosePath(nvg);
             }
             nvgBeginPath(nvg);
-            nvgRect(nvg, global.c.x + global.s.x * (float)i / length, global.c.y, 3, global.s.y);
-            nvgFillColor(nvg, DARK);
+            nvgRect(nvg, global.c.x + global.s.x * (float)i / length, global.c.y, 2, global.s.y);
+            nvgFillColor(nvg, GUI::GEngine::ui_theme->MIDI_DELIMITER_COLOR);
             nvgFill(nvg);
             nvgClosePath(nvg);
         }
 
-        for (int i = 0; i < vert_notes; i++) {
+        for (int i = 1; i < vert_notes; i++) {
             nvgBeginPath(nvg);
-            nvgRect(nvg, global.c.x, global.c.y + i * global.s.y / vert_notes, global.s.x, 3);
-            nvgFillColor(nvg, DARK);
+            nvgRect(nvg, global.c.x, global.c.y + i * global.s.y / vert_notes, global.s.x, 2);
+            nvgFillColor(nvg, GUI::GEngine::ui_theme->MIDI_DELIMITER_COLOR);
             nvgFill(nvg);
             nvgClosePath(nvg);
         }

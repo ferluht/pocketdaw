@@ -10,46 +10,13 @@
 
 namespace GUI {
 
-    class IEHeader : public AMGCanvas {
-
-        char * label;
-
-        const float onoff_button_padding = 0.002;
-        const float onoff_button_height = 0.9;
-        const float onoff_button_ratio = 1.2;
-        const float name_height = 0.5;
+    class IEHeader : public Button {
 
     public:
 
-        Button *isOn;
-
-        IEHeader(const char * label_) {
-            setColor(GREY);
-            size_t len = strlen(label_);
-            label = new char[len + 1];
-            strncpy(label, label_, len);
-            label[len] = 0;
-
-            isOn = new Button("ON", "OFF", [](bool state) {});
-            isOn->GPlace({onoff_button_padding, (1 - onoff_button_height) / 2});
-            isOn->GSetHeight(onoff_button_height);
-            isOn->GSetRatio(onoff_button_ratio);
-            GAttach(isOn);
-            *isOn = true;
+        IEHeader(const char * label_) : Button(label_, [](bool state) {}){
+            state = true;
         }
-
-        void GDraw(NVGcontext *nvg) override {
-            AMGCanvas::GDraw(nvg);
-
-            nvgBeginPath(nvg);
-            nvgFontSize(nvg, global.s.y * name_height);
-            nvgFontFace(nvg, "sans");
-            nvgTextAlign(nvg,NVG_ALIGN_MIDDLE|NVG_ALIGN_MIDDLE);
-
-            nvgFillColor(nvg, BLACK);
-            nvgText(nvg, global.c.x + global.s.x/2, global.c.y + global.s.y/2, label, NULL);
-            nvgClosePath(nvg);
-        };
 
     };
 
@@ -86,7 +53,7 @@ namespace GUI {
         }
 
         inline bool enabled() {
-            return *header->isOn;
+            return *header;
         }
 
         void NoHeader() {
@@ -120,7 +87,7 @@ namespace GUI {
                     global.c.x,
                     global.c.y,
                     global.s.x, global.s.y);
-            nvgFillColor(nvg, DARK);
+            nvgFillColor(nvg, GEngine::ui_theme->IECANVAS_BODY_COLOR);
             nvgFill(nvg);
             nvgStrokeColor(nvg, BLACK);
             nvgStroke(nvg);

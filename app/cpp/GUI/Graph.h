@@ -24,7 +24,7 @@ namespace GUI {
         float * points;
 
         BaseGraph() : AMGObject(BOX) {
-            line_color = GREEN;
+            line_color = GEngine::ui_theme->GRAPH_COLOR;
             width = 2;
         }
 

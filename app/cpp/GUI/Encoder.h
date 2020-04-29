@@ -37,11 +37,11 @@ namespace GUI {
         friend class EncoderOverlay;
         friend class AnalogEncoder;
 
-        const float wheel_radius = 0.42; // of width
+        const float wheel_radius = 0.45; // of width
         const float text_height = 0.16; // of space under wheel
-        const Vec2 text_position = {0.5, 0.075};
-        const Vec2 wheel_center = {0.5, 0.55};
-        const float inner_circle_radius = 0.2;
+        const Vec2 text_position = {0.5, 0.925};
+        const Vec2 wheel_center = {0.5, 0.45};
+        const float value_circle_width = 0.08;
         const int text_max_length = 12;
 
         float angle = 0;
@@ -156,8 +156,8 @@ namespace GUI {
             dragging = false;
 
             jack = new Jack(Jack::INPUT);
-            jack->GPlace({0.5, 0.54});
-            jack->GSetWidth(0.5);
+            jack->GPlace({0.55, 0.55});
+            jack->GSetWidth(0.4);
             GAttach(jack);
 
             GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {

@@ -38,9 +38,9 @@ namespace GUI {
         nvgBeginPath(nvg);
         nvgRect(nvg, global.c.x, global.c.y, global.s.x, global.s.y);
         if (state) {
-            nvgFillColor(nvg, YELLOW);
+            nvgFillColor(nvg, GEngine::ui_theme->BUTTON_ON_COLOR);
         } else {
-            nvgFillColor(nvg, GREY);
+            nvgFillColor(nvg, GEngine::ui_theme->BUTTON_OFF_COLOR);
         }
         nvgFill(nvg);
         if (lighted) {
@@ -48,14 +48,22 @@ namespace GUI {
             nvgFill(nvg);
         }
 
-        nvgStrokeColor(nvg, BLACK);
+        if (state) {
+            nvgFillColor(nvg, GEngine::ui_theme->BUTTON_OUTLINE_ON_COLOR);
+        } else {
+            nvgFillColor(nvg, GEngine::ui_theme->BUTTON_OUTLINE_OFF_COLOR);
+        }
         nvgStroke(nvg);
 
         nvgFontSize(nvg, global.s.y * 0.7);
         nvgFontFace(nvg, "sans");
         nvgTextAlign(nvg,NVG_ALIGN_CENTER|NVG_ALIGN_MIDDLE);
 
-        nvgFillColor(nvg, BLACK);
+        if (state) {
+            nvgFillColor(nvg, GEngine::ui_theme->BUTTON_TEXT_ON_COLOR);
+        } else {
+            nvgFillColor(nvg, GEngine::ui_theme->BUTTON_TEXT_OFF_COLOR);
+        }
         char * label = labelOff;
         if (state) label = labelOn;
         nvgText(nvg, global.c.x + global.s.x/2, global.c.y + global.s.y/2, label, NULL);
@@ -82,15 +90,23 @@ namespace GUI {
     void ProgressButton::GDraw(NVGcontext *nvg) {
         nvgBeginPath(nvg);
         nvgRect(nvg, global.c.x, global.c.y, global.s.x, global.s.y);
-        nvgFillColor(nvg, GREY);
+        if (state) {
+            nvgFillColor(nvg, GEngine::ui_theme->BUTTON_ON_COLOR);
+        } else {
+            nvgFillColor(nvg, GEngine::ui_theme->BUTTON_OFF_COLOR);
+        }
         nvgFill(nvg);
 
-        nvgStrokeColor(nvg, BLACK);
+        if (state) {
+            nvgFillColor(nvg, GEngine::ui_theme->BUTTON_OUTLINE_ON_COLOR);
+        } else {
+            nvgFillColor(nvg, GEngine::ui_theme->BUTTON_OUTLINE_OFF_COLOR);
+        }
         nvgStroke(nvg);
 
         nvgBeginPath(nvg);
         nvgRect(nvg, global.c.x, global.c.y + 0.02f, global.s.x * percent, global.s.y * 0.96f);
-        nvgFillColor(nvg, YELLOW);
+        nvgFillColor(nvg, GEngine::ui_theme->PROGRESS_BUTTON_BODY_COLOR);
         nvgFill(nvg);
 
         nvgFontSize(nvg, global.s.y * 0.7);
@@ -99,7 +115,11 @@ namespace GUI {
 
         char * label = labelOff;
         if (state) label = labelOn;
-        nvgFillColor(nvg, BLACK);
+        if (state) {
+            nvgFillColor(nvg, GEngine::ui_theme->BUTTON_TEXT_ON_COLOR);
+        } else {
+            nvgFillColor(nvg, GEngine::ui_theme->BUTTON_TEXT_OFF_COLOR);
+        }
         nvgText(nvg, global.c.x + global.s.x/2, global.c.y + global.s.y/2, label, NULL);
         nvgClosePath(nvg);
     }

@@ -17,7 +17,7 @@ namespace GUI {
         T *graph;
 
         Plot(unsigned int points) {
-            setColor(BLACK);
+            setColor(GEngine::ui_theme->PLOT_BODY_COLOR);
 
             graph = new TimeGraph(points);
             graph->GPlace({0, 0});

@@ -56,7 +56,7 @@ private:
 public:
 
     Synth(){
-
+        setColor(GUI::GEngine::ui_theme->BACKGROUND_COLOR);
         Master = new AMGMasterTrack();
         Master->GPlace({0, panel_height});
         Master->GSetHeight(1 - panel_height);
@@ -228,17 +228,6 @@ public:
             mapping_object = dynamic_cast<AMGObject *> (object);
         }
         return object;
-    }
-
-    virtual void GDraw(NVGcontext *nvg) {
-        nvgBeginPath(nvg);
-        nvgRect(nvg,
-                global.c.x,
-                global.c.y,
-                global.s.x, global.s.y * panel_height);
-        nvgFillColor(nvg, MIDGREY);
-        nvgFill(nvg);
-        nvgClosePath(nvg);
     }
 
 };
