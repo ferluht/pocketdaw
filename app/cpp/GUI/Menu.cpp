@@ -251,7 +251,7 @@ namespace GUI {
                 global.c.x,
                 global.c.y,
                 global.s.x, global.s.y);
-        nvgFillColor(nvg, DARK);
+        nvgFillColor(nvg, GEngine::ui_theme->FULLSCREEN_MENU_BODY_COLOR);
         nvgFill(nvg);
         nvgClosePath(nvg);
 

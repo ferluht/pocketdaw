@@ -170,6 +170,7 @@ add_library(
         Instruments/SingleTone.cpp
         Instruments/Brute.cpp
         Instruments/SoundObject5.cpp
+        Instruments/SplineSynth.cpp
 
         Instruments/AnalogDrums/AnalogDrum.cpp
         Instruments/AnalogDrums/Kick.cpp

@@ -22,7 +22,7 @@ public:
     GUI::EncoderButton * trig;
 
     SequencerStep(const char * name_) {
-        trig = new GUI::EncoderButton(name_);
+        trig = new GUI::EncoderButton(name_, 32, 0, 127);
         trig->GPlace({0.05f, 0.02f});
         trig->GSetRatio(1);
         trig->GSetWidth(0.9f);
@@ -123,45 +123,47 @@ class Sequencer : public MidiEffect {
     int focus_pattern;
     int step;
 
-    GUI::TapButton * next;
-    GUI::TapButton * prev;
+//    GUI::TapButton * next;
+//    GUI::TapButton * prev;
 
-    GUI::Jack * jack;
+//    GUI::Jack * jack;
 
 public:
 
     Sequencer(int n_channels_, int n_steps_=16, int n_patterns_=8) : MidiEffect("Sequencer") {
 
-        GSetRatio(0.5);
+        GSetRatio(1);
+
+        n_channels_ = 1;
 
         for (int i = 0; i < n_channels_; i++) {
             auto channel = new SequencerChannel(n_patterns_, n_steps_);
             channels.push_back(channel);
             channel->GPlace({0, 0});
             channel->GSetWidth(1);
-            channel->GSetHeight(0.5);
+            channel->GSetHeight(1);
             GAttach(channel);
             channel->GSetVisible(false);
             channel->map(36 + i);
         }
 
-        jack = new GUI::Jack(GUI::Jack::OUTPUT);
-        jack->GPlace({0.6, 0.6});
-        jack->GSetHeight(0.1);
-        GAttach(jack);
+//        jack = new GUI::Jack(GUI::Jack::OUTPUT);
+//        jack->GPlace({0.8, 0.8});
+//        jack->GSetHeight(0.07);
+//        GAttach(jack);
 
 
-        prev = new GUI::TapButton("prev", [this](bool a){selectChannel(focus_channel - 1);});
-        prev->GPlace({0.05, 0.7});
-        prev->GSetWidth(0.3);
-        prev->GSetRatio(2);
-        GAttach(prev);
-
-        next = new GUI::TapButton("next", [this](bool a){selectChannel(focus_channel + 1);});
-        next->GPlace({0.25, 0.7});
-        next->GSetWidth(0.3);
-        next->GSetRatio(2);
-        GAttach(next);
+//        prev = new GUI::TapButton("prev", [this](bool a){selectChannel(focus_channel - 1);});
+//        prev->GPlace({0.05, 0.8});
+//        prev->GSetWidth(0.3);
+//        prev->GSetRatio(1);
+//        GAttach(prev);
+//
+//        next = new GUI::TapButton("next", [this](bool a){selectChannel(focus_channel + 1);});
+//        next->GPlace({0.4, 0.8});
+//        next->GSetWidth(0.3);
+//        next->GSetRatio(1);
+//        GAttach(next);
 
         step = 0;
         focus_channel = 0;
@@ -197,9 +199,13 @@ public:
             for (const auto &channel: channels) {
                 button = channel->get(focus_pattern, step)->trig;
                 if (*button) {
-                    MOut({beat, NOTEON_HEADER, channel->mapping, 100});
-                    *jack = (float)(*button);
-                    jack->MRender(beat);
+                    MOut({beat, NOTEON_HEADER, (unsigned char)((float)*button), 100});
+//                    *jack = (float)(*button);
+//                    jack->MRender(beat);
+                } else {
+                    MOut({beat, NOTEON_HEADER, (unsigned char)((float)*button), 0});
+//                    *jack = (float)(*button);
+//                    jack->MRender(beat);
                 }
             }
         }

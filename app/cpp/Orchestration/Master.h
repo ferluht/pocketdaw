@@ -30,6 +30,7 @@
 #include <Instruments/SoundObject5.h>
 #include <MidiEffects/MidiMonitor.h>
 #include <AudioEffects/Saturator.h>
+#include <Instruments/SplineSynth.h>
 #include "Track.h"
 
 class AMGMasterTrack : public GUI::AMGCanvas{
@@ -127,6 +128,13 @@ public:
                                                  [this](bool a){
                                                      if (focus_track > -1) {
                                                          Tracks[focus_track]->RAdd(new SoundObject5());
+                                                     }
+                                                 }));
+
+        addDeviceMenu->addButton(new GUI::Button("SplineSynth",
+                                                 [this](bool a){
+                                                     if (focus_track > -1) {
+                                                         Tracks[focus_track]->RAdd(new SplineSynth(1));
                                                      }
                                                  }));
 

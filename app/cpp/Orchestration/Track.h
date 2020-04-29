@@ -57,7 +57,7 @@ public:
         focus_pattern = 0;
         patterns[focus_pattern]->GSetVisible(mc_visible);
 
-        setColor(DARKER);
+        setColor(GUI::GEngine::ui_theme->BACKGROUND_COLOR);
 
         run_lock.lock();
         stop_lock.unlock();

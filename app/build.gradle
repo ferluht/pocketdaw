@@ -8,7 +8,7 @@ android {
         minSdkVersion 26
         targetSdkVersion 26
         versionCode 30 // Application version, 3 digits, major/minor/revision
-        versionName "0.3.0"
+        versionName "0.0.1"
     }
     // One APK per ABI. Generate also one multi-abi APK.
     splits {
