@@ -51,15 +51,6 @@ git clone --recurse-submodules https://github.com/ferluht/pd.git
 
 # Build APK
 
-## Resource files
-
-App requires resource files, you will need to copy them to the Android device (physical or emulator) SDCard using `adb`:
-```shell
-~/android/sdk/platform-tools/adb push bgfx/examples/runtime /sdcard/bgfx/examples/runtime
-```
-
-**Remark:** This is not the official way to do for a real application, runtime files should be embedded into APK, but for bgfx examples, we go that way.
-
 ## Packaging
 
 Launch android studio, and import the project. Select `Build` menu, and generate APK using `Make Project` entry.
