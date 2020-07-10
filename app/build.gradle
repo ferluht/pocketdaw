@@ -1,10 +1,20 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
-    compileSdkVersion 26
+    signingConfigs {
+        release {
+            storeFile file('c')
+            storePassword 'c'
+            keyAlias = 'c'
+            keyPassword 'c'
+        }
+    }
+    compileSdkVersion 28
     buildToolsVersion "28.0.3"
     defaultConfig {
-        applicationId 'com.pdaw.pd'
+            applicationId 'com.pdaw.pd'
         minSdkVersion 26
         targetSdkVersion 26
         versionCode 30 // Application version, 3 digits, major/minor/revision
@@ -56,9 +66,19 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            firebaseCrashlytics {
+                nativeSymbolUploadEnabled true
+//                strippedNativeLibsDir "./build/intermediates/transforms/stripDebugSymbol/release/0/lib"
+//                unstrippedNativeLibsDir "./build/intermediates/transforms/mergeJniLibs/release/0/lib"
+            }
         }
         debug {
             jniDebuggable true
+            firebaseCrashlytics {
+                nativeSymbolUploadEnabled true
+//                strippedNativeLibsDir "./build/intermediates/transforms/stripDebugSymbol/debug/0/lib"
+//                unstrippedNativeLibsDir "./build/intermediates/transforms/mergeJniLibs/debug/0/lib"
+            }
         }
     }
     externalNativeBuild {
@@ -66,8 +86,25 @@ android {
             path file('cpp/CMakeLists.txt')
         }
     }
+//    android.applicationVariants.all { variant ->
+//        def variantName = variant.name.capitalize()
+//        def task = project.task ("assemble${variantName}")
+//        task.finalizedBy project.("uploadCrashlyticsSymbolFile${variantName}")
+//    }
+//    afterEvaluate {
+//        packageRelease.finalizedBy("uploadCrashlyticsSymbolFileRelease")
+//        packageDebug.finalizedBy("uploadCrashlyticsSymbolFileDebug")
+//    }
 }
 
+// Upload Crashlytics NDK symbols
+tasks.whenTaskAdded { task -> if (task.name.startsWith('assemble') && task.name.endsWith("Release")) task.finalizedBy "uploadCrashlyticsSymbolFile" + task.name.substring('assemble'.length()) }
+tasks.whenTaskAdded { task -> if (task.name.startsWith('assemble') && task.name.endsWith("Debug")) task.finalizedBy "uploadCrashlyticsSymbolFile" + task.name.substring('assemble'.length()) }
+
 dependencies {
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    //noinspection GradleCompatible
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'com.google.firebase:firebase-analytics:17.4.4'
+    implementation 'com.google.firebase:firebase-crashlytics:17.1.1'
+    implementation 'com.google.firebase:firebase-crashlytics-ndk:17.1.1'
 }

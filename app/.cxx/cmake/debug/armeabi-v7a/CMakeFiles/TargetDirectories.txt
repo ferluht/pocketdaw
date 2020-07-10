@@ -1,0 +1,11 @@
+/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/armeabi-v7a/CMakeFiles/rebuild_cache.dir
+/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/armeabi-v7a/CMakeFiles/bgfx.dir
+/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/armeabi-v7a/CMakeFiles/imgui-lib.dir
+/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/armeabi-v7a/CMakeFiles/native-lib.dir
+/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/armeabi-v7a/CMakeFiles/native_app_glue.dir
+/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/armeabi-v7a/CMakeFiles/nanovg-lib.dir
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/armeabi-v7a/CMakeFiles/rebuild_cache.dir
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/armeabi-v7a/CMakeFiles/NdkHelper.dir
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/armeabi-v7a/CMakeFiles/native_app_glue_NdkHelper.dir

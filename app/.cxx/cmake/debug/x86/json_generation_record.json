@@ -1,0 +1,434 @@
+[
+  {
+    "level": "INFO",
+    "message": "Start JSON generation. Platform version: 26 min SDK version: x86",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "No CMake version was specified in build.gradle. Using default version 3.10.2.",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Trying to locate CMake in local SDK repository.",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "- CMake found in SDK at \u0027/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404\u0027 had version \u00273.10.2\u0027",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "CMake \u00273.6.0\u0027 found in SDK did not match requested version \u00273.10.2\u0027.",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "rebuilding JSON /Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86/android_gradle_build.json due to:",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "- force flag, will remove stale json folder",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "removing stale contents from \u0027/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\u0027",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "created folder \u0027/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\u0027",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "executing cmake Executable : /Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/bin/cmake\narguments : \n-H/Users/ferluht/Dev/pocketdaw/pd/app/cpp\n-DCMAKE_BUILD_TYPE\u003dDebug\n-DCMAKE_TOOLCHAIN_FILE\u003d/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/build/cmake/android.toolchain.cmake\n-DANDROID_ABI\u003dx86\n-DANDROID_NDK\u003d/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669\n-DANDROID_PLATFORM\u003dandroid-26\n-DCMAKE_ANDROID_ARCH_ABI\u003dx86\n-DCMAKE_ANDROID_NDK\u003d/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669\n-DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON\n-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/Users/ferluht/Dev/pocketdaw/pd/app/build/intermediates/cmake/debug/obj/x86\n-DCMAKE_MAKE_PROGRAM\u003d/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja\n-DCMAKE_SYSTEM_NAME\u003dAndroid\n-DCMAKE_SYSTEM_VERSION\u003d26\n-B/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\n-GNinja\njvmArgs : \n\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "[\u003d\u003d \"CMake Server\" \u003d\u003d[\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"supportedProtocolVersions\":[{\"isExperimental\":true,\"major\":1,\"minor\":1}],\"type\":\"hello\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "]\u003d\u003d \"CMake Server\" \u003d\u003d]\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\n  \"type\": \"handshake\",\n  \"cookie\": \"gradle-cmake-cookie\",\n  \"protocolVersion\": {\n    \"isExperimental\": true,\n    \"major\": 1,\n    \"minor\": 1\n  },\n  \"sourceDirectory\": \"/Users/ferluht/Dev/pocketdaw/pd/app/cpp\",\n  \"buildDirectory\": \"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\",\n  \"generator\": \"Ninja\"\n}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"gradle-cmake-cookie\",\"inReplyTo\":\"handshake\",\"type\":\"reply\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\n  \"type\": \"configure\",\n  \"cacheArguments\": [\n    \"\",\n    \"-DCMAKE_BUILD_TYPE\\u003dDebug\",\n    \"-DCMAKE_TOOLCHAIN_FILE\\u003d/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/build/cmake/android.toolchain.cmake\",\n    \"-DANDROID_ABI\\u003dx86\",\n    \"-DANDROID_NDK\\u003d/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669\",\n    \"-DANDROID_PLATFORM\\u003dandroid-26\",\n    \"-DCMAKE_ANDROID_ARCH_ABI\\u003dx86\",\n    \"-DCMAKE_ANDROID_NDK\\u003d/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669\",\n    \"-DCMAKE_EXPORT_COMPILE_COMMANDS\\u003dON\",\n    \"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\\u003d/Users/ferluht/Dev/pocketdaw/pd/app/build/intermediates/cmake/debug/obj/x86\",\n    \"-DCMAKE_MAKE_PROGRAM\\u003d/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja\",\n    \"-DCMAKE_SYSTEM_NAME\\u003dAndroid\",\n    \"-DCMAKE_SYSTEM_VERSION\\u003d26\"\n  ]\n}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Check for working C compiler: /Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang\",\"type\":\"message\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Check for working C compiler: /Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":33,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Check for working C compiler: /Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang -- works\",\"type\":\"message\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Check for working C compiler: /Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang -- works",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Detecting C compiler ABI info\",\"type\":\"message\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Detecting C compiler ABI info",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":65,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Detecting C compiler ABI info - done\",\"type\":\"message\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Detecting C compiler ABI info - done",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Detecting C compile features\",\"type\":\"message\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Detecting C compile features",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":96,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":126,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":155,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Detecting C compile features - done\",\"type\":\"message\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Detecting C compile features - done",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Check for working CXX compiler: /Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++\",\"type\":\"message\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Check for working CXX compiler: /Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":184,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Check for working CXX compiler: /Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ -- works\",\"type\":\"message\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Check for working CXX compiler: /Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ -- works",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Detecting CXX compiler ABI info\",\"type\":\"message\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Detecting CXX compiler ABI info",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":211,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Detecting CXX compiler ABI info - done\",\"type\":\"message\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Detecting CXX compiler ABI info - done",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Detecting CXX compile features\",\"type\":\"message\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Detecting CXX compile features",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":237,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":262,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":287,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":311,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Detecting CXX compile features - done\",\"type\":\"message\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Detecting CXX compile features - done",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":334,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":950,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"progressCurrent\":1000,\"progressMaximum\":1000,\"progressMessage\":\"Configuring\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"message\":\"Configuring done\",\"type\":\"message\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Configuring done",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"configure\",\"type\":\"reply\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"type\":\"compute\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"compute\",\"progressCurrent\":500,\"progressMaximum\":1000,\"progressMessage\":\"Generating\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"compute\",\"progressCurrent\":1000,\"progressMaximum\":1000,\"progressMessage\":\"Generating\",\"progressMinimum\":0,\"type\":\"progress\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"compute\",\"message\":\"Generating done\",\"type\":\"message\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Generating done",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"cookie\":\"\",\"inReplyTo\":\"compute\",\"type\":\"reply\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"type\":\"cmakeInputs\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"buildFiles\":[{\"isCMake\":true,\"isTemporary\":false,\"sources\":[\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeDetermineSystem.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/Android-Determine.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeSystem.cmake.in\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeSystemSpecificInitialize.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/Android-Initialize.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeDetermineCCompiler.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeDetermineCompiler.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/Android-Determine-C.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/Android/Determine-Compiler.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeFindBinUtils.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-FindBinUtils.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeCCompiler.cmake.in\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeDetermineCXXCompiler.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeDetermineCompiler.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/Android-Determine-CXX.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/Android/Determine-Compiler.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeFindBinUtils.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-FindBinUtils.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeCXXCompiler.cmake.in\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeSystemSpecificInformation.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeGenericSystem.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/Android.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/Linux.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/UnixPaths.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeCInformation.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeLanguageInformation.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-C.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/CMakeCommonCompilerMacros.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/GNU.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/CMakeCommonCompilerMacros.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/Android-Clang-C.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/Android-Clang.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeCommonLanguageInclude.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeTestCCompiler.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeTestCompilerCommon.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeDetermineCompilerABI.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeParseImplicitLinkInfo.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeCCompilerABI.c\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeDetermineCompileFeatures.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Internal/FeatureTesting.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-C-FeatureTests.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-C-FeatureTests.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-C-FeatureTests.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeCCompiler.cmake.in\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeCXXInformation.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeLanguageInformation.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-CXX.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/Android-Clang-CXX.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Platform/Android-Clang.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeCommonLanguageInclude.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeTestCXXCompiler.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeTestCompilerCommon.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeDetermineCompilerABI.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeParseImplicitLinkInfo.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeCXXCompilerABI.cpp\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeDetermineCompileFeatures.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Internal/FeatureTesting.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-CXX-FeatureTests.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-CXX-TestableFeatures.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-CXX-FeatureTests.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-CXX-TestableFeatures.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-CXX-FeatureTests.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-CXX-TestableFeatures.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-CXX-FeatureTests.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/Compiler/Clang-CXX-TestableFeatures.cmake\",\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10/Modules/CMakeCXXCompiler.cmake.in\"]},{\"isCMake\":false,\"isTemporary\":false,\"sources\":[\"CMakeLists.txt\",\"/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/build/cmake/android.toolchain.cmake\",\"/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/build/cmake/platforms.cmake\",\"/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/build/cmake/android.toolchain.cmake\",\"AMGEngine/link/AbletonLinkConfig.cmake\",\"AMGEngine/link/cmake_include/AsioStandaloneConfig.cmake\",\"AMGEngine/ndk_helper/CMakeLists.txt\"]},{\"isCMake\":false,\"isTemporary\":true,\"sources\":[\"../.cxx/cmake/debug/x86/CMakeFiles/3.10.2/CMakeSystem.cmake\",\"../.cxx/cmake/debug/x86/CMakeFiles/3.10.2/CMakeCCompiler.cmake\",\"../.cxx/cmake/debug/x86/CMakeFiles/3.10.2/CMakeCXXCompiler.cmake\",\"../.cxx/cmake/debug/x86/CMakeFiles/feature_tests.c\",\"../.cxx/cmake/debug/x86/CMakeFiles/feature_tests.c\",\"../.cxx/cmake/debug/x86/CMakeFiles/feature_tests.c\",\"../.cxx/cmake/debug/x86/CMakeFiles/3.10.2/CMakeCCompiler.cmake\",\"../.cxx/cmake/debug/x86/CMakeFiles/feature_tests.cxx\",\"../.cxx/cmake/debug/x86/CMakeFiles/feature_tests.cxx\",\"../.cxx/cmake/debug/x86/CMakeFiles/feature_tests.cxx\",\"../.cxx/cmake/debug/x86/CMakeFiles/feature_tests.cxx\",\"../.cxx/cmake/debug/x86/CMakeFiles/3.10.2/CMakeCXXCompiler.cmake\"]}],\"cmakeRootDirectory\":\"/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/share/cmake-3.10\",\"cookie\":\"\",\"inReplyTo\":\"cmakeInputs\",\"sourceDirectory\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp\",\"type\":\"reply\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"type\":\"codemodel\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "{\"configurations\":[{\"name\":\"Debug\",\"projects\":[{\"buildDirectory\":\"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\",\"name\":\"native-lib\",\"sourceDirectory\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp\",\"targets\":[{\"artifacts\":[\"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86/libnative_app_glue.a\"],\"buildDirectory\":\"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\",\"fileGroups\":[{\"compileFlags\":\"-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE\u003d2 -Wformat -Werror\u003dformat-security  -O0 -fno-limit-debug-info  -fPIC  \",\"includePath\":[{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/modules/asio-standalone/asio/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/src/main/cpp/Link/android-ifaddrs\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Link/android-ifaddrs\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty/dear-imgui\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bx/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/include\"},{\"path\":\"/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/sources/android/native_app_glue\"}],\"isGenerated\":false,\"language\":\"C\",\"sources\":[\"/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/sources/android/native_app_glue/android_native_app_glue.c\"]}],\"fullName\":\"libnative_app_glue.a\",\"linkerLanguage\":\"C\",\"name\":\"native_app_glue\",\"sourceDirectory\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp\",\"sysroot\":\"/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/sysroot\",\"type\":\"STATIC_LIBRARY\"},{\"artifacts\":[\"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86/libnanovg-lib.a\"],\"buildDirectory\":\"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\",\"fileGroups\":[{\"compileFlags\":\"-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE\u003d2 -Wformat -Werror\u003dformat-security   -O0 -fno-limit-debug-info  -Ofast -fPIC  \",\"includePath\":[{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/modules/asio-standalone/asio/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/src/main/cpp/Link/android-ifaddrs\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Link/android-ifaddrs\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty/dear-imgui\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bx/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/nanovg\"}],\"isGenerated\":false,\"language\":\"CXX\",\"sources\":[\"AMGEngine/nanovg/nanovg.cpp\",\"AMGEngine/nanovg/nanovg_bgfx.cpp\"]}],\"fullName\":\"libnanovg-lib.a\",\"linkerLanguage\":\"CXX\",\"name\":\"nanovg-lib\",\"sourceDirectory\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp\",\"sysroot\":\"/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/sysroot\",\"type\":\"STATIC_LIBRARY\"},{\"artifacts\":[\"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86/libbgfx.a\"],\"buildDirectory\":\"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\",\"fileGroups\":[{\"compileFlags\":\"-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE\u003d2 -Wformat -Werror\u003dformat-security   -O0 -fno-limit-debug-info  -Ofast -fPIC   -stdlib\u003dlibc++\",\"defines\":[\"BGFX_CONFIG_RENDERER_OPENGLES\u003d30\"],\"includePath\":[{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/modules/asio-standalone/asio/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/src/main/cpp/Link/android-ifaddrs\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bx/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bx/3rdparty\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/src\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/3rdparty\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/3rdparty/astc-codec\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/3rdparty/astc-codec/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/3rdparty/iqa/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty/khronos\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Link/android-ifaddrs\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty/dear-imgui\"}],\"isGenerated\":false,\"language\":\"CXX\",\"sources\":[\"AMGEngine/bx/src/amalgamated.cpp\",\"AMGEngine/bgfx/src/amalgamated.cpp\",\"AMGEngine/bimg/src/image.cpp\",\"AMGEngine/bimg/src/image_cubemap_filter.cpp\",\"AMGEngine/bimg/src/image_decode.cpp\",\"AMGEngine/bimg/src/image_encode.cpp\",\"AMGEngine/bimg/src/image_gnf.cpp\",\"AMGEngine/bimg/3rdparty/astc-codec/src/decoder/astc_file.cc\",\"AMGEngine/bimg/3rdparty/astc-codec/src/decoder/codec.cc\",\"AMGEngine/bimg/3rdparty/astc-codec/src/decoder/endpoint_codec.cc\",\"AMGEngine/bimg/3rdparty/astc-codec/src/decoder/footprint.cc\",\"AMGEngine/bimg/3rdparty/astc-codec/src/decoder/integer_sequence_codec.cc\",\"AMGEngine/bimg/3rdparty/astc-codec/src/decoder/intermediate_astc_block.cc\",\"AMGEngine/bimg/3rdparty/astc-codec/src/decoder/logical_astc_block.cc\",\"AMGEngine/bimg/3rdparty/astc-codec/src/decoder/partition.cc\",\"AMGEngine/bimg/3rdparty/astc-codec/src/decoder/physical_astc_block.cc\",\"AMGEngine/bimg/3rdparty/astc-codec/src/decoder/quantization.cc\",\"AMGEngine/bimg/3rdparty/astc-codec/src/decoder/weight_infill.cc\"]}],\"fullName\":\"libbgfx.a\",\"linkerLanguage\":\"CXX\",\"name\":\"bgfx\",\"sourceDirectory\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp\",\"sysroot\":\"/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/sysroot\",\"type\":\"STATIC_LIBRARY\"},{\"artifacts\":[\"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86/libimgui-lib.a\"],\"buildDirectory\":\"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\",\"fileGroups\":[{\"compileFlags\":\"-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE\u003d2 -Wformat -Werror\u003dformat-security   -O0 -fno-limit-debug-info  -Ofast -fPIC  \",\"includePath\":[{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/modules/asio-standalone/asio/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/src/main/cpp/Link/android-ifaddrs\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Link/android-ifaddrs\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty/dear-imgui\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bx/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/include\"}],\"isGenerated\":false,\"language\":\"CXX\",\"sources\":[\"AMGEngine/bgfx/3rdparty/dear-imgui/imgui.cpp\",\"AMGEngine/bgfx/3rdparty/dear-imgui/imgui_widgets.cpp\",\"AMGEngine/bgfx/3rdparty/dear-imgui/imgui_draw.cpp\"]}],\"fullName\":\"libimgui-lib.a\",\"linkerLanguage\":\"CXX\",\"name\":\"imgui-lib\",\"sourceDirectory\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp\",\"sysroot\":\"/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/sysroot\",\"type\":\"STATIC_LIBRARY\"},{\"artifacts\":[\"/Users/ferluht/Dev/pocketdaw/pd/app/build/intermediates/cmake/debug/obj/x86/libnative-lib.so\"],\"buildDirectory\":\"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\",\"fileGroups\":[{\"isGenerated\":false,\"sources\":[\"AMGEngine/link/include/ableton/Link.hpp\"]},{\"compileFlags\":\"-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE\u003d2 -Wformat -Werror\u003dformat-security   -O0 -fno-limit-debug-info  -Ofast -fPIC   -stdlib\u003dlibc++ -std\u003dgnu++11\",\"defines\":[\"ABL_LINK_OFFSET_MS\u003d23\",\"ANDROID\u003d1\",\"BGFX_CONFIG_RENDERER_OPENGLES\u003d30\",\"LINK_PLATFORM_LINUX\u003d1\",\"LINK_PLATFORM_UNIX\u003d1\",\"PD\u003d1\",\"native_lib_EXPORTS\"],\"includePath\":[{\"isSystem\":true,\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/modules/asio-standalone/asio/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/src/main/cpp/Link/android-ifaddrs\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Link/android-ifaddrs\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty/dear-imgui\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bx/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/include\"},{\"path\":\"/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/sources/android/native_app_glue\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/nanovg\"},{\"isSystem\":true,\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/cmake_include/../modules/asio-standalone/asio/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/ndk_helper\"}],\"isGenerated\":false,\"language\":\"CXX\",\"sources\":[\"MainActivity.cpp\",\"Synth.cpp\",\"Link/LinkManager.cpp\",\"Link/android-ifaddrs/ifaddrs.cpp\",\"AudioEffects/AudioEffect.cpp\",\"AudioEffects/Delay.cpp\",\"AudioEffects/MoogFilter.cpp\",\"AudioEffects/Oscilloscope.cpp\",\"AudioEffects/StereoDelay.cpp\",\"AudioEffects/ConvolutionReverb.cpp\",\"AudioEffects/ThreeBandEQ.cpp\",\"AudioEffects/Saturator.cpp\",\"AudioEffects/FFTConvolver/AudioFFT.cpp\",\"AudioEffects/FFTConvolver/FFTConvolver.cpp\",\"AudioEffects/FFTConvolver/TwoStageFFTConvolver.cpp\",\"AudioEffects/FFTConvolver/Utilities.cpp\",\"AMGEngine/A.cpp\",\"AMGEngine/G.cpp\",\"AMGEngine/M.cpp\",\"AMGEngine/AMGEngine.cpp\",\"GUI/Button.cpp\",\"GUI/Canvas.cpp\",\"GUI/Encoder.cpp\",\"GUI/Graph.cpp\",\"GUI/IECanvas.cpp\",\"GUI/Knob.cpp\",\"GUI/Led.cpp\",\"GUI/Text.cpp\",\"GUI/Menu.cpp\",\"GUI/Plot.cpp\",\"GUI/Slider.cpp\",\"GUI/EncoderButton.cpp\",\"GUI/FullscreenWindow.cpp\",\"GUI/Jack.cpp\",\"GUI/Wire.cpp\",\"Instruments/Envelopes/ADSR.cpp\",\"Instruments/Envelopes/ADS.cpp\",\"Instruments/Envelopes/AD.cpp\",\"Instruments/DrumRack.cpp\",\"Instruments/Instrument.cpp\",\"Instruments/Metronome.cpp\",\"Instruments/Operator.cpp\",\"Instruments/Oscillator.cpp\",\"Instruments/Sampler.cpp\",\"Instruments/SingleTone.cpp\",\"Instruments/Brute.cpp\",\"Instruments/SoundObject5.cpp\",\"Instruments/SplineSynth.cpp\",\"Instruments/DoubleSplineSynth.cpp\",\"Instruments/AnalogDrums/AnalogDrum.cpp\",\"Instruments/AnalogDrums/Kick.cpp\",\"Instruments/AnalogDrums/Snare.cpp\",\"MidiEffects/LFO.cpp\",\"MidiEffects/MidiEffect.cpp\",\"MidiEffects/Arpeggiator.cpp\",\"MidiEffects/MidiMonitor.cpp\",\"Orchestration/Chain.cpp\",\"Orchestration/Master.cpp\",\"Orchestration/Midi.cpp\",\"Orchestration/Rack.cpp\",\"Orchestration/Track.cpp\",\"MidiEffects/Sequencer.cpp\",\"Utils/AudioFile.cpp\",\"AMGEngine/bgfx_utils/bgfx_utils.cpp\",\"AMGEngine/bgfx_utils/example-glue.cpp\",\"AMGEngine/entry/cmd.cpp\",\"AMGEngine/entry/dialog.cpp\",\"AMGEngine/entry/entry.cpp\",\"AMGEngine/entry/input.cpp\",\"AMGEngine/entry/entry_android.cpp\",\"AMGEngine/imgui/imgui.cpp\"]}],\"fullName\":\"libnative-lib.so\",\"linkFlags\":\"-Wl,--exclude-libs,libgcc_real.a -Wl,--exclude-libs,libatomic.a -static-libstdc++ -Wl,--build-id -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments   -u ANativeActivity_onCreate\",\"linkLibraries\":\"-landroid -laaudio libnative_app_glue.a -lEGL -lGLESv3 libimgui-lib.a libnanovg-lib.a -llog /Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/x86/libNdkHelper.a libbgfx.a /Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/x86/libnative_app_glue_NdkHelper.a -lGLESv2 -lEGL -llog -landroid -latomic -latomic -lm\",\"linkerLanguage\":\"CXX\",\"name\":\"native-lib\",\"sourceDirectory\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp\",\"sysroot\":\"/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/sysroot\",\"type\":\"SHARED_LIBRARY\"},{\"artifacts\":[\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/x86/libNdkHelper.a\"],\"buildDirectory\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/x86\",\"fileGroups\":[{\"compileFlags\":\"-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE\u003d2 -Wformat -Werror\u003dformat-security   -O0 -fno-limit-debug-info  -Ofast -fPIC   -std\u003dc++11\",\"includePath\":[{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/modules/asio-standalone/asio/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/src/main/cpp/Link/android-ifaddrs\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/ndk_helper\"},{\"path\":\"/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/sources/android/native_app_glue\"}],\"isGenerated\":false,\"language\":\"CXX\",\"sources\":[\"gestureDetector.cpp\",\"gl3stub.cpp\",\"GLContext.cpp\",\"interpolator.cpp\",\"JNIHelper.cpp\",\"perfMonitor.cpp\",\"sensorManager.cpp\",\"shader.cpp\",\"tapCamera.cpp\",\"texture.cpp\",\"vecmath.cpp\"]}],\"fullName\":\"libNdkHelper.a\",\"linkerLanguage\":\"CXX\",\"name\":\"NdkHelper\",\"sourceDirectory\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/ndk_helper\",\"sysroot\":\"/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/sysroot\",\"type\":\"STATIC_LIBRARY\"},{\"artifacts\":[\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/x86/libnative_app_glue_NdkHelper.a\"],\"buildDirectory\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/x86\",\"fileGroups\":[{\"compileFlags\":\"-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE\u003d2 -Wformat -Werror\u003dformat-security  -O0 -fno-limit-debug-info  -fPIC  \",\"includePath\":[{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/modules/asio-standalone/asio/include\"},{\"path\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/src/main/cpp/Link/android-ifaddrs\"},{\"path\":\"/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/sources/android/native_app_glue\"}],\"isGenerated\":false,\"language\":\"C\",\"sources\":[\"/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/sources/android/native_app_glue/android_native_app_glue.c\"]}],\"fullName\":\"libnative_app_glue_NdkHelper.a\",\"linkerLanguage\":\"C\",\"name\":\"native_app_glue_NdkHelper\",\"sourceDirectory\":\"/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/ndk_helper\",\"sysroot\":\"/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/sysroot\",\"type\":\"STATIC_LIBRARY\"}]}]}],\"cookie\":\"\",\"inReplyTo\":\"codemodel\",\"type\":\"reply\"}\n",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "done executing cmake",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "write build output /Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86/build_output.txt",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "write command file /Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86/build_command.txt",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "JSON generation completed without problems",
+    "file": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt",
+    "tag": "debug|x86"
+  }
+]

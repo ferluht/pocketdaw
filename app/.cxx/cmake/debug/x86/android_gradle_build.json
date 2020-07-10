@@ -1,0 +1,656 @@
+{
+  "stringTable": {
+    "0": "/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86",
+    "1": "--target=i686-none-linux-android26 --gcc-toolchain=/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -DBGFX_CONFIG_RENDERER_OPENGLES=30 -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/modules/asio-standalone/asio/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/src/main/cpp/Link/android-ifaddrs -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bx/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bx/3rdparty -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/src -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/3rdparty -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/3rdparty/astc-codec -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/3rdparty/astc-codec/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/3rdparty/iqa/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty/khronos -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Link/android-ifaddrs -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty/dear-imgui -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -O0 -fno-limit-debug-info -Ofast -fPIC -stdlib=libc++",
+    "2": "--target=i686-none-linux-android26 --gcc-toolchain=/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/modules/asio-standalone/asio/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/src/main/cpp/Link/android-ifaddrs -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Link/android-ifaddrs -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty/dear-imgui -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bx/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -O0 -fno-limit-debug-info -Ofast -fPIC",
+    "3": "--target=i686-none-linux-android26 --gcc-toolchain=/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -DABL_LINK_OFFSET_MS=23 -DANDROID=1 -DBGFX_CONFIG_RENDERER_OPENGLES=30 -DLINK_PLATFORM_LINUX=1 -DLINK_PLATFORM_UNIX=1 -DPD=1 -Dnative_lib_EXPORTS -isystem /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/modules/asio-standalone/asio/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/src/main/cpp/Link/android-ifaddrs -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Link/android-ifaddrs -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty/dear-imgui -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bx/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/include -I/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/sources/android/native_app_glue -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/nanovg -isystem /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/cmake_include/../modules/asio-standalone/asio/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/ndk_helper -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -O0 -fno-limit-debug-info -Ofast -fPIC -stdlib=libc++ -std=gnu++11",
+    "4": "--target=i686-none-linux-android26 --gcc-toolchain=/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/modules/asio-standalone/asio/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/src/main/cpp/Link/android-ifaddrs -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Link/android-ifaddrs -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty/dear-imgui -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bx/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/include -I/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/sources/android/native_app_glue -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIC",
+    "5": "--target=i686-none-linux-android26 --gcc-toolchain=/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/modules/asio-standalone/asio/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/src/main/cpp/Link/android-ifaddrs -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Link/android-ifaddrs -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty/dear-imgui -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bx/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/nanovg -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -O0 -fno-limit-debug-info -Ofast -fPIC",
+    "6": "--target=i686-none-linux-android26 --gcc-toolchain=/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/modules/asio-standalone/asio/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/src/main/cpp/Link/android-ifaddrs -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/ndk_helper -I/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/sources/android/native_app_glue -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -O0 -fno-limit-debug-info -Ofast -fPIC -std=c++11",
+    "7": "--target=i686-none-linux-android26 --gcc-toolchain=/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/modules/asio-standalone/asio/include -I/Users/ferluht/Dev/pocketdaw/pd/app/cpp/src/main/cpp/Link/android-ifaddrs -I/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/sources/android/native_app_glue -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIC"
+  },
+  "buildFiles": [
+    "/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/build/cmake/platforms.cmake",
+    "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/ndk_helper/CMakeLists.txt",
+    "/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/build/cmake/android.toolchain.cmake",
+    "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/AbletonLinkConfig.cmake",
+    "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/cmake_include/AsioStandaloneConfig.cmake",
+    "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\" clean"
+  ],
+  "buildTargetsCommand": "/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "native_app_glue-Debug-x86": {
+      "buildCommand": "/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\" native_app_glue",
+      "buildType": "debug",
+      "toolchain": "1543387136",
+      "abi": "x86",
+      "artifactName": "native_app_glue",
+      "files": [
+        {
+          "src": "/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/sources/android/native_app_glue/android_native_app_glue.c",
+          "flagsOrdinal": 7,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86/libnative_app_glue.a"
+    },
+    "native_app_glue_NdkHelper-Debug-x86": {
+      "buildCommand": "/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\" native_app_glue_NdkHelper",
+      "buildType": "debug",
+      "toolchain": "1543387136",
+      "abi": "x86",
+      "artifactName": "native_app_glue_NdkHelper",
+      "files": [
+        {
+          "src": "/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/sources/android/native_app_glue/android_native_app_glue.c",
+          "flagsOrdinal": 7,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/x86/libnative_app_glue_NdkHelper.a"
+    },
+    "nanovg-lib-Debug-x86": {
+      "buildCommand": "/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\" nanovg-lib",
+      "buildType": "debug",
+      "toolchain": "1543387136",
+      "abi": "x86",
+      "artifactName": "nanovg-lib",
+      "files": [
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/nanovg/nanovg.cpp",
+          "flagsOrdinal": 5,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/nanovg/nanovg_bgfx.cpp",
+          "flagsOrdinal": 5,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86/libnanovg-lib.a"
+    },
+    "bgfx-Debug-x86": {
+      "buildCommand": "/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\" bgfx",
+      "buildType": "debug",
+      "toolchain": "1543387136",
+      "abi": "x86",
+      "artifactName": "bgfx",
+      "files": [
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bx/src/amalgamated.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/src/amalgamated.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/src/image.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/src/image_cubemap_filter.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/src/image_decode.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/src/image_encode.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/src/image_gnf.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/3rdparty/astc-codec/src/decoder/astc_file.cc",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/3rdparty/astc-codec/src/decoder/codec.cc",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/3rdparty/astc-codec/src/decoder/endpoint_codec.cc",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/3rdparty/astc-codec/src/decoder/footprint.cc",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/3rdparty/astc-codec/src/decoder/integer_sequence_codec.cc",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/3rdparty/astc-codec/src/decoder/intermediate_astc_block.cc",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/3rdparty/astc-codec/src/decoder/logical_astc_block.cc",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/3rdparty/astc-codec/src/decoder/partition.cc",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/3rdparty/astc-codec/src/decoder/physical_astc_block.cc",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/3rdparty/astc-codec/src/decoder/quantization.cc",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bimg/3rdparty/astc-codec/src/decoder/weight_infill.cc",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86/libbgfx.a"
+    },
+    "NdkHelper-Debug-x86": {
+      "buildCommand": "/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\" NdkHelper",
+      "buildType": "debug",
+      "toolchain": "1543387136",
+      "abi": "x86",
+      "artifactName": "NdkHelper",
+      "files": [
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/ndk_helper/gestureDetector.cpp",
+          "flagsOrdinal": 6,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/ndk_helper/gl3stub.cpp",
+          "flagsOrdinal": 6,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/ndk_helper/GLContext.cpp",
+          "flagsOrdinal": 6,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/ndk_helper/interpolator.cpp",
+          "flagsOrdinal": 6,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/ndk_helper/JNIHelper.cpp",
+          "flagsOrdinal": 6,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/ndk_helper/perfMonitor.cpp",
+          "flagsOrdinal": 6,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/ndk_helper/sensorManager.cpp",
+          "flagsOrdinal": 6,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/ndk_helper/shader.cpp",
+          "flagsOrdinal": 6,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/ndk_helper/tapCamera.cpp",
+          "flagsOrdinal": 6,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/ndk_helper/texture.cpp",
+          "flagsOrdinal": 6,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/ndk_helper/vecmath.cpp",
+          "flagsOrdinal": 6,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/x86/libNdkHelper.a"
+    },
+    "imgui-lib-Debug-x86": {
+      "buildCommand": "/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\" imgui-lib",
+      "buildType": "debug",
+      "toolchain": "1543387136",
+      "abi": "x86",
+      "artifactName": "imgui-lib",
+      "files": [
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty/dear-imgui/imgui.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty/dear-imgui/imgui_widgets.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx/3rdparty/dear-imgui/imgui_draw.cpp",
+          "flagsOrdinal": 2,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86/libimgui-lib.a"
+    },
+    "native-lib-Debug-x86": {
+      "buildCommand": "/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\" native-lib",
+      "buildType": "debug",
+      "toolchain": "1543387136",
+      "abi": "x86",
+      "artifactName": "native-lib",
+      "files": [
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/MainActivity.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Synth.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Link/LinkManager.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Link/android-ifaddrs/ifaddrs.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/AudioEffect.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/Delay.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/MoogFilter.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/Oscilloscope.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/StereoDelay.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/ConvolutionReverb.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/ThreeBandEQ.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/Saturator.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/FFTConvolver/AudioFFT.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/FFTConvolver/FFTConvolver.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/FFTConvolver/TwoStageFFTConvolver.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/FFTConvolver/Utilities.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/A.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/M.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Button.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Canvas.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Graph.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/IECanvas.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Knob.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Led.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Text.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Menu.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Plot.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Slider.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/EncoderButton.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/FullscreenWindow.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Wire.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Envelopes/ADSR.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Envelopes/ADS.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Envelopes/AD.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/DrumRack.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Instrument.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Metronome.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Operator.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Oscillator.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Sampler.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/SingleTone.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Brute.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/SoundObject5.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/SplineSynth.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/DoubleSplineSynth.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/AnalogDrum.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/Kick.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/Snare.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/MidiEffects/LFO.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/MidiEffects/MidiEffect.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/MidiEffects/Arpeggiator.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/MidiEffects/MidiMonitor.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Chain.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Midi.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Rack.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Track.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/MidiEffects/Sequencer.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Utils/AudioFile.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx_utils/bgfx_utils.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/bgfx_utils/example-glue.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/entry/cmd.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/entry/dialog.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/entry/entry.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/entry/input.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/entry/entry_android.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/imgui/imgui.cpp",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [
+        {
+          "header": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/include/ableton/Link.hpp",
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "output": "/Users/ferluht/Dev/pocketdaw/pd/app/build/intermediates/cmake/debug/obj/x86/libnative-lib.so"
+    }
+  },
+  "toolchains": {
+    "1543387136": {
+      "cCompilerExecutable": "/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang",
+      "cppCompilerExecutable": "/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
+    }
+  },
+  "cFileExtensions": [
+    "c"
+  ],
+  "cppFileExtensions": [
+    "cc",
+    "cpp"
+  ]
+}

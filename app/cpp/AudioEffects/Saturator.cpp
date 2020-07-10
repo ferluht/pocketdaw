@@ -8,7 +8,7 @@
 Saturator::Saturator() : AudioEffect("Saturator") {
     GSetRatio(0.3f);
 
-    drywet = new GUI::AnalogEncoder("dry/wet", -1);
+    drywet = new GUI::AnalogEncoder("dry/wet");
     drywet->GPlace({0.25, 0.4});
     drywet->GSetHeight(0.2);
     GAttach(drywet);
@@ -22,8 +22,8 @@ Saturator::Saturator() : AudioEffect("Saturator") {
 
     type = 0;
 
-    factor = new GUI::AnalogEncoder("factor", 1, 1, 15, [this](float value){
-//        redraw_wave();
+    factor = new GUI::AnalogEncoder("factor", 10, 1, 15, [this](float value){
+        waveshape_changed = true;
     });
     factor->GPlace({0.25, 0.7});
     factor->GSetHeight(0.2);
@@ -35,7 +35,7 @@ Saturator::Saturator() : AudioEffect("Saturator") {
     plot->GSetTapEndCallback([this](const Vec2& v) -> GUI::GObject * {
         type ++;
         if (type > 3) type = 0;
-        redraw_wave();
+        waveshape_changed = true;
         return nullptr;
     });
 }

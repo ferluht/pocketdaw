@@ -38,6 +38,7 @@ public:
     double increment;
     float * audioData;
     int numFrames;
+    bool pattern_switch = false;
 
     AMGTrack(std::string name) : AMGRack() {
         drag_from = {0, 0};
@@ -83,25 +84,28 @@ public:
             for (int i = 0; i < 4; i++) patterns[i]->record = cmd.data2 > 0;
             return;
         }
-        if ((cmd.status == 0xB0) && (cmd.data1 == 103) && (cmd.data2 > 0)) {
-            if (cmd.data2 > 0 && cmd.data2 < 5) {
+        if ((cmd.status == 0xB0) && (cmd.data1 == 0x13)) {
+            pattern_switch = cmd.data2 > 0;
+        }
+        if (pattern_switch && ((cmd.status & 0xF0) == NOTEON_HEADER) && cmd.data1 > 35 && cmd.data1 < 41) {
+            if (cmd.data2 > 0) {
                 patterns[focus_pattern]->GSetVisible(false);
-                patterns[cmd.data2 - 1]->MCHotRestart();
-                focus_pattern = cmd.data2 - 1;
+                patterns[cmd.data1 - 36]->MCHotRestart();
+                focus_pattern = cmd.data1 - 36;
                 patterns[focus_pattern]->GSetVisible(mc_visible);
             }
             return;
         }
-        if ((cmd.status == 0xB0) && (cmd.data1 == 104) && (cmd.data2 > 0)) {
-            if (cmd.data2 > 0 && cmd.data2 < 5) {
-                patterns[focus_pattern]->GSetVisible(false);
-                patterns[cmd.data2 - 1]->MCHotRestart();
-                patterns[focus_pattern]->MCCopyTo(patterns[cmd.data2 - 1]);
-                focus_pattern = cmd.data2 - 1;
-                patterns[focus_pattern]->GSetVisible(mc_visible);
-            }
-            return;
-        }
+//        if ((cmd.status == 0xB0) && (cmd.data1 == 104) && (cmd.data2 > 0)) {
+//            if (cmd.data2 > 0 && cmd.data2 < 5) {
+//                patterns[focus_pattern]->GSetVisible(false);
+//                patterns[cmd.data2 - 1]->MCHotRestart();
+//                patterns[focus_pattern]->MCCopyTo(patterns[cmd.data2 - 1]);
+//                focus_pattern = cmd.data2 - 1;
+//                patterns[focus_pattern]->GSetVisible(mc_visible);
+//            }
+//            return;
+//        }
         patterns[focus_pattern]->MIn(cmd);
     }
 

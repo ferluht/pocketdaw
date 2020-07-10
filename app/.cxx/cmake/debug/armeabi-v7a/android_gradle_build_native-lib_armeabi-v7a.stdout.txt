@@ -1,0 +1,979 @@
+ninja: Entering directory `/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/armeabi-v7a'
+[1/114] Building CXX object CMakeFiles/bgfx.dir/AMGEngine/bimg/src/image_gnf.cpp.o
+[2/114] Building CXX object CMakeFiles/bgfx.dir/AMGEngine/bimg/src/image_cubemap_filter.cpp.o
+[3/114] Building CXX object CMakeFiles/bgfx.dir/AMGEngine/bimg/3rdparty/astc-codec/src/decoder/codec.cc.o
+[4/114] Building CXX object CMakeFiles/bgfx.dir/AMGEngine/bimg/3rdparty/astc-codec/src/decoder/footprint.cc.o
+[5/114] Building CXX object CMakeFiles/bgfx.dir/AMGEngine/bimg/3rdparty/astc-codec/src/decoder/logical_astc_block.cc.o
+[6/114] Building CXX object CMakeFiles/bgfx.dir/AMGEngine/bimg/3rdparty/astc-codec/src/decoder/weight_infill.cc.o
+[7/114] Building CXX object CMakeFiles/bgfx.dir/AMGEngine/bimg/3rdparty/astc-codec/src/decoder/integer_sequence_codec.cc.o
+[8/114] Building CXX object CMakeFiles/bgfx.dir/AMGEngine/bimg/3rdparty/astc-codec/src/decoder/endpoint_codec.cc.o
+[9/114] Building CXX object CMakeFiles/bgfx.dir/AMGEngine/bimg/src/image_encode.cpp.o
+[10/114] Building CXX object CMakeFiles/bgfx.dir/AMGEngine/bimg/3rdparty/astc-codec/src/decoder/physical_astc_block.cc.o
+[11/114] Building CXX object CMakeFiles/native-lib.dir/Synth.cpp.o
+[12/114] Building CXX object CMakeFiles/bgfx.dir/AMGEngine/bimg/3rdparty/astc-codec/src/decoder/astc_file.cc.o
+[13/114] Building CXX object CMakeFiles/native-lib.dir/Link/android-ifaddrs/ifaddrs.cpp.o
+[14/114] Building CXX object CMakeFiles/bgfx.dir/AMGEngine/bimg/3rdparty/astc-codec/src/decoder/intermediate_astc_block.cc.o
+[15/114] Building CXX object CMakeFiles/bgfx.dir/AMGEngine/bimg/3rdparty/astc-codec/src/decoder/partition.cc.o
+[16/114] Building CXX object CMakeFiles/bgfx.dir/AMGEngine/bimg/3rdparty/astc-codec/src/decoder/quantization.cc.o
+[17/114] Building CXX object CMakeFiles/native-lib.dir/AudioEffects/AudioEffect.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/AudioEffect.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/AudioEffect.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Button.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Knob.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+1 warning generated.
+[18/114] Building CXX object CMakeFiles/imgui-lib.dir/AMGEngine/bgfx/3rdparty/dear-imgui/imgui_draw.cpp.o
+[19/114] Building CXX object CMakeFiles/native-lib.dir/AudioEffects/ThreeBandEQ.cpp.o
+[20/114] Building CXX object CMakeFiles/bgfx.dir/AMGEngine/bimg/src/image.cpp.o
+[21/114] Building CXX object CMakeFiles/bgfx.dir/AMGEngine/bx/src/amalgamated.cpp.o
+[22/114] Building CXX object CMakeFiles/native-lib.dir/AudioEffects/Delay.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/Delay.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Button.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Knob.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/Delay.cpp:6:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/Delay.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+2 warnings generated.
+[23/114] Building CXX object CMakeFiles/native-lib.dir/AudioEffects/FFTConvolver/FFTConvolver.cpp.o
+[24/114] Building CXX object CMakeFiles/native-lib.dir/AudioEffects/FFTConvolver/AudioFFT.cpp.o
+[25/114] Building CXX object CMakeFiles/native-lib.dir/AudioEffects/FFTConvolver/TwoStageFFTConvolver.cpp.o
+[26/114] Building CXX object CMakeFiles/native-lib.dir/AudioEffects/Oscilloscope.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/Oscilloscope.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Knob.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/Oscilloscope.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+2 warnings generated.
+[27/114] Building CXX object CMakeFiles/native-lib.dir/AudioEffects/FFTConvolver/Utilities.cpp.o
+[28/114] Building CXX object CMakeFiles/native-lib.dir/AudioEffects/StereoDelay.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/StereoDelay.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/StereoDelay.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Knob.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/StereoDelay.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/StereoDelay.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+2 warnings generated.
+[29/114] Building CXX object CMakeFiles/native-lib.dir/AMGEngine/G.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.cpp:1:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+1 warning generated.
+[30/114] Building CXX object CMakeFiles/native-lib.dir/AMGEngine/A.cpp.o
+[31/114] Building CXX object CMakeFiles/native-lib.dir/AMGEngine/AMGEngine.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+1 warning generated.
+[32/114] Building CXX object CMakeFiles/native-lib.dir/AMGEngine/M.cpp.o
+[33/114] Building CXX object CMakeFiles/native-lib.dir/AudioEffects/MoogFilter.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/MoogFilter.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/MoogFilter.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Knob.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/MoogFilter.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/MoogFilter.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+2 warnings generated.
+[34/114] Building CXX object CMakeFiles/imgui-lib.dir/AMGEngine/bgfx/3rdparty/dear-imgui/imgui_widgets.cpp.o
+[35/114] Building CXX object CMakeFiles/native-lib.dir/AudioEffects/ConvolutionReverb.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/ConvolutionReverb.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/ConvolutionReverb.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/AudioEffect.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Button.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Knob.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/ConvolutionReverb.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/ConvolutionReverb.h:10:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+2 warnings generated.
+[36/114] Building CXX object CMakeFiles/native-lib.dir/GUI/Canvas.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Canvas.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Canvas.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+1 warning generated.
+[37/114] Building CXX object CMakeFiles/native-lib.dir/GUI/Graph.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Graph.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Graph.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+1 warning generated.
+[38/114] Building CXX object CMakeFiles/native-lib.dir/GUI/IECanvas.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/IECanvas.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/IECanvas.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Button.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Knob.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+1 warning generated.
+[39/114] Building CXX object CMakeFiles/native-lib.dir/GUI/Text.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Text.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Text.h:8:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+1 warning generated.
+[40/114] Building CXX object CMakeFiles/native-lib.dir/GUI/Led.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Led.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Led.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Canvas.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+1 warning generated.
+[41/114] Building CXX object CMakeFiles/native-lib.dir/GUI/Plot.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Plot.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Plot.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Graph.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+1 warning generated.
+[42/114] Building CXX object CMakeFiles/native-lib.dir/GUI/Knob.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Knob.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Knob.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+1 warning generated.
+[43/114] Building CXX object CMakeFiles/native-lib.dir/GUI/FullscreenWindow.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/FullscreenWindow.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/FullscreenWindow.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Canvas.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+1 warning generated.
+[44/114] Building CXX object CMakeFiles/native-lib.dir/GUI/Wire.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Wire.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Wire.h:8:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+1 warning generated.
+[45/114] Building CXX object CMakeFiles/native-lib.dir/GUI/Menu.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Menu.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Menu.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Canvas.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Menu.cpp:5:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Menu.h:96:14: warning: 'GDraw' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+        void GDraw(NVGcontext *nvg);
+             ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Canvas.h:24:14: note: overridden virtual function is here
+        void GDraw(NVGcontext * nvg) override;
+             ^
+2 warnings generated.
+[46/114] Building CXX object CMakeFiles/native-lib.dir/Instruments/Envelopes/ADS.cpp.o
+[47/114] Building CXX object CMakeFiles/native-lib.dir/AudioEffects/Saturator.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/Saturator.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/Saturator.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Knob.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/Saturator.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AudioEffects/Saturator.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+2 warnings generated.
+[48/114] Building CXX object CMakeFiles/native-lib.dir/Instruments/Envelopes/ADSR.cpp.o
+[49/114] Building CXX object CMakeFiles/native-lib.dir/Instruments/Metronome.cpp.o
+[50/114] Building CXX object CMakeFiles/native-lib.dir/GUI/Button.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Button.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Button.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Knob.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+1 warning generated.
+[51/114] Building CXX object CMakeFiles/native-lib.dir/Instruments/Envelopes/AD.cpp.o
+[52/114] Building CXX object CMakeFiles/native-lib.dir/GUI/Jack.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.cpp:5:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+2 warnings generated.
+[53/114] Building CXX object CMakeFiles/native-lib.dir/GUI/Encoder.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Knob.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+2 warnings generated.
+[54/114] Building CXX object CMakeFiles/native-lib.dir/GUI/EncoderButton.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/EncoderButton.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/EncoderButton.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Button.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Knob.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/EncoderButton.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/EncoderButton.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+2 warnings generated.
+[55/114] Building CXX object CMakeFiles/native-lib.dir/Instruments/Instrument.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Instrument.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Instrument.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+1 warning generated.
+[56/114] Building CXX object CMakeFiles/native-lib.dir/GUI/Slider.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Slider.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Slider.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Knob.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+1 warning generated.
+[57/114] Building CXX object CMakeFiles/native-lib.dir/Instruments/DoubleSplineSynth.cpp.o
+[58/114] Building CXX object CMakeFiles/imgui-lib.dir/AMGEngine/bgfx/3rdparty/dear-imgui/imgui.cpp.o
+[59/114] Linking CXX static library libimgui-lib.a
+[60/114] Building CXX object CMakeFiles/native-lib.dir/Instruments/DrumRack.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/DrumRack.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/DrumRack.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Rack.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Canvas.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/DrumRack.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/DrumRack.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Rack.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Chain.h:199:22: warning: 'GFindFocusObject' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
+                     ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:248:26: note: overridden virtual function is here
+        virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
+                         ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/DrumRack.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/DrumRack.h:8:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Rack.h:128:18: warning: expression result unused [-Wunused-value]
+            for (it; (it != objects.end()) && isMidiEffect(*it); ++it);
+                 ^~
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Rack.h:134:22: warning: expression result unused [-Wunused-value]
+                for (it; (it != objects.end()) && isMidiEffect(*it); ++it);
+                     ^~
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/DrumRack.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/DrumRack.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/DrumRack.cpp:5:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/DrumRack.h:71:10: warning: 'GSetVisible' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void GSetVisible(bool visible_) {
+         ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/IECanvas.h:75:14: note: overridden virtual function is here
+        void GSetVisible(bool visible_) override {
+             ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/DrumRack.cpp:5:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/DrumRack.h:77:10: warning: 'MRender' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void MRender(double beat) {
+         ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/M.h:76:18: note: overridden virtual function is here
+    virtual void MRender(double beat) {}
+                 ^
+7 warnings generated.
+[61/114] Building CXX object CMakeFiles/native-lib.dir/Instruments/Brute.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Brute.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Brute.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/Kick.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/../Instrument.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Brute.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Brute.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/Kick.h:10:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/AnalogDrum.h:10:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Brute.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Brute.h:8:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/Kick.h:59:10: warning: 'MRender' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void MRender(double beat) {
+         ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/AnalogDrum.h:42:18: note: overridden virtual function is here
+    virtual void MRender(double beat) override {
+                 ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Brute.cpp:5:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Brute.h:41:22: warning: 'GFindFocusObject' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
+                     ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:248:26: note: overridden virtual function is here
+        virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
+                         ^
+4 warnings generated.
+[62/114] Building CXX object CMakeFiles/bgfx.dir/AMGEngine/bgfx/src/amalgamated.cpp.o
+[63/114] Building CXX object CMakeFiles/native-lib.dir/Instruments/AnalogDrums/AnalogDrum.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/AnalogDrum.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/AnalogDrum.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Instrument.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/AnalogDrum.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/AnalogDrum.h:10:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+2 warnings generated.
+[64/114] Building CXX object CMakeFiles/native-lib.dir/Instruments/SingleTone.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/SingleTone.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/SingleTone.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Knob.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/SingleTone.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/SingleTone.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+2 warnings generated.
+[65/114] Building CXX object CMakeFiles/native-lib.dir/Instruments/SoundObject5.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/SoundObject5.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/SoundObject5.h:10:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Graph.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/SoundObject5.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/SoundObject5.h:14:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/../GUI/Encoder.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/SoundObject5.cpp:5:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/SoundObject5.h:269:10: warning: 'IUpdateState' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void IUpdateState(SoundObject5State *state, MData md) {
+         ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Instrument.h:83:18: note: overridden virtual function is here
+    virtual void IUpdateState(State * state, MData cmd) {};
+                 ^
+3 warnings generated.
+[66/114] Building CXX object CMakeFiles/native-lib.dir/Instruments/Operator.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Operator.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Operator.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Instrument.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Operator.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Operator.h:10:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Oscillator.h:10:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+2 warnings generated.
+[67/114] Building CXX object CMakeFiles/native-lib.dir/Instruments/Sampler.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Sampler.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Sampler.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Knob.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Sampler.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Sampler.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+2 warnings generated.
+[68/114] Building CXX object CMakeFiles/native-lib.dir/MidiEffects/MidiEffect.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MidiEffects/MidiEffect.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MidiEffects/MidiEffect.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/IECanvas.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Button.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Knob.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+1 warning generated.
+[69/114] Building CXX object CMakeFiles/native-lib.dir/MidiEffects/MidiMonitor.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MidiEffects/MidiMonitor.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MidiEffects/MidiMonitor.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MidiEffects/MidiEffect.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/IECanvas.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Button.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Knob.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+1 warning generated.
+[70/114] Building CXX object CMakeFiles/native-lib.dir/Orchestration/Midi.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Midi.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Midi.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Canvas.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+1 warning generated.
+[71/114] Building CXX object CMakeFiles/native-lib.dir/Orchestration/Chain.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Chain.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Chain.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Chain.cpp:5:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Chain.h:199:22: warning: 'GFindFocusObject' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
+                     ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:248:26: note: overridden virtual function is here
+        virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
+                         ^
+2 warnings generated.
+[72/114] Building CXX object CMakeFiles/native-lib.dir/MidiEffects/LFO.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MidiEffects/LFO.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MidiEffects/LFO.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MidiEffects/LFO.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MidiEffects/LFO.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+2 warnings generated.
+[73/114] Building CXX object CMakeFiles/native-lib.dir/Instruments/Oscillator.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Oscillator.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Oscillator.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Instrument.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Oscillator.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Oscillator.h:10:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+2 warnings generated.
+[74/114] Building CXX object CMakeFiles/native-lib.dir/AMGEngine/bgfx_utils/bgfx_utils.cpp.o
+[75/114] Building CXX object CMakeFiles/native-lib.dir/AMGEngine/bgfx_utils/example-glue.cpp.o
+[76/114] Building CXX object CMakeFiles/native-lib.dir/AMGEngine/entry/dialog.cpp.o
+[77/114] Building CXX object CMakeFiles/native-lib.dir/AMGEngine/entry/cmd.cpp.o
+[78/114] Building CXX object CMakeFiles/native-lib.dir/AMGEngine/entry/input.cpp.o
+[79/114] Building CXX object CMakeFiles/native-lib.dir/Orchestration/Rack.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Rack.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Rack.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Canvas.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Rack.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Rack.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Chain.h:199:22: warning: 'GFindFocusObject' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
+                     ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:248:26: note: overridden virtual function is here
+        virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
+                         ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Rack.cpp:5:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Rack.h:128:18: warning: expression result unused [-Wunused-value]
+            for (it; (it != objects.end()) && isMidiEffect(*it); ++it);
+                 ^~
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Rack.h:134:22: warning: expression result unused [-Wunused-value]
+                for (it; (it != objects.end()) && isMidiEffect(*it); ++it);
+                     ^~
+4 warnings generated.
+[80/114] Building CXX object CMakeFiles/native-lib.dir/AMGEngine/entry/entry.cpp.o
+[81/114] Building CXX object CMakeFiles/native-lib.dir/Instruments/SplineSynth.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/SplineSynth.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/SplineSynth.h:10:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Graph.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/SplineSynth.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/SplineSynth.h:14:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/../GUI/Encoder.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+2 warnings generated.
+[82/114] Building CXX object CMakeFiles/native-lib.dir/MidiEffects/Sequencer.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MidiEffects/Sequencer.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MidiEffects/Sequencer.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Canvas.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MidiEffects/Sequencer.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MidiEffects/Sequencer.h:12:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MidiEffects/Sequencer.cpp:5:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/MidiEffects/Sequencer.h:184:18: warning: 'GSetVisible' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    virtual void GSetVisible(bool visible_) {
+                 ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/IECanvas.h:75:14: note: overridden virtual function is here
+        void GSetVisible(bool visible_) override {
+             ^
+3 warnings generated.
+[83/114] Building CXX object CMakeFiles/native-lib.dir/Instruments/AnalogDrums/Kick.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/Kick.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/Kick.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/../Instrument.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/Kick.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/Kick.h:10:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/AnalogDrum.h:10:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/Kick.cpp:5:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/Kick.h:59:10: warning: 'MRender' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void MRender(double beat) {
+         ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/AnalogDrum.h:42:18: note: overridden virtual function is here
+    virtual void MRender(double beat) override {
+                 ^
+3 warnings generated.
+[84/114] Building C object CMakeFiles/native_app_glue.dir/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/sources/android/native_app_glue/android_native_app_glue.c.o
+[85/114] Linking C static library libnative_app_glue.a
+[86/114] Building CXX object /Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/armeabi-v7a/CMakeFiles/NdkHelper.dir/gl3stub.cpp.o
+[87/114] Building CXX object CMakeFiles/native-lib.dir/Instruments/AnalogDrums/Snare.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/Snare.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/Snare.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/../Instrument.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/Snare.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/Snare.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/AnalogDrum.h:10:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+2 warnings generated.
+[88/114] Building CXX object CMakeFiles/nanovg-lib.dir/AMGEngine/nanovg/nanovg_bgfx.cpp.o
+[89/114] Building CXX object CMakeFiles/native-lib.dir/MidiEffects/Arpeggiator.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MidiEffects/Arpeggiator.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Knob.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MidiEffects/Arpeggiator.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+2 warnings generated.
+[90/114] Building CXX object /Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/armeabi-v7a/CMakeFiles/NdkHelper.dir/gestureDetector.cpp.o
+[91/114] Building CXX object /Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/armeabi-v7a/CMakeFiles/NdkHelper.dir/GLContext.cpp.o
+[92/114] Building CXX object /Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/armeabi-v7a/CMakeFiles/NdkHelper.dir/interpolator.cpp.o
+[93/114] Building CXX object CMakeFiles/native-lib.dir/AMGEngine/entry/entry_android.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/entry/entry_android.cpp:22:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/entry/entry_android.cpp:29:
+/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/sources/android/native_app_glue/android_native_app_glue.c:29:9: warning: 'LOGI' macro redefined [-Wmacro-redefined]
+#define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "threaded_app", __VA_ARGS__))
+        ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/ndk_helper/JNIHelper.h:30:9: note: previous definition is here
+#define LOGI(...)                                                           \
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/entry/entry_android.cpp:29:
+/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/sources/android/native_app_glue/android_native_app_glue.c:30:9: warning: 'LOGE' macro redefined [-Wmacro-redefined]
+#define LOGE(...) ((void)__android_log_print(ANDROID_LOG_ERROR, "threaded_app", __VA_ARGS__))
+        ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/ndk_helper/JNIHelper.h:38:9: note: previous definition is here
+#define LOGE(...)                                                            \
+        ^
+3 warnings generated.
+[94/114] Building CXX object /Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/armeabi-v7a/CMakeFiles/NdkHelper.dir/perfMonitor.cpp.o
+[95/114] Building CXX object /Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/armeabi-v7a/CMakeFiles/NdkHelper.dir/sensorManager.cpp.o
+[96/114] Building C object /Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/armeabi-v7a/CMakeFiles/native_app_glue_NdkHelper.dir/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/sources/android/native_app_glue/android_native_app_glue.c.o
+[97/114] Linking C static library /Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/armeabi-v7a/libnative_app_glue_NdkHelper.a
+[98/114] Building CXX object CMakeFiles/nanovg-lib.dir/AMGEngine/nanovg/nanovg.cpp.o
+[99/114] Building CXX object /Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/armeabi-v7a/CMakeFiles/NdkHelper.dir/texture.cpp.o
+[100/114] Linking CXX static library libnanovg-lib.a
+[101/114] Building CXX object /Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/armeabi-v7a/CMakeFiles/NdkHelper.dir/vecmath.cpp.o
+[102/114] Building CXX object /Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/armeabi-v7a/CMakeFiles/NdkHelper.dir/shader.cpp.o
+[103/114] Building CXX object /Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/armeabi-v7a/CMakeFiles/NdkHelper.dir/tapCamera.cpp.o
+[104/114] Building CXX object /Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/armeabi-v7a/CMakeFiles/NdkHelper.dir/JNIHelper.cpp.o
+[105/114] Linking CXX static library /Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/armeabi-v7a/libNdkHelper.a
+[106/114] Building CXX object CMakeFiles/native-lib.dir/Utils/AudioFile.cpp.o
+[107/114] Building CXX object CMakeFiles/native-lib.dir/AMGEngine/imgui/imgui.cpp.o
+[108/114] Building CXX object CMakeFiles/bgfx.dir/AMGEngine/bimg/src/image_decode.cpp.o
+[109/114] Linking CXX static library libbgfx.a
+[110/114] Building CXX object CMakeFiles/native-lib.dir/Orchestration/Track.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Track.cpp:6:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Track.h:12:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Track.cpp:6:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Track.h:15:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Chain.h:199:22: warning: 'GFindFocusObject' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
+                     ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:248:26: note: overridden virtual function is here
+        virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
+                         ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Track.cpp:6:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Track.h:16:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Rack.h:128:18: warning: expression result unused [-Wunused-value]
+            for (it; (it != objects.end()) && isMidiEffect(*it); ++it);
+                 ^~
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Rack.h:134:22: warning: expression result unused [-Wunused-value]
+                for (it; (it != objects.end()) && isMidiEffect(*it); ++it);
+                     ^~
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Track.cpp:6:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Track.h:19:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Menu.h:96:14: warning: 'GDraw' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+        void GDraw(NVGcontext *nvg);
+             ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Canvas.h:24:14: note: overridden virtual function is here
+        void GDraw(NVGcontext * nvg) override;
+             ^
+5 warnings generated.
+[111/114] Building CXX object CMakeFiles/native-lib.dir/Link/LinkManager.cpp.o
+[112/114] Building CXX object CMakeFiles/native-lib.dir/Orchestration/Master.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Canvas.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:10:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Menu.h:96:14: warning: 'GDraw' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+        void GDraw(NVGcontext *nvg);
+             ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Canvas.h:24:14: note: overridden virtual function is here
+        void GDraw(NVGcontext * nvg) override;
+             ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:22:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/DrumRack.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Rack.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Chain.h:199:22: warning: 'GFindFocusObject' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
+                     ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:248:26: note: overridden virtual function is here
+        virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
+                         ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:22:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/DrumRack.h:8:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Rack.h:128:18: warning: expression result unused [-Wunused-value]
+            for (it; (it != objects.end()) && isMidiEffect(*it); ++it);
+                 ^~
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Rack.h:134:22: warning: expression result unused [-Wunused-value]
+                for (it; (it != objects.end()) && isMidiEffect(*it); ++it);
+                     ^~
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:22:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/DrumRack.h:71:10: warning: 'GSetVisible' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void GSetVisible(bool visible_) {
+         ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/IECanvas.h:75:14: note: overridden virtual function is here
+        void GSetVisible(bool visible_) override {
+             ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:22:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/DrumRack.h:77:10: warning: 'MRender' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void MRender(double beat) {
+         ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/M.h:76:18: note: overridden virtual function is here
+    virtual void MRender(double beat) {}
+                 ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:23:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/Kick.h:59:10: warning: 'MRender' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void MRender(double beat) {
+         ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/AnalogDrum.h:42:18: note: overridden virtual function is here
+    virtual void MRender(double beat) override {
+                 ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:25:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Brute.h:41:22: warning: 'GFindFocusObject' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
+                     ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:248:26: note: overridden virtual function is here
+        virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
+                         ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:27:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/MidiEffects/Sequencer.h:184:18: warning: 'GSetVisible' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    virtual void GSetVisible(bool visible_) {
+                 ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/IECanvas.h:75:14: note: overridden virtual function is here
+        void GSetVisible(bool visible_) override {
+             ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.cpp:5:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:30:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/SoundObject5.h:269:10: warning: 'IUpdateState' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void IUpdateState(SoundObject5State *state, MData md) {
+         ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/../Instrument.h:83:18: note: overridden virtual function is here
+    virtual void IUpdateState(State * state, MData cmd) {};
+                 ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.cpp:5:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:69:46: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        linkButton = new GUI::ProgressButton("Link", [this](bool state){
+                                             ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:86:33: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        addMenu = new GUI::Menu("Add");
+                                ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:89:39: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        addDeviceMenu = new GUI::Menu("Instrument");
+                                      ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:91:38: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        addAudioMenu = new GUI::Menu("Audio device");
+                                     ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:93:37: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        addMidiMenu = new GUI::Menu("Midi device");
+                                    ^
+17 warnings generated.
+[113/114] Building CXX object CMakeFiles/native-lib.dir/MainActivity.cpp.o
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MainActivity.cpp:7:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Synth.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Button.h:9:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Knob.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/AMGEngine.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:544:9: warning: control may reach end of non-void function [-Wreturn-type]
+        }
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MainActivity.cpp:7:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Synth.h:9:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Menu.h:96:14: warning: 'GDraw' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+        void GDraw(NVGcontext *nvg);
+             ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Canvas.h:24:14: note: overridden virtual function is here
+        void GDraw(NVGcontext * nvg) override;
+             ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MainActivity.cpp:7:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Synth.h:11:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:10:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Encoder.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/Jack.h:46:9: warning: 'static' is not permitted on a declaration of a type [-Wmissing-declarations]
+        static enum {
+        ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MainActivity.cpp:7:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Synth.h:11:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:22:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/DrumRack.h:8:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Rack.h:12:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Chain.h:199:22: warning: 'GFindFocusObject' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
+                     ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:248:26: note: overridden virtual function is here
+        virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
+                         ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MainActivity.cpp:7:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Synth.h:11:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:22:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/DrumRack.h:8:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Rack.h:128:18: warning: expression result unused [-Wunused-value]
+            for (it; (it != objects.end()) && isMidiEffect(*it); ++it);
+                 ^~
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Rack.h:134:22: warning: expression result unused [-Wunused-value]
+                for (it; (it != objects.end()) && isMidiEffect(*it); ++it);
+                     ^~
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MainActivity.cpp:7:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Synth.h:11:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:22:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/DrumRack.h:71:10: warning: 'GSetVisible' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void GSetVisible(bool visible_) {
+         ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/IECanvas.h:75:14: note: overridden virtual function is here
+        void GSetVisible(bool visible_) override {
+             ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MainActivity.cpp:7:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Synth.h:11:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:22:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/DrumRack.h:77:10: warning: 'MRender' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void MRender(double beat) {
+         ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/M.h:76:18: note: overridden virtual function is here
+    virtual void MRender(double beat) {}
+                 ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MainActivity.cpp:7:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Synth.h:11:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:23:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/Kick.h:59:10: warning: 'MRender' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void MRender(double beat) {
+         ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/AnalogDrum.h:42:18: note: overridden virtual function is here
+    virtual void MRender(double beat) override {
+                 ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MainActivity.cpp:7:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Synth.h:11:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:25:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/Brute.h:41:22: warning: 'GFindFocusObject' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
+                     ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/G.h:248:26: note: overridden virtual function is here
+        virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
+                         ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MainActivity.cpp:7:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Synth.h:11:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:27:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/MidiEffects/Sequencer.h:184:18: warning: 'GSetVisible' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    virtual void GSetVisible(bool visible_) {
+                 ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/GUI/IECanvas.h:75:14: note: overridden virtual function is here
+        void GSetVisible(bool visible_) override {
+             ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MainActivity.cpp:7:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Synth.h:11:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:30:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/SoundObject5.h:269:10: warning: 'IUpdateState' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void IUpdateState(SoundObject5State *state, MData md) {
+         ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Instruments/AnalogDrums/../Instrument.h:83:18: note: overridden virtual function is here
+    virtual void IUpdateState(State * state, MData cmd) {};
+                 ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MainActivity.cpp:7:
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/Synth.h:11:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:69:46: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        linkButton = new GUI::ProgressButton("Link", [this](bool state){
+                                             ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:86:33: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        addMenu = new GUI::Menu("Add");
+                                ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:89:39: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        addDeviceMenu = new GUI::Menu("Instrument");
+                                      ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:91:38: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        addAudioMenu = new GUI::Menu("Audio device");
+                                     ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Orchestration/Master.h:93:37: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        addMidiMenu = new GUI::Menu("Midi device");
+                                    ^
+In file included from /Users/ferluht/Dev/pocketdaw/pd/app/cpp/MainActivity.cpp:7:
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Synth.h:101:40: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        midiDeviceMenu = new GUI::Menu("Midi device");
+                                       ^
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/Synth.h:147:43: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        cpuload = new GUI::ProgressButton("CPU", [this](bool state){
+                                          ^
+19 warnings generated.
+[114/114] Linking CXX shared library /Users/ferluht/Dev/pocketdaw/pd/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libnative-lib.so

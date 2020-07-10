@@ -20,6 +20,8 @@ class Saturator : public AudioEffect {
 
     int type = 0;
 
+    bool waveshape_changed = true;
+
     Vec2 drag_from;
 
     inline float shaper(float amp) {
@@ -49,6 +51,14 @@ public:
 
     void redraw_wave();
     bool ARender(double beat, float * lsample, float * rsample) override;
+
+    void GDraw(NVGcontext * nvg) override {
+        if (waveshape_changed) {
+            redraw_wave();
+            changed = false;
+        }
+        AudioEffect::GDraw(nvg);
+    }
 };
 
 

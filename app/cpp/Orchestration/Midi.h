@@ -91,12 +91,12 @@ public:
 
     void MIn(MData cmd) override {
 
-        if (((cmd.status & 0xF0) == 0xB0) && (cmd.data1 == 101)) {
+        if (((cmd.status & 0xF0) == 0xB0) && (cmd.data1 == 1)) {
             length = (int)((cmd.data2 + 1) / 8);
             if (length == 0) length = 1;
         }
 
-        if (((cmd.status & 0xF0) == 0xB0) && (cmd.data1 == 102) && (cmd.data2 > 0)) {
+        if (((cmd.status & 0xF0) == 0xB0) && (cmd.data1 == 0x17) && (cmd.data2 > 0)) {
             for (auto it = notes.begin(); it != notes.end(); ++it) {
                 if ((*it).data2 > 0) (*it).beat = static_cast<int>((*it).beat/0.25 + 0.5) * 0.25;
             }

@@ -1,0 +1,11 @@
+/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86/CMakeFiles/rebuild_cache.dir
+/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86/CMakeFiles/edit_cache.dir
+/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86/CMakeFiles/bgfx.dir
+/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86/CMakeFiles/imgui-lib.dir
+/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86/CMakeFiles/native-lib.dir
+/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86/CMakeFiles/native_app_glue.dir
+/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86/CMakeFiles/nanovg-lib.dir
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/x86/CMakeFiles/rebuild_cache.dir
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/x86/CMakeFiles/edit_cache.dir
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/x86/CMakeFiles/NdkHelper.dir
+/Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/x86/CMakeFiles/native_app_glue_NdkHelper.dir
