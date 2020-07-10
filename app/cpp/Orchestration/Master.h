@@ -60,14 +60,14 @@ public:
     std::vector<AMGTrack*> Tracks;
     AMGChain AEffects;
 
-    AMGMasterTrack() : link(170.0) {
+    AMGMasterTrack() : link(120.0) {
         link.enable(true);
 //        GAttachTexture("Textures/background.bmp");
         size_denominator = 4;
         isPlaying = false;
-        bpm = 170;
+        bpm = 120;
         linkButton = new GUI::ProgressButton("Link", [this](bool state){
-            this->link.enable(state);
+//            this->link.enable(state);
             isPlaying = state;
         });
         metronome = new Metronome();
@@ -134,7 +134,7 @@ public:
         addDeviceMenu->addButton(new GUI::Button("SplineSynth",
                                                  [this](bool a){
                                                      if (focus_track > -1) {
-                                                         Tracks[focus_track]->RAdd(new SplineSynth(1));
+                                                         Tracks[focus_track]->RAdd(new SplineSynth(4));
                                                      }
                                                  }));
 
@@ -259,7 +259,7 @@ public:
         addAudioMenu->addButton(new GUI::Button("Convolution reverb",
                                                 [this](bool a){
                                                     if (focus_track > -1) {
-                                                        Tracks[focus_track]->RAdd(new ConvolutionReverb("/storage/emulated/0/impulse_response_left.wav"));
+                                                        Tracks[focus_track]->RAdd(new ConvolutionReverb("/storage/emulated/0/.pocketdaw/impulse_response_left.wav"));
                                                     }
                                                 }));
 
@@ -382,9 +382,9 @@ public:
                 case 0x15:
                     changeTrackFocus(focus_track + 1);
                     break;
-                case 0x17:
-                    isPlaying ^= true;
-                    break;
+//                case 0x17:
+//                    isPlaying ^= true;
+//                    break;
                 default:
                     break;
             }

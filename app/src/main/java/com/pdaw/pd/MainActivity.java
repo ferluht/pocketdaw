@@ -17,44 +17,35 @@
 package com.pdaw.pd;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.NativeActivity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
-import android.graphics.PixelFormat;
 import android.media.midi.MidiDevice;
 import android.media.midi.MidiDeviceInfo;
 import android.media.midi.MidiManager;
 import android.media.midi.MidiOutputPort;
 import android.media.midi.MidiReceiver;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
-import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -65,13 +56,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.UUID;
 
 import static android.os.Environment.getExternalStorageDirectory;
@@ -154,6 +140,7 @@ public class MainActivity extends NativeActivity {
         dir.mkdirs();
         dir = new File(sdcard.getAbsolutePath() + "/.pocketdaw/");
         dir.mkdirs();
+
 
         copyAssets();
 //        Files.copy(origin.toPath(), dest.toPath());
@@ -277,7 +264,7 @@ public class MainActivity extends NativeActivity {
         }
     }
 
-    @TargetApi(26)
+//    @TargetApi(26)
     protected void onResume() {
         super.onResume();
 
@@ -309,7 +296,7 @@ public class MainActivity extends NativeActivity {
     }
     // Our popup window, you will call it from your C/C++ code later
 
-    @TargetApi(26)
+//    @TargetApi(26)
     void setImmersiveSticky() {
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -324,32 +311,32 @@ public class MainActivity extends NativeActivity {
     PopupWindow _popupWindow;
     TextView _label;
 
-    @SuppressLint("InflateParams")
-    public void showUI()
-    {
-        if( _popupWindow != null )
-            return;
-
-        _activity = this;
-
-        this.runOnUiThread(new Runnable()  {
-            @Override
-            public void run()  {
-                LayoutInflater layoutInflater
-                = (LayoutInflater)getBaseContext()
-                .getSystemService(LAYOUT_INFLATER_SERVICE);
-
-                LinearLayout mainLayout = new LinearLayout(_activity);
-                MarginLayoutParams params = new MarginLayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-                params.setMargins(0, 0, 0, 0);
-                _activity.setContentView(mainLayout, params);
-
-                // Show our UI over NativeActivity window
-                _popupWindow.showAtLocation(mainLayout, Gravity.TOP | Gravity.START, 10, 10);
-                _popupWindow.update();
-
-            }});
-    }
+//    @SuppressLint("InflateParams")
+//    public void showUI()
+//    {
+//        if( _popupWindow != null )
+//            return;
+//
+//        _activity = this;
+//
+//        this.runOnUiThread(new Runnable()  {
+//            @Override
+//            public void run()  {
+//                LayoutInflater layoutInflater
+//                = (LayoutInflater)getBaseContext()
+//                .getSystemService(LAYOUT_INFLATER_SERVICE);
+//
+//                LinearLayout mainLayout = new LinearLayout(_activity);
+//                MarginLayoutParams params = new MarginLayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+//                params.setMargins(0, 0, 0, 0);
+//                _activity.setContentView(mainLayout, params);
+//
+//                // Show our UI over NativeActivity window
+//                _popupWindow.showAtLocation(mainLayout, Gravity.TOP | Gravity.START, 10, 10);
+//                _popupWindow.update();
+//
+//            }});
+//    }
 
     protected void onPause()
     {

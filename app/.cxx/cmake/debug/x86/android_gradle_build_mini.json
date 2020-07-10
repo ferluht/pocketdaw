@@ -1,0 +1,58 @@
+{
+  "buildFiles": [
+    "/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/build/cmake/platforms.cmake",
+    "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/ndk_helper/CMakeLists.txt",
+    "/Users/ferluht/Library/Android/sdk/ndk/21.0.6113669/build/cmake/android.toolchain.cmake",
+    "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/AbletonLinkConfig.cmake",
+    "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/AMGEngine/link/cmake_include/AsioStandaloneConfig.cmake",
+    "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\" clean"
+  ],
+  "buildTargetsCommand": "/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "native_app_glue-Debug-x86": {
+      "artifactName": "native_app_glue",
+      "buildCommand": "/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\" native_app_glue",
+      "abi": "x86",
+      "output": "/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86/libnative_app_glue.a"
+    },
+    "native_app_glue_NdkHelper-Debug-x86": {
+      "artifactName": "native_app_glue_NdkHelper",
+      "buildCommand": "/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\" native_app_glue_NdkHelper",
+      "abi": "x86",
+      "output": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/x86/libnative_app_glue_NdkHelper.a"
+    },
+    "nanovg-lib-Debug-x86": {
+      "artifactName": "nanovg-lib",
+      "buildCommand": "/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\" nanovg-lib",
+      "abi": "x86",
+      "output": "/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86/libnanovg-lib.a"
+    },
+    "bgfx-Debug-x86": {
+      "artifactName": "bgfx",
+      "buildCommand": "/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\" bgfx",
+      "abi": "x86",
+      "output": "/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86/libbgfx.a"
+    },
+    "NdkHelper-Debug-x86": {
+      "artifactName": "NdkHelper",
+      "buildCommand": "/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\" NdkHelper",
+      "abi": "x86",
+      "output": "/Users/ferluht/Dev/pocketdaw/pd/app/cpp/.build/ndkHelper/Debug/x86/libNdkHelper.a"
+    },
+    "imgui-lib-Debug-x86": {
+      "artifactName": "imgui-lib",
+      "buildCommand": "/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\" imgui-lib",
+      "abi": "x86",
+      "output": "/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86/libimgui-lib.a"
+    },
+    "native-lib-Debug-x86": {
+      "artifactName": "native-lib",
+      "buildCommand": "/Users/ferluht/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/ferluht/Dev/pocketdaw/pd/app/.cxx/cmake/debug/x86\" native-lib",
+      "abi": "x86",
+      "output": "/Users/ferluht/Dev/pocketdaw/pd/app/build/intermediates/cmake/debug/obj/x86/libnative-lib.so"
+    }
+  }
+}

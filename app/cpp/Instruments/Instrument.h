@@ -83,6 +83,8 @@ public:
     virtual void IUpdateState(State * state, MData cmd) {};
 
     virtual void IARender(State * state, double beat, float * lsample, float * rsample) {}
+
+    virtual void IARenderOnce(double beat) {}
 };
 
 template <class State>
@@ -162,6 +164,8 @@ template <class State>
 bool Instrument<State>::ARender(double beat, float * lsample, float * rsample)
 {
     keyPressedLock.lock();
+
+    IARenderOnce(beat);
 
     for (auto it = States.begin(); it != States.end(); it++ ){
         if ((*it)->active){

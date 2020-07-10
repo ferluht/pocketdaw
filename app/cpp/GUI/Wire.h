@@ -54,8 +54,8 @@ namespace GUI {
             unsigned char R = rand() % 255;
             unsigned char G = rand() % 255;
             unsigned char B = rand() % 255;
-//            color = nvgRGB(R, G, B);
-            color = nvgRGB(0, 156, 245);
+            color = nvgRGB(R, G, B);
+//            color = nvgRGB(0, 156, 245);
             a_obj = nullptr;
             b_obj = nullptr;
             a_vec = {0, 0};
@@ -109,7 +109,7 @@ namespace GUI {
                 b_rad = 10;
             }
 
-            drawShadow(nvg, a, b, a_rad, b_rad);
+//            drawShadow(nvg, a, b, a_rad, b_rad);
             drawWire(nvg, a, b, a_rad, b_rad);
             drawCircle(nvg, a, a_rad);
             drawCircle(nvg, b, b_rad);
