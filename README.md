@@ -19,7 +19,7 @@ This project uses [Android Studio](http://developer.android.com/sdk/index.html) 
 
 *Following commands assume it was installed to `~/android/sdk/ndk-bundle` directory.*
 
-## Environment variables
+## Environment variables (only for Linux)
 
 ```shell
 sudo nano /etc/profile.d/ndk.sh
