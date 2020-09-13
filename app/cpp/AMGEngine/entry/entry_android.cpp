@@ -21,6 +21,7 @@
 #include <AMGEngine/ndk_helper/NDKHelper.h>
 #include <AMGEngine/G.h>
 #include <AMGEngine/M.h>
+#include <AMGEngine/A.h>
 
 extern "C"
 {
@@ -264,6 +265,7 @@ namespace entry
 						if (!m_thread.isRunning() )
 						{
 							MEngine::getMEngine().attachApp(m_app);
+							AEngine::getAEngine().attachApp(m_app);
 							m_thread.init(MainThreadEntry::threadFunc, &m_mte);
 						}
 					}

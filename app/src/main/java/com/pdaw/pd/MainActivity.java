@@ -25,6 +25,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
+import android.media.AudioDeviceInfo;
+import android.media.AudioManager;
 import android.media.midi.MidiDevice;
 import android.media.midi.MidiDeviceInfo;
 import android.media.midi.MidiInputPort;
@@ -82,6 +84,7 @@ public class MainActivity extends NativeActivity {
 
     // Olds permission request result
     private static final int readExternalStoragePermission = 1;
+    private static final int recordAudioPermission = 2;
 
     static {
 //        System.loadLibrary("c++_shared");
@@ -132,6 +135,16 @@ public class MainActivity extends NativeActivity {
             ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     readExternalStoragePermission);
+        }
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.RECORD_AUDIO)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(
+                    this,
+                    new String[]{Manifest.permission.RECORD_AUDIO},
+                    recordAudioPermission);
         }
 
         midiDevices = new HashMap<String, MidiDeviceInfo>();
@@ -193,6 +206,12 @@ public class MainActivity extends NativeActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
+    }
+
     private void copyAssets() {
         AssetManager assetManager = getAssets();
         String[] files = null;
@@ -223,6 +242,7 @@ public class MainActivity extends NativeActivity {
             }
         }
     }
+
     private void copyFile(InputStream in, OutputStream out) throws IOException {
         byte[] buffer = new byte[1024];
         int read;
@@ -368,6 +388,36 @@ public class MainActivity extends NativeActivity {
         for (String key : midiDevices.keySet()) {
             ret[i]= key;
             i++;
+        }
+
+        return ret;
+    }
+
+    public String[] getInputAudioDevices()
+    {
+        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+
+        AudioDeviceInfo[] info = audioManager.getDevices(AudioManager.GET_DEVICES_INPUTS);
+
+        String[] ret = new String[info.length];
+
+        for (int i = 0; i < info.length; i++) {
+            ret[i] = String.format("input %d: %s, %s", i, info[i].getProductName(), info[i].getId());
+        }
+
+        return ret;
+    }
+
+    public String[] getOutputAudioDevices()
+    {
+        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+
+        AudioDeviceInfo[] info = audioManager.getDevices(AudioManager.GET_DEVICES_OUTPUTS);
+
+        String[] ret = new String[info.length];
+
+        for (int i = 0; i < info.length; i++) {
+            ret[i] = String.format("output %d: %s, %s", i, info[i].getProductName(), info[i].getId());
         }
 
         return ret;

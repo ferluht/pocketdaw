@@ -15,12 +15,13 @@ include_directories(${LINK_DIR}/modules/asio-standalone/asio/include)
 include_directories(src/main/cpp/Link/android-ifaddrs)
 
 # set up common compile options
-#set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -w -std=c++17 -fno-exceptions")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Ofast")
-set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -fuse-ld=lld")
+#set(CMAKE_C_FLAGS “${CMAKE_C_FLAGS} ”)
+set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -w -fno-exceptions")
+#set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Ofast")
+set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -fuse-ld=lld -Wl,--build-id=sha1")
 set(CMAKE_CXX11_EXTENSION_COMPILE_OPTION "-std=c++17")
 
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/AMGEngine/ndk_helper ${CMAKE_CURRENT_LIST_DIR}/.build/ndkHelper/${CMAKE_BUILD_TYPE}/${ANDROID_ABI})
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/AMGEngine/ndk_helper ${CMAKE_CURRENT_LIST_DIR}/build/ndkHelper/${CMAKE_BUILD_TYPE}/${ANDROID_ABI})
 
 set(BX_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/AMGEngine/bx)
 set(BIMG_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/AMGEngine/bimg)
@@ -122,6 +123,7 @@ add_library(
 
         MainActivity.cpp
         Synth.cpp
+        Effector.cpp
 
         Link/LinkManager.cpp
         Link/android-ifaddrs/ifaddrs.cpp

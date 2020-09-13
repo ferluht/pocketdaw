@@ -121,7 +121,7 @@ public:
         incoming.push_back(msg);
     }
 
-    void attachApp(android_app *app) {
+    inline void attachApp(android_app *app) {
         app_ = app;
     }
 

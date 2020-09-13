@@ -28,6 +28,8 @@ public:
         midi = &MEngine::getMEngine();
         graphic = &GUI::GEngine::getGEngine();
 
+//        audio->getDevices();
+
         audio->setRoot(root_);
         midi->MConnect(root_);
         graphic->setRoot(root_);
