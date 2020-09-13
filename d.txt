@@ -1,0 +1,384 @@
+diff --git a/app/build.gradle b/app/build.gradle
+index 18a52fc..63192a7 100644
+--- a/app/build.gradle
++++ b/app/build.gradle
+@@ -18,14 +18,14 @@ android {
+         minSdkVersion 26
+         targetSdkVersion 26
+         versionCode 30 // Application version, 3 digits, major/minor/revision
+-        versionName "0.0.1"
++        versionName "0.0.2"
+     }
+     // One APK per ABI. Generate also one multi-abi APK.
+     splits {
+         abi {
+             enable true
+             reset()
+-            include 'armeabi-v7a', 'x86'
++            include 'armeabi-v7a', 'arm64-v8a'
+             universalApk true
+         }
+     }
+@@ -40,7 +40,7 @@ android {
+         }
+     }
+     // Helper function to synchronize our natives libs in jni directories
+-    project.ext.nativeBuildsDirsAbis = ['armeabi-v7a': 'android-arm', 'x86': 'android-x86']
++    project.ext.nativeBuildsDirsAbis = ['armeabi-v7a': 'android-arm', 'arm64-v8a': 'android-arm64']
+     android.applicationVariants.all { variant ->
+         variant.outputs.each { output ->
+             def abiName = output.getFilter(com.android.build.OutputFile.ABI)
+diff --git a/app/cpp/AMGEngine/A.cpp b/app/cpp/AMGEngine/A.cpp
+index 2f3dc8b..6b1c709 100644
+--- a/app/cpp/AMGEngine/A.cpp
++++ b/app/cpp/AMGEngine/A.cpp
+@@ -10,7 +10,7 @@
+ float AObject::sample_rate;
+ 
+ // Double-buffering offers a good tradeoff between latency and protection against glitches.
+-constexpr int32_t kBufferSizeInBursts = 2;
++constexpr int32_t kBufferSizeInBursts = 4;
+ 
+ aaudio_data_callback_result_t dataCallback(
+         AAudioStream *stream,
+diff --git a/app/cpp/AMGEngine/CMakeLists.txt b/app/cpp/AMGEngine/CMakeLists.txt
+index 58dfbf4..2ddc6fd 100644
+--- a/app/cpp/AMGEngine/CMakeLists.txt
++++ b/app/cpp/AMGEngine/CMakeLists.txt
+@@ -8,8 +8,9 @@ cmake_minimum_required(VERSION 3.4.1)
+ project(AMGEngine-lib LANGUAGES C CXX)
+ 
+ # set up common compile options
+-set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -fno-exceptions")
+-#set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Ofast")
++#set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -fno-exceptions")
++set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Ofast")
++set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -fuse-ld=lld")
+ 
+ add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/ndk_helper ${CMAKE_CURRENT_LIST_DIR}/.build/ndkHelper/${CMAKE_BUILD_TYPE}/${ANDROID_ABI})
+ 
+@@ -128,6 +129,8 @@ find_library(log-lib log)
+ # Refer to: https://github.com/android-ndk/ndk/issues/381.
+ set_target_properties(${PROJECT_NAME}  PROPERTIES LINK_FLAGS "-u ANativeActivity_onCreate")
+ 
++#add_link_options( -fuse-ld=lld )
++
+ target_link_libraries(
+         AMGEngine-lib
+         android
+diff --git a/app/cpp/AMGEngine/G.h b/app/cpp/AMGEngine/G.h
+index 87e8015..e8630dc 100644
+--- a/app/cpp/AMGEngine/G.h
++++ b/app/cpp/AMGEngine/G.h
+@@ -183,7 +183,7 @@ namespace GUI {
+         virtual void GInit() {};
+ 
+         void GDraw_(NVGcontext *nvg) {
+-            if (!initialized) GInit();
++//            if (!initialized) GInit();
+ 
+             GUpdateGlobalPosition(parent);
+ 
+diff --git a/app/cpp/AMGEngine/M.cpp b/app/cpp/AMGEngine/M.cpp
+index 2cfcbb4..19ecc2d 100644
+--- a/app/cpp/AMGEngine/M.cpp
++++ b/app/cpp/AMGEngine/M.cpp
+@@ -6,6 +6,21 @@
+ #include <jni.h>
+ #include <string>
+ 
++void MEngine::sendNoteOn(uint8_t note, uint8_t velocity) {
++    uint8_t data[3] = {NOTEON_HEADER, note, velocity};
++    sendMidi(data, 0, 3, 0);
++}
++
++void MEngine::sendNoteOff(uint8_t note) {
++    uint8_t data[3] = {NOTEOFF_HEADER, note, 0};
++    sendMidi(data, 0, 3, 0);
++}
++
++void MEngine::sendCC(uint8_t num, uint8_t value) {
++    uint8_t data[3] = {CC_HEADER, num, value};
++    sendMidi(data, 0, 3, 0);
++}
++
+ std::list<std::string> MEngine::getDevices() {
+     JNIEnv *jni;
+     app_->activity->vm->AttachCurrentThread(&jni, nullptr);
+@@ -58,6 +73,24 @@ void MEngine::connectDevice(std::string deviceName) {
+     app_->activity->vm->DetachCurrentThread();
+ }
+ 
++void MEngine::sendMidi(uint8_t *data, int offset, int length, long timestamp) {
++    JNIEnv *jni;
++    app_->activity->vm->AttachCurrentThread(&jni, nullptr);
++
++    // Default class retrieval
++    jclass clazz = jni->GetObjectClass(app_->activity->clazz);
++    jmethodID methodID = jni->GetMethodID(clazz, "sendMidi", "([BIIJ)V");
++
++    jbyteArray jData = jni->NewByteArray(length);
++    jni->SetByteArrayRegion(jData, 0, length, reinterpret_cast<const jbyte*>(data));
++
++    jni->CallVoidMethod(app_->activity->clazz, methodID,
++            jData, static_cast<const jint>(offset),
++            static_cast<const jint>(length), static_cast<const jlong>(timestamp));
++
++    app_->activity->vm->DetachCurrentThread();
++}
++
+ extern "C" {
+ 
+ // Data callback stuff
+diff --git a/app/cpp/AMGEngine/M.h b/app/cpp/AMGEngine/M.h
+index 2f77efc..754900d 100644
+--- a/app/cpp/AMGEngine/M.h
++++ b/app/cpp/AMGEngine/M.h
+@@ -15,6 +15,7 @@
+ #include <android_native_app_glue.h>
+ #include <android/native_window_jni.h>
+ #include <string>
++#include <mutex>
+ 
+ #define NOTEOFF_HEADER 128
+ #define NOTEON_HEADER 144
+@@ -46,6 +47,7 @@ class MObject {
+ 
+ private:
+ 
++    std::mutex midiLock;
+     MObject * MInput;
+     std::list<MObject *> MOutputs;
+ 
+@@ -94,6 +96,10 @@ public:
+ 
+     std::list<std::string> getDevices();
+     void connectDevice(std::string deviceName);
++    void sendMidi(uint8_t * data, int offset, int length, long timestamp);
++    void sendNoteOn(uint8_t note, uint8_t velocity);
++    void sendNoteOff(uint8_t note);
++    void sendCC(uint8_t num, uint8_t value);
+ 
+     void attachApp(android_app *app) {
+         app_ = app;
+diff --git a/app/cpp/CMakeLists.txt b/app/cpp/CMakeLists.txt
+index 169175e..954f7c7 100644
+--- a/app/cpp/CMakeLists.txt
++++ b/app/cpp/CMakeLists.txt
+@@ -5,7 +5,7 @@
+ 
+ cmake_minimum_required(VERSION 3.4.1)
+ 
+-project(native-lib LANGUAGES C CXX)
++project(pocketdaw LANGUAGES C CXX)
+ 
+ # Ableton Link
+ set (LINK_DIR ${CMAKE_CURRENT_LIST_DIR}/AMGEngine/link)
+@@ -17,6 +17,7 @@ include_directories(src/main/cpp/Link/android-ifaddrs)
+ # set up common compile options
+ #set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -w -fno-exceptions")
+ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Ofast")
++set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -fuse-ld=lld")
+ 
+ add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/AMGEngine/ndk_helper ${CMAKE_CURRENT_LIST_DIR}/.build/ndkHelper/${CMAKE_BUILD_TYPE}/${ANDROID_ABI})
+ 
+@@ -108,7 +109,7 @@ target_include_directories(nanovg-lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/nanovg)
+ 
+ # add sources
+ add_library(
+-        native-lib
++        pocketdaw
+ 
+         SHARED
+ 
+@@ -206,7 +207,7 @@ add_library(
+ 
+         )
+ 
+-target_compile_definitions(native-lib PRIVATE ANDROID=1 LINK_PLATFORM_LINUX=1 PD=1 ABL_LINK_OFFSET_MS=23)
++target_compile_definitions(pocketdaw PRIVATE ANDROID=1 LINK_PLATFORM_LINUX=1 PD=1 ABL_LINK_OFFSET_MS=23)
+ 
+ find_library(log-lib log)
+ 
+@@ -215,7 +216,7 @@ find_library(log-lib log)
+ set_target_properties(${PROJECT_NAME}  PROPERTIES LINK_FLAGS "-u ANativeActivity_onCreate")
+ 
+ target_link_libraries(
+-        native-lib
++        pocketdaw
+         android
+         aaudio
+         native_app_glue
+diff --git a/app/cpp/Orchestration/Track.h b/app/cpp/Orchestration/Track.h
+index f997054..437a024 100644
+--- a/app/cpp/Orchestration/Track.h
++++ b/app/cpp/Orchestration/Track.h
+@@ -53,11 +53,11 @@ public:
+             patterns[i]->GSetVisible(false);
+         }
+ 
+-        TSetMCHeight(0.23);
+-
+         focus_pattern = 0;
+         patterns[focus_pattern]->GSetVisible(mc_visible);
+ 
++        TSetMCHeight(0.23);
++
+         setColor(GUI::GEngine::ui_theme->BACKGROUND_COLOR);
+ 
+         run_lock.lock();
+diff --git a/app/cpp/Synth.h b/app/cpp/Synth.h
+index 09de5fb..7246dae 100644
+--- a/app/cpp/Synth.h
++++ b/app/cpp/Synth.h
+@@ -145,7 +145,13 @@ public:
+         add_upper_panel_button(save_button);
+ 
+         cpuload = new GUI::ProgressButton("CPU", [this](bool state){
+-
++            if (state) {
++                auto lmidi = &MEngine::getMEngine();
++                lmidi->sendNoteOn(60, 100);
++            } else {
++                auto lmidi = &MEngine::getMEngine();
++                lmidi->sendNoteOff(60);
++            }
+         });
+         add_upper_panel_button(cpuload);
+ 
+@@ -216,9 +222,14 @@ public:
+     void MIn(MData cmd) override {
+         midiLeds[0]->toggle();
+         midiLeds[1]->toggle();
+-        if (cmd.status == 0xB0 && cmd.data1 == 100) {
++        if (cmd.status == CC_HEADER && cmd.data1 == 100) {
+             if (cmd.data2 > 0) record_button->state ^= true;
+         }
++        if (cmd.status == NOTEON_HEADER) {
++            auto lmidi = &MEngine::getMEngine();
++            uint8_t data[3] = {cmd.status, cmd.data1, cmd.data2};
++            lmidi->sendMidi(data, 0, 3, 0);
++        }
+         MOut(cmd);
+     }
+ 
+diff --git a/app/release/app-armeabi-v7a-release.apk b/app/release/app-armeabi-v7a-release.apk
+index 89aaf38..1e78820 100644
+Binary files a/app/release/app-armeabi-v7a-release.apk and b/app/release/app-armeabi-v7a-release.apk differ
+diff --git a/app/release/app-universal-release.apk b/app/release/app-universal-release.apk
+index c73715e..e7651dc 100644
+Binary files a/app/release/app-universal-release.apk and b/app/release/app-universal-release.apk differ
+diff --git a/app/release/app-x86-release.apk b/app/release/app-x86-release.apk
+index c178289..15bdb8c 100644
+Binary files a/app/release/app-x86-release.apk and b/app/release/app-x86-release.apk differ
+diff --git a/app/release/output.json b/app/release/output.json
+index 26903ea..56530f4 100644
+--- a/app/release/output.json
++++ b/app/release/output.json
+@@ -1 +1 @@
+-[{"outputType":{"type":"APK"},"apkInfo":{"type":"FULL_SPLIT","splits":[],"versionCode":30,"versionName":"0.0.1","enabled":true,"filterName":"universal","outputFile":"app-universal-release.apk","fullName":"universalRelease","baseName":"universal-release"},"path":"app-universal-release.apk","properties":{}},{"outputType":{"type":"APK"},"apkInfo":{"type":"FULL_SPLIT","splits":[{"filterType":"ABI","value":"x86"}],"versionCode":80000030,"versionName":"0.0.1","enabled":true,"filterName":"x86","outputFile":"app-x86-release.apk","fullName":"x86Release","baseName":"x86-release"},"path":"app-x86-release.apk","properties":{}},{"outputType":{"type":"APK"},"apkInfo":{"type":"FULL_SPLIT","splits":[{"filterType":"ABI","value":"armeabi-v7a"}],"versionCode":20000030,"versionName":"0.0.1","enabled":true,"filterName":"armeabi-v7a","outputFile":"app-armeabi-v7a-release.apk","fullName":"armeabi-v7aRelease","baseName":"armeabi-v7a-release"},"path":"app-armeabi-v7a-release.apk","properties":{}}]
+\ No newline at end of file
++[{"outputType":{"type":"APK"},"apkInfo":{"type":"FULL_SPLIT","splits":[],"versionCode":30,"versionName":"0.0.2","enabled":true,"filterName":"universal","outputFile":"app-universal-release.apk","fullName":"universalRelease","baseName":"universal-release"},"path":"app-universal-release.apk","properties":{}},{"outputType":{"type":"APK"},"apkInfo":{"type":"FULL_SPLIT","splits":[{"filterType":"ABI","value":"arm64-v8a"}],"versionCode":30000030,"versionName":"0.0.2","enabled":true,"filterName":"arm64-v8a","outputFile":"app-arm64-v8a-release.apk","fullName":"arm64-v8aRelease","baseName":"arm64-v8a-release"},"path":"app-arm64-v8a-release.apk","properties":{}},{"outputType":{"type":"APK"},"apkInfo":{"type":"FULL_SPLIT","splits":[{"filterType":"ABI","value":"armeabi-v7a"}],"versionCode":20000030,"versionName":"0.0.2","enabled":true,"filterName":"armeabi-v7a","outputFile":"app-armeabi-v7a-release.apk","fullName":"armeabi-v7aRelease","baseName":"armeabi-v7a-release"},"path":"app-armeabi-v7a-release.apk","properties":{}}]
+\ No newline at end of file
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+index 78275db..3e20443 100644
+--- a/app/src/main/AndroidManifest.xml
++++ b/app/src/main/AndroidManifest.xml
+@@ -27,7 +27,7 @@
+             android:screenOrientation="landscape">
+             <!-- Tell NativeActivity the name of our .so -->
+             <meta-data android:name="android.app.lib_name"
+-                android:value="native-lib" />
++                android:value="pocketdaw" />
+             <meta-data
+                 android:name="firebase_crashlytics_collection_enabled"
+                 android:value="true" />
+diff --git a/app/src/main/java/com/pdaw/pd/MainActivity.java b/app/src/main/java/com/pdaw/pd/MainActivity.java
+index f3e3765..f1b3d5f 100644
+--- a/app/src/main/java/com/pdaw/pd/MainActivity.java
++++ b/app/src/main/java/com/pdaw/pd/MainActivity.java
+@@ -27,6 +27,7 @@ import android.content.pm.PackageManager;
+ import android.content.res.AssetManager;
+ import android.media.midi.MidiDevice;
+ import android.media.midi.MidiDeviceInfo;
++import android.media.midi.MidiInputPort;
+ import android.media.midi.MidiManager;
+ import android.media.midi.MidiOutputPort;
+ import android.media.midi.MidiReceiver;
+@@ -83,13 +84,16 @@ public class MainActivity extends NativeActivity {
+     private static final int readExternalStoragePermission = 1;
+ 
+     static {
+-        System.loadLibrary("c++_shared");
+-        System.loadLibrary("native-lib");
++//        System.loadLibrary("c++_shared");
++        System.loadLibrary("pocketdaw");
+     }
+ 
+     private HashMap<String, MidiDeviceInfo> midiDevices;
+     private MidiDeviceInfo currentMidiDevice = null;
+ 
++    MidiInputPort inputPort;
++    MidiOutputPort outputPort;
++
+     private native void midiEvent(byte cmd, byte val1, byte val2);
+ 
+ //    private native void startEngine();
+@@ -380,15 +384,29 @@ public class MainActivity extends NativeActivity {
+                     if (device == null) {
+                         Log.e("", "could not open device");
+                     } else {
+-                        //Toast.makeText(getApplicationContext(), "opened", Toast.LENGTH_SHORT).show();
+-                        MidiOutputPort outputPort = device.openOutputPort(0);
++                        outputPort = device.openOutputPort(0);
+                         outputPort.connect(new MainActivity.MyReceiver());
++
++                        inputPort = device.openInputPort(0);
+                     }
+                 }
+             }, null);
+         }
+     }
+ 
++    public void sendMidi(byte [] msg, int offset, int length, long timestamp)
++    {
++        if (inputPort != null) {
++            try {
++                inputPort.onSend(msg, offset, length, timestamp);
++            } catch (IOException e) {
++                e.printStackTrace();
++            }
++        } else {
++            Toast.makeText(getApplicationContext(), "input null", Toast.LENGTH_SHORT).show();
++        }
++    }
++
+     private void scanLeDevice(final boolean enable) {
+         if (enable) {
+             startScanningIfPermitted();
+diff --git a/gradle.properties b/gradle.properties
+index 916f9f3..fbe4722 100644
+--- a/gradle.properties
++++ b/gradle.properties
+@@ -10,14 +10,15 @@
+ # Specifies the JVM arguments used for the daemon process.
+ # The setting is particularly useful for tweaking memory settings.
+ # Default value: -Xmx10248m -XX:MaxPermSize=256m
+-# org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8
++ org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8
+ 
+ # When configured, Gradle will run in incubating parallel mode.
+ # This option should only be used with decoupled projects. More details, visit
+ # http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects
+-# org.gradle.parallel=true
+-
++#org.gradle.parallel=true
++#org.gradle.daemon=false
+ #android.useAndroidX=true
+ android.enableJetifier=true
+ android.useAndroidX=true
+-android.debug.obsoleteApi=true
+\ No newline at end of file
++android.debug.obsoleteApi=true
++#org.gradle.jvmargs=-Xmx12G -XX:-UseGCOverheadLimit
+\ No newline at end of file

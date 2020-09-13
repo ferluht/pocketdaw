@@ -6,6 +6,21 @@
 #include <jni.h>
 #include <string>
 
+void MEngine::sendNoteOn(uint8_t note, uint8_t velocity) {
+    uint8_t data[3] = {NOTEON_HEADER, note, velocity};
+    sendMidi(data, 0, 3, 0);
+}
+
+void MEngine::sendNoteOff(uint8_t note) {
+    uint8_t data[3] = {NOTEOFF_HEADER, note, 0};
+    sendMidi(data, 0, 3, 0);
+}
+
+void MEngine::sendCC(uint8_t num, uint8_t value) {
+    uint8_t data[3] = {CC_HEADER, num, value};
+    sendMidi(data, 0, 3, 0);
+}
+
 std::list<std::string> MEngine::getDevices() {
     JNIEnv *jni;
     app_->activity->vm->AttachCurrentThread(&jni, nullptr);
@@ -58,6 +73,24 @@ void MEngine::connectDevice(std::string deviceName) {
     app_->activity->vm->DetachCurrentThread();
 }
 
+void MEngine::sendMidi(uint8_t *data, int offset, int length, long timestamp) {
+    JNIEnv *jni;
+    app_->activity->vm->AttachCurrentThread(&jni, nullptr);
+
+    // Default class retrieval
+    jclass clazz = jni->GetObjectClass(app_->activity->clazz);
+    jmethodID methodID = jni->GetMethodID(clazz, "sendMidi", "([BIIJ)V");
+
+    jbyteArray jData = jni->NewByteArray(length);
+    jni->SetByteArrayRegion(jData, 0, length, reinterpret_cast<const jbyte*>(data));
+
+    jni->CallVoidMethod(app_->activity->clazz, methodID,
+            jData, static_cast<const jint>(offset),
+            static_cast<const jint>(length), static_cast<const jlong>(timestamp));
+
+    app_->activity->vm->DetachCurrentThread();
+}
+
 extern "C" {
 
 // Data callback stuff
@@ -73,6 +106,6 @@ Java_com_pdaw_pd_MainActivity_midiEvent(JNIEnv *env, jobject obj, jbyte status_b
         (unsigned char)data_byte_1,
         (unsigned char)data_byte_2
     };
-    MEngine::getMEngine().MOut(md);
+    MEngine::getMEngine().putInput(md);
 }
 }

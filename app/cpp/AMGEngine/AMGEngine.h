@@ -15,7 +15,7 @@ public:
 };
 
 
-class AMGEngine : MObject{
+class AMGEngine {
 
 public:
 
@@ -29,13 +29,8 @@ public:
         graphic = &GUI::GEngine::getGEngine();
 
         audio->setRoot(root_);
-        midi->MConnect(this);
-        MConnect(root_);
+        midi->MConnect(root_);
         graphic->setRoot(root_);
-    }
-
-    void MIn(MData cmd) override {
-        MOut(cmd);
     }
 
 };

@@ -18,14 +18,14 @@ android {
         minSdkVersion 26
         targetSdkVersion 26
         versionCode 30 // Application version, 3 digits, major/minor/revision
-        versionName "0.0.1"
+        versionName "0.0.2"
     }
     // One APK per ABI. Generate also one multi-abi APK.
     splits {
         abi {
             enable true
             reset()
-            include 'armeabi-v7a', 'x86'
+            include 'armeabi-v7a', 'arm64-v8a'
             universalApk true
         }
     }
@@ -40,7 +40,7 @@ android {
         }
     }
     // Helper function to synchronize our natives libs in jni directories
-    project.ext.nativeBuildsDirsAbis = ['armeabi-v7a': 'android-arm', 'x86': 'android-x86']
+    project.ext.nativeBuildsDirsAbis = ['armeabi-v7a': 'android-arm', 'arm64-v8a': 'android-arm64']
     android.applicationVariants.all { variant ->
         variant.outputs.each { output ->
             def abiName = output.getFilter(com.android.build.OutputFile.ABI)

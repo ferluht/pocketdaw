@@ -42,6 +42,14 @@ struct MData {
     unsigned char data2;
 };
 
+//bool operator!=(const MData& a1, const MData& a2)
+//{
+//    return (a1.beat != a2.beat) || (a1.status != a2.status) || (a1.data1 != a2.data1) ||
+//           (a1.data2 != a2.data2);
+//}
+
+const MData NULLMIDI = {0,0,0,0};
+
 class MObject {
 
 private:
@@ -80,6 +88,8 @@ class MEngine : public MObject {
 
     android_app *app_;
 
+    std::list<MData> incoming;
+
 public:
 
     static MEngine &getMEngine() {
@@ -94,6 +104,22 @@ public:
 
     std::list<std::string> getDevices();
     void connectDevice(std::string deviceName);
+    void sendMidi(uint8_t * data, int offset, int length, long timestamp);
+    void sendNoteOn(uint8_t note, uint8_t velocity);
+    void sendNoteOff(uint8_t note);
+    void sendCC(uint8_t num, uint8_t value);
+    inline MData getInput() {
+        if (!incoming.empty()) {
+            auto ret = incoming.front();
+            incoming.pop_front();
+            return ret;
+        }
+        return NULLMIDI;
+    }
+
+    inline void putInput(MData msg) {
+        incoming.push_back(msg);
+    }
 
     void attachApp(android_app *app) {
         app_ = app;

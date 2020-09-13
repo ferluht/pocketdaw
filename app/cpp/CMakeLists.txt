@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
-project(native-lib LANGUAGES C CXX)
+project(pocketdaw LANGUAGES C CXX)
 
 # Ableton Link
 set (LINK_DIR ${CMAKE_CURRENT_LIST_DIR}/AMGEngine/link)
@@ -15,8 +15,10 @@ include_directories(${LINK_DIR}/modules/asio-standalone/asio/include)
 include_directories(src/main/cpp/Link/android-ifaddrs)
 
 # set up common compile options
-#set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -w -fno-exceptions")
+#set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -w -std=c++17 -fno-exceptions")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Ofast")
+set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -fuse-ld=lld")
+set(CMAKE_CXX11_EXTENSION_COMPILE_OPTION "-std=c++17")
 
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/AMGEngine/ndk_helper ${CMAKE_CURRENT_LIST_DIR}/.build/ndkHelper/${CMAKE_BUILD_TYPE}/${ANDROID_ABI})
 
@@ -86,6 +88,8 @@ include_directories(
         ${BX_DIRECTORY}/include
 
         ${BIMG_DIRECTORY}/include
+
+        ${OBOE_DIR}/include
         )
 
 add_library(native_app_glue STATIC ${ANDROID_NDK}/sources/android/native_app_glue/android_native_app_glue.c)
@@ -106,9 +110,13 @@ add_library(nanovg-lib
         )
 target_include_directories(nanovg-lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/nanovg)
 
+### INCLUDE OBOE LIBRARY ###
+set (OBOE_DIR AMGEngine/oboe)
+add_subdirectory(${OBOE_DIR} ./oboe-bin)
+
 # add sources
 add_library(
-        native-lib
+        pocketdaw
 
         SHARED
 
@@ -204,9 +212,12 @@ add_library(
 
         AMGEngine/imgui/imgui.cpp
 
+        AMGEngine/FullDuplexStream.cpp
+
         )
 
-target_compile_definitions(native-lib PRIVATE ANDROID=1 LINK_PLATFORM_LINUX=1 PD=1 ABL_LINK_OFFSET_MS=23)
+target_compile_definitions(pocketdaw PRIVATE ANDROID=1 LINK_PLATFORM_LINUX=1 PD=1 ABL_LINK_OFFSET_MS=23)
+#target_compile_options(pocketdaw PRIVATE -std=c++14)
 
 find_library(log-lib log)
 
@@ -215,9 +226,10 @@ find_library(log-lib log)
 set_target_properties(${PROJECT_NAME}  PROPERTIES LINK_FLAGS "-u ANativeActivity_onCreate")
 
 target_link_libraries(
-        native-lib
+        pocketdaw
         android
         aaudio
+        oboe
         native_app_glue
         EGL
         GLESv3

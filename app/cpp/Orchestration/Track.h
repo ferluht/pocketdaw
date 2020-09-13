@@ -53,10 +53,10 @@ public:
             patterns[i]->GSetVisible(false);
         }
 
-        TSetMCHeight(0.23);
-
         focus_pattern = 0;
         patterns[focus_pattern]->GSetVisible(mc_visible);
+
+        TSetMCHeight(0.23);
 
         setColor(GUI::GEngine::ui_theme->BACKGROUND_COLOR);
 

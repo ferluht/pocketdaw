@@ -27,6 +27,7 @@ import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.media.midi.MidiDevice;
 import android.media.midi.MidiDeviceInfo;
+import android.media.midi.MidiInputPort;
 import android.media.midi.MidiManager;
 import android.media.midi.MidiOutputPort;
 import android.media.midi.MidiReceiver;
@@ -83,12 +84,15 @@ public class MainActivity extends NativeActivity {
     private static final int readExternalStoragePermission = 1;
 
     static {
-        System.loadLibrary("c++_shared");
-        System.loadLibrary("native-lib");
+//        System.loadLibrary("c++_shared");
+        System.loadLibrary("pocketdaw");
     }
 
     private HashMap<String, MidiDeviceInfo> midiDevices;
     private MidiDeviceInfo currentMidiDevice = null;
+
+    MidiInputPort inputPort;
+    MidiOutputPort outputPort;
 
     private native void midiEvent(byte cmd, byte val1, byte val2);
 
@@ -380,13 +384,28 @@ public class MainActivity extends NativeActivity {
                     if (device == null) {
                         Log.e("", "could not open device");
                     } else {
-                        //Toast.makeText(getApplicationContext(), "opened", Toast.LENGTH_SHORT).show();
-                        MidiOutputPort outputPort = device.openOutputPort(0);
+                        outputPort = device.openOutputPort(0);
                         outputPort.connect(new MainActivity.MyReceiver());
+
+                        inputPort = device.openInputPort(0);
                     }
                 }
             }, null);
         }
+    }
+
+    public void sendMidi(byte [] msg, int offset, int length, long timestamp)
+    {
+        if (inputPort != null) {
+            try {
+                inputPort.send(msg, offset, length);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+//        else {
+//            Toast.makeText(getApplicationContext(), "input null", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     private void scanLeDevice(final boolean enable) {

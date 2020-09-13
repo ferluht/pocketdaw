@@ -23,6 +23,8 @@ extern "C" int _main_(int _argc, char** _argv);
 #	define ENTRY_CONFIG_IMPLEMENT_MAIN 1
 #endif // ENTRY_CONFIG_IMPLEMENT_MAIN
 
+extern int _main_(int _argc, char** _argv);
+
 #if ENTRY_CONFIG_IMPLEMENT_MAIN
 #define ENTRY_IMPLEMENT_MAIN(_app, ...)                 \
 	int _main_(int _argc, char** _argv)                 \

@@ -27,8 +27,9 @@ private:
     GUI::Button * midi_device_menu;
     GUI::Button * record_button;
     GUI::Button * save_button;
-    GUI::ProgressButton * cpuload;
+    GUI::TimeGraph * cpuload;
     GUI::Led * midiLeds[2];
+    GUI::Text * FPS;
 //    Oscilloscope * masterWaveform;
 
     float panel_height = 0.05f;
@@ -144,10 +145,30 @@ public:
         });
         add_upper_panel_button(save_button);
 
-        cpuload = new GUI::ProgressButton("CPU", [this](bool state){
+        cpuload = new GUI::TimeGraph(100);
+        cpuload->GPlace({panel_buttons_start_x + upper_panel_buttons.size() * panel_button_width, 0});
+        cpuload->GSetWidth(panel_button_width * 1.5f);
+        cpuload->GSetHeight(panel_height);
+        GAttach(cpuload);
 
-        });
-        add_upper_panel_button(cpuload);
+        FPS = new GUI::Text("0", WHITE);//, NVG_ALIGN_CENTER | NVG_ALIGN_MIDDLE);
+        FPS->GPlace({panel_buttons_start_x + (upper_panel_buttons.size() + 1.5f) * panel_button_width, 0});
+        FPS->GSetWidth(panel_button_width);
+        FPS->GSetHeight(panel_height);
+        GAttach(FPS);
+
+//        AMGEngine::graphic->getGEngine().fps;
+
+//                ("CPU", [this](bool state){
+//            if (state) {
+//                auto lmidi = &MEngine::getMEngine();
+//                lmidi->sendNoteOn(60, 100);
+//            } else {
+//                auto lmidi = &MEngine::getMEngine();
+//                lmidi->sendNoteOff(60);
+//            }
+//        });
+//        add_upper_panel_button(cpuload);
 
 //        midiDeviceMenu->setGainCallback([this](){
 //            auto midi = &MEngine::getMEngine();
@@ -180,6 +201,16 @@ public:
     }
 
     inline bool ARender(float * audioData, int numFrames) override {
+
+        auto lmidi = &MEngine::getMEngine();
+        MData minput;
+        do {
+            minput = lmidi->getInput();
+            if (minput.status != NULLMIDI.status) MIn(minput);
+        } while (minput.status != NULLMIDI.status);
+
+        for (int i = 0; i < numFrames; i++) cpuload->update(audioData[i]);
+
         bool ret = Master->ARender(audioData, numFrames);
 
         struct timespec res;
@@ -189,7 +220,11 @@ public:
         float load = static_cast<float>(render_time - last_render_time) / ((float)numFrames / sample_rate);
         last_render_time = render_time;
         if (load > 1) load = 1;
-        cpuload->progress(load);
+//        cpuload->update(load * 2 - 1);
+
+        char fps[100];
+        sprintf(fps, "fps: %.2f", GUI::GEngine::getGEngine().fps);
+        FPS->TSetText(fps);
 
         if (*save_button) {
 
@@ -216,9 +251,12 @@ public:
     void MIn(MData cmd) override {
         midiLeds[0]->toggle();
         midiLeds[1]->toggle();
-        if (cmd.status == 0xB0 && cmd.data1 == 100) {
+        if (cmd.status == CC_HEADER && cmd.data1 == 100) {
             if (cmd.data2 > 0) record_button->state ^= true;
         }
+        auto lmidi = &MEngine::getMEngine();
+        uint8_t data[3] = {cmd.status, cmd.data1, cmd.data2};
+        lmidi->sendMidi(data, 0, 3, 0);
         MOut(cmd);
     }
 

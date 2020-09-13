@@ -36,10 +36,10 @@ bool AMGMasterTrack::ARender(float *audioData, int numFrames) {
         Tracks[i]->AMGTrackProcess(beat, increment, samples[i], numFrames);
     }
 
-    for (int i = 0; i < numFrames; i++) {
-        audioData[2 * i] = 0;
-        audioData[2 * i + 1] = 0;
-    }
+//    for (int i = 0; i < numFrames; i++) {
+//        audioData[2 * i] = 0;
+//        audioData[2 * i + 1] = 0;
+//    }
 
     for (int i = 0; i < Tracks.size(); i ++) {
         Tracks[i]->AMGTrackWait();

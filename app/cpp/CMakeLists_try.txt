@@ -1,0 +1,113 @@
+# For more information about using CMake with Android Studio, read the
+# documentation: https://d.android.com/studio/projects/add-native-code.html
+
+# Sets the minimum version of CMake required to build the native library.
+
+cmake_minimum_required(VERSION 3.4.1)
+
+project(pocketdaw LANGUAGES C CXX)
+
+#include(ExternalProject)
+#
+#ExternalProject_Add (AMGEngine)
+
+# set up common compile options
+#set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -w -fno-exceptions")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Ofast")
+set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -fuse-ld=lld")
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/AMGEngine ${CMAKE_CURRENT_LIST_DIR}/.build/AMGEngine/${CMAKE_BUILD_TYPE}/${ANDROID_ABI})
+
+# add sources
+add_library(
+        pocketdaw
+
+        SHARED
+
+        MainActivity.cpp
+        Synth.cpp
+
+        AudioEffects/AudioEffect.cpp
+        AudioEffects/Delay.cpp
+#        AudioEffects/Lissajous.cpp
+        AudioEffects/MoogFilter.cpp
+        AudioEffects/Oscilloscope.cpp
+#        AudioEffects/Spectrum.cpp
+        AudioEffects/StereoDelay.cpp
+        AudioEffects/ConvolutionReverb.cpp
+        AudioEffects/ThreeBandEQ.cpp
+        AudioEffects/Saturator.cpp
+
+        AudioEffects/FFTConvolver/AudioFFT.cpp
+        AudioEffects/FFTConvolver/FFTConvolver.cpp
+        AudioEffects/FFTConvolver/TwoStageFFTConvolver.cpp
+        AudioEffects/FFTConvolver/Utilities.cpp
+
+        GUI/Button.cpp
+        GUI/Canvas.cpp
+        GUI/Encoder.cpp
+        GUI/Graph.cpp
+        GUI/IECanvas.cpp
+        GUI/Knob.cpp
+        GUI/Led.cpp
+        GUI/Text.cpp
+        GUI/Menu.cpp
+        GUI/Plot.cpp
+        GUI/Slider.cpp
+        GUI/EncoderButton.cpp
+        GUI/FullscreenWindow.cpp
+        GUI/Jack.cpp
+        GUI/Wire.cpp
+#        GUI/AnalogEncoder.cpp
+#        GUI/vectordisplay/vectordisplay.cpp
+
+        Instruments/Envelopes/ADSR.cpp
+        Instruments/Envelopes/ADS.cpp
+        Instruments/Envelopes/AD.cpp
+
+        Instruments/DrumRack.cpp
+        Instruments/Instrument.cpp
+        Instruments/Metronome.cpp
+        Instruments/Operator.cpp
+        Instruments/Oscillator.cpp
+        Instruments/Sampler.cpp
+        Instruments/SingleTone.cpp
+        Instruments/Brute.cpp
+        Instruments/SoundObject5.cpp
+        Instruments/SplineSynth.cpp
+        Instruments/DoubleSplineSynth.cpp
+
+        Instruments/AnalogDrums/AnalogDrum.cpp
+        Instruments/AnalogDrums/Kick.cpp
+        Instruments/AnalogDrums/Snare.cpp
+
+        MidiEffects/LFO.cpp
+        MidiEffects/MidiEffect.cpp
+        MidiEffects/Arpeggiator.cpp
+        MidiEffects/MidiMonitor.cpp
+#        MidiEffects/MidiDelay.cpp
+#        MidiEffects/Scale.cpp
+
+        Orchestration/Chain.cpp
+        Orchestration/Master.cpp
+        Orchestration/Midi.cpp
+        Orchestration/Rack.cpp
+        Orchestration/Track.cpp
+        MidiEffects/Sequencer.cpp
+
+        Utils/AudioFile.cpp
+
+        )
+
+target_compile_definitions(pocketdaw PRIVATE ANDROID=1 LINK_PLATFORM_LINUX=1 PD=1 ABL_LINK_OFFSET_MS=23)
+
+find_library(log-lib log)
+
+# Export ANativeActivity_onCreate(),
+# Refer to: https://github.com/android-ndk/ndk/issues/381.
+set_target_properties(${PROJECT_NAME}  PROPERTIES LINK_FLAGS "-u ANativeActivity_onCreate")
+
+target_link_libraries(
+        pocketdaw
+        AMGEngine
+        )

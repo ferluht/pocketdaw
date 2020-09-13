@@ -183,7 +183,7 @@ namespace GUI {
         virtual void GInit() {};
 
         void GDraw_(NVGcontext *nvg) {
-            if (!initialized) GInit();
+//            if (!initialized) GInit();
 
             GUpdateGlobalPosition(parent);
 
@@ -433,6 +433,10 @@ namespace GUI {
         std::list<GObject *> focusStack;
         std::list<GObject *> focusStackCopy;
 
+        double render_time = 0;
+        double last_render_time = 0;
+        float fps;
+
         static GEngine &getGEngine() {
             static GEngine gengine;
             return gengine;
@@ -479,6 +483,15 @@ namespace GUI {
         }
 
         void Render() {
+
+            struct timespec res;
+            clock_gettime(CLOCK_THREAD_CPUTIME_ID, &res);
+
+            render_time = res.tv_sec + (double) res.tv_nsec / 1e9;
+            fps = 1 / static_cast<float>(render_time - last_render_time);
+
+            last_render_time = render_time;
+
             // Set view 0 default viewport.
             bgfx::setViewRect(0, 0, 0, uint16_t(screen_width), uint16_t(screen_height) );
 
