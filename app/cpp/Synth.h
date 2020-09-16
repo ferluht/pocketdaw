@@ -200,7 +200,7 @@ public:
 //        GAttach(masterWaveform);
     }
 
-    inline bool ARender(float * audioData, int numFrames) override {
+    inline bool ARender(const float * inputData, int inputFrames, float * outputData, int outputFrames) override {
 
         auto lmidi = &MEngine::getMEngine();
         MData minput;
@@ -209,18 +209,16 @@ public:
             if (minput.status != NULLMIDI.status) MIn(minput);
         } while (minput.status != NULLMIDI.status);
 
-        for (int i = 0; i < numFrames; i++) cpuload->update(audioData[i]);
-
-        bool ret = Master->ARender(audioData, numFrames);
+        bool ret = Master->ARender(inputData, inputFrames, outputData, outputFrames);
 
         struct timespec res;
         clock_gettime(CLOCK_THREAD_CPUTIME_ID, &res);
 //        clock_gettime(CLOCK_THREAD_CPUTIME_ID, )
         render_time = res.tv_sec + (double) res.tv_nsec / 1e9;
-        float load = static_cast<float>(render_time - last_render_time) / ((float)numFrames / sample_rate);
+        float load = static_cast<float>(render_time - last_render_time) / ((float)outputFrames / sample_rate);
         last_render_time = render_time;
         if (load > 1) load = 1;
-//        cpuload->update(load * 2 - 1);
+        cpuload->update(load * 2 - 1);
 
         char fps[100];
         sprintf(fps, "fps: %.2f", GUI::GEngine::getGEngine().fps);
@@ -230,18 +228,18 @@ public:
 
             FILE* f= fopen(filename, "ab");
 
-            uint8_t bytes[4*numFrames];
-            for (int i = 0; i < numFrames; i++)
+            uint8_t bytes[4*outputFrames];
+            for (int i = 0; i < outputFrames; i++)
             {
-                int16_t l = audioFile.sampleToSixteenBitInt (audioData[i*2]);
-                int16_t r = audioFile.sampleToSixteenBitInt (audioData[i*2 + 1]);
+                int16_t l = audioFile.sampleToSixteenBitInt (outputData[i*2]);
+                int16_t r = audioFile.sampleToSixteenBitInt (outputData[i*2 + 1]);
                 bytes[4*i + 3] = (uint8_t) (r >> 8) & 0xFF;
                 bytes[4*i + 2] = (uint8_t) r & 0xFF;
                 bytes[4*i + 1] = (uint8_t) (l >> 8) & 0xFF;
                 bytes[4*i + 0] = (uint8_t) l & 0xFF;
             }
 
-            fwrite(bytes, sizeof(uint8_t), 4*numFrames, f);
+            fwrite(bytes, sizeof(uint8_t), 4*outputFrames, f);
 
             fclose(f);
         }

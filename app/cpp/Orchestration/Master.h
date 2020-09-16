@@ -5,6 +5,8 @@
 #ifndef PD_MASTER_H
 #define PD_MASTER_H
 
+//#define ASIO_NO_EXCEPTIONS
+
 #include <ableton/Link.hpp>
 #include <GUI/Canvas.h>
 #include <GUI/Encoder.h>
@@ -31,6 +33,7 @@
 #include <MidiEffects/MidiMonitor.h>
 #include <AudioEffects/Saturator.h>
 #include <Instruments/SplineSynth.h>
+#include <AudioEffects/Calibrator.h>
 #include "Track.h"
 
 class AMGMasterTrack : public GUI::AMGCanvas{
@@ -171,11 +174,29 @@ public:
                                                  [this](bool a){
                                                      if (focus_track > -1) {
                                                          auto drack = new DrumRack();
-                                                         drack->addSample("/storage/emulated/0/000_AMENCUT_001.wav", 36);
-                                                         drack->addSample("/storage/emulated/0/000_AMENCUT_002.wav", 37);
-                                                         drack->addSample("/storage/emulated/0/000_AMENCUT_003.wav", 38);
-                                                         drack->addSample("/storage/emulated/0/000_AMENCUT_004.wav", 39);
-                                                         drack->addSample("/storage/emulated/0/Shaker.wav", 40);
+                                                         char path[200];
+                                                         sprintf(path, "%s%s", AEngine::getAEngine().storage_root, "/.pocketdaw/Kick 909.wav");
+                                                         drack->addSample(path, 36);
+                                                         sprintf(path, "%s%s", AEngine::getAEngine().storage_root, "/.pocketdaw/Snare 909.wav");
+                                                         drack->addSample(path, 37);
+                                                         sprintf(path, "%s%s", AEngine::getAEngine().storage_root, "/.pocketdaw/Clap 909.wav");
+                                                         drack->addSample(path, 38);
+                                                         sprintf(path, "%s%s", AEngine::getAEngine().storage_root, "/.pocketdaw/ClosedHH 909.wav");
+                                                         drack->addSample(path, 39);
+                                                         sprintf(path, "%s%s", AEngine::getAEngine().storage_root, "/.pocketdaw/OpenHH 909.wav");
+                                                         drack->addSample(path, 40);
+                                                         sprintf(path, "%s%s", AEngine::getAEngine().storage_root, "/.pocketdaw/FloorTom 909.wav");
+                                                         drack->addSample(path, 41);
+                                                         sprintf(path, "%s%s", AEngine::getAEngine().storage_root, "/.pocketdaw/MidLowTom 909.wav");
+                                                         drack->addSample(path, 42);
+                                                         sprintf(path, "%s%s", AEngine::getAEngine().storage_root, "/.pocketdaw/MidHiTom 909.wav");
+                                                         drack->addSample(path, 43);
+                                                         sprintf(path, "%s%s", AEngine::getAEngine().storage_root, "/.pocketdaw/HiTom 909.wav");
+                                                         drack->addSample(path, 44);
+                                                         sprintf(path, "%s%s", AEngine::getAEngine().storage_root, "/.pocketdaw/Ride 909.wav");
+                                                         drack->addSample(path, 45);
+                                                         sprintf(path, "%s%s", AEngine::getAEngine().storage_root, "/.pocketdaw/Crash 909.wav");
+                                                         drack->addSample(path, 46);
                                                          Tracks[focus_track]->RAdd(drack);
                                                      }
                                                  }));
@@ -259,7 +280,9 @@ public:
         addAudioMenu->addButton(new GUI::Button("Convolution reverb",
                                                 [this](bool a){
                                                     if (focus_track > -1) {
-                                                        Tracks[focus_track]->RAdd(new ConvolutionReverb("/storage/emulated/0/.pocketdaw/impulse_response_left.wav"));
+                                                        char path[200];
+                                                        sprintf(path, "%s%s", AEngine::getAEngine().storage_root, "/.pocketdaw/impulse_response_left.wav");
+                                                        Tracks[focus_track]->RAdd(new ConvolutionReverb(path));
                                                     }
                                                 }));
 
@@ -295,6 +318,13 @@ public:
                                                 [this](bool a){
                                                     if (focus_track > -1) {
                                                         Tracks[focus_track]->RAdd(new Saturator());
+                                                    }
+                                                }));
+
+        addAudioMenu->addButton(new GUI::Button("Calibrator",
+                                                [this](bool a){
+                                                    if (focus_track > -1) {
+                                                        Tracks[focus_track]->RAdd(new Calibrator());
                                                     }
                                                 }));
 
@@ -342,7 +372,7 @@ public:
 
     }
 
-    bool ARender(float * audioData, int numFrames) override;
+    bool ARender(const float * inputData, int inputFrames, float * outputData, int outputFrames) override;
 
     void AddTrack(AMGTrack * track) {
         track_lock.lock();

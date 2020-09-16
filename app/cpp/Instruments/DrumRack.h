@@ -64,6 +64,8 @@ public:
     }
 
     bool ARender(double beat, float * lsample, float * rsample) override {
+        *lsample = 0;
+        *rsample = 0;
         for (auto const& chain : activeChains) chain->ARender(beat, lsample, rsample);
         return true;
     }

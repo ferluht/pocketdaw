@@ -9,44 +9,18 @@
 #include <AMGEngine/oboe/samples/debug-utils/logging_macros.h>
 
 float AObject::sample_rate;
-
-// Double-buffering offers a good tradeoff between latency and protection against glitches.
-constexpr int32_t kBufferSizeInBursts = 4;
-
-aaudio_data_callback_result_t dataCallback(
-        AAudioStream *stream,
-        void *userData,
-        void *audioData,
-        int32_t numFrames) {
-
-    AAudioStream *inputStream = ((AEngine *) userData)->inputstream;
-    int64_t timeout = 0;
-    aaudio_result_t result =
-            AAudioStream_read(inputStream, audioData, numFrames, timeout);
-
-//    if (result == numFrames)
-//        return AAUDIO_CALLBACK_RESULT_STOP;
-//    if (result >= 0) {
-//        memset(static_cast<float*>(audioData) + result * 2, 0,
-//               sizeof(float) * (numFrames - result) * 2);
-//        return AAUDIO_CALLBACK_RESULT_CONTINUE;
-//    }
-//    return AAUDIO_CALLBACK_RESULT_STOP;
-
-    for(int i = numFrames; i < numFrames * 2; i++) {
-        (static_cast<float *>(audioData))[i] = (static_cast<float *>(audioData))[i - numFrames];
-    }
-
-    ((AEngine *) userData)->root_->ARender(static_cast<float *>(audioData), numFrames);
-    return AAUDIO_CALLBACK_RESULT_CONTINUE;
-}
+float AObject::latency = 0;
 
 bool AEngine::start() {
-    setAudioApi(oboe::AudioApi::AAudio);
+    if (isAAudioSupported())
+        setAudioApi(oboe::AudioApi::AAudio);
+    else
+        setAudioApi(oboe::AudioApi::OpenSLES);
+    AObject::sample_rate = 48000;
     if ((mRecordingDeviceId == oboe::kUnspecified) ||
         (mPlaybackDeviceId == oboe::kUnspecified)) {
         getDevices();
-        setInputDevice(getInputs()[0]);
+        setInputDevice(getInputs()[1]);
         setOutputDevice(getOutputs()[0]);
     }
     auto success = openStreams() == oboe::Result::OK;
@@ -365,6 +339,21 @@ void AEngine::getDevices() {
             jni->DeleteLocalRef(stringClass);
         }
     }
+
+    app_->activity->vm->DetachCurrentThread();
+}
+
+
+void AEngine::getRootDirectory() {
+    JNIEnv *jni;
+    app_->activity->vm->AttachCurrentThread(&jni, nullptr);
+
+    // Default class retrieval
+    jclass clazz = jni->GetObjectClass(app_->activity->clazz);
+    jmethodID methodID = jni->GetMethodID(clazz, "getStorageRoot", "()Ljava/lang/String;");
+    jstring s = (jstring) jni->CallObjectMethod(app_->activity->clazz, methodID);
+
+    sprintf(storage_root, "%s" , jni->GetStringUTFChars(s, 0));
 
     app_->activity->vm->DetachCurrentThread();
 }

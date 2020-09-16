@@ -56,6 +56,10 @@ namespace GUI {
         nvgStroke(nvg);
 
         nvgFontSize(nvg, global.s.y * 0.7);
+//        if ((global.s.y * strlen(labelOn) > global.s.x) ||
+//            (global.s.y * strlen(labelOff) > global.s.x)){
+//            nvgFontSize(nvg, global.s.x / strlen(labelOn) / 2);
+//        }
         nvgFontFace(nvg, "sans");
         nvgTextAlign(nvg,NVG_ALIGN_CENTER|NVG_ALIGN_MIDDLE);
 

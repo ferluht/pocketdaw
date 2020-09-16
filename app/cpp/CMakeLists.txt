@@ -19,7 +19,7 @@ include_directories(src/main/cpp/Link/android-ifaddrs)
 set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -w -fno-exceptions")
 #set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Ofast")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -fuse-ld=lld -Wl,--build-id=sha1")
-set(CMAKE_CXX11_EXTENSION_COMPILE_OPTION "-std=c++17")
+set(CMAKE_CXX11_EXTENSION_COMPILE_OPTION "-std=c++14")
 
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/AMGEngine/ndk_helper ${CMAKE_CURRENT_LIST_DIR}/build/ndkHelper/${CMAKE_BUILD_TYPE}/${ANDROID_ABI})
 
@@ -112,7 +112,7 @@ add_library(nanovg-lib
 target_include_directories(nanovg-lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/nanovg)
 
 ### INCLUDE OBOE LIBRARY ###
-set (OBOE_DIR AMGEngine/oboe)
+set (OBOE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/AMGEngine/oboe)
 add_subdirectory(${OBOE_DIR} ./oboe-bin)
 
 # add sources
@@ -123,7 +123,7 @@ add_library(
 
         MainActivity.cpp
         Synth.cpp
-        Effector.cpp
+#        Effector.cpp
 
         Link/LinkManager.cpp
         Link/android-ifaddrs/ifaddrs.cpp
@@ -138,6 +138,7 @@ add_library(
         AudioEffects/ConvolutionReverb.cpp
         AudioEffects/ThreeBandEQ.cpp
         AudioEffects/Saturator.cpp
+        AudioEffects/Calibrator.cpp
 
         AudioEffects/FFTConvolver/AudioFFT.cpp
         AudioEffects/FFTConvolver/FFTConvolver.cpp
@@ -230,7 +231,7 @@ set_target_properties(${PROJECT_NAME}  PROPERTIES LINK_FLAGS "-u ANativeActivity
 target_link_libraries(
         pocketdaw
         android
-        aaudio
+#        aaudio
         oboe
         native_app_glue
         EGL

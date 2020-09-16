@@ -15,7 +15,7 @@ android {
     buildToolsVersion "28.0.3"
     defaultConfig {
             applicationId 'com.pdaw.pd'
-        minSdkVersion 26
+        minSdkVersion 19
         targetSdkVersion 26
         versionCode 30 // Application version, 3 digits, major/minor/revision
         versionName "0.0.2"

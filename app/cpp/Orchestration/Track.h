@@ -36,8 +36,10 @@ public:
 
     double beat;
     double increment;
-    float * audioData;
-    int numFrames;
+    const float * inputData;
+    int inputFrames;
+    float * outputData;
+    int outputFrames;
     bool pattern_switch = false;
 
     AMGTrack(std::string name) : AMGRack() {
@@ -120,12 +122,14 @@ public:
         patterns[focus_pattern]->GSetVisible(visible_);
     }
 
-    void AMGTrackProcess(double beat_, double increment_, float * audioData_, int numFrames_) {
+    void AMGTrackProcess(double beat_, double increment_, const float * inputData_, int inputFrames_, float * outputData_, int outputFrames_) {
         stop_lock.lock();
         beat = beat_;
         increment = increment_;
-        audioData = audioData_;
-        numFrames = numFrames_;
+        inputData = inputData_;
+        inputFrames = inputFrames_;
+        outputData = outputData_;
+        outputFrames = outputFrames_;
 
         stop_lock.unlock();
         end_lock.lock();
@@ -142,13 +146,18 @@ public:
             track->run_lock.lock();
             track->stop_lock.lock();
 
-            for (int i = 0; i < track->numFrames; i++) {
-                track->audioData[2 * i] = 0;
-                track->audioData[2 * i + 1] = 0;
+//            int byteDiff = (outputFrames - inputFrames) * bytesPerFrame;
+//            size_t bytesToZero = (byteDiff > 0) ? byteDiff : 0;
+//            memcpy(outputData, inputData, bytesToWrite);
+//            memset((u_char*) outputData + bytesToWrite, 0, bytesToZero);
+
+            for (int i = 0; i < track->outputFrames; i++) {
+                track->outputData[2 * i] = track->inputData[2 * i];
+                track->outputData[2 * i + 1] = track->inputData[2 * i + 1];
 
                 track->MRender(track->beat);
 
-                track->ARender(track->beat, &track->audioData[2 * i], &track->audioData[2 * i + 1]);
+                track->ARender(track->beat, &track->outputData[2 * i], &track->outputData[2 * i + 1]);
 
                 track->beat += track->increment;
 

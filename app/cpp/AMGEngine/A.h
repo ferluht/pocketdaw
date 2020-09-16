@@ -27,12 +27,28 @@ class AObject {
 public:
 
     static float sample_rate;
+    static float latency;
 
     inline void ASetSampleRate(float sample_rate_) {sample_rate = sample_rate_;}
 
     virtual bool ARender(float * audioData, int numFrames) {return true;}
 
-    virtual bool ARender(double beat, float * audioData, int numFrames) {return true;}
+    virtual bool ARender(const float * inputData, int inputFrames, float * outputData, int outputFrames) {
+        ARender(outputData, outputFrames);
+        return true;
+    }
+
+    virtual bool ARender(double beat, const float * inputData, int inputFrames, float * outputData, int outputFrames) {
+        ARender(beat, outputData, outputFrames);
+        return true;
+    }
+
+    virtual bool ARender(double beat, float * audioData, int numFrames) {
+        if (numFrames == 1) {
+            ARender(beat, audioData, audioData + 1);
+        }
+        return true;
+    }
 
     virtual bool ARender(float * lsample, float * rsample) {return true;}
 
@@ -51,13 +67,13 @@ public:
     virtual oboe::DataCallbackResult
     onBothStreamsReady(const void *inputData, int numInputFrames, void *outputData,
                        int numOutputFrames) {
-        size_t bytesPerFrame = this->getOutputStream()->getBytesPerFrame();
-        size_t bytesToWrite = numInputFrames * bytesPerFrame;
-        size_t byteDiff = (numOutputFrames - numInputFrames) * bytesPerFrame;
-        size_t bytesToZero = (byteDiff > 0) ? byteDiff : 0;
-        memcpy(outputData, inputData, bytesToWrite);
-        memset((u_char*) outputData + bytesToWrite, 0, bytesToZero);
-        root_->ARender(static_cast<float *>(outputData), numOutputFrames);
+//        size_t bytesPerFrame = this->getOutputStream()->getBytesPerFrame();
+//        size_t bytesToWrite = numInputFrames * bytesPerFrame;
+//        size_t byteDiff = (numOutputFrames - numInputFrames) * bytesPerFrame;
+//        size_t bytesToZero = (byteDiff > 0) ? byteDiff : 0;
+//        memcpy(outputData, inputData, bytesToWrite);
+//        memset((u_char*) outputData + bytesToWrite, 0, bytesToZero);
+        root_->ARender(static_cast<const float *>(inputData), numInputFrames, static_cast<float *>(outputData), numOutputFrames);
         return oboe::DataCallbackResult::Continue;
     }
 };
@@ -66,6 +82,8 @@ class AEngine: public oboe::AudioStreamCallback {
 public:
 
     android_app *app_;
+
+    char storage_root[200];
 
     ADevicesInfo adevicesinfo;
 
@@ -113,6 +131,8 @@ public:
     inline void attachApp(android_app *app) {
         app_ = app;
     }
+
+    void getRootDirectory();
 
 private:
 

@@ -393,6 +393,11 @@ public class MainActivity extends NativeActivity {
         return ret;
     }
 
+    public String getStorageRoot()
+    {
+        return getExternalStorageDirectory().getAbsolutePath();
+    }
+
     public String[] getInputAudioDevices()
     {
         AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);

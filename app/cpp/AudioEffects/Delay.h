@@ -6,11 +6,12 @@
 #define PD_DELAY_H
 
 #include <GUI/Encoder.h>
+#include <GUI/Led.h>
 #include "AudioEffect.h"
 
 class Delay : public AudioEffect{
 
-    const int buffer_size = 5*48000;
+    const int buffer_size = 10*48000;
 
     int position = 0;
 
@@ -19,6 +20,8 @@ class Delay : public AudioEffect{
     GUI::Encoder * delay_time;
     GUI::Encoder * feedback;
     GUI::Encoder * drywet;
+
+    GUI::Led * error_led;
 
 public:
 
