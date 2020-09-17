@@ -18,8 +18,8 @@ namespace GUI {
 
     public:
 
-        Vec2 drag_from;
-        Vec2 last_point;
+        vecmath::Vec2 drag_from;
+        vecmath::Vec2 last_point;
 
         FullscreenWindow(const char * name_) {
             GPlace({0, 0});
@@ -34,19 +34,19 @@ namespace GUI {
 
             last_point = {0, 0};
 
-            GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
+            GSetDragBeginCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
                 GUpdateGlobalPosition(nullptr);
                 drag_from = v - global.c;
                 return this;
             });
 
-            GSetDragHandlerCallback([this](const Vec2& v) -> GUI::GObject * {
+            GSetDragHandlerCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
                 if (drag_from.y < global.s.y * 0.1f) GPlace({(v - drag_from).x / global.s.x, (v - drag_from).y / global.s.y});
                 last_point = v;
                 return this;
             });
 
-            GSetDragEndCallback([this](const Vec2& v) -> GUI::GObject * {
+            GSetDragEndCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
                 if ((drag_from.y < global.s.y * 0.1f) && (last_point.y > global.s.y * 0.5f)){
                     GEngine::getGEngine().unfocusTo(this);
                     GPlace({0, 0});
@@ -57,7 +57,7 @@ namespace GUI {
             });
         }
 
-        virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
+        virtual GObject *GFindFocusObject(const vecmath::Vec2 &point, std::list<GObject *> * trace) {
             for (auto const &gr : Graphics) {
                 if (gr == name) continue;
                 auto fo = gr->GFindFocusObject(point, trace);
@@ -73,7 +73,7 @@ namespace GUI {
             return nullptr;
         }
 
-//        virtual GObject *GTapEnd(const Vec2 &v) override {
+//        virtual GObject *GTapEnd(const vecmath::Vec2 &v) override {
 //            if (close->GContains(v)) {
 //                GEngine::getGEngine().unfocusTo(this);
 //                return nullptr;

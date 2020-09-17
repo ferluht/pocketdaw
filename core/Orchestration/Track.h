@@ -26,7 +26,7 @@ public:
     std::vector<MidiClip *> patterns;
     int focus_pattern;
 
-    Vec2 drag_from;
+    vecmath::Vec2 drag_from;
     bool mc_visible;
     std::thread * track_thread;
     std::mutex run_lock;

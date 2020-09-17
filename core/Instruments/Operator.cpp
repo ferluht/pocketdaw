@@ -117,7 +117,7 @@ void Operator::IUpdateState(OperatorState *state, MData md){
     if (md.data2 != 0) state->setActive(true);
 }
 
-//GUI::GObject * Operator::TapEnd(const ndk_helper::Vec2& v)
+//GUI::GObject * Operator::TapEnd(const vecmath::Vec2& v)
 //{
 //    if (visible && sines[op_focus]->GContains(v)){
 //        nextOsc();

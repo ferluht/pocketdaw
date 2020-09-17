@@ -39,8 +39,8 @@ namespace GUI {
 
         const float wheel_radius = 0.45; // of width
         const float text_height = 0.16; // of space under wheel
-        const Vec2 text_position = {0.5, 0.925};
-        const Vec2 wheel_center = {0.5, 0.45};
+        const vecmath::Vec2 text_position = {0.5, 0.925};
+        const vecmath::Vec2 wheel_center = {0.5, 0.45};
         const float value_circle_width = 0.08;
         const int text_max_length = 12;
 
@@ -48,7 +48,7 @@ namespace GUI {
         float lower_bound, upper_bound;
         float range;
         float old_angle;
-        Vec2 drag_from;
+        vecmath::Vec2 drag_from;
 
         EncoderOverlay * overlay;
 
@@ -160,7 +160,7 @@ namespace GUI {
             jack->GSetWidth(0.4);
             GAttach(jack);
 
-            GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
+            GSetDragBeginCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
                 drag_from = v;
                 old_angle = angle;
                 mapping_mode = true;
@@ -169,7 +169,7 @@ namespace GUI {
                 return this;
             });
 
-            GSetDragHandlerCallback([this](const Vec2& v) -> GUI::GObject * {
+            GSetDragHandlerCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
                 overlay->GSetVisible(true);
                 angle = old_angle + (v.x - drag_from.x) / 100;
                 setangle(angle);
@@ -180,7 +180,7 @@ namespace GUI {
                 return this;
             });
 
-            GSetDragEndCallback([this](const Vec2& v) -> GUI::GObject * {
+            GSetDragEndCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
                 overlay->GSetVisible(false);
                 mapping_mode = false;
                 dragging = false;
@@ -200,7 +200,7 @@ namespace GUI {
             else *this << 0;
         }
 
-        GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) override {
+        GObject *GFindFocusObject(const vecmath::Vec2 &point, std::list<GObject *> * trace) override {
             if (jack->visible && jack->GContains(point)) {
                 trace->push_front(jack);
                 trace->push_front(this);

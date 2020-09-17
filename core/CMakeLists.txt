@@ -21,7 +21,7 @@ set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -w -fno-exceptions")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -fuse-ld=lld -Wl,--build-id=sha1")
 set(CMAKE_CXX11_EXTENSION_COMPILE_OPTION "-std=c++14")
 
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../helpers/ndk_helper ${CMAKE_CURRENT_LIST_DIR}/../.build/ndkHelper/${CMAKE_BUILD_TYPE}/${ANDROID_ABI})
+#add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../helpers/ndk_helper ${CMAKE_CURRENT_LIST_DIR}/../.build/ndkHelper/${CMAKE_BUILD_TYPE}/${ANDROID_ABI})
 
 set(BX_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/../3rdparty/bx)
 set(BIMG_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/../3rdparty/bimg)
@@ -217,6 +217,10 @@ add_library(
         ../helpers/entry/input.cpp
         ../helpers/entry/entry_android.cpp
 
+        ../helpers/vecmath.cpp
+        ../helpers/gestureDetector.cpp
+        ../helpers/perfMonitor.cpp
+
         ../3rdparty/imgui/imgui.cpp
 
         )
@@ -242,6 +246,6 @@ target_link_libraries(
         nanovg-lib
         ${log-lib}
         Ableton::Link
-        NdkHelper
+#        NdkHelper
         bgfx
         )

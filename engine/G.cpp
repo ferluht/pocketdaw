@@ -29,7 +29,7 @@ namespace GUI {
             }
             global.ratio = global.s.x / global.s.y;
         } else {
-            Vec2 screen_size = {GEngine::screen_width, GEngine::screen_height};
+            vecmath::Vec2 screen_size = {GEngine::screen_width, GEngine::screen_height};
             global.c = local.c * screen_size;
             global.s = local.s * screen_size;
             global.ratio = global.s.x / global.s.y;

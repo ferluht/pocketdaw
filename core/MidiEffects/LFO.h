@@ -35,7 +35,7 @@ class LFO : public MidiEffect {
     double old_phase = 0;
     float w = 0;
 
-    Vec2 drag_from;
+    vecmath::Vec2 drag_from;
 
     inline double osc(double phase) {
         phase = phase < -M_PI ? M_PI + fmod(phase + M_PI, 2*M_PI) : -M_PI + fmod(phase + M_PI, 2*M_PI);
@@ -87,13 +87,13 @@ public:
         plot->GSetHeight(0.98*0.3);
         GAttach(plot);
 
-        plot->GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
+        plot->GSetDragBeginCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             drag_from = v;
             old_waveform = waveform;
             return plot;
         });
 
-        plot->GSetDragHandlerCallback([this](const Vec2& v) -> GUI::GObject * {
+        plot->GSetDragHandlerCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             float wf = old_waveform + (v.y - drag_from.y)/100;
             if (wf > 1) wf = 1;
             if (wf < 0) wf = 0;
@@ -101,7 +101,7 @@ public:
             return plot;
         });
 
-        plot->GSetTapEndCallback([this](const Vec2& v) -> GUI::GObject * {
+        plot->GSetTapEndCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             type ++;
             if (type > 3) type = 0;
             return nullptr;

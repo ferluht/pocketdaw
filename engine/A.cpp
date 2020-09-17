@@ -81,13 +81,21 @@ std::vector<std::string> AEngine::getOutputs() {
 
 
 void AEngine::setInputDevice(std::string name){
+#ifndef TARGET_IOS
     auto device = adevicesinfo.inputs.find(name);
     mRecordingDeviceId = device->second;
+#else
+    
+#endif
 }
 
 void AEngine::setOutputDevice(std::string name) {
+#ifndef TARGET_IOS
     auto device = adevicesinfo.outputs.find(name);
     mPlaybackDeviceId = device->second;
+#else
+    
+#endif
 }
 
 #ifndef TARGET_IOS

@@ -426,8 +426,8 @@ public:
         for (auto const& track : Tracks) track->MRender(beat);
     }
 
-//    void GDragHandler(const ndk_helper::Vec2& v) override ;
-//    void GDragBegin(const ndk_helper::Vec2& v) override ;
+//    void GDragHandler(const vecmath::Vec2& v) override ;
+//    void GDragBegin(const vecmath::Vec2& v) override ;
 };
 
 

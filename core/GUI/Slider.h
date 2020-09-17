@@ -22,7 +22,7 @@ namespace GUI {
         const float slider_width = 0.8;
         const float slider_height = 0.07;
 
-        Vec2 drag_from;
+        vecmath::Vec2 drag_from;
         float old_value;
 
     public:
@@ -31,9 +31,9 @@ namespace GUI {
 
         void GDraw(NVGcontext * nvg) override;
 
-        GObject *DragBegin(const Vec2 &v) ;
+        GObject *DragBegin(const vecmath::Vec2 &v) ;
 
-        GObject *DragHandler(const Vec2 &v) ;
+        GObject *DragHandler(const vecmath::Vec2 &v) ;
 
         operator float() const { return value; }
 

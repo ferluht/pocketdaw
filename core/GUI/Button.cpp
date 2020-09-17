@@ -27,7 +27,7 @@ namespace GUI {
             labelOff[len] = 0;
         }
 
-        GSetTapEndCallback([this](const Vec2& v) -> GUI::GObject * {
+        GSetTapEndCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             state = !state;
             callback(state);
             return nullptr;
@@ -84,7 +84,7 @@ namespace GUI {
         num_states = num_states_;
         textures = textures_;
 
-        GSetTapEndCallback([this](const Vec2& v) -> GUI::GObject * {
+        GSetTapEndCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             state = (state + 1) % num_states;
             callback(state);
             return nullptr;
@@ -133,7 +133,7 @@ namespace GUI {
         state = 0;
         callback = callback_;
 
-        GSetTapEndCallback([this](const Vec2& v) -> GUI::GObject * {
+        GSetTapEndCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             state = (state + 1) % 4;
             callback(state);
             return nullptr;

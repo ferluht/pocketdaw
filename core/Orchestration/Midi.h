@@ -50,7 +50,7 @@ public:
 
     float root_note = 32, old_root_note;
     float vert_notes = 6;
-    Vec2 drag_start;
+    vecmath::Vec2 drag_start;
 
     MidiClip(){
 //        GAttachTexture("Textures/midi_canvas.bmp");
@@ -66,18 +66,18 @@ public:
 
         setColor(GUI::GEngine::ui_theme->MIDI_BODY_COLOR);
 
-        GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
+        GSetDragBeginCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             drag_start = v;
             old_root_note = root_note;
             return this;
         });
 
-        GSetDragHandlerCallback([this](const Vec2& v) -> GUI::GObject * {
+        GSetDragHandlerCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             root_note = old_root_note + (int)((v.y - drag_start.y) / (global.s.y / vert_notes));
             return this;
         });
 
-        GSetDoubleTapEndCallback([this](const Vec2& v) -> GUI::GObject * {
+        GSetDoubleTapEndCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             midiLock.lock();
             notes.clear();
             for (auto const& gnote : graphic_notes) GDetach(gnote.second);
@@ -228,7 +228,7 @@ public:
         nvgClosePath(nvg);
     }
 
-    GObject * GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) override {
+    GObject * GFindFocusObject(const vecmath::Vec2 &point, std::list<GObject *> * trace) override {
         if (visible && GContains(point)) {
             trace->push_front(this);
             return this;

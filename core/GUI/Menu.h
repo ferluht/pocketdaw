@@ -39,7 +39,7 @@ namespace GUI {
 
         bool unfold;
 
-        ndk_helper::Vec2 last_touch;
+        vecmath::Vec2 last_touch;
 
         std::vector<std::pair<char *, MenuItem *>> items;
 
@@ -72,14 +72,14 @@ namespace GUI {
 //
 //        void MIn(MData cmd) override;
 
-//    GObject * GDragBegin(const ndk_helper::Vec2& v) override;
-//        GObject *GDragHandler(const ndk_helper::Vec2 &v) override;
+//    GObject * GDragBegin(const vecmath::Vec2& v) override;
+//        GObject *GDragHandler(const vecmath::Vec2 &v) override;
 //
-//        GObject *GDragEnd(const ndk_helper::Vec2 &v) override;
+//        GObject *GDragEnd(const vecmath::Vec2 &v) override;
 
-//    GObject * GTapEnd(const ndk_helper::Vec2& v) override;
+//    GObject * GTapEnd(const vecmath::Vec2& v) override;
 
-//    GObject * GFindFocusObject(const ndk_helper::Vec2& point) override;
+//    GObject * GFindFocusObject(const vecmath::Vec2& point) override;
 
         void GGainFocus() override {
             open(true);

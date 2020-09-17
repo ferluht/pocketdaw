@@ -30,7 +30,7 @@ namespace GUI {
             graph->update(sample);
         }
 
-        virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
+        virtual GObject *GFindFocusObject(const vecmath::Vec2 &point, std::list<GObject *> * trace) {
             if (visible && this->GContains(point)) {
                 trace->push_front(this);
                 return this;
@@ -42,18 +42,18 @@ namespace GUI {
 //    template <class T>
 //    class DraggablePlot : public Plot<T> {
 //
-//        std::function<GUI::GObject *(const ndk_helper::Vec2& v)> tap_end_callback;
-//        std::function<GUI::GObject *(const ndk_helper::Vec2& v)> drag_begin_callback;
-//        std::function<GUI::GObject *(const ndk_helper::Vec2& v)> drag_callback;
-//        std::function<GUI::GObject *(const ndk_helper::Vec2& v)> drag_end_callback;
+//        std::function<GUI::GObject *(const vecmath::Vec2& v)> tap_end_callback;
+//        std::function<GUI::GObject *(const vecmath::Vec2& v)> drag_begin_callback;
+//        std::function<GUI::GObject *(const vecmath::Vec2& v)> drag_callback;
+//        std::function<GUI::GObject *(const vecmath::Vec2& v)> drag_end_callback;
 //
 //    public:
 //
 //        DraggablePlot(unsigned int points,
-//                      std::function<GUI::GObject *(const ndk_helper::Vec2& v)> tap_end_callback_,
-//                      std::function<GUI::GObject *(const ndk_helper::Vec2& v)> drag_begin_callback_,
-//                      std::function<GUI::GObject *(const ndk_helper::Vec2& v)> drag_callback_,
-//                      std::function<GUI::GObject *(const ndk_helper::Vec2& v)> drag_end_callback_
+//                      std::function<GUI::GObject *(const vecmath::Vec2& v)> tap_end_callback_,
+//                      std::function<GUI::GObject *(const vecmath::Vec2& v)> drag_begin_callback_,
+//                      std::function<GUI::GObject *(const vecmath::Vec2& v)> drag_callback_,
+//                      std::function<GUI::GObject *(const vecmath::Vec2& v)> drag_end_callback_
 //                      ) : Plot<T>(points) {
 //            tap_end_callback = tap_end_callback_;
 //            drag_callback = drag_callback_;

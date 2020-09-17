@@ -49,27 +49,27 @@ vec3 decodeNormalUint(vec3 _encodedNormal)
 	return _encodedNormal * 2.0 - 1.0;
 }
 
-vec2 encodeNormalSphereMap(vec3 _normal)
+vecmath::Vec2 encodeNormalSphereMap(vec3 _normal)
 {
 	return normalize(_normal.xy) * sqrt(_normal.z * 0.5 + 0.5);
 }
 
-vec3 decodeNormalSphereMap(vec2 _encodedNormal)
+vec3 decodeNormalSphereMap(vecmath::Vec2 _encodedNormal)
 {
 	float zz = dot(_encodedNormal, _encodedNormal) * 2.0 - 1.0;
 	return vec3(normalize(_encodedNormal.xy) * sqrt(1.0 - zz*zz), zz);
 }
 
-vec2 octahedronWrap(vec2 _val)
+vecmath::Vec2 octahedronWrap(vecmath::Vec2 _val)
 {
 	// Reference(s):
 	// - Octahedron normal vector encoding
 	//   https://web.archive.org/web/20191027010600/https://knarkowicz.wordpress.com/2014/04/16/octahedron-normal-vector-encoding/comment-page-1/
 	return (1.0 - abs(_val.yx) )
-		 * mix(vec2_splat(-1.0), vec2_splat(1.0), vec2(greaterThanEqual(_val.xy, vec2_splat(0.0) ) ) );
+		 * mix(vecmath::Vec2_splat(-1.0), vecmath::Vec2_splat(1.0), vecmath::Vec2(greaterThanEqual(_val.xy, vecmath::Vec2_splat(0.0) ) ) );
 }
 
-vec2 encodeNormalOctahedron(vec3 _normal)
+vecmath::Vec2 encodeNormalOctahedron(vec3 _normal)
 {
 	_normal /= abs(_normal.x) + abs(_normal.y) + abs(_normal.z);
 	_normal.xy = _normal.z >= 0.0 ? _normal.xy : octahedronWrap(_normal.xy);
@@ -77,7 +77,7 @@ vec2 encodeNormalOctahedron(vec3 _normal)
 	return _normal.xy;
 }
 
-vec3 decodeNormalOctahedron(vec2 _encodedNormal)
+vec3 decodeNormalOctahedron(vecmath::Vec2 _encodedNormal)
 {
 	_encodedNormal = _encodedNormal * 2.0 - 1.0;
 
@@ -349,24 +349,24 @@ float unpackRgbaToFloat(vec4 _rgba)
 	return dot(_rgba, shift);
 }
 
-vec2 packHalfFloat(float _value)
+vecmath::Vec2 packHalfFloat(float _value)
 {
-	const vec2 shift = vec2(256, 1.0);
-	const vec2 mask = vec2(0, 1.0 / 256.0);
-	vec2 comp = fract(_value * shift);
+	const vecmath::Vec2 shift = vecmath::Vec2(256, 1.0);
+	const vecmath::Vec2 mask = vecmath::Vec2(0, 1.0 / 256.0);
+	vecmath::Vec2 comp = fract(_value * shift);
 	comp -= comp.xx * mask;
 	return comp;
 }
 
-float unpackHalfFloat(vec2 _rg)
+float unpackHalfFloat(vecmath::Vec2 _rg)
 {
-	const vec2 shift = vec2(1.0 / 256.0, 1.0);
+	const vecmath::Vec2 shift = vecmath::Vec2(1.0 / 256.0, 1.0);
 	return dot(_rg, shift);
 }
 
-float random(vec2 _uv)
+float random(vecmath::Vec2 _uv)
 {
-	return fract(sin(dot(_uv.xy, vec2(12.9898, 78.233) ) ) * 43758.5453);
+	return fract(sin(dot(_uv.xy, vecmath::Vec2(12.9898, 78.233) ) ) * 43758.5453);
 }
 
 vec3 fixCubeLookup(vec3 _v, float _lod, float _topLevelCubeSize)
@@ -385,7 +385,7 @@ vec3 fixCubeLookup(vec3 _v, float _lod, float _topLevelCubeSize)
 	return _v;
 }
 
-vec2 texture2DBc5(sampler2D _sampler, vec2 _uv)
+vecmath::Vec2 texture2DBc5(sampler2D _sampler, vecmath::Vec2 _uv)
 {
 #if BGFX_SHADER_LANGUAGE_HLSL && BGFX_SHADER_LANGUAGE_HLSL <= 3
 	return texture2D(_sampler, _uv).yx;

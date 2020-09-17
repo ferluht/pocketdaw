@@ -28,16 +28,16 @@ namespace GUI {
             properties_window = new FullscreenWindow("Properties");
             properties_window->setColor(DARK);
 
-            GSetDoubleTapEndCallback([this](const Vec2& v) -> GUI::GObject * {
+            GSetDoubleTapEndCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
                 return properties_window;
             });
 
-            GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
+            GSetDragBeginCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
                 mapping_mode = true;
                 return this;
             });
 
-            GSetDragEndCallback([this](const Vec2& v) -> GUI::GObject * {
+            GSetDragEndCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
                 mapping_mode = false;
                 return this;
             });
@@ -50,7 +50,7 @@ namespace GUI {
             }
         }
 
-        GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) override {
+        GObject *GFindFocusObject(const vecmath::Vec2 &point, std::list<GObject *> * trace) override {
             if (visible && GContains(point)) {
                 trace->push_front(this);
                 return this;

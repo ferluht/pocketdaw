@@ -158,7 +158,7 @@ public:
 
     GUI::Plot<GUI::TimeGraph> * plot;
 
-    Vec2 drag_from;
+    vecmath::Vec2 drag_from;
 
     int graph_phase;
 

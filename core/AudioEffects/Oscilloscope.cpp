@@ -54,14 +54,14 @@ bool Oscilloscope::ARender(double beat, float *lsample, float *rsample) {
     return true;
 }
 
-//void Oscilloscope::dragHandler(ndk_helper::Vec2 v) {
+//void Oscilloscope::dragHandler(vecmath::Vec2 v) {
 ////    relativePosition.x = (v.x_ - drag_from.x_)*drag_xscale + relative_position_backup.x;
 ////    relativePosition.y = (v.y_ - drag_from.y_)*drag_yscale + relative_position_backup.y;
 ////
 ////    Update();
 //}
 //
-//void Oscilloscope::dragBegin(ndk_helper::Vec2 v, float xscale, float yscale) {
+//void Oscilloscope::dragBegin(vecmath::Vec2 v, float xscale, float yscale) {
 ////    drag_from = v;
 ////    relative_position_backup = relativePosition;
 ////    drag_xscale = xscale;

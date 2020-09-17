@@ -30,6 +30,16 @@
 		CFB2FA362513A3C0006825CF /* os.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FA1F2513A3C0006825CF /* os.cpp */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		CFB2FD3325140A70006825CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CFB2FD2F25140A70006825CF /* imgui-lib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CFB2FD1D25140981006825CF;
+			remoteInfo = "imgui-lib";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		01BB1848EDA1DA3F96F2405D /* buffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = buffer.h; sourceTree = "<group>"; };
 		04920B3AF0CD0EA459E0269B /* semaphore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = semaphore.h; sourceTree = "<group>"; };
@@ -138,6 +148,7 @@
 		CFB2FA1D2513A3C0006825CF /* string.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = string.cpp; path = ../../3rdparty/bx/src/string.cpp; sourceTree = SOURCE_ROOT; };
 		CFB2FA1E2513A3C0006825CF /* hash.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = hash.cpp; path = ../../3rdparty/bx/src/hash.cpp; sourceTree = SOURCE_ROOT; };
 		CFB2FA1F2513A3C0006825CF /* os.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = os.cpp; path = ../../3rdparty/bx/src/os.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FD2F25140A70006825CF /* imgui-lib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "imgui-lib.xcodeproj"; path = "pocketdaw/pd/projects/ios/imgui-lib.xcodeproj"; sourceTree = "<group>"; };
 		D508915E412178880ACE0722 /* allocator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = allocator.cpp; sourceTree = "<group>"; };
 		D5D335834140F17D0A3489DB /* libbxDebug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbxDebug.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7692D0F438214390C2FA4D2 /* debug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = debug.h; sourceTree = "<group>"; };
@@ -231,6 +242,7 @@
 		6A75CEC3562D1011BF34E96C /* bx */ = {
 			isa = PBXGroup;
 			children = (
+				CFB2FD2F25140A70006825CF /* imgui-lib.xcodeproj */,
 				CFB2FA122513A3C0006825CF /* allocator.cpp */,
 				CFB2FA0B2513A3BF006825CF /* amalgamated.cpp */,
 				CFB2FA162513A3C0006825CF /* bx.cpp */,
@@ -403,6 +415,14 @@
 			path = bx;
 			sourceTree = "<group>";
 		};
+		CFB2FD3025140A70006825CF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CFB2FD3425140A70006825CF /* libimgui-lib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		DF7282D64B80B0BCD466ACA7 /* tinystl */ = {
 			isa = PBXGroup;
 			children = (
@@ -487,12 +507,28 @@
 			);
 			mainGroup = 6A75CEC3562D1011BF34E96C /* bx */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = CFB2FD3025140A70006825CF /* Products */;
+					ProjectRef = CFB2FD2F25140A70006825CF /* imgui-lib.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1B1D4BC607ACD48FB0CAE88A /* bx */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		CFB2FD3425140A70006825CF /* libimgui-lib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libimgui-lib.a";
+			remoteRef = CFB2FD3325140A70006825CF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		6AAE9B7F5616624DBF817663 /* Resources */ = {

@@ -90,7 +90,7 @@ namespace GUI {
 //        size++;
 //    }
 //
-//    GObject *Menu::GDragHandler(const ndk_helper::Vec2 &v) {
+//    GObject *Menu::GDragHandler(const vecmath::Vec2 &v) {
 //
 //        if (unfold_background->globalPosition.GContains(v)) {
 //            int new_focus = (int) ((abs(v.y_ - unfold_background->globalPosition.y) -
@@ -127,7 +127,7 @@ namespace GUI {
 //        return this;
 //    }
 //
-//    GObject *Menu::GDragEnd(const ndk_helper::Vec2 &v) {
+//    GObject *Menu::GDragEnd(const vecmath::Vec2 &v) {
 //
 //        if (cursor->globalPosition.GContains(last_touch)) {
 //            if (items[focus].second->menu == nullptr)
@@ -145,14 +145,14 @@ namespace GUI {
 //        return nullptr;
 //    }
 //
-////GObject * Menu::GFindFocusObject(const ndk_helper::Vec2 &point) {
+////GObject * Menu::GFindFocusObject(const vecmath::Vec2 &point) {
 ////    if (unfold && unfold_background->globalPosition.contains(point)){
 ////        return this;
 ////    }
 ////    return Knob::GFindFocusObject(point);
 ////}
 ////
-////GObject * Menu::GTapEnd(const ndk_helper::Vec2& v) {
+////GObject * Menu::GTapEnd(const vecmath::Vec2& v) {
 ////    if (contains(v)){
 ////        return this;
 ////    }

@@ -198,13 +198,13 @@ SplineSynth::SplineSynth(unsigned int num_voices) : Instrument<SplineSynthState>
 
     draw_waveform();
 
-    plot->GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
+    plot->GSetDragBeginCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
         drag_from = v;
         old_waveform = waveform;
         return plot;
     });
 
-    plot->GSetDragHandlerCallback([this](const Vec2& v) -> GUI::GObject * {
+    plot->GSetDragHandlerCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
         float wf = old_waveform + (v.y - drag_from.y)/100;
         if (wf > 1) wf = 1;
         if (wf < 0) wf = 0;
@@ -213,7 +213,7 @@ SplineSynth::SplineSynth(unsigned int num_voices) : Instrument<SplineSynthState>
         return plot;
     });
 
-    plot->GSetTapEndCallback([this](const Vec2& v) -> GUI::GObject * {
+    plot->GSetTapEndCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
         type ++;
         if (type > 3) type = 0;
         draw_waveform();

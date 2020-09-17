@@ -258,7 +258,7 @@ public:
         MOut(cmd);
     }
 
-    GObject * GFindFocusObject(const ndk_helper::Vec2& point, std::list<GObject *> * trace) override {
+    GObject * GFindFocusObject(const vecmath::Vec2& point, std::list<GObject *> * trace) override {
         auto object = AMGCanvas::GFindFocusObject(point, trace);
         if (*mapping_mode) {
             mapping_object = dynamic_cast<AMGObject *> (object);

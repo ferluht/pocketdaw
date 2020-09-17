@@ -85,7 +85,7 @@ public:
 
     void MRender(double beat) override ;
 
-//    GObject * TapEnd(const ndk_helper::Vec2& v) ;
+//    GObject * TapEnd(const vecmath::Vec2& v) ;
 
     void GSetVisible(bool visible_) override ;
 };

@@ -26,13 +26,13 @@ public:
     float max_x_offset = 0;
 
     std::list<GUI::IECanvas *> objects;
-    Vec2 obj_space_c;
-    Vec2 obj_space_s;
+    vecmath::Vec2 obj_space_c;
+    vecmath::Vec2 obj_space_s;
 
     MObject * m_in, * m_out;
     int midi_devices;
 
-    Vec2 drag_from;
+    vecmath::Vec2 drag_from;
     GUI::IECanvas * dragging_obj;
     std::mutex drawLock;
 
@@ -63,12 +63,12 @@ public:
 //        GAttach(&MEffects);
 //        GAttach(&AEffects);
 
-        GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
+        GSetDragBeginCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             drag_from = v;
             return this;
         });
 
-        GSetDragHandlerCallback([this](const Vec2& v) -> GUI::GObject * {
+        GSetDragHandlerCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             x_offset += (v.x - drag_from.x)/global.s.x;
             if ((max_x_offset > 0) || (x_offset > 0)) x_offset = 0;
             if ((max_x_offset < 0) && (x_offset < max_x_offset)) x_offset = max_x_offset;
@@ -86,7 +86,7 @@ public:
             return this;
         });
 
-        GSetDragEndCallback([this](const Vec2& v) -> GUI::GObject * {
+        GSetDragEndCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             if (action == RACK_ACTION_DELETE) {
                 RDel(dragging_obj);
                 dragging_obj = nullptr;
@@ -195,7 +195,7 @@ public:
         max_x_offset = - x + 1;
     }
 
-    GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) override {
+    GObject *GFindFocusObject(const vecmath::Vec2 &point, std::list<GObject *> * trace) override {
         auto fo = GUI::AMGCanvas::GFindFocusObject(point, trace);
         if (GUI::isIEHeader(fo)) {
             while (trace->back() != this) {

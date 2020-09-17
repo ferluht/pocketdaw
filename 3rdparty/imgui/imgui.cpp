@@ -11,7 +11,7 @@
 #include <dear-imgui/imgui.h>
 
 #include "imgui.h"
-#include "../bgfx_utils/bgfx_utils.h"
+#include <bgfx_utils/bgfx_utils.h>
 
 //#define USE_ENTRY 1
 

@@ -26,6 +26,8 @@ namespace entry
 {
 	struct MainThreadEntry
 	{
+        int height;
+        int width;
 		int m_argc;
 		const char* const* m_argv;
 
@@ -43,6 +45,8 @@ namespace entry
 			m_mte.m_argv = argv;
 
 			m_eventQueue.postSizeEvent(s_defaultWindow, _width, _height);
+            m_mte.height = _height;
+            m_mte.width = _width;
 
 			// Prevent render thread creation.
 			bgfx::renderFrame();
@@ -84,7 +88,7 @@ namespace entry
 		}
 
 		MainThreadEntry* self = (MainThreadEntry*)_userData;
-		int32_t result = main(self->m_argc, self->m_argv);
+		int32_t result = main(self->height, self->width, self->m_argc, self->m_argv);
 		return result;
 	}
 

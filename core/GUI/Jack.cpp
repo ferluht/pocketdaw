@@ -9,7 +9,7 @@ namespace GUI {
     const float Jack::RATIO = 1;
 
     void Jack::GDraw(NVGcontext *nvg) {
-        Vec2 wheel_center(global.c.x + global.s.x/2, global.c.y + global.s.y / 2);
+        vecmath::Vec2 wheel_center(global.c.x + global.s.x/2, global.c.y + global.s.y / 2);
         float wheel_radius = global.s.x * 0.5f;
 
         nvgBeginPath(nvg);

@@ -66,7 +66,7 @@ class SoundObject5 : public Instrument<SoundObject5State> {
     float o_waveform[2];
     int o_type[2];
 
-    Vec2 drag_from;
+    vecmath::Vec2 drag_from;
     float old_waveform;
 
     GUI::Jack * jack;
@@ -203,13 +203,13 @@ public:
             o2_wave->update(osc(i*(M_PI*2/waveform_vis_size) - M_PI, 1) * 0.9);
         }
 
-        o1_wave->GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
+        o1_wave->GSetDragBeginCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             drag_from = v;
             old_waveform = o_waveform[0];
             return o1_wave;
         });
 
-        o1_wave->GSetDragHandlerCallback([this](const Vec2& v) -> GUI::GObject * {
+        o1_wave->GSetDragHandlerCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             float wf = old_waveform + (v.y - drag_from.y)/100;
             if (wf > 1) wf = 1;
             if (wf < 0) wf = 0;
@@ -220,7 +220,7 @@ public:
             return o1_wave;
         });
 
-        o1_wave->GSetTapEndCallback([this](const Vec2& v) -> GUI::GObject * {
+        o1_wave->GSetTapEndCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             o_type[0] ++;
             if (o_type[0] > 3) o_type[0] = 0;
             for (int i = 0; i < waveform_vis_size; i++){
@@ -229,13 +229,13 @@ public:
             return nullptr;
         });
 
-        o2_wave->GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
+        o2_wave->GSetDragBeginCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             drag_from = v;
             old_waveform = o_waveform[1];
             return o2_wave;
         });
 
-        o2_wave->GSetDragHandlerCallback([this](const Vec2& v) -> GUI::GObject * {
+        o2_wave->GSetDragHandlerCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             float wf = old_waveform + (v.y - drag_from.y)/100;
             if (wf > 1) wf = 1;
             if (wf < 0) wf = 0;
@@ -246,7 +246,7 @@ public:
             return o2_wave;
         });
 
-        o2_wave->GSetTapEndCallback([this](const Vec2& v) -> GUI::GObject * {
+        o2_wave->GSetTapEndCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             o_type[1] ++;
             if (o_type[1] > 3) o_type[1] = 0;
             for (int i = 0; i < waveform_vis_size; i++){

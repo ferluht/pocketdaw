@@ -29,7 +29,7 @@ namespace GUI {
                 : Encoder(label_, default_value_, lower_bound_, upper_bound_, drag_callback_, default_map_, CIRCLE) {
             state = false;
 
-            GSetTapEndCallback([this](const Vec2& v) -> GUI::GObject * {
+            GSetTapEndCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
                 state = !state;
                 return nullptr;
             });

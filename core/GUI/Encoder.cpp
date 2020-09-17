@@ -50,21 +50,21 @@ namespace GUI {
         GAttach(overlay);
         overlay->GSetVisible(false);
 
-        GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
+        GSetDragBeginCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             drag_from = v;
             old_angle = angle;
             mapping_mode = true;
             return this;
         });
 
-        GSetDragHandlerCallback([this](const Vec2& v) -> GUI::GObject * {
+        GSetDragHandlerCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             overlay->GSetVisible(true);
             angle = old_angle + (v.x - drag_from.x) / 100;
             setangle(angle);
             return this;
         });
 
-        GSetDragEndCallback([this](const Vec2& v) -> GUI::GObject * {
+        GSetDragEndCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             overlay->GSetVisible(false);
             mapping_mode = false;
             return this;
@@ -80,7 +80,7 @@ namespace GUI {
         nvgStroke(nvg);
         nvgClosePath(nvg);
 
-        Vec2 wc(global.c.x + global.s.x * wheel_center.x, global.c.y + global.s.y * wheel_center.y);
+        vecmath::Vec2 wc(global.c.x + global.s.x * wheel_center.x, global.c.y + global.s.y * wheel_center.y);
         float wr = global.s.x * wheel_radius;
 
         nvgBeginPath(nvg);
@@ -147,7 +147,7 @@ namespace GUI {
     }
 
     void AnalogEncoder::GDraw(NVGcontext * nvg) {
-        Vec2 ac(global.c.x + global.s.x * wheel_center.x, global.c.y + global.s.y * wheel_center.y);
+        vecmath::Vec2 ac(global.c.x + global.s.x * wheel_center.x, global.c.y + global.s.y * wheel_center.y);
         float ar = global.s.x * wheel_radius;
 
         Encoder::GDraw(nvg);

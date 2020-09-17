@@ -32,7 +32,7 @@ Saturator::Saturator() : AudioEffect("Saturator") {
 
     redraw_wave();
 
-    plot->GSetTapEndCallback([this](const Vec2& v) -> GUI::GObject * {
+    plot->GSetTapEndCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
         type ++;
         if (type > 3) type = 0;
         waveshape_changed = true;

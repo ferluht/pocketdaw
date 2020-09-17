@@ -17,13 +17,13 @@
 #include <cerrno>
 #include <set>
 #include <string>
+#include <mutex>
 
 #include <bgfx/bgfx.h>
-#include <ndk_helper/NDKHelper.h>
+#include <vecmath.h>
+#include <perfMonitor.h>
 
 #include <nanovg/nanovg.h>
-
-typedef ndk_helper::Vec2 Vec2;
 
 namespace GUI {
 
@@ -39,8 +39,8 @@ namespace GUI {
     public:
 
         struct Position {
-            Vec2 c;
-            Vec2 s;
+            vecmath::Vec2 c;
+            vecmath::Vec2 s;
             float ratio;
 
             Position () {}
@@ -63,7 +63,7 @@ namespace GUI {
             global.ratio = 0;
         }
 
-        inline virtual void GPlace(Vec2 c_) { local.c = c_; }
+        inline virtual void GPlace(vecmath::Vec2 c_) { local.c = c_; }
 
         inline virtual void GSetRatio(float ratio_) { local.ratio = ratio_; }
 
@@ -95,7 +95,7 @@ namespace GUI {
             }
         }
 
-        inline virtual bool GContains(const Vec2 &v) {
+        inline virtual bool GContains(const vecmath::Vec2 &v) {
             switch (type) {
                 case BOX:
                     return GContainsX(v) && GContainsY(v);
@@ -106,7 +106,7 @@ namespace GUI {
             }
         }
 
-        inline virtual bool GContainsX(const Vec2 &v) {
+        inline virtual bool GContainsX(const vecmath::Vec2 &v) {
             switch (type) {
                 case BOX:
                     return (global.c.x < v.x) && (global.c.x + global.s.x > v.x);
@@ -117,7 +117,7 @@ namespace GUI {
             }
         }
 
-        inline virtual bool GContainsY(const Vec2 &v) {
+        inline virtual bool GContainsY(const vecmath::Vec2 &v) {
             switch (type) {
                 case BOX:
                     return (global.c.y < v.y) && (global.c.y + global.s.y > v.y);
@@ -134,18 +134,18 @@ namespace GUI {
 
     class GObject : public Shape {
 
-        std::function<GUI::GObject *(const ndk_helper::Vec2& v)> tap_begin_callback;
-        std::function<GUI::GObject *(const ndk_helper::Vec2& v)> tap_handler_callback;
-        std::function<GUI::GObject *(const ndk_helper::Vec2& v)> tap_end_callback;
-        std::function<GUI::GObject *(const ndk_helper::Vec2& v)> drag_begin_callback;
-        std::function<GUI::GObject *(const ndk_helper::Vec2& v)> drag_handler_callback;
-        std::function<GUI::GObject *(const ndk_helper::Vec2& v)> drag_end_callback;
-        std::function<GUI::GObject *(const ndk_helper::Vec2& v)> double_tap_begin_callback;
-        std::function<GUI::GObject *(const ndk_helper::Vec2& v)> double_tap_handler_callback;
-        std::function<GUI::GObject *(const ndk_helper::Vec2& v)> double_tap_end_callback;
-        std::function<GUI::GObject *(const ndk_helper::Vec2& v)> pinch_begin_callback;
-        std::function<GUI::GObject *(const ndk_helper::Vec2& v)> pinch_handler_callback;
-        std::function<GUI::GObject *(const ndk_helper::Vec2& v)> pinch_end_callback;
+        std::function<GUI::GObject *(const vecmath::Vec2& v)> tap_begin_callback;
+        std::function<GUI::GObject *(const vecmath::Vec2& v)> tap_handler_callback;
+        std::function<GUI::GObject *(const vecmath::Vec2& v)> tap_end_callback;
+        std::function<GUI::GObject *(const vecmath::Vec2& v)> drag_begin_callback;
+        std::function<GUI::GObject *(const vecmath::Vec2& v)> drag_handler_callback;
+        std::function<GUI::GObject *(const vecmath::Vec2& v)> drag_end_callback;
+        std::function<GUI::GObject *(const vecmath::Vec2& v)> double_tap_begin_callback;
+        std::function<GUI::GObject *(const vecmath::Vec2& v)> double_tap_handler_callback;
+        std::function<GUI::GObject *(const vecmath::Vec2& v)> double_tap_end_callback;
+        std::function<GUI::GObject *(const vecmath::Vec2& v)> pinch_begin_callback;
+        std::function<GUI::GObject *(const vecmath::Vec2& v)> pinch_handler_callback;
+        std::function<GUI::GObject *(const vecmath::Vec2& v)> pinch_end_callback;
 
     public:
 
@@ -247,7 +247,7 @@ namespace GUI {
 //            infocus = false;
         }
 
-        virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
+        virtual GObject *GFindFocusObject(const vecmath::Vec2 &point, std::list<GObject *> * trace) {
             for (auto const &gr : Graphics) {
                 auto fo = gr->GFindFocusObject(point, trace);
                 if (fo) {
@@ -262,110 +262,110 @@ namespace GUI {
             return nullptr;
         }
 
-        inline void GSetTapBeginCallback(std::function<GUI::GObject *(const ndk_helper::Vec2& v)> tap_begin_callback_) {
+        inline void GSetTapBeginCallback(std::function<GUI::GObject *(const vecmath::Vec2& v)> tap_begin_callback_) {
             tap_begin_callback = tap_begin_callback_;
         }
 
-        inline void GSetTapHandlerCallback(std::function<GUI::GObject *(const ndk_helper::Vec2& v)> tap_handler_callback_) {
+        inline void GSetTapHandlerCallback(std::function<GUI::GObject *(const vecmath::Vec2& v)> tap_handler_callback_) {
             tap_handler_callback = tap_handler_callback_;
         }
 
-        inline void GSetTapEndCallback(std::function<GUI::GObject *(const ndk_helper::Vec2& v)> tap_end_callback_) {
+        inline void GSetTapEndCallback(std::function<GUI::GObject *(const vecmath::Vec2& v)> tap_end_callback_) {
             tap_end_callback = tap_end_callback_;
         }
 
-        inline void GSetDragBeginCallback(std::function<GUI::GObject *(const ndk_helper::Vec2& v)> drag_begin_callback_) {
+        inline void GSetDragBeginCallback(std::function<GUI::GObject *(const vecmath::Vec2& v)> drag_begin_callback_) {
             drag_begin_callback = drag_begin_callback_;
         }
 
-        inline void GSetDragHandlerCallback(std::function<GUI::GObject *(const ndk_helper::Vec2& v)> drag_handler_callback_) {
+        inline void GSetDragHandlerCallback(std::function<GUI::GObject *(const vecmath::Vec2& v)> drag_handler_callback_) {
             drag_handler_callback = drag_handler_callback_;
         }
 
-        inline void GSetDragEndCallback(std::function<GUI::GObject *(const ndk_helper::Vec2& v)> drag_end_callback_) {
+        inline void GSetDragEndCallback(std::function<GUI::GObject *(const vecmath::Vec2& v)> drag_end_callback_) {
             drag_end_callback = drag_end_callback_;
         }
 
-        inline void GSetDoubleTapBeginCallback(std::function<GUI::GObject *(const ndk_helper::Vec2& v)> double_tap_begin_callback_) {
+        inline void GSetDoubleTapBeginCallback(std::function<GUI::GObject *(const vecmath::Vec2& v)> double_tap_begin_callback_) {
             double_tap_begin_callback = double_tap_begin_callback_;
         }
 
-        inline void GSetDoubleTapHandlerCallback(std::function<GUI::GObject *(const ndk_helper::Vec2& v)> double_tap_handler_callback_) {
+        inline void GSetDoubleTapHandlerCallback(std::function<GUI::GObject *(const vecmath::Vec2& v)> double_tap_handler_callback_) {
             double_tap_handler_callback = double_tap_handler_callback_;
         }
 
-        inline void GSetDoubleTapEndCallback(std::function<GUI::GObject *(const ndk_helper::Vec2& v)> double_tap_end_callback_) {
+        inline void GSetDoubleTapEndCallback(std::function<GUI::GObject *(const vecmath::Vec2& v)> double_tap_end_callback_) {
             double_tap_end_callback = double_tap_end_callback_;
         }
 
-        inline void GSetPinchBeginCallback(std::function<GUI::GObject *(const ndk_helper::Vec2& v)> pinch_begin_callback_) {
+        inline void GSetPinchBeginCallback(std::function<GUI::GObject *(const vecmath::Vec2& v)> pinch_begin_callback_) {
             pinch_begin_callback = pinch_begin_callback_;
         }
 
-        inline void GSetPinchHandlerCallback(std::function<GUI::GObject *(const ndk_helper::Vec2& v)> pinch_handler_callback_) {
+        inline void GSetPinchHandlerCallback(std::function<GUI::GObject *(const vecmath::Vec2& v)> pinch_handler_callback_) {
             pinch_handler_callback = pinch_handler_callback_;
         }
 
-        inline void GSetPinchEndCallback(std::function<GUI::GObject *(const ndk_helper::Vec2& v)> pinch_end_callback_) {
+        inline void GSetPinchEndCallback(std::function<GUI::GObject *(const vecmath::Vec2& v)> pinch_end_callback_) {
             pinch_end_callback = pinch_end_callback_;
         }
 
-        GObject *GTapBegin(const Vec2 &v) {
+        GObject *GTapBegin(const vecmath::Vec2 &v) {
             if (tap_begin_callback) return tap_begin_callback(v);
             return this;
         }
 
-        GObject *GTapHandler(const Vec2 &v) {
+        GObject *GTapHandler(const vecmath::Vec2 &v) {
             if (tap_handler_callback) return tap_handler_callback(v);
             return this;
         }
 
-        GObject *GTapEnd(const Vec2 &v) {
+        GObject *GTapEnd(const vecmath::Vec2 &v) {
             if (tap_end_callback) return tap_end_callback(v);
             return this;
         }
 
-        GObject *GDoubleTapBegin(const Vec2 &v) {
+        GObject *GDoubleTapBegin(const vecmath::Vec2 &v) {
             if (double_tap_begin_callback) return double_tap_begin_callback(v);
             return this;
         }
 
-        GObject *GDoubleTapHandler(const Vec2 &v) {
+        GObject *GDoubleTapHandler(const vecmath::Vec2 &v) {
             if (double_tap_handler_callback) return double_tap_handler_callback(v);
             return this;
         }
 
-        GObject *GDoubleTapEnd(const Vec2 &v) {
+        GObject *GDoubleTapEnd(const vecmath::Vec2 &v) {
             if (double_tap_end_callback) return double_tap_end_callback(v);
             return this;
         }
 
-        GObject *GDragBegin(const Vec2 &v) {
+        GObject *GDragBegin(const vecmath::Vec2 &v) {
             if (drag_begin_callback) return drag_begin_callback(v);
             return this;
         }
 
-        GObject *GDragHandler(const Vec2 &v) {
+        GObject *GDragHandler(const vecmath::Vec2 &v) {
             if (drag_handler_callback) return drag_handler_callback(v);
             return this;
         }
 
-        GObject *GDragEnd(const Vec2 &v) {
+        GObject *GDragEnd(const vecmath::Vec2 &v) {
             if (drag_end_callback) return drag_end_callback(v);
             return this;
         }
 
-        GObject *GPinchBegin(const Vec2 &v) {
+        GObject *GPinchBegin(const vecmath::Vec2 &v) {
             if (pinch_begin_callback) return pinch_begin_callback(v);
             return this;
         }
 
-        GObject *GPinchHandler(const Vec2 &v) {
+        GObject *GPinchHandler(const vecmath::Vec2 &v) {
             if (pinch_handler_callback) return pinch_handler_callback(v);
             return this;
         }
 
-        GObject *GPinchEnd(const Vec2 &v) {
+        GObject *GPinchEnd(const vecmath::Vec2 &v) {
             if (pinch_end_callback) return pinch_end_callback(v);
             return this;
         }
@@ -422,11 +422,7 @@ namespace GUI {
         std::mutex renderLock;
         std::mutex overlayLock;
 
-        ndk_helper::DoubletapDetector doubletap_detector_;
-        ndk_helper::PinchDetector pinch_detector_;
-        ndk_helper::DragDetector drag_detector_;
-        ndk_helper::TapDetector tap_detector_;
-        ndk_helper::PerfMonitor monitor_;
+        perfmonitor::PerfMonitor monitor_;
 
         NVGcontext * nvg;
 
@@ -536,7 +532,7 @@ namespace GUI {
             overlays.erase(go);
         }
 
-        GObject * FindFocusObject(const Vec2 &point) {
+        GObject * FindFocusObject(const vecmath::Vec2 &point) {
 
             renderLock.lock();
 
@@ -556,6 +552,8 @@ namespace GUI {
             }
 
             renderLock.unlock();
+            
+            return ret;
         }
 
         GEngine(const GEngine &) {}

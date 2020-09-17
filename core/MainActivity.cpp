@@ -1,10 +1,14 @@
-#include <bx/include/bx/uint32_t.h>
+#include <bx/uint32_t.h>
 #include <bgfx_utils/common.h>
 #include <bgfx_utils/bgfx_utils.h>
 #include <imgui/imgui.h>
 #include <nanovg/nanovg_bgfx.h>
 #include <nanovg/nanovg.h>
-#include <Synth.h>
+#include <AMGEngine.h>
+
+#ifndef TARGET_IOS
+    #include <Synth.h>
+#endif
 
 namespace
 {
@@ -58,10 +62,10 @@ namespace
                     , 0
             );
 
-            const bgfx::RendererType::Enum renderer = bgfx::getRendererType();
-            float texelHalf = bgfx::RendererType::Direct3D9 == renderer ? 0.5f : 0.0f;
-            bool originBottomLeft = bgfx::RendererType::OpenGL == renderer
-                                    || bgfx::RendererType::OpenGLES == renderer;
+//            const bgfx::RendererType::Enum renderer = bgfx::getRendererType();
+//            float texelHalf = bgfx::RendererType::Direct3D9 == renderer ? 0.5f : 0.0f;
+//            bool originBottomLeft = bgfx::RendererType::OpenGL == renderer
+//                                    || bgfx::RendererType::OpenGLES == renderer;
 
             imguiCreate();
 
@@ -71,6 +75,7 @@ namespace
 
             GUI::GEngine::getGEngine().setDisplay(m_nvg, m_width, m_height);
 
+#ifndef TARGET_IOS
             S = new Synth();
             S->GPlace({0, 0});
             S->GSetHeight(1);
@@ -79,6 +84,9 @@ namespace
             eng = new AMGEngine(S);
 
             eng->audio->start();
+#else
+            eng = new AMGEngine(new AMGObject(GUI::BOX));
+#endif
         }
 
         virtual int shutdown() override
@@ -129,7 +137,9 @@ namespace
 
         AMGEngine * eng;
 
+#ifndef TARGET_IOS
         Synth * S;
+#endif
 
         uint32_t m_width;
         uint32_t m_height;

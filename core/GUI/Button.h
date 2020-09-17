@@ -60,7 +60,7 @@ namespace GUI {
     public:
         TapButton(const char * label, std::function<void(bool)> callback_) :
                 Button(label, callback_) {
-            GSetTapEndCallback([this](const Vec2& v) -> GUI::GObject * {
+            GSetTapEndCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
                 callback(true);
                 return nullptr;
             });
@@ -104,7 +104,7 @@ namespace GUI {
         TexturedMultiButton(std::function<void(unsigned int)> callback_, unsigned int num_states_,
                             const char **textures_);
 
-        GObject *TapEnd(const ndk_helper::Vec2 &v);
+        GObject *TapEnd(const vecmath::Vec2 &v);
 
         operator unsigned int() const { return state; }
 
@@ -128,7 +128,7 @@ namespace GUI {
         FocusButton(const char *label, std::function<void(bool)> callback_, GObject * focus_object_) :
                 Button(label, callback_) {
             focus_object = focus_object_;
-            GSetTapEndCallback([this](const Vec2& v) -> GUI::GObject * {
+            GSetTapEndCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
                 state = !state;
                 callback(state);
                 if (state)
@@ -180,7 +180,7 @@ namespace GUI {
 //            value = 0;
 //        }
 //
-//        virtual GObject *GTapEnd(const ndk_helper::Vec2 &v) override;
+//        virtual GObject *GTapEnd(const vecmath::Vec2 &v) override;
 //
 //        void GDraw(NVGcontext * nvg) override;
 //    };

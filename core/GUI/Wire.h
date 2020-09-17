@@ -14,12 +14,12 @@ namespace GUI {
 
         GObject * a_obj;
         GObject * b_obj;
-        Vec2 a_vec;
-        Vec2 b_vec;
+        vecmath::Vec2 a_vec;
+        vecmath::Vec2 b_vec;
 
         NVGcolor color;
 
-        void drawShadow(NVGcontext * nvg, Vec2 a, Vec2 b, float rad_a, float rad_b) {
+        void drawShadow(NVGcontext * nvg, vecmath::Vec2 a, vecmath::Vec2 b, float rad_a, float rad_b) {
             nvgBeginPath(nvg);
             nvgMoveTo(nvg, a.x, a.y + rad_a);
             nvgStrokeColor(nvg, DARKER);
@@ -29,7 +29,7 @@ namespace GUI {
             nvgClosePath(nvg);
         }
 
-        void drawWire(NVGcontext * nvg, Vec2 a, Vec2 b, float rad_a, float rad_b) {
+        void drawWire(NVGcontext * nvg, vecmath::Vec2 a, vecmath::Vec2 b, float rad_a, float rad_b) {
             nvgBeginPath(nvg);
             nvgMoveTo(nvg, a.x, a.y + rad_a);
             nvgStrokeColor(nvg, color);
@@ -39,7 +39,7 @@ namespace GUI {
             nvgClosePath(nvg);
         }
 
-        void drawCircle(NVGcontext * nvg, Vec2 a, float rad_a) {
+        void drawCircle(NVGcontext * nvg, vecmath::Vec2 a, float rad_a) {
             nvgBeginPath(nvg);
             nvgCircle(nvg, a.x, a.y, rad_a);
             nvgStrokeWidth(nvg, rad_a / 2);
@@ -70,10 +70,10 @@ namespace GUI {
         }
 
         inline void from(GObject * f) { a_obj = f; }
-        inline void from(Vec2 f) { a_obj = nullptr, a_vec = f; }
+        inline void from(vecmath::Vec2 f) { a_obj = nullptr, a_vec = f; }
 
         inline void to(GObject * t) { b_obj = t; }
-        inline void to(Vec2 t) { b_obj = nullptr, b_vec = t; }
+        inline void to(vecmath::Vec2 t) { b_obj = nullptr, b_vec = t; }
 
         inline bool isVisible() { return a_obj && b_obj && (a_obj->visible && b_obj->visible); }
 
@@ -82,8 +82,8 @@ namespace GUI {
 //            if (!isVisible())
 //                return;
 
-            Vec2 a = a_vec;
-            Vec2 b = b_vec;
+            vecmath::Vec2 a = a_vec;
+            vecmath::Vec2 b = b_vec;
 
             float a_rad = 0;
             float b_rad = 0;

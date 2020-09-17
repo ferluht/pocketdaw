@@ -81,7 +81,7 @@ public:
 
     GUI::Plot<GUI::TimeGraph> * plot;
 
-    Vec2 drag_from;
+    vecmath::Vec2 drag_from;
 
     int graph_phase;
 
@@ -102,7 +102,7 @@ public:
         return this->output + osc2.output;
     }
 
-//    GUI::GObject * GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) override
+//    GUI::GObject * GFindFocusObject(const vecmath::Vec2 &point, std::list<GObject *> * trace) override
 //    {
 //        if (visible && GContains(point)){
 //            if (plot->GContains(point)) {

@@ -27,13 +27,13 @@ public:
 
     bool ARender(double beat, float * lsample, float * rsample) override ;
 
-//    void pinchBegin(const ndk_helper::Vec2& v) override ;
-//    void pinchHandler(const ndk_helper::Vec2& v) override ;
+//    void pinchBegin(const vecmath::Vec2& v) override ;
+//    void pinchHandler(const vecmath::Vec2& v) override ;
 //    virtual void pinchEnd() {};
 
 //    void grender(float dTime) override ;
-//    void dragBegin(const ndk_helper::Vec2& v) override ;
-//    void dragHandler(const ndk_helper::Vec2& v) override ;
+//    void dragBegin(const vecmath::Vec2& v) override ;
+//    void dragHandler(const vecmath::Vec2& v) override ;
 //    void dragEnd() override ;
 };
 

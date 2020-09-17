@@ -19,13 +19,13 @@ namespace GUI {
         min = min_;
         max = max_;
 
-        GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
+        GSetDragBeginCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             drag_from = v;
             old_value = value;
             return this;
         });
 
-        GSetDragHandlerCallback([this](const Vec2& v) -> GUI::GObject * {
+        GSetDragHandlerCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             value = old_value - (v.y - drag_from.y) / 100;
 
             if (value < min) value = min;

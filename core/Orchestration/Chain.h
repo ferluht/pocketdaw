@@ -19,7 +19,7 @@ private:
     std::vector<GUI::IECanvas *>::iterator moving_from, moving_to;
     GUI::AMGCanvas * moving_overlay;
     int moving_focus = 0;
-    ndk_helper::Vec2 last_touch;
+    vecmath::Vec2 last_touch;
 
 public:
 
@@ -34,7 +34,7 @@ public:
         auto dummy = new GUI::IECanvas("dummy");
         IEObjects.push_back(dummy);
 
-        GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
+        GSetDragBeginCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             std::list<GObject *> trace;
             auto go = AMGObject::GFindFocusObject(v, &trace);
             moving_from = std::find(IEObjects.begin(), IEObjects.end(), go);
@@ -43,7 +43,7 @@ public:
             return this;
         });
 
-        GSetDragHandlerCallback([this](const Vec2& v) -> GUI::GObject * {
+        GSetDragHandlerCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             auto old_moving_to = moving_to;
 
             while ((moving_to != IEObjects.begin()) && (v.x < (*moving_to)->global.c.x)){
@@ -68,7 +68,7 @@ public:
             return this;
         });
 
-        GSetDragEndCallback([this](const Vec2& v) -> GUI::GObject * {
+        GSetDragEndCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
             //    if ((*moving_to)->globalPosition.GContains(last_touch)){
 //        auto go = (*moving_from);
 //        AMGChainDel(moving_from - AMGObjects.begin());
@@ -180,7 +180,7 @@ public:
         for (auto const& mo : IEObjects) mo->MRender(beat);
     }
 
-//    GObject * GFindFocusObject(const ndk_helper::Vec2& point) override
+//    GObject * GFindFocusObject(const vecmath::Vec2& point) override
 //    {
 //        if (visible && globalPosition.GContains(point)){
 //            for (auto const &gr : Graphics) {
@@ -196,7 +196,7 @@ public:
 //        return nullptr;
 //    }
 
-    virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
+    virtual GObject *GFindFocusObject(const vecmath::Vec2 &point, std::list<GObject *> * trace) {
         for (auto const &gr : Graphics) {
             auto fo = gr->GFindFocusObject(point, trace);
             if (fo) {

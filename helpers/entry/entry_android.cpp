@@ -18,7 +18,8 @@
 #include <android/window.h>
 #include <android_native_app_glue.h>
 #include <android/native_window.h>
-#include <ndk_helper/NDKHelper.h>
+#include <vecmath.h>
+#include <gestureDetector.h>
 #include <G.h>
 #include <M.h>
 #include <A.h>
@@ -177,6 +178,12 @@ namespace entry
 
 	struct Context
 	{
+
+		gestures::TapDetector tap_detector_;
+		gestures::DragDetector drag_detector_;
+		gestures::DoubletapDetector doubletap_detector_;
+		gestures::PinchDetector pinch_detector_;
+
 		Context()
 			: m_window(NULL)
 		{
@@ -377,16 +384,16 @@ namespace entry
 		{
 			auto eng = &GUI::GEngine::getGEngine();
 			if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION) {
-				ndk_helper::GESTURE_STATE tapState = eng->tap_detector_.Detect(event);
-				ndk_helper::GESTURE_STATE doubleTapState = eng->doubletap_detector_.Detect(event);
-				ndk_helper::GESTURE_STATE dragState = eng->drag_detector_.Detect(event);
-				ndk_helper::GESTURE_STATE pinchState = eng->pinch_detector_.Detect(event);
+				gestures::GESTURE_STATE tapState = tap_detector_.Detect(event);
+				gestures::GESTURE_STATE doubleTapState = doubletap_detector_.Detect(event);
+				gestures::GESTURE_STATE dragState = drag_detector_.Detect(event);
+				gestures::GESTURE_STATE pinchState = pinch_detector_.Detect(event);
 
                 // Handle drag state
-                if (tapState & ndk_helper::GESTURE_STATE_ACTION) {
+                if (tapState & gestures::GESTURE_STATE_ACTION) {
                     // Otherwise, start dragging
-                    ndk_helper::Vec2 v;
-                    eng->tap_detector_.GetPointer(v);
+                    vecmath::Vec2 v;
+                    tap_detector_.GetPointer(v);
                     eng->FindFocusObject(v);
                     auto new_focus = eng->focusStack.back()->GTapEnd(v);
 //					eng->unfocus();
@@ -395,10 +402,10 @@ namespace entry
                 }
 
 				// Handle drag state
-				if (doubleTapState & ndk_helper::GESTURE_STATE_ACTION) {
+				if (doubleTapState & gestures::GESTURE_STATE_ACTION) {
 					// Otherwise, start dragging
-					ndk_helper::Vec2 v;
-					eng->doubletap_detector_.GetPointer(v);
+					vecmath::Vec2 v;
+					doubletap_detector_.GetPointer(v);
 					eng->FindFocusObject(v);
 					auto new_focus = eng->focusStack.back()->GDoubleTapEnd(v);
 //					eng->unfocus();
@@ -407,20 +414,20 @@ namespace entry
 				}
 
 				// Handle drag state
-				if (dragState & ndk_helper::GESTURE_STATE_START) {
+				if (dragState & gestures::GESTURE_STATE_START) {
 					// Otherwise, start dragging
-					ndk_helper::Vec2 v;
-					eng->drag_detector_.GetPointer(v);
+					vecmath::Vec2 v;
+					drag_detector_.GetPointer(v);
 					eng->FindFocusObject(v);
 					auto new_focus = eng->focusStack.back()->GDragBegin(v);
 					eng->focusOn(new_focus);
-				} else if (dragState & ndk_helper::GESTURE_STATE_MOVE) {
-					ndk_helper::Vec2 v;
-					eng->drag_detector_.GetPointer(v);
+				} else if (dragState & gestures::GESTURE_STATE_MOVE) {
+					vecmath::Vec2 v;
+					drag_detector_.GetPointer(v);
 					auto new_focus = eng->focusStack.back()->GDragHandler(v);
-				} else if (dragState & ndk_helper::GESTURE_STATE_END) {
-					ndk_helper::Vec2 v;
-					eng->drag_detector_.GetPointer(v);
+				} else if (dragState & gestures::GESTURE_STATE_END) {
+					vecmath::Vec2 v;
+					drag_detector_.GetPointer(v);
 					auto new_focus = eng->focusStack.back()->GDragEnd(v);
 //					eng->unfocus();
 					eng->focusOn(new_focus);

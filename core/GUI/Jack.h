@@ -53,7 +53,7 @@ namespace GUI {
             type = type_;
             value = 0;
 
-            GSetDragBeginCallback([this](const Vec2& v) -> GUI::GObject * {
+            GSetDragBeginCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
                 if (type == OUTPUT && !outputs.empty()) {
                     auto wire = outputs.begin()->first;
                     auto jack = outputs.begin()->second;
@@ -72,13 +72,13 @@ namespace GUI {
                 return this;
             });
 
-            GSetDragHandlerCallback([this](const Vec2& v) -> GUI::GObject * {
+            GSetDragHandlerCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
                 focusWire->from(this);
                 focusWire->to(v);
                 return this;
             });
 
-            GSetDragEndCallback([this](const Vec2& v) -> GUI::GObject * {
+            GSetDragEndCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
                 auto & eng = GEngine::getGEngine();
                 std::list<GObject *> trace;
                 Jack * jack = dynamic_cast<Jack *>(eng.focusStack.front()->GFindFocusObject(v, &trace));

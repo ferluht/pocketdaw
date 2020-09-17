@@ -22,7 +22,7 @@ class Saturator : public AudioEffect {
 
     bool waveshape_changed = true;
 
-    Vec2 drag_from;
+    vecmath::Vec2 drag_from;
 
     inline float shaper(float amp) {
         amp *= *factor;

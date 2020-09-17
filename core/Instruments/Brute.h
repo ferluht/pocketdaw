@@ -38,7 +38,7 @@ public:
 //        GAttach(jack);
     }
 
-    virtual GObject *GFindFocusObject(const Vec2 &point, std::list<GObject *> * trace) {
+    virtual GObject *GFindFocusObject(const vecmath::Vec2 &point, std::list<GObject *> * trace) {
 //        for (int i = 0; i < SOUNDS; i++) {
 //            if (drums[i]->visible && drums[i]->GContains(point)) focusOnDrum(i);
 //        }

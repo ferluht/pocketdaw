@@ -14,7 +14,7 @@ bool AMGRack::ARender(double beat, float *lsample, float *rsample){
     return true;
 }
 
-//GUI::GObject * AMGRack::GDragHandler(const ndk_helper::Vec2 &v) {
+//GUI::GObject * AMGRack::GDragHandler(const vecmath::Vec2 &v) {
 //    x_offset += (v.x - drag_from.x)/shape->global.s.x;
 //    updatePositions();
 ////    if ((MEffects.shape->local.ratio + Instr->shape->local.ratio + AEffects.shape->local.ratio)/shape->global.ratio + x_offset + 2*padding < 1)
@@ -25,7 +25,7 @@ bool AMGRack::ARender(double beat, float *lsample, float *rsample){
 //    return this;
 //}
 //
-//GUI::GObject * AMGRack::GDragBegin(const ndk_helper::Vec2 &v) {
+//GUI::GObject * AMGRack::GDragBegin(const vecmath::Vec2 &v) {
 //    drag_from = v;
 //    return this;
 //}
