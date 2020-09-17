@@ -1,3 +1,4 @@
+ios-arm
 *.iml
 .gradle
 *.trace
