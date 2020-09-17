@@ -1,3 +1,4 @@
+.build
 ios-arm
 *.iml
 .gradle
