@@ -15,7 +15,7 @@
 		18FF40C4046707926DD21BA8 /* image_decode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = image_decode.cpp; sourceTree = "<group>"; };
 		2C3EC96198A35CE8217CFEC0 /* encode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = encode.h; sourceTree = "<group>"; };
 		7D6367F06989315752CFB622 /* libbimg_decodeDebug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbimg_decodeDebug.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		CFB2FA582513A5BD006825CF /* image_decode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = image_decode.cpp; path = pocketdaw/pocketdaw/3rdparty/bimg/src/image_decode.cpp; sourceTree = "<group>"; };
+		CFB2FA582513A5BD006825CF /* image_decode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = image_decode.cpp; path = ../../3rdparty/bimg/src/image_decode.cpp; sourceTree = SOURCE_ROOT; };
 		F9EC9459E5545B274EC06F3D /* decode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = decode.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 

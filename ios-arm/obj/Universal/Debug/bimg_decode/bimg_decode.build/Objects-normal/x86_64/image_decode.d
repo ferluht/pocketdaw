@@ -1,0 +1,36 @@
+dependencies: \
+  /Users/ferluht/Dev/pocketdaw/pd/3rdparty/bimg/src/image_decode.cpp \
+  /Users/ferluht/Dev/pocketdaw/pd/3rdparty/bimg/src/bimg_p.h \
+  ../../3rdparty/bimg/include/bimg/bimg.h \
+  ../../3rdparty/bx/include/bx/allocator.h \
+  ../../3rdparty/bx/include/bx/bx.h \
+  ../../3rdparty/bx/include/bx/platform.h \
+  ../../3rdparty/bx/include/bx/config.h \
+  ../../3rdparty/bx/include/bx/macros.h \
+  ../../3rdparty/bx/include/bx/inline/bx.inl \
+  ../../3rdparty/bx/include/bx/inline/allocator.inl \
+  ../../3rdparty/bx/include/bx/readerwriter.h \
+  ../../3rdparty/bx/include/bx/endian.h \
+  ../../3rdparty/bx/include/bx/inline/endian.inl \
+  ../../3rdparty/bx/include/bx/error.h \
+  ../../3rdparty/bx/include/bx/string.h \
+  ../../3rdparty/bx/include/bx/inline/string.inl \
+  ../../3rdparty/bx/include/bx/inline/error.inl \
+  ../../3rdparty/bx/include/bx/filepath.h \
+  ../../3rdparty/bx/include/bx/math.h \
+  ../../3rdparty/bx/include/bx/uint32_t.h \
+  ../../3rdparty/bx/include/bx/inline/uint32_t.inl \
+  ../../3rdparty/bx/include/bx/inline/math.inl \
+  ../../3rdparty/bx/include/bx/simd_t.h \
+  ../../3rdparty/bx/include/bx/inline/simd128_swizzle.inl \
+  ../../3rdparty/bx/include/bx/inline/simd128_sse.inl \
+  ../../3rdparty/bx/include/bx/inline/simd128_ref.inl \
+  ../../3rdparty/bx/include/bx/inline/simd256_ref.inl \
+  ../../3rdparty/bx/include/bx/inline/simd_ni.inl \
+  ../../3rdparty/bx/include/bx/inline/readerwriter.inl \
+  ../../3rdparty/bx/include/bx/pixelformat.h \
+  ../../3rdparty/bx/include/bx/inline/pixelformat.inl \
+  ../../3rdparty/bimg/3rdparty/tinyexr/tinyexr.h \
+  ../../3rdparty/bimg/3rdparty/lodepng/lodepng.cpp \
+  ../../3rdparty/bimg/3rdparty/lodepng/lodepng.h \
+  ../../3rdparty/bimg/3rdparty/stb/stb_image.h

@@ -7,13 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CFB2FAF52513B649006825CF /* example-glue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FAF42513B649006825CF /* example-glue.cpp */; };
+		CFB2FCF82513D511006825CF /* example-glue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FCF72513D511006825CF /* example-glue.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4E730F08BA396C240395FA86 /* example-glue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "example-glue.cpp"; sourceTree = "<group>"; };
-		CFB2FAE82513AC9C006825CF /* example-glue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "example-glue.cpp"; path = "pocketdaw/3rdparty/bgfx/examples/common/example-glue.cpp"; sourceTree = "<group>"; };
-		CFB2FAF42513B649006825CF /* example-glue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "example-glue.cpp"; path = "pocketdaw/helpers/bgfx_utils/example-glue.cpp"; sourceTree = "<group>"; };
+		CFB2FCF72513D511006825CF /* example-glue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "example-glue.cpp"; path = "pd/helpers/bgfx_utils/example-glue.cpp"; sourceTree = "<group>"; };
 		E1955B9C4D796ADC567C9818 /* libexample-glueDebug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libexample-glueDebug.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -55,8 +54,7 @@
 		D4C31D4840DC04720989940B /* example-glue */ = {
 			isa = PBXGroup;
 			children = (
-				CFB2FAE82513AC9C006825CF /* example-glue.cpp */,
-				CFB2FAF42513B649006825CF /* example-glue.cpp */,
+				CFB2FCF72513D511006825CF /* example-glue.cpp */,
 				2E7DEB1B9A3F1FA6E3EFAD32 /* examples */,
 				2760FFE893223373DCD2C1FF /* Products */,
 			);
@@ -123,7 +121,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CFB2FAF52513B649006825CF /* example-glue.cpp in Sources */,
+				CFB2FCF82513D511006825CF /* example-glue.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

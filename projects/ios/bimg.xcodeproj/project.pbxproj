@@ -20,6 +20,7 @@
 		CFB2FA552513A4DD006825CF /* quantization.cc in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FA4A2513A4DD006825CF /* quantization.cc */; };
 		CFB2FA562513A4DD006825CF /* footprint.cc in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FA4B2513A4DD006825CF /* footprint.cc */; };
 		CFB2FA572513A4DD006825CF /* codec.cc in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FA4C2513A4DD006825CF /* codec.cc */; };
+		CFB2FCFA2513D8B4006825CF /* image_cubemap_filter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FCF92513D8B4006825CF /* image_cubemap_filter.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,22 +50,22 @@
 		C95D0501B58A5132DE6BF442 /* integer_sequence_codec.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = integer_sequence_codec.cc; sourceTree = "<group>"; };
 		CBBEDA33B77E6BD8209C53E3 /* footprint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = footprint.h; sourceTree = "<group>"; };
 		CC63F7FCB8397EFAA1E3984D /* weight_infill.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = weight_infill.h; sourceTree = "<group>"; };
-		CFB2FA382513A478006825CF /* image_encode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = image_encode.cpp; path = pocketdaw/pocketdaw/3rdparty/bimg/src/image_encode.cpp; sourceTree = "<group>"; };
-		CFB2FA392513A478006825CF /* image_cubemap_filter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = image_cubemap_filter.cpp; path = pocketdaw/pocketdaw/3rdparty/bimg/src/image_cubemap_filter.cpp; sourceTree = "<group>"; };
-		CFB2FA3A2513A478006825CF /* image_decode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = image_decode.cpp; path = pocketdaw/pocketdaw/3rdparty/bimg/src/image_decode.cpp; sourceTree = "<group>"; };
-		CFB2FA3B2513A478006825CF /* image_gnf.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = image_gnf.cpp; path = pocketdaw/pocketdaw/3rdparty/bimg/src/image_gnf.cpp; sourceTree = "<group>"; };
-		CFB2FA3C2513A478006825CF /* image.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = image.cpp; path = pocketdaw/pocketdaw/3rdparty/bimg/src/image.cpp; sourceTree = "<group>"; };
-		CFB2FA422513A4DD006825CF /* integer_sequence_codec.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = integer_sequence_codec.cc; path = "pocketdaw/pocketdaw/3rdparty/bimg/3rdparty/astc-codec/src/decoder/integer_sequence_codec.cc"; sourceTree = "<group>"; };
-		CFB2FA432513A4DD006825CF /* logical_astc_block.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = logical_astc_block.cc; path = "pocketdaw/pocketdaw/3rdparty/bimg/3rdparty/astc-codec/src/decoder/logical_astc_block.cc"; sourceTree = "<group>"; };
-		CFB2FA442513A4DD006825CF /* weight_infill.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = weight_infill.cc; path = "pocketdaw/pocketdaw/3rdparty/bimg/3rdparty/astc-codec/src/decoder/weight_infill.cc"; sourceTree = "<group>"; };
-		CFB2FA452513A4DD006825CF /* endpoint_codec.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = endpoint_codec.cc; path = "pocketdaw/pocketdaw/3rdparty/bimg/3rdparty/astc-codec/src/decoder/endpoint_codec.cc"; sourceTree = "<group>"; };
-		CFB2FA462513A4DD006825CF /* partition.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = partition.cc; path = "pocketdaw/pocketdaw/3rdparty/bimg/3rdparty/astc-codec/src/decoder/partition.cc"; sourceTree = "<group>"; };
-		CFB2FA472513A4DD006825CF /* intermediate_astc_block.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = intermediate_astc_block.cc; path = "pocketdaw/pocketdaw/3rdparty/bimg/3rdparty/astc-codec/src/decoder/intermediate_astc_block.cc"; sourceTree = "<group>"; };
-		CFB2FA482513A4DD006825CF /* astc_file.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = astc_file.cc; path = "pocketdaw/pocketdaw/3rdparty/bimg/3rdparty/astc-codec/src/decoder/astc_file.cc"; sourceTree = "<group>"; };
-		CFB2FA492513A4DD006825CF /* physical_astc_block.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = physical_astc_block.cc; path = "pocketdaw/pocketdaw/3rdparty/bimg/3rdparty/astc-codec/src/decoder/physical_astc_block.cc"; sourceTree = "<group>"; };
-		CFB2FA4A2513A4DD006825CF /* quantization.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = quantization.cc; path = "pocketdaw/pocketdaw/3rdparty/bimg/3rdparty/astc-codec/src/decoder/quantization.cc"; sourceTree = "<group>"; };
-		CFB2FA4B2513A4DD006825CF /* footprint.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = footprint.cc; path = "pocketdaw/pocketdaw/3rdparty/bimg/3rdparty/astc-codec/src/decoder/footprint.cc"; sourceTree = "<group>"; };
-		CFB2FA4C2513A4DD006825CF /* codec.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = codec.cc; path = "pocketdaw/pocketdaw/3rdparty/bimg/3rdparty/astc-codec/src/decoder/codec.cc"; sourceTree = "<group>"; };
+		CFB2FA382513A478006825CF /* image_encode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = image_encode.cpp; path = ../../3rdparty/bimg/src/image_encode.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA3A2513A478006825CF /* image_decode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = image_decode.cpp; path = ../../3rdparty/bimg/src/image_decode.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA3B2513A478006825CF /* image_gnf.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = image_gnf.cpp; path = ../../3rdparty/bimg/src/image_gnf.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA3C2513A478006825CF /* image.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = image.cpp; path = ../../3rdparty/bimg/src/image.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA422513A4DD006825CF /* integer_sequence_codec.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = integer_sequence_codec.cc; path = "../../3rdparty/bimg/3rdparty/astc-codec/src/decoder/integer_sequence_codec.cc"; sourceTree = SOURCE_ROOT; };
+		CFB2FA432513A4DD006825CF /* logical_astc_block.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = logical_astc_block.cc; path = "../../3rdparty/bimg/3rdparty/astc-codec/src/decoder/logical_astc_block.cc"; sourceTree = SOURCE_ROOT; };
+		CFB2FA442513A4DD006825CF /* weight_infill.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = weight_infill.cc; path = "../../3rdparty/bimg/3rdparty/astc-codec/src/decoder/weight_infill.cc"; sourceTree = SOURCE_ROOT; };
+		CFB2FA452513A4DD006825CF /* endpoint_codec.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = endpoint_codec.cc; path = "../../3rdparty/bimg/3rdparty/astc-codec/src/decoder/endpoint_codec.cc"; sourceTree = SOURCE_ROOT; };
+		CFB2FA462513A4DD006825CF /* partition.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = partition.cc; path = "../../3rdparty/bimg/3rdparty/astc-codec/src/decoder/partition.cc"; sourceTree = SOURCE_ROOT; };
+		CFB2FA472513A4DD006825CF /* intermediate_astc_block.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = intermediate_astc_block.cc; path = "../../3rdparty/bimg/3rdparty/astc-codec/src/decoder/intermediate_astc_block.cc"; sourceTree = SOURCE_ROOT; };
+		CFB2FA482513A4DD006825CF /* astc_file.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = astc_file.cc; path = "../../3rdparty/bimg/3rdparty/astc-codec/src/decoder/astc_file.cc"; sourceTree = SOURCE_ROOT; };
+		CFB2FA492513A4DD006825CF /* physical_astc_block.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = physical_astc_block.cc; path = "../../3rdparty/bimg/3rdparty/astc-codec/src/decoder/physical_astc_block.cc"; sourceTree = SOURCE_ROOT; };
+		CFB2FA4A2513A4DD006825CF /* quantization.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = quantization.cc; path = "../../3rdparty/bimg/3rdparty/astc-codec/src/decoder/quantization.cc"; sourceTree = SOURCE_ROOT; };
+		CFB2FA4B2513A4DD006825CF /* footprint.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = footprint.cc; path = "../../3rdparty/bimg/3rdparty/astc-codec/src/decoder/footprint.cc"; sourceTree = SOURCE_ROOT; };
+		CFB2FA4C2513A4DD006825CF /* codec.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = codec.cc; path = "../../3rdparty/bimg/3rdparty/astc-codec/src/decoder/codec.cc"; sourceTree = SOURCE_ROOT; };
+		CFB2FCF92513D8B4006825CF /* image_cubemap_filter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = image_cubemap_filter.cpp; path = pocketdaw/pd/3rdparty/bimg/src/image_cubemap_filter.cpp; sourceTree = "<group>"; };
 		D38598843F4E660808DF6E1A /* quantization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = quantization.h; sourceTree = "<group>"; };
 		F9F8B9FAE58FFCAF8E4473B0 /* physical_astc_block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = physical_astc_block.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -104,7 +105,7 @@
 				CFB2FA492513A4DD006825CF /* physical_astc_block.cc */,
 				CFB2FA4A2513A4DD006825CF /* quantization.cc */,
 				CFB2FA442513A4DD006825CF /* weight_infill.cc */,
-				CFB2FA392513A478006825CF /* image_cubemap_filter.cpp */,
+				CFB2FCF92513D8B4006825CF /* image_cubemap_filter.cpp */,
 				CFB2FA3A2513A478006825CF /* image_decode.cpp */,
 				CFB2FA382513A478006825CF /* image_encode.cpp */,
 				CFB2FA3B2513A478006825CF /* image_gnf.cpp */,
@@ -268,6 +269,7 @@
 				CFB2FA4F2513A4DD006825CF /* weight_infill.cc in Sources */,
 				CFB2FA502513A4DD006825CF /* endpoint_codec.cc in Sources */,
 				CFB2FA512513A4DD006825CF /* partition.cc in Sources */,
+				CFB2FCFA2513D8B4006825CF /* image_cubemap_filter.cpp in Sources */,
 				CFB2FA522513A4DD006825CF /* intermediate_astc_block.cc in Sources */,
 				CFB2FA532513A4DD006825CF /* astc_file.cc in Sources */,
 				CFB2FA542513A4DD006825CF /* physical_astc_block.cc in Sources */,

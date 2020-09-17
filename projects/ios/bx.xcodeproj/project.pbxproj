@@ -116,29 +116,28 @@
 		C8D91AC5B4C0DCBC5D1143DA /* pixelformat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pixelformat.h; sourceTree = "<group>"; };
 		CA3CC405B6F7B3B15FAF2CFC /* settings.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = settings.cpp; sourceTree = "<group>"; };
 		CABB0ACF36D66D707FF87D04 /* dirent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dirent.h; sourceTree = "<group>"; };
-		CFB2FA0A2513A3BF006825CF /* commandline.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = commandline.cpp; path = pocketdaw/pocketdaw/3rdparty/bx/src/commandline.cpp; sourceTree = "<group>"; };
-		CFB2FA0B2513A3BF006825CF /* amalgamated.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = amalgamated.cpp; path = pocketdaw/pocketdaw/3rdparty/bx/src/amalgamated.cpp; sourceTree = "<group>"; };
-		CFB2FA0C2513A3BF006825CF /* mutex.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = mutex.cpp; path = pocketdaw/pocketdaw/3rdparty/bx/src/mutex.cpp; sourceTree = "<group>"; };
-		CFB2FA0D2513A3C0006825CF /* dtoa.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = dtoa.cpp; path = pocketdaw/pocketdaw/3rdparty/bx/src/dtoa.cpp; sourceTree = "<group>"; };
-		CFB2FA0E2513A3C0006825CF /* debug.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = debug.cpp; path = pocketdaw/pocketdaw/3rdparty/bx/src/debug.cpp; sourceTree = "<group>"; };
-		CFB2FA0F2513A3C0006825CF /* url.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = url.cpp; path = pocketdaw/pocketdaw/3rdparty/bx/src/url.cpp; sourceTree = "<group>"; };
-		CFB2FA102513A3C0006825CF /* sort.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = sort.cpp; path = pocketdaw/pocketdaw/3rdparty/bx/src/sort.cpp; sourceTree = "<group>"; };
-		CFB2FA112513A3C0006825CF /* crtnone.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = crtnone.cpp; path = pocketdaw/pocketdaw/3rdparty/bx/src/crtnone.cpp; sourceTree = "<group>"; };
-		CFB2FA122513A3C0006825CF /* allocator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = allocator.cpp; path = pocketdaw/pocketdaw/3rdparty/bx/src/allocator.cpp; sourceTree = "<group>"; };
-		CFB2FA132513A3C0006825CF /* file.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = file.cpp; path = pocketdaw/pocketdaw/3rdparty/bx/src/file.cpp; sourceTree = "<group>"; };
-		CFB2FA142513A3C0006825CF /* math.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = math.cpp; path = pocketdaw/pocketdaw/3rdparty/bx/src/math.cpp; sourceTree = "<group>"; };
-		CFB2FA152513A3C0006825CF /* process.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = process.cpp; path = pocketdaw/pocketdaw/3rdparty/bx/src/process.cpp; sourceTree = "<group>"; };
-		CFB2FA162513A3C0006825CF /* bx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = bx.cpp; path = pocketdaw/pocketdaw/3rdparty/bx/src/bx.cpp; sourceTree = "<group>"; };
-		CFB2FA172513A3C0006825CF /* timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = timer.cpp; path = pocketdaw/pocketdaw/3rdparty/bx/src/timer.cpp; sourceTree = "<group>"; };
-		CFB2FA182513A3C0006825CF /* filepath.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = filepath.cpp; path = pocketdaw/pocketdaw/3rdparty/bx/src/filepath.cpp; sourceTree = "<group>"; };
-		CFB2FA192513A3C0006825CF /* easing.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = easing.cpp; path = pocketdaw/pocketdaw/3rdparty/bx/src/easing.cpp; sourceTree = "<group>"; };
-		CFB2FA1A2513A3C0006825CF /* semaphore.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = semaphore.cpp; path = pocketdaw/pocketdaw/3rdparty/bx/src/semaphore.cpp; sourceTree = "<group>"; };
-		CFB2FA1B2513A3C0006825CF /* thread.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = thread.cpp; path = pocketdaw/pocketdaw/3rdparty/bx/src/thread.cpp; sourceTree = "<group>"; };
-		CFB2FA1C2513A3C0006825CF /* settings.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = settings.cpp; path = pocketdaw/pocketdaw/3rdparty/bx/src/settings.cpp; sourceTree = "<group>"; };
-		CFB2FA1D2513A3C0006825CF /* string.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = string.cpp; path = pocketdaw/pocketdaw/3rdparty/bx/src/string.cpp; sourceTree = "<group>"; };
-		CFB2FA1E2513A3C0006825CF /* hash.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = hash.cpp; path = pocketdaw/pocketdaw/3rdparty/bx/src/hash.cpp; sourceTree = "<group>"; };
-		CFB2FA1F2513A3C0006825CF /* os.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = os.cpp; path = pocketdaw/pocketdaw/3rdparty/bx/src/os.cpp; sourceTree = "<group>"; };
-		CFB2FA202513A3C0006825CF /* bx_p.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = bx_p.h; path = pocketdaw/pocketdaw/3rdparty/bx/src/bx_p.h; sourceTree = "<group>"; };
+		CFB2FA0A2513A3BF006825CF /* commandline.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = commandline.cpp; path = ../../3rdparty/bx/src/commandline.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA0B2513A3BF006825CF /* amalgamated.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = amalgamated.cpp; path = ../../3rdparty/bx/src/amalgamated.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA0C2513A3BF006825CF /* mutex.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = mutex.cpp; path = ../../3rdparty/bx/src/mutex.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA0D2513A3C0006825CF /* dtoa.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = dtoa.cpp; path = ../../3rdparty/bx/src/dtoa.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA0E2513A3C0006825CF /* debug.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = debug.cpp; path = ../../3rdparty/bx/src/debug.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA0F2513A3C0006825CF /* url.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = url.cpp; path = ../../3rdparty/bx/src/url.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA102513A3C0006825CF /* sort.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = sort.cpp; path = ../../3rdparty/bx/src/sort.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA112513A3C0006825CF /* crtnone.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = crtnone.cpp; path = ../../3rdparty/bx/src/crtnone.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA122513A3C0006825CF /* allocator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = allocator.cpp; path = ../../3rdparty/bx/src/allocator.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA132513A3C0006825CF /* file.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = file.cpp; path = ../../3rdparty/bx/src/file.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA142513A3C0006825CF /* math.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = math.cpp; path = ../../3rdparty/bx/src/math.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA152513A3C0006825CF /* process.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = process.cpp; path = ../../3rdparty/bx/src/process.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA162513A3C0006825CF /* bx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = bx.cpp; path = ../../3rdparty/bx/src/bx.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA172513A3C0006825CF /* timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = timer.cpp; path = ../../3rdparty/bx/src/timer.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA182513A3C0006825CF /* filepath.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = filepath.cpp; path = ../../3rdparty/bx/src/filepath.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA192513A3C0006825CF /* easing.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = easing.cpp; path = ../../3rdparty/bx/src/easing.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA1A2513A3C0006825CF /* semaphore.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = semaphore.cpp; path = ../../3rdparty/bx/src/semaphore.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA1B2513A3C0006825CF /* thread.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = thread.cpp; path = ../../3rdparty/bx/src/thread.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA1C2513A3C0006825CF /* settings.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = settings.cpp; path = ../../3rdparty/bx/src/settings.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA1D2513A3C0006825CF /* string.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = string.cpp; path = ../../3rdparty/bx/src/string.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA1E2513A3C0006825CF /* hash.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = hash.cpp; path = ../../3rdparty/bx/src/hash.cpp; sourceTree = SOURCE_ROOT; };
+		CFB2FA1F2513A3C0006825CF /* os.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = os.cpp; path = ../../3rdparty/bx/src/os.cpp; sourceTree = SOURCE_ROOT; };
 		D508915E412178880ACE0722 /* allocator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = allocator.cpp; sourceTree = "<group>"; };
 		D5D335834140F17D0A3489DB /* libbxDebug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbxDebug.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7692D0F438214390C2FA4D2 /* debug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = debug.h; sourceTree = "<group>"; };
@@ -234,7 +233,6 @@
 			children = (
 				CFB2FA122513A3C0006825CF /* allocator.cpp */,
 				CFB2FA0B2513A3BF006825CF /* amalgamated.cpp */,
-				CFB2FA202513A3C0006825CF /* bx_p.h */,
 				CFB2FA162513A3C0006825CF /* bx.cpp */,
 				CFB2FA0A2513A3BF006825CF /* commandline.cpp */,
 				CFB2FA112513A3C0006825CF /* crtnone.cpp */,
