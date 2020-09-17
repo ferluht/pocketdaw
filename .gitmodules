@@ -13,6 +13,9 @@
 [submodule "app/cpp/AMGEngine/link"]
 	path = app/cpp/AMGEngine/link
 	url = https://github.com/Ableton/link
+<<<<<<< HEAD
 [submodule "app/cpp/AMGEngine/oboe"]
 	path = app/cpp/AMGEngine/oboe
 	url = https://github.com/google/oboe
+=======
+>>>>>>> cf5cb82f3b138b9805acce3df1a34fc3557f14f6
