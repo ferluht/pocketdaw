@@ -1,0 +1,341 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CFB2FAF52513B649006825CF /* example-glue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FAF42513B649006825CF /* example-glue.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4E730F08BA396C240395FA86 /* example-glue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "example-glue.cpp"; sourceTree = "<group>"; };
+		CFB2FAE82513AC9C006825CF /* example-glue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "example-glue.cpp"; path = "pocketdaw/3rdparty/bgfx/examples/common/example-glue.cpp"; sourceTree = "<group>"; };
+		CFB2FAF42513B649006825CF /* example-glue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "example-glue.cpp"; path = "pocketdaw/helpers/bgfx_utils/example-glue.cpp"; sourceTree = "<group>"; };
+		E1955B9C4D796ADC567C9818 /* libexample-glueDebug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libexample-glueDebug.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		87522728F31AF5ABBCABFDBD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2760FFE893223373DCD2C1FF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E1955B9C4D796ADC567C9818 /* libexample-glueDebug.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2E7DEB1B9A3F1FA6E3EFAD32 /* examples */ = {
+			isa = PBXGroup;
+			children = (
+				87E0A36573318FA79C957D69 /* common */,
+			);
+			path = examples;
+			sourceTree = "<group>";
+		};
+		87E0A36573318FA79C957D69 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				4E730F08BA396C240395FA86 /* example-glue.cpp */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
+		D4C31D4840DC04720989940B /* example-glue */ = {
+			isa = PBXGroup;
+			children = (
+				CFB2FAE82513AC9C006825CF /* example-glue.cpp */,
+				CFB2FAF42513B649006825CF /* example-glue.cpp */,
+				2E7DEB1B9A3F1FA6E3EFAD32 /* examples */,
+				2760FFE893223373DCD2C1FF /* Products */,
+			);
+			name = "example-glue";
+			path = ../../..;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A7CD7A7993F344E07C39CAAB /* example-glue */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BC01166FA86CD67A51883BE0 /* Build configuration list for PBXNativeTarget "example-glue" */;
+			buildPhases = (
+				A51F9BB611E8683ADA78714C /* Resources */,
+				3D57616FA91F2FF372B03705 /* Sources */,
+				87522728F31AF5ABBCABFDBD /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "example-glue";
+			productName = "example-glue";
+			productReference = E1955B9C4D796ADC567C9818 /* libexample-glueDebug.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		__RootObject_ /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+			};
+			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "example-glue" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D4C31D4840DC04720989940B /* example-glue */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A7CD7A7993F344E07C39CAAB /* example-glue */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A51F9BB611E8683ADA78714C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3D57616FA91F2FF372B03705 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFB2FAF52513B649006825CF /* example-glue.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1312D9997FD835B6C833C418 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__STDC_LIMIT_MACROS,
+					__STDC_FORMAT_MACROS,
+					__STDC_CONSTANT_MACROS,
+					NDEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../../bx/include/compat/ios,
+					../../../../bx/include,
+					../../../../bimg/include,
+					../../../include,
+					../../../3rdparty,
+				);
+				OBJROOT = "../../ios-arm/obj/Universal/Release/example-glue";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+				);
+				OTHER_LDFLAGS = "-lc++";
+				SDKROOT = iphoneos;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../../ios-arm/bin";
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Release;
+		};
+		29C649F9152E10C77E9924DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "../../ios-arm/bin";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				HEADER_SEARCH_PATHS = (
+					../../3rdparty/bx/include/compat/ios,
+					../../3rdparty/bx/include,
+					../../3rdparty/bimg/include,
+					../../3rdparty/bgfx/include,
+					../../3rdparty/bgfx/3rdparty,
+					../../3rdparty/,
+					../../engine/,
+					../../helpers/,
+				);
+				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = "example-glueDebug";
+			};
+			name = Debug;
+		};
+		78CC46F1E407A7B4EDFC2344 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__STDC_LIMIT_MACROS,
+					__STDC_FORMAT_MACROS,
+					__STDC_CONSTANT_MACROS,
+					_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../../bx/include/compat/ios,
+					../../../../bx/include,
+					../../../../bimg/include,
+					../../../include,
+					../../../3rdparty,
+				);
+				OBJROOT = "../../ios-arm/obj/Universal/Debug/example-glue";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+				);
+				OTHER_LDFLAGS = "-lc++";
+				SDKROOT = iphoneos;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../../ios-arm/bin";
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Debug;
+		};
+		A36B2FA98F7E2F0238680CEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "../../ios-arm/bin";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				HEADER_SEARCH_PATHS = (
+					../../3rdparty/bx/include/compat/ios,
+					../../3rdparty/bx/include,
+					../../3rdparty/bimg/include,
+					../../3rdparty/bgfx/include,
+					../../3rdparty/bgfx/3rdparty,
+					../../3rdparty/,
+					../../engine/,
+					../../helpers/,
+				);
+				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = "example-glueRelease";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "example-glue" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				78CC46F1E407A7B4EDFC2344 /* Debug */,
+				1312D9997FD835B6C833C418 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		BC01166FA86CD67A51883BE0 /* Build configuration list for PBXNativeTarget "example-glue" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29C649F9152E10C77E9924DD /* Debug */,
+				A36B2FA98F7E2F0238680CEF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = __RootObject_ /* Project object */;
+}

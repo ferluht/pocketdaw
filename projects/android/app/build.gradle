@@ -1,0 +1,115 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+
+android {
+    signingConfigs {
+        release {
+            storeFile file('c')
+            storePassword 'c'
+            keyAlias = 'c'
+            keyPassword 'c'
+        }
+    }
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
+    defaultConfig {
+            applicationId 'com.pdaw.pd'
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 30 // Application version, 3 digits, major/minor/revision
+        versionName "0.0.2"
+    }
+    // One APK per ABI. Generate also one multi-abi APK.
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'armeabi-v7a', 'arm64-v8a'
+            universalApk true
+        }
+    }
+    // Helper function to generate a unique version code per application version and per abi
+    // Method comes from https://androidbycode.wordpress.com/2015/07/07/android-ndk-a-guide-to-deploying-apps-with-native-libraries/
+    project.ext.versionCodes = ['armeabi': 1, 'armeabi-v7a': 2, 'arm64-v8a': 3, 'mips': 5, 'mips64': 6, 'x86': 8, 'x86_64': 9]
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.versionCodeOverride =
+                    project.ext.versionCodes.get(output.getFilter(
+                            com.android.build.OutputFile.ABI), 0) * 10000000 + android.defaultConfig.versionCode
+        }
+    }
+    // Helper function to synchronize our natives libs in jni directories
+    project.ext.nativeBuildsDirsAbis = ['armeabi-v7a': 'android-arm', 'arm64-v8a': 'android-arm64']
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def abiName = output.getFilter(com.android.build.OutputFile.ABI)
+            def nativeBuildDir = project.ext.nativeBuildsDirsAbis.get(abiName)
+            if(nativeBuildDir != null) {
+                // First task, copy our native lib to the corresponding jni directory
+                def task1 = project.tasks.create("synchronizeJni_${abiName}${variant.name}", Copy)
+                task1.from("./../../bgfx/.build/${nativeBuildDir}/bin/libbgfx-shared-lib${variant.name}.so")
+                task1.into("./src/main/jniLibs/${abiName}")
+
+                // Second task, copy libc++_shared from NDK to the corresponding jni directory
+                def task2 = project.tasks.create("synchronizeJniLibC++_${abiName}${variant.name}", Copy)
+                task2.from("${System.getenv('ANDROID_NDK_ROOT')}/sources/cxx-stl/llvm-libc++/libs/${abiName}/libc++_shared.so")
+                task2.into("./src/main/jniLibs/${abiName}")
+
+                // Insert our copy tasks at the beginning of gradle build tree.
+                variant.preBuild.dependsOn task1
+                variant.preBuild.dependsOn task2
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            firebaseCrashlytics {
+                nativeSymbolUploadEnabled true
+//                strippedNativeLibsDir "./build/intermediates/transforms/stripDebugSymbol/release/0/lib"
+//                unstrippedNativeLibsDir "./build/intermediates/transforms/mergeJniLibs/release/0/lib"
+            }
+        }
+        debug {
+            jniDebuggable true
+            firebaseCrashlytics {
+                nativeSymbolUploadEnabled true
+//                strippedNativeLibsDir "./build/intermediates/transforms/stripDebugSymbol/debug/0/lib"
+//                unstrippedNativeLibsDir "./build/intermediates/transforms/mergeJniLibs/debug/0/lib"
+            }
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path file('../../../core/CMakeLists.txt')
+        }
+    }
+    sourceSets {
+        main.java.srcDirs += '../../../core/'
+        main.java.srcDirs += '../../../engine/'
+        main.java.srcDirs += '../../../helpers/'
+    }
+//    android.applicationVariants.all { variant ->
+//        def variantName = variant.name.capitalize()
+//        def task = project.task ("assemble${variantName}")
+//        task.finalizedBy project.("uploadCrashlyticsSymbolFile${variantName}")
+//    }
+//    afterEvaluate {
+//        packageRelease.finalizedBy("uploadCrashlyticsSymbolFileRelease")
+//        packageDebug.finalizedBy("uploadCrashlyticsSymbolFileDebug")
+//    }
+}
+
+// Upload Crashlytics NDK symbols
+tasks.whenTaskAdded { task -> if (task.name.startsWith('assemble') && task.name.endsWith("Release")) task.finalizedBy "uploadCrashlyticsSymbolFile" + task.name.substring('assemble'.length()) }
+tasks.whenTaskAdded { task -> if (task.name.startsWith('assemble') && task.name.endsWith("Debug")) task.finalizedBy "uploadCrashlyticsSymbolFile" + task.name.substring('assemble'.length()) }
+
+dependencies {
+    //noinspection GradleCompatible
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'com.google.firebase:firebase-analytics:17.4.4'
+    implementation 'com.google.firebase:firebase-crashlytics:17.1.1'
+    implementation 'com.google.firebase:firebase-crashlytics-ndk:17.1.1'
+}

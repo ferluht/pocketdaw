@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+	version = "1.0">
+	<Group
+		location = "container:"
+		name = "libs">
+		<FileRef
+			location = "group:bgfx.xcodeproj">
+		</FileRef>
+		<FileRef
+			location = "group:bgfx-shared-lib.xcodeproj">
+		</FileRef>
+		<FileRef
+			location = "group:bimg.xcodeproj">
+		</FileRef>
+		<FileRef
+			location = "group:bimg_decode.xcodeproj">
+		</FileRef>
+		<FileRef
+			location = "group:bimg_encode.xcodeproj">
+		</FileRef>
+		<FileRef
+			location = "group:bx.xcodeproj">
+		</FileRef>
+	</Group>
+	<Group
+		location = "container:"
+		name = "examples">
+		<FileRef
+			location = "group:example-25-c99.xcodeproj">
+		</FileRef>
+		<FileRef
+			location = "group:example-common.xcodeproj">
+		</FileRef>
+		<FileRef
+			location = "group:example-glue.xcodeproj">
+		</FileRef>
+		<FileRef
+			location = "group:examples.xcodeproj">
+		</FileRef>
+	</Group>
+	<Group
+		location = "container:"
+		name = "tools">
+		<Group
+			location = "container:"
+			name = "shaderc">
+			<FileRef
+				location = "group:fcpp.xcodeproj">
+			</FileRef>
+			<FileRef
+				location = "group:glsl-optimizer.xcodeproj">
+			</FileRef>
+			<FileRef
+				location = "group:glslang.xcodeproj">
+			</FileRef>
+			<FileRef
+				location = "group:shaderc.xcodeproj">
+			</FileRef>
+			<FileRef
+				location = "group:spirv-cross.xcodeproj">
+			</FileRef>
+			<FileRef
+				location = "group:spirv-opt.xcodeproj">
+			</FileRef>
+		</Group>
+		<FileRef
+			location = "group:geometryc.xcodeproj">
+		</FileRef>
+		<FileRef
+			location = "group:geometryv.xcodeproj">
+		</FileRef>
+		<FileRef
+			location = "group:texturec.xcodeproj">
+		</FileRef>
+		<FileRef
+			location = "group:texturev.xcodeproj">
+		</FileRef>
+	</Group>
+</Workspace>

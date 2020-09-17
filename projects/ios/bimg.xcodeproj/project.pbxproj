@@ -1,0 +1,487 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CFB2FA402513A479006825CF /* image_gnf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FA3B2513A478006825CF /* image_gnf.cpp */; };
+		CFB2FA412513A479006825CF /* image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FA3C2513A478006825CF /* image.cpp */; };
+		CFB2FA4D2513A4DD006825CF /* integer_sequence_codec.cc in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FA422513A4DD006825CF /* integer_sequence_codec.cc */; };
+		CFB2FA4E2513A4DD006825CF /* logical_astc_block.cc in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FA432513A4DD006825CF /* logical_astc_block.cc */; };
+		CFB2FA4F2513A4DD006825CF /* weight_infill.cc in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FA442513A4DD006825CF /* weight_infill.cc */; };
+		CFB2FA502513A4DD006825CF /* endpoint_codec.cc in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FA452513A4DD006825CF /* endpoint_codec.cc */; };
+		CFB2FA512513A4DD006825CF /* partition.cc in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FA462513A4DD006825CF /* partition.cc */; };
+		CFB2FA522513A4DD006825CF /* intermediate_astc_block.cc in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FA472513A4DD006825CF /* intermediate_astc_block.cc */; };
+		CFB2FA532513A4DD006825CF /* astc_file.cc in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FA482513A4DD006825CF /* astc_file.cc */; };
+		CFB2FA542513A4DD006825CF /* physical_astc_block.cc in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FA492513A4DD006825CF /* physical_astc_block.cc */; };
+		CFB2FA552513A4DD006825CF /* quantization.cc in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FA4A2513A4DD006825CF /* quantization.cc */; };
+		CFB2FA562513A4DD006825CF /* footprint.cc in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FA4B2513A4DD006825CF /* footprint.cc */; };
+		CFB2FA572513A4DD006825CF /* codec.cc in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FA4C2513A4DD006825CF /* codec.cc */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1422776A00B9B91FA96D3020 /* logical_astc_block.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = logical_astc_block.cc; sourceTree = "<group>"; };
+		2549F9EA11F32EFAFAC33615 /* codec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = codec.h; sourceTree = "<group>"; };
+		270E156893CBBD9E1C96A906 /* footprint.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = footprint.cc; sourceTree = "<group>"; };
+		29CADBE415B19DDCBE0104FA /* decode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = decode.h; sourceTree = "<group>"; };
+		319165BD9D24C76BA60B3722 /* weight_infill.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = weight_infill.cc; sourceTree = "<group>"; };
+		42C871412E0475AB97168DA2 /* bimg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bimg.h; sourceTree = "<group>"; };
+		548E342440BB8055699C2366 /* intermediate_astc_block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = intermediate_astc_block.h; sourceTree = "<group>"; };
+		556EDBDA41559DD2EAA503F0 /* encode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = encode.h; sourceTree = "<group>"; };
+		58036666C46CFBC84DB0A973 /* logical_astc_block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = logical_astc_block.h; sourceTree = "<group>"; };
+		5ACAB1E8C601FA7FCF0B5EA3 /* libbimgDebug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbimgDebug.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		62AA5D884E6AEE2CB787D637 /* astc_file.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = astc_file.cc; sourceTree = "<group>"; };
+		6DCD4CF8D90C1111E2ECD728 /* integer_sequence_codec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = integer_sequence_codec.h; sourceTree = "<group>"; };
+		6FBD1F055B93A602443DC155 /* quantization.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = quantization.cc; sourceTree = "<group>"; };
+		7554356D610F25190AC79D63 /* image.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = image.cpp; sourceTree = "<group>"; };
+		79991F40E563F19A2E6AF0BF /* intermediate_astc_block.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = intermediate_astc_block.cc; sourceTree = "<group>"; };
+		8580117A7181A5F49A491279 /* endpoint_codec.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = endpoint_codec.cc; sourceTree = "<group>"; };
+		8D0BA85579CB38FAE2E82005 /* astc_file.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = astc_file.h; sourceTree = "<group>"; };
+		95E361730158F7D0CAA144E0 /* physical_astc_block.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = physical_astc_block.cc; sourceTree = "<group>"; };
+		A39F56FA0F5DFF309827EB98 /* partition.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = partition.cc; sourceTree = "<group>"; };
+		A9A67AA5153ADC531E214C0A /* endpoint_codec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = endpoint_codec.h; sourceTree = "<group>"; };
+		B1FBC7A29D4CB3E4C6B0A1A6 /* image_gnf.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = image_gnf.cpp; sourceTree = "<group>"; };
+		C114EF432DFCD93936EADBB5 /* codec.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = codec.cc; sourceTree = "<group>"; };
+		C71032DBB3D0C27F1CEEAA8A /* partition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = partition.h; sourceTree = "<group>"; };
+		C95D0501B58A5132DE6BF442 /* integer_sequence_codec.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = integer_sequence_codec.cc; sourceTree = "<group>"; };
+		CBBEDA33B77E6BD8209C53E3 /* footprint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = footprint.h; sourceTree = "<group>"; };
+		CC63F7FCB8397EFAA1E3984D /* weight_infill.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = weight_infill.h; sourceTree = "<group>"; };
+		CFB2FA382513A478006825CF /* image_encode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = image_encode.cpp; path = pocketdaw/pocketdaw/3rdparty/bimg/src/image_encode.cpp; sourceTree = "<group>"; };
+		CFB2FA392513A478006825CF /* image_cubemap_filter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = image_cubemap_filter.cpp; path = pocketdaw/pocketdaw/3rdparty/bimg/src/image_cubemap_filter.cpp; sourceTree = "<group>"; };
+		CFB2FA3A2513A478006825CF /* image_decode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = image_decode.cpp; path = pocketdaw/pocketdaw/3rdparty/bimg/src/image_decode.cpp; sourceTree = "<group>"; };
+		CFB2FA3B2513A478006825CF /* image_gnf.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = image_gnf.cpp; path = pocketdaw/pocketdaw/3rdparty/bimg/src/image_gnf.cpp; sourceTree = "<group>"; };
+		CFB2FA3C2513A478006825CF /* image.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = image.cpp; path = pocketdaw/pocketdaw/3rdparty/bimg/src/image.cpp; sourceTree = "<group>"; };
+		CFB2FA422513A4DD006825CF /* integer_sequence_codec.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = integer_sequence_codec.cc; path = "pocketdaw/pocketdaw/3rdparty/bimg/3rdparty/astc-codec/src/decoder/integer_sequence_codec.cc"; sourceTree = "<group>"; };
+		CFB2FA432513A4DD006825CF /* logical_astc_block.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = logical_astc_block.cc; path = "pocketdaw/pocketdaw/3rdparty/bimg/3rdparty/astc-codec/src/decoder/logical_astc_block.cc"; sourceTree = "<group>"; };
+		CFB2FA442513A4DD006825CF /* weight_infill.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = weight_infill.cc; path = "pocketdaw/pocketdaw/3rdparty/bimg/3rdparty/astc-codec/src/decoder/weight_infill.cc"; sourceTree = "<group>"; };
+		CFB2FA452513A4DD006825CF /* endpoint_codec.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = endpoint_codec.cc; path = "pocketdaw/pocketdaw/3rdparty/bimg/3rdparty/astc-codec/src/decoder/endpoint_codec.cc"; sourceTree = "<group>"; };
+		CFB2FA462513A4DD006825CF /* partition.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = partition.cc; path = "pocketdaw/pocketdaw/3rdparty/bimg/3rdparty/astc-codec/src/decoder/partition.cc"; sourceTree = "<group>"; };
+		CFB2FA472513A4DD006825CF /* intermediate_astc_block.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = intermediate_astc_block.cc; path = "pocketdaw/pocketdaw/3rdparty/bimg/3rdparty/astc-codec/src/decoder/intermediate_astc_block.cc"; sourceTree = "<group>"; };
+		CFB2FA482513A4DD006825CF /* astc_file.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = astc_file.cc; path = "pocketdaw/pocketdaw/3rdparty/bimg/3rdparty/astc-codec/src/decoder/astc_file.cc"; sourceTree = "<group>"; };
+		CFB2FA492513A4DD006825CF /* physical_astc_block.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = physical_astc_block.cc; path = "pocketdaw/pocketdaw/3rdparty/bimg/3rdparty/astc-codec/src/decoder/physical_astc_block.cc"; sourceTree = "<group>"; };
+		CFB2FA4A2513A4DD006825CF /* quantization.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = quantization.cc; path = "pocketdaw/pocketdaw/3rdparty/bimg/3rdparty/astc-codec/src/decoder/quantization.cc"; sourceTree = "<group>"; };
+		CFB2FA4B2513A4DD006825CF /* footprint.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = footprint.cc; path = "pocketdaw/pocketdaw/3rdparty/bimg/3rdparty/astc-codec/src/decoder/footprint.cc"; sourceTree = "<group>"; };
+		CFB2FA4C2513A4DD006825CF /* codec.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = codec.cc; path = "pocketdaw/pocketdaw/3rdparty/bimg/3rdparty/astc-codec/src/decoder/codec.cc"; sourceTree = "<group>"; };
+		D38598843F4E660808DF6E1A /* quantization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = quantization.h; sourceTree = "<group>"; };
+		F9F8B9FAE58FFCAF8E4473B0 /* physical_astc_block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = physical_astc_block.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FDCC777E693D7AF7325CF47F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		270C1AD993CC950F5C07DF8C /* bimg */ = {
+			isa = PBXGroup;
+			children = (
+				F0604A1ADC5A736CC5C7097D /* 3rdparty */,
+				4E66E84E3A6011A123CDA7B1 /* include */,
+				B18C11A09D70D2F506D1CC48 /* src */,
+			);
+			path = bimg;
+			sourceTree = "<group>";
+		};
+		4637D8ECB2F753237B329DA0 /* bimg */ = {
+			isa = PBXGroup;
+			children = (
+				CFB2FA482513A4DD006825CF /* astc_file.cc */,
+				CFB2FA4C2513A4DD006825CF /* codec.cc */,
+				CFB2FA452513A4DD006825CF /* endpoint_codec.cc */,
+				CFB2FA4B2513A4DD006825CF /* footprint.cc */,
+				CFB2FA422513A4DD006825CF /* integer_sequence_codec.cc */,
+				CFB2FA472513A4DD006825CF /* intermediate_astc_block.cc */,
+				CFB2FA432513A4DD006825CF /* logical_astc_block.cc */,
+				CFB2FA462513A4DD006825CF /* partition.cc */,
+				CFB2FA492513A4DD006825CF /* physical_astc_block.cc */,
+				CFB2FA4A2513A4DD006825CF /* quantization.cc */,
+				CFB2FA442513A4DD006825CF /* weight_infill.cc */,
+				CFB2FA392513A478006825CF /* image_cubemap_filter.cpp */,
+				CFB2FA3A2513A478006825CF /* image_decode.cpp */,
+				CFB2FA382513A478006825CF /* image_encode.cpp */,
+				CFB2FA3B2513A478006825CF /* image_gnf.cpp */,
+				CFB2FA3C2513A478006825CF /* image.cpp */,
+				270C1AD993CC950F5C07DF8C /* bimg */,
+				D4E0414AC0C402A02925FDF2 /* Products */,
+			);
+			name = bimg;
+			path = ../../../..;
+			sourceTree = "<group>";
+		};
+		4E66E84E3A6011A123CDA7B1 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				BD12E9F5292017DCB20613C7 /* bimg */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		5435A61DC0A5A89689C4221F /* decoder */ = {
+			isa = PBXGroup;
+			children = (
+				62AA5D884E6AEE2CB787D637 /* astc_file.cc */,
+				8D0BA85579CB38FAE2E82005 /* astc_file.h */,
+				C114EF432DFCD93936EADBB5 /* codec.cc */,
+				2549F9EA11F32EFAFAC33615 /* codec.h */,
+				8580117A7181A5F49A491279 /* endpoint_codec.cc */,
+				A9A67AA5153ADC531E214C0A /* endpoint_codec.h */,
+				270E156893CBBD9E1C96A906 /* footprint.cc */,
+				CBBEDA33B77E6BD8209C53E3 /* footprint.h */,
+				C95D0501B58A5132DE6BF442 /* integer_sequence_codec.cc */,
+				6DCD4CF8D90C1111E2ECD728 /* integer_sequence_codec.h */,
+				79991F40E563F19A2E6AF0BF /* intermediate_astc_block.cc */,
+				548E342440BB8055699C2366 /* intermediate_astc_block.h */,
+				1422776A00B9B91FA96D3020 /* logical_astc_block.cc */,
+				58036666C46CFBC84DB0A973 /* logical_astc_block.h */,
+				A39F56FA0F5DFF309827EB98 /* partition.cc */,
+				C71032DBB3D0C27F1CEEAA8A /* partition.h */,
+				95E361730158F7D0CAA144E0 /* physical_astc_block.cc */,
+				F9F8B9FAE58FFCAF8E4473B0 /* physical_astc_block.h */,
+				6FBD1F055B93A602443DC155 /* quantization.cc */,
+				D38598843F4E660808DF6E1A /* quantization.h */,
+				319165BD9D24C76BA60B3722 /* weight_infill.cc */,
+				CC63F7FCB8397EFAA1E3984D /* weight_infill.h */,
+			);
+			path = decoder;
+			sourceTree = "<group>";
+		};
+		B18C11A09D70D2F506D1CC48 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				7554356D610F25190AC79D63 /* image.cpp */,
+				B1FBC7A29D4CB3E4C6B0A1A6 /* image_gnf.cpp */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		BD12E9F5292017DCB20613C7 /* bimg */ = {
+			isa = PBXGroup;
+			children = (
+				42C871412E0475AB97168DA2 /* bimg.h */,
+				29CADBE415B19DDCBE0104FA /* decode.h */,
+				556EDBDA41559DD2EAA503F0 /* encode.h */,
+			);
+			path = bimg;
+			sourceTree = "<group>";
+		};
+		CE4A7AF53A0F79E50375A9AF /* src */ = {
+			isa = PBXGroup;
+			children = (
+				5435A61DC0A5A89689C4221F /* decoder */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		D4E0414AC0C402A02925FDF2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5ACAB1E8C601FA7FCF0B5EA3 /* libbimgDebug.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F0604A1ADC5A736CC5C7097D /* 3rdparty */ = {
+			isa = PBXGroup;
+			children = (
+				F6E8FB9162575111AB400C11 /* astc-codec */,
+			);
+			path = 3rdparty;
+			sourceTree = "<group>";
+		};
+		F6E8FB9162575111AB400C11 /* astc-codec */ = {
+			isa = PBXGroup;
+			children = (
+				CE4A7AF53A0F79E50375A9AF /* src */,
+			);
+			path = "astc-codec";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		00D72F0FECD05861D53DEF71 /* bimg */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 42AA95CBAE1A9844773912CD /* Build configuration list for PBXNativeTarget "bimg" */;
+			buildPhases = (
+				C4EA8A8D305B8D06F979078F /* Resources */,
+				5CF17F4FC86182C89180FC50 /* Sources */,
+				FDCC777E693D7AF7325CF47F /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = bimg;
+			productName = bimg;
+			productReference = 5ACAB1E8C601FA7FCF0B5EA3 /* libbimgDebug.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		__RootObject_ /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+			};
+			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "bimg" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4637D8ECB2F753237B329DA0 /* bimg */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				00D72F0FECD05861D53DEF71 /* bimg */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C4EA8A8D305B8D06F979078F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5CF17F4FC86182C89180FC50 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFB2FA4D2513A4DD006825CF /* integer_sequence_codec.cc in Sources */,
+				CFB2FA4E2513A4DD006825CF /* logical_astc_block.cc in Sources */,
+				CFB2FA4F2513A4DD006825CF /* weight_infill.cc in Sources */,
+				CFB2FA502513A4DD006825CF /* endpoint_codec.cc in Sources */,
+				CFB2FA512513A4DD006825CF /* partition.cc in Sources */,
+				CFB2FA522513A4DD006825CF /* intermediate_astc_block.cc in Sources */,
+				CFB2FA532513A4DD006825CF /* astc_file.cc in Sources */,
+				CFB2FA542513A4DD006825CF /* physical_astc_block.cc in Sources */,
+				CFB2FA552513A4DD006825CF /* quantization.cc in Sources */,
+				CFB2FA562513A4DD006825CF /* footprint.cc in Sources */,
+				CFB2FA572513A4DD006825CF /* codec.cc in Sources */,
+				CFB2FA402513A479006825CF /* image_gnf.cpp in Sources */,
+				CFB2FA412513A479006825CF /* image.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		029DDEB5EED8E11F57EBF916 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "../../ios-arm/bin";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				HEADER_SEARCH_PATHS = (
+					../../3rdparty/bx/include/compat/ios,
+					../../3rdparty/bx/include,
+					../../3rdparty/bimg/include,
+					"../../3rdparty/bimg/3rdparty/astc-codec",
+					"../../3rdparty/bimg/3rdparty/astc-codec/include",
+				);
+				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = bimgDebug;
+			};
+			name = Debug;
+		};
+		6AAACCCFD68DDB0FDF90094C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__STDC_LIMIT_MACROS,
+					__STDC_FORMAT_MACROS,
+					__STDC_CONSTANT_MACROS,
+					_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../../bx/include/compat/ios,
+					../../../../bx/include,
+					../../../../bimg/include,
+					"../../../../bimg/3rdparty/astc-codec",
+					"../../../../bimg/3rdparty/astc-codec/include",
+				);
+				OBJROOT = "../../ios-arm/obj/Universal/Debug/bimg";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+				);
+				OTHER_LDFLAGS = "-lc++";
+				SDKROOT = iphoneos;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../../ios-arm/bin";
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Debug;
+		};
+		856398AEF1D1ED2D3ABBA82D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__STDC_LIMIT_MACROS,
+					__STDC_FORMAT_MACROS,
+					__STDC_CONSTANT_MACROS,
+					NDEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../../bx/include/compat/ios,
+					../../../../bx/include,
+					../../../../bimg/include,
+					"../../../../bimg/3rdparty/astc-codec",
+					"../../../../bimg/3rdparty/astc-codec/include",
+				);
+				OBJROOT = "../../ios-arm/obj/Universal/Release/bimg";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+				);
+				OTHER_LDFLAGS = "-lc++";
+				SDKROOT = iphoneos;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../../ios-arm/bin";
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Release;
+		};
+		BC5C55DEA84317D651947DF3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "../../ios-arm/bin";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				HEADER_SEARCH_PATHS = (
+					../../3rdparty/bx/include/compat/ios,
+					../../3rdparty/bx/include,
+					../../3rdparty/bimg/include,
+					"../../3rdparty/bimg/3rdparty/astc-codec",
+					"../../3rdparty/bimg/3rdparty/astc-codec/include",
+				);
+				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = bimgRelease;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "bimg" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6AAACCCFD68DDB0FDF90094C /* Debug */,
+				856398AEF1D1ED2D3ABBA82D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		42AA95CBAE1A9844773912CD /* Build configuration list for PBXNativeTarget "bimg" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				029DDEB5EED8E11F57EBF916 /* Debug */,
+				BC5C55DEA84317D651947DF3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = __RootObject_ /* Project object */;
+}
