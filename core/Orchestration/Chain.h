@@ -68,7 +68,7 @@ public:
             return this;
         });
 
-        GSetDragEndCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
+        GSetDragEndCallback([](const vecmath::Vec2& v) -> GUI::GObject * {
             //    if ((*moving_to)->globalPosition.GContains(last_touch)){
 //        auto go = (*moving_from);
 //        AMGChainDel(moving_from - AMGObjects.begin());
@@ -196,7 +196,7 @@ public:
 //        return nullptr;
 //    }
 
-    virtual GObject *GFindFocusObject(const vecmath::Vec2 &point, std::list<GObject *> * trace) {
+    virtual GObject *GFindFocusObject(const vecmath::Vec2 &point, std::list<GObject *> * trace) override {
         for (auto const &gr : Graphics) {
             auto fo = gr->GFindFocusObject(point, trace);
             if (fo) {

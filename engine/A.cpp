@@ -17,8 +17,8 @@ bool AEngine::start() {
     if ((mRecordingDeviceId == oboe::kUnspecified) ||
         (mPlaybackDeviceId == oboe::kUnspecified)) {
         getDevices();
-        setInputDevice(getInputs()[1]);
-        setOutputDevice(getOutputs()[0]);
+        setInputDevice(getInputs()[0]);
+        setOutputDevice(getOutputs()[1]);
     }
     auto success = openStreams() == oboe::Result::OK;
     if (success) {

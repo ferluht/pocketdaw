@@ -216,6 +216,22 @@
 				);
 				INSTALL_PATH = /usr/local/lib;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+					"-frtti",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+					"-frtti",
+				);
 				PRODUCT_NAME = "example-glueDebug";
 			};
 			name = Debug;
@@ -308,6 +324,22 @@
 				);
 				INSTALL_PATH = /usr/local/lib;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+					"-frtti",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+					"-frtti",
+				);
 				PRODUCT_NAME = "example-glueRelease";
 			};
 			name = Release;

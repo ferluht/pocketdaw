@@ -9,6 +9,7 @@ bool AMGMasterTrack::ARender(const float * inputData, int inputFrames, float * o
     double end_beat = beat;
 
     if (isPlaying) {
+#ifndef TARGET_IOS
         ableton::Link::SessionState state = link.captureAppSessionState();
         bpm = state.tempo();
         std::chrono::microseconds time = link.clock().micros();
@@ -17,6 +18,9 @@ bool AMGMasterTrack::ARender(const float * inputData, int inputFrames, float * o
         phase = state.phaseAtTime(time + lag, size_denominator);
         beat = state.beatAtTime(time + lag, size_denominator);
         linkButton->progress(phase/size_denominator);
+#else
+
+#endif
     }
 
     double increment = bpm / 60.0 / sample_rate;// + (beat - end_beat)/numFrames;

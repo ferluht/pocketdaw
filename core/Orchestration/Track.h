@@ -15,7 +15,6 @@
 #include "Chain.h"
 #include "Rack.h"
 #include "Midi.h"
-#include <ableton/Link.hpp>
 #include <GUI/Menu.h>
 #include <Utils/Utils.h>
 
@@ -152,8 +151,8 @@ public:
 //            memset((u_char*) outputData + bytesToWrite, 0, bytesToZero);
 
             for (int i = 0; i < track->outputFrames; i++) {
-                track->outputData[2 * i] = track->inputData[2 * i];
-                track->outputData[2 * i + 1] = track->inputData[2 * i + 1];
+                track->outputData[2 * i] = 0; //track->inputData[2 * i];
+                track->outputData[2 * i + 1] = 0; //track->inputData[2 * i + 1];
 
                 track->MRender(track->beat);
 

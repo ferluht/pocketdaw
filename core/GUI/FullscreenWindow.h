@@ -13,7 +13,7 @@ namespace GUI {
 
     class FullscreenWindow : public AMGCanvas {
 
-        AMGCanvas * close;
+//        AMGCanvas * close;
         Text * name;
 
     public:

@@ -6,7 +6,7 @@
 #include <math.h>
 
 bool ADSR::ARender(double beat, float *lsample, float *rsample) {
-    float old_level = level;
+//    float old_level = level;
     if (release_beat > 0){
         auto time = (float)(beat - release_beat);
         level = release_level * (1 - time / R);

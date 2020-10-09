@@ -7,7 +7,12 @@
 
 //#define ASIO_NO_EXCEPTIONS
 
-#include <ableton/Link.hpp>
+#ifndef TARGET_IOS
+    #include <ableton/Link.hpp>
+#else
+
+#endif
+
 #include <GUI/Canvas.h>
 #include <GUI/Encoder.h>
 #include <GUI/Button.h>
@@ -46,7 +51,12 @@ private:
 
 public:
 
+#ifndef TARGET_IOS
     ableton::Link link;
+#else
+    
+#endif
+    
     unsigned char size_denominator;
     double bpm, beat, phase;
     bool isPlaying;
@@ -63,8 +73,12 @@ public:
     std::vector<AMGTrack*> Tracks;
     AMGChain AEffects;
 
+#ifndef TARGET_IOS
     AMGMasterTrack() : link(120.0) {
         link.enable(true);
+#else
+    AMGMasterTrack() {
+#endif
 //        GAttachTexture("Textures/background.bmp");
         size_denominator = 4;
         isPlaying = false;

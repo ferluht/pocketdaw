@@ -432,6 +432,7 @@ public class MainActivity extends NativeActivity {
     {
         final MidiManager m = (MidiManager)this.getSystemService(Context.MIDI_SERVICE);
         MidiDeviceInfo info = midiDevices.get(name);
+        // close midi device
         if (info != null) {
             m.openDevice(info, new MidiManager.OnDeviceOpenedListener() {
                 @Override

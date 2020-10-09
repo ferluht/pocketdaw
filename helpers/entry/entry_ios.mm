@@ -22,6 +22,10 @@
 #include <bx/uint32_t.h>
 #include <bx/thread.h>
 
+#include <G.h>
+#include <M.h>
+#include <A.h>
+
 namespace entry
 {
 	struct MainThreadEntry
@@ -256,9 +260,18 @@ static	void* m_device = NULL;
 	CGPoint touchLocation = [touch locationInView:self];
 	touchLocation.x *= self.contentScaleFactor;
 	touchLocation.y *= self.contentScaleFactor;
+    
+    auto eng = &GUI::GEngine::getGEngine();
+    
+    vecmath::Vec2 v;
+    v.x = touchLocation.x;
+    v.y = touchLocation.y;
+    eng->FindFocusObject(v);
+    auto new_focus = eng->focusStack.back()->GDragBegin(v);
+    eng->focusOn(new_focus);
 
-	s_ctx->m_eventQueue.postMouseEvent(s_defaultWindow, touchLocation.x, touchLocation.y, 0);
-	s_ctx->m_eventQueue.postMouseEvent(s_defaultWindow, touchLocation.x, touchLocation.y, 0, MouseButton::Left, true);
+//	s_ctx->m_eventQueue.postMouseEvent(s_defaultWindow, touchLocation.x, touchLocation.y, 0);
+//	s_ctx->m_eventQueue.postMouseEvent(s_defaultWindow, touchLocation.x, touchLocation.y, 0, MouseButton::Left, true);
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -268,8 +281,17 @@ static	void* m_device = NULL;
 	CGPoint touchLocation = [touch locationInView:self];
 	touchLocation.x *= self.contentScaleFactor;
 	touchLocation.y *= self.contentScaleFactor;
+    
+    auto eng = &GUI::GEngine::getGEngine();
+    vecmath::Vec2 v;
+    v.x = touchLocation.x;
+    v.y = touchLocation.y;
 
-	s_ctx->m_eventQueue.postMouseEvent(s_defaultWindow, touchLocation.x, touchLocation.y, 0, MouseButton::Left, false);
+    auto new_focus = eng->focusStack.back()->GDragEnd(v);
+    //                    eng->unfocus();
+    eng->focusOn(new_focus);
+
+//	s_ctx->m_eventQueue.postMouseEvent(s_defaultWindow, touchLocation.x, touchLocation.y, 0, MouseButton::Left, false);
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -279,8 +301,16 @@ static	void* m_device = NULL;
 	CGPoint touchLocation = [touch locationInView:self];
 	touchLocation.x *= self.contentScaleFactor;
 	touchLocation.y *= self.contentScaleFactor;
+    
+    vecmath::Vec2 v;
+    v.x = touchLocation.x;
+    v.y = touchLocation.y;
+    
+    auto eng = &GUI::GEngine::getGEngine();
+    
+    eng->focusStack.back()->GDragHandler(v);
 
-	s_ctx->m_eventQueue.postMouseEvent(s_defaultWindow, touchLocation.x, touchLocation.y, 0);
+//	s_ctx->m_eventQueue.postMouseEvent(s_defaultWindow, touchLocation.x, touchLocation.y, 0);
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event

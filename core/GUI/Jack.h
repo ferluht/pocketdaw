@@ -43,7 +43,7 @@ namespace GUI {
 
         static const float RATIO;
 
-        static enum {
+        enum {
             INPUT,
             OUTPUT
         };
