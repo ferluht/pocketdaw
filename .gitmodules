@@ -1,21 +1,19 @@
-[submodule "app/cpp/AudioEffects/FFTConvolver"]
-	path = app/cpp/AudioEffects/FFTConvolver
+[submodule "core/AudioEffects/FFTConvolver"]
+	path = core/AudioEffects/FFTConvolver
 	url = https://github.com/HiFi-LoFi/FFTConvolver
-[submodule "app/cpp/AMGEngine/bgfx"]
-	path = app/cpp/AMGEngine/bgfx
+[submodule "3rdparty/bgfx"]
+	path = 3rdparty/bgfx
 	url = https://github.com/bkaradzic/bgfx
-[submodule "app/cpp/AMGEngine/bx"]
-	path = app/cpp/AMGEngine/bx
+[submodule "3rdparty/bx"]
+	path = 3rdparty/bx
 	url = https://github.com/bkaradzic/bx
-[submodule "app/cpp/AMGEngine/bimg"]
-	path = app/cpp/AMGEngine/bimg
+[submodule "3rdparty/bimg"]
+	path = 3rdparty/bimg
 	url = https://github.com/bkaradzic/bimg
-[submodule "app/cpp/AMGEngine/link"]
-	path = app/cpp/AMGEngine/link
+[submodule "3rdparty/link-android"]
+	path = 3rdparty/link-android
 	url = https://github.com/Ableton/link
-<<<<<<< HEAD
-[submodule "app/cpp/AMGEngine/oboe"]
-	path = app/cpp/AMGEngine/oboe
+[submodule "3rdparty/oboe"]
+	path = 3rdparty/oboe
 	url = https://github.com/google/oboe
 =======
->>>>>>> cf5cb82f3b138b9805acce3df1a34fc3557f14f6
