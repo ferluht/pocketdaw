@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="examples">
+      <UniqueIdentifier>{84D830B1-70A5-8BBC-99BE-796485EAC04A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\00-helloworld">
+      <UniqueIdentifier>{691AC310-5514-EC62-3E81-82732A1A52CF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\01-cubes">
+      <UniqueIdentifier>{6049465C-CC5F-44F2-15D7-CF13812C157A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\02-metaballs">
+      <UniqueIdentifier>{A4D76EEC-1044-2AE7-D937-C24445634C4F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\03-raymarch">
+      <UniqueIdentifier>{87A75579-7336-DF42-1C55-F33D08C3EFE8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\04-mesh">
+      <UniqueIdentifier>{1E13FFC3-0A0C-1E16-333E-039B1F96FD21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\05-instancing">
+      <UniqueIdentifier>{C05F3BDE-AC59-6430-95C6-FA40815FCA9C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\06-bump">
+      <UniqueIdentifier>{879FA3C8-7398-C21A-9CCA-A79F8822A226}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\07-callback">
+      <UniqueIdentifier>{418E3F93-2D1D-C95C-D63B-DD57C2A9D902}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\08-update">
+      <UniqueIdentifier>{98B07F84-8494-40DA-EDF4-3A2DD9F72A5C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\09-hdr">
+      <UniqueIdentifier>{14F9C6F6-8084-34BB-8995-B7AFF59F90BB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\10-font">
+      <UniqueIdentifier>{A500A107-91F9-BF59-BA2B-A5DEA6839F65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\11-fontsdf">
+      <UniqueIdentifier>{03E2D964-6F43-B772-F8B0-FD246411EE31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\12-lod">
+      <UniqueIdentifier>{8F889DF8-FB13-0BBD-0425-8EB1702F67BD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\13-stencil">
+      <UniqueIdentifier>{C33A8B41-2F9C-684F-B809-AF01246A9F0E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\14-shadowvolumes">
+      <UniqueIdentifier>{83D733DA-EF99-6764-384A-F6F0A44B4042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\15-shadowmaps-simple">
+      <UniqueIdentifier>{01D69D9A-6DEE-84C4-369B-145EA272195E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\16-shadowmaps">
+      <UniqueIdentifier>{6B771881-5771-41D3-40DE-D7E32C77A73F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\17-drawstress">
+      <UniqueIdentifier>{8768FDC1-7362-2614-5CCF-BC2448688C80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\18-ibl">
+      <UniqueIdentifier>{2D0D0AF9-9998-77BD-A2A9-FAB10EB4D3BD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\19-oit">
+      <UniqueIdentifier>{23401CF9-8FCB-89BD-98DC-0CB204E7E5BD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\20-nanovg">
+      <UniqueIdentifier>{38170CFA-24FB-CC4F-8D5B-C7A2795EB7D1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\21-deferred">
+      <UniqueIdentifier>{31C96F97-1D58-F960-C676-0D5CB2E40907}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\22-windows">
+      <UniqueIdentifier>{9C24F7EB-0886-D4F9-91F3-1AACFD530BB9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\23-vectordisplay">
+      <UniqueIdentifier>{BB9762D5-275A-965F-700A-25ECDC0B6F3D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\24-nbody">
+      <UniqueIdentifier>{EF82751C-5B99-73B2-A410-FFD31066443A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\26-occlusion">
+      <UniqueIdentifier>{C4F9A972-3066-656D-F959-FDCA658587D5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\27-terrain">
+      <UniqueIdentifier>{CBD27142-3734-4F50-C0A1-95022C02860F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\28-wireframe">
+      <UniqueIdentifier>{393E171C-A5AA-D216-6E9E-6A74DAC9F47E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\29-debugdraw">
+      <UniqueIdentifier>{EDACE9A0-5919-A59B-220D-3DF98E38C703}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\30-picking">
+      <UniqueIdentifier>{D5D86DEB-413A-4BF9-CAA7-91AB360882B8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\31-rsm">
+      <UniqueIdentifier>{63DB35FD-CF66-A3C1-D877-26B64482FFC1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\32-particles">
+      <UniqueIdentifier>{193D94BE-85A9-4FB9-4E9D-E716BAC87121}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\33-pom">
+      <UniqueIdentifier>{5F035AFD-CB8E-C7C1-D49F-4AB640AA23C2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\34-mvs">
+      <UniqueIdentifier>{0A106CFD-769B-D9C1-7FAC-5CB6EBB635C2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\35-dynamic">
+      <UniqueIdentifier>{FA6035BC-66C2-12CA-EF2F-597C5B904989}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\36-sky">
+      <UniqueIdentifier>{2D5990FD-99E4-FDC1-A2F5-80B60E005AC2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\37-gpudrivenrendering">
+      <UniqueIdentifier>{C9E5F457-B50B-BFBE-9E51-448A8A16E48A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\38-bloom">
+      <UniqueIdentifier>{F1A1CC3B-5DB8-CAD1-A62F-56F312859B59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\39-assao">
+      <UniqueIdentifier>{10ACB888-7CC2-B61E-C539-4240318F87A6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\40-svt">
+      <UniqueIdentifier>{2EF078FF-9A7B-E6C3-A38C-69B80F9742C4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\41-tess">
+      <UniqueIdentifier>{F162ECF0-DD5B-0B43-068E-F0C7F2E5EA4E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\25-c99">
+      <UniqueIdentifier>{49CD28FB-B558-96BF-BE69-19B42A74F2BF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\runtime">
+      <UniqueIdentifier>{642DBE38-5026-DD8A-7958-C20F65B0BC96}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\examples\runtime\iOS-Info.plist">
+      <Filter>examples\runtime</Filter>
+    </None>
+    <None Include="..\..\..\examples\runtime\tvOS-Info.plist">
+      <Filter>examples\runtime</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\examples\00-helloworld\logo.h">
+      <Filter>examples\00-helloworld</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\examples\20-nanovg\blendish.h">
+      <Filter>examples\20-nanovg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\examples\23-vectordisplay\vectordisplay.h">
+      <Filter>examples\23-vectordisplay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\examples\40-svt\vt.h">
+      <Filter>examples\40-svt</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\examples\00-helloworld\helloworld.cpp">
+      <Filter>examples\00-helloworld</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\01-cubes\cubes.cpp">
+      <Filter>examples\01-cubes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\02-metaballs\metaballs.cpp">
+      <Filter>examples\02-metaballs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\03-raymarch\raymarch.cpp">
+      <Filter>examples\03-raymarch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\04-mesh\mesh.cpp">
+      <Filter>examples\04-mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\05-instancing\instancing.cpp">
+      <Filter>examples\05-instancing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\06-bump\bump.cpp">
+      <Filter>examples\06-bump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\07-callback\callback.cpp">
+      <Filter>examples\07-callback</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\08-update\update.cpp">
+      <Filter>examples\08-update</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\09-hdr\hdr.cpp">
+      <Filter>examples\09-hdr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\10-font\font.cpp">
+      <Filter>examples\10-font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\11-fontsdf\fontsdf.cpp">
+      <Filter>examples\11-fontsdf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\12-lod\lod.cpp">
+      <Filter>examples\12-lod</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\13-stencil\stencil.cpp">
+      <Filter>examples\13-stencil</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\14-shadowvolumes\shadowvolumes.cpp">
+      <Filter>examples\14-shadowvolumes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\15-shadowmaps-simple\shadowmaps_simple.cpp">
+      <Filter>examples\15-shadowmaps-simple</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\16-shadowmaps\shadowmaps.cpp">
+      <Filter>examples\16-shadowmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\17-drawstress\drawstress.cpp">
+      <Filter>examples\17-drawstress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\18-ibl\ibl.cpp">
+      <Filter>examples\18-ibl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\19-oit\oit.cpp">
+      <Filter>examples\19-oit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\20-nanovg\nanovg.cpp">
+      <Filter>examples\20-nanovg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\21-deferred\deferred.cpp">
+      <Filter>examples\21-deferred</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\22-windows\windows.cpp">
+      <Filter>examples\22-windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\23-vectordisplay\vectordisplay.cpp">
+      <Filter>examples\23-vectordisplay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\23-vectordisplay\main.cpp">
+      <Filter>examples\23-vectordisplay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\24-nbody\nbody.cpp">
+      <Filter>examples\24-nbody</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\26-occlusion\occlusion.cpp">
+      <Filter>examples\26-occlusion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\27-terrain\terrain.cpp">
+      <Filter>examples\27-terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\28-wireframe\wireframe.cpp">
+      <Filter>examples\28-wireframe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\29-debugdraw\debugdraw.cpp">
+      <Filter>examples\29-debugdraw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\30-picking\picking.cpp">
+      <Filter>examples\30-picking</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\31-rsm\reflectiveshadowmap.cpp">
+      <Filter>examples\31-rsm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\32-particles\particles.cpp">
+      <Filter>examples\32-particles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\33-pom\pom.cpp">
+      <Filter>examples\33-pom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\34-mvs\mvs.cpp">
+      <Filter>examples\34-mvs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\35-dynamic\dynamic.cpp">
+      <Filter>examples\35-dynamic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\36-sky\sky.cpp">
+      <Filter>examples\36-sky</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\37-gpudrivenrendering\gpudrivenrendering.cpp">
+      <Filter>examples\37-gpudrivenrendering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\38-bloom\bloom.cpp">
+      <Filter>examples\38-bloom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\39-assao\assao.cpp">
+      <Filter>examples\39-assao</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\40-svt\svt.cpp">
+      <Filter>examples\40-svt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\40-svt\vt.cpp">
+      <Filter>examples\40-svt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\41-tess\tess.cpp">
+      <Filter>examples\41-tess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\examples\25-c99\helloworld.c">
+      <Filter>examples\25-c99</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

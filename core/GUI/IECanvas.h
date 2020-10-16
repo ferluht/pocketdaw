@@ -93,6 +93,10 @@ namespace GUI {
             nvgStroke(nvg);
             nvgClosePath(nvg);
         };
+
+        virtual int BRender(uint8_t * data) {
+            return 0;
+        }
     };
 
     static auto isIECanvas = GUI::IsType<IECanvas>;

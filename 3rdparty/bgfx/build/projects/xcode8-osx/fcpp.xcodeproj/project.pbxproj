@@ -1,0 +1,379 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1CC421B5888820A551EE506F /* FPPBase.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4238A2979323E4C0F711A6 /* FPPBase.h */; };
+		29E5D1251562C5683EDFC57C /* FPP_protos.h in Headers */ = {isa = PBXBuildFile; fileRef = 3803EF70A4BC591B2D1C74F5 /* FPP_protos.h */; };
+		098F3AE2F5CA3D4C5EDD5543 /* cpp.h in Headers */ = {isa = PBXBuildFile; fileRef = F8BD51DC64D638062D83C89F /* cpp.h */; };
+		5733F30BC3EC5DB64C4C7890 /* cpp1.c in Sources */ = {isa = PBXBuildFile; fileRef = 66215D045247276B3B8DAC36 /* cpp1.c */; };
+		5A7BA72CC63412D74F942CB1 /* cpp2.c in Sources */ = {isa = PBXBuildFile; fileRef = 899B30A275C1FA085E0780D4 /* cpp2.c */; };
+		5DC35B4DC97CC6F752DCE0D1 /* cpp3.c in Sources */ = {isa = PBXBuildFile; fileRef = AC150440983BCEA681815372 /* cpp3.c */; };
+		600B106ECCC47A18552495F2 /* cpp4.c in Sources */ = {isa = PBXBuildFile; fileRef = CF8FD7DDBBB5A144A4FB2610 /* cpp4.c */; };
+		FA7B46CB6635B175EF94CB4F /* cpp5.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B8A41215DE6E79FE23F444 /* cpp5.c */; };
+		FDC3FAEB697D6596F2DC7F70 /* cpp6.c in Sources */ = {isa = PBXBuildFile; fileRef = 4C3278B038584217219EC7E2 /* cpp6.c */; };
+		7720936FE3E4915FAC4AC229 /* cppadd.h in Headers */ = {isa = PBXBuildFile; fileRef = 461EB375326F9EB75BD38C79 /* cppadd.h */; };
+		DF5236864B173576147D6540 /* cppdef.h in Headers */ = {isa = PBXBuildFile; fileRef = AE2F0BDB9A80F61CC3E4E4DE /* cppdef.h */; };
+		55954C5D41D14FC7AAE367BE /* fpp.h in Headers */ = {isa = PBXBuildFile; fileRef = C4A4E7F330BDCE1DF9695EB7 /* fpp.h */; };
+		F8BF9ADBE42761A94D9375BF /* fpp_pragmas.h in Headers */ = {isa = PBXBuildFile; fileRef = 87ACC579F370C469BCD6F433 /* fpp_pragmas.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AB4238A2979323E4C0F711A6 /* FPPBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "FPPBase.h"; path = "FPPBase.h"; sourceTree = "<group>"; };
+		3803EF70A4BC591B2D1C74F5 /* FPP_protos.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "FPP_protos.h"; path = "FPP_protos.h"; sourceTree = "<group>"; };
+		F8BD51DC64D638062D83C89F /* cpp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "cpp.h"; path = "cpp.h"; sourceTree = "<group>"; };
+		66215D045247276B3B8DAC36 /* cpp1.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "cpp1.c"; path = "cpp1.c"; sourceTree = "<group>"; };
+		899B30A275C1FA085E0780D4 /* cpp2.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "cpp2.c"; path = "cpp2.c"; sourceTree = "<group>"; };
+		AC150440983BCEA681815372 /* cpp3.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "cpp3.c"; path = "cpp3.c"; sourceTree = "<group>"; };
+		CF8FD7DDBBB5A144A4FB2610 /* cpp4.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "cpp4.c"; path = "cpp4.c"; sourceTree = "<group>"; };
+		29B8A41215DE6E79FE23F444 /* cpp5.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "cpp5.c"; path = "cpp5.c"; sourceTree = "<group>"; };
+		4C3278B038584217219EC7E2 /* cpp6.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "cpp6.c"; path = "cpp6.c"; sourceTree = "<group>"; };
+		461EB375326F9EB75BD38C79 /* cppadd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "cppadd.h"; path = "cppadd.h"; sourceTree = "<group>"; };
+		AE2F0BDB9A80F61CC3E4E4DE /* cppdef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "cppdef.h"; path = "cppdef.h"; sourceTree = "<group>"; };
+		C4A4E7F330BDCE1DF9695EB7 /* fpp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "fpp.h"; path = "fpp.h"; sourceTree = "<group>"; };
+		87ACC579F370C469BCD6F433 /* fpp_pragmas.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "fpp_pragmas.h"; path = "fpp_pragmas.h"; sourceTree = "<group>"; };
+		8491023EF0C84AD5F9D2AEF8 /* libfcppDebug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libfcppDebug.a"; path = "libfcppDebug.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D4C735EF95D1B0582AFAD44 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9A8C5AB9064DD6EFCF871F6D /* fcpp */ = {
+			isa = PBXGroup;
+			children = (
+				0B1B7D0377317B99C0A806BB /* 3rdparty */,
+				B7D8B6C1A3BC77170C1D726A /* Products */,
+			);
+			name = "fcpp";
+			path = "../../..";
+			sourceTree = "<group>";
+		};
+		0B1B7D0377317B99C0A806BB /* 3rdparty */ = {
+			isa = PBXGroup;
+			children = (
+				C4527F82B04CA8D499B93EE5 /* fcpp */,
+			);
+			name = "3rdparty";
+			path = "3rdparty";
+			sourceTree = "<group>";
+		};
+		C4527F82B04CA8D499B93EE5 /* fcpp */ = {
+			isa = PBXGroup;
+			children = (
+				AB4238A2979323E4C0F711A6 /* FPPBase.h */,
+				3803EF70A4BC591B2D1C74F5 /* FPP_protos.h */,
+				F8BD51DC64D638062D83C89F /* cpp.h */,
+				66215D045247276B3B8DAC36 /* cpp1.c */,
+				899B30A275C1FA085E0780D4 /* cpp2.c */,
+				AC150440983BCEA681815372 /* cpp3.c */,
+				CF8FD7DDBBB5A144A4FB2610 /* cpp4.c */,
+				29B8A41215DE6E79FE23F444 /* cpp5.c */,
+				4C3278B038584217219EC7E2 /* cpp6.c */,
+				461EB375326F9EB75BD38C79 /* cppadd.h */,
+				AE2F0BDB9A80F61CC3E4E4DE /* cppdef.h */,
+				C4A4E7F330BDCE1DF9695EB7 /* fpp.h */,
+				87ACC579F370C469BCD6F433 /* fpp_pragmas.h */,
+			);
+			name = "fcpp";
+			path = "fcpp";
+			sourceTree = "<group>";
+		};
+		B7D8B6C1A3BC77170C1D726A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8491023EF0C84AD5F9D2AEF8 /* libfcppDebug.a */,
+			);
+			name = "Products";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EA608F38D65AB88ABFC74E9B /* fcpp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E9D45C5355E604FADE379739 /* Build configuration list for PBXNativeTarget "fcpp" */;
+			buildPhases = (
+				2BE2B90197F361A82045F4E7 /* Resources */,
+				83B516B0EFC6BE5678185196 /* Sources */,
+				8D4C735EF95D1B0582AFAD44 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "fcpp";
+			productName = "fcpp";
+			productReference = 8491023EF0C84AD5F9D2AEF8 /* libfcppDebug.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		__RootObject_ /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "fcpp" */;
+			compatibilityVersion = "Xcode 8.0";
+			hasScannedForEncodings = 1;
+			mainGroup = 9A8C5AB9064DD6EFCF871F6D /* fcpp */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EA608F38D65AB88ABFC74E9B /* libfcppDebug.a */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2BE2B90197F361A82045F4E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		83B516B0EFC6BE5678185196 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5733F30BC3EC5DB64C4C7890 /* cpp1.c in Sources */,
+				5A7BA72CC63412D74F942CB1 /* cpp2.c in Sources */,
+				5DC35B4DC97CC6F752DCE0D1 /* cpp3.c in Sources */,
+				600B106ECCC47A18552495F2 /* cpp4.c in Sources */,
+				FA7B46CB6635B175EF94CB4F /* cpp5.c in Sources */,
+				FDC3FAEB697D6596F2DC7F70 /* cpp6.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EC55B24ED891B5B841A4CDAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = ../../osx_universal/bin;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_NAME = fcppDebug;
+			};
+			name = Debug;
+		};
+		26F8FAFA12DFBCF2BB2F2310 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = ../../osx_universal/bin;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_NAME = fcppRelease;
+			};
+			name = Release;
+		};
+		BECC6B142AB07A5433B3A890 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__STDC_LIMIT_MACROS,
+					__STDC_FORMAT_MACROS,
+					__STDC_CONSTANT_MACROS,
+					_DEBUG,
+					"NINCLUDE=64",
+					"NWORK=65536",
+					"NBUFF=65536",
+					"OLD_PREPROCESSOR=0",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../../bx/include/compat/osx,
+				);
+				OBJROOT = ../../osx_universal/bin/Universal/Debug/fcpp;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wshadow",
+					"-Wfatal-errors",
+					"-msse2",
+					"-Wunused-value",
+					"-Wundef",
+					"-target x86_64-apple-macos10.11",
+					"-Wno-implicit-fallthrough",
+					"-Wno-incompatible-pointer-types",
+					"-Wno-parentheses-equality",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wshadow",
+					"-Wfatal-errors",
+					"-msse2",
+					"-Wunused-value",
+					"-Wundef",
+					"-target x86_64-apple-macos10.11",
+					"-Wno-implicit-fallthrough",
+					"-Wno-incompatible-pointer-types",
+					"-Wno-parentheses-equality",
+				);
+				SDKROOT = macosx;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = ../../osx_universal/bin;
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Debug;
+		};
+		D96A899745D9DE168EC29916 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__STDC_LIMIT_MACROS,
+					__STDC_FORMAT_MACROS,
+					__STDC_CONSTANT_MACROS,
+					NDEBUG,
+					"NINCLUDE=64",
+					"NWORK=65536",
+					"NBUFF=65536",
+					"OLD_PREPROCESSOR=0",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../../bx/include/compat/osx,
+				);
+				OBJROOT = ../../osx_universal/bin/Universal/Release/fcpp;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wshadow",
+					"-Wfatal-errors",
+					"-msse2",
+					"-Wunused-value",
+					"-Wundef",
+					"-target x86_64-apple-macos10.11",
+					"-Wno-implicit-fallthrough",
+					"-Wno-incompatible-pointer-types",
+					"-Wno-parentheses-equality",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wshadow",
+					"-Wfatal-errors",
+					"-msse2",
+					"-Wunused-value",
+					"-Wundef",
+					"-target x86_64-apple-macos10.11",
+					"-Wno-implicit-fallthrough",
+					"-Wno-incompatible-pointer-types",
+					"-Wno-parentheses-equality",
+				);
+				SDKROOT = macosx;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = ../../osx_universal/bin;
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E9D45C5355E604FADE379739 /* Build configuration list for PBXNativeTarget "libfcppDebug.a" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC55B24ED891B5B841A4CDAF /* Debug */,
+				26F8FAFA12DFBCF2BB2F2310 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug";
+		};
+		1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "fcpp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BECC6B142AB07A5433B3A890 /* Debug */,
+				D96A899745D9DE168EC29916 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug";
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = __RootObject_ /* Project object */;
+}

@@ -1,0 +1,464 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9AA22D5C86A3C1D6AF6B2E5B /* astc_file.cc in Sources */ = {isa = PBXBuildFile; fileRef = 62AA5D884E6AEE2CB787D637 /* astc_file.cc */; };
+		5EB95949CA4CBBF7D3332BAE /* astc_file.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D0BA85579CB38FAE2E82005 /* astc_file.h */; };
+		B21A45979E8505A347A16A08 /* codec.cc in Sources */ = {isa = PBXBuildFile; fileRef = C114EF432DFCD93936EADBB5 /* codec.cc */; };
+		76DD3BF8E29AE42E6B65D096 /* codec.h in Headers */ = {isa = PBXBuildFile; fileRef = 2549F9EA11F32EFAFAC33615 /* codec.h */; };
+		1686BA2D82FA4F8B4B449D9A /* endpoint_codec.cc in Sources */ = {isa = PBXBuildFile; fileRef = 8580117A7181A5F49A491279 /* endpoint_codec.cc */; };
+		1186B053FD1CF308A6D16909 /* endpoint_codec.h in Headers */ = {isa = PBXBuildFile; fileRef = A9A67AA5153ADC531E214C0A /* endpoint_codec.h */; };
+		584CF534444D89AF6D15F633 /* footprint.cc in Sources */ = {isa = PBXBuildFile; fileRef = 270E156893CBBD9E1C96A906 /* footprint.cc */; };
+		5C23D4F2C8B635A1D19DA557 /* footprint.h in Headers */ = {isa = PBXBuildFile; fileRef = CBBEDA33B77E6BD8209C53E3 /* footprint.h */; };
+		DA7EF388469F3C330FA27731 /* integer_sequence_codec.cc in Sources */ = {isa = PBXBuildFile; fileRef = C95D0501B58A5132DE6BF442 /* integer_sequence_codec.cc */; };
+		DE409096CA03C1BA7351D236 /* integer_sequence_codec.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DCD4CF8D90C1111E2ECD728 /* integer_sequence_codec.h */; };
+		E1787FC9CDA6ECBCB6028882 /* intermediate_astc_block.cc in Sources */ = {isa = PBXBuildFile; fileRef = 79991F40E563F19A2E6AF0BF /* intermediate_astc_block.cc */; };
+		45BE5D3DB1DEA6E77AE1E1E5 /* intermediate_astc_block.h in Headers */ = {isa = PBXBuildFile; fileRef = 548E342440BB8055699C2366 /* intermediate_astc_block.h */; };
+		85719420F13B667B3A4265A0 /* logical_astc_block.cc in Sources */ = {isa = PBXBuildFile; fileRef = 1422776A00B9B91FA96D3020 /* logical_astc_block.cc */; };
+		29B9852A15E6D15B3EC7746C /* logical_astc_block.h in Headers */ = {isa = PBXBuildFile; fileRef = 58036666C46CFBC84DB0A973 /* logical_astc_block.h */; };
+		542B19B5402CAD2F69F419B4 /* partition.cc in Sources */ = {isa = PBXBuildFile; fileRef = A39F56FA0F5DFF309827EB98 /* partition.cc */; };
+		EF2300815BB7612F649ED1E5 /* partition.h in Headers */ = {isa = PBXBuildFile; fileRef = C71032DBB3D0C27F1CEEAA8A /* partition.h */; };
+		C6D37A7CB2EB85311BBB65F6 /* physical_astc_block.cc in Sources */ = {isa = PBXBuildFile; fileRef = 95E361730158F7D0CAA144E0 /* physical_astc_block.cc */; };
+		8A5F3A70F6290CCB3F300BF0 /* physical_astc_block.h in Headers */ = {isa = PBXBuildFile; fileRef = F9F8B9FAE58FFCAF8E4473B0 /* physical_astc_block.h */; };
+		0081BB596CEA50BCF52DFF66 /* quantization.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6FBD1F055B93A602443DC155 /* quantization.cc */; };
+		C4BB0C96B0A7A405191E6458 /* quantization.h in Headers */ = {isa = PBXBuildFile; fileRef = D38598843F4E660808DF6E1A /* quantization.h */; };
+		99453B0285DC7DB72E91F4B7 /* weight_infill.cc in Sources */ = {isa = PBXBuildFile; fileRef = 319165BD9D24C76BA60B3722 /* weight_infill.cc */; };
+		7DA93AE1E912D04372567EEE /* weight_infill.h in Headers */ = {isa = PBXBuildFile; fileRef = CC63F7FCB8397EFAA1E3984D /* weight_infill.h */; };
+		335C2A0A9FEBEBF4A8E7CC0C /* bimg.h in Headers */ = {isa = PBXBuildFile; fileRef = 42C871412E0475AB97168DA2 /* bimg.h */; };
+		BAAAD5FC26C5389E6FE74832 /* decode.h in Headers */ = {isa = PBXBuildFile; fileRef = 29CADBE415B19DDCBE0104FA /* decode.h */; };
+		3DC8F815A9E25BB7F2046C4B /* encode.h in Headers */ = {isa = PBXBuildFile; fileRef = 556EDBDA41559DD2EAA503F0 /* encode.h */; };
+		86D33D13F24193923B2B4E92 /* image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7554356D610F25190AC79D63 /* image.cpp */; };
+		C218D2662EDDD056F7420121 /* image_gnf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1FBC7A29D4CB3E4C6B0A1A6 /* image_gnf.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		62AA5D884E6AEE2CB787D637 /* astc_file.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "astc_file.cc"; path = "astc_file.cc"; sourceTree = "<group>"; };
+		8D0BA85579CB38FAE2E82005 /* astc_file.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "astc_file.h"; path = "astc_file.h"; sourceTree = "<group>"; };
+		C114EF432DFCD93936EADBB5 /* codec.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "codec.cc"; path = "codec.cc"; sourceTree = "<group>"; };
+		2549F9EA11F32EFAFAC33615 /* codec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "codec.h"; path = "codec.h"; sourceTree = "<group>"; };
+		8580117A7181A5F49A491279 /* endpoint_codec.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "endpoint_codec.cc"; path = "endpoint_codec.cc"; sourceTree = "<group>"; };
+		A9A67AA5153ADC531E214C0A /* endpoint_codec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "endpoint_codec.h"; path = "endpoint_codec.h"; sourceTree = "<group>"; };
+		270E156893CBBD9E1C96A906 /* footprint.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "footprint.cc"; path = "footprint.cc"; sourceTree = "<group>"; };
+		CBBEDA33B77E6BD8209C53E3 /* footprint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "footprint.h"; path = "footprint.h"; sourceTree = "<group>"; };
+		C95D0501B58A5132DE6BF442 /* integer_sequence_codec.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "integer_sequence_codec.cc"; path = "integer_sequence_codec.cc"; sourceTree = "<group>"; };
+		6DCD4CF8D90C1111E2ECD728 /* integer_sequence_codec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "integer_sequence_codec.h"; path = "integer_sequence_codec.h"; sourceTree = "<group>"; };
+		79991F40E563F19A2E6AF0BF /* intermediate_astc_block.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "intermediate_astc_block.cc"; path = "intermediate_astc_block.cc"; sourceTree = "<group>"; };
+		548E342440BB8055699C2366 /* intermediate_astc_block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "intermediate_astc_block.h"; path = "intermediate_astc_block.h"; sourceTree = "<group>"; };
+		1422776A00B9B91FA96D3020 /* logical_astc_block.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "logical_astc_block.cc"; path = "logical_astc_block.cc"; sourceTree = "<group>"; };
+		58036666C46CFBC84DB0A973 /* logical_astc_block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "logical_astc_block.h"; path = "logical_astc_block.h"; sourceTree = "<group>"; };
+		A39F56FA0F5DFF309827EB98 /* partition.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "partition.cc"; path = "partition.cc"; sourceTree = "<group>"; };
+		C71032DBB3D0C27F1CEEAA8A /* partition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "partition.h"; path = "partition.h"; sourceTree = "<group>"; };
+		95E361730158F7D0CAA144E0 /* physical_astc_block.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "physical_astc_block.cc"; path = "physical_astc_block.cc"; sourceTree = "<group>"; };
+		F9F8B9FAE58FFCAF8E4473B0 /* physical_astc_block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "physical_astc_block.h"; path = "physical_astc_block.h"; sourceTree = "<group>"; };
+		6FBD1F055B93A602443DC155 /* quantization.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "quantization.cc"; path = "quantization.cc"; sourceTree = "<group>"; };
+		D38598843F4E660808DF6E1A /* quantization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "quantization.h"; path = "quantization.h"; sourceTree = "<group>"; };
+		319165BD9D24C76BA60B3722 /* weight_infill.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "weight_infill.cc"; path = "weight_infill.cc"; sourceTree = "<group>"; };
+		CC63F7FCB8397EFAA1E3984D /* weight_infill.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "weight_infill.h"; path = "weight_infill.h"; sourceTree = "<group>"; };
+		42C871412E0475AB97168DA2 /* bimg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "bimg.h"; path = "bimg.h"; sourceTree = "<group>"; };
+		29CADBE415B19DDCBE0104FA /* decode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "decode.h"; path = "decode.h"; sourceTree = "<group>"; };
+		556EDBDA41559DD2EAA503F0 /* encode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "encode.h"; path = "encode.h"; sourceTree = "<group>"; };
+		7554356D610F25190AC79D63 /* image.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "image.cpp"; path = "image.cpp"; sourceTree = "<group>"; };
+		B1FBC7A29D4CB3E4C6B0A1A6 /* image_gnf.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "image_gnf.cpp"; path = "image_gnf.cpp"; sourceTree = "<group>"; };
+		5ACAB1E8C601FA7FCF0B5EA3 /* libbimgDebug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libbimgDebug.a"; path = "libbimgDebug.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FDCC777E693D7AF7325CF47F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4637D8ECB2F753237B329DA0 /* bimg */ = {
+			isa = PBXGroup;
+			children = (
+				270C1AD993CC950F5C07DF8C /* bimg */,
+				D4E0414AC0C402A02925FDF2 /* Products */,
+			);
+			name = "bimg";
+			path = "../../../..";
+			sourceTree = "<group>";
+		};
+		270C1AD993CC950F5C07DF8C /* bimg */ = {
+			isa = PBXGroup;
+			children = (
+				F0604A1ADC5A736CC5C7097D /* 3rdparty */,
+				4E66E84E3A6011A123CDA7B1 /* include */,
+				B18C11A09D70D2F506D1CC48 /* src */,
+			);
+			name = "bimg";
+			path = "bimg";
+			sourceTree = "<group>";
+		};
+		F0604A1ADC5A736CC5C7097D /* 3rdparty */ = {
+			isa = PBXGroup;
+			children = (
+				F6E8FB9162575111AB400C11 /* astc-codec */,
+			);
+			name = "3rdparty";
+			path = "3rdparty";
+			sourceTree = "<group>";
+		};
+		F6E8FB9162575111AB400C11 /* astc-codec */ = {
+			isa = PBXGroup;
+			children = (
+				CE4A7AF53A0F79E50375A9AF /* src */,
+			);
+			name = "astc-codec";
+			path = "astc-codec";
+			sourceTree = "<group>";
+		};
+		CE4A7AF53A0F79E50375A9AF /* src */ = {
+			isa = PBXGroup;
+			children = (
+				5435A61DC0A5A89689C4221F /* decoder */,
+			);
+			name = "src";
+			path = "src";
+			sourceTree = "<group>";
+		};
+		5435A61DC0A5A89689C4221F /* decoder */ = {
+			isa = PBXGroup;
+			children = (
+				62AA5D884E6AEE2CB787D637 /* astc_file.cc */,
+				8D0BA85579CB38FAE2E82005 /* astc_file.h */,
+				C114EF432DFCD93936EADBB5 /* codec.cc */,
+				2549F9EA11F32EFAFAC33615 /* codec.h */,
+				8580117A7181A5F49A491279 /* endpoint_codec.cc */,
+				A9A67AA5153ADC531E214C0A /* endpoint_codec.h */,
+				270E156893CBBD9E1C96A906 /* footprint.cc */,
+				CBBEDA33B77E6BD8209C53E3 /* footprint.h */,
+				C95D0501B58A5132DE6BF442 /* integer_sequence_codec.cc */,
+				6DCD4CF8D90C1111E2ECD728 /* integer_sequence_codec.h */,
+				79991F40E563F19A2E6AF0BF /* intermediate_astc_block.cc */,
+				548E342440BB8055699C2366 /* intermediate_astc_block.h */,
+				1422776A00B9B91FA96D3020 /* logical_astc_block.cc */,
+				58036666C46CFBC84DB0A973 /* logical_astc_block.h */,
+				A39F56FA0F5DFF309827EB98 /* partition.cc */,
+				C71032DBB3D0C27F1CEEAA8A /* partition.h */,
+				95E361730158F7D0CAA144E0 /* physical_astc_block.cc */,
+				F9F8B9FAE58FFCAF8E4473B0 /* physical_astc_block.h */,
+				6FBD1F055B93A602443DC155 /* quantization.cc */,
+				D38598843F4E660808DF6E1A /* quantization.h */,
+				319165BD9D24C76BA60B3722 /* weight_infill.cc */,
+				CC63F7FCB8397EFAA1E3984D /* weight_infill.h */,
+			);
+			name = "decoder";
+			path = "decoder";
+			sourceTree = "<group>";
+		};
+		4E66E84E3A6011A123CDA7B1 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				BD12E9F5292017DCB20613C7 /* bimg */,
+			);
+			name = "include";
+			path = "include";
+			sourceTree = "<group>";
+		};
+		BD12E9F5292017DCB20613C7 /* bimg */ = {
+			isa = PBXGroup;
+			children = (
+				42C871412E0475AB97168DA2 /* bimg.h */,
+				29CADBE415B19DDCBE0104FA /* decode.h */,
+				556EDBDA41559DD2EAA503F0 /* encode.h */,
+			);
+			name = "bimg";
+			path = "bimg";
+			sourceTree = "<group>";
+		};
+		B18C11A09D70D2F506D1CC48 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				7554356D610F25190AC79D63 /* image.cpp */,
+				B1FBC7A29D4CB3E4C6B0A1A6 /* image_gnf.cpp */,
+			);
+			name = "src";
+			path = "src";
+			sourceTree = "<group>";
+		};
+		D4E0414AC0C402A02925FDF2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5ACAB1E8C601FA7FCF0B5EA3 /* libbimgDebug.a */,
+			);
+			name = "Products";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		00D72F0FECD05861D53DEF71 /* bimg */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 42AA95CBAE1A9844773912CD /* Build configuration list for PBXNativeTarget "bimg" */;
+			buildPhases = (
+				C4EA8A8D305B8D06F979078F /* Resources */,
+				5CF17F4FC86182C89180FC50 /* Sources */,
+				FDCC777E693D7AF7325CF47F /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "bimg";
+			productName = "bimg";
+			productReference = 5ACAB1E8C601FA7FCF0B5EA3 /* libbimgDebug.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		__RootObject_ /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "bimg" */;
+			compatibilityVersion = "Xcode 8.0";
+			hasScannedForEncodings = 1;
+			mainGroup = 4637D8ECB2F753237B329DA0 /* bimg */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				00D72F0FECD05861D53DEF71 /* libbimgDebug.a */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C4EA8A8D305B8D06F979078F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5CF17F4FC86182C89180FC50 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AA22D5C86A3C1D6AF6B2E5B /* astc_file.cc in Sources */,
+				B21A45979E8505A347A16A08 /* codec.cc in Sources */,
+				1686BA2D82FA4F8B4B449D9A /* endpoint_codec.cc in Sources */,
+				584CF534444D89AF6D15F633 /* footprint.cc in Sources */,
+				DA7EF388469F3C330FA27731 /* integer_sequence_codec.cc in Sources */,
+				E1787FC9CDA6ECBCB6028882 /* intermediate_astc_block.cc in Sources */,
+				85719420F13B667B3A4265A0 /* logical_astc_block.cc in Sources */,
+				542B19B5402CAD2F69F419B4 /* partition.cc in Sources */,
+				C6D37A7CB2EB85311BBB65F6 /* physical_astc_block.cc in Sources */,
+				0081BB596CEA50BCF52DFF66 /* quantization.cc in Sources */,
+				99453B0285DC7DB72E91F4B7 /* weight_infill.cc in Sources */,
+				86D33D13F24193923B2B4E92 /* image.cpp in Sources */,
+				C218D2662EDDD056F7420121 /* image_gnf.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		029DDEB5EED8E11F57EBF916 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "../../ios-arm/bin";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = bimgDebug;
+			};
+			name = Debug;
+		};
+		BC5C55DEA84317D651947DF3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "../../ios-arm/bin";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = bimgRelease;
+			};
+			name = Release;
+		};
+		6AAACCCFD68DDB0FDF90094C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__STDC_LIMIT_MACROS,
+					__STDC_FORMAT_MACROS,
+					__STDC_CONSTANT_MACROS,
+					_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../../bx/include/compat/ios,
+					../../../../bx/include,
+					../../../../bimg/include,
+					"../../../../bimg/3rdparty/astc-codec",
+					"../../../../bimg/3rdparty/astc-codec/include",
+				);
+				OBJROOT = "../../ios-arm/obj/Universal/Debug/bimg";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+				);
+				OTHER_LDFLAGS = (
+					"-lc++",
+				);
+				SDKROOT = iphoneos;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../../ios-arm/bin";
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Debug;
+		};
+		856398AEF1D1ED2D3ABBA82D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__STDC_LIMIT_MACROS,
+					__STDC_FORMAT_MACROS,
+					__STDC_CONSTANT_MACROS,
+					NDEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../../bx/include/compat/ios,
+					../../../../bx/include,
+					../../../../bimg/include,
+					"../../../../bimg/3rdparty/astc-codec",
+					"../../../../bimg/3rdparty/astc-codec/include",
+				);
+				OBJROOT = "../../ios-arm/obj/Universal/Release/bimg";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+				);
+				OTHER_LDFLAGS = (
+					"-lc++",
+				);
+				SDKROOT = iphoneos;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../../ios-arm/bin";
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		42AA95CBAE1A9844773912CD /* Build configuration list for PBXNativeTarget "libbimgDebug.a" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				029DDEB5EED8E11F57EBF916 /* Debug */,
+				BC5C55DEA84317D651947DF3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug";
+		};
+		1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "bimg" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6AAACCCFD68DDB0FDF90094C /* Debug */,
+				856398AEF1D1ED2D3ABBA82D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug";
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = __RootObject_ /* Project object */;
+}

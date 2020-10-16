@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="examples">
+      <UniqueIdentifier>{84D830B1-70A5-8BBC-99BE-796485EAC04A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\25-c99">
+      <UniqueIdentifier>{49CD28FB-B558-96BF-BE69-19B42A74F2BF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\runtime">
+      <UniqueIdentifier>{642DBE38-5026-DD8A-7958-C20F65B0BC96}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\examples\runtime\iOS-Info.plist">
+      <Filter>examples\runtime</Filter>
+    </None>
+    <None Include="..\..\..\examples\runtime\tvOS-Info.plist">
+      <Filter>examples\runtime</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\examples\25-c99\helloworld.c">
+      <Filter>examples\25-c99</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

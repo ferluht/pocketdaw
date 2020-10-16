@@ -27,6 +27,8 @@ class LFO : public MidiEffect {
     float waveform = 0;
     float old_waveform = 0;
 
+    float value;
+
     std::random_device dev;
     std::mt19937 * rng;
     std::uniform_real_distribution<float> * dist;
@@ -120,6 +122,35 @@ public:
         counter ++;
         jack->MRender(beat);
         rate->MRender(beat);
+    }
+
+    inline void MIn(MData cmd) override {
+        rate->MIn(cmd);
+        MOut(cmd);
+    }
+
+    struct BLFO {
+        uint8_t id = 0x01;
+        uint8_t rate_int = 0;
+        uint8_t rate_frac = 0;
+        uint8_t value = 0;
+    };
+
+    inline uint8_t get_int(float val) {
+        return static_cast<uint8_t>(val);
+    }
+
+    inline uint8_t get_frac(float val) {
+        return static_cast<uint8_t>((int)(*rate * 100) % 100);
+    }
+
+    int BRender (uint8_t * data) override {
+        BLFO blfo;
+        blfo.rate_int = get_int(*rate);
+        blfo.rate_frac = get_frac(*rate);
+        blfo.value = static_cast<uint8_t>((*jack + 1) / 2 * 127);
+        std::memcpy(data, &blfo, sizeof(BLFO));
+        return sizeof(BLFO);
     }
 
 };

@@ -1,0 +1,522 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		67F84191538C3739BC5091ED /* texturec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F622A0656293A2DE2BB21C67 /* texturec.cpp */; };
+		60F09D82CCB86B0695497418 /* libbimg_decodeDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F52B2205B27FAD384D639D0 /* libbimg_decodeDebug.a */; };
+		AD4F71D69925F8D382CF1227 /* libbimg_encodeDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CADDC3B08201F5851B454DC /* libbimg_encodeDebug.a */; };
+		262F9489926AF44C9B5F71DC /* libbimgDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5566F6B041CEBC7EAA39D194 /* libbimgDebug.a */; };
+		2A569D9016699DE9BF527AD6 /* libbxDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19A747DB853609C68E32EADD /* libbxDebug.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DF7E4EE4CB417F08748F9084 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6457B4C450EEF679F9A26D7A /* bimg_decode.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7D6367F06989315752CFB622;
+			remoteInfo = "libbimg_decodeDebug.a";
+		};
+		B920396FA5E369934E317B0F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6457B4C450EEF679F9A26D7A /* bimg_decode.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C35735362F701C60F81CACF9;
+			remoteInfo = "libbimg_decodeDebug.a";
+		};
+		A301BE130F2207BED82442BC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2856BFE294CA54405D14A24F /* bimg_encode.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 67FFD46E53259FD53C6B24A1;
+			remoteInfo = "libbimg_encodeDebug.a";
+		};
+		7DA3A89EE9C3F148B2C62C47 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2856BFE294CA54405D14A24F /* bimg_encode.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6D1E0A3AD936F163A2E380FD;
+			remoteInfo = "libbimg_encodeDebug.a";
+		};
+		DCBC337DC892BA7AB13CD5CD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C1FD0924ADA73F339678474E /* bimg.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5ACAB1E8C601FA7FCF0B5EA3;
+			remoteInfo = "libbimgDebug.a";
+		};
+		D6851722C25B9E1FAB05B972 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C1FD0924ADA73F339678474E /* bimg.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 00D72F0FECD05861D53DEF71;
+			remoteInfo = "libbimgDebug.a";
+		};
+		0978A6C975354F00FEFF3A68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A56002A71172AA4D9AC33C8D /* bx.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D5D335834140F17D0A3489DB;
+			remoteInfo = "libbxDebug.a";
+		};
+		3AE5E266A6A28B9D2F6D7705 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A56002A71172AA4D9AC33C8D /* bx.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B1D4BC607ACD48FB0CAE88A;
+			remoteInfo = "libbxDebug.a";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F622A0656293A2DE2BB21C67 /* texturec.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "texturec.cpp"; path = "texturec.cpp"; sourceTree = "<group>"; };
+		09FDAD81F5F6D6D3DE636DE4 /* texturecDebug */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "texturecDebug"; path = "texturecDebug"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6457B4C450EEF679F9A26D7A /* bimg_decode.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "bimg_decode.xcodeproj"; path = "bimg_decode.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		2856BFE294CA54405D14A24F /* bimg_encode.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "bimg_encode.xcodeproj"; path = "bimg_encode.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		C1FD0924ADA73F339678474E /* bimg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "bimg.xcodeproj"; path = "bimg.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		A56002A71172AA4D9AC33C8D /* bx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "bx.xcodeproj"; path = "bx.xcodeproj"; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BF4BD601ABF43D31D48A59B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60F09D82CCB86B0695497418 /* libbimg_decodeDebug.a in Frameworks */,
+				AD4F71D69925F8D382CF1227 /* libbimg_encodeDebug.a in Frameworks */,
+				262F9489926AF44C9B5F71DC /* libbimgDebug.a in Frameworks */,
+				2A569D9016699DE9BF527AD6 /* libbxDebug.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F0F8A1B65C655DB12559F50E /* texturec */ = {
+			isa = PBXGroup;
+			children = (
+				BC0E2E0328252C99719CB7BA /* bimg */,
+				D66F07A042DCC29A0BD05AF8 /* Products */,
+				74D4054160CE2E93493BC5A3 /* Projects */,
+			);
+			name = "texturec";
+			path = ".";
+			sourceTree = "<group>";
+		};
+		BC0E2E0328252C99719CB7BA /* bimg */ = {
+			isa = PBXGroup;
+			children = (
+				FDC2730569FABB9C720420C0 /* tools */,
+			);
+			name = "bimg";
+			path = "../../../../bimg";
+			sourceTree = "<group>";
+		};
+		FDC2730569FABB9C720420C0 /* tools */ = {
+			isa = PBXGroup;
+			children = (
+				21D0ADF60D219938368587FA /* texturec */,
+			);
+			name = "tools";
+			path = "tools";
+			sourceTree = "<group>";
+		};
+		21D0ADF60D219938368587FA /* texturec */ = {
+			isa = PBXGroup;
+			children = (
+				F622A0656293A2DE2BB21C67 /* texturec.cpp */,
+			);
+			name = "texturec";
+			path = "texturec";
+			sourceTree = "<group>";
+		};
+		D66F07A042DCC29A0BD05AF8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				09FDAD81F5F6D6D3DE636DE4 /* texturecDebug */,
+			);
+			name = "Products";
+			sourceTree = "<group>";
+		};
+		74D4054160CE2E93493BC5A3 /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				6457B4C450EEF679F9A26D7A /* bimg_decode.xcodeproj */,
+				2856BFE294CA54405D14A24F /* bimg_encode.xcodeproj */,
+				C1FD0924ADA73F339678474E /* bimg.xcodeproj */,
+				A56002A71172AA4D9AC33C8D /* bx.xcodeproj */,
+			);
+			name = "Projects";
+			path = ".";
+			sourceTree = "<group>";
+		};
+		9E075DC90A1DCB1F93D9A480 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6F52B2205B27FAD384D639D0 /* libbimg_decodeDebug.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E241C5ABCE04F6CF7752074C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9CADDC3B08201F5851B454DC /* libbimg_encodeDebug.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DB36830347FF508710905999 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5566F6B041CEBC7EAA39D194 /* libbimgDebug.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A8646EE69424FF8AFD41E795 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				19A747DB853609C68E32EADD /* libbxDebug.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CFEF08ED3B5CC4E704505C45 /* texturec */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BBF6BF1EA79F274ED03543CD /* Build configuration list for PBXNativeTarget "texturec" */;
+			buildPhases = (
+				1DA3C7BF094C2FEF32E24A6E /* Resources */,
+				9515CF6081BE3690AA54520F /* Sources */,
+				BF4BD601ABF43D31D48A59B0 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0A07DD02761C4B59FFD824BA /* PBXTargetDependency */,
+				4E4145E53A047609E3518785 /* PBXTargetDependency */,
+				A77FA556134873DADCD87BEC /* PBXTargetDependency */,
+				4BDE668F379EF733A0BBDF3E /* PBXTargetDependency */,
+			);
+			name = "texturec";
+			productInstallPath = "$(HOME)/bin";
+			productName = "texturec";
+			productReference = 09FDAD81F5F6D6D3DE636DE4 /* texturecDebug */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		__RootObject_ /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "texturec" */;
+			compatibilityVersion = "Xcode 8.0";
+			hasScannedForEncodings = 1;
+			mainGroup = F0F8A1B65C655DB12559F50E /* texturec */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 9E075DC90A1DCB1F93D9A480 /* Products */;
+					ProjectRef = 6457B4C450EEF679F9A26D7A /* bimg_decode.xcodeproj */;
+				},
+				{
+					ProductGroup = E241C5ABCE04F6CF7752074C /* Products */;
+					ProjectRef = 2856BFE294CA54405D14A24F /* bimg_encode.xcodeproj */;
+				},
+				{
+					ProductGroup = DB36830347FF508710905999 /* Products */;
+					ProjectRef = C1FD0924ADA73F339678474E /* bimg.xcodeproj */;
+				},
+				{
+					ProductGroup = A8646EE69424FF8AFD41E795 /* Products */;
+					ProjectRef = A56002A71172AA4D9AC33C8D /* bx.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				CFEF08ED3B5CC4E704505C45 /* texturecDebug */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		6F52B2205B27FAD384D639D0 /* libbimg_decodeDebug.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "../../ios-arm/bin/libbimg_decodeDebug.a";
+			remoteRef = DF7E4EE4CB417F08748F9084 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9CADDC3B08201F5851B454DC /* libbimg_encodeDebug.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "../../ios-arm/bin/libbimg_encodeDebug.a";
+			remoteRef = A301BE130F2207BED82442BC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5566F6B041CEBC7EAA39D194 /* libbimgDebug.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "../../ios-arm/bin/libbimgDebug.a";
+			remoteRef = DCBC337DC892BA7AB13CD5CD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		19A747DB853609C68E32EADD /* libbxDebug.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "../../ios-arm/bin/libbxDebug.a";
+			remoteRef = 0978A6C975354F00FEFF3A68 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1DA3C7BF094C2FEF32E24A6E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9515CF6081BE3690AA54520F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				67F84191538C3739BC5091ED /* texturec.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+/* End PBXVariantGroup section */
+
+/* Begin PBXTargetDependency section */
+		0A07DD02761C4B59FFD824BA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libbimg_decodeDebug.a";
+			targetProxy = B920396FA5E369934E317B0F /* PBXContainerItemProxy */;
+		};
+		4E4145E53A047609E3518785 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libbimg_encodeDebug.a";
+			targetProxy = 7DA3A89EE9C3F148B2C62C47 /* PBXContainerItemProxy */;
+		};
+		A77FA556134873DADCD87BEC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libbimgDebug.a";
+			targetProxy = D6851722C25B9E1FAB05B972 /* PBXContainerItemProxy */;
+		};
+		4BDE668F379EF733A0BBDF3E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libbxDebug.a";
+			targetProxy = 3AE5E266A6A28B9D2F6D7705 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		5164F437BDD249B706BC04B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "../../ios-arm/bin";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = texturecDebug;
+			};
+			name = Debug;
+		};
+		CB33FA3C37ED64E7C04C7FC1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "../../ios-arm/bin";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = texturecRelease;
+			};
+			name = Release;
+		};
+		9441076500D1C84F09CDA967 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__STDC_LIMIT_MACROS,
+					__STDC_FORMAT_MACROS,
+					__STDC_CONSTANT_MACROS,
+					_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../../bx/include/compat/ios,
+					../../../../bx/include,
+					../../../../bimg/include,
+					../../../include,
+					../../../../bimg/3rdparty/iqa/include,
+				);
+				OBJROOT = "../../ios-arm/obj/Universal/Debug/texturec";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+				);
+				OTHER_LDFLAGS = (
+					"-lc++",
+				);
+				SDKROOT = iphoneos;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../../ios-arm/bin";
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Debug;
+		};
+		AF35985F1B50FB0064720B95 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__STDC_LIMIT_MACROS,
+					__STDC_FORMAT_MACROS,
+					__STDC_CONSTANT_MACROS,
+					NDEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../../bx/include/compat/ios,
+					../../../../bx/include,
+					../../../../bimg/include,
+					../../../include,
+					../../../../bimg/3rdparty/iqa/include,
+				);
+				OBJROOT = "../../ios-arm/obj/Universal/Release/texturec";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+				);
+				OTHER_LDFLAGS = (
+					"-lc++",
+				);
+				SDKROOT = iphoneos;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../../ios-arm/bin";
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BBF6BF1EA79F274ED03543CD /* Build configuration list for PBXNativeTarget "texturecDebug" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5164F437BDD249B706BC04B7 /* Debug */,
+				CB33FA3C37ED64E7C04C7FC1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug";
+		};
+		1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "texturec" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9441076500D1C84F09CDA967 /* Debug */,
+				AF35985F1B50FB0064720B95 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug";
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = __RootObject_ /* Project object */;
+}

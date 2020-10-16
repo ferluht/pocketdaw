@@ -325,6 +325,34 @@ public:
         *rsample += sample;
     }
 
+//    struct BSoundobject5 {
+//        uint8_t id = 0x02;
+//        uint8_t freq1_int = 0;
+//        uint8_t freq1_frac = 0;
+//        uint8_t freq2_int = 0;
+//        uint8_t freq2_frac = 0;
+//        uint8_t xmod1_int = 0;
+//        uint8_t xmod1_frac = 0;
+//        uint8_t xmod2_int = 0;
+//        uint8_t xmod2_frac = 0;
+//    };
+//
+//    int BRender (uint8_t * data) override {
+//        BSoundobject5 bso5 = {
+//                0x02,
+//                static_cast<uint8_t>(*o1_coarse),
+//                static_cast<uint8_t>((*o1_coarse * 100) % 100),
+//                static_cast<uint8_t>(*o2_coarse),
+//                static_cast<uint8_t>((*o2_coarse * 100) % 100),
+//                static_cast<uint8_t>(*o12_xmod),
+//                static_cast<uint8_t>((*o12_xmod * 100) % 100),
+//                static_cast<uint8_t>(*o21_xmod),
+//                static_cast<uint8_t>((*o21_xmod * 100) % 100)
+//        };
+//        std::memcpy(data, &bso5, sizeof(BSoundobject5));
+//        return sizeof(BSoundobject5);
+//    }
+
 };
 
 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="tools">
+      <UniqueIdentifier>{36DF7010-A2F3-98C1-6B75-3C21D74895F2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools\geometryv">
+      <UniqueIdentifier>{D456E02D-40E2-4DF2-49F3-D0E6B5FDA9F2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\tools\geometryv\fs_mesh.sc">
+      <Filter>tools\geometryv</Filter>
+    </None>
+    <None Include="..\..\..\tools\geometryv\varying.def.sc">
+      <Filter>tools\geometryv</Filter>
+    </None>
+    <None Include="..\..\..\tools\geometryv\makefile">
+      <Filter>tools\geometryv</Filter>
+    </None>
+    <None Include="..\..\..\tools\geometryv\vs_mesh.sc">
+      <Filter>tools\geometryv</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\tools\geometryv\fs_mesh.bin.h">
+      <Filter>tools\geometryv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tools\geometryv\vs_mesh.bin.h">
+      <Filter>tools\geometryv</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\tools\geometryv\geometryv.cpp">
+      <Filter>tools\geometryv</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

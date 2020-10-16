@@ -6,7 +6,295 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57884d47-7195-4d09-bd10-b46f057e2238" name="Default Changelist" comment="" />
+    <list default="true" id="57884d47-7195-4d09-bd10-b46f057e2238" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../ios/Assets.xcassets/AppIcon.appiconset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ios/Assets.xcassets/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ios/Assets.xcassets/droidsans.ttf.dataset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ios/droidsans.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ios/pocketdaw.xcodeproj/project.pbxproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ios/pocketdaw.xcodeproj/project.xcworkspace/xcuserdata/ferluht.xcuserdatad/UserInterfaceState.xcuserstate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.gitmodules" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitmodules" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../core/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../core/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../core/GUI/IECanvas.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../core/GUI/IECanvas.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../core/GUI/Text.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../core/GUI/Text.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../core/Instruments/SoundObject5.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../core/Instruments/SoundObject5.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../core/MainActivity.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../core/MainActivity.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../core/MidiEffects/LFO.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../core/MidiEffects/LFO.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../core/Orchestration/Track.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../core/Orchestration/Track.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../engine/G.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../engine/G.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/A.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/A.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/AMGEngine.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/AMGEngine.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/G.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/G.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/M.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/M.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/bgfx_utils/aviwriter.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/bgfx_utils/bgfx_utils.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/bgfx_utils/bgfx_utils.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/bgfx_utils/bounds.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/bgfx_utils/bounds.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/bgfx_utils/camera.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/bgfx_utils/camera.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/bgfx_utils/common.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/bgfx_utils/common.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/bgfx_utils/cube_atlas.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/bgfx_utils/cube_atlas.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/bgfx_utils/example-glue.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/bgfx_utils/packrect.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/bgfx_utils/shaderlib.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/entry/cmd.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/entry/cmd.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/entry/dbg.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/entry/dialog.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/entry/dialog.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/entry/dialog_darwin.mm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/entry/entry.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/entry/entry.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/entry/entry_android.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/entry/entry_asmjs.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/entry/entry_glfw.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/entry/entry_ios.mm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/entry/entry_noop.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/entry/entry_osx.mm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/entry/entry_p.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/entry/entry_sdl.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/entry/entry_windows.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/entry/entry_winrt.cx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/entry/entry_x11.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/entry/input.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/entry/input.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/droidsans.ttf.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/fs_imgui_color.bin.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/fs_imgui_color.sc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/fs_imgui_cubemap.bin.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/fs_imgui_cubemap.sc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/fs_imgui_image.bin.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/fs_imgui_image.sc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/fs_imgui_image_swizz.bin.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/fs_imgui_image_swizz.sc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/fs_imgui_latlong.bin.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/fs_imgui_latlong.sc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/fs_imgui_texture.bin.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/fs_imgui_texture.sc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/fs_ocornut_imgui.bin.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/fs_ocornut_imgui.sc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/icons_font_awesome.ttf.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/icons_kenney.ttf.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/imgui.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/imgui.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/roboto_regular.ttf.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/robotomono_regular.ttf.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/varying.def.sc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/vs_imgui_color.bin.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/vs_imgui_color.sc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/vs_imgui_cubemap.bin.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/vs_imgui_cubemap.sc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/vs_imgui_image.bin.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/vs_imgui_image.sc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/vs_imgui_latlong.bin.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/vs_imgui_latlong.sc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/vs_imgui_texture.bin.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/vs_imgui_texture.sc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/vs_ocornut_imgui.bin.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/imgui/vs_ocornut_imgui.sc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/nanovg/fontstash.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/nanovg/fs_nanovg_fill.bin.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/nanovg/fs_nanovg_fill.sc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/nanovg/makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/nanovg/nanovg.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/nanovg/nanovg.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/nanovg/nanovg_bgfx.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/nanovg/nanovg_bgfx.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/nanovg/varying.def.sc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/nanovg/vs_nanovg_fill.bin.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/nanovg/vs_nanovg_fill.sc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/GLContext.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/GLContext.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/JNIHelper.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/JNIHelper.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/NDKHelper.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/gestureDetector.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/gestureDetector.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/gl3stub.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/gl3stub.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/gl3stub.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/interpolator.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/interpolator.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/perfMonitor.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/perfMonitor.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/sensorManager.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/sensorManager.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/shader.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/shader.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/tapCamera.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/tapCamera.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/texture.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/texture.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/vecmath.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AMGEngine/ndk_helper/vecmath.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AudioEffects/AudioEffect.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AudioEffects/AudioEffect.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AudioEffects/ConvolutionReverb.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AudioEffects/ConvolutionReverb.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AudioEffects/Delay.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AudioEffects/Delay.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AudioEffects/Lissajous.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AudioEffects/Lissajous.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AudioEffects/MoogFilter.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AudioEffects/MoogFilter.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AudioEffects/Oscilloscope.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AudioEffects/Oscilloscope.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AudioEffects/Saturator.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AudioEffects/Saturator.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AudioEffects/Spectrum.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AudioEffects/Spectrum.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AudioEffects/StereoDelay.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AudioEffects/StereoDelay.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AudioEffects/ThreeBandEQ.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/AudioEffects/ThreeBandEQ.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Button.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Button.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Canvas.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Canvas.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Encoder.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Encoder.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/EncoderButton.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/EncoderButton.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/FullscreenWindow.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/FullscreenWindow.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Graph.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Graph.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/IECanvas.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/IECanvas.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Jack.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Jack.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Knob.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Knob.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Led.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Led.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Menu.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Menu.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Plot.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Plot.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Selector.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Selector.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Slider.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Slider.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Text.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Text.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Wheel.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Wheel.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Wire.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/Wire.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/GUI/styles.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/AnalogDrums/AnalogDrum.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/AnalogDrums/AnalogDrum.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/AnalogDrums/Kick.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/AnalogDrums/Kick.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/AnalogDrums/Snare.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/AnalogDrums/Snare.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/Brute.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/Brute.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/DoubleSplineSynth.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/DoubleSplineSynth.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/DrumRack.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/DrumRack.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/Envelopes/AD.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/Envelopes/AD.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/Envelopes/ADS.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/Envelopes/ADS.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/Envelopes/ADSR.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/Envelopes/ADSR.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/Instrument.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/Instrument.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/Metronome.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/Metronome.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/ModularSynth/Modular.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/ModularSynth/Modular.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/ModularSynth/Module.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/ModularSynth/Module.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/ModularSynth/VCO.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/ModularSynth/VCO.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/Operator.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/Operator.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/Oscillator.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/Oscillator.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/Sampler.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/Sampler.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/SingleTone.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/SingleTone.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/SoundObject5.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/SoundObject5.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/SplineSynth.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/SplineSynth.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/VCO.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Instruments/VCO.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Link/LinkManager.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Link/LinkManager.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Link/android-ifaddrs/ifaddrs.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Link/android-ifaddrs/ifaddrs.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/MainActivity.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/MidiEffects/Arpeggiator.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/MidiEffects/Arpeggiator.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/MidiEffects/LFO.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/MidiEffects/LFO.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/MidiEffects/MidiDelay.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/MidiEffects/MidiDelay.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/MidiEffects/MidiEffect.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/MidiEffects/MidiEffect.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/MidiEffects/MidiMonitor.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/MidiEffects/MidiMonitor.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/MidiEffects/Scale.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/MidiEffects/Scale.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/MidiEffects/Sequencer.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/MidiEffects/Sequencer.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Orchestration/Chain.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Orchestration/Chain.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Orchestration/Master.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Orchestration/Master.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Orchestration/Midi.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Orchestration/Midi.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Orchestration/Rack.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Orchestration/Rack.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Orchestration/Track.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Orchestration/Track.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Synth.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Synth.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Utils/AudioFile.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Utils/AudioFile.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Utils/Spline.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cpp/Utils/Utils.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/droidsans.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Assets.xcassets/droidsans.ttf.dataset/droidsans.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pdaw/pd/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/pdaw/pd/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/bgfx.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/bgfx.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/bgfx.xcodeproj/xcuserdata/ferluht.xcuserdatad/xcschemes/xcschememanagement.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/bgfx.xcodeproj/xcuserdata/ferluht.xcuserdatad/xcschemes/xcschememanagement.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/bimg_decode.xcodeproj/xcuserdata/ferluht.xcuserdatad/xcschemes/xcschememanagement.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/bimg_decode.xcodeproj/xcuserdata/ferluht.xcuserdatad/xcschemes/xcschememanagement.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/build/imgui-lib.build/Debug-iphonesimulator/imgui-lib.build/Objects-normal/x86_64/imgui_draw.dia" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/build/imgui-lib.build/Debug-iphonesimulator/imgui-lib.build/Objects-normal/x86_64/imgui_draw.dia" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/bx.xcodeproj/xcuserdata/ferluht.xcuserdatad/xcschemes/xcschememanagement.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/bx.xcodeproj/xcuserdata/ferluht.xcuserdatad/xcschemes/xcschememanagement.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/example-glue.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/nanovg.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/example-glue.xcodeproj/xcuserdata/ferluht.xcuserdatad/xcschemes/xcschememanagement.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/nanovg.xcodeproj/xcuserdata/ferluht.xcuserdatad/xcschemes/xcschememanagement.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/examples.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/examples.xcodeproj/project.xcworkspace/contents.xcworkspacedata" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/pocketdaw.xcodeproj/project.xcworkspace/contents.xcworkspacedata" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/examples.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/pocketdaw.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/examples.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/pocketdaw.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/examples.xcodeproj/project.xcworkspace/xcuserdata/ferluht.xcuserdatad/UserInterfaceState.xcuserstate" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/examples.xcodeproj/project.xcworkspace/xcuserdata/ferluht.xcuserdatad/WorkspaceSettings.xcsettings" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/pocketdaw.xcodeproj/project.xcworkspace/xcuserdata/ferluht.xcuserdatad/WorkspaceSettings.xcsettings" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/examples.xcodeproj/xcshareddata/xcschemes/examples Debug.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/pocketdaw.xcodeproj/xcshareddata/xcschemes/examples Debug.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/examples.xcodeproj/xcshareddata/xcschemes/examples Release.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/pocketdaw.xcodeproj/xcshareddata/xcschemes/examples Release.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/examples.xcodeproj/xcshareddata/xcschemes/examples.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/pocketdaw.xcodeproj/xcshareddata/xcschemes/examples.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/examples.xcodeproj/xcshareddata/xcschemes/pocketdaw.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/pocketdaw.xcodeproj/xcshareddata/xcschemes/pocketdaw.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/examples.xcodeproj/xcuserdata/ferluht.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/pocketdaw.xcodeproj/xcuserdata/ferluht.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/examples.xcodeproj/xcuserdata/ferluht.xcuserdatad/xcschemes/xcschememanagement.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/pocketdaw.xcodeproj/xcuserdata/ferluht.xcuserdatad/xcschemes/xcschememanagement.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/imgui-lib.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/imgui-lib.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/ios-info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/ios-info.plist" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,5 +427,12 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="AndroidRunConfigurationType">
+        <watch expression="sizeof(BLFO)" language="ObjectiveC" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

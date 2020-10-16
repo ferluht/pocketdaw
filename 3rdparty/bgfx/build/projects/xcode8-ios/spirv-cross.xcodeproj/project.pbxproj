@@ -1,0 +1,388 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7399567BDFAAFE2168FC9061 /* spirv.hpp in Headers */ = {isa = PBXBuildFile; fileRef = C278DE67AEF62E0197EEEC98 /* spirv.hpp */; };
+		DFD499364BBC842C54AA86A8 /* spirv_cfg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EB8D08A1A4CC632831020E7 /* spirv_cfg.cpp */; };
+		ED95FA6CD96A4220021A821C /* spirv_cfg.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7C18C314E8296BBB717BFDFA /* spirv_cfg.hpp */; };
+		C85AA0ED34184924BDE2348C /* spirv_common.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 17E0E7CA038A1DDAEC5A25F5 /* spirv_common.hpp */; };
+		FF4AB6C8EB1FFE7B14CF3D78 /* spirv_cpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EDAA2AFBAEB4A56433DDD95 /* spirv_cpp.cpp */; };
+		8672579372479F469BF6DE42 /* spirv_cpp.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7571B4F1E1825C986AD4EED7 /* spirv_cpp.hpp */; };
+		0A1031DEF6CFC1825FEDA98D /* spirv_cross.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 39E0E202A5FCD4F36ED44161 /* spirv_cross.cpp */; };
+		A856AF2B941640D0FD3328DB /* spirv_cross.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 170C7511832867024C00D46F /* spirv_cross.hpp */; };
+		BD884656A91F890B52D4FF0B /* spirv_cross_parsed_ir.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC0F01AB38A36259418AD20F /* spirv_cross_parsed_ir.cpp */; };
+		44832521301A68D6D9CEDED6 /* spirv_cross_parsed_ir.hpp in Headers */ = {isa = PBXBuildFile; fileRef = F399A0775F2D0226681472DC /* spirv_cross_parsed_ir.hpp */; };
+		062DFA1E72C05BCD7BA7CB83 /* spirv_cross_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 153B437E01FBD3226A18BC2D /* spirv_cross_util.cpp */; };
+		4D2E0532B9C166E0C2A8D696 /* spirv_cross_util.hpp in Headers */ = {isa = PBXBuildFile; fileRef = FC93FFDAE853907F5171788A /* spirv_cross_util.hpp */; };
+		CC9FC03D3812035A81A638DE /* spirv_glsl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB260732C765B1AD70E88DDF /* spirv_glsl.cpp */; };
+		9317C08EFF8902AB481E382F /* spirv_glsl.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 42E6F3B52E259E31D7A77A63 /* spirv_glsl.hpp */; };
+		F15E238E5DD165AAA6659B2E /* spirv_hlsl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E09A57AECCD9012A755CDE5B /* spirv_hlsl.cpp */; };
+		B8D622DF244965FB6DDD9A7F /* spirv_hlsl.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 475A44323399EEADDC1BCBDF /* spirv_hlsl.hpp */; };
+		EE14CB72DAE9122603995222 /* spirv_msl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDF2D6CF49047F76D25511B6 /* spirv_msl.cpp */; };
+		4C21B6AD38F6FD6061A53D5D /* spirv_msl.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7B4C9389E75D3B3070AFCD6F /* spirv_msl.hpp */; };
+		4A2FBCB2B6EC64E93FB75051 /* spirv_parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 595B4A9E450580AD2ED687C8 /* spirv_parser.cpp */; };
+		915F17EDFD1CC02386E7AB8B /* spirv_parser.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4083BDC42C2DF3D315FEFAEE /* spirv_parser.hpp */; };
+		C6BAB61EB225772A5B41DC8F /* spirv_reflect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3529DE84A110C97AAAFECAF6 /* spirv_reflect.cpp */; };
+		4D53B1D639BE71E2E2D9D647 /* spirv_reflect.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 5C915E79C878496FD1664BEB /* spirv_reflect.hpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C278DE67AEF62E0197EEEC98 /* spirv.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = "spirv.hpp"; path = "spirv.hpp"; sourceTree = "<group>"; };
+		2EB8D08A1A4CC632831020E7 /* spirv_cfg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "spirv_cfg.cpp"; path = "spirv_cfg.cpp"; sourceTree = "<group>"; };
+		7C18C314E8296BBB717BFDFA /* spirv_cfg.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = "spirv_cfg.hpp"; path = "spirv_cfg.hpp"; sourceTree = "<group>"; };
+		17E0E7CA038A1DDAEC5A25F5 /* spirv_common.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = "spirv_common.hpp"; path = "spirv_common.hpp"; sourceTree = "<group>"; };
+		4EDAA2AFBAEB4A56433DDD95 /* spirv_cpp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "spirv_cpp.cpp"; path = "spirv_cpp.cpp"; sourceTree = "<group>"; };
+		7571B4F1E1825C986AD4EED7 /* spirv_cpp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = "spirv_cpp.hpp"; path = "spirv_cpp.hpp"; sourceTree = "<group>"; };
+		39E0E202A5FCD4F36ED44161 /* spirv_cross.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "spirv_cross.cpp"; path = "spirv_cross.cpp"; sourceTree = "<group>"; };
+		170C7511832867024C00D46F /* spirv_cross.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = "spirv_cross.hpp"; path = "spirv_cross.hpp"; sourceTree = "<group>"; };
+		CC0F01AB38A36259418AD20F /* spirv_cross_parsed_ir.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "spirv_cross_parsed_ir.cpp"; path = "spirv_cross_parsed_ir.cpp"; sourceTree = "<group>"; };
+		F399A0775F2D0226681472DC /* spirv_cross_parsed_ir.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = "spirv_cross_parsed_ir.hpp"; path = "spirv_cross_parsed_ir.hpp"; sourceTree = "<group>"; };
+		153B437E01FBD3226A18BC2D /* spirv_cross_util.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "spirv_cross_util.cpp"; path = "spirv_cross_util.cpp"; sourceTree = "<group>"; };
+		FC93FFDAE853907F5171788A /* spirv_cross_util.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = "spirv_cross_util.hpp"; path = "spirv_cross_util.hpp"; sourceTree = "<group>"; };
+		DB260732C765B1AD70E88DDF /* spirv_glsl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "spirv_glsl.cpp"; path = "spirv_glsl.cpp"; sourceTree = "<group>"; };
+		42E6F3B52E259E31D7A77A63 /* spirv_glsl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = "spirv_glsl.hpp"; path = "spirv_glsl.hpp"; sourceTree = "<group>"; };
+		E09A57AECCD9012A755CDE5B /* spirv_hlsl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "spirv_hlsl.cpp"; path = "spirv_hlsl.cpp"; sourceTree = "<group>"; };
+		475A44323399EEADDC1BCBDF /* spirv_hlsl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = "spirv_hlsl.hpp"; path = "spirv_hlsl.hpp"; sourceTree = "<group>"; };
+		DDF2D6CF49047F76D25511B6 /* spirv_msl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "spirv_msl.cpp"; path = "spirv_msl.cpp"; sourceTree = "<group>"; };
+		7B4C9389E75D3B3070AFCD6F /* spirv_msl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = "spirv_msl.hpp"; path = "spirv_msl.hpp"; sourceTree = "<group>"; };
+		595B4A9E450580AD2ED687C8 /* spirv_parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "spirv_parser.cpp"; path = "spirv_parser.cpp"; sourceTree = "<group>"; };
+		4083BDC42C2DF3D315FEFAEE /* spirv_parser.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = "spirv_parser.hpp"; path = "spirv_parser.hpp"; sourceTree = "<group>"; };
+		3529DE84A110C97AAAFECAF6 /* spirv_reflect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "spirv_reflect.cpp"; path = "spirv_reflect.cpp"; sourceTree = "<group>"; };
+		5C915E79C878496FD1664BEB /* spirv_reflect.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = "spirv_reflect.hpp"; path = "spirv_reflect.hpp"; sourceTree = "<group>"; };
+		A658E212927EAC797BC43145 /* libspirv-crossDebug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libspirv-crossDebug.a"; path = "libspirv-crossDebug.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1721557583DEFDAB0CA9E913 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5EBFCCB6CACCFA9C53B3F687 /* spirv-cross */ = {
+			isa = PBXGroup;
+			children = (
+				0D56A0E5F97AEF6522C6D4F5 /* 3rdparty */,
+				39CC1825A58E4CAFEE3EDB3B /* Products */,
+			);
+			name = "spirv-cross";
+			path = "../../..";
+			sourceTree = "<group>";
+		};
+		0D56A0E5F97AEF6522C6D4F5 /* 3rdparty */ = {
+			isa = PBXGroup;
+			children = (
+				880CD7BD74F398B51D44FFD2 /* spirv-cross */,
+			);
+			name = "3rdparty";
+			path = "3rdparty";
+			sourceTree = "<group>";
+		};
+		880CD7BD74F398B51D44FFD2 /* spirv-cross */ = {
+			isa = PBXGroup;
+			children = (
+				C278DE67AEF62E0197EEEC98 /* spirv.hpp */,
+				2EB8D08A1A4CC632831020E7 /* spirv_cfg.cpp */,
+				7C18C314E8296BBB717BFDFA /* spirv_cfg.hpp */,
+				17E0E7CA038A1DDAEC5A25F5 /* spirv_common.hpp */,
+				4EDAA2AFBAEB4A56433DDD95 /* spirv_cpp.cpp */,
+				7571B4F1E1825C986AD4EED7 /* spirv_cpp.hpp */,
+				39E0E202A5FCD4F36ED44161 /* spirv_cross.cpp */,
+				170C7511832867024C00D46F /* spirv_cross.hpp */,
+				CC0F01AB38A36259418AD20F /* spirv_cross_parsed_ir.cpp */,
+				F399A0775F2D0226681472DC /* spirv_cross_parsed_ir.hpp */,
+				153B437E01FBD3226A18BC2D /* spirv_cross_util.cpp */,
+				FC93FFDAE853907F5171788A /* spirv_cross_util.hpp */,
+				DB260732C765B1AD70E88DDF /* spirv_glsl.cpp */,
+				42E6F3B52E259E31D7A77A63 /* spirv_glsl.hpp */,
+				E09A57AECCD9012A755CDE5B /* spirv_hlsl.cpp */,
+				475A44323399EEADDC1BCBDF /* spirv_hlsl.hpp */,
+				DDF2D6CF49047F76D25511B6 /* spirv_msl.cpp */,
+				7B4C9389E75D3B3070AFCD6F /* spirv_msl.hpp */,
+				595B4A9E450580AD2ED687C8 /* spirv_parser.cpp */,
+				4083BDC42C2DF3D315FEFAEE /* spirv_parser.hpp */,
+				3529DE84A110C97AAAFECAF6 /* spirv_reflect.cpp */,
+				5C915E79C878496FD1664BEB /* spirv_reflect.hpp */,
+			);
+			name = "spirv-cross";
+			path = "spirv-cross";
+			sourceTree = "<group>";
+		};
+		39CC1825A58E4CAFEE3EDB3B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A658E212927EAC797BC43145 /* libspirv-crossDebug.a */,
+			);
+			name = "Products";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CCCB21BB38E408E50191987E /* spirv-cross */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 139971077F561A3E082106A6 /* Build configuration list for PBXNativeTarget "spirv-cross" */;
+			buildPhases = (
+				75566881E11311B86ADEFC1F /* Resources */,
+				EDD95EFB59970732E261F399 /* Sources */,
+				1721557583DEFDAB0CA9E913 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "spirv-cross";
+			productName = "spirv-cross";
+			productReference = A658E212927EAC797BC43145 /* libspirv-crossDebug.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		__RootObject_ /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "spirv-cross" */;
+			compatibilityVersion = "Xcode 8.0";
+			hasScannedForEncodings = 1;
+			mainGroup = 5EBFCCB6CACCFA9C53B3F687 /* spirv-cross */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CCCB21BB38E408E50191987E /* libspirv-crossDebug.a */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		75566881E11311B86ADEFC1F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EDD95EFB59970732E261F399 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFD499364BBC842C54AA86A8 /* spirv_cfg.cpp in Sources */,
+				FF4AB6C8EB1FFE7B14CF3D78 /* spirv_cpp.cpp in Sources */,
+				0A1031DEF6CFC1825FEDA98D /* spirv_cross.cpp in Sources */,
+				BD884656A91F890B52D4FF0B /* spirv_cross_parsed_ir.cpp in Sources */,
+				062DFA1E72C05BCD7BA7CB83 /* spirv_cross_util.cpp in Sources */,
+				CC9FC03D3812035A81A638DE /* spirv_glsl.cpp in Sources */,
+				F15E238E5DD165AAA6659B2E /* spirv_hlsl.cpp in Sources */,
+				EE14CB72DAE9122603995222 /* spirv_msl.cpp in Sources */,
+				4A2FBCB2B6EC64E93FB75051 /* spirv_parser.cpp in Sources */,
+				C6BAB61EB225772A5B41DC8F /* spirv_reflect.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CE231AA83A3E7D4983608DDD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "../../ios-arm/bin";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = "spirv-crossDebug";
+			};
+			name = Debug;
+		};
+		88C68D4DF42B21D47D04C3AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "../../ios-arm/bin";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = "spirv-crossRelease";
+			};
+			name = Release;
+		};
+		C2A662252E17659EF735DF26 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__STDC_LIMIT_MACROS,
+					__STDC_FORMAT_MACROS,
+					__STDC_CONSTANT_MACROS,
+					_DEBUG,
+					SPIRV_CROSS_EXCEPTIONS_TO_ASSERTIONS,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../../bx/include/compat/ios,
+					"../../../3rdparty/spirv-cross/include",
+				);
+				OBJROOT = "../../ios-arm/obj/Universal/Debug/spirv-cross";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+				);
+				OTHER_LDFLAGS = (
+					"-lc++",
+				);
+				SDKROOT = iphoneos;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../../ios-arm/bin";
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Debug;
+		};
+		BD9E3B7D29DA9B4032CF18D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__STDC_LIMIT_MACROS,
+					__STDC_FORMAT_MACROS,
+					__STDC_CONSTANT_MACROS,
+					NDEBUG,
+					SPIRV_CROSS_EXCEPTIONS_TO_ASSERTIONS,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../../bx/include/compat/ios,
+					"../../../3rdparty/spirv-cross/include",
+				);
+				OBJROOT = "../../ios-arm/obj/Universal/Release/spirv-cross";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+				);
+				OTHER_LDFLAGS = (
+					"-lc++",
+				);
+				SDKROOT = iphoneos;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../../ios-arm/bin";
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		139971077F561A3E082106A6 /* Build configuration list for PBXNativeTarget "libspirv-crossDebug.a" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE231AA83A3E7D4983608DDD /* Debug */,
+				88C68D4DF42B21D47D04C3AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug";
+		};
+		1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "spirv-cross" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C2A662252E17659EF735DF26 /* Debug */,
+				BD9E3B7D29DA9B4032CF18D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug";
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = __RootObject_ /* Project object */;
+}

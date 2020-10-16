@@ -34,17 +34,19 @@ namespace GUI {
         }
 
         void GDraw(NVGcontext * nvg) override {
+//#ifndef TARGET_IOS
             nvgBeginPath(nvg);
             nvgFontSize(nvg, global.s.y/2);
             nvgFontFace(nvg, "sans");
             nvgTextAlign(nvg, align);
-            nvgFillColor(nvg, color);
+            nvgFillColor(nvg, nvgRGB(255, 0, 0));
             if (align & NVG_ALIGN_LEFT)
                 nvgText(nvg, global.c.x, global.c.y + global.s.y / 2, text, NULL);
             if (align & NVG_ALIGN_MIDDLE)
                 nvgText(nvg, global.c.x + global.s.x /2, global.c.y + global.s.y / 2, text, NULL);
             nvgFill(nvg);
             nvgClosePath(nvg);
+//#endif
         }
 
     };

@@ -1,0 +1,345 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		034D5A836FBD5CFC38DCD684 /* bimg.h in Headers */ = {isa = PBXBuildFile; fileRef = 12F7E310FE73D75327F1D767 /* bimg.h */; };
+		F1F841B1DDA1A9E00638C55F /* decode.h in Headers */ = {isa = PBXBuildFile; fileRef = F9EC9459E5545B274EC06F3D /* decode.h */; };
+		9D184B3389C1B262B257CEE1 /* encode.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C3EC96198A35CE8217CFEC0 /* encode.h */; };
+		E9C813B75504747A5EF9F009 /* image_decode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18FF40C4046707926DD21BA8 /* image_decode.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		12F7E310FE73D75327F1D767 /* bimg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "bimg.h"; path = "bimg.h"; sourceTree = "<group>"; };
+		F9EC9459E5545B274EC06F3D /* decode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "decode.h"; path = "decode.h"; sourceTree = "<group>"; };
+		2C3EC96198A35CE8217CFEC0 /* encode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "encode.h"; path = "encode.h"; sourceTree = "<group>"; };
+		18FF40C4046707926DD21BA8 /* image_decode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "image_decode.cpp"; path = "image_decode.cpp"; sourceTree = "<group>"; };
+		7D6367F06989315752CFB622 /* libbimg_decodeDebug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libbimg_decodeDebug.a"; path = "libbimg_decodeDebug.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5E4E1B77CA0BC4AD53D6AF15 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ACF385C11801B4A7A1E7AF92 /* bimg_decode */ = {
+			isa = PBXGroup;
+			children = (
+				6ABB48A4564AD26DFF68E668 /* bimg */,
+				72626488DE24981227D5269F /* Products */,
+			);
+			name = "bimg_decode";
+			path = "../../../..";
+			sourceTree = "<group>";
+		};
+		6ABB48A4564AD26DFF68E668 /* bimg */ = {
+			isa = PBXGroup;
+			children = (
+				1EDD41850A983131B34FAA7B /* include */,
+				11C91A407D8B4ECAC63BDD56 /* src */,
+			);
+			name = "bimg";
+			path = "bimg";
+			sourceTree = "<group>";
+		};
+		1EDD41850A983131B34FAA7B /* include */ = {
+			isa = PBXGroup;
+			children = (
+				8D4BCD31F9B922B142A3DDB0 /* bimg */,
+			);
+			name = "include";
+			path = "include";
+			sourceTree = "<group>";
+		};
+		8D4BCD31F9B922B142A3DDB0 /* bimg */ = {
+			isa = PBXGroup;
+			children = (
+				12F7E310FE73D75327F1D767 /* bimg.h */,
+				F9EC9459E5545B274EC06F3D /* decode.h */,
+				2C3EC96198A35CE8217CFEC0 /* encode.h */,
+			);
+			name = "bimg";
+			path = "bimg";
+			sourceTree = "<group>";
+		};
+		11C91A407D8B4ECAC63BDD56 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				18FF40C4046707926DD21BA8 /* image_decode.cpp */,
+			);
+			name = "src";
+			path = "src";
+			sourceTree = "<group>";
+		};
+		72626488DE24981227D5269F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7D6367F06989315752CFB622 /* libbimg_decodeDebug.a */,
+			);
+			name = "Products";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C35735362F701C60F81CACF9 /* bimg_decode */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E37C12144F3ABB4AD804A7B2 /* Build configuration list for PBXNativeTarget "bimg_decode" */;
+			buildPhases = (
+				453A098EB1F7B1C43AC29D2C /* Resources */,
+				BDBDFF07297BA83EB24594A6 /* Sources */,
+				5E4E1B77CA0BC4AD53D6AF15 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "bimg_decode";
+			productName = "bimg_decode";
+			productReference = 7D6367F06989315752CFB622 /* libbimg_decodeDebug.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		__RootObject_ /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "bimg_decode" */;
+			compatibilityVersion = "Xcode 8.0";
+			hasScannedForEncodings = 1;
+			mainGroup = ACF385C11801B4A7A1E7AF92 /* bimg_decode */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C35735362F701C60F81CACF9 /* libbimg_decodeDebug.a */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		453A098EB1F7B1C43AC29D2C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BDBDFF07297BA83EB24594A6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9C813B75504747A5EF9F009 /* image_decode.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		455A8886B174EB27FA96FBBB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "../../ios-arm/bin";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = bimg_decodeDebug;
+			};
+			name = Debug;
+		};
+		BF7663802BDCF606B4B498DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "../../ios-arm/bin";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = bimg_decodeRelease;
+			};
+			name = Release;
+		};
+		9002ACD3FC72AE4CC59128D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__STDC_LIMIT_MACROS,
+					__STDC_FORMAT_MACROS,
+					__STDC_CONSTANT_MACROS,
+					_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../../bx/include/compat/ios,
+					../../../../bx/include,
+					../../../../bimg/include,
+					../../../../bimg/3rdparty,
+				);
+				OBJROOT = "../../ios-arm/obj/Universal/Debug/bimg_decode";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+				);
+				OTHER_LDFLAGS = (
+					"-lc++",
+				);
+				SDKROOT = iphoneos;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../../ios-arm/bin";
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Debug;
+		};
+		0B264BE37761ABA680562836 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__STDC_LIMIT_MACROS,
+					__STDC_FORMAT_MACROS,
+					__STDC_CONSTANT_MACROS,
+					NDEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../../bx/include/compat/ios,
+					../../../../bx/include,
+					../../../../bimg/include,
+					../../../../bimg/3rdparty,
+				);
+				OBJROOT = "../../ios-arm/obj/Universal/Release/bimg_decode";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wfatal-errors",
+					"-Wunused-value",
+					"-Wundef",
+				);
+				OTHER_LDFLAGS = (
+					"-lc++",
+				);
+				SDKROOT = iphoneos;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../../ios-arm/bin";
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E37C12144F3ABB4AD804A7B2 /* Build configuration list for PBXNativeTarget "libbimg_decodeDebug.a" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				455A8886B174EB27FA96FBBB /* Debug */,
+				BF7663802BDCF606B4B498DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug";
+		};
+		1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "bimg_decode" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9002ACD3FC72AE4CC59128D5 /* Debug */,
+				0B264BE37761ABA680562836 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug";
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = __RootObject_ /* Project object */;
+}

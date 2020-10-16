@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -99,11 +99,12 @@
 				TargetAttributes = {
 					CFB2FD1C25140981006825CF = {
 						CreatedOnToolsVersion = 11.3.1;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
 			buildConfigurationList = CFB2FD1825140981006825CF /* Build configuration list for PBXProject "imgui-lib" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -184,7 +185,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -236,7 +237,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -249,7 +250,12 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9SW9XU5S9Z;
-				HEADER_SEARCH_PATHS = "../../3rdparty/bgfx/3rdparty/dear-imgui/";
+				HEADER_SEARCH_PATHS = (
+					"../../3rdparty/bgfx/3rdparty/dear-imgui/",
+					../../3rdparty/bgfx/3rdparty,
+					../../3rdparty/bx/include,
+				);
+				OTHER_CFLAGS = "-frtti";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -262,7 +268,12 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9SW9XU5S9Z;
-				HEADER_SEARCH_PATHS = "../../3rdparty/bgfx/3rdparty/dear-imgui/";
+				HEADER_SEARCH_PATHS = (
+					"../../3rdparty/bgfx/3rdparty/dear-imgui/",
+					../../3rdparty/bgfx/3rdparty,
+					../../3rdparty/bx/include,
+				);
+				OTHER_CFLAGS = "-frtti";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

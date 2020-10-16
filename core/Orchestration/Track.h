@@ -32,6 +32,8 @@ public:
     std::mutex stop_lock;
     std::mutex end_lock;
     std::mutex destroy_lock;
+    int counter = 0;
+    int divider = 1;
 
     double beat;
     double increment;
@@ -138,6 +140,20 @@ public:
     void AMGTrackWait() {
         end_lock.lock();
         end_lock.unlock();
+    }
+
+    void GRender(NVGcontext *nvg, float dTime) override {
+
+        if (counter == 0) {
+            auto lmidi = &MEngine::getMEngine();
+            uint8_t data[100] = {0xF0, 0x01, static_cast<char> (objects.size())};
+            int numbytes = 3;
+            for (auto const &obj : objects) {
+                numbytes += obj->BRender(&data[numbytes]);
+            }
+            lmidi->sendMidi(data, 0, numbytes, 0);
+        }
+        counter = (counter + 1) % divider;
     }
 
     static void AMGTrackRun(AMGTrack * track) {

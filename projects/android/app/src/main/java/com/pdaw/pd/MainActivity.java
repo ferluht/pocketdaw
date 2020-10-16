@@ -454,7 +454,7 @@ public class MainActivity extends NativeActivity {
     {
         if (inputPort != null) {
             try {
-                inputPort.send(msg, offset, length);
+                inputPort.send(msg, offset, length, timestamp);
             } catch (IOException e) {
                 e.printStackTrace();
             }

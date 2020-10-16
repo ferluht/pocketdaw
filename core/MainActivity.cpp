@@ -5,10 +5,12 @@
 #include <nanovg/nanovg_bgfx.h>
 #include <nanovg/nanovg.h>
 #include <AMGEngine.h>
-
-//#ifndef TARGET_IOS
 #include <Synth.h>
-//#endif
+
+#ifdef TARGET_IOS
+#include <CoreFoundation/CoreFoundation.h>
+#include <unistd.h>
+#endif
 
 namespace
 {
@@ -62,7 +64,6 @@ namespace
                     , 0
             );
 
-//            const bgfx::RendererType::Enum renderer = bgfx::getRendererType();
 //            float texelHalf = bgfx::RendererType::Direct3D9 == renderer ? 0.5f : 0.0f;
 //            bool originBottomLeft = bgfx::RendererType::OpenGL == renderer
 //                                    || bgfx::RendererType::OpenGLES == renderer;
@@ -70,8 +71,22 @@ namespace
             imguiCreate();
 
             m_nvg = nvgCreate(1, 0);
+            
+//            bgfx::setViewMode(0, bgfx::ViewMode::Sequential);
 
+#ifdef TARGET_IOS
+            CFURLRef droidsans_url = CFBundleCopyResourceURL(CFBundleGetMainBundle(),
+                                                            CFSTR("droidsans.ttf"), NULL,
+                                                            NULL);
+            unsigned char droidsans_path[1024];
+            CFURLGetFileSystemRepresentation(droidsans_url, true, droidsans_path, sizeof(droidsans_path));
+            
+            CFRelease(droidsans_url);
+            
+            int32_t ret = createFont(m_nvg, "sans", (char*)droidsans_path);
+#else
             createFont(m_nvg, "sans", "droidsans.ttf");
+#endif
 
             GUI::GEngine::getGEngine().setDisplay(m_nvg, m_width, m_height);
 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "GUI::GObject::GRender_(NVGcontext*, float):G.h">
+         <PersistentStrings>
+            <PersistentString
+               value = "*gr">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GUI::AMGCanvas::GDraw(NVGcontext*):Canvas.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "GUI::GEngine::Render():G.h">
+      </ContextState>
+      <ContextState
+         contextName = "(anonymous namespace)::MainActivity::init(int, char const* const*, unsigned int, unsigned int):MainActivity.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "CFBundleGetMainBundle()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

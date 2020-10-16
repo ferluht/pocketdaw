@@ -1,0 +1,540 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		67F84191538C3739BC5091ED /* texturec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F622A0656293A2DE2BB21C67 /* texturec.cpp */; };
+		1CD8A7C70814AB317126C328 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB87401217A0273CE04CB7D5 /* Cocoa.framework */; };
+		8CB7F55B784E38112103AF11 /* libbimg_decodeDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B01A504A79406B3B07B7669 /* libbimg_decodeDebug.a */; };
+		7939D915E5AD6E73AEF7BB82 /* libbimg_encodeDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 085BF721F45B8B9C1D24F820 /* libbimg_encodeDebug.a */; };
+		B2F779599EA1AF688772B783 /* libbimgDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 81FE650EEDC4C22A3620518D /* libbimgDebug.a */; };
+		11CC51E27D92AEFEC6ED3C61 /* libbxDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 005465BDEC66651695504203 /* libbxDebug.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0E0F2975FAD15999A31F6B15 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9328759A7FBFB74F28742E50 /* bimg_decode.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7D6367F06989315752CFB622;
+			remoteInfo = "libbimg_decodeDebug.a";
+		};
+		E8B01300D47344247DC155A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9328759A7FBFB74F28742E50 /* bimg_decode.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C35735362F701C60F81CACF9;
+			remoteInfo = "libbimg_decodeDebug.a";
+		};
+		D29198A43EB2E14E07B51C4D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 572780B8C39B15168CE56225 /* bimg_encode.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 67FFD46E53259FD53C6B24A1;
+			remoteInfo = "libbimg_encodeDebug.a";
+		};
+		AC33832F1854CCD9E15607D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 572780B8C39B15168CE56225 /* bimg_encode.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6D1E0A3AD936F163A2E380FD;
+			remoteInfo = "libbimg_encodeDebug.a";
+		};
+		EBB30E0BD7899508C033B05B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D055C2DFBCFFF7EEA5D0FF09 /* bimg.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5ACAB1E8C601FA7FCF0B5EA3;
+			remoteInfo = "libbimgDebug.a";
+		};
+		E57CF2AFD15279ADBAFC9300 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D055C2DFBCFFF7EEA5D0FF09 /* bimg.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 00D72F0FECD05861D53DEF71;
+			remoteInfo = "libbimgDebug.a";
+		};
+		585FEAF6C41C932D4DE77E95 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F4685779607AFF1FE9CB915F /* bx.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D5D335834140F17D0A3489DB;
+			remoteInfo = "libbxDebug.a";
+		};
+		89CC2694F589CFCA7E54BB32 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F4685779607AFF1FE9CB915F /* bx.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B1D4BC607ACD48FB0CAE88A;
+			remoteInfo = "libbxDebug.a";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F622A0656293A2DE2BB21C67 /* texturec.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "texturec.cpp"; path = "texturec.cpp"; sourceTree = "<group>"; };
+		AB87401217A0273CE04CB7D5 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Cocoa.framework"; path = "/System/Library/Frameworks/Cocoa.framework"; sourceTree = "<absolute>"; };
+		09FDAD81F5F6D6D3DE636DE4 /* texturecDebug */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "texturecDebug"; path = "texturecDebug"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9328759A7FBFB74F28742E50 /* bimg_decode.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "bimg_decode.xcodeproj"; path = "bimg_decode.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		572780B8C39B15168CE56225 /* bimg_encode.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "bimg_encode.xcodeproj"; path = "bimg_encode.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		D055C2DFBCFFF7EEA5D0FF09 /* bimg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "bimg.xcodeproj"; path = "bimg.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		F4685779607AFF1FE9CB915F /* bx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "bx.xcodeproj"; path = "bx.xcodeproj"; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9CFE183588A84E447179565F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CD8A7C70814AB317126C328 /* Cocoa.framework in Frameworks */,
+				8CB7F55B784E38112103AF11 /* libbimg_decodeDebug.a in Frameworks */,
+				7939D915E5AD6E73AEF7BB82 /* libbimg_encodeDebug.a in Frameworks */,
+				B2F779599EA1AF688772B783 /* libbimgDebug.a in Frameworks */,
+				11CC51E27D92AEFEC6ED3C61 /* libbxDebug.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F0F8A1B65C655DB12559F50E /* texturec */ = {
+			isa = PBXGroup;
+			children = (
+				BC0E2E0328252C99719CB7BA /* bimg */,
+				438D2FD8AFC4776FB8CEDB92 /* Frameworks */,
+				80230F966C1D38E8558ACEF8 /* Products */,
+				97ECDFD383E608266C539F36 /* Projects */,
+			);
+			name = "texturec";
+			path = ".";
+			sourceTree = "<group>";
+		};
+		BC0E2E0328252C99719CB7BA /* bimg */ = {
+			isa = PBXGroup;
+			children = (
+				FDC2730569FABB9C720420C0 /* tools */,
+			);
+			name = "bimg";
+			path = "../../../../bimg";
+			sourceTree = "<group>";
+		};
+		FDC2730569FABB9C720420C0 /* tools */ = {
+			isa = PBXGroup;
+			children = (
+				21D0ADF60D219938368587FA /* texturec */,
+			);
+			name = "tools";
+			path = "tools";
+			sourceTree = "<group>";
+		};
+		21D0ADF60D219938368587FA /* texturec */ = {
+			isa = PBXGroup;
+			children = (
+				F622A0656293A2DE2BB21C67 /* texturec.cpp */,
+			);
+			name = "texturec";
+			path = "texturec";
+			sourceTree = "<group>";
+		};
+		438D2FD8AFC4776FB8CEDB92 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AB87401217A0273CE04CB7D5 /* Cocoa.framework */,
+			);
+			name = "Frameworks";
+			sourceTree = "<group>";
+		};
+		80230F966C1D38E8558ACEF8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				09FDAD81F5F6D6D3DE636DE4 /* texturecDebug */,
+			);
+			name = "Products";
+			sourceTree = "<group>";
+		};
+		97ECDFD383E608266C539F36 /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				9328759A7FBFB74F28742E50 /* bimg_decode.xcodeproj */,
+				572780B8C39B15168CE56225 /* bimg_encode.xcodeproj */,
+				D055C2DFBCFFF7EEA5D0FF09 /* bimg.xcodeproj */,
+				F4685779607AFF1FE9CB915F /* bx.xcodeproj */,
+			);
+			name = "Projects";
+			path = ".";
+			sourceTree = "<group>";
+		};
+		EDCDFEC559E36C1CE29F467D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3B01A504A79406B3B07B7669 /* libbimg_decodeDebug.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		310867A81DCB97CCC618A948 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				085BF721F45B8B9C1D24F820 /* libbimg_encodeDebug.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0A0844D976D0115D3F611A6F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				81FE650EEDC4C22A3620518D /* libbimgDebug.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		171E1B1E03DEABC26CFB93CD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				005465BDEC66651695504203 /* libbxDebug.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CFEF08ED3B5CC4E704505C45 /* texturec */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 580B3F2544B574342D867C4F /* Build configuration list for PBXNativeTarget "texturec" */;
+			buildPhases = (
+				7AEC872A6696BD394F67C554 /* Resources */,
+				B293D02F9E3D063F870E0E5A /* Sources */,
+				9CFE183588A84E447179565F /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				59CD7EFFC5E2EC554E9FC6B6 /* PBXTargetDependency */,
+				9D07E7E189CA170632182982 /* PBXTargetDependency */,
+				D650662C421934B00BAA3CC2 /* PBXTargetDependency */,
+				BA9713C7A657A46B0F758C76 /* PBXTargetDependency */,
+			);
+			name = "texturec";
+			productInstallPath = "$(HOME)/bin";
+			productName = "texturec";
+			productReference = 09FDAD81F5F6D6D3DE636DE4 /* texturecDebug */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		__RootObject_ /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "texturec" */;
+			compatibilityVersion = "Xcode 8.0";
+			hasScannedForEncodings = 1;
+			mainGroup = F0F8A1B65C655DB12559F50E /* texturec */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EDCDFEC559E36C1CE29F467D /* Products */;
+					ProjectRef = 9328759A7FBFB74F28742E50 /* bimg_decode.xcodeproj */;
+				},
+				{
+					ProductGroup = 310867A81DCB97CCC618A948 /* Products */;
+					ProjectRef = 572780B8C39B15168CE56225 /* bimg_encode.xcodeproj */;
+				},
+				{
+					ProductGroup = 0A0844D976D0115D3F611A6F /* Products */;
+					ProjectRef = D055C2DFBCFFF7EEA5D0FF09 /* bimg.xcodeproj */;
+				},
+				{
+					ProductGroup = 171E1B1E03DEABC26CFB93CD /* Products */;
+					ProjectRef = F4685779607AFF1FE9CB915F /* bx.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				CFEF08ED3B5CC4E704505C45 /* texturecDebug */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		3B01A504A79406B3B07B7669 /* libbimg_decodeDebug.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "../../../../bimg/scripts/libbimg_decodeDebug.a";
+			remoteRef = 0E0F2975FAD15999A31F6B15 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		085BF721F45B8B9C1D24F820 /* libbimg_encodeDebug.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "../../../../bimg/scripts/libbimg_encodeDebug.a";
+			remoteRef = D29198A43EB2E14E07B51C4D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		81FE650EEDC4C22A3620518D /* libbimgDebug.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "../../../../bimg/scripts/libbimgDebug.a";
+			remoteRef = EBB30E0BD7899508C033B05B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		005465BDEC66651695504203 /* libbxDebug.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "../../../../bx/scripts/libbxDebug.a";
+			remoteRef = 585FEAF6C41C932D4DE77E95 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7AEC872A6696BD394F67C554 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B293D02F9E3D063F870E0E5A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				67F84191538C3739BC5091ED /* texturec.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+/* End PBXVariantGroup section */
+
+/* Begin PBXTargetDependency section */
+		59CD7EFFC5E2EC554E9FC6B6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libbimg_decodeDebug.a";
+			targetProxy = E8B01300D47344247DC155A0 /* PBXContainerItemProxy */;
+		};
+		9D07E7E189CA170632182982 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libbimg_encodeDebug.a";
+			targetProxy = AC33832F1854CCD9E15607D8 /* PBXContainerItemProxy */;
+		};
+		D650662C421934B00BAA3CC2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libbimgDebug.a";
+			targetProxy = E57CF2AFD15279ADBAFC9300 /* PBXContainerItemProxy */;
+		};
+		BA9713C7A657A46B0F758C76 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libbxDebug.a";
+			targetProxy = 89CC2694F589CFCA7E54BB32 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		5164F437BDD249B706BC04B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = ../../osx_universal/bin;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_NAME = texturecDebug;
+			};
+			name = Debug;
+		};
+		CB33FA3C37ED64E7C04C7FC1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = ../../osx_universal/bin;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_NAME = texturecRelease;
+			};
+			name = Release;
+		};
+		9441076500D1C84F09CDA967 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__STDC_LIMIT_MACROS,
+					__STDC_FORMAT_MACROS,
+					__STDC_CONSTANT_MACROS,
+					_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../../bx/include/compat/osx,
+					../../../../bx/include,
+					../../../../bimg/include,
+					../../../include,
+					../../../../bimg/3rdparty/iqa/include,
+				);
+				OBJROOT = ../../osx_universal/bin/Universal/Debug/texturec;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wshadow",
+					"-Wfatal-errors",
+					"-msse2",
+					"-Wunused-value",
+					"-Wundef",
+					"-target x86_64-apple-macos10.11",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wshadow",
+					"-Wfatal-errors",
+					"-msse2",
+					"-Wunused-value",
+					"-Wundef",
+					"-target x86_64-apple-macos10.11",
+				);
+				SDKROOT = macosx;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = ../../osx_universal/bin;
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Debug;
+		};
+		AF35985F1B50FB0064720B95 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__STDC_LIMIT_MACROS,
+					__STDC_FORMAT_MACROS,
+					__STDC_CONSTANT_MACROS,
+					NDEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../../bx/include/compat/osx,
+					../../../../bx/include,
+					../../../../bimg/include,
+					../../../include,
+					../../../../bimg/3rdparty/iqa/include,
+				);
+				OBJROOT = ../../osx_universal/bin/Universal/Release/texturec;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wshadow",
+					"-Wfatal-errors",
+					"-msse2",
+					"-Wunused-value",
+					"-Wundef",
+					"-target x86_64-apple-macos10.11",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffast-math",
+					"-fomit-frame-pointer",
+					"-Wshadow",
+					"-Wfatal-errors",
+					"-msse2",
+					"-Wunused-value",
+					"-Wundef",
+					"-target x86_64-apple-macos10.11",
+				);
+				SDKROOT = macosx;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = ../../osx_universal/bin;
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		580B3F2544B574342D867C4F /* Build configuration list for PBXNativeTarget "texturecDebug" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5164F437BDD249B706BC04B7 /* Debug */,
+				CB33FA3C37ED64E7C04C7FC1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug";
+		};
+		1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "texturec" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9441076500D1C84F09CDA967 /* Debug */,
+				AF35985F1B50FB0064720B95 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug";
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = __RootObject_ /* Project object */;
+}

@@ -481,6 +481,38 @@ namespace GUI {
         }
 
         void Render() {
+            
+//            // Set view 0 default viewport.
+//            bgfx::setViewRect(0, 0, 0, uint16_t(screen_width), uint16_t(screen_height) );
+//
+//            // This dummy draw call is here to make sure that view 0 is cleared
+//            // if no other draw calls are submitted to view 0.
+//            bgfx::touch(0);
+//
+//            nvgBeginFrame(nvg, float(screen_width), float(screen_height), 1.0f);
+//
+//            nvgBeginPath(nvg);
+//            nvgRect(nvg, 100, 100, 150, 150);
+//            nvgFillColor(nvg, nvgRGB(50, 50, 255));
+//            nvgFill(nvg);
+//            nvgClosePath(nvg);
+//
+//            nvgFontSize(nvg, 10);
+//            nvgFontFace(nvg, "sans");
+//            nvgTextAlign(nvg,NVG_ALIGN_CENTER|NVG_ALIGN_MIDDLE);
+//
+//            nvgFillColor(nvg, nvgRGB(0, 255, 0));
+//            char const label[10] = "test";
+//            nvgText(nvg, 300, 200, label, NULL);
+//            nvgClosePath(nvg);
+//
+//            focusStack.front()->GRender_(nvg, (float) monitor_.GetCurrentTime());
+//
+//            nvgEndFrame(nvg);
+//
+//            bgfx::frame();
+//
+//            return;
 
             struct timespec res;
             clock_gettime(CLOCK_THREAD_CPUTIME_ID, &res);
