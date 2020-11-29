@@ -5,10 +5,10 @@ apply plugin: 'com.google.firebase.crashlytics'
 android {
     signingConfigs {
         release {
-            storeFile file('c')
-            storePassword 'c'
-            keyAlias = 'c'
-            keyPassword 'c'
+            storeFile file('pocketdaw')
+            storePassword 'pocketdaw'
+            keyAlias = 'pocketdaw'
+            keyPassword 'pocketdaw'
         }
     }
     compileSdkVersion 28
@@ -18,7 +18,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 30 // Application version, 3 digits, major/minor/revision
-        versionName "0.0.2"
+        versionName "0.0.3"
     }
     // One APK per ABI. Generate also one multi-abi APK.
     splits {

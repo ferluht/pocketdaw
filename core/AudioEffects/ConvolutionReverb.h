@@ -20,8 +20,6 @@ class ConvolutionReverb : public AudioEffect{
 
     const size_t blockSize = 1024;
 
-    GUI::Encoder * drywet;
-
     int sample_counter = 0;
 
     AudioFile<float> ir;
@@ -49,6 +47,8 @@ class ConvolutionReverb : public AudioEffect{
     fftconvolver::FFTConvolver convolver;
 
 public:
+
+    GUI::Encoder * drywet;
 
     ConvolutionReverb(const char * ir);
 

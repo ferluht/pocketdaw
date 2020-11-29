@@ -18,12 +18,14 @@ private:
 
     int focus_track;
     AMGMasterTrack * Master;
+    GUI::Button * input_button;
     GUI::Button * mapping_mode;
     GUI::Button * metronome_button;
     GUI::Button * device_menu;
     GUI::ProgressButton * linkButton;
     AMGObject * mapping_object;
     GUI::Menu * midiDeviceMenu;
+    GUI::Menu * audioDeviceMenu;
     GUI::Button * midi_device_menu;
     GUI::Button * record_button;
     GUI::Button * save_button;
@@ -33,7 +35,7 @@ private:
 //    Oscilloscope * masterWaveform;
 
     float panel_height = 0.05f;
-    float panel_buttons_start_x = 0.06f;
+    float panel_buttons_start_x = 0.04f;
     float panel_button_ratio = 3;
     float panel_button_width = 0.1;
     float mc_height = 0;
@@ -65,6 +67,9 @@ public:
         GAttach(Master);
         MConnect(Master);
 
+        input_button = Master->input_button;
+        add_upper_panel_button(input_button);
+
         metronome_button = Master->metronome_button;
         add_upper_panel_button(metronome_button);
 
@@ -84,6 +89,7 @@ public:
         });
         *mapping_mode = true;
         add_upper_panel_button(mapping_mode);
+        Master->MSetMCHeight(0);
 
         float led_height = panel_height * 0.4f;
         midiLeds[0] = new GUI::Led(false);
@@ -147,15 +153,45 @@ public:
 
         cpuload = new GUI::TimeGraph(100);
         cpuload->GPlace({panel_buttons_start_x + upper_panel_buttons.size() * panel_button_width, 0});
-        cpuload->GSetWidth(panel_button_width * 1.5f);
+        cpuload->GSetWidth(panel_button_width);
         cpuload->GSetHeight(panel_height);
         GAttach(cpuload);
 
         FPS = new GUI::Text("0", WHITE);//, NVG_ALIGN_CENTER | NVG_ALIGN_MIDDLE);
-        FPS->GPlace({panel_buttons_start_x + (upper_panel_buttons.size() + 1.5f) * panel_button_width, 0});
+        FPS->GPlace({panel_buttons_start_x + (upper_panel_buttons.size() + 1) * panel_button_width, 0});
         FPS->GSetWidth(panel_button_width);
         FPS->GSetHeight(panel_height);
         GAttach(FPS);
+
+
+        audioDeviceMenu = new GUI::Menu("Audio device");
+        GAttach(audioDeviceMenu);
+
+        cpuload->GSetTapEndCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
+            audioDeviceMenu->clear();
+            auto audio = &AEngine::getAEngine();
+            audio->getDevices();
+            auto anames = audio->adevicesinfo;
+            for (auto const& name : anames.inputs) {
+                this->audioDeviceMenu->addButton(
+                        new GUI::Button(name.first.c_str(), [audio, name](bool state){
+                            audio->stop();
+                            audio->setInputDevice(name.first);
+                            //midi->connectDevice(name);
+                            audio->start();
+                        }));
+            }
+            for (auto const& name : anames.outputs) {
+                this->audioDeviceMenu->addButton(
+                        new GUI::Button(name.first.c_str(), [audio, name](bool state){
+                            audio->stop();
+                            audio->setOutputDevice(name.first);
+                            //midi->connectDevice(name);
+                            audio->start();
+                        }));
+            }
+            return audioDeviceMenu;
+        });
 
 //        AMGEngine::graphic->getGEngine().fps;
 
@@ -252,9 +288,9 @@ public:
         if (cmd.status == CC_HEADER && cmd.data1 == 100) {
             if (cmd.data2 > 0) record_button->state ^= true;
         }
-        auto lmidi = &MEngine::getMEngine();
-        uint8_t data[3] = {cmd.status, cmd.data1, cmd.data2};
-        lmidi->sendMidi(data, 0, 3, 0);
+//        auto lmidi = &MEngine::getMEngine();
+//        uint8_t data[3] = {cmd.status, cmd.data1, cmd.data2};
+//        lmidi->sendMidi(data, 0, 3, 0);
         MOut(cmd);
     }
 

@@ -12,13 +12,13 @@ set (LINK_DIR ${CMAKE_CURRENT_LIST_DIR}/../3rdparty/link-android)
 include(${LINK_DIR}/AbletonLinkConfig.cmake)
 include_directories(${LINK_DIR}/include)
 include_directories(${LINK_DIR}/modules/asio-standalone/asio/include)
-include_directories(src/main/cpp/Link/android-ifaddrs)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/Link/android-ifaddrs)
 
 # set up common compile options
 #set(CMAKE_C_FLAGS “${CMAKE_C_FLAGS} ”)
 #set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -w -fno-exceptions")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Ofast")
-set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -fuse-ld=lld -Wl,--build-id=sha1")
+set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--build-id=sha1")
 set(CMAKE_CXX11_EXTENSION_COMPILE_OPTION "-std=c++14")
 
 #add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../helpers/ndk_helper ${CMAKE_CURRENT_LIST_DIR}/../.build/ndkHelper/${CMAKE_BUILD_TYPE}/${ANDROID_ABI})
@@ -76,26 +76,6 @@ target_include_directories(bgfx PRIVATE
         ${BGFX_DIRECTORY}/3rdparty/khronos
         )
 
-
-
-include_directories(
-        ${CMAKE_CURRENT_SOURCE_DIR}/../core
-        ${CMAKE_CURRENT_SOURCE_DIR}/../engine
-        ${CMAKE_CURRENT_SOURCE_DIR}/../helpers
-        ${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty
-        ${CMAKE_CURRENT_SOURCE_DIR}/Link/android-ifaddrs
-
-        ${BGFX_DIRECTORY}/include
-        ${BGFX_DIRECTORY}/3rdparty
-        ${BGFX_DIRECTORY}/3rdparty/dear-imgui
-
-        ${BX_DIRECTORY}/include
-
-        ${BIMG_DIRECTORY}/include
-
-        ${OBOE_DIR}/include
-        )
-
 add_library(native_app_glue STATIC ${ANDROID_NDK}/sources/android/native_app_glue/android_native_app_glue.c)
 target_include_directories(native_app_glue PUBLIC ${ANDROID_NDK}/sources/android/native_app_glue)
 
@@ -117,6 +97,44 @@ target_include_directories(nanovg-lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/nanovg)
 ### INCLUDE OBOE LIBRARY ###
 set (OBOE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/oboe)
 add_subdirectory(${OBOE_DIR} ./oboe-bin)
+
+### INCLUDE LIBPD LIBRARY ###
+
+#set (LIBPD_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/libpd)
+#add_subdirectory(${LIBPD_DIR} ./libpd-bin)
+#target_compile_options(libpd PUBLIC -DMICROSOFT_STUPID_SORT -DANDROID_ABI=arm64-v8a) #PD -DHAVE_UNISTD_H -DHAVE_LIBDL -DUSEAPI_DUMMY -w)
+##set_target_properties(libpd PROPERTIES IMPORTED_LOCATION
+##        ${CMAKE_CURRENT_LIST_DIR}/../projects/android/app/src/main/jniLibs/${ANDROID_ABI}/libpd.so)
+#
+#set_target_properties(libpd PROPERTIES
+##        ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/../projects/android/app/src/main/jniLibs/${ANDROID_ABI}/"
+#        LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/../projects/android/app/src/main/jniLibs/${ANDROID_ABI}/"
+##        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/../projects/android/app/src/main/jniLibs/${ANDROID_ABI}/")
+#        )
+##target_link_libraries(libpd PUBLIC dl atomic)
+
+include_directories(
+        ${CMAKE_CURRENT_SOURCE_DIR}/../core
+        ${CMAKE_CURRENT_SOURCE_DIR}/../engine
+        ${CMAKE_CURRENT_SOURCE_DIR}/../helpers
+        ${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty
+        ${CMAKE_CURRENT_SOURCE_DIR}/Link/android-ifaddrs
+
+        ${BGFX_DIRECTORY}/include
+        ${BGFX_DIRECTORY}/3rdparty
+        ${BGFX_DIRECTORY}/3rdparty/dear-imgui
+
+        ${BX_DIRECTORY}/include
+
+        ${BIMG_DIRECTORY}/include
+
+        ${OBOE_DIR}/include
+
+#        ${LIBPD_DIR}/cpp
+#        ${LIBPD_DIR}/libpd_wrapper/util
+#        ${LIBPD_DIR}/libpd_wrapper
+#        ${LIBPD_DIR}/pure-data/src
+)
 
 # add sources
 add_library(
@@ -142,6 +160,11 @@ add_library(
         AudioEffects/ThreeBandEQ.cpp
         AudioEffects/Saturator.cpp
         AudioEffects/Calibrator.cpp
+        AudioEffects/PitchShifter.cpp
+        AudioEffects/PitchTracker.cpp
+
+        AudioEffects/Looper.cpp
+        AudioEffects/LoopStation.cpp
 
         AudioEffects/FFTConvolver/AudioFFT.cpp
         AudioEffects/FFTConvolver/FFTConvolver.cpp
@@ -187,6 +210,9 @@ add_library(
         Instruments/SoundObject5.cpp
         Instruments/SplineSynth.cpp
         Instruments/DoubleSplineSynth.cpp
+        Instruments/Apparatus.cpp
+
+#        Instruments/PDContainer.cpp
 
         Instruments/AnalogDrums/AnalogDrum.cpp
         Instruments/AnalogDrums/Kick.cpp
@@ -226,8 +252,12 @@ add_library(
         )
 
 target_compile_definitions(pocketdaw PRIVATE ANDROID=1 LINK_PLATFORM_LINUX=1 PD=1 ABL_LINK_OFFSET_MS=23)
-#target_compile_options(pocketdaw PRIVATE -std=c++14)
 
+#set_target_properties(pocketdaw PROPERTIES
+##        ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/../projects/android/app/src/main/jniLibs/${ANDROID_ABI}/"
+#        LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/../projects/android/app/src/main/jniLibs/${ANDROID_ABI}/"
+##        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/../projects/android/app/src/main/jniLibs/${ANDROID_ABI}/")
+#        )
 find_library(log-lib log)
 
 # Export ANativeActivity_onCreate(),
@@ -239,6 +269,7 @@ target_link_libraries(
         android
 #        aaudio
         oboe
+#        libpd
         native_app_glue
         EGL
         GLESv3

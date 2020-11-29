@@ -42,6 +42,7 @@ namespace GUI {
         size_t len = strlen(label_);
         label = new char[len + 1];
         strncpy(label, label_, len);
+        label[len] = 0;
 
         keymap = default_map_;
         setvalue(default_value_);

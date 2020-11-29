@@ -21,9 +21,18 @@ class Oscilloscope : public AudioEffect{
 
     GUI::Plot<GUI::TimeGraph> * plot;
 
+    float avg = 0, avg_env = 0;
+
 public:
 
     Oscilloscope();
+
+    inline float envelope(float sample, float w, float w_env){
+        avg = w*sample + (1-w)*avg;
+        float i = std::abs(sample - avg);
+        avg_env = w_env*i + (1-w_env)*avg_env;
+        return avg_env;
+    }
 
     bool ARender(double beat, float * lsample, float * rsample) override ;
 

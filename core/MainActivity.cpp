@@ -91,12 +91,14 @@ namespace
             GUI::GEngine::getGEngine().setDisplay(m_nvg, m_width, m_height);
 
 //#ifndef TARGET_IOS
+            eng = new AMGEngine();
+
             S = new Synth();
             S->GPlace({0, 0});
             S->GSetHeight(1);
             S->GSetWidth(1);
 
-            eng = new AMGEngine(S);
+            eng->SetRoot(S);
 
             eng->audio->start();
 //#else

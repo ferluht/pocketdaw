@@ -183,4 +183,5 @@ bool Instrument<State>::ARender(double beat, float * lsample, float * rsample)
 
 static auto isInstrument = GUI::IsType<InstrumentBase>;
 
+
 #endif //PD_INSTRUMENT_H

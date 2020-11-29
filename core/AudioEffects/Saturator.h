@@ -13,9 +13,6 @@
 
 class Saturator : public AudioEffect {
 
-    GUI::AnalogEncoder * drywet;
-    GUI::AnalogEncoder * factor;
-
     GUI::Plot<GUI::TimeGraph> * plot;
 
     int type = 0;
@@ -46,6 +43,9 @@ class Saturator : public AudioEffect {
     }
 
 public:
+
+    GUI::AnalogEncoder * drywet;
+    GUI::AnalogEncoder * factor;
 
     Saturator();
 

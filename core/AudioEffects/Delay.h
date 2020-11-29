@@ -17,13 +17,13 @@ class Delay : public AudioEffect{
 
     float * buffer;
 
-    GUI::Encoder * delay_time;
-    GUI::Encoder * feedback;
-    GUI::Encoder * drywet;
-
     GUI::Led * error_led;
 
 public:
+
+    GUI::Encoder * delay_time;
+    GUI::Encoder * feedback;
+    GUI::Encoder * drywet;
 
     Delay();
 

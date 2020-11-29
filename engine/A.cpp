@@ -4,8 +4,9 @@
 
 #include "A.h"
 
-float AObject::sample_rate;
+float AObject::sample_rate = 48000;
 float AObject::latency = 0;
+int32_t AObject::latency_samples = 0;
 
 bool AEngine::start() {
 #ifndef TARGET_IOS
@@ -13,17 +14,11 @@ bool AEngine::start() {
         setAudioApi(oboe::AudioApi::AAudio);
     else
         setAudioApi(oboe::AudioApi::OpenSLES);
-    AObject::sample_rate = 48000;
-    if ((mRecordingDeviceId == oboe::kUnspecified) ||
-        (mPlaybackDeviceId == oboe::kUnspecified)) {
-        getDevices();
-        setInputDevice(getInputs()[0]);
-        setOutputDevice(getOutputs()[1]);
-    }
     auto success = openStreams() == oboe::Result::OK;
     if (success) {
         mFullDuplexPass.setRoot(root_);
         mFullDuplexPass.start();
+        AObject::latency_samples = mFullDuplexPass.getLatency();
         return true;
     }
     return false;
@@ -200,11 +195,16 @@ oboe::AudioStreamBuilder *AEngine::setupCommonStreamParameters(
  */
 void AEngine::closeStream(oboe::ManagedStream &stream) {
     if (stream) {
-        oboe::Result result = stream->close();
+        oboe::Result result = stream->stop();
         if (result != oboe::Result::OK) {
-            LOGE("Error closing stream. %s", oboe::convertToText(result));
+            LOGW("Error stopping stream: %s", oboe::convertToText(result));
         }
-        LOGW("Successfully closed streams");
+        result = stream->close();
+        if (result != oboe::Result::OK) {
+            LOGE("Error closing stream: %s", oboe::convertToText(result));
+        } else {
+            LOGW("Successfully closed streams");
+        }
         stream.reset();
     }
 }

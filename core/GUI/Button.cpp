@@ -48,12 +48,12 @@ namespace GUI {
             nvgFill(nvg);
         }
 
-        if (state) {
-            nvgFillColor(nvg, GEngine::ui_theme->BUTTON_OUTLINE_ON_COLOR);
-        } else {
-            nvgFillColor(nvg, GEngine::ui_theme->BUTTON_OUTLINE_OFF_COLOR);
-        }
-        nvgStroke(nvg);
+//        if (state) {
+//            nvgFillColor(nvg, GEngine::ui_theme->BUTTON_OUTLINE_ON_COLOR);
+//        } else {
+//            nvgFillColor(nvg, GEngine::ui_theme->BUTTON_OUTLINE_OFF_COLOR);
+//        }
+//        nvgStroke(nvg);
 
         nvgFontSize(nvg, global.s.y * 0.7);
 //        if ((global.s.y * strlen(labelOn) > global.s.x) ||
@@ -101,12 +101,12 @@ namespace GUI {
         }
         nvgFill(nvg);
 
-        if (state) {
-            nvgFillColor(nvg, GEngine::ui_theme->BUTTON_OUTLINE_ON_COLOR);
-        } else {
-            nvgFillColor(nvg, GEngine::ui_theme->BUTTON_OUTLINE_OFF_COLOR);
-        }
-        nvgStroke(nvg);
+//        if (state) {
+//            nvgFillColor(nvg, GEngine::ui_theme->BUTTON_OUTLINE_ON_COLOR);
+//        } else {
+//            nvgFillColor(nvg, GEngine::ui_theme->BUTTON_OUTLINE_OFF_COLOR);
+//        }
+//        nvgStroke(nvg);
 
         nvgBeginPath(nvg);
         nvgRect(nvg, global.c.x, global.c.y + 0.02f, global.s.x * percent, global.s.y * 0.96f);
@@ -158,6 +158,64 @@ namespace GUI {
         char const *label = s.c_str();
         nvgText(nvg, global.c.x + global.s.x/2, global.c.y + global.s.y/2, label, NULL);
         nvgClosePath(nvg);
+    }
+
+    void LooperButton::GDraw(NVGcontext *nvg) {
+        nvgBeginPath(nvg);
+
+        vecmath::Vec2 button_center(global.c.x + global.s.x/2, global.c.y + global.s.y/2);
+        float button_radius = global.s.x * 0.4f;
+
+        nvgBeginPath(nvg);
+        nvgArc(nvg, button_center.x, button_center.y, button_radius, 2 * M_PI * position + 0.5 * M_PI, 0.5 * M_PI, NVG_CCW);
+        nvgStrokeWidth(nvg, global.s.x * 0.1f);
+        nvgStrokeColor(nvg, arc_color);
+        nvgStroke(nvg);
+        nvgClosePath(nvg);
+        nvgStrokeWidth(nvg, 1);
+
+        nvgBeginPath(nvg);
+        nvgCircle(nvg, button_center.x, button_center.y, button_radius * 0.98f);
+        if (state) {
+            if (flashing) {
+                flashing_counter = (flashing_counter + 1) % flashing_divider;
+                if (flashing_counter > flashing_divider / 2) {
+                    nvgFillColor(nvg, body_color);
+                } else {
+                    nvgFillColor(nvg, nextColor);
+                }
+            } else {
+                nvgFillColor(nvg, body_color);
+            }
+        } else {
+            nvgFillColor(nvg, MIDGREY);
+        }
+        nvgFill(nvg);
+        nvgClosePath(nvg);
+
+        nvgClosePath(nvg);
+    }
+
+    void XYButtonOverlay::GDraw(NVGcontext *nvg) {
+        nvgBeginPath(nvg);
+        nvgRect(nvg, 0, 0, GEngine::screen_width, GEngine::screen_height);
+        auto fc = DARKER;
+        fc.a = 0.2;
+        nvgFillColor(nvg, fc);
+        nvgFill(nvg);
+        nvgClosePath(nvg);
+
+        nvgBeginPath(nvg);
+        nvgFontSize(nvg, GEngine::screen_height * 0.1f);
+        nvgFontFace(nvg, "sans");
+        nvgTextAlign(nvg, NVG_ALIGN_CENTER | NVG_ALIGN_MIDDLE);
+
+        char buffer[100];
+        snprintf(buffer, sizeof buffer, "%s: %.2f   %s: %.2f", btn->xlabel, btn->xval, btn->ylabel, btn->yval);
+
+        nvgFillColor(nvg, WHITE);
+
+        nvgText(nvg, GEngine::screen_width / 2, GEngine::screen_height / 2, buffer, NULL);
     }
 
 //    void ValueButton::GDraw(NVGcontext *nvg) {

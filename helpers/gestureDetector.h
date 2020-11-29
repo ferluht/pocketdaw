@@ -34,7 +34,7 @@ namespace gestures {
 // Constants
 //--------------------------------------------------------------------------------
 const int32_t DOUBLE_TAP_TIMEOUT = 300 * 1000000;
-const int32_t TAP_TIMEOUT = 180 * 1000000;
+const int32_t TAP_TIMEOUT = 300 * 1000000;
 const int32_t DOUBLE_TAP_SLOP = 100;
 const int32_t TOUCH_SLOP = 8;
 

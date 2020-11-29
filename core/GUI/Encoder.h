@@ -52,8 +52,6 @@ namespace GUI {
 
         EncoderOverlay * overlay;
 
-        char * label;
-
         inline float value_range_guard(float value_) {
             if (value_ < lower_bound) value_ = lower_bound;
             if (value_ > upper_bound) value_ = upper_bound;
@@ -78,15 +76,19 @@ namespace GUI {
 
         inline void setangle(float angle_) {
             angle = angle_range_guard(angle_);
-            value = angle2value(angle);
-            callback(value);
+            setvalue(angle2value(angle));
         }
 
         std::function<void(float)> callback;
 
         float value;
+        float prev_value = 0;
 
     public:
+
+        char * label;
+        bool val_changed = false;
+        bool discrete = false;
 
         static const float RATIO;
 
@@ -101,8 +103,13 @@ namespace GUI {
             }
         }
 
+        inline void setdiscrete(bool discrete_) {
+            discrete = discrete_;
+        }
+
         inline virtual void setvalue(float value_) {
             value = value_range_guard(value_);
+            if (discrete) value = (int)(value + 0.5);
             angle = value2angle(value);
             callback(value);
         }
@@ -196,6 +203,12 @@ namespace GUI {
         }
 
         void MRender(double beat) override {
+            if (value != prev_value) {
+                prev_value = value;
+                val_changed = true;
+            } else {
+                val_changed = false;
+            }
             if (jack->isConnected()) *this << *jack;
             else *this << 0;
         }

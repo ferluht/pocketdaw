@@ -55,6 +55,9 @@ namespace GUI {
         TimeGraph(unsigned int num_points_) {
             number_of_points = num_points_;
             points = new float[number_of_points * 2];
+            for (int i = 0; i < num_points_ * 2; i++){
+                points[i] = 0;
+            }
             current_position = 0;
         }
 
@@ -64,6 +67,8 @@ namespace GUI {
     };
 
     class XYGraph : public BaseGraph {
+
+        friend class CircleGraph;
 
         int r;
 
@@ -79,6 +84,15 @@ namespace GUI {
         void update(float x, float y);
 
         void GDraw(NVGcontext * nvg) override ;
+    };
+
+    class CircleGraph : public XYGraph {
+
+    public:
+
+        CircleGraph(unsigned int num_points_) : XYGraph(num_points_) {}
+
+        void update(float x, float y);
     };
 
 }

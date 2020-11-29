@@ -37,20 +37,36 @@ Oscilloscope::Oscilloscope() : AudioEffect("Oscill")
 
 bool Oscilloscope::ARender(double beat, float *lsample, float *rsample) {
 
-//    if (*rsample > *trig / *scale) after_trig = 0;
-    if (*rsample > max) after_trig = 0;
+    float env = envelope(*lsample * 10, 0.01, 0.01);
+
+    if (env > *trig / *scale) after_trig = 0;
+    if (env > max) after_trig = 0;
+//
+//    if (after_trig < graph_points) {
+//        if (sample_counter < *time) {
+//            sample_counter++;
+//        } else {
+//            plot->graph->update(*rsample * *scale);
+//            sample_counter = 0;
+//            after_trig ++;
+//        }
+//    }
+//    if (*rsample > max) max = *rsample;
+//    max -= 0.00001;
 
     if (after_trig < graph_points) {
         if (sample_counter < *time) {
             sample_counter++;
         } else {
-            plot->graph->update(*rsample * *scale);
+            plot->graph->update(env * *scale);
             sample_counter = 0;
-            after_trig ++;
+            after_trig++;
         }
     }
-    if (*rsample > max) max = *rsample;
+
+    if (env > max) max = env;
     max -= 0.00001;
+
     return true;
 }
 

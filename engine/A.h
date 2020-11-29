@@ -36,6 +36,7 @@ public:
 
     static float sample_rate;
     static float latency;
+    static int32_t latency_samples;
 
     inline void ASetSampleRate(float sample_rate_) {sample_rate = sample_rate_;}
 
@@ -82,6 +83,7 @@ public:
 //        size_t bytesToZero = (byteDiff > 0) ? byteDiff : 0;
 //        memcpy(outputData, inputData, bytesToWrite);
 //        memset((u_char*) outputData + bytesToWrite, 0, bytesToZero);
+//        root_->ARender(&((static_cast<const float *>(inputData))[numInputFrames]), numInputFrames, static_cast<float *>(outputData), numOutputFrames);
         root_->ARender(static_cast<const float *>(inputData), numInputFrames, static_cast<float *>(outputData), numOutputFrames);
         return oboe::DataCallbackResult::Continue;
     }
@@ -159,6 +161,8 @@ public:
 
     void getRootDirectory();
 
+    void getDevices();
+
 private:
 
 #ifndef TARGET_IOS
@@ -187,8 +191,6 @@ private:
 #else
     //TODO
 #endif
-    
-    void getDevices();
 
 protected:
     AEngine() {

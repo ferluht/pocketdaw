@@ -389,19 +389,6 @@ namespace entry
 				gestures::GESTURE_STATE dragState = drag_detector_.Detect(event);
 				gestures::GESTURE_STATE pinchState = pinch_detector_.Detect(event);
 
-                // Handle drag state
-                if (tapState & gestures::GESTURE_STATE_ACTION) {
-                    // Otherwise, start dragging
-                    vecmath::Vec2 v;
-                    tap_detector_.GetPointer(v);
-                    eng->FindFocusObject(v);
-                    auto new_focus = eng->focusStack.back()->GTapEnd(v);
-//					eng->unfocus();
-                    eng->focusOn(new_focus);
-                    return 1;
-                }
-
-				// Handle drag state
 				if (doubleTapState & gestures::GESTURE_STATE_ACTION) {
 					// Otherwise, start dragging
 					vecmath::Vec2 v;
@@ -411,7 +398,16 @@ namespace entry
 //					eng->unfocus();
 					eng->focusOn(new_focus);
 					return 1;
-				}
+				} else if (tapState & gestures::GESTURE_STATE_ACTION) {
+                    // Otherwise, start dragging
+                    vecmath::Vec2 v;
+                    tap_detector_.GetPointer(v);
+                    eng->FindFocusObject(v);
+                    auto new_focus = eng->focusStack.back()->GTapEnd(v);
+//					eng->unfocus();
+                    eng->focusOn(new_focus);
+                    return 1;
+                }
 
 				// Handle drag state
 				if (dragState & gestures::GESTURE_STATE_START) {

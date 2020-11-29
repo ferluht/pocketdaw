@@ -77,6 +77,8 @@ public:
      */
     void setNumInputBurstsCushion(int32_t numInputBurstsCushion);
 
+    int32_t getLatency();
+
 private:
 
     // TODO add getters and setters

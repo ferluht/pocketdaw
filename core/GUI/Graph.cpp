@@ -64,4 +64,11 @@ namespace GUI {
         r = (r + 1) % number_of_points;
     }
 
+    void CircleGraph::update(float x, float y) {
+        if (x > 1) x = 1;
+        if (x < -1) x = -1;
+        if (y > 1) y = 1;
+        if (y < -1) y = -1;
+    }
+
 }

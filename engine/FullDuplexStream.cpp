@@ -126,3 +126,7 @@ int32_t FullDuplexStream::getNumInputBurstsCushion() const {
 void FullDuplexStream::setNumInputBurstsCushion(int32_t numBursts) {
     FullDuplexStream::mNumInputBurstsCushion = numBursts;
 }
+
+int32_t FullDuplexStream::getLatency() {
+    return getOutputStream()->getFramesPerBurst() * 2;
+}

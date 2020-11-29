@@ -8,7 +8,7 @@
 Saturator::Saturator() : AudioEffect("Saturator") {
     GSetRatio(0.3f);
 
-    drywet = new GUI::AnalogEncoder("dry/wet");
+    drywet = new GUI::AnalogEncoder("dry/wet", 1, 0, 1);
     drywet->GPlace({0.25, 0.4});
     drywet->GSetHeight(0.2);
     GAttach(drywet);

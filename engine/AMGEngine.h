@@ -23,15 +23,16 @@ public:
     MEngine * midi;
     GUI::GEngine * graphic;
 
-    AMGEngine(AMGObject* root_){
+    AMGEngine(){
         audio = &AEngine::getAEngine();
         midi = &MEngine::getMEngine();
         graphic = &GUI::GEngine::getGEngine();
 
         audio->getRootDirectory();
+        audio->getDevices();
+    }
 
-//        audio->getDevices();
-
+    void SetRoot(AMGObject* root_) {
         audio->setRoot(root_);
         midi->MConnect(root_);
         graphic->setRoot(root_);

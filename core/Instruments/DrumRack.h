@@ -45,7 +45,7 @@ public:
     void focusOn(AMGRack * chain){
         if (focus_chain) focus_chain->GSetVisible(false);
         focus_chain = chain;
-        if (chain) chain->GSetVisible(true);
+        if (visible && chain) chain->GSetVisible(true);
     }
 
     void MIn(MData cmd) override {

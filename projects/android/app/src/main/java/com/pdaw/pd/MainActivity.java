@@ -88,6 +88,7 @@ public class MainActivity extends NativeActivity {
 
     static {
 //        System.loadLibrary("c++_shared");
+//        System.loadLibrary("libpd");
         System.loadLibrary("pocketdaw");
     }
 

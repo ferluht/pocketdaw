@@ -10,6 +10,7 @@
 static NVGcolor
         RED=nvgRGB(255, 0, 0),
         GREEN=nvgRGB(0, 255, 0),
+        SALAD=nvgRGB(50, 200, 0),
         DARKBLUE=nvgRGB(0, 0, 255),
         BLUE=nvgRGB(50, 50, 255),
         YELLOW=nvgRGB(255, 255, 0),

@@ -39,6 +39,10 @@
 #include <AudioEffects/Saturator.h>
 #include <Instruments/SplineSynth.h>
 #include <AudioEffects/Calibrator.h>
+//#include <Instruments/PDContainer.h>
+#include <Instruments/Apparatus.h>
+#include <AudioEffects/Looper.h>
+#include <AudioEffects/LoopStation.h>
 #include "Track.h"
 
 class AMGMasterTrack : public GUI::AMGCanvas{
@@ -63,6 +67,7 @@ public:
     float mc_height;
     GUI::ProgressButton * linkButton;
     GUI::Button * metronome_button;
+    GUI::Button * input_button;
     Metronome * metronome;
     GUI::Menu * addMenu;
     GUI::Menu * addDeviceMenu;
@@ -89,6 +94,10 @@ public:
         });
         metronome = new Metronome();
         metronome_button = new GUI::Button("Metr", [](bool state){});
+
+        input_button = new GUI::Button("IN", [this](bool state){
+            this->Tracks[this->focus_track]->input_enabled = state;
+        });
         beat = 0;
         phase = 0;
 
@@ -120,19 +129,27 @@ public:
                                                         AddTrack(tr);
                                                     }));
 
-        addDeviceMenu->addButton(new GUI::Button("Oscillator",
+        addDeviceMenu->addButton(new GUI::Button("Apparatus",
                                [this](bool a){
                                    if (focus_track > -1) {
-                                       Tracks[focus_track]->RAdd(new Oscillator("Oscillator", 1));
+                                       Tracks[focus_track]->RAdd(new Apparatus());
                                    }
                                }));
 
-        addDeviceMenu->addButton(new GUI::Button("Operator",
-                                                 [this](bool a){
-                                                     if (focus_track > -1) {
-                                                         Tracks[focus_track]->RAdd(new Operator(4));
-                                                     }
-                                                 }));
+//        addDeviceMenu->addButton(new GUI::Button("Operator",
+//                                                 [this](bool a){
+//                                                     if (focus_track > -1) {
+//                                                         Tracks[focus_track]->RAdd(new Operator(4));
+//                                                     }
+//                                                 }));
+
+//        addDeviceMenu->addButton(new GUI::Button("PDContainer",
+//                                                 [this](bool a){
+//                                                     if (focus_track > -1) {
+//                                                         auto br = new Brute();
+//                                                         Tracks[focus_track]->RAdd(new PDContainer("/.pocketdaw/303.pd", AEngine::getAEngine().storage_root));
+//                                                     }
+//                                                 }));
 
         addDeviceMenu->addButton(new GUI::Button("SingleTone",
                                                  [this](bool a){
@@ -324,7 +341,7 @@ public:
         addAudioMenu->addButton(new GUI::Button("Moog filter",
                                                 [this](bool a){
                                                     if (focus_track > -1) {
-                                                        Tracks[focus_track]->RAdd(new MoogFilter());
+                                                        Tracks[focus_track]->RAdd(new RKMoogFilter());
                                                     }
                                                 }));
 
@@ -339,6 +356,13 @@ public:
                                                 [this](bool a){
                                                     if (focus_track > -1) {
                                                         Tracks[focus_track]->RAdd(new Calibrator());
+                                                    }
+                                                }));
+
+        addAudioMenu->addButton(new GUI::Button("LoopStation",
+                                                [this](bool a){
+                                                    if (focus_track > -1) {
+                                                        Tracks[focus_track]->RAdd(new LoopStation(5));
                                                     }
                                                 }));
 
@@ -384,6 +408,7 @@ public:
 //        t->GSetWidth(1);
 //        GAttach(t);
 
+        Tracks[focus_track]->RAdd(new LoopStation(5));
     }
 
     bool ARender(const float * inputData, int inputFrames, float * outputData, int outputFrames) override;

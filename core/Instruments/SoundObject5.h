@@ -19,6 +19,8 @@ public:
 
     double o1_phase, o2_phase, lfo_phase;
     float note;
+    float note_target;
+    float note_inc;
 
     ADSR adsr;
 
@@ -51,6 +53,7 @@ class SoundObject5 : public Instrument<SoundObject5State> {
     GUI::AnalogEncoder * mix_o2;
     GUI::AnalogEncoder * mix_noise;
     GUI::AnalogEncoder * mix_amp;
+    GUI::AnalogEncoder * glide_time;
     GUI::AnalogEncoder * A;
     GUI::AnalogEncoder * D;
     GUI::AnalogEncoder * S;
@@ -103,7 +106,7 @@ public:
     SoundObject5() : Instrument<SoundObject5State> (1, "Object5") {
         GSetRatio(0.8);
 
-        o1_coarse = new GUI::AnalogEncoder("coarse", 0, 0, 10);
+        o1_coarse = new GUI::AnalogEncoder("coarse", 0, 2.5, 10);
         o1_coarse->GPlace({0.01,0.01});
         o1_coarse->GSetHeight(0.2);
         GAttach(o1_coarse);
@@ -124,7 +127,7 @@ public:
         o1_wave->GSetWidth(0.31);
         GAttach(o1_wave);
 
-        o2_coarse = new GUI::AnalogEncoder("coarse", 0, 0, 10);
+        o2_coarse = new GUI::AnalogEncoder("coarse", 0, 2.5, 10);
         o2_coarse->GPlace({0.01,0.22});
         o2_coarse->GSetHeight(0.2);
         GAttach(o2_coarse);
@@ -145,12 +148,12 @@ public:
         o2_wave->GSetWidth(0.31);
         GAttach(o2_wave);
 
-        mix_o1 = new GUI::AnalogEncoder("o1 mix", 0, 0, 1);
+        mix_o1 = new GUI::AnalogEncoder("o1 mix", 0, 0.5, 1);
         mix_o1->GPlace({0.01,0.43});
         mix_o1->GSetHeight(0.2);
         GAttach(mix_o1);
 
-        mix_o2 = new GUI::AnalogEncoder("o2 mix", 0, 0, 1);
+        mix_o2 = new GUI::AnalogEncoder("o2 mix", 0, 0.5, 1);
         mix_o2->GPlace({0.23,0.43});
         mix_o2->GSetHeight(0.2);
         GAttach(mix_o2);
@@ -158,7 +161,12 @@ public:
         mix_noise = new GUI::AnalogEncoder("noise", 0, 0, 1);
         mix_noise->GPlace({0.45,0.43});
         mix_noise->GSetHeight(0.2);
-        GAttach(mix_noise);
+//        GAttach(mix_noise);
+
+        glide_time = new GUI::AnalogEncoder("glide", 0, 0, 1);
+        glide_time->GPlace({0.45,0.43});
+        glide_time->GSetHeight(0.2);
+        GAttach(glide_time);
 
         mix_amp = new GUI::AnalogEncoder("mix amp", 0, 0, 1);
         mix_amp->GPlace({0.73,0.43});
@@ -268,7 +276,13 @@ public:
 
     void IUpdateState(SoundObject5State *state, MData md) {
         if (((md.status & 0xF0) == NOTEON_HEADER) && (md.data2 != 0)) {
-            state->note = md.data1 - 24;
+            if (*glide_time > 1.0 / sample_rate) {
+                state->note_inc = ((md.data1 - 24) - state->note) / (*glide_time * sample_rate);
+            } else {
+                state->note_inc = 0;
+                state->note = md.data1 - 24;
+            }
+            state->note_target = md.data1 - 24;
             state->adsr.attack(md.beat);
             adsr_led->toggle();
         }else{
@@ -320,6 +334,10 @@ public:
 
         state->o2_phase += getPhaseIncrement(*o2_coarse * 12 + *o2_fine + state->note) * (1 + 5 * *o21_xmod * first);
         if (state->o2_phase > 6.283f) state->o2_phase -= 6.283f;
+
+        if (abs(state->note - state->note_target) > 0.01) {
+            state->note += state->note_inc;
+        }
 
         *lsample += sample;
         *rsample += sample;

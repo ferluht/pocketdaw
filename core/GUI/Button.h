@@ -14,9 +14,16 @@ namespace GUI {
     class Button : public Knob {
 
         friend class EncoderButton;
+        friend class LooperButton;
 
         bool lighted = false;
+        bool flashing = false;
+
+        int flashing_counter = 0;
+        const int flashing_divider = 40;
+
         NVGcolor lightColor;
+        NVGcolor nextColor;
 
     public:
 
@@ -53,6 +60,11 @@ namespace GUI {
 
         void GSetVisible(bool visible_) override {
             Knob::GSetVisible(visible_);
+        }
+
+        void setFlashing(bool flashing_, NVGcolor nextColor_=MIDGREY) {
+            flashing = flashing_;
+            nextColor = nextColor_;
         }
     };
 
@@ -184,6 +196,140 @@ namespace GUI {
 //
 //        void GDraw(NVGcontext * nvg) override;
 //    };
+
+    class LooperButton : public Button {
+
+        float position;
+
+        NVGcolor arc_color;
+        NVGcolor body_color;
+
+    public:
+
+        LooperButton(char *label, std::function<void(bool)> callback_) :
+                Button(label, callback_) {
+            position = 0;
+            GSetRatio(1);
+        }
+
+        void setArcColor(NVGcolor c){
+            arc_color = c;
+        }
+
+        void setBodyColor(NVGcolor c){
+            body_color = c;
+        }
+
+        void setPosition(float position_){
+            position = position_ + 1e-10f;
+        }
+
+        void GDraw(NVGcontext * nvg) override;
+
+    };
+
+    class XYButton;
+
+    class XYButtonOverlay : public GObject {
+
+        XYButton * btn;
+
+    public:
+
+        XYButtonOverlay(XYButton * btn_) : GObject(BOX) {
+            btn = btn_;
+        }
+
+        void GDraw(NVGcontext * nvg) override;
+
+    };
+
+    class XYButton : public Button {
+
+        friend class XYButtonOverlay;
+
+        XYButtonOverlay * overlay;
+
+        std::function<void(float, float)> callback;
+
+        char xlabel[50], ylabel[50];
+        float xmin, ymin, xrange, yrange;
+
+        bool mem_state;
+
+        float xval = 0, yval = 0;
+
+        int xscale, yscale;
+
+    public:
+
+        enum SCALE {
+            LIN,
+            EXP
+        };
+
+        XYButton(char *label,
+                 char *xlabel_, float xmin_, float xmax_,
+                 char *ylabel_, float ymin_, float ymax_,
+                 std::function<void(float, float)> callback_,
+                 int xscale_=LIN, int yscale_=LIN) :
+                Button(label, [](bool state){}) {
+
+            callback = callback_;
+
+            overlay = new XYButtonOverlay(this);
+            GAttach(overlay);
+            overlay->GSetVisible(false);
+
+            sprintf(xlabel, "%s", xlabel_);
+            sprintf(ylabel, "%s", ylabel_);
+
+            xscale = xscale_;
+            yscale = yscale_;
+
+            xmin = xmin_;
+            xrange = xmax_ - xmin_;
+//            if (xscale == EXP) xrange = log(xrange);
+
+            ymin = ymin_;
+            yrange = ymax_ - ymin_;
+//            if (yscale == EXP) yrange = log(yrange);
+
+            GSetDragBeginCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
+                mem_state = state;
+                state = true;
+                overlay->GSetVisible(true);
+                return this;
+            });
+
+            GSetDragHandlerCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
+
+                if (xscale == EXP) {
+                    xval = pow((v.x / GEngine::screen_width), 4) * xrange + xmin;
+                } else {
+                    xval = (v.x / GEngine::screen_width) * xrange + xmin;
+                }
+
+                if (yscale == EXP) {
+                    yval = pow((1 - v.y / GEngine::screen_height), 4) * yrange + ymin;
+                } else {
+                    yval = (1 - v.y / GEngine::screen_height) * yrange + ymin;
+                }
+
+                callback(xval, yval);
+//                angle = old_angle + (v.x - drag_from.x) / 100;
+                return this;
+            });
+
+            GSetDragEndCallback([this](const vecmath::Vec2& v) -> GUI::GObject * {
+                state = mem_state;
+                overlay->GSetVisible(false);
+                return this;
+            });
+        }
+
+    };
+
 }
 
 #endif //PD_BUTTON_H

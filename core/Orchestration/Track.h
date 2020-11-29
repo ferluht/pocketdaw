@@ -42,6 +42,7 @@ public:
     float * outputData;
     int outputFrames;
     bool pattern_switch = false;
+    bool input_enabled = false;
 
     AMGTrack(std::string name) : AMGRack() {
         drag_from = {0, 0};
@@ -161,14 +162,14 @@ public:
             track->run_lock.lock();
             track->stop_lock.lock();
 
-//            int byteDiff = (outputFrames - inputFrames) * bytesPerFrame;
-//            size_t bytesToZero = (byteDiff > 0) ? byteDiff : 0;
-//            memcpy(outputData, inputData, bytesToWrite);
-//            memset((u_char*) outputData + bytesToWrite, 0, bytesToZero);
-
             for (int i = 0; i < track->outputFrames; i++) {
-                track->outputData[2 * i] = 0; //track->inputData[2 * i];
-                track->outputData[2 * i + 1] = 0; //track->inputData[2 * i + 1];
+                if (track->input_enabled) {
+                    track->outputData[2 * i] = 0.5f * (track->inputData[2 * i] + track->inputData[2 * i + 1]);
+                    track->outputData[2 * i + 1] = 0.5f * (track->inputData[2 * i] + track->inputData[2 * i + 1]);
+                } else {
+                    track->outputData[2 * i] = 0;
+                    track->outputData[2 * i + 1] = 0;
+                }
 
                 track->MRender(track->beat);
 
