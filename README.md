@@ -3,7 +3,7 @@ PocketDaw
 
 ![main screen](pic/screen.jpg)
 
-# Demo: https://www.instagram.com/p/CANCYmeHWLV/
+### Demo: https://www.instagram.com/p/CANCYmeHWLV/
 
 # Prerequisites
 
